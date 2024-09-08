@@ -92,10 +92,8 @@ export class QuoteOfferingsComponent implements OnInit {
     });
   }
 
-  private getSelectedCardLeftPosition = (): number => {
-    const carrouselCard = this.track.nativeElement.childNodes[this.selectedPriceIndex];
-    const carrouselCardWidth = carrouselCard.clientWidth;
-
-    return this.selectedPriceIndex * carrouselCardWidth;
-  };
+  private getSelectedCardLeftPosition = (): number =>
+    Array.from(this.track.nativeElement.childNodes as NodeList)
+      .slice(0, this.selectedPriceIndex)
+      .reduce<number>((acc, card) => acc + (card as HTMLElement).clientWidth, 0);
 }
