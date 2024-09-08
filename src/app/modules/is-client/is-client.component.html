@@ -1,0 +1,7 @@
+<article class="component-container">
+  <quote-header-title>¿Eres cliente de Shagui?</quote-header-title>
+  <section class="form-container">
+    <button [nxButton]="isClient ? 'primary' : 'secondary'" type="button" (click)="onIsClientChange(true)">Si</button>
+    <button [nxButton]="isClient === false ? 'primary' : 'secondary'" type="button" (click)="onIsClientChange(false)">No</button>
+  </section>
+</article>

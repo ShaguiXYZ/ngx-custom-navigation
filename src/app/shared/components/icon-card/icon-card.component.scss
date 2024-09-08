@@ -1,0 +1,16 @@
+.card-container {
+  height: 88px;
+  width: 150px;
+
+  &.labeled {
+    height: 128px;
+  }
+
+  .color-background-icon {
+    background-color: var(--documentation-avatar-color-1, #eff6f6);
+  }
+
+  .icon-image {
+    max-height: 25px;
+  }
+}

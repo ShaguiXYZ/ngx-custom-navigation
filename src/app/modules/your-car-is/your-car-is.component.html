@@ -1,0 +1,20 @@
+<article class="component-container">
+  <quote-header-title>Selecciona el modelo</quote-header-title>
+  <div class="form-container">
+    @for(vehicle of vehicleOptions; track vehicle) {
+    <div class="card-container" [ngClass]="{ selected: vehicle.power === selectedVehicle?.power }" (click)="selectVehicle(vehicle)">
+      <span nxCopytext="medium" class="card-text nx-margin-top-s nx-font-weight-bold"> {{ vehicle.make }} {{ vehicle.model }}</span>
+      <span nxCopytext="medium" class="card-text nx-margin-bottom-s">
+        {{ vehicle.fuel?.data }} - {{ vehicle.power }} CV - {{ vehicle.yearOfManufacture }}
+      </span>
+    </div>
+    }
+  </div>
+  <quote-footer [config]="footerConfig">
+    <div class="extra__footer__options">
+      <button class="nx-margin-y-2xs w-100" nxButton="tertiary small" type="button" (click)="continue()">
+        <span nxCopytext="medium">No lo encuentro, continuar sin modelo (Link) </span>
+      </button>
+    </div>
+  </quote-footer>
+</article>

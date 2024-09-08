@@ -1,0 +1,35 @@
+<article class="component-container">
+  <quote-header-title>¿Cuál es tu marca?</quote-header-title>
+  <!-- TODO: Buscador Marca -->
+  <!-- <nx-page-search buttonLabel="Search" [hideSearchButton]="true" aria-label="Search hidden example">
+    <div nxLayout="grid nopadding">
+      <div nxRow>
+        <div nxCol="12"> -->
+  <nx-formfield appearance="outline">
+    <input nxInput placeholder="Search..." [(ngModel)]="searchTerm" type="search" />
+    @if (searchTerm) {
+    <span nxFormfieldSuffix aria-hidden="true" (click)="searchTerm = ''">
+      <nx-icon name="close" size="s"></nx-icon>
+    </span>
+    } @else {
+    <span nxFormfieldSuffix>
+      <nx-icon name="search" size="s"></nx-icon>
+    </span>
+    }
+  </nx-formfield>
+  <!-- </div>
+      </div>
+    </div>
+  </nx-page-search> -->
+
+  <section class="form-container">
+    @for(make of makes; track make) {
+    <quote-brand
+      class="nx-margin-x-3xs nx-margin-y-3xs"
+      [brand]="make"
+      [selected]="selectedMake === make"
+      (uiSelect)="selectMake($event)"
+    />
+    }
+  </section>
+</article>

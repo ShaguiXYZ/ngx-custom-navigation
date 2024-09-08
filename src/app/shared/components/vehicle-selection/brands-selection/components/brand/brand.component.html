@@ -1,0 +1,4 @@
+<div class="brand-content" [ngClass]="{ selected }" (click)="selectBrand()">
+  <img class="brand-image" [src]="data?.icon" />
+  <p>{{ data?.data ?? brand | titlecase }}</p>
+</div>

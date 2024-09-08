@@ -1,0 +1,14 @@
+<article class="component-container">
+  <quote-header-title>¿Con qué compañía tienes tu seguro actualmente?</quote-header-title>
+  <section class="form-container">
+    @for(icon of insuranceCompanies; track icon.index) {
+    <quote-icon-card
+      [data]="icon"
+      [showLabel]="false"
+      [selected]="selectedCompany?.index === icon.index"
+      (uiSelect)="selectCompany(icon)"
+    />
+    }
+  </section>
+  <quote-footer [config]="footerConfig" />
+</article>

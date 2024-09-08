@@ -1,0 +1,16 @@
+<article class="component-container">
+  <quote-header-title>¿Cuándo quieres que empiece tu seguro?</quote-header-title>
+  <section class="form-container">
+    <form [formGroup]="form">
+      <div class="quote-grow nx-margin-right-xs">
+        <nx-formfield label="Fecha de contratación">
+          <input formControlName="dateOfIssue" nxDatefield nxInput [datepicker]="myDatepicker" />
+          <span nxFormfieldHint>Formato: DD/MM/AAAA</span>
+          <nx-datepicker-toggle [for]="myDatepicker" nxFormfieldSuffix></nx-datepicker-toggle>
+          <nx-datepicker #myDatepicker></nx-datepicker>
+        </nx-formfield>
+      </div>
+    </form>
+  </section>
+  <quote-footer [config]="footerConfig" />
+</article>

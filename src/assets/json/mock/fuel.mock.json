@@ -1,0 +1,18 @@
+[
+  {
+    "index": "G",
+    "data": "Gasolina"
+  },
+  {
+    "index": "D",
+    "data": "Diesel"
+  },
+  {
+    "index": "E",
+    "data": "Eléctrico"
+  },
+  {
+    "index": "O",
+    "data": "Otros"
+  }
+]

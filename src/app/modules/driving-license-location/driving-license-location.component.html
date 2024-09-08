@@ -1,0 +1,9 @@
+<article class="component-container">
+  <quote-header-title>¿Dónde te sacaste el carnet?</quote-header-title>
+  <section class="form-container">
+    @for(icon of drivenLicenseCountries; track icon.index) {
+    <quote-icon-card [data]="icon" [selected]="selectedLocation?.index === icon.index" (uiSelect)="selectLocation(icon)" />
+    }
+  </section>
+  <quote-footer [config]="footerConfig" />
+</article>

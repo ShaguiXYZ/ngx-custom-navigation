@@ -1,0 +1,12 @@
+<nx-message nxContext="info">
+  <div class="quote__info__message">
+    @if(icon) {
+    <div class="quote__info__message__icon">
+      <nx-icon [name]="icon" size="s"></nx-icon>
+    </div>
+    }
+    <div class="quote__info__message__text">
+      <span nxCopytext="normal"><ng-content></ng-content></span>
+    </div>
+  </div>
+</nx-message>

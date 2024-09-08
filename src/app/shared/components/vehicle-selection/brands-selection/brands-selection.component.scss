@@ -1,0 +1,16 @@
+.brands-content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+
+  .all-brands {
+    display: inherit;
+    flex-direction: column;
+    width: 100%;
+
+    nx-formfield {
+      width: 100%;
+    }
+  }
+}

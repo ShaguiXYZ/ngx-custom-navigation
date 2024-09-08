@@ -1,0 +1,32 @@
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { APP_INITIALIZER, ApplicationConfig, importProvidersFrom, provideZoneChangeDetection } from '@angular/core';
+import { provideAnimations } from '@angular/platform-browser/animations';
+import { provideRouter } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
+import { NX_CONTEX_CONFIG } from '@shagui/ng-shagui/core';
+import { routes } from './app.routes';
+import { APP_NAME, SCHEDULER_PERIOD } from './core/constants';
+import { SettingsService } from './core/services';
+import { AppUrls, TRANSLATE_MODULE_CONFIG, urls } from './shared/config';
+
+const initSettings = (settings: SettingsService) => (): Promise<any> => settings.loadSettings();
+
+export const appConfig: ApplicationConfig = {
+  providers: [
+    importProvidersFrom(TranslateModule.forRoot(TRANSLATE_MODULE_CONFIG)),
+    provideZoneChangeDetection({ eventCoalescing: true }),
+    provideAnimations(),
+    provideHttpClient(withInterceptorsFromDi()),
+    provideRouter(routes),
+    {
+      provide: NX_CONTEX_CONFIG,
+      useValue: { appName: APP_NAME.toUpperCase(), urls, home: AppUrls.onBoarding, cache: { schedulerPeriod: SCHEDULER_PERIOD } }
+    },
+    {
+      provide: APP_INITIALIZER,
+      useFactory: initSettings,
+      deps: [SettingsService],
+      multi: true
+    }
+  ]
+};

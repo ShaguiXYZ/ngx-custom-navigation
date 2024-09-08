@@ -1,0 +1,10 @@
+<article class="component-container">
+  <quote-header-title>Algunos detalles más sobre tu coche...</quote-header-title>
+  <div class="form-container">
+    @for(type of vehicleTypes; track type.index) {
+    <div class="card-container" [ngClass]="{ selected: type.index === selectedType?.index }" (click)="selectType(type)">
+      <span nxCopytext="medium" class="nx-margin-s"> {{ type.data }}</span>
+    </div>
+    }
+  </div>
+</article>

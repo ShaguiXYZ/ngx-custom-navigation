@@ -1,0 +1,18 @@
+<article class="component-container">
+  <quote-header-title>Nos gustaría conocerte un poco más</quote-header-title>
+  <section class="form-container">
+    <form [formGroup]="form">
+      <div class="quote-grow">
+        <nx-formfield label="Nombre">
+          <input formControlName="name" nxInput />
+        </nx-formfield>
+      </div>
+      <div class="quote-grow">
+        <nx-formfield label="Apellidos">
+          <input formControlName="surname" nxInput />
+        </nx-formfield>
+      </div>
+    </form>
+  </section>
+  <quote-footer [config]="footerConfig" />
+</article>

@@ -1,0 +1,19 @@
+.products-info {
+  display: flex;
+  flex-direction: column;
+
+  .products-info-literal {
+    align-items: center;
+    display: flex;
+    flex: 1;
+    margin: 0;
+
+    &.privatity {
+      display: block;
+    }
+  }
+
+  .products-info-literal + .products-info-literal {
+    margin-top: 16px;
+  }
+}

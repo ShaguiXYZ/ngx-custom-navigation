@@ -1,0 +1,10 @@
+.years-content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+
+  .year {
+    min-width: 145px;
+  }
+}

@@ -1,0 +1,23 @@
+<article class="component-container">
+  <quote-header-title>¿Cuál es la matrícula de tu coche?</quote-header-title>
+  <section class="form-container">
+    <form [formGroup]="form">
+      <div class="quote-grow nx-margin-right-xs">
+        <nx-formfield label="Matrícula">
+          <nx-licence-plate-euro-prefix nxFormfieldPrefix>E</nx-licence-plate-euro-prefix>
+          <input #searchInput type="text" formControlName="licensePlate" nxInput nxMask="0000-SSS" />
+        </nx-formfield>
+      </div>
+    </form>
+  </section>
+  <quote-footer [config]="footerConfig">
+    <div class="extra__footer__options">
+      <button class="nx-margin-y-2xs w-100" nxButton="tertiary small" type="button" (click)="continue()">
+        <span nxCopytext="medium">¿No recuerdas tu matrícula? Continúa aquí (link)</span>
+      </button>
+    </div>
+    <div class="extra__footer__info">
+      <quote-footer-info icon="product-car-front">Facilitando tu matrícula obtendrás tu cotización mucho más rápido </quote-footer-info>
+    </div>
+  </quote-footer>
+</article>

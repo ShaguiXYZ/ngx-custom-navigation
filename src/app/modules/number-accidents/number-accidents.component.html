@@ -1,0 +1,22 @@
+<article class="component-container">
+  <quote-header-title>¿Has dado algún parte en los últimos 5 años?</quote-header-title>
+  <section class="form-container">
+    <form [formGroup]="form">
+      <div class="quote-grow">
+        <nx-radio-group name="accidents-group" formControlName="accidents" [required]="true">
+          <nx-radio [value]="0" class="nx-margin-bottom-m">No</nx-radio>
+          <nx-radio [value]="1" class="nx-margin-bottom-m">1</nx-radio>
+          <nx-radio [value]="2" class="nx-margin-bottom-m">2</nx-radio>
+          <nx-radio [value]="3" class="nx-margin-bottom-m">3</nx-radio>
+          <nx-radio [value]="4" class="nx-margin-bottom-m">4</nx-radio>
+          <nx-radio [value]="5" class="nx-margin-bottom-m">5 o más</nx-radio>
+        </nx-radio-group>
+      </div>
+    </form>
+  </section>
+  <quote-footer [config]="footerConfig">
+    <div class="extra__footer__info">
+      <quote-footer-info icon="product-car-front">Nos gustaría acompañarte en tus próximos viajes.</quote-footer-info>
+    </div>
+  </quote-footer>
+</article>

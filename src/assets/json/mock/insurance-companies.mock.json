@@ -1,0 +1,34 @@
+[
+  {
+    "index": "AMV",
+    "data": "amv"
+  },
+  {
+    "index": "AXA",
+    "data": "axa"
+  },
+  {
+    "index": "CASER",
+    "data": "caser"
+  },
+  {
+    "index": "CATALANA-OCCIDENTE",
+    "data": "catalana-occidente"
+  },
+  {
+    "index": "ING",
+    "data": "ing"
+  },
+  {
+    "index": "MAPFRE",
+    "data": "mapfre"
+  },
+  {
+    "index": "PELAYO",
+    "data": "pelayo"
+  },
+  {
+    "index": "ZURICH",
+    "data": "zurich"
+  }
+]

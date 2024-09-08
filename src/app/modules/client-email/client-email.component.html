@@ -1,0 +1,24 @@
+<article class="component-container">
+  <quote-header-title>Déjanos tu email y recibe tu presupuesto al instante</quote-header-title>
+  <section class="form-container">
+    <form [formGroup]="form">
+      <div class="quote-grow">
+        <nx-formfield label="Correo electrónico">
+          <input type="email" formControlName="email" nxInput email />
+        </nx-formfield>
+      </div>
+      <div class="quote-grow products-info" nxCopytext="small">
+        <p class="products-info-literal">
+          <span class="products-info-literal" nxCopytext="normal">Quiero recibir información sobre productos y ofertas de Shagui</span>
+          <nx-switcher formControlName="productsInfo" />
+        </p>
+        <p class="privatity products-info-literal" nxCopytext="normal">
+          He leído y acepto la
+          <nx-link nxStyle="text"><a routerLink="/documentation"> política de privacidad </a></nx-link>
+          de Shagui
+        </p>
+      </div>
+    </form>
+  </section>
+  <quote-footer [config]="footerConfig" />
+</article>

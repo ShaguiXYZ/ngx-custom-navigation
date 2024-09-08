@@ -1,0 +1,20 @@
+.models-content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+
+  .model {
+    min-width: 145px;
+  }
+
+  .all-models {
+    display: inherit;
+    flex-direction: column;
+    width: 100%;
+
+    nx-formfield {
+      width: 100%;
+    }
+  }
+}

@@ -1,0 +1,24 @@
+<div class="footer-options" [ngClass]="{ 'mobile-options': mobileMode }">
+  @if (config.showBack) {
+  <button
+    class="footer-option nx-margin-x-2xs nx-margin-y-2xs"
+    [ngClass]="{ 'mobile-option-back': mobileMode }"
+    nxButton="secondary medium"
+    type="button"
+    (click)="goToPreviousStep()"
+  >
+    @if(mobileMode) {
+    <nx-icon name="chevron-left" size="s" aria-hidden="true" />
+    }@else {
+    {{ config.backLabel }}
+    }
+  </button>
+  } @if (config.showNext) {
+  <button class="footer-option nx-margin-x-2xs nx-margin-y-2xs" nxButton="primary medium" type="button" (click)="goToNextStep()">
+    {{ config.nextLabel }}
+  </button>
+  }
+</div>
+<div class="footer-extras nx-margin-x-2xs" [ngClass]="{ 'mobile-options': mobileMode }">
+  <ng-content></ng-content>
+</div>

@@ -1,0 +1,39 @@
+@if(pagesSeenForBreadcrumb.length) {
+<nav class="nav" aria-label="Breadcrumb">
+  <div #breadcrumb class="breadcrumb">
+    <ol nxBreadcrumb appearance="link">
+      @for (page of pagesSeenForBreadcrumb; track page.id) {
+      <li>
+        <a nxBreadcrumbItem [routerLink]="$last ? null : '/' + page.id">
+          {{ page.title }}
+        </a>
+      </li>
+      }
+    </ol>
+  </div>
+  @if (showButtons) {
+  <div>
+    <div style="float: left">
+      <!-- <button nxButton="tertiary small" type="button" (click)="scrollMaxLeft()">
+        <nx-icon name="arrow-first" size="s"> </nx-icon>
+      </button> -->
+      <button nxButton="tertiary small" type="button" (click)="scrollLeft()">
+        <nx-icon name="arrow-left" size="s"> </nx-icon>
+      </button>
+    </div>
+    <div style="float: right">
+      <button nxButton="tertiary small" type="button" (click)="scrollRight()">
+        <nx-icon name="arrow-right" size="s"> </nx-icon>
+      </button>
+      <!-- <button
+        nxButton="tertiary small"
+        type="button"
+        (click)="scrollMaxRight()"
+      >
+        <nx-icon name="arrow-last" size="s"> </nx-icon>
+      </button> -->
+    </div>
+  </div>
+  }
+</nav>
+}

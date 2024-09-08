@@ -1,0 +1,17 @@
+<article class="component-container">
+  <quote-header-title>¿Cuándo naciste?</quote-header-title>
+  <section class="form-container">
+    <form [formGroup]="form">
+      <div class="quote-grow">
+        <nx-formfield label="Fecha de nacimiento">
+          <input formControlName="birthdate" nxDatefield nxInput [datepicker]="myDatepicker" />
+          <span nxFormfieldHint>DD/MM/YYYY</span>
+
+          <nx-datepicker-toggle [for]="myDatepicker" nxFormfieldSuffix></nx-datepicker-toggle>
+          <nx-datepicker #myDatepicker></nx-datepicker>
+        </nx-formfield>
+      </div>
+    </form>
+  </section>
+  <quote-footer [config]="footerConfig" />
+</article>

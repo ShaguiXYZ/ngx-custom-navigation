@@ -1,0 +1,68 @@
+<article class="component-container">
+  <quote-header-title>Datos del vehículo</quote-header-title>
+  <section class="form-container">
+    <nx-accordion>
+      <nx-expansion-panel [expanded]="!contextData.vehicle.make">
+        <nx-expansion-panel-header>
+          <nx-expansion-panel-title nxHeadline="subsection-xsmall">
+            {{ 'Label.Brand' | translate }}
+            <span class="nx-font-weight-bold nx-margin-right-3xs">
+              {{ contextData.vehicle.make }}
+            </span>
+          </nx-expansion-panel-title>
+        </nx-expansion-panel-header>
+        <quote-brands-selection (uiSelect)="selectBrand($event)" />
+      </nx-expansion-panel>
+      @if(contextData.vehicle.make) {
+      <nx-expansion-panel [expanded]="!contextData.vehicle.model">
+        <nx-expansion-panel-header>
+          <nx-expansion-panel-title nxHeadline="subsection-xsmall">
+            {{ 'Label.Model' | translate }}
+            <span class="nx-font-weight-bold nx-margin-right-3xs">
+              {{ contextData.vehicle.model }}
+            </span>
+          </nx-expansion-panel-title>
+        </nx-expansion-panel-header>
+        <quote-model-selection (uiSelect)="selectModel($event)" />
+      </nx-expansion-panel>
+
+      @if(contextData.vehicle.model){
+      <nx-expansion-panel [expanded]="!contextData.vehicle.fuel">
+        <nx-expansion-panel-header>
+          <nx-expansion-panel-title nxHeadline="subsection-xsmall">
+            {{ 'Label.Fuel' | translate }}
+            <span class="nx-font-weight-bold nx-margin-right-3xs">
+              {{ contextData.vehicle.fuel?.data }}
+            </span>
+          </nx-expansion-panel-title>
+        </nx-expansion-panel-header>
+        <quote-fuel-selection (uiSelect)="selectFuel($event)" />
+      </nx-expansion-panel>
+
+      <nx-expansion-panel [expanded]="contextData.vehicle.fuel && !contextData.vehicle.power">
+        <nx-expansion-panel-header>
+          <nx-expansion-panel-title nxHeadline="subsection-xsmall">
+            {{ 'Label.Power' | translate }}
+            <span class="nx-font-weight-bold nx-margin-right-3xs">
+              {{ contextData.vehicle.powerRange?.data }}
+            </span>
+          </nx-expansion-panel-title>
+        </nx-expansion-panel-header>
+        <quote-power-selection (uiSelect)="selectPower($event)" />
+      </nx-expansion-panel>
+
+      <nx-expansion-panel [expanded]="contextData.vehicle.fuel && contextData.vehicle.power && !contextData.vehicle.yearOfManufacture">
+        <nx-expansion-panel-header>
+          <nx-expansion-panel-title nxHeadline="subsection-xsmall">
+            {{ 'Label.YearOfManufacture' | translate }}
+            <span class="nx-font-weight-bold nx-margin-right-3xs">
+              {{ contextData.vehicle.yearOfManufacture }}
+            </span>
+          </nx-expansion-panel-title>
+        </nx-expansion-panel-header>
+        <quote-vehicle-year-selection (uiSelect)="selectYear($event)" />
+      </nx-expansion-panel>
+      } }
+    </nx-accordion>
+  </section>
+</article>

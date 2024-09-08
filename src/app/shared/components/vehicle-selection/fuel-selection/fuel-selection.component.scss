@@ -1,0 +1,10 @@
+.fuels-content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+
+  .fuel {
+    min-width: 145px;
+  }
+}

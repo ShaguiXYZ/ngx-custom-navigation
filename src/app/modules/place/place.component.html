@@ -1,0 +1,20 @@
+<article class="component-container">
+  <quote-header-title>¿Cuál es tu código postal?</quote-header-title>
+  <section class="form-container">
+    <form [formGroup]="form">
+      <div class="quote-grow nx-margin-right-xs">
+        <nx-formfield label="Código postal">
+          <input #searchInput type="text" formControlName="postalCode" required nxInput nxMask="00000" />
+          <span nxFormfieldHint> {{ province?.data }} </span>
+        </nx-formfield>
+      </div>
+    </form>
+  </section>
+  <quote-footer [config]="footerConfig">
+    <div class="extra__footer__info">
+      <quote-footer-info icon="product-person-heart-people-love"
+        >Queremos conocerte un poco más para adaptarnos a tus necesidades.
+      </quote-footer-info>
+    </div>
+  </quote-footer>
+</article>

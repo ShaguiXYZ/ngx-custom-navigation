@@ -1,0 +1,7 @@
+<article class="component-container">
+  <quote-header-title>¿Eres o has sido titular de un seguro en el último año, para este coche u otro?</quote-header-title>
+  <section class="form-container">
+    <button [nxButton]="isPolicyOwner ? 'primary' : 'secondary'" type="button" (click)="onIsPolicyOwnerChange(true)">Si</button>
+    <button [nxButton]="isPolicyOwner === false ? 'primary' : 'secondary'" type="button" (click)="onIsPolicyOwnerChange(false)">No</button>
+  </section>
+</article>

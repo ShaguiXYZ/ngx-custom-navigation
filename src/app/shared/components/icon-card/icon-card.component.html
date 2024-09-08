@@ -1,0 +1,9 @@
+<div class="card-container" [ngClass]="{ selected, labeled:showLabel }" (click)="selectIcon()">
+  <div nxAvatar size="small" class="color-background-icon">
+    <img class="icon-image" [alt]="data.data" [src]="data.icon" />
+  </div>
+
+  @if(showLabel){
+  <p>{{ data.data | titlecase }}</p>
+  }
+</div>

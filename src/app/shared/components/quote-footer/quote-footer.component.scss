@@ -1,0 +1,40 @@
+.footer-options {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+
+  .footer-option + .footer-option {
+    margin-left: 10px;
+  }
+
+  &.mobile-options {
+    .footer-option {
+      flex: 1;
+    }
+  }
+
+  .mobile-option-back {
+    width: auto;
+  }
+}
+
+.footer-extras {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+
+  &.mobile-options {
+    .footer-option {
+      flex: 1;
+    }
+  }
+
+  ::ng-deep {
+    .extra__footer__info {
+      display: flex;
+      flex: 1;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
+  }
+}

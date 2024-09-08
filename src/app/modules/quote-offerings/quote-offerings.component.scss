@@ -1,0 +1,38 @@
+@import './styles/carousel.scss';
+
+.form-container {
+  .track {
+    display: flex;
+    overflow: hidden;
+  }
+
+  .carousel__stepers {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+
+    .carousel__steper {
+      height: 8px;
+      border: 1px solid var(--interactive-primary);
+      border-radius: 100%;
+      cursor: pointer;
+      width: 8px;
+      transition: background-color 0.3s ease-in-out, width 0.3s ease-in-out;
+
+      &.selected-price {
+        background-color: var(--interactive-primary);
+        border-radius: 22px;
+        height: 8px;
+        gap: 0px;
+        opacity: 0px;
+        width: 28px;
+        transition: background-color 0.3s ease-in-out, width 0.3s ease-in-out;
+      }
+    }
+
+    .carousel__steper + .carousel__steper {
+      margin-left: 8px;
+    }
+  }
+}
