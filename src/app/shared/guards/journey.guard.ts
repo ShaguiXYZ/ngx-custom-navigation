@@ -5,8 +5,8 @@ import { QUOTE_APP_CONTEXT_DATA_NAME } from 'src/app/core/constants';
 import { AppContextData } from 'src/app/core/models';
 
 export const journeyGuard: CanActivateFn = (route, state) => {
-  const router = inject(Router);
   const contextDataService = inject(ContextDataService);
+  const router = inject(Router);
 
   const context = contextDataService.get<AppContextData>(QUOTE_APP_CONTEXT_DATA_NAME);
 

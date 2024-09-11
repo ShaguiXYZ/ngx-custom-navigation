@@ -59,8 +59,6 @@ export class ClientIdentificationNumberComponent implements OnInit {
         ...this.form.value
       };
 
-      console.log('saving context data', this.contextData);
-
       this.contextDataService.set(QUOTE_CONTEXT_DATA_NAME, this.contextData);
     }
 

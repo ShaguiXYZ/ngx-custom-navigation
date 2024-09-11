@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { ContextDataService, JsonUtils } from '@shagui/ng-shagui/core';
-import { PageModel } from '../../shared/models';
+import { PageModel, QuoteModel } from '../../shared/models';
 import { QUOTE_CONTEXT_DATA_NAME } from '../constants';
 import { CompareOperations, Condition, Configuration, NextOption, Page } from '../models';
 import { SettingsService } from './setting.service';
@@ -11,9 +11,11 @@ import { SettingsService } from './setting.service';
 })
 export class RoutingService {
   private configuration: Configuration;
-  private readonly contextDataService = inject(ContextDataService);
 
-  constructor(private _router: Router, private settingsService: SettingsService) {
+  private readonly contextDataService = inject(ContextDataService);
+  private readonly settingsService = inject(SettingsService);
+
+  constructor(private readonly _router: Router) {
     this.configuration = this.settingsService.configuration;
   }
 
@@ -31,7 +33,7 @@ export class RoutingService {
   }
 
   public getPage(url: string): Page | undefined {
-    return this.configuration.pageMap!.find(page => page.pageId === url.substring(1));
+    return this.configuration.pageMap.find(page => page.pageId === url.substring(1));
   }
 
   private getNextRoute(url: string): string[] {
@@ -55,7 +57,7 @@ export class RoutingService {
       // los propios componentes.
       return page.nextOptionList[0].nextPageId;
     } else if (page.nextOptionList && page.nextOptionList.length > 1) {
-      return this.getNextPageIdFromNextOptionList(page.nextOptionList);
+      return this.nextPageIdFromNextOptionList(page.nextOptionList);
     } else {
       return undefined;
     }
@@ -64,8 +66,9 @@ export class RoutingService {
   /**
    * Devuelve el nextPageId que cumpla las condiciones, o en última instancia el nextPageId por defecto (último)
    */
-  private getNextPageIdFromNextOptionList(nextOptionList: NextOption[]): string | undefined {
+  private nextPageIdFromNextOptionList(nextOptionList: NextOption[]): string | undefined {
     const nextOption = nextOptionList.find(nextOption => this.checkConditions(nextOption.conditions));
+
     return nextOption?.nextPageId;
   }
 
@@ -86,11 +89,9 @@ export class RoutingService {
       ? (0, eval)(`'${this.contextDataItemValue(condition.expression)}'${condition.operation ?? '==='}'${condition.value}'`)
       : (0, eval)(`${this.contextDataItemValue(condition.expression)}${condition.operation ?? '==='}${condition.value}`);
   };
-  private contextDataItemValue = (key: string): any => {
-    const contextData = this.contextDataService.get(QUOTE_CONTEXT_DATA_NAME);
 
-    return JsonUtils.valueOf(contextData, key);
-  };
+  private contextDataItemValue = (key: string): any =>
+    JsonUtils.valueOf(this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA_NAME), key);
 
   private applyPreviousEval = (previous: boolean, current: boolean, union?: CompareOperations): boolean =>
     (union &&

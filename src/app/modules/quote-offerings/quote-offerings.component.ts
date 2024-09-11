@@ -14,6 +14,8 @@ import { QuoteOfferingPriceCardComponent } from './components';
   imports: [CommonModule, QuoteOfferingPriceCardComponent]
 })
 export class QuoteOfferingsComponent implements OnInit {
+  @ViewChild('carrouselInner', { static: true })
+  private inner!: ElementRef;
   @ViewChild('carrouselTrack', { static: true })
   private track!: ElementRef;
 
@@ -77,8 +79,7 @@ export class QuoteOfferingsComponent implements OnInit {
     this.contextData.offering.price = { ...this.contextData.offering.price, ...this.prices[index] };
     this.contextDataService.set(QUOTE_CONTEXT_DATA_NAME, this.contextData);
     this.selectedPriceIndex = index;
-
-    Promise.resolve().then(this.selectCarrouselCard.bind(this));
+    this.selectCarrouselCard();
   }
 
   /**
@@ -86,14 +87,16 @@ export class QuoteOfferingsComponent implements OnInit {
    *  with a smooth transition
    **/
   private selectCarrouselCard(): void {
-    this.track.nativeElement.scrollTo({
-      left: this.getSelectedCardLeftPosition(),
-      behavior: 'smooth'
-    });
+    const innerWidth = this.inner.nativeElement.clientWidth;
+    const screenItems = Math.floor(innerWidth / this.track.nativeElement.childNodes[0].clientWidth);
+    const trackCards = this.prices.length - screenItems > this.selectedPriceIndex;
+    const selectedCardLeftPosition = this.selectedCardLeftPosition(trackCards ? this.selectedPriceIndex : this.prices.length - screenItems);
+
+    this.track.nativeElement.style.transform = `translateX(${-selectedCardLeftPosition}px)`;
   }
 
-  private getSelectedCardLeftPosition = (): number =>
+  private selectedCardLeftPosition = (index: number): number =>
     Array.from(this.track.nativeElement.childNodes as NodeList)
-      .slice(0, this.selectedPriceIndex)
+      .slice(0, index)
       .reduce<number>((acc, card) => acc + (card as HTMLElement).clientWidth, 0);
 }

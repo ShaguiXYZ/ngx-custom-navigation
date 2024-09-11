@@ -11,6 +11,5 @@ export const resetContextGuard: CanActivateFn = () => {
   contextDataService.set(QUOTE_CONTEXT_DATA_NAME, QuoteModel.init());
   contextDataService.set(QUOTE_APP_CONTEXT_DATA_NAME, AppContextData.init());
 
-  console.log('Reset context');
   return true;
 };

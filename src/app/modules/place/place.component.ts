@@ -73,8 +73,6 @@ export class PlaceComponent implements OnInit, OnDestroy {
         ...this.form.value
       };
 
-      console.log('saving context data', this.contextData);
-
       this.contextDataService.set(QUOTE_CONTEXT_DATA_NAME, this.contextData);
     }
 

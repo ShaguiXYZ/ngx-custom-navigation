@@ -28,11 +28,9 @@ export class VehicleTypeComponent {
 
   private contextData!: QuoteModel;
 
-  constructor(private _router: Router) {
+  constructor(private readonly _router: Router) {
     this.contextData = this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA_NAME);
     this.selectedType = this.vehicleTypes.find(type => type.index === this.contextData.vehicle.vehicleTtype);
-
-    console.log('context data', this.contextData);
   }
 
   public selectType(type: IndexedData) {
@@ -52,8 +50,6 @@ export class VehicleTypeComponent {
       ...this.contextData.vehicle,
       vehicleTtype: this.selectedType?.index
     };
-
-    console.log('saving context data', this.contextData);
 
     this.contextDataService.set(QUOTE_CONTEXT_DATA_NAME, this.contextData);
 

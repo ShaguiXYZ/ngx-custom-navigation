@@ -1,9 +1,16 @@
 @import './styles/carousel.scss';
 
 .form-container {
-  .track {
-    display: flex;
+  .inner__carrousel {
+    display: block;
     overflow: hidden;
+
+    .track {
+      display: flex;
+      overflow: hidden;
+      transition: transform 0.2s ease-in-out;
+      width: fit-content;
+    }
   }
 
   .carousel__stepers {

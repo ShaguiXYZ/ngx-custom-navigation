@@ -17,11 +17,8 @@ export const activatingChildrenGuard: CanDeactivateFn<CanComponentDeactivate> = 
   const settingService = inject(SettingsService);
 
   const nextUrl = nextState.url.substring(1);
-
   const context = contextDataService.get<AppContextData>(QUOTE_APP_CONTEXT_DATA_NAME);
-
   const pages = settingService.configuration.pageMap;
-
   const fromPage = pages.filter(page => page.pageId === currentState.url.substring(1))[0];
 
   if (fromPage.pageId === 'on-boarding') {
@@ -41,6 +38,7 @@ export const activatingChildrenGuard: CanDeactivateFn<CanComponentDeactivate> = 
     return true;
   } else {
     const nextOption = fromPage.nextOptionList?.find(child => child.nextPageId === nextUrl);
+
     if (nextOption) {
       const toPage = pages.find(page => page.pageId === nextOption.nextPageId);
       context.viewedPages.push({
@@ -48,6 +46,7 @@ export const activatingChildrenGuard: CanDeactivateFn<CanComponentDeactivate> = 
         title: toPage!.title,
         showAsBreadcrumb: toPage!.showAsBreadcrumb ?? true
       });
+
       contextDataService.set(QUOTE_APP_CONTEXT_DATA_NAME, context);
       return true;
     }

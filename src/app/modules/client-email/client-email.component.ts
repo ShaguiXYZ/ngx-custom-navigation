@@ -1,18 +1,18 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { NxCopytextModule } from '@aposin/ng-aquila/copytext';
 import { NX_DATE_LOCALE } from '@aposin/ng-aquila/datefield';
 import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
 import { NxInputModule } from '@aposin/ng-aquila/input';
-import { NxSwitcherModule } from '@aposin/ng-aquila/switcher';
-import { NxCopytextModule } from '@aposin/ng-aquila/copytext';
 import { NxLinkModule } from '@aposin/ng-aquila/link';
-import { RoutingService } from 'src/app/core/services';
+import { NxSwitcherModule } from '@aposin/ng-aquila/switcher';
+import { ContextDataService } from '@shagui/ng-shagui/core';
 import { QUOTE_CONTEXT_DATA_NAME } from 'src/app/core/constants';
+import { RoutingService } from 'src/app/core/services';
 import { HeaderTitleComponent, QuoteFooterComponent } from 'src/app/shared/components';
 import { QuoteFooterConfig } from 'src/app/shared/components/quote-footer/models';
 import { QuoteModel } from 'src/app/shared/models';
-import { ContextDataService } from '@shagui/ng-shagui/core';
 
 @Component({
   selector: 'app-client-email',
@@ -61,8 +61,6 @@ export class ClientEMailComponent implements OnInit {
         ...this.contextData.personalData,
         ...this.form.value
       };
-
-      console.log('saving context data', this.contextData);
 
       this.contextDataService.set(QUOTE_CONTEXT_DATA_NAME, this.contextData);
     }

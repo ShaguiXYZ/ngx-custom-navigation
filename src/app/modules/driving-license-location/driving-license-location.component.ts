@@ -30,8 +30,6 @@ export class DrivingLicenseLocationComponent {
     this.contextData = this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA_NAME);
     this.selectedLocation = this.drivenLicenseCountries.find(country => country.index === this.contextData.driven.drivenLicenseCountry);
 
-    console.log('context data', this.contextData);
-
     const navigateTo = this.routingService.getPage(this._router.url);
     this.footerConfig = {
       validationFn: this.updateValidData,
@@ -48,8 +46,6 @@ export class DrivingLicenseLocationComponent {
       ...this.contextData.driven,
       drivenLicenseCountry: this.selectedLocation?.index
     };
-
-    console.log('saving context data', this.contextData);
 
     this.contextDataService.set(QUOTE_CONTEXT_DATA_NAME, this.contextData);
 

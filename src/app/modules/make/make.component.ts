@@ -41,9 +41,9 @@ export class MakeComponent {
 
   private contextData!: QuoteModel;
 
-  private contextDataService = inject(ContextDataService);
-  private footerService = inject(QuoteFooterService);
-  private routingService = inject(RoutingService);
+  private readonly contextDataService = inject(ContextDataService);
+  private readonly footerService = inject(QuoteFooterService);
+  private readonly routingService = inject(RoutingService);
 
   // Update constructor
   constructor(private readonly _router: Router) {
@@ -51,8 +51,6 @@ export class MakeComponent {
     this.makes = BrandData.iconBrands();
     this.contextData = this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA_NAME);
     // this.selectedLocation = this.makes.find(country => country.label === this.contextData.driven.drivenLicenseCountry);
-
-    console.log('context data', this.contextData);
 
     const navigateTo = this.routingService.getPage(this._router.url);
     this.footerConfig = {
@@ -79,8 +77,6 @@ export class MakeComponent {
       ...this.contextData.vehicle,
       make: this.selectedMake!
     };
-
-    console.log('saving context data', this.contextData);
 
     this.contextDataService.set(QUOTE_CONTEXT_DATA_NAME, this.contextData);
 

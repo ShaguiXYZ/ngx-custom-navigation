@@ -63,8 +63,6 @@ export class BirthdateComponent implements OnInit {
         birthdate: moment(new Date(this.form.controls['birthdate'].value)).format('YYYY-MM-DD')
       };
 
-      console.log('saving context data', this.contextData);
-
       this.contextDataService.set(QUOTE_CONTEXT_DATA_NAME, this.contextData);
     }
 

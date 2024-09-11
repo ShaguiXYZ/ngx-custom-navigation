@@ -77,8 +77,8 @@ export class LicensePlateComponent implements OnInit, OnDestroy {
 
   public continue() {
     this.contextData.driven.hasDrivenLicense = false;
-    console.log('saving context data', this.contextData);
     this.contextDataService.set(QUOTE_CONTEXT_DATA_NAME, this.contextData);
+
     const navigateTo = this.routingService.getPage(this._router.url);
     this.footerService.nextStep({
       validationFn: () => true,
@@ -91,8 +91,6 @@ export class LicensePlateComponent implements OnInit, OnDestroy {
     if (this.form.valid) {
       this.contextData.vehicle.plateNumber = this.form.controls['licensePlate'].value;
       this.contextData.driven.hasDrivenLicense = true;
-
-      console.log('saving context data', this.contextData);
 
       this.contextDataService.set(QUOTE_CONTEXT_DATA_NAME, this.contextData);
     }

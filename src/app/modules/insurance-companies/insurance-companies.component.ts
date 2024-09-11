@@ -54,8 +54,6 @@ export class InsuranceCompaniesComponent implements OnInit {
       company: this.selectedCompany?.index
     };
 
-    console.log('saving context data', this.contextData);
-
     this.contextDataService.set(QUOTE_CONTEXT_DATA_NAME, this.contextData);
 
     return true;

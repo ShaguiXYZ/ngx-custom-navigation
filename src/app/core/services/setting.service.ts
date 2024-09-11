@@ -1,10 +1,10 @@
 import { Injectable, inject } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 import { ContextDataService } from '@shagui/ng-shagui/core';
 import { QuoteModel } from '../../shared/models';
 import { QUOTE_APP_CONTEXT_DATA_NAME, QUOTE_CONTEXT_DATA_NAME } from '../constants';
 import { AppContextData, Configuration } from '../models';
 import { NavigationService } from './navigation.service';
-import { TranslateService } from '@ngx-translate/core';
 
 @Injectable({
   providedIn: 'root'
