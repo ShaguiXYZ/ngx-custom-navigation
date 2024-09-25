@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ContextDataService, HttpService } from '@shagui/ng-shagui/core';
 import { ContextDataServiceMock, HttpServiceMock, VehicleServiceMock } from 'src/app/core/mock/services';
 import { VehicleService } from 'src/app/core/services';
-import { PowerRangesModel } from '../models';
+import { PowerRangesModel } from 'src/app/shared/models';
 import { PowerRangesSelectionComponent } from './power-ranges-selection.component';
 
 describe('PowerRangesSelectionComponent', () => {

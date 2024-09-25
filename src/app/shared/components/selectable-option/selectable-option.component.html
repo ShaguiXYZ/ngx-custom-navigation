@@ -1,0 +1,10 @@
+<div class="option__container" [ngClass]="{ selected }" (click)="uiSelect.emit()">
+  @if(selected){
+  <div size="small" class="option__checked" [ngClass]="{ 'full-height': fullHeight }">
+    <nx-icon name="check" size="auto" aria-hidden="true" />
+  </div>
+  }
+  <div class="card__data">
+    <ng-content></ng-content>
+  </div>
+</div>

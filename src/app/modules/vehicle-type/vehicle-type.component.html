@@ -1,9 +1,13 @@
 <article class="component-container">
-  <quote-header-title>Algunos detalles más sobre tu coche...</quote-header-title>
+  <quote-header-title>¿Acabas de comprar tu coche?</quote-header-title>
   <div class="form-container">
     @for(type of vehicleTypes; track type.index) {
-    <div class="card-container" [ngClass]="{ selected: type.index === selectedType?.index }" (click)="selectType(type)">
-      <span nxCopytext="medium" class="nx-margin-s"> {{ type.data }}</span>
+    <div class="selectable-container">
+      <quote-selectable-option [selected]="type.index === selectedType?.index" [fullHeight]="true" (uiSelect)="selectType(type)">
+        <div class="card-container">
+          <span nxCopytext="medium" class="nx-margin-s"> {{ type.data }}</span>
+        </div>
+      </quote-selectable-option>
     </div>
     }
   </div>

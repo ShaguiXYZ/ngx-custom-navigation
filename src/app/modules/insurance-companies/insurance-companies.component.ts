@@ -1,11 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRouteSnapshot, Router, RouterStateSnapshot } from '@angular/router';
 import { ContextDataService } from '@shagui/ng-shagui/core';
-import { QUOTE_CONTEXT_DATA_NAME } from 'src/app/core/constants';
+import { Observable } from 'rxjs';
+import { QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
 import { InsuranceCompaniesService, RoutingService } from 'src/app/core/services';
 import { HeaderTitleComponent, IconCardComponent, QuoteFooterComponent } from 'src/app/shared/components';
 import { QuoteFooterConfig } from 'src/app/shared/components/quote-footer/models';
+import { IsValidData } from 'src/app/shared/guards';
 import { IIconData, QuoteModel } from 'src/app/shared/models';
 
 @Component({
@@ -15,7 +17,7 @@ import { IIconData, QuoteModel } from 'src/app/shared/models';
   templateUrl: './insurance-companies.component.html',
   styleUrl: './insurance-companies.component.scss'
 })
-export class InsuranceCompaniesComponent implements OnInit {
+export class InsuranceCompaniesComponent implements OnInit, IsValidData {
   public insuranceCompanies: IIconData[] = [];
   public selectedCompany?: IIconData;
   public footerConfig!: QuoteFooterConfig;
@@ -27,11 +29,10 @@ export class InsuranceCompaniesComponent implements OnInit {
   private contextData!: QuoteModel;
 
   constructor(private _router: Router) {
-    this.contextData = this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA_NAME);
+    this.contextData = this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA);
 
     const navigateTo = this.routingService.getPage(this._router.url);
     this.footerConfig = {
-      validationFn: this.updateValidData,
       showNext: !!navigateTo?.nextOptionList
     };
   }
@@ -44,6 +45,12 @@ export class InsuranceCompaniesComponent implements OnInit {
     }
   }
 
+  public canDeactivate = (
+    currentRoute: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot,
+    next?: RouterStateSnapshot
+  ): boolean | Observable<boolean> | Promise<boolean> => this.updateValidData();
+
   public selectCompany(icon: IIconData) {
     this.selectedCompany = icon;
   }
@@ -54,7 +61,7 @@ export class InsuranceCompaniesComponent implements OnInit {
       company: this.selectedCompany?.index
     };
 
-    this.contextDataService.set(QUOTE_CONTEXT_DATA_NAME, this.contextData);
+    this.contextDataService.set(QUOTE_CONTEXT_DATA, this.contextData);
 
     return true;
   };

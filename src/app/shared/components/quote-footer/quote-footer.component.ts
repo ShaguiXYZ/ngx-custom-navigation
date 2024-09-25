@@ -17,11 +17,11 @@ import { hasValue } from '@shagui/ng-shagui/core';
   styleUrl: './quote-footer.component.scss'
 })
 export class QuoteFooterComponent implements OnDestroy {
-  public _config: QuoteFooterConfig = { showNext: true, showBack: false };
+  public _config: QuoteFooterConfig;
   public _mobileMode?: boolean;
   public _observedMobileMode?: boolean;
 
-  private subscription$: Subscription[] = [];
+  private readonly subscription$: Subscription[] = [];
   private readonly breakpointObserver = inject(BreakpointObserver);
   private readonly footerService = inject(QuoteFooterService);
   private readonly translateService = inject(TranslateService);
@@ -32,6 +32,13 @@ export class QuoteFooterComponent implements OnDestroy {
         .observe([Breakpoints.HandsetPortrait, Breakpoints.TabletPortrait, Breakpoints.WebPortrait])
         .subscribe((state: BreakpointState) => (this._observedMobileMode = state.breakpoints[Breakpoints.HandsetPortrait]))
     );
+
+    this._config = {
+      showNext: true,
+      showBack: false,
+      backLabel: this.translateService.instant('Label.Back'),
+      nextLabel: this.translateService.instant('Label.Next')
+    };
   }
 
   get config(): QuoteFooterConfig {
@@ -42,6 +49,7 @@ export class QuoteFooterComponent implements OnDestroy {
   set config(value: QuoteFooterConfig) {
     this._config = {
       ...value,
+      showNext: value.showNext ?? true,
       backLabel: value.backLabel ?? this.translateService.instant('Label.Back'),
       nextLabel: value.nextLabel ?? this.translateService.instant('Label.Next')
     };

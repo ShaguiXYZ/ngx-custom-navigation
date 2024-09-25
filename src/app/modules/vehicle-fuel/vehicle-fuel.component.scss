@@ -1,0 +1,19 @@
+.form-container {
+  .vehicle__selections {
+    align-items: start;
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+
+    .fixed-width {
+      width: 110px;
+    }
+  }
+}
+
+.button-container {
+  align-items: center;
+  display: flex;
+  flex: 1;
+  justify-content: center;
+}

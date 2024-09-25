@@ -1,17 +1,17 @@
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild, inject } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { NX_DATE_LOCALE } from '@aposin/ng-aquila/datefield';
 import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
 import { NxInputModule } from '@aposin/ng-aquila/input';
 import { NxMaskModule } from '@aposin/ng-aquila/mask';
 import { ContextDataService } from '@shagui/ng-shagui/core';
-import { Subscription, debounceTime, distinctUntilChanged, fromEvent, tap } from 'rxjs';
-import { DEBOUNCE_TIME, QUOTE_CONTEXT_DATA_NAME } from 'src/app/core/constants';
+import { Observable, Subscription, debounceTime, distinctUntilChanged, fromEvent, tap } from 'rxjs';
+import { DEBOUNCE_TIME, QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
 import { IndexedData } from 'src/app/core/models';
-import { LocationService, RoutingService } from 'src/app/core/services';
+import { LocationService } from 'src/app/core/services';
 import { HeaderTitleComponent, QuoteFooterComponent, QuoteFooterInfoComponent } from 'src/app/shared/components';
-import { QuoteFooterConfig } from 'src/app/shared/components/quote-footer/models';
+import { IsValidData } from 'src/app/shared/guards';
 import { QuoteModel } from 'src/app/shared/models';
 
 @Component({
@@ -31,29 +31,21 @@ import { QuoteModel } from 'src/app/shared/models';
   ],
   providers: [{ provide: NX_DATE_LOCALE, useValue: 'es-ES' }]
 })
-export class PlaceComponent implements OnInit, OnDestroy {
+export class PlaceComponent implements OnInit, OnDestroy, IsValidData {
   @ViewChild('searchInput', { static: true })
   private searchInput!: ElementRef;
 
   public form!: FormGroup;
-  public footerConfig!: QuoteFooterConfig;
 
   private contextData!: QuoteModel;
 
   private readonly contextDataService = inject(ContextDataService);
   private readonly locationService = inject(LocationService);
-  private readonly routingService = inject(RoutingService);
 
   private subscription$: Subscription[] = [];
 
-  constructor(private readonly fb: FormBuilder, private readonly _router: Router) {
-    const navigateTo = this.routingService.getPage(this._router.url);
-
-    this.contextData = this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA_NAME);
-    this.footerConfig = {
-      validationFn: this.updateValidData,
-      showNext: !!navigateTo?.nextOptionList
-    };
+  constructor(private readonly fb: FormBuilder) {
+    this.contextData = this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA);
   }
 
   ngOnInit(): void {
@@ -66,6 +58,12 @@ export class PlaceComponent implements OnInit, OnDestroy {
     this.subscription$.forEach(subscription => subscription.unsubscribe());
   }
 
+  public canDeactivate = (
+    currentRoute: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot,
+    next?: RouterStateSnapshot
+  ): boolean | Observable<boolean> | Promise<boolean> => this.updateValidData();
+
   private updateValidData = (): boolean => {
     if (this.form.valid) {
       this.contextData.place = {
@@ -73,7 +71,7 @@ export class PlaceComponent implements OnInit, OnDestroy {
         ...this.form.value
       };
 
-      this.contextDataService.set(QUOTE_CONTEXT_DATA_NAME, this.contextData);
+      this.contextDataService.set(QUOTE_CONTEXT_DATA, this.contextData);
     }
 
     return !!this.contextData.place.province;

@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component, ElementRef, inject, OnInit, ViewChild } from '@angular/core';
 import { ContextDataService } from '@shagui/ng-shagui/core';
-import { QUOTE_CONTEXT_DATA_NAME } from 'src/app/core/constants';
-import { OfferingsService } from 'src/app/core/services';
+import { QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
+import { OfferingsService } from 'src/app/core/services/offerings.service';
 import { OfferingPriceModel, QuoteModel } from 'src/app/shared/models';
 import { QuoteOfferingPriceCardComponent } from './components';
 
@@ -31,7 +31,7 @@ export class QuoteOfferingsComponent implements OnInit {
   private readonly offeringsService = inject(OfferingsService);
 
   constructor() {
-    this.contextData = this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA_NAME);
+    this.contextData = this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA);
   }
 
   ngOnInit(): void {
@@ -63,8 +63,6 @@ export class QuoteOfferingsComponent implements OnInit {
     const duration = time - this.swipeTime;
 
     if (duration < 1000 && Math.abs(direction[0]) > 30 && Math.abs(direction[0]) > Math.abs(direction[1] * 3)) {
-      // console.log(`swipe ${direction[0] < 0 ? 'next' : 'previous'}`);
-
       const trackIndex =
         direction[0] < 0
           ? (this.selectedPriceIndex + 1) % this.prices.length
@@ -77,7 +75,7 @@ export class QuoteOfferingsComponent implements OnInit {
 
   public selectSteper(index: number): void {
     this.contextData.offering.price = { ...this.contextData.offering.price, ...this.prices[index] };
-    this.contextDataService.set(QUOTE_CONTEXT_DATA_NAME, this.contextData);
+    this.contextDataService.set(QUOTE_CONTEXT_DATA, this.contextData);
     this.selectedPriceIndex = index;
     this.selectCarrouselCard();
   }

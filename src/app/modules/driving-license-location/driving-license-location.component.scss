@@ -1,3 +1,11 @@
+.component__header__title {
+  .info__icon {
+    color: var(--interactive-primary);
+    vertical-align: sub;
+    margin: 10px;
+  }
+}
+
 .form-container {
   display: flex;
   flex-wrap: wrap;
@@ -6,4 +14,8 @@
   quote-icon-card {
     margin: 7.5px;
   }
+}
+
+.modal-content {
+  text-align: center;
 }

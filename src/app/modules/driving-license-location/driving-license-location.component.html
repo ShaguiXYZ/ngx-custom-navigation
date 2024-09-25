@@ -1,9 +1,24 @@
 <article class="component-container">
-  <quote-header-title>¿Dónde te sacaste el carnet?</quote-header-title>
+  <quote-header-title>
+    <div class="component__header__title">
+      <span class="info__description">¿Dónde te sacaste el carnet de conducir?</span>
+      <span class="info__icon nx-margin-left-2xs">
+        <nx-icon name="info-circle-o" size="auto" aria-hidden="true" (click)="openFromTemplate()" />
+      </span>
+    </div>
+  </quote-header-title>
   <section class="form-container">
     @for(icon of drivenLicenseCountries; track icon.index) {
     <quote-icon-card [data]="icon" [selected]="selectedLocation?.index === icon.index" (uiSelect)="selectLocation(icon)" />
     }
   </section>
-  <quote-footer [config]="footerConfig" />
 </article>
+
+<ng-template #template>
+  <div nxModalContent class="modal-content">
+    <h3 nxHeadline="subsection-medium" class="nx-margin-bottom-s">Obtención del carnet</h3>
+    <p nxCopytext="subsection-medium" class="nx-margin-bottom-2m">
+      Indica lugar de origen donde obtuviste tu primera licencia de condución.
+    </p>
+  </div>
+</ng-template>

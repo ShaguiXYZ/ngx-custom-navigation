@@ -2,8 +2,9 @@ import { Configuration } from '../../models';
 
 export class SettingServiceMock {
   public configuration: Configuration = {
-    pageMap: [
-      {
+    homePageId: 'on-boarding',
+    pageMap: {
+      'on-boarding': {
         pageId: 'on-boarding',
         route: 'on-boarding',
         title: 'On boarding',
@@ -13,7 +14,7 @@ export class SettingServiceMock {
           }
         ]
       },
-      {
+      'is-client': {
         pageId: 'is-client',
         route: 'is-client',
         title: 'Eres cliente',
@@ -32,7 +33,7 @@ export class SettingServiceMock {
           }
         ]
       },
-      {
+      'contact-us': {
         pageId: 'contact-us',
         route: 'contact-us',
         title: 'Te llamamos',
@@ -42,11 +43,11 @@ export class SettingServiceMock {
           body: 'Para cualquier consulta:'
         }
       },
-      {
+      'personal-data': {
         pageId: 'personal-data',
         route: 'personal-data',
         title: 'Datos personales'
       }
-    ]
+    }
   };
 }

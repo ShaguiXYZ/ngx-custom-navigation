@@ -8,19 +8,13 @@ import { ContextDataService, HttpService } from '@shagui/ng-shagui/core';
 import { AppComponent } from './app.component';
 import { ContextDataServiceMock, HttpServiceMock, TranslateServiceMock, VehicleServiceMock } from './core/mock/services';
 import { VehicleService } from './core/services';
-import { QuoteBreadcrumbComponent, QuoteFooterComponent, QuoteLoadingComponent } from './shared/components';
+import { QuoteFooterComponent, QuoteLoadingComponent } from './shared/components';
 
 describe('AppComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [AppComponent],
-      imports: [
-        provideHttpClientTesting(),
-        RouterModule.forRoot([]),
-        QuoteBreadcrumbComponent,
-        QuoteFooterComponent,
-        QuoteLoadingComponent
-      ],
+      imports: [provideHttpClientTesting(), RouterModule.forRoot([]), QuoteFooterComponent, QuoteLoadingComponent],
       providers: [
         provideHttpClient(),
         { provide: ContextDataService, useClass: ContextDataServiceMock },

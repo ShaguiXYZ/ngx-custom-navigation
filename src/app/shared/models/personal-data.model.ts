@@ -7,6 +7,7 @@ export interface PersonalDataModel {
   name: string;
   identificationNumber?: string;
   productsInfo?: boolean;
+  privacyPolicy?: boolean;
   surname?: string;
   phoneNumber?: string;
 }

@@ -1,65 +1,85 @@
-import { Injectable, inject } from '@angular/core';
+import { Injectable, OnDestroy, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { ContextDataService, JsonUtils } from '@shagui/ng-shagui/core';
-import { PageModel, QuoteModel } from '../../shared/models';
-import { QUOTE_CONTEXT_DATA_NAME } from '../constants';
-import { CompareOperations, Condition, Configuration, NextOption, Page } from '../models';
-import { SettingsService } from './setting.service';
+import { QuoteModel } from '../../shared/models';
+import { QUOTE_APP_CONTEXT_DATA, QUOTE_CONTEXT_DATA } from '../constants';
+import { AppContextData, CompareOperations, Condition, NextOption, Page } from '../models';
+import { Subscription } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
-export class RoutingService {
-  private configuration: Configuration;
+export class RoutingService implements OnDestroy {
+  private appContextData: AppContextData;
 
+  private readonly subscrition$: Subscription[] = [];
   private readonly contextDataService = inject(ContextDataService);
-  private readonly settingsService = inject(SettingsService);
 
   constructor(private readonly _router: Router) {
-    this.configuration = this.settingsService.configuration;
+    this.appContextData = this.contextDataService.get<AppContextData>(QUOTE_APP_CONTEXT_DATA);
+
+    this.subscrition$.push(
+      this.contextDataService.onDataChange<AppContextData>(QUOTE_APP_CONTEXT_DATA).subscribe(data => {
+        this.appContextData = data;
+      })
+    );
+  }
+
+  ngOnDestroy(): void {
+    this.subscrition$.forEach(sub => sub.unsubscribe());
   }
 
   public nextStep(validFn?: () => boolean, onError?: () => void): Promise<boolean> {
     if (!validFn || validFn()) {
-      return this._router.navigate(this.getNextRoute(this._router.url));
+      const nextPage = this.getNextRoute();
+
+      if (!nextPage) {
+        return Promise.resolve(false);
+      }
+
+      return this.goToPage(nextPage);
     } else {
       onError && onError();
       return Promise.resolve(false);
     }
   }
 
-  public previousStep(page: PageModel): Promise<boolean> {
-    return this._router.navigate([page.id]);
-  }
+  public previousStep = (): Promise<boolean> => {
+    if (this.appContextData.navigation.viewedPages.length > 1) {
+      const pageId = this.appContextData.navigation.viewedPages[this.appContextData.navigation.viewedPages.length - 2];
 
-  public getPage(url: string): Page | undefined {
-    return this.configuration.pageMap.find(page => page.pageId === url.substring(1));
-  }
+      return this.goToPage(this.appContextData.configuration.pageMap[pageId]);
+    }
 
-  private getNextRoute(url: string): string[] {
+    return Promise.resolve(false);
+  };
+
+  public getPage = (id: string): Page | undefined => this.appContextData.configuration.pageMap[id];
+
+  private goToPage = (page: Page): Promise<boolean> => {
+    this.appContextData.navigation.nextPage = page;
+
+    this.contextDataService.set(QUOTE_APP_CONTEXT_DATA, this.appContextData);
+    return this._router.navigate([page.route]);
+  };
+
+  private getNextRoute(): Page | undefined {
+    const pageId = this.appContextData.navigation.viewedPages[this.appContextData.navigation.viewedPages.length - 1];
+
     // 1º Recuperamos la pagina del sitemap
-    const pagina = this.getPage(url);
+    const page = this.getPage(pageId);
 
     // 2º Recuperamos la opción de siguiente
-    const nextPageId = this.testNavigation(pagina!);
+    const nextPageId = this.testNavigation(page!);
 
-    console.log('next page id', nextPageId);
-
-    return nextPageId ? [nextPageId] : [];
+    return this.appContextData.configuration.pageMap[nextPageId!];
   }
 
-  private testNavigation(page: Page) {
-    //1º Comprobamos si hay mas de una opción de siguiente
-    if (page.nextOptionList && page.nextOptionList.length === 1) {
-      // Cuando solo tenemos una opción de siguiente, esta no tendrá condiciones.
-      // Las condiciones solo son condiciones de navegación, que sirven para decidir
-      // a que pagina ir. Las condiciones de validaciones se realizarán por parte de
-      // los propios componentes.
-      return page.nextOptionList[0].nextPageId;
-    } else if (page.nextOptionList && page.nextOptionList.length > 1) {
+  private testNavigation(page: Page): string | undefined {
+    if (page.nextOptionList) {
       return this.nextPageIdFromNextOptionList(page.nextOptionList);
     } else {
-      return undefined;
+      return;
     }
   }
 
@@ -90,8 +110,7 @@ export class RoutingService {
       : (0, eval)(`${this.contextDataItemValue(condition.expression)}${condition.operation ?? '==='}${condition.value}`);
   };
 
-  private contextDataItemValue = (key: string): any =>
-    JsonUtils.valueOf(this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA_NAME), key);
+  private contextDataItemValue = (key: string): any => JsonUtils.valueOf(this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA), key);
 
   private applyPreviousEval = (previous: boolean, current: boolean, union?: CompareOperations): boolean =>
     (union &&

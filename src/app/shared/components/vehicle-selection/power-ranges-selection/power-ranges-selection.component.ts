@@ -1,11 +1,10 @@
 import { Component, EventEmitter, OnDestroy, OnInit, Output, inject } from '@angular/core';
 import { NxButtonModule } from '@aposin/ng-aquila/button';
-import { Subscription } from 'rxjs';
-import { QUOTE_CONTEXT_DATA_NAME } from 'src/app/core/constants';
-import { VehicleService } from 'src/app/core/services';
-import { QuoteModel } from 'src/app/shared/models';
-import { IVehicleModel, PowerRangesModel } from '../models';
 import { ContextDataService } from '@shagui/ng-shagui/core';
+import { Subscription } from 'rxjs';
+import { QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
+import { VehicleService } from 'src/app/core/services';
+import { IVehicleModel, PowerRangesModel, QuoteModel } from 'src/app/shared/models';
 
 @Component({
   selector: 'quote-power-selection',
@@ -27,13 +26,13 @@ export class PowerRangesSelectionComponent implements OnInit, OnDestroy {
   private subscription$: Subscription[] = [];
 
   ngOnInit(): void {
-    const data = this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA_NAME);
+    const data = this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA);
 
     this.selectedPower = data.vehicle?.fuel;
     data.vehicle && this.powersFromModel(data.vehicle);
 
     this.subscription$.push(
-      this.contextDataService.onDataChange<QuoteModel>(QUOTE_CONTEXT_DATA_NAME).subscribe(data => {
+      this.contextDataService.onDataChange<QuoteModel>(QUOTE_CONTEXT_DATA).subscribe(data => {
         this.selectedPower = data.vehicle?.powerRange;
         this.powersFromModel(data.vehicle);
       })

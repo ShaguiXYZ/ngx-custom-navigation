@@ -1,19 +1,20 @@
+import { DataInfo } from '@shagui/ng-shagui/core';
+
 export type CompareOperations = 'AND' | 'OR';
 
-export interface Configuration {
+export interface ConfigurationDTO {
+  homePageId: string;
   lastUpdate?: Date;
   pageMap: Page[];
 }
 
 export interface Page {
-  pageId: string;
-  route: string;
-  title: string;
   nextOptionList?: NextOption[];
   pageConfiguration?: any;
-  step?: number;
-  maxPath?: number;
-  showAsBreadcrumb?: boolean;
+  pageId: string;
+  route: string;
+  showBack?: boolean;
+  title: string;
 }
 
 export interface NextOption {
@@ -26,4 +27,23 @@ export interface Condition {
   operation?: string;
   value: any;
   union?: CompareOperations;
+}
+
+export interface Configuration {
+  homePageId: string;
+  lastUpdate?: Date;
+  pageMap: DataInfo<Page>;
+}
+
+export namespace Configuration {
+  export function init(configuration: ConfigurationDTO): Configuration {
+    return {
+      homePageId: configuration.homePageId,
+      lastUpdate: configuration.lastUpdate,
+      pageMap: configuration.pageMap.reduce((acc, page) => {
+        acc[page.pageId] = page;
+        return acc;
+      }, {} as DataInfo<Page>)
+    };
+  }
 }

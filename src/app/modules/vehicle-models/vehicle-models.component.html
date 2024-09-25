@@ -1,0 +1,25 @@
+<article class="component-container">
+  <quote-header-title>¿Y el modelo?</quote-header-title>
+  <div class="form-container">
+    <form [formGroup]="form">
+      <nx-formfield label="Search..." appearance="outline">
+        <input #searchInput type="text" formControlName="searchInput" nxInput />
+        <span nxFormfieldSuffix>
+          <nx-icon name="search"></nx-icon>
+        </span>
+      </nx-formfield>
+    </form>
+
+    @for(model of models; track $index) { @defer(on viewport) {
+    <div class="nx-margin-bottom-s">
+      <quote-selectable-option [selected]="model === selectedModel" [fullHeight]="true" (uiSelect)="selectModel(model)">
+        <div class="card-container">
+          <span nxCopytext="medium" class="nx-margin-s"> {{ model }}</span>
+        </div>
+      </quote-selectable-option>
+    </div>
+    } @placeholder {
+    <div class="card-container"></div>
+    } }
+  </div>
+</article>

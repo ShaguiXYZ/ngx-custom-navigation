@@ -1,0 +1,13 @@
+<article class="component-container">
+  <quote-header-title>¿Cuál es año de matriculación?</quote-header-title>
+  <section class="form-container">
+    <form [formGroup]="form">
+      <div class="quote-grow nx-margin-right-xs">
+        <nx-formfield label="Año de matriculación">
+          <input type="text" formControlName="yearOfManufacture" nxInput nxMask="0000" />
+        </nx-formfield>
+      </div>
+    </form>
+  </section>
+  <quote-footer />
+</article>

@@ -1,8 +1,10 @@
 nx-message {
   background-color: #eff6f6;
+  border: none;
   margin-top: auto;
 
   .quote__info__message {
+    color: #003781;
     display: flex;
 
     .quote__info__message__icon {

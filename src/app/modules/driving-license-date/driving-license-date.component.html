@@ -5,7 +5,7 @@
       <div class="quote-grow">
         <nx-formfield label="Fecha de emisión">
           <input formControlName="drivenLicenseDate" nxDatefield nxInput [datepicker]="myDatepicker" />
-          <span nxFormfieldHint>DD/MM/YYYY</span>
+          <span nxFormfieldHint>{{ 'Label.DateFormat' | translate }}</span>
 
           <nx-datepicker-toggle [for]="myDatepicker" nxFormfieldSuffix></nx-datepicker-toggle>
           <nx-datepicker #myDatepicker></nx-datepicker>
@@ -13,5 +13,5 @@
       </div>
     </form>
   </section>
-  <quote-footer [config]="footerConfig" />
+  <quote-footer />
 </article>

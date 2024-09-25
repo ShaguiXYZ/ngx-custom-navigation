@@ -1,0 +1,9 @@
+.form-container {
+  flex-direction: column;
+
+  .card-container {
+    align-items: start;
+    height: 56px;
+    width: 100%;
+  }
+}

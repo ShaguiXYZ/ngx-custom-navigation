@@ -1,10 +1,8 @@
 .products-info {
+  align-items: center;
   display: flex;
-  flex-direction: column;
 
   .products-info-literal {
-    align-items: center;
-    display: flex;
     flex: 1;
     margin: 0;
 
@@ -12,8 +10,8 @@
       display: block;
     }
   }
+}
 
-  .products-info-literal + .products-info-literal {
-    margin-top: 16px;
-  }
+.products-info + .products-info {
+  margin-top: 16px;
 }

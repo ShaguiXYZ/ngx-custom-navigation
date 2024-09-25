@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, ElementRef, inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { NxButtonModule } from '@aposin/ng-aquila/button';
 import { NxCopytextModule } from '@aposin/ng-aquila/copytext';
 import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
@@ -9,11 +9,11 @@ import { NxInputModule } from '@aposin/ng-aquila/input';
 import { NxLicencePlateModule } from '@aposin/ng-aquila/licence-plate';
 import { NxMaskModule } from '@aposin/ng-aquila/mask';
 import { ContextDataService } from '@shagui/ng-shagui/core';
-import { debounceTime, distinctUntilChanged, fromEvent, map, Subscription } from 'rxjs';
-import { DEBOUNCE_TIME, QUOTE_CONTEXT_DATA_NAME } from 'src/app/core/constants';
+import { debounceTime, distinctUntilChanged, fromEvent, map, Observable, Subscription } from 'rxjs';
+import { DEBOUNCE_TIME, QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
 import { RoutingService } from 'src/app/core/services';
-import { HeaderTitleComponent, QuoteFooterComponent, QuoteFooterInfoComponent, QuoteFooterService } from 'src/app/shared/components';
-import { QuoteFooterConfig } from 'src/app/shared/components/quote-footer/models';
+import { HeaderTitleComponent, QuoteFooterComponent, QuoteFooterInfoComponent } from 'src/app/shared/components';
+import { IsValidData } from 'src/app/shared/guards';
 import { QuoteModel } from 'src/app/shared/models';
 
 @Component({
@@ -36,33 +36,20 @@ import { QuoteModel } from 'src/app/shared/models';
     CommonModule
   ]
 })
-export class LicensePlateComponent implements OnInit, OnDestroy {
+export class LicensePlateComponent implements OnInit, OnDestroy, IsValidData {
   @ViewChild('searchInput', { static: true })
   private searchInput!: ElementRef;
-  private licensePlateMasks = {
-    ['OLD']: 'SS-0000-SS',
-    ['NEW']: 'SSS-0000'
-  };
 
   public form!: FormGroup;
-  public footerConfig!: QuoteFooterConfig;
 
   private contextData!: QuoteModel;
   private subscription$: Subscription[] = [];
 
   private readonly contextDataService = inject(ContextDataService);
-  private readonly footerService = inject(QuoteFooterService);
   private readonly routingService = inject(RoutingService);
 
-  constructor(private readonly fb: FormBuilder, private readonly _router: Router) {
-    this.contextData = this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA_NAME);
-
-    const navigateTo = this.routingService.getPage(this._router.url);
-    this.footerConfig = {
-      validationFn: this.updateValidData,
-      showBack: false,
-      showNext: !!navigateTo?.nextOptionList
-    };
+  constructor(private readonly fb: FormBuilder) {
+    this.contextData = this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA);
   }
 
   ngOnInit(): void {
@@ -75,32 +62,37 @@ export class LicensePlateComponent implements OnInit, OnDestroy {
     this.subscription$.forEach(subscription => subscription.unsubscribe());
   }
 
-  public continue() {
-    this.contextData.driven.hasDrivenLicense = false;
-    this.contextDataService.set(QUOTE_CONTEXT_DATA_NAME, this.contextData);
+  public canDeactivate = (
+    currentRoute: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot,
+    next?: RouterStateSnapshot
+  ): boolean | Observable<boolean> | Promise<boolean> => this.updateValidData();
 
-    const navigateTo = this.routingService.getPage(this._router.url);
-    this.footerService.nextStep({
-      validationFn: () => true,
-      showBack: true,
-      showNext: !!navigateTo?.nextOptionList
-    });
+  public continueWithOutLicensePlate() {
+    this.contextData.driven.hasDrivenLicense = false;
+    this.contextDataService.set(QUOTE_CONTEXT_DATA, this.contextData);
+    this.routingService.nextStep();
   }
 
   private updateValidData = (): boolean => {
+    if (this.contextData.driven.hasDrivenLicense === false) {
+      this.contextData.vehicle.plateNumber = '';
+      return true;
+    }
+
     if (this.form.valid) {
-      this.contextData.vehicle.plateNumber = this.form.controls['licensePlate'].value;
+      this.contextData.vehicle.plateNumber = this.form.value.plateNumber;
       this.contextData.driven.hasDrivenLicense = true;
 
-      this.contextDataService.set(QUOTE_CONTEXT_DATA_NAME, this.contextData);
+      this.contextDataService.set(QUOTE_CONTEXT_DATA, this.contextData);
     }
 
     return this.form.valid;
   };
 
-  private createForm() {
+  private createForm(): void {
     this.form = this.fb.group({
-      licensePlate: new FormControl(this.contextData.vehicle.plateNumber, [Validators.required])
+      plateNumber: new FormControl(this.contextData.vehicle.plateNumber, [Validators.required])
     });
   }
 

@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-namespace */
 /* eslint-disable no-redeclare */
-import { IVehicleModel } from '../components/vehicle-selection/models/vehicle.model';
 import { ClientModel } from './client.model';
 import { DateOfIssueModel } from './dateOfIssue.model';
 import { DrivenModel } from './driven.model';
@@ -8,6 +7,7 @@ import { InsuranceCompanyModel } from './insurance-company.model';
 import { IOfferingModel } from './offering.model';
 import { PersonalDataModel } from './personal-data.model';
 import { PlaceModel } from './place.model';
+import { IVehicleModel } from './vehicle.model';
 
 export interface QuoteModel {
   client: ClientModel;

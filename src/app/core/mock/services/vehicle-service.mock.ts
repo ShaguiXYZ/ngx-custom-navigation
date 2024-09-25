@@ -1,6 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-
-import { BrandKey, FuelModel, IVehicleModel, PowerRangesModel } from '../../../shared/components/vehicle-selection';
+import { BrandKey, FuelModel, IVehicleModel, PowerRangesModel } from 'src/app/shared/models';
 
 export class VehicleServiceMock {
   vehicleBrands(branch: BrandKey): Promise<string[]> {

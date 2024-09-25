@@ -1,0 +1,28 @@
+<article class="component-container">
+  <quote-header-title>¿Y la versión?</quote-header-title>
+  <div class="form-container">
+    <form [formGroup]="form">
+      <nx-formfield label="Search..." appearance="outline">
+        <input #searchInput type="text" formControlName="searchInput" nxInput />
+        <span nxFormfieldSuffix>
+          <nx-icon name="search"></nx-icon>
+        </span>
+      </nx-formfield>
+    </form>
+    @for(modelVersion of modelVersions; track modelVersion.index) { @defer(on viewport) {
+    <div class="nx-margin-bottom-s">
+      <quote-selectable-option
+        [selected]="modelVersion.index === selectedModelVersion?.index"
+        [fullHeight]="true"
+        (uiSelect)="selectVersion(modelVersion)"
+      >
+        <div class="card-container">
+          <span nxCopytext="medium" class="nx-margin-s"> {{ modelVersion.data }}</span>
+        </div>
+      </quote-selectable-option>
+    </div>
+    } @placeholder {
+    <div class="card-container"></div>
+    } }
+  </div>
+</article>

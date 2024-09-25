@@ -1,7 +1,7 @@
-import { QUOTE_APP_CONTEXT_DATA_NAME, QUOTE_CONTEXT_DATA_NAME } from '../../constants';
+import { QUOTE_APP_CONTEXT_DATA, QUOTE_CONTEXT_DATA } from '../../constants';
 
 export const ContextDataMock: { [key: string]: any } = {
-  [QUOTE_CONTEXT_DATA_NAME]: {
+  [QUOTE_CONTEXT_DATA]: {
     client: { isClient: true },
     personalData: {},
     driven: { drivenLicense: 'license', drivenLicenseCountry: 'country' },
@@ -9,7 +9,7 @@ export const ContextDataMock: { [key: string]: any } = {
     place: {},
     dateOfIssue: {}
   },
-  [QUOTE_APP_CONTEXT_DATA_NAME]: {
+  [QUOTE_APP_CONTEXT_DATA]: {
     viewedPages: []
   }
 };

@@ -1,0 +1,87 @@
+<article class="component-container">
+  <quote-header-title>Seleccione sus características</quote-header-title>
+  <div class="form-container">
+    <nx-accordion variant="light" [multi]="true">
+      <nx-expansion-panel [expanded]="true">
+        <nx-expansion-panel-header>
+          <nx-expansion-panel-title nxHeadline="subsection-xsmall">
+            {{ 'Label.Fuel' | translate }}
+          </nx-expansion-panel-title>
+        </nx-expansion-panel-header>
+        <div class="vehicle__selections">
+          @for(fuel of fuels; track $index) { @defer(on viewport) {
+          <div class="vehicle__selection nx-margin-2xs">
+            <quote-selectable-option [selected]="fuel.index === selectedFuel?.index" (uiSelect)="selectFuel(fuel)">
+              <div class="card-container">
+                <span nxCopytext="medium" class="nx-margin-s"> {{ fuel.data }}</span>
+              </div>
+            </quote-selectable-option>
+          </div>
+          } @placeholder {
+          <div class="card-container"></div>
+          } }
+        </div>
+      </nx-expansion-panel>
+
+      <nx-expansion-panel #cubicCapacityPanel [expanded]="contextData.vehicle.fuel">
+        <nx-expansion-panel-header>
+          <nx-expansion-panel-title nxHeadline="subsection-xsmall">
+            {{ 'Label.CubicCapacity' | translate }}
+          </nx-expansion-panel-title>
+        </nx-expansion-panel-header>
+        <div class="vehicle__selections">
+          @for(cubicCapacity of cubicCapacities; track $index) { @defer(on viewport) {
+          <div class="vehicle__selections nx-margin-2xs">
+            <quote-selectable-option
+              [selected]="cubicCapacity.index === selectedCubicCapacity?.index"
+              (uiSelect)="selectCubicCapacity(cubicCapacity)"
+            >
+              <div class="card-container fixed-width">
+                <span nxCopytext="medium" class="nx-margin-s"> {{ cubicCapacity.data }}</span>
+              </div>
+            </quote-selectable-option>
+          </div>
+          } @placeholder {
+          <div class="card-container"></div>
+          } }
+        </div>
+        <div class="button-container">
+          <button
+            class="nx-margin-y-2xs center"
+            nxButton="tertiary small"
+            type="button"
+            (click)="selectCubicCapacity(cubicCapacityNotKnown)"
+          >
+            <span nxCopytext="medium">No sé la cilindrada</span>
+          </button>
+        </div>
+      </nx-expansion-panel>
+
+      <nx-expansion-panel #powerPanel [expanded]="contextData.vehicle.cubicCapacity">
+        <nx-expansion-panel-header>
+          <nx-expansion-panel-title nxHeadline="subsection-xsmall">
+            {{ 'Label.Power' | translate }}
+          </nx-expansion-panel-title>
+        </nx-expansion-panel-header>
+        <div class="vehicle__selections">
+          @for(power of powers; track $index) { @defer(on viewport) {
+          <div class="vehicle__selection nx-margin-2xs">
+            <quote-selectable-option [selected]="power.index === selectedPower?.index" (uiSelect)="selectPower(power)">
+              <div class="card-container">
+                <span nxCopytext="medium" class="nx-margin-s"> {{ power.data }}</span>
+              </div>
+            </quote-selectable-option>
+          </div>
+          } @placeholder {
+          <div class="card-container"></div>
+          } }
+        </div>
+        <div class="button-container">
+          <button class="nx-margin-y-2xs center" nxButton="tertiary small" type="button" (click)="selectPower(powerNotKnown)">
+            <span nxCopytext="medium">No sé la potencia</span>
+          </button>
+        </div>
+      </nx-expansion-panel>
+    </nx-accordion>
+  </div>
+</article>

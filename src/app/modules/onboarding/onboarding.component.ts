@@ -1,13 +1,9 @@
 import { Component, inject } from '@angular/core';
-
-// Modules
 import { NxButtonModule } from '@aposin/ng-aquila/button';
 import { NxCardModule } from '@aposin/ng-aquila/card';
 import { NxCopytextModule } from '@aposin/ng-aquila/copytext';
 import { NxHeadlineModule } from '@aposin/ng-aquila/headline';
 import { NxIconModule } from '@aposin/ng-aquila/icon';
-
-// Services
 import { HeaderTitleComponent, QuoteFooterComponent, QuoteFooterService } from 'src/app/shared/components';
 import { QuoteFooterConfig } from 'src/app/shared/components/quote-footer/models';
 

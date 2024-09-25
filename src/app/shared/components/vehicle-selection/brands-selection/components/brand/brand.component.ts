@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { BrandData, BrandKey, IVehicleDictionaryData } from '../../../models';
+import { BrandData, BrandKey, IVehicleDictionaryData } from 'src/app/shared/models';
 
 @Component({
   selector: 'quote-brand',

@@ -2,7 +2,7 @@ import { Component, EventEmitter, OnDestroy, OnInit, Output, inject } from '@ang
 import { NxButtonModule } from '@aposin/ng-aquila/button';
 import { ContextDataService } from '@shagui/ng-shagui/core';
 import { Subscription } from 'rxjs';
-import { QUOTE_CONTEXT_DATA_NAME } from 'src/app/core/constants';
+import { QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
 import { VehicleService } from 'src/app/core/services';
 import { QuoteModel } from 'src/app/shared/models';
 
@@ -26,13 +26,13 @@ export class VehicleYearSelectionComponent implements OnInit, OnDestroy {
   private subscription$: Subscription[] = [];
 
   ngOnInit(): void {
-    const data = this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA_NAME);
+    const data = this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA);
 
     this.selectedYear = data.vehicle?.yearOfManufacture;
     data.vehicle && this.yearsFromModel();
 
     this.subscription$.push(
-      this.contextDataService.onDataChange<QuoteModel>(QUOTE_CONTEXT_DATA_NAME).subscribe(data => {
+      this.contextDataService.onDataChange<QuoteModel>(QUOTE_CONTEXT_DATA).subscribe(data => {
         this.selectedYear = data.vehicle?.yearOfManufacture;
         this.yearsFromModel();
       })

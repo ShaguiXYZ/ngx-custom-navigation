@@ -1,9 +1,18 @@
 .form-container {
   flex-direction: column;
 
+  .coverage {
+    align-items: start;
+    display: flex;
+
+    .coverage-icon {
+      color: var(--success);
+    }
+  }
+
   p {
     display: flex;
-    align-items: center;
+    align-items: start;
   }
 }
 
@@ -14,8 +23,15 @@
   justify-content: center;
   text-align: center;
 
+  .avatar__car {
+    height: 88px;
+    width: 88px;
+  }
+
   .nx-icon--fill {
     color: var(--interactive-primary);
     background-color: #eff6f6;
+    height: inherit;
+    width: inherit;
   }
 }

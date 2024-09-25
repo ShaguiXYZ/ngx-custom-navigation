@@ -4,9 +4,7 @@
       <div #carrouselTrack class="track nx-margin-s" (touchstart)="swipeStart($event)" (touchend)="swipeEnd($event)">
         @for(price of prices; track price.modalityId) {
         <div class="carousel__card">
-          @defer {
           <quote-offering-price-card [price]="price" [selected]="selectedPriceIndex === $index" />
-          }
         </div>
         }
       </div>

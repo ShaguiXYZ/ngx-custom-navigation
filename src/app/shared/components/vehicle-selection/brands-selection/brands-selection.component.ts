@@ -1,15 +1,14 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, OnInit, Output, inject } from '@angular/core';
+import { Component, EventEmitter, inject, OnInit, Output } from '@angular/core';
 import { NxButtonModule } from '@aposin/ng-aquila/button';
 import { NxDropdownModule, NxDropdownSelectChange } from '@aposin/ng-aquila/dropdown';
 import { NxIconModule } from '@aposin/ng-aquila/icon';
 import { NxInputModule } from '@aposin/ng-aquila/input';
 import { TranslateModule } from '@ngx-translate/core';
 import { ContextDataService, hasValue } from '@shagui/ng-shagui/core';
-import { QUOTE_CONTEXT_DATA_NAME } from 'src/app/core/constants';
-import { QuoteModel } from 'src/app/shared/models';
+import { QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
+import { BrandData, brandDictionary, QuoteModel } from 'src/app/shared/models';
 import { ModelSelectionComponent } from '../model-selection';
-import { BrandData, brandDictionary } from '../models';
 import { BrandComponent } from './components';
 
 @Component({
@@ -42,7 +41,7 @@ export class BrandsSelectionComponent implements OnInit {
   private readonly contextDataService = inject(ContextDataService);
 
   ngOnInit(): void {
-    const data = this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA_NAME);
+    const data = this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA);
 
     this.selectedBrand = data.vehicle?.make;
     this.showAll = hasValue(this.selectedBrand) && this.iconBrands.findIndex(brand => brand === this.selectedBrand) < 0;

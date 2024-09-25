@@ -6,10 +6,9 @@ import { NxInputModule } from '@aposin/ng-aquila/input';
 import { TranslateModule } from '@ngx-translate/core';
 import { ContextDataService, hasValue } from '@shagui/ng-shagui/core';
 import { Subscription } from 'rxjs';
-import { QUOTE_CONTEXT_DATA_NAME } from 'src/app/core/constants';
+import { QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
 import { VehicleService } from 'src/app/core/services';
-import { QuoteModel } from 'src/app/shared/models';
-import { BrandKey, MAX_BUTTON_MODELS } from '../models';
+import { BrandKey, MAX_BUTTON_MODELS, QuoteModel } from 'src/app/shared/models';
 
 @Component({
   selector: 'quote-model-selection',
@@ -33,7 +32,7 @@ export class ModelSelectionComponent implements OnInit, OnDestroy {
   private subscription$: Subscription[] = [];
 
   ngOnInit(): void {
-    const data = this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA_NAME);
+    const data = this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA);
 
     this.selectedModel = data.vehicle?.model;
     data.vehicle?.make &&
@@ -42,7 +41,7 @@ export class ModelSelectionComponent implements OnInit, OnDestroy {
       );
 
     this.subscription$.push(
-      this.contextDataService.onDataChange<QuoteModel>(QUOTE_CONTEXT_DATA_NAME).subscribe(data => {
+      this.contextDataService.onDataChange<QuoteModel>(QUOTE_CONTEXT_DATA).subscribe(data => {
         this.selectedModel = data.vehicle?.model;
         data.vehicle?.make && this.modelsFromBrand(data.vehicle.make);
       })

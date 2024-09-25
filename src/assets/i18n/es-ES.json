@@ -4,9 +4,11 @@
     "AllModels": "Todos los modelos",
     "Back": "Atrás",
     "Brand": "Marca",
+    "DateFormat": "Formato: DD/MM/AAAA",
+    "Fuel": "Combustible",
     "Model": "Modelo",
     "Next": "Continuar",
-    "Fuel": "Combustible",
+    "CubicCapacity": "Cilindrada",
     "Power": "Potencia",
     "YearOfManufacture": "Año de fabricación"
   }

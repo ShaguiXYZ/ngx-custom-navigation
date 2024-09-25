@@ -5,12 +5,12 @@
       <div class="quote-grow nx-margin-right-xs">
         <nx-formfield label="Fecha de contratación">
           <input formControlName="dateOfIssue" nxDatefield nxInput [datepicker]="myDatepicker" />
-          <span nxFormfieldHint>Formato: DD/MM/AAAA</span>
+          <span nxFormfieldHint>{{ 'Label.DateFormat' | translate }}</span>
           <nx-datepicker-toggle [for]="myDatepicker" nxFormfieldSuffix></nx-datepicker-toggle>
           <nx-datepicker #myDatepicker></nx-datepicker>
         </nx-formfield>
       </div>
     </form>
   </section>
-  <quote-footer [config]="footerConfig" />
+  <quote-footer />
 </article>

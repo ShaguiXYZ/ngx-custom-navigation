@@ -1,0 +1,37 @@
+.option__container {
+  position: relative;
+
+  .option__checked {
+    align-items: center;
+    background-color: var(--interactive-primary);
+    border: 1px solid var(--interactive-primary);
+    border-radius: 0 6px 0 0;
+    color: var(--ui-01);
+    display: flex;
+    height: 18px;
+    justify-content: center;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 18px;
+    z-index: 1;
+
+    &.full-height {
+      border-radius: 0 6px 6px 0;
+      height: 100%;
+      width: 56px;
+    }
+  }
+
+  .card__data {
+    border: 1px solid var(--card-border-color);
+    border-radius: 6px;
+  }
+
+  &.selected {
+    .card__data {
+      border: 2px solid var(--interactive-primary);
+      border-radius: 4px;
+    }
+  }
+}

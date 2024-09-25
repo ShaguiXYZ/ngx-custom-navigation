@@ -1,40 +1,46 @@
 import { Injectable, inject } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { ContextDataService } from '@shagui/ng-shagui/core';
+import { ContextDataService, HttpService } from '@shagui/ng-shagui/core';
+import { firstValueFrom, map, tap } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { QuoteModel } from '../../shared/models';
-import { QUOTE_APP_CONTEXT_DATA_NAME, QUOTE_CONTEXT_DATA_NAME } from '../constants';
-import { AppContextData, Configuration } from '../models';
-import { NavigationService } from './navigation.service';
+import { QUOTE_APP_CONTEXT_DATA, QUOTE_CONTEXT_DATA } from '../constants';
+import { AppContextData, Configuration, ConfigurationDTO } from '../models';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SettingsService {
-  public configuration: Configuration = { pageMap: [] };
-
   private readonly contextDataService = inject(ContextDataService);
-  private readonly navigationService = inject(NavigationService);
+  private readonly httpService = inject(HttpService);
   private readonly translateService = inject(TranslateService);
 
-  public async loadSettings() {
+  public async loadSettings(): Promise<void> {
     this.translateService.setDefaultLang('es-ES');
 
-    const contextData = this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA_NAME);
+    const contextData = this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA);
 
-    contextData ||
-      this.contextDataService.set(QUOTE_CONTEXT_DATA_NAME, QuoteModel.init(), {
+    this.contextDataService.set(
+      QUOTE_CONTEXT_DATA,
+      { ...QuoteModel.init(), ...contextData },
+      {
         persistent: false
-      });
+      }
+    );
 
-    const appContextData = this.contextDataService.get<AppContextData>(QUOTE_APP_CONTEXT_DATA_NAME);
+    const configuration = await firstValueFrom(
+      this.httpService.get<ConfigurationDTO>(environment.mockUrl).pipe(
+        map(res => res as ConfigurationDTO),
+        map(Configuration.init)
+      )
+    );
+    const appContextData = this.contextDataService.get<AppContextData>(QUOTE_APP_CONTEXT_DATA);
 
-    appContextData ||
-      this.contextDataService.set(QUOTE_APP_CONTEXT_DATA_NAME, AppContextData.init(), {
-        persistent: false
-      });
+    this.contextDataService.set(QUOTE_APP_CONTEXT_DATA, AppContextData.init(configuration, appContextData?.navigation.viewedPages ?? []), {
+      persistent: true
+    });
 
-    this.configuration = await this.navigationService.getConfiguration();
-
-    console.log('configuration', this.configuration);
+    console.log('contextData', this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA));
+    console.log('appContextData', this.contextDataService.get<AppContextData>(QUOTE_APP_CONTEXT_DATA));
   }
 }

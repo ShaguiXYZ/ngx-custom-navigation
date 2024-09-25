@@ -3,7 +3,7 @@
   <section class="form-container">
     <form [formGroup]="form">
       <div class="quote-grow">
-        <nx-radio-group name="accidents-group" formControlName="accidents" [required]="true">
+        <nx-radio-group name="accidents-group" formControlName="accidents" [required]="true" (click)="selectAccidents()">
           <nx-radio [value]="0" class="nx-margin-bottom-m">No</nx-radio>
           <nx-radio [value]="1" class="nx-margin-bottom-m">1</nx-radio>
           <nx-radio [value]="2" class="nx-margin-bottom-m">2</nx-radio>

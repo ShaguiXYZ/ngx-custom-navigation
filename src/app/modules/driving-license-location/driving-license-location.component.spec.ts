@@ -1,8 +1,10 @@
 import { provideHttpClient } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { NxDialogService } from '@aposin/ng-aquila/modal';
 import { TranslateService } from '@ngx-translate/core';
 import { ContextDataService, HttpService } from '@shagui/ng-shagui/core';
 import { ContextDataServiceMock, HttpServiceMock, RoutingServiceMock, TranslateServiceMock } from 'src/app/core/mock/services';
+import { NxDialogServiceMock } from 'src/app/core/mock/services/dialog-service.mock';
 import { RoutingService } from 'src/app/core/services';
 import { DrivingLicenseLocationComponent } from './driving-license-location.component';
 
@@ -17,6 +19,7 @@ describe('DrivingLicenseLocationComponent', () => {
         provideHttpClient(),
         { provide: ContextDataService, useClass: ContextDataServiceMock },
         { provide: HttpService, useClass: HttpServiceMock },
+        { provide: NxDialogService, useClass: NxDialogServiceMock },
         { provide: RoutingService, useClass: RoutingServiceMock },
         { provide: TranslateService, useClass: TranslateServiceMock }
       ]

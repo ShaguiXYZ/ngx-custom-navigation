@@ -1,11 +1,7 @@
 import { Component } from '@angular/core';
-
-// Modules
 import { NxCopytextModule } from '@aposin/ng-aquila/copytext';
 import { NxHeadlineModule } from '@aposin/ng-aquila/headline';
 import { NxIconModule } from '@aposin/ng-aquila/icon';
-
-// Services
 import { HeaderTitleComponent, QuoteFooterComponent } from 'src/app/shared/components';
 import { QuoteFooterConfig } from 'src/app/shared/components/quote-footer/models';
 
@@ -24,9 +20,5 @@ export class ContactUsComponent {
       showNext: true,
       nextLabel: 'FINALIZAR'
     };
-  }
-
-  contactUs() {
-    console.log('Contact us');
   }
 }

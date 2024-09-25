@@ -8,12 +8,11 @@ import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
 import { NxInputModule } from '@aposin/ng-aquila/input';
 import { NxMaskModule } from '@aposin/ng-aquila/mask';
 import { ContextDataService } from '@shagui/ng-shagui/core';
-import { QUOTE_CONTEXT_DATA_NAME } from 'src/app/core/constants';
-import { HeaderTitleComponent, QuoteFooterComponent } from 'src/app/shared/components';
+import { QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
+import { HeaderTitleComponent, QuoteFooterComponent, SelectableOptionComponent } from 'src/app/shared/components';
 import { QuoteFooterConfig } from 'src/app/shared/components/quote-footer/models';
 import { QuoteFooterService } from 'src/app/shared/components/quote-footer/services';
-import { IVehicleModel } from 'src/app/shared/components/vehicle-selection';
-import { FuelTypes, QuoteModel } from 'src/app/shared/models';
+import { FuelTypes, IVehicleModel, QuoteModel } from 'src/app/shared/models';
 
 @Component({
   selector: 'app-your-car-is',
@@ -29,6 +28,7 @@ import { FuelTypes, QuoteModel } from 'src/app/shared/models';
     NxFormfieldModule,
     NxInputModule,
     NxMaskModule,
+    SelectableOptionComponent,
     QuoteFooterComponent,
     ReactiveFormsModule
   ]
@@ -49,35 +49,35 @@ export class YourCarIsComponent {
       showNext: false
     };
 
-    this.contextData = this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA_NAME);
+    this.contextData = this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA);
 
     //MOCK
     this.vehicleOptions = [
       {
         make: 'Audi',
         model: 'Q3',
-        fuel: { index: FuelTypes.DIESEL, data: 'Diesel' },
+        fuel: { data: 'Diesel', index: FuelTypes.DIESEL },
         power: 120,
         yearOfManufacture: 2015
       },
       {
         make: 'Audi',
         model: 'Q3',
-        fuel: { index: FuelTypes.DIESEL, data: 'Diesel' },
+        fuel: { data: 'Diesel', index: FuelTypes.DIESEL },
         power: 130,
         yearOfManufacture: 2015
       },
       {
         make: 'Audi',
         model: 'Q3',
-        fuel: { index: FuelTypes.DIESEL, data: 'Diesel' },
+        fuel: { data: 'Diesel', index: FuelTypes.DIESEL },
         power: 140,
         yearOfManufacture: 2015
       },
       {
         make: 'Audi',
         model: 'Q3',
-        fuel: { index: FuelTypes.DIESEL, data: 'Diesel' },
+        fuel: { data: 'Diesel', index: FuelTypes.DIESEL },
         power: 150,
         yearOfManufacture: 2015
       }
@@ -86,7 +86,7 @@ export class YourCarIsComponent {
 
   public selectVehicle(vehicle: IVehicleModel) {
     this.contextData.vehicle = { ...this.contextData.vehicle, ...vehicle };
-    this.contextDataService.set(QUOTE_CONTEXT_DATA_NAME, this.contextData);
+    this.contextDataService.set(QUOTE_CONTEXT_DATA, this.contextData);
     this.footerService.nextStep({ showNext: false });
   }
 
