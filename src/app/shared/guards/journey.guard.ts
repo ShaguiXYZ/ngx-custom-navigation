@@ -21,6 +21,7 @@ export const journeyGuard: CanActivateFn = (route, state): MaybeAsync<GuardResul
     viewedPages.push(nextPage.pageId);
   }
 
+  context.navigation.lastPage = nextPage;
   context.navigation.nextPage = undefined;
   context.navigation.viewedPages = viewedPages;
   contextDataService.set(QUOTE_APP_CONTEXT_DATA, context);

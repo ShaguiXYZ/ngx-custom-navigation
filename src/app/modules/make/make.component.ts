@@ -8,10 +8,10 @@ import { NxIconModule } from '@aposin/ng-aquila/icon';
 import { NxInputModule } from '@aposin/ng-aquila/input';
 import { NxPageSearchModule } from '@aposin/ng-aquila/page-search';
 import { ContextDataService } from '@shagui/ng-shagui/core';
-import { debounceTime, distinctUntilChanged, fromEvent, map, Observable, Subscription } from 'rxjs';
+import { debounceTime, distinctUntilChanged, fromEvent, map, Subscription } from 'rxjs';
 import { DEBOUNCE_TIME, QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
 import { RoutingService, VehicleService } from 'src/app/core/services';
-import { HeaderTitleComponent, IconCardComponent, QuoteFooterComponent, QuoteFooterService } from 'src/app/shared/components';
+import { HeaderTitleComponent, IconCardComponent, QuoteFooterComponent } from 'src/app/shared/components';
 import { QuoteFooterConfig } from 'src/app/shared/components/quote-footer/models';
 import { BrandComponent } from 'src/app/shared/components/vehicle-selection';
 import { IsValidData } from 'src/app/shared/guards';
@@ -51,7 +51,6 @@ export class MakeComponent implements OnInit, OnDestroy, IsValidData {
   private subscription$: Subscription[] = [];
 
   private readonly contextDataService = inject(ContextDataService);
-  private readonly footerService = inject(QuoteFooterService);
   private readonly routingService = inject(RoutingService);
   private readonly vehicleService = inject(VehicleService);
 
@@ -82,11 +81,15 @@ export class MakeComponent implements OnInit, OnDestroy, IsValidData {
 
   public selectMake(event: string): void {
     this.selectedMake = event;
-    const navigateTo = this.routingService.getPage(this._router.url);
-    this.footerService.nextStep({
-      showBack: true,
-      showNext: !!navigateTo?.nextOptionList
-    });
+
+    this.contextData.vehicle = {
+      ...this.contextData.vehicle,
+      make: this.selectedMake!
+    };
+
+    this.contextDataService.set(QUOTE_CONTEXT_DATA, this.contextData);
+
+    this.routingService.nextStep();
   }
 
   private createForm() {
@@ -113,13 +116,6 @@ export class MakeComponent implements OnInit, OnDestroy, IsValidData {
    * Actualiza el contexto guardando la marca seleccionada
    */
   private updateValidData = (): boolean => {
-    this.contextData.vehicle = {
-      ...this.contextData.vehicle,
-      make: this.selectedMake!
-    };
-
-    this.contextDataService.set(QUOTE_CONTEXT_DATA, this.contextData);
-
-    return true;
+    return this.contextData.vehicle.make === this.selectedMake;
   };
 }

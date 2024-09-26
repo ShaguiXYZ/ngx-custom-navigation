@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRouteSnapshot, Router, RouterStateSnapshot } from '@angular/router';
 import { NxAccordionModule } from '@aposin/ng-aquila/accordion';
@@ -49,13 +49,11 @@ export class VehicleFuelComponent implements OnInit, IsValidData {
   public selectedFuel?: FuelModel;
   public selectedPower?: PowerRangesModel;
 
-  constructor(
-    private _router: Router,
-    private contextDataService: ContextDataService,
-    private footerService: QuoteFooterService,
-    private routingService: RoutingService,
-    private vehicleService: VehicleService
-  ) {
+  private readonly contextDataService = inject(ContextDataService);
+  private readonly routingService = inject(RoutingService);
+  private readonly vehicleService = inject(VehicleService);
+
+  constructor() {
     this.contextData = this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA);
     this.selectedFuel = this.contextData.vehicle.fuel;
     this.selectedCubicCapacity = this.contextData.vehicle.cubicCapacity;
@@ -66,9 +64,11 @@ export class VehicleFuelComponent implements OnInit, IsValidData {
     this.vehicleService.modelFuels(this.contextData.vehicle).then(fuel => {
       this.fuels = fuel;
     });
+
     this.vehicleService.vehiclePowers(this.contextData.vehicle).then(powers => {
       this.powers = powers;
     });
+
     this.vehicleService.cubicCapacities(this.contextData.vehicle).then(cubicCapacities => {
       this.cubicCapacities = cubicCapacities;
     });
@@ -112,11 +112,7 @@ export class VehicleFuelComponent implements OnInit, IsValidData {
 
   private navigateToNextPage() {
     if (this.contextData.vehicle.fuel && this.contextData.vehicle.cubicCapacity && this.contextData.vehicle.powerRange) {
-      this.routingService.getPage(this._router.url);
-      this.footerService.nextStep({
-        showBack: true,
-        showNext: true
-      });
+      this.routingService.nextStep();
     }
   }
 }

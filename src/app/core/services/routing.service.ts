@@ -49,7 +49,7 @@ export class RoutingService implements OnDestroy {
     return Promise.resolve(false);
   };
 
-  public getPage = (id: string): Page | undefined => this.appContextData.configuration.pageMap[id];
+  private getPage = (id: string): Page | undefined => this.appContextData.configuration.pageMap[id];
 
   private goToPage = (page: Page): Promise<boolean> => {
     this.appContextData.navigation.nextPage = page;

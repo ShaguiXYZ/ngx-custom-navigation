@@ -3,8 +3,6 @@ import { configContextRoutes } from '@shagui/ng-shagui/core';
 import { AppUrls } from './shared/config';
 import { isValidGuard, journeyGuard } from './shared/guards';
 
-export const HOME_PAGE = AppUrls.onBoarding;
-
 export const routes: Routes = configContextRoutes([
   {
     path: AppUrls.apology,
@@ -168,8 +166,12 @@ export const routes: Routes = configContextRoutes([
     canDeactivate: [isValidGuard]
   },
   {
+    path: AppUrls.journeyHome,
+    loadComponent: () => import('./modules/journey-home/journey-home.component').then(c => c.JourneyHomeComponent)
+  },
+  {
     path: AppUrls.root,
     pathMatch: 'full',
-    redirectTo: `/${HOME_PAGE}`
+    redirectTo: AppUrls.journeyHome
   }
 ]);

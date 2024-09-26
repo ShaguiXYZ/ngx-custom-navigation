@@ -1,11 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
-import { ActivatedRouteSnapshot, Router, RouterStateSnapshot } from '@angular/router';
+import { ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { ContextDataService } from '@shagui/ng-shagui/core';
 import { Observable } from 'rxjs';
 import { QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
 import { InsuranceCompaniesService, RoutingService } from 'src/app/core/services';
-import { HeaderTitleComponent, IconCardComponent, QuoteFooterComponent } from 'src/app/shared/components';
+import { HeaderTitleComponent, IconCardComponent } from 'src/app/shared/components';
 import { QuoteFooterConfig } from 'src/app/shared/components/quote-footer/models';
 import { IsValidData } from 'src/app/shared/guards';
 import { IIconData, QuoteModel } from 'src/app/shared/models';
@@ -13,7 +13,7 @@ import { IIconData, QuoteModel } from 'src/app/shared/models';
 @Component({
   selector: 'app-insurance-companies',
   standalone: true,
-  imports: [CommonModule, IconCardComponent, HeaderTitleComponent, QuoteFooterComponent],
+  imports: [CommonModule, IconCardComponent, HeaderTitleComponent],
   templateUrl: './insurance-companies.component.html',
   styleUrl: './insurance-companies.component.scss'
 })
@@ -28,13 +28,8 @@ export class InsuranceCompaniesComponent implements OnInit, IsValidData {
 
   private contextData!: QuoteModel;
 
-  constructor(private _router: Router) {
+  constructor() {
     this.contextData = this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA);
-
-    const navigateTo = this.routingService.getPage(this._router.url);
-    this.footerConfig = {
-      showNext: !!navigateTo?.nextOptionList
-    };
   }
 
   async ngOnInit(): Promise<void> {
@@ -49,13 +44,11 @@ export class InsuranceCompaniesComponent implements OnInit, IsValidData {
     currentRoute: ActivatedRouteSnapshot,
     state: RouterStateSnapshot,
     next?: RouterStateSnapshot
-  ): boolean | Observable<boolean> | Promise<boolean> => this.updateValidData();
+  ): boolean | Observable<boolean> | Promise<boolean> => this.isValidData();
 
   public selectCompany(icon: IIconData) {
     this.selectedCompany = icon;
-  }
 
-  private updateValidData = (): boolean => {
     this.contextData.insuranceCompany = {
       ...this.contextData.insuranceCompany,
       company: this.selectedCompany?.index
@@ -63,6 +56,10 @@ export class InsuranceCompaniesComponent implements OnInit, IsValidData {
 
     this.contextDataService.set(QUOTE_CONTEXT_DATA, this.contextData);
 
-    return true;
+    this.routingService.nextStep();
+  }
+
+  private isValidData = (): boolean => {
+    return !!this.contextData.insuranceCompany?.company;
   };
 }

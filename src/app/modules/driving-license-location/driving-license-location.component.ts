@@ -51,6 +51,13 @@ export class DrivingLicenseLocationComponent implements IsValidData {
   public selectLocation(icon: IIconData) {
     this.selectedLocation = icon;
 
+    this.contextData.driven = {
+      ...this.contextData.driven,
+      drivenLicenseCountry: this.selectedLocation?.index
+    };
+
+    this.contextDataService.set(QUOTE_CONTEXT_DATA, this.contextData);
+
     this.routingService.nextStep();
   }
 
@@ -62,17 +69,10 @@ export class DrivingLicenseLocationComponent implements IsValidData {
   }
 
   public canDeactivate = (): boolean => {
-    return this.updateValidData();
+    return this.isValidData();
   };
 
-  private updateValidData = (): boolean => {
-    this.contextData.driven = {
-      ...this.contextData.driven,
-      drivenLicenseCountry: this.selectedLocation?.index
-    };
-
-    this.contextDataService.set(QUOTE_CONTEXT_DATA, this.contextData);
-
-    return true;
+  private isValidData = (): boolean => {
+    return !!this.contextData.driven.drivenLicenseCountry;
   };
 }

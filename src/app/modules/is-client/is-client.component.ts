@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
-import { ActivatedRouteSnapshot, Router, RouterStateSnapshot } from '@angular/router';
+import { ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { NxButtonModule } from '@aposin/ng-aquila/button';
 import { ContextDataService, hasValue } from '@shagui/ng-shagui/core';
 import { Observable } from 'rxjs';
@@ -23,7 +23,7 @@ export class IsClientComponent implements IsValidData {
 
   private contextData!: QuoteModel;
 
-  constructor(private _router: Router) {
+  constructor() {
     this.contextData = this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA);
   }
 

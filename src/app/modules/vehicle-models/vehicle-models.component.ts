@@ -11,7 +11,6 @@ import { debounceTime, distinctUntilChanged, fromEvent, map, Observable, Subscri
 import { DEBOUNCE_TIME, QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
 import { RoutingService, VehicleService } from 'src/app/core/services';
 import { HeaderTitleComponent, IconCardComponent, SelectableOptionComponent } from 'src/app/shared/components';
-import { QuoteFooterService } from 'src/app/shared/components/quote-footer/services';
 import { IsValidData } from 'src/app/shared/guards';
 import { QuoteModel } from 'src/app/shared/models';
 
@@ -45,7 +44,6 @@ export class VehicleModelsComponent implements OnInit, OnDestroy, IsValidData {
   private subscription$: Subscription[] = [];
 
   private readonly contextDataService = inject(ContextDataService);
-  private readonly footerService = inject(QuoteFooterService);
   private readonly routingService = inject(RoutingService);
   private readonly vehicleService = inject(VehicleService);
 
@@ -75,17 +73,8 @@ export class VehicleModelsComponent implements OnInit, OnDestroy, IsValidData {
   ): boolean | Observable<boolean> | Promise<boolean> => this.updateValidData();
 
   public selectModel(model: string) {
-    const navigateTo = this.routingService.getPage(this._router.url);
-
     this.selectedModel = model;
 
-    this.footerService.nextStep({
-      showBack: true,
-      showNext: !!navigateTo?.nextOptionList
-    });
-  }
-
-  private updateValidData = (): boolean => {
     this.contextData.vehicle = {
       ...this.contextData.vehicle,
       model: this.selectedModel
@@ -93,7 +82,11 @@ export class VehicleModelsComponent implements OnInit, OnDestroy, IsValidData {
 
     this.contextDataService.set(QUOTE_CONTEXT_DATA, this.contextData);
 
-    return true;
+    this.routingService.nextStep();
+  }
+
+  private updateValidData = (): boolean => {
+    return !!this.contextData.vehicle.model;
   };
 
   private createForm() {

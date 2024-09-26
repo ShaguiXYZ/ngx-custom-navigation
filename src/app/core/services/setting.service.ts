@@ -24,7 +24,7 @@ export class SettingsService {
       QUOTE_CONTEXT_DATA,
       { ...QuoteModel.init(), ...contextData },
       {
-        persistent: false
+        persistent: true
       }
     );
 

@@ -2,6 +2,7 @@ import { Configuration, Page } from './configuration';
 
 export interface Navigation {
   nextPage?: Page;
+  lastPage?: Page;
   viewedPages: string[];
 }
 

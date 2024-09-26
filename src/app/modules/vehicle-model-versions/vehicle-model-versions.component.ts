@@ -71,14 +71,8 @@ export class VehicleModelVersionsComponent implements OnInit, OnDestroy, IsValid
   ): boolean | Observable<boolean> | Promise<boolean> => this.updateValidData();
 
   public selectVersion(version: ModelVersionModel) {
-    const navigateTo = this.routingService.getPage(this._router.url);
-
     this.selectedModelVersion = version;
 
-    this.routingService.nextStep();
-  }
-
-  private updateValidData = (): boolean => {
     this.contextData.vehicle = {
       ...this.contextData.vehicle,
       vehicleModelVersion: this.selectedModelVersion
@@ -86,7 +80,11 @@ export class VehicleModelVersionsComponent implements OnInit, OnDestroy, IsValid
 
     this.contextDataService.set(QUOTE_CONTEXT_DATA, this.contextData);
 
-    return true;
+    this.routingService.nextStep();
+  }
+
+  private updateValidData = (): boolean => {
+    return !!this.contextData.vehicle.vehicleModelVersion;
   };
 
   private createForm() {

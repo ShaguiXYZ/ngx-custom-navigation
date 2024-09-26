@@ -1,6 +1,6 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ActivatedRouteSnapshot, Router, RouterStateSnapshot } from '@angular/router';
+import { ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { NxCopytextModule } from '@aposin/ng-aquila/copytext';
 import { NX_DATE_LOCALE } from '@aposin/ng-aquila/datefield';
 import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
@@ -10,7 +10,6 @@ import { NxSwitcherModule } from '@aposin/ng-aquila/switcher';
 import { ContextDataService } from '@shagui/ng-shagui/core';
 import { Observable } from 'rxjs';
 import { QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
-import { RoutingService } from 'src/app/core/services';
 import { HeaderTitleComponent, QuoteFooterComponent } from 'src/app/shared/components';
 import { QuoteFooterConfig } from 'src/app/shared/components/quote-footer/models';
 import { IsValidData } from 'src/app/shared/guards';
@@ -41,15 +40,9 @@ export class ClientEMailComponent implements OnInit, IsValidData {
   private contextData!: QuoteModel;
 
   private readonly contextDataService = inject(ContextDataService);
-  private readonly routingService = inject(RoutingService);
 
-  constructor(private readonly fb: FormBuilder, private readonly _router: Router) {
+  constructor(private readonly fb: FormBuilder) {
     this.contextData = this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA);
-
-    const navigateTo = this.routingService.getPage(this._router.url);
-    this.footerConfig = {
-      showNext: !!navigateTo?.nextOptionList
-    };
   }
 
   ngOnInit(): void {
