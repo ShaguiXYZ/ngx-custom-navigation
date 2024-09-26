@@ -7,8 +7,10 @@ import { NxIconModule } from '@aposin/ng-aquila/icon';
 import { NxDialogService } from '@aposin/ng-aquila/modal';
 import { ContextDataService } from '@shagui/ng-shagui/core';
 import { QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
-import { HeaderTitleComponent, IconCardComponent, QuoteFooterComponent, QuoteFooterService } from 'src/app/shared/components';
+import { RoutingService } from 'src/app/core/services';
+import { HeaderTitleComponent, IconCardComponent, QuoteFooterComponent } from 'src/app/shared/components';
 import { QuoteFooterConfig } from 'src/app/shared/components/quote-footer/models';
+import { IsValidData } from 'src/app/shared/guards';
 import { IIconData, QuoteModel } from 'src/app/shared/models';
 import { DrivingLicenseIcons } from './models';
 
@@ -28,7 +30,7 @@ import { DrivingLicenseIcons } from './models';
   templateUrl: './driving-license-location.component.html',
   styleUrl: './driving-license-location.component.scss'
 })
-export class DrivingLicenseLocationComponent {
+export class DrivingLicenseLocationComponent implements IsValidData {
   @ViewChild('template') infoModal!: TemplateRef<any>;
 
   public drivenLicenseCountries = DrivingLicenseIcons;
@@ -36,7 +38,7 @@ export class DrivingLicenseLocationComponent {
   public footerConfig!: QuoteFooterConfig;
 
   private readonly contextDataService = inject(ContextDataService);
-  private readonly footerService = inject(QuoteFooterService);
+  private readonly routingService = inject(RoutingService);
   private readonly dialogService = inject(NxDialogService);
 
   private contextData!: QuoteModel;
@@ -49,10 +51,7 @@ export class DrivingLicenseLocationComponent {
   public selectLocation(icon: IIconData) {
     this.selectedLocation = icon;
 
-    this.footerService.nextStep({
-      validationFn: this.updateValidData,
-      showNext: false
-    });
+    this.routingService.nextStep();
   }
 
   public openFromTemplate(): void {
@@ -61,6 +60,11 @@ export class DrivingLicenseLocationComponent {
       showCloseIcon: true
     });
   }
+
+  public canDeactivate = (): boolean => {
+    return this.updateValidData();
+  };
+
   private updateValidData = (): boolean => {
     this.contextData.driven = {
       ...this.contextData.driven,

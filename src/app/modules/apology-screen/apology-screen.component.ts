@@ -25,8 +25,4 @@ export class ApologyComponent {
       nextLabel: 'FINALIZAR'
     };
   }
-
-  goToNextStep() {
-    this.footerService.nextStep({ showNext: false });
-  }
 }

@@ -77,7 +77,6 @@ export class NumberAccidentsComponent implements OnInit, OnDestroy, IsValidData 
     this.subscription$.push(
       this.form.valueChanges.subscribe(() => {
         this.footerService.nextStep({
-          validationFn: this.updateValidData,
           showNext: this.form.valid
         });
       })

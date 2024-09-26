@@ -1,36 +1,27 @@
 import { Configuration, Page } from './configuration';
 
-export type NavigationOperation = 'next' | 'previous';
+export interface Navigation {
+  nextPage?: Page;
+  viewedPages: string[];
+}
 
 export interface AppContextData {
   configuration: Configuration;
   navigation: Navigation;
 }
 
-export interface Navigation {
-  currentPage: Page;
-  nextPage?: Page;
-  operation?: NavigationOperation;
-  viewedPages: Array<string>;
-}
-
 export namespace AppContextData {
-  export const init = (configuration: Configuration, viewedPages: string[]): AppContextData => {
+  export const init = (configuration: Configuration, viewedPages: string[] = []): AppContextData => {
     const homePage = configuration.pageMap[configuration.homePageId];
+    const nextPage = viewedPages.length ? configuration.pageMap[viewedPages[viewedPages.length - 1]] : homePage;
+    const updatedViewedPages = viewedPages.length ? viewedPages : [homePage.pageId];
 
     return {
       configuration,
-      navigation: viewedPages.length
-        ? {
-            currentPage: configuration.pageMap[viewedPages[viewedPages.length - 1]],
-            nextPage: configuration.pageMap[viewedPages[viewedPages.length - 1]],
-            viewedPages
-          }
-        : {
-            currentPage: homePage,
-            nextPage: homePage,
-            viewedPages: [homePage.pageId]
-          }
+      navigation: {
+        nextPage,
+        viewedPages: updatedViewedPages
+      }
     };
   };
 }

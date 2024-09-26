@@ -47,7 +47,6 @@ export class VehicleTypeComponent implements IsValidData {
     this.selectedType = type;
 
     this.footerService.nextStep({
-      validationFn: this.updateValidData,
       showBack: true,
       showNext: !!navigateTo?.nextOptionList
     });

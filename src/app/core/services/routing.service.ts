@@ -1,10 +1,10 @@
 import { Injectable, OnDestroy, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { ContextDataService, JsonUtils } from '@shagui/ng-shagui/core';
+import { Subscription } from 'rxjs';
 import { QuoteModel } from '../../shared/models';
 import { QUOTE_APP_CONTEXT_DATA, QUOTE_CONTEXT_DATA } from '../constants';
 import { AppContextData, CompareOperations, Condition, NextOption, Page } from '../models';
-import { Subscription } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -29,19 +29,14 @@ export class RoutingService implements OnDestroy {
     this.subscrition$.forEach(sub => sub.unsubscribe());
   }
 
-  public nextStep(validFn?: () => boolean, onError?: () => void): Promise<boolean> {
-    if (!validFn || validFn()) {
-      const nextPage = this.getNextRoute();
+  public nextStep(): Promise<boolean> {
+    const nextPage = this.getNextRoute();
 
-      if (!nextPage) {
-        return Promise.resolve(false);
-      }
-
-      return this.goToPage(nextPage);
-    } else {
-      onError && onError();
+    if (!nextPage) {
       return Promise.resolve(false);
     }
+
+    return this.goToPage(nextPage);
   }
 
   public previousStep = (): Promise<boolean> => {
@@ -58,8 +53,8 @@ export class RoutingService implements OnDestroy {
 
   private goToPage = (page: Page): Promise<boolean> => {
     this.appContextData.navigation.nextPage = page;
-
     this.contextDataService.set(QUOTE_APP_CONTEXT_DATA, this.appContextData);
+
     return this._router.navigate([page.route]);
   };
 
