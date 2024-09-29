@@ -1,16 +1,26 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { inject } from '@angular/core';
-import { CanActivateFn, GuardResult, MaybeAsync } from '@angular/router';
+import { ActivatedRouteSnapshot, CanActivateFn, GuardResult, MaybeAsync, Router, RouterStateSnapshot } from '@angular/router';
 import { ContextDataService } from '@shagui/ng-shagui/core';
 import { QUOTE_APP_CONTEXT_DATA } from 'src/app/core/constants';
-import { AppContextData } from 'src/app/core/models';
+import { AppContextData, Page } from 'src/app/core/models';
 
-export const journeyGuard: CanActivateFn = (route, state): MaybeAsync<GuardResult> => {
+export const journeyGuard: CanActivateFn = (route: ActivatedRouteSnapshot, state: RouterStateSnapshot): MaybeAsync<GuardResult> => {
   const contextDataService = inject(ContextDataService);
   const context = contextDataService.get<AppContextData>(QUOTE_APP_CONTEXT_DATA);
+  const router = inject(Router);
   const { nextPage, viewedPages } = context.navigation;
 
+  console.groupCollapsed('Journey Guard');
+  console.log(`Journey Guard ${QUOTE_APP_CONTEXT_DATA}`, contextDataService.get<AppContextData>(QUOTE_APP_CONTEXT_DATA));
+  console.groupEnd();
+
   if (!nextPage?.pageId) {
-    return false;
+    context.navigation.lastPage = undefined;
+    context.navigation.nextPage = context.configuration.pageMap[viewedPages[viewedPages.length - 1]];
+    contextDataService.set(QUOTE_APP_CONTEXT_DATA, context);
+
+    return router.parseUrl(`/${Page.routeFrom(context.navigation.nextPage)}`);
   }
 
   const pageIndex = viewedPages.indexOf(nextPage.pageId);

@@ -1,20 +1,27 @@
+/* eslint-disable @typescript-eslint/no-namespace */
 import { DataInfo } from '@shagui/ng-shagui/core';
+import { Steppers } from 'src/app/shared/models/stepper.model';
 
 export type CompareOperations = 'AND' | 'OR';
 
 export interface ConfigurationDTO {
   homePageId: string;
   lastUpdate?: Date;
+  steppers?: Steppers;
   pageMap: Page[];
 }
 
 export interface Page {
   nextOptionList?: NextOption[];
-  pageConfiguration?: any;
+  pageConfiguration?: unknown;
   pageId: string;
   route: string;
   showBack?: boolean;
   title: string;
+}
+
+export namespace Page {
+  export const routeFrom = (page: Page): string => page.route ?? page.pageId;
 }
 
 export interface NextOption {
@@ -25,7 +32,7 @@ export interface NextOption {
 export interface Condition {
   expression: string;
   operation?: string;
-  value: any;
+  value: unknown;
   union?: CompareOperations;
 }
 
@@ -36,7 +43,7 @@ export interface Configuration {
 }
 
 export namespace Configuration {
-  export function init(configuration: ConfigurationDTO): Configuration {
+  export const init = (configuration: ConfigurationDTO): Configuration => {
     return {
       homePageId: configuration.homePageId,
       lastUpdate: configuration.lastUpdate,
@@ -45,5 +52,5 @@ export namespace Configuration {
         return acc;
       }, {} as DataInfo<Page>)
     };
-  }
+  };
 }

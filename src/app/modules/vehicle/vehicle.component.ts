@@ -1,15 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
-import { ActivatedRouteSnapshot, Router, RouterStateSnapshot } from '@angular/router';
+import { ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { NxAccordionModule } from '@aposin/ng-aquila/accordion';
 import { NxHeadlineModule } from '@aposin/ng-aquila/headline';
 import { TranslateModule } from '@ngx-translate/core';
 import { ContextDataService } from '@shagui/ng-shagui/core';
 import { Observable } from 'rxjs';
 import { QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
-import { RoutingService } from 'src/app/core/services';
 import { HeaderTitleComponent } from 'src/app/shared/components';
-import { QuoteFooterService } from 'src/app/shared/components/quote-footer/services';
 import {
   BrandsSelectionComponent,
   FuelSelectionComponent,
@@ -43,9 +41,8 @@ export class VehicleComponent implements IsValidData {
   public contextData!: QuoteModel;
 
   private readonly contextDataService = inject(ContextDataService);
-  private readonly footerService = inject(QuoteFooterService);
 
-  constructor(private readonly routingService: RoutingService, private _router: Router) {
+  constructor() {
     this.contextData = this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA);
   }
 
@@ -53,7 +50,7 @@ export class VehicleComponent implements IsValidData {
     currentRoute: ActivatedRouteSnapshot,
     state: RouterStateSnapshot,
     next?: RouterStateSnapshot
-  ): boolean | Observable<boolean> | Promise<boolean> => this.updateValidData();
+  ): boolean | Observable<boolean> | Promise<boolean> => this.isValidData();
 
   public selectBrand(brand: string) {
     this.contextData.vehicle = {
@@ -95,15 +92,10 @@ export class VehicleComponent implements IsValidData {
   public selectYear(year: number) {
     this.contextData.vehicle = { ...this.contextData.vehicle, yearOfManufacture: year };
     this.contextDataService.set<QuoteModel>(QUOTE_CONTEXT_DATA, this.contextData);
-
-    const navigateTo = this.routingService.getPage(this._router.url);
-    this.footerService.nextStep({
-      showNext: !!navigateTo?.nextOptionList
-    });
   }
 
   // eslint-disable-next-line arrow-body-style
-  private updateValidData = (): boolean => {
+  private isValidData = (): boolean => {
     // TODO: implement logic
     return true;
   };

@@ -40,7 +40,7 @@ export class SettingsService {
       persistent: true
     });
 
-    console.log('contextData', this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA));
-    console.log('appContextData', this.contextDataService.get<AppContextData>(QUOTE_APP_CONTEXT_DATA));
+    console.log(QUOTE_CONTEXT_DATA, this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA));
+    console.log(QUOTE_APP_CONTEXT_DATA, this.contextDataService.get<AppContextData>(QUOTE_APP_CONTEXT_DATA));
   }
 }

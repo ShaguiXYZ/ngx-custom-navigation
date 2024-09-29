@@ -13,7 +13,6 @@ import { IsClientComponent } from '../../../modules/is-client/is-client.componen
 import { OnboardingComponent } from '../../../modules/onboarding/onboarding.component';
 import { PagenotfoundComponent } from '../../../modules/pagenotfound/pagenotfound.component';
 import { PlaceComponent } from '../../../modules/place/place.component';
-import { VehicleComponent } from '../../../modules/vehicle/vehicle.component';
 import { AppUrls } from '../../../shared/config/routing';
 import { PageModel } from '../../../shared/models';
 import { ContextDataServiceMock, SettingServiceMock } from '../../mock/services';
@@ -48,10 +47,6 @@ const appRoutes: Routes = [
   {
     path: AppUrls.drivingLicenseDate,
     component: DrivingLicenseDateComponent
-  },
-  {
-    path: AppUrls.vehicle,
-    component: VehicleComponent
   },
   {
     path: AppUrls.pageNotFound,

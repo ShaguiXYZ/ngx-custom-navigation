@@ -55,7 +55,7 @@ export class RoutingService implements OnDestroy {
     this.appContextData.navigation.nextPage = page;
     this.contextDataService.set(QUOTE_APP_CONTEXT_DATA, this.appContextData);
 
-    return this._router.navigate([page.route]);
+    return this._router.navigate([Page.routeFrom(page)]);
   };
 
   private getNextRoute(): Page | undefined {
@@ -105,7 +105,8 @@ export class RoutingService implements OnDestroy {
       : (0, eval)(`${this.contextDataItemValue(condition.expression)}${condition.operation ?? '==='}${condition.value}`);
   };
 
-  private contextDataItemValue = (key: string): any => JsonUtils.valueOf(this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA), key);
+  private contextDataItemValue = (key: string): unknown =>
+    JsonUtils.valueOf(this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA), key);
 
   private applyPreviousEval = (previous: boolean, current: boolean, union?: CompareOperations): boolean =>
     (union &&
