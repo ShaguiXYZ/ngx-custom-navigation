@@ -1,13 +1,13 @@
 /* eslint-disable @typescript-eslint/no-namespace */
-import { DataInfo } from '@shagui/ng-shagui/core';
-import { Steppers } from 'src/app/shared/models/stepper.model';
+import { DataInfo, UniqueIds } from '@shagui/ng-shagui/core';
+import { Stepper, StepperDTO, Steppers } from 'src/app/shared/models/stepper.model';
 
 export type CompareOperations = 'AND' | 'OR';
 
 export interface ConfigurationDTO {
   homePageId: string;
   lastUpdate?: Date;
-  steppers?: Steppers;
+  steppers?: StepperDTO[];
   pageMap: Page[];
 }
 
@@ -40,6 +40,7 @@ export interface Configuration {
   homePageId: string;
   lastUpdate?: Date;
   pageMap: DataInfo<Page>;
+  steppers: Steppers;
 }
 
 export namespace Configuration {
@@ -50,7 +51,34 @@ export namespace Configuration {
       pageMap: configuration.pageMap.reduce((acc, page) => {
         acc[page.pageId] = page;
         return acc;
-      }, {} as DataInfo<Page>)
+      }, {} as DataInfo<Page>),
+      steppers: initSteppers(configuration.steppers)
     };
+  };
+
+  const initSteppers = (steppers?: StepperDTO[]): Steppers => {
+    const steppersMap: DataInfo<Stepper> = {};
+    const pagesMap: DataInfo<{ stepperKey: string; stepKey: string }> = {};
+
+    if (!steppers) return { steppersMap, pagesMap };
+
+    steppers.forEach(stepper => {
+      const stepperKey = UniqueIds._next_();
+
+      steppersMap[stepperKey] = {
+        title: stepper.title,
+        steps: stepper.steps.map(step => {
+          const stepKey = UniqueIds._next_();
+
+          step.pages.forEach(pageId => {
+            pagesMap[pageId] = { stepperKey, stepKey };
+          });
+
+          return { key: stepKey, label: step.label };
+        })
+      };
+    });
+
+    return { steppersMap, pagesMap };
   };
 }

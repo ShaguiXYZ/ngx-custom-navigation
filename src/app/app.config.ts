@@ -9,7 +9,7 @@ import { APP_NAME, SCHEDULER_PERIOD } from './core/constants';
 import { SettingsService } from './core/services';
 import { AppUrls, TRANSLATE_MODULE_CONFIG, urls } from './shared/config';
 
-const initSettings = (settings: SettingsService) => (): Promise<any> => settings.loadSettings();
+const initSettings = (settings: SettingsService) => (): Promise<void> => settings.loadSettings();
 
 export const appConfig: ApplicationConfig = {
   providers: [

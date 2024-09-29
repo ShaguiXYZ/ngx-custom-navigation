@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { ContextDataService, HttpService } from '@shagui/ng-shagui/core';
-import { firstValueFrom, map, tap } from 'rxjs';
+import { firstValueFrom, map } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { QuoteModel } from '../../shared/models';
 import { QUOTE_APP_CONTEXT_DATA, QUOTE_CONTEXT_DATA } from '../constants';

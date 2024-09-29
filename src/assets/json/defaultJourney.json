@@ -1,17 +1,25 @@
 {
   "last_update": "2024-06-13 15:00:00",
   "homePageId": "on-boarding",
-  "steppers": {
-    "main": {
+  "steppers": [
+    {
       "title": "On boarding",
       "steps": [
         {
-          "label": "On boarding",
-          "route": "onBoarding"
+          "label": "Personal Data",
+          "pages": ["is-client", "place", "birthdate"]
+        },
+        {
+          "label": "Driving Data",
+          "pages": ["driving-license-date", "driving-license-location"]
+        },
+        {
+          "label": "Vehicle Data",
+          "pages": ["license-plate", "your-car-is", "make", "vehicle-type", "vehicle-models", "vehicle-fuel", "vehicle-model-versions"]
         }
       ]
     }
-  },
+  ],
   "pageMap": [
     {
       "pageId": "on-boarding",

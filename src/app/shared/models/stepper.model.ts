@@ -1,9 +1,18 @@
 import { DataInfo } from '@shagui/ng-shagui/core';
-import { AppUrls } from '../config';
+
+export interface StepDTO {
+  label: string;
+  pages: string[];
+}
+
+export interface StepperDTO {
+  title: string;
+  steps: StepDTO[];
+}
 
 export interface Step {
+  key: string;
   label: string;
-  route: keyof typeof AppUrls;
 }
 
 export interface Stepper {
@@ -11,16 +20,7 @@ export interface Stepper {
   steps: Step[];
 }
 
-export type Steppers = DataInfo<Stepper>;
-
-export const steppers: Steppers = {
-  main: {
-    title: 'On boarding',
-    steps: [
-      {
-        label: 'On boarding',
-        route: 'onBoarding'
-      }
-    ]
-  }
-};
+export interface Steppers {
+  steppersMap: DataInfo<Stepper>;
+  pagesMap: DataInfo<{ stepperKey: string; stepKey: string }>;
+}
