@@ -1,6 +1,5 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ActivatedRouteSnapshot, Router, RouterStateSnapshot } from '@angular/router';
 
 // Modules
 import { NX_DATE_LOCALE } from '@aposin/ng-aquila/datefield';
@@ -11,7 +10,6 @@ import { Observable } from 'rxjs';
 import { QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
 import { RoutingService } from 'src/app/core/services';
 import { HeaderTitleComponent, QuoteFooterComponent } from 'src/app/shared/components';
-import { QuoteFooterConfig } from 'src/app/shared/components/quote-footer/models';
 import { IsValidData } from 'src/app/shared/guards';
 import { QuoteModel } from 'src/app/shared/models';
 
@@ -39,11 +37,7 @@ export class ClientNameComponent implements OnInit, IsValidData {
     this.createForm();
   }
 
-  public canDeactivate = (
-    currentRoute: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot,
-    next?: RouterStateSnapshot
-  ): boolean | Observable<boolean> | Promise<boolean> => this.updateValidData();
+  public canDeactivate = (): boolean | Observable<boolean> | Promise<boolean> => this.updateValidData();
 
   private updateValidData = (): boolean => {
     if (this.form.valid) {

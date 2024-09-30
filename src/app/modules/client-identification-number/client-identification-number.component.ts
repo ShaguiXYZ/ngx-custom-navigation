@@ -1,6 +1,5 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 
 // Modules
 import { NxCopytextModule } from '@aposin/ng-aquila/copytext';
@@ -47,8 +46,7 @@ export class ClientIdentificationNumberComponent implements OnInit, IsValidData 
     this.createForm();
   }
 
-  public canDeactivate = (currentRoute: ActivatedRouteSnapshot, state: RouterStateSnapshot, next?: RouterStateSnapshot): boolean =>
-    this.updateValidData();
+  public canDeactivate = (): boolean => this.updateValidData();
 
   private updateValidData = (): boolean => {
     if (this.form.valid) {

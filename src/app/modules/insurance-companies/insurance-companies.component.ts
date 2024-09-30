@@ -1,6 +1,5 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
-import { ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { ContextDataService } from '@shagui/ng-shagui/core';
 import { Observable } from 'rxjs';
 import { QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
@@ -40,11 +39,7 @@ export class InsuranceCompaniesComponent implements OnInit, IsValidData {
     }
   }
 
-  public canDeactivate = (
-    currentRoute: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot,
-    next?: RouterStateSnapshot
-  ): boolean | Observable<boolean> | Promise<boolean> => this.isValidData();
+  public canDeactivate = (): boolean | Observable<boolean> | Promise<boolean> => this.isValidData();
 
   public selectCompany(icon: IIconData) {
     this.selectedCompany = icon;

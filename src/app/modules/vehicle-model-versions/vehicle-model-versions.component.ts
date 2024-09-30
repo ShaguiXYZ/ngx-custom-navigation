@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, ElementRef, inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ActivatedRouteSnapshot, Router, RouterStateSnapshot } from '@angular/router';
+import { Router } from '@angular/router';
 import { NxCopytextModule } from '@aposin/ng-aquila/copytext';
 import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
 import { NxIconModule } from '@aposin/ng-aquila/icon';
@@ -64,11 +64,7 @@ export class VehicleModelVersionsComponent implements OnInit, OnDestroy, IsValid
     this.subscription$.forEach(subscription => subscription.unsubscribe());
   }
 
-  public canDeactivate = (
-    currentRoute: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot,
-    next?: RouterStateSnapshot
-  ): boolean | Observable<boolean> | Promise<boolean> => this.updateValidData();
+  public canDeactivate = (): boolean | Observable<boolean> | Promise<boolean> => this.updateValidData();
 
   public selectVersion(version: ModelVersionModel) {
     this.selectedModelVersion = version;

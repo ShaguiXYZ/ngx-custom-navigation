@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
-import { ActivatedRouteSnapshot, Router, RouterStateSnapshot } from '@angular/router';
+import { Router } from '@angular/router';
 import { NxCopytextModule } from '@aposin/ng-aquila/copytext';
 import { ContextDataService } from '@shagui/ng-shagui/core';
 import { Observable } from 'rxjs';
@@ -33,11 +33,7 @@ export class VehicleTypeComponent implements IsValidData {
     this.selectedType = this.vehicleTypes.find(type => type.index === this.contextData.vehicle.vehicleTtype);
   }
 
-  public canDeactivate = (
-    currentRoute: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot,
-    next?: RouterStateSnapshot
-  ): boolean | Observable<boolean> | Promise<boolean> => this.isValidData();
+  public canDeactivate = (): boolean | Observable<boolean> | Promise<boolean> => this.isValidData();
 
   public selectType(type: IndexedData) {
     this.selectedType = type;

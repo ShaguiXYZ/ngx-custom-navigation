@@ -1,6 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { NX_DATE_LOCALE, NxDatefieldModule } from '@aposin/ng-aquila/datefield';
 import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
 import { NxInputModule } from '@aposin/ng-aquila/input';
@@ -13,6 +12,18 @@ import { QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
 import { HeaderTitleComponent, QuoteFooterComponent } from 'src/app/shared/components';
 import { IsValidData } from 'src/app/shared/guards';
 import { QuoteModel } from 'src/app/shared/models';
+
+export const MY_FORMATS = {
+  parse: {
+    dateInput: 'LL'
+  },
+  display: {
+    dateInput: 'LL',
+    monthYearLabel: 'MMM YYYY',
+    dateA11yLabel: 'LL',
+    monthYearA11yLabel: 'MMMM YYYY'
+  }
+};
 
 @Component({
   selector: 'app-date-of-issue',
@@ -30,7 +41,10 @@ import { QuoteModel } from 'src/app/shared/models';
     ReactiveFormsModule,
     TranslateModule
   ],
-  providers: [{ provide: NX_DATE_LOCALE, useValue: 'es-ES' }]
+  providers: [
+    { provide: NX_DATE_LOCALE, useValue: 'es-ES' }
+    // { provide: NX_DATE_FORMATS, useValue: MY_FORMATS }
+  ]
 })
 export class DateOfIssueComponent implements OnInit, IsValidData {
   public form!: FormGroup;
@@ -48,11 +62,7 @@ export class DateOfIssueComponent implements OnInit, IsValidData {
     this.createForm();
   }
 
-  public canDeactivate = (
-    currentRoute: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot,
-    next?: RouterStateSnapshot
-  ): boolean | Observable<boolean> | Promise<boolean> => this.updateValidData();
+  public canDeactivate = (): boolean | Observable<boolean> | Promise<boolean> => this.updateValidData();
 
   private updateValidData = (): boolean => {
     if (this.form.valid) {

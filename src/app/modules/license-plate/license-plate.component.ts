@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, ElementRef, inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { NxButtonModule } from '@aposin/ng-aquila/button';
 import { NxCopytextModule } from '@aposin/ng-aquila/copytext';
 import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
@@ -62,11 +61,7 @@ export class LicensePlateComponent implements OnInit, OnDestroy, IsValidData {
     this.subscription$.forEach(subscription => subscription.unsubscribe());
   }
 
-  public canDeactivate = (
-    currentRoute: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot,
-    next?: RouterStateSnapshot
-  ): boolean | Observable<boolean> | Promise<boolean> => this.updateValidData();
+  public canDeactivate = (): boolean | Observable<boolean> | Promise<boolean> => this.updateValidData();
 
   public continueWithOutLicensePlate() {
     this.contextData.driven.hasDrivenLicense = false;

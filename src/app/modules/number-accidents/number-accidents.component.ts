@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ActivatedRouteSnapshot, Router, RouterStateSnapshot } from '@angular/router';
+import { Router } from '@angular/router';
 import { NX_DATE_LOCALE } from '@aposin/ng-aquila/datefield';
 import { NxRadioModule } from '@aposin/ng-aquila/radio-button';
 import { ContextDataService } from '@shagui/ng-shagui/core';
@@ -45,11 +45,7 @@ export class NumberAccidentsComponent implements OnInit, OnDestroy, IsValidData 
     this.subscription$.forEach(sub => sub.unsubscribe());
   }
 
-  public canDeactivate = (
-    currentRoute: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot,
-    next?: RouterStateSnapshot
-  ): boolean | Observable<boolean> | Promise<boolean> => this.updateValidData();
+  public canDeactivate = (): boolean | Observable<boolean> | Promise<boolean> => this.updateValidData();
 
   public selectAccidents() {
     // force value changes to trigger

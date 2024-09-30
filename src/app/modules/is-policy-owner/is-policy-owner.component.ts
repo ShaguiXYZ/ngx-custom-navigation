@@ -1,6 +1,5 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
-import { ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { NxButtonModule } from '@aposin/ng-aquila/button';
 import { ContextDataService, hasValue } from '@shagui/ng-shagui/core';
 import { Observable } from 'rxjs';
@@ -27,11 +26,7 @@ export class IsPolicyOwnerComponent implements IsValidData {
     this.contextData = this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA);
   }
 
-  public canDeactivate = (
-    currentRoute: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot,
-    next?: RouterStateSnapshot
-  ): boolean | Observable<boolean> | Promise<boolean> => this.isValidData();
+  public canDeactivate = (): boolean | Observable<boolean> | Promise<boolean> => this.isValidData();
 
   public onIsPolicyOwnerChange(value: boolean): void {
     this.contextData.client.isPolicyOwner = value;

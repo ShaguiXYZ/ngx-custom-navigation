@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
 import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ActivatedRouteSnapshot, Router, RouterStateSnapshot } from '@angular/router';
 import { NxAccordionModule } from '@aposin/ng-aquila/accordion';
 import { NxButtonModule } from '@aposin/ng-aquila/button';
 import { NxCopytextModule } from '@aposin/ng-aquila/copytext';
@@ -13,7 +12,6 @@ import { Observable } from 'rxjs';
 import { QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
 import { RoutingService, VehicleService } from 'src/app/core/services';
 import { HeaderTitleComponent, IconCardComponent, SelectableOptionComponent } from 'src/app/shared/components';
-import { QuoteFooterService } from 'src/app/shared/components/quote-footer/services';
 import { IsValidData } from 'src/app/shared/guards';
 import { CubicCapacityModel, FuelModel, PowerRangesModel, QuoteModel } from 'src/app/shared/models';
 
@@ -74,11 +72,7 @@ export class VehicleFuelComponent implements OnInit, IsValidData {
     });
   }
 
-  public canDeactivate = (
-    currentRoute: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot,
-    next?: RouterStateSnapshot
-  ): boolean | Observable<boolean> | Promise<boolean> => true;
+  public canDeactivate = (): boolean | Observable<boolean> | Promise<boolean> => true;
 
   public selectFuel(fuel: FuelModel) {
     this.contextData.vehicle = {

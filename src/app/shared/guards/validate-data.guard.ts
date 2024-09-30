@@ -8,7 +8,11 @@ const previousStep = ({ navigation: { nextPage, viewedPages } }: AppContextData)
   !!nextPage && viewedPages.includes(nextPage.pageId);
 
 export interface IsValidData {
-  canDeactivate: (currentRoute: ActivatedRouteSnapshot, state: RouterStateSnapshot, next?: RouterStateSnapshot) => MaybeAsync<GuardResult>;
+  canDeactivate: (
+    currentRoute?: ActivatedRouteSnapshot,
+    state?: RouterStateSnapshot,
+    next?: RouterStateSnapshot
+  ) => MaybeAsync<GuardResult>;
 }
 
 export const isValidGuard: CanDeactivateFn<IsValidData> = (

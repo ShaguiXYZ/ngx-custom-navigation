@@ -1,6 +1,5 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
-import { ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { NxAccordionModule } from '@aposin/ng-aquila/accordion';
 import { NxHeadlineModule } from '@aposin/ng-aquila/headline';
 import { TranslateModule } from '@ngx-translate/core';
@@ -46,11 +45,7 @@ export class VehicleComponent implements IsValidData {
     this.contextData = this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA);
   }
 
-  public canDeactivate = (
-    currentRoute: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot,
-    next?: RouterStateSnapshot
-  ): boolean | Observable<boolean> | Promise<boolean> => this.isValidData();
+  public canDeactivate = (): boolean | Observable<boolean> | Promise<boolean> => this.isValidData();
 
   public selectBrand(brand: string) {
     this.contextData.vehicle = {
@@ -94,7 +89,6 @@ export class VehicleComponent implements IsValidData {
     this.contextDataService.set<QuoteModel>(QUOTE_CONTEXT_DATA, this.contextData);
   }
 
-  // eslint-disable-next-line arrow-body-style
   private isValidData = (): boolean => {
     // TODO: implement logic
     return true;

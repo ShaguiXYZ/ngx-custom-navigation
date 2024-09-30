@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, ElementRef, inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ActivatedRouteSnapshot, Router, RouterStateSnapshot } from '@angular/router';
+import { Router } from '@angular/router';
 import { NxAutocompleteModule, NxAutocompleteSelectedEvent } from '@aposin/ng-aquila/autocomplete';
 import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
 import { NxIconModule } from '@aposin/ng-aquila/icon';
@@ -72,8 +72,7 @@ export class MakeComponent implements OnInit, OnDestroy, IsValidData {
     this.subscription$.forEach(subscription => subscription.unsubscribe());
   }
 
-  public canDeactivate = (currentRoute: ActivatedRouteSnapshot, state: RouterStateSnapshot, next?: RouterStateSnapshot): boolean =>
-    this.updateValidData();
+  public canDeactivate = (): boolean => this.updateValidData();
 
   public selectAutocompleteMake(event: NxAutocompleteSelectedEvent): void {
     this.selectMake(event.option.value);
