@@ -16,6 +16,7 @@ export interface Page {
   pageConfiguration?: unknown;
   pageId: string;
   route: string;
+  stepper?: { key: string; stepKey: string };
   showBack?: boolean;
   title: string;
 }
@@ -40,45 +41,54 @@ export interface Configuration {
   homePageId: string;
   lastUpdate?: Date;
   pageMap: DataInfo<Page>;
-  steppers: Steppers;
+  steppers?: Steppers;
 }
 
 export namespace Configuration {
   export const init = (configuration: ConfigurationDTO): Configuration => {
+    const quoteConfiguration: Configuration = initQuote(configuration);
+
+    initSteppers(quoteConfiguration, configuration.steppers);
+
+    return quoteConfiguration;
+  };
+
+  const initQuote = (configuration: ConfigurationDTO): Configuration => {
     return {
       homePageId: configuration.homePageId,
       lastUpdate: configuration.lastUpdate,
       pageMap: configuration.pageMap.reduce((acc, page) => {
         acc[page.pageId] = page;
         return acc;
-      }, {} as DataInfo<Page>),
-      steppers: initSteppers(configuration.steppers)
+      }, {} as DataInfo<Page>)
     };
   };
 
-  const initSteppers = (steppers?: StepperDTO[]): Steppers => {
+  const initSteppers = (configuration: Configuration, steppers?: StepperDTO[]): void => {
     const steppersMap: DataInfo<Stepper> = {};
-    const pagesMap: DataInfo<{ stepperKey: string; stepKey: string }> = {};
 
-    if (!steppers) return { steppersMap, pagesMap };
+    if (!steppers) return;
 
     steppers.forEach(stepper => {
       const stepperKey = UniqueIds._next_();
 
       steppersMap[stepperKey] = {
         title: stepper.title,
-        steps: stepper.steps.map(step => {
-          const stepKey = UniqueIds._next_();
+        steps: stepper.steps
+          .filter(step => step.pages?.length)
+          .map(step => {
+            const stepKey = UniqueIds._next_();
 
-          step.pages.forEach(pageId => {
-            pagesMap[pageId] = { stepperKey, stepKey };
-          });
+            step.pages.forEach(pageId => {
+              const page = configuration.pageMap[pageId];
+              if (page) page.stepper = { key: stepperKey, stepKey };
+            });
 
-          return { key: stepKey, label: step.label };
-        })
+            return { key: stepKey, label: step.label, url: step.pages[0] };
+          })
       };
     });
 
-    return { steppersMap, pagesMap };
+    configuration.steppers = { steppersMap };
   };
 }

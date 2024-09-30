@@ -1,0 +1,48 @@
+.stepper__container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+
+  .stepper__list {
+    align-items: center;
+    display: flex;
+    width: 100%;
+
+    .stepper__item {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 15px;
+      height: 15px;
+      border-radius: 2px;
+      background-color: var(--disabled-03);
+      color: var(--text-01);
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin: 0 5px;
+      cursor: pointer;
+      transition: color 0.5s ease-out, background-color 0.5s ease-out;
+
+      &.active {
+        background-color: var(--success);
+        color: var(--text-02);
+      }
+
+      &.complete {
+        background-color: var(--accent-02);
+        color: var(--text-02);
+      }
+
+      &.disabled {
+        cursor: not-allowed;
+      }
+    }
+
+    .stepper__item__line {
+      border-top: 1px dashed var(--ui-05);
+      flex: 1;
+      height: 1px;
+    }
+  }
+}

@@ -13,6 +13,7 @@ export interface StepperDTO {
 export interface Step {
   key: string;
   label: string;
+  url: string;
 }
 
 export interface Stepper {
@@ -22,5 +23,4 @@ export interface Stepper {
 
 export interface Steppers {
   steppersMap: DataInfo<Stepper>;
-  pagesMap: DataInfo<{ stepperKey: string; stepKey: string }>;
 }

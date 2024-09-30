@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { IndexdData } from '@shagui/ng-shagui/core';
+import { IndexedData } from '@shagui/ng-shagui/core';
 
 const POSTAL_CODES = {
   ['01']: 'Araba/Álava',
@@ -60,7 +60,7 @@ const POSTAL_CODES = {
   providedIn: 'root'
 })
 export class LocationService {
-  public location = (postalCode: string): Promise<IndexdData | undefined> => {
+  public location = (postalCode: string): Promise<IndexedData | undefined> => {
     if (postalCode.length !== 5) {
       return Promise.resolve(undefined);
     }

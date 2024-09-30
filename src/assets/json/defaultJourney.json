@@ -16,6 +16,10 @@
         {
           "label": "Vehicle Data",
           "pages": ["license-plate", "your-car-is", "make", "vehicle-type", "vehicle-models", "vehicle-fuel", "vehicle-model-versions"]
+        },
+        {
+          "label": "Presupuesto",
+          "pages": ["offerings"]
         }
       ]
     }

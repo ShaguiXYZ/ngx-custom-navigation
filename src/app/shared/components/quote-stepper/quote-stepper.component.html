@@ -1,0 +1,23 @@
+<!-- eslint-disable @angular-eslint/template/interactive-supports-focus -->
+<!-- eslint-disable @angular-eslint/template/click-events-have-key-events -->
+<section class="stepper__container">
+  @if(stepperData) {
+  <h3>{{ stepperData.stepper.title }}</h3>
+  <div class="stepper__list">
+    @for(step of stepperData.stepper.steps; track step.key) { @if(step.key === stepperData.stepKey || stepperIndex > $index) {
+    <div
+      class="stepper__item"
+      [ngClass]="{ active: step.key === stepperData.stepKey, complete: stepperIndex > $index }"
+      [nxTooltip]="step.label"
+      (click)="onStepClick(step)"
+    >
+      <nx-icon name="check" size="auto"></nx-icon>
+    </div>
+    } @else {
+    <div class="stepper__item disabled" [nxTooltip]="step.label"></div>
+    } @if(!$last) {
+    <div class="stepper__item__line"></div>
+    } }
+  </div>
+  }
+</section>

@@ -13,9 +13,11 @@
             displayFormat="DD/MM/YYYY"
           />
           <span nxFormfieldHint>{{ 'Label.DateFormat' | translate }}</span>
-
           <nx-datepicker-toggle [for]="myDatepicker" nxFormfieldSuffix></nx-datepicker-toggle>
           <nx-datepicker #myDatepicker></nx-datepicker>
+          @if(formErrors['clientOld']) {
+          <nx-error appearance="text" nxFormfieldError>El cliente a de ser mayor de edad</nx-error>
+          }
         </nx-formfield>
       </div>
     </form>

@@ -23,7 +23,7 @@
     "@aposin/ng-aquila": "18.4.0",
     "@ngx-translate/core": "15.0.0",
     "@ngx-translate/http-loader": "8.0.0",
-    "@shagui/ng-shagui": "18.1.6",
+    "@shagui/ng-shagui": "18.1.7",
     "rxjs": "~7.8.1",
     "tslib": "2.7.0",
     "zone.js": "~0.14.10"

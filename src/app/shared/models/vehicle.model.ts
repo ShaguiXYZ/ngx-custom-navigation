@@ -1,12 +1,13 @@
-import { IndexdData } from '@shagui/ng-shagui/core';
+/* eslint-disable @typescript-eslint/no-namespace */
+import { IndexedData } from '@shagui/ng-shagui/core';
 import { brandDictionary, BrandKey } from './brand-dictionary';
 import { FuelTypes } from './fuel-types.model';
 import { IIconData } from './icon-data.model';
 
-export type FuelModel = IndexdData<string, FuelTypes>;
-export type PowerRangesModel = IndexdData;
-export type CubicCapacityModel = IndexdData<string, number>;
-export type ModelVersionModel = IndexdData<string, number>;
+export type FuelModel = IndexedData<string, FuelTypes>;
+export type PowerRangesModel = IndexedData;
+export type CubicCapacityModel = IndexedData<string, number>;
+export type ModelVersionModel = IndexedData<string, number>;
 
 export const MAX_ICON_BRANDS = 12;
 export const MAX_BUTTON_MODELS = 10;
@@ -24,7 +25,7 @@ export namespace IVehicleModel {
     } as IVehicleModel);
 }
 
-export interface IVehicleDictionaryData extends Partial<IIconData> {}
+export type IVehicleDictionaryData = Partial<IIconData>;
 
 export class BrandData {
   private static iconType = 'png';

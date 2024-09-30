@@ -1,12 +1,21 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import {
+  AbstractControl,
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+  ValidationErrors,
+  ValidatorFn,
+  Validators
+} from '@angular/forms';
 import { NX_DATE_LOCALE, NxDatefieldModule } from '@aposin/ng-aquila/datefield';
 import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
 import { NxInputModule } from '@aposin/ng-aquila/input';
 import { NxMomentDateModule } from '@aposin/ng-aquila/moment-date-adapter';
 import { TranslateModule } from '@ngx-translate/core';
-import { ContextDataService } from '@shagui/ng-shagui/core';
+import { ContextDataService, DataInfo, dateBetween } from '@shagui/ng-shagui/core';
 import moment, { Moment } from 'moment';
 import { Observable } from 'rxjs';
 import { QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
@@ -34,13 +43,14 @@ import { QuoteModel } from 'src/app/shared/models';
 })
 export class BirthdateComponent implements OnInit, IsValidData {
   public form!: FormGroup;
+  public formErrors: DataInfo<boolean> = {};
   public birthdateFromContext: Moment | undefined;
 
   private contextData!: QuoteModel;
 
   private readonly contextDataService = inject(ContextDataService);
 
-  constructor(private readonly fb: FormBuilder, private readonly _router: Router) {
+  constructor(private readonly fb: FormBuilder) {
     this.contextData = this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA);
   }
 
@@ -70,7 +80,18 @@ export class BirthdateComponent implements OnInit, IsValidData {
     }
 
     this.form = this.fb.group({
-      birthdate: new FormControl(this.birthdateFromContext, [Validators.required])
+      birthdate: new FormControl(this.birthdateFromContext, [Validators.required, this.clientOldValidator()])
     });
+  }
+
+  private clientOldValidator(): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const bornDate = new Date(control.value);
+      const timeBetween = dateBetween(bornDate, new Date()).years();
+
+      this.formErrors['clientOld'] = timeBetween < 18;
+
+      return this.formErrors['clientOld'] ? { clientOld: true } : null;
+    };
   }
 }

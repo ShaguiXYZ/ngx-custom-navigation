@@ -49,6 +49,8 @@ export class RoutingService implements OnDestroy {
     return Promise.resolve(false);
   };
 
+  public goToStep = (pageId: string): Promise<boolean> => this.goToPage(this.getPage(pageId)!);
+
   private getPage = (id: string): Page | undefined => this.appContextData.configuration.pageMap[id];
 
   private goToPage = (page: Page): Promise<boolean> => {
