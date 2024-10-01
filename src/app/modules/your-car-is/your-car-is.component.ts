@@ -9,9 +9,9 @@ import { NxInputModule } from '@aposin/ng-aquila/input';
 import { NxMaskModule } from '@aposin/ng-aquila/mask';
 import { ContextDataService } from '@shagui/ng-shagui/core';
 import { QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
+import { RoutingService } from 'src/app/core/services';
 import { HeaderTitleComponent, QuoteFooterComponent, SelectableOptionComponent } from 'src/app/shared/components';
 import { QuoteFooterConfig } from 'src/app/shared/components/quote-footer/models';
-import { QuoteFooterService } from 'src/app/shared/components/quote-footer/services';
 import { FuelTypes, IVehicleModel, QuoteModel } from 'src/app/shared/models';
 
 @Component({
@@ -41,7 +41,7 @@ export class YourCarIsComponent {
   private contextData!: QuoteModel;
 
   private readonly contextDataService = inject(ContextDataService);
-  private readonly footerService = inject(QuoteFooterService);
+  private readonly routingService = inject(RoutingService);
 
   constructor(private readonly fb: FormBuilder, private readonly _router: Router) {
     this.footerConfig = {
@@ -87,7 +87,8 @@ export class YourCarIsComponent {
   public selectVehicle(vehicle: IVehicleModel) {
     this.contextData.vehicle = { ...this.contextData.vehicle, ...vehicle };
     this.contextDataService.set(QUOTE_CONTEXT_DATA, this.contextData);
-    this.footerService.nextStep({ showNext: false });
+
+    this.routingService.nextStep();
   }
 
   public continue() {

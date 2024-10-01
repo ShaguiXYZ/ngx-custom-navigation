@@ -1,7 +1,0 @@
-<div class="fuels-content">
-  @for(fuel of fuels; track fuel.index) {
-  <button class="fuel nx-margin-x-3xs nx-margin-y-3xs" [nxButton]="buttonType(fuel)" type="button" (click)="selectFuel(fuel)">
-    {{ fuel.data }}
-  </button>
-  }
-</div>

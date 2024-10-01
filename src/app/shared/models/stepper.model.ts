@@ -13,7 +13,7 @@ export interface StepperDTO {
 export interface Step {
   key: string;
   label: string;
-  url: string;
+  page: string;
 }
 
 export interface Stepper {

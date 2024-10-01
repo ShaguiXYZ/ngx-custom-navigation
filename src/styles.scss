@@ -36,23 +36,9 @@ main {
 
   .card-container {
     align-items: center;
-    outline: 1px solid #bbb;
-    border-radius: 3px;
-    cursor: pointer;
     display: flex;
     flex-direction: column;
     justify-content: center;
-
-    &:hover {
-      background-color: var(--selectable-card-background-selected-hover-color);
-      transition: outline-color 0.5s ease-out, background-color 0.5s ease-out;
-    }
-
-    &.selected {
-      background-color: var(--selectable-card-background-selected-color);
-      outline: 2px solid #007ab3;
-      transition: outline-color 0.5s ease-out;
-    }
   }
 
   .nx-formfield-hint {

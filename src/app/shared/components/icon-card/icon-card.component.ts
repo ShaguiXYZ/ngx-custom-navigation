@@ -2,11 +2,12 @@ import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { NxAvatarModule } from '@aposin/ng-aquila/avatar';
 import { IIconData } from '../../models';
+import { SelectableOptionComponent } from '../selectable-option';
 
 @Component({
   selector: 'quote-icon-card',
   standalone: true,
-  imports: [CommonModule, NxAvatarModule],
+  imports: [CommonModule, SelectableOptionComponent, NxAvatarModule],
   templateUrl: './icon-card.component.html',
   styleUrl: './icon-card.component.scss'
 })

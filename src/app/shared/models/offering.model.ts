@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-namespace */
 export interface ReceiptData {
   firstReceiptAmount: number;
   followingReceiptAmount: number;
@@ -16,7 +17,7 @@ export interface Coverage {
 export interface OfferingPriceModel {
   modalityId: number;
   modalityDescription: string;
-  modalityFullDescription: string | null;
+  modalityFullDescription?: string;
   paymentType: string;
   paymentTypeDescription: string;
   popular?: boolean;

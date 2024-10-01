@@ -13,24 +13,30 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      width: 15px;
-      height: 15px;
-      border-radius: 2px;
+      width: 25px;
+      height: 25px;
+      border-radius: 50px;
       background-color: var(--disabled-03);
       color: var(--text-01);
       font-size: 1.5rem;
       font-weight: 700;
-      margin: 0 5px;
       cursor: pointer;
       transition: color 0.5s ease-out, background-color 0.5s ease-out;
 
       &.active {
-        background-color: var(--success);
+        background-color: inherit;
+        border: 2px solid var(--interactive-primary);
         color: var(--text-02);
+
+        .stepper__item__active {
+          background-color: var(--interactive-primary);
+          border-radius: 50px;
+          padding: 6px;
+        }
       }
 
       &.complete {
-        background-color: var(--accent-02);
+        background-color: var(--interactive-primary);
         color: var(--text-02);
       }
 
@@ -40,9 +46,15 @@
     }
 
     .stepper__item__line {
-      border-top: 1px dashed var(--ui-05);
+      border-top: 5px dotted var(--ui-05);
       flex: 1;
-      height: 1px;
+      margin: 0 5px;
+
+      &.solid__line {
+        border: none;
+        margin: 0;
+        outline: 1px solid var(--interactive-primary);
+      }
     }
   }
 }

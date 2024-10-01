@@ -1,11 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { SelectableOptionComponent } from 'src/app/shared/components';
 import { BrandData, BrandKey, IVehicleDictionaryData } from 'src/app/shared/models';
 
 @Component({
   selector: 'quote-brand',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, SelectableOptionComponent],
   templateUrl: './brand.component.html',
   styleUrl: './brand.component.scss'
 })

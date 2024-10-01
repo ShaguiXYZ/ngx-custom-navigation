@@ -12,6 +12,7 @@ import { debounceTime, distinctUntilChanged, fromEvent, map, Observable, Subscri
 import { DEBOUNCE_TIME, QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
 import { RoutingService } from 'src/app/core/services';
 import { HeaderTitleComponent, QuoteFooterComponent, QuoteFooterInfoComponent } from 'src/app/shared/components';
+import { QuoteFooterConfig } from 'src/app/shared/components/quote-footer/models';
 import { IsValidData } from 'src/app/shared/guards';
 import { QuoteModel } from 'src/app/shared/models';
 
@@ -40,6 +41,7 @@ export class LicensePlateComponent implements OnInit, OnDestroy, IsValidData {
   private searchInput!: ElementRef;
 
   public form!: FormGroup;
+  public footerConfig!: QuoteFooterConfig;
 
   private contextData!: QuoteModel;
   private subscription$: Subscription[] = [];
@@ -53,6 +55,7 @@ export class LicensePlateComponent implements OnInit, OnDestroy, IsValidData {
 
   ngOnInit(): void {
     this.createForm();
+    this.footerConfig = { showNext: true, nextFn: this.saveContextData };
 
     this.subscription$.push(this.searchBoxConfig());
   }
@@ -101,7 +104,12 @@ export class LicensePlateComponent implements OnInit, OnDestroy, IsValidData {
       .subscribe(() => this.searchVehicle());
   }
 
-  private searchVehicle() {
+  private saveContextData = (): void => {
+    this.contextData.driven.hasDrivenLicense = true;
+    this.contextDataService.set(QUOTE_CONTEXT_DATA, this.contextData);
+  };
+
+  private searchVehicle(): void {
     // this.contextData.vehicle = this.vehicleService.searchVehicleByLicensePlate(this.form.value.licensePlate);
   }
 }

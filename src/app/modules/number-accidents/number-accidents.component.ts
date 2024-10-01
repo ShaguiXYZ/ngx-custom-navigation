@@ -1,13 +1,10 @@
-import { Component, OnDestroy, OnInit, inject } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Component, inject } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NX_DATE_LOCALE } from '@aposin/ng-aquila/datefield';
-import { NxRadioModule } from '@aposin/ng-aquila/radio-button';
-import { ContextDataService } from '@shagui/ng-shagui/core';
-import { Observable, Subscription } from 'rxjs';
+import { ContextDataService, hasValue } from '@shagui/ng-shagui/core';
 import { QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
-import { HeaderTitleComponent, QuoteFooterComponent, QuoteFooterInfoComponent, QuoteFooterService } from 'src/app/shared/components';
-import { QuoteFooterConfig } from 'src/app/shared/components/quote-footer/models';
+import { RoutingService } from 'src/app/core/services';
+import { HeaderTitleComponent, QuoteFooterComponent, QuoteFooterInfoComponent, SelectableOptionComponent } from 'src/app/shared/components';
 import { IsValidData } from 'src/app/shared/guards';
 import { QuoteModel } from 'src/app/shared/models';
 
@@ -16,66 +13,37 @@ import { QuoteModel } from 'src/app/shared/models';
   templateUrl: './number-accidents.component.html',
   styleUrl: './number-accidents.component.scss',
   standalone: true,
-  imports: [FormsModule, HeaderTitleComponent, NxRadioModule, QuoteFooterComponent, QuoteFooterInfoComponent, ReactiveFormsModule],
+  imports: [
+    FormsModule,
+    HeaderTitleComponent,
+    QuoteFooterComponent,
+    QuoteFooterInfoComponent,
+    SelectableOptionComponent,
+    ReactiveFormsModule
+  ],
   providers: [{ provide: NX_DATE_LOCALE, useValue: 'es-ES' }]
 })
-export class NumberAccidentsComponent implements OnInit, OnDestroy, IsValidData {
-  public form!: FormGroup;
-  public footerConfig!: QuoteFooterConfig;
+export class NumberAccidentsComponent implements IsValidData {
+  public selectedAccidents?: number;
 
   private contextData!: QuoteModel;
-  private subscription$: Subscription[] = [];
 
   private readonly contextDataService = inject(ContextDataService);
-  private readonly footerService = inject(QuoteFooterService);
+  private readonly routingService = inject(RoutingService);
 
-  constructor(private readonly fb: FormBuilder, private readonly _router: Router) {
+  constructor() {
     this.contextData = this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA);
-
-    this.footerConfig = {
-      showNext: false
-    };
+    this.selectedAccidents = this.contextData.client.accidents;
   }
 
-  ngOnInit(): void {
-    this.createForm();
+  public canDeactivate = (): boolean => this.updateValidData();
+
+  public selectAccidents(accidents: number): void {
+    this.contextData.client.accidents = accidents;
+    this.contextDataService.set(QUOTE_CONTEXT_DATA, this.contextData);
+
+    this.routingService.nextStep();
   }
 
-  ngOnDestroy(): void {
-    this.subscription$.forEach(sub => sub.unsubscribe());
-  }
-
-  public canDeactivate = (): boolean | Observable<boolean> | Promise<boolean> => this.updateValidData();
-
-  public selectAccidents() {
-    // force value changes to trigger
-    this.form.patchValue({ accidents: undefined });
-  }
-
-  private updateValidData = (): boolean => {
-    if (this.form.valid) {
-      this.contextData.client = {
-        ...this.contextData.client,
-        ...this.form.value
-      };
-
-      this.contextDataService.set(QUOTE_CONTEXT_DATA, this.contextData);
-    }
-
-    return this.form.valid;
-  };
-
-  private createForm() {
-    this.form = this.fb.group({
-      accidents: new FormControl(this.contextData.client.accidents, [Validators.required])
-    });
-
-    this.subscription$.push(
-      this.form.valueChanges.subscribe(() => {
-        this.footerService.nextStep({
-          showNext: this.form.valid
-        });
-      })
-    );
-  }
+  private updateValidData = (): boolean => hasValue(this.contextData.client.accidents);
 }

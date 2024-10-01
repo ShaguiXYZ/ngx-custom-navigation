@@ -1,0 +1,6 @@
+<quote-selectable-option [selected]="selected" (uiSelect)="selectBrand()">
+  <div class="brand-content">
+    <img class="brand-image" [src]="data?.icon" [alt]="data?.data" />
+    <p>{{ data?.data ?? brand | titlecase }}</p>
+  </div>
+</quote-selectable-option>

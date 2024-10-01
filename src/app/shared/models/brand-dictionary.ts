@@ -1,8 +1,9 @@
+import { DataInfo } from '@shagui/ng-shagui/core';
 import { IVehicleDictionaryData } from './vehicle.model';
 
 export type BrandKey = keyof typeof brandDictionary;
 
-type BrandDictionary = { [key: string]: IVehicleDictionaryData };
+type BrandDictionary = DataInfo<IVehicleDictionaryData>;
 
 export const brandDictionary: BrandDictionary = {
   MINI: { icon: '027.fw', data: 'Mini' },

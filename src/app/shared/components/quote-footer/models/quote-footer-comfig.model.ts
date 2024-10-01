@@ -3,4 +3,6 @@ export interface QuoteFooterConfig {
   showNext?: boolean;
   backLabel?: string;
   nextLabel?: string;
+  nextFn?: () => void;
+  backFn?: () => void;
 }

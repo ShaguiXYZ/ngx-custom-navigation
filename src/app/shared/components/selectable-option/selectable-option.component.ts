@@ -16,6 +16,9 @@ export class SelectableOptionComponent {
   @Input()
   public fullHeight?: boolean;
 
+  @Input()
+  public disabled?: boolean;
+
   @Output()
   public uiSelect: EventEmitter<void> = new EventEmitter<void>();
 }

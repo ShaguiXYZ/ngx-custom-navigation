@@ -6,7 +6,7 @@
       "steps": [
         {
           "label": "Datos personales",
-          "pages": ["is-client", "place", "birthdate", "driving-license-date", "driving-license-location"]
+          "pages": ["is-client", "place", "birthdate", "driving-license-date", "driving-license-location", "date-of-issue"]
         },
         {
           "label": "Datos del coche",
@@ -29,7 +29,7 @@
     {
       "steps": [
         {
-          "label": "Datos del Contacto",
+          "label": "Datos del Cliente",
           "pages": [
             "is-client-client-name",
             "is-client-client-phone-number",

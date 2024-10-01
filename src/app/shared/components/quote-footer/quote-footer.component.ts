@@ -14,7 +14,8 @@ import { hasValue } from '@shagui/ng-shagui/core';
   standalone: true,
   imports: [CommonModule, NxButtonModule, NxIconModule],
   templateUrl: './quote-footer.component.html',
-  styleUrl: './quote-footer.component.scss'
+  styleUrl: './quote-footer.component.scss',
+  providers: [QuoteFooterService]
 })
 export class QuoteFooterComponent implements OnDestroy {
   public _config: QuoteFooterConfig;

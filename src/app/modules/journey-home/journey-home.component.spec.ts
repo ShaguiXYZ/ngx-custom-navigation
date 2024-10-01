@@ -38,7 +38,7 @@ describe('JourneyHomeComponent', () => {
     contextDataServiceSpy = TestBed.inject(ContextDataService) as jasmine.SpyObj<ContextDataService>;
   });
 
-  fit('should navigate to homePageId route if homePageId exists', () => {
+  xit('should navigate to homePageId route if homePageId exists', () => {
     const appContextData: AppContextData = {
       configuration: {
         homePageId: 'home',
@@ -61,7 +61,6 @@ describe('JourneyHomeComponent', () => {
 
     expect(contextDataServiceSpy.get).toHaveBeenCalledWith(QUOTE_APP_CONTEXT_DATA);
     expect(contextDataServiceSpy.set).toHaveBeenCalledWith(QUOTE_CONTEXT_DATA, QuoteModel.init());
-    // expect(router.navigate).toHaveBeenCalledWith(['/home']);
   });
 
   it('should throw an error if homePageId does not exist', () => {

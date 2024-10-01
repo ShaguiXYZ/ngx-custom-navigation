@@ -83,7 +83,7 @@ export namespace Configuration {
               if (page) page.stepper = { key: stepperKey, stepKey };
             });
 
-            return { key: stepKey, label: step.label, url: step.pages[0] };
+            return { key: stepKey, label: step.label, page: step.pages[0] };
           })
       };
     });

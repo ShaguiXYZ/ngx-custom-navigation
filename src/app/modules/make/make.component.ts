@@ -13,9 +13,9 @@ import { DEBOUNCE_TIME, QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
 import { RoutingService, VehicleService } from 'src/app/core/services';
 import { HeaderTitleComponent, IconCardComponent, QuoteFooterComponent } from 'src/app/shared/components';
 import { QuoteFooterConfig } from 'src/app/shared/components/quote-footer/models';
-import { BrandComponent } from 'src/app/shared/components/vehicle-selection';
 import { IsValidData } from 'src/app/shared/guards';
 import { BrandData, QuoteModel } from 'src/app/shared/models';
+import { BrandComponent } from './components';
 
 @Component({
   selector: 'app-make',
