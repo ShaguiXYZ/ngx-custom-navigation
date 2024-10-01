@@ -1,16 +1,17 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, OnDestroy, OnInit } from '@angular/core';
+import { NxCopytextModule } from '@aposin/ng-aquila/copytext';
+import { NxIconModule } from '@aposin/ng-aquila/icon';
 import { NxTooltipModule } from '@aposin/ng-aquila/tooltip';
 import { Subscription } from 'rxjs';
 import { RoutingService } from 'src/app/core/services';
 import { Step, Stepper } from '../../models/stepper.model';
 import { QuoteStepperService } from './services';
-import { NxIconModule } from '@aposin/ng-aquila/icon';
 
 @Component({
   selector: 'quote-stepper',
   standalone: true,
-  imports: [CommonModule, NxIconModule, NxTooltipModule],
+  imports: [CommonModule, NxCopytextModule, NxIconModule, NxTooltipModule],
   templateUrl: './quote-stepper.component.html',
   styleUrls: ['./quote-stepper.component.scss'],
   providers: [QuoteStepperService]

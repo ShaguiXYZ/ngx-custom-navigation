@@ -17,7 +17,6 @@ export interface Step {
 }
 
 export interface Stepper {
-  title: string;
   steps: Step[];
 }
 

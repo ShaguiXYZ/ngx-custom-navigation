@@ -3,23 +3,43 @@
   "homePageId": "on-boarding",
   "steppers": [
     {
-      "title": "On boarding",
       "steps": [
         {
-          "label": "Personal Data",
-          "pages": ["is-client", "place", "birthdate"]
+          "label": "Datos personales",
+          "pages": ["is-client", "place", "birthdate", "driving-license-date", "driving-license-location"]
         },
         {
-          "label": "Driving Data",
-          "pages": ["driving-license-date", "driving-license-location"]
-        },
-        {
-          "label": "Vehicle Data",
+          "label": "Datos del coche",
           "pages": ["license-plate", "your-car-is", "make", "vehicle-type", "vehicle-models", "vehicle-fuel", "vehicle-model-versions"]
+        },
+        {
+          "label": "Datos del Seguro",
+          "pages": ["is-policy-owner", "insurance-companies", "number-accidents"]
+        },
+        {
+          "label": "Datos del Contacto",
+          "pages": ["client-name", "client-phone-number", "client-email", "client-identification-number"]
         },
         {
           "label": "Presupuesto",
           "pages": ["offerings"]
+        }
+      ]
+    },
+    {
+      "steps": [
+        {
+          "label": "Datos del Contacto",
+          "pages": [
+            "is-client-client-name",
+            "is-client-client-phone-number",
+            "is-client-client-email",
+            "is-client-client-identification-number"
+          ]
+        },
+        {
+          "label": "Te llamamos",
+          "pages": ["is-client-contact-us"]
         }
       ]
     }
@@ -43,7 +63,7 @@
       "title": "Datos personales",
       "nextOptionList": [
         {
-          "nextPageId": "contact-us",
+          "nextPageId": "is-client-client-name",
           "conditions": [
             {
               "expression": "client.isClient",
@@ -377,6 +397,60 @@
       "pageId": "apology-screen",
       "route": "apology-screen",
       "title": ""
+    },
+
+    {
+      "pageId": "is-client-client-name",
+      "route": "client-name",
+      "title": "Datos del contacto",
+      "nextOptionList": [
+        {
+          "nextPageId": "is-client-client-phone-number"
+        }
+      ]
+    },
+    {
+      "pageId": "is-client-client-phone-number",
+      "route": "client-phone-number",
+      "title": "Datos del contacto",
+      "showAsBreadcrumb": false,
+      "nextOptionList": [
+        {
+          "nextPageId": "is-client-client-email"
+        }
+      ]
+    },
+    {
+      "pageId": "is-client-client-email",
+      "route": "client-email",
+      "title": "Datos del contacto",
+      "showAsBreadcrumb": false,
+      "nextOptionList": [
+        {
+          "nextPageId": "is-client-client-identification-number"
+        }
+      ]
+    },
+    {
+      "pageId": "is-client-client-identification-number",
+      "route": "client-identification-number",
+      "title": "Datos del contacto",
+      "showAsBreadcrumb": false,
+      "nextOptionList": [
+        {
+          "nextPageId": "is-client-contact-us"
+        }
+      ]
+    },
+    {
+      "pageId": "is-client-contact-us",
+      "route": "contact-us",
+      "title": "Te llamamos",
+      "pageConfiguration": {
+        "header": "¡Qué sorpresa!",
+        "subheader": "Actualmente no podemos hacer seguros con esas condiciones.",
+        "body": "Para cualquier consulta:"
+      }
     }
   ]
 }

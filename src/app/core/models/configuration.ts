@@ -73,7 +73,6 @@ export namespace Configuration {
       const stepperKey = UniqueIds._next_();
 
       steppersMap[stepperKey] = {
-        title: stepper.title,
         steps: stepper.steps
           .filter(step => step.pages?.length)
           .map(step => {
