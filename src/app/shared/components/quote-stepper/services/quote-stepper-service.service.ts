@@ -8,9 +8,10 @@ import { Stepper } from 'src/app/shared/models/stepper.model';
 @Injectable()
 export class QuoteStepperService implements OnDestroy {
   private subscription$: Subscription[] = [];
-  private contextDataService = inject(ContextDataService);
 
   private quoteSteps$ = new BehaviorSubject<{ stepper: Stepper; stepKey: string } | undefined>(undefined);
+
+  private readonly contextDataService = inject(ContextDataService);
 
   constructor() {
     const subscription = this.contextDataService.onDataChange<AppContextData>(QUOTE_APP_CONTEXT_DATA).subscribe(data => {

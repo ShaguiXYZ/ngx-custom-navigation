@@ -10,6 +10,7 @@ import { DEBOUNCE_TIME, QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
 import { IndexedData } from 'src/app/core/models';
 import { LocationService } from 'src/app/core/services';
 import { HeaderTitleComponent, QuoteFooterComponent, QuoteFooterInfoComponent } from 'src/app/shared/components';
+import { QuoteFooterConfig } from 'src/app/shared/components/quote-footer/models';
 import { IsValidData } from 'src/app/shared/guards';
 import { QuoteModel } from 'src/app/shared/models';
 
@@ -35,6 +36,7 @@ export class PlaceComponent implements OnInit, OnDestroy, IsValidData {
   private searchInput!: ElementRef;
 
   public form!: FormGroup;
+  public footerConfig!: QuoteFooterConfig;
 
   private contextData!: QuoteModel;
 
@@ -45,6 +47,11 @@ export class PlaceComponent implements OnInit, OnDestroy, IsValidData {
 
   constructor(private readonly fb: FormBuilder) {
     this.contextData = this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA);
+
+    this.footerConfig = {
+      showNext: true,
+      nextFn: () => this.updateValidData()
+    };
   }
 
   ngOnInit(): void {
@@ -57,7 +64,7 @@ export class PlaceComponent implements OnInit, OnDestroy, IsValidData {
     this.subscription$.forEach(subscription => subscription.unsubscribe());
   }
 
-  public canDeactivate = (): boolean | Observable<boolean> | Promise<boolean> => this.updateValidData();
+  public canDeactivate = (): boolean => this.isValidData();
 
   private updateValidData = (): boolean => {
     if (this.form.valid) {
@@ -71,6 +78,10 @@ export class PlaceComponent implements OnInit, OnDestroy, IsValidData {
 
     return !!this.contextData.place.province;
   };
+
+  private isValidData(): boolean {
+    return !!this.contextData.place.province?.data;
+  }
 
   public get province(): IndexedData | undefined {
     return this.contextData.place.province;

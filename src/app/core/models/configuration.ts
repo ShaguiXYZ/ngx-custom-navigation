@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-namespace */
 import { DataInfo, UniqueIds } from '@shagui/ng-shagui/core';
 import { Stepper, StepperDTO, Steppers } from 'src/app/shared/models/stepper.model';
+import { LiteralModel } from './literal.model';
 
 export type CompareOperations = 'AND' | 'OR';
 
@@ -11,14 +12,18 @@ export interface ConfigurationDTO {
   pageMap: Page[];
 }
 
+export interface PageConfiguration {
+  literals?: DataInfo<LiteralModel>;
+  data?: unknown;
+}
+
 export interface Page {
+  configuration?: PageConfiguration;
   nextOptionList?: NextOption[];
-  pageConfiguration?: unknown;
   pageId: string;
   route: string;
   stepper?: { key: string; stepKey: string };
   showBack?: boolean;
-  title: string;
 }
 
 export namespace Page {

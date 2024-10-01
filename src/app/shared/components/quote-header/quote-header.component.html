@@ -1,15 +1,15 @@
 <div class="container">
   <div class="head">
-    <img src="../../../../favicon.ico" class="logo" />
+    <img src="../../../../favicon.ico" class="logo" alt="Logo" />
     <nx-link>
-      <a class="contact-us" (click)="navigateToContactUs()">¿Te llamamos?</a>
+      <a class="contact-us" (click)="navigateToContactUs()" (keydown.enter)="navigateToContactUs()" tabindex="0">¿Te llamamos?</a>
     </nx-link>
   </div>
-  @if (showBackButton) {
   <div class="back">
+    @if (showBackButton) {
     <nx-link nxStyle="block icon-left">
-      <a (click)="return()"><nx-icon name="arrow-left" aria-hidden="true"></nx-icon> Volver</a>
+      <a (click)="return()" (keydown.enter)="return()" tabindex="0"><nx-icon name="arrow-left" aria-hidden="true"></nx-icon> Volver</a>
     </nx-link>
+    }
   </div>
-  }
 </div>

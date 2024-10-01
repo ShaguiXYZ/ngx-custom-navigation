@@ -37,7 +37,7 @@ export class SettingServiceMock {
         pageId: 'contact-us',
         route: 'contact-us',
         title: 'Te llamamos',
-        pageConfiguration: {
+        configuration: {
           header: '¡Qué sorpresa!',
           subheader: 'Actualmente no podemos hacer seguros con esas condiciones.',
           body: 'Para cualquier consulta:'

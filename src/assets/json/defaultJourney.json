@@ -49,7 +49,6 @@
       "pageId": "on-boarding",
       "route": "on-boarding",
       "showBack": false,
-      "title": "On boarding",
       "nextOptionList": [
         {
           "nextPageId": "is-client"
@@ -60,7 +59,6 @@
       "pageId": "is-client",
       "route": "is-client",
       "showBack": false,
-      "title": "Datos personales",
       "nextOptionList": [
         {
           "nextPageId": "is-client-client-name",
@@ -79,7 +77,6 @@
     {
       "pageId": "place",
       "route": "place",
-      "title": "Localidad",
       "nextOptionList": [
         {
           "nextPageId": "contact-us",
@@ -103,7 +100,6 @@
     {
       "pageId": "birthdate",
       "route": "birthdate",
-      "title": "Año de nacimiento",
       "showAsBreadcrumb": false,
       "nextOptionList": [
         {
@@ -114,7 +110,6 @@
     {
       "pageId": "driving-license-date",
       "route": "driving-license-date",
-      "title": "¿Cuando adquiriste el carnet?",
       "nextOptionList": [
         {
           "nextPageId": "vehicle-type"
@@ -124,7 +119,6 @@
     {
       "pageId": "driving-license-location",
       "route": "driving-license-location",
-      "title": "¿Donde adquiriste el carnet?",
       "nextOptionList": [
         {
           "nextPageId": "contact-us",
@@ -143,7 +137,6 @@
     {
       "pageId": "date-of-issue",
       "route": "date-of-issue",
-      "title": "Datos vehículo",
       "nextOptionList": [
         {
           "nextPageId": "birthdate"
@@ -153,7 +146,6 @@
     {
       "pageId": "license-plate",
       "route": "license-plate",
-      "title": "Matrícula de tu coche",
       "nextOptionList": [
         {
           "nextPageId": "make",
@@ -172,7 +164,6 @@
     {
       "pageId": "your-car-is",
       "route": "your-car-is",
-      "title": "Tu coche es",
       "nextOptionList": [
         {
           "nextPageId": "license-year",
@@ -190,7 +181,6 @@
     },
     {
       "pageId": "make",
-      "title": "Marca del vehículo",
       "nextOptionList": [
         {
           "nextPageId": "vehicle-models"
@@ -200,7 +190,6 @@
     {
       "pageId": "vehicle-type",
       "route": "vehicle-type",
-      "title": "Tipo de vehículo",
       "nextOptionList": [
         {
           "nextPageId": "make",
@@ -218,7 +207,6 @@
     },
     {
       "pageId": "vehicle-models",
-      "title": "¿Y el modelo?",
       "nextOptionList": [
         {
           "nextPageId": "vehicle-fuel"
@@ -227,7 +215,6 @@
     },
     {
       "pageId": "vehicle-fuel",
-      "title": "Combustible",
       "nextOptionList": [
         {
           "nextPageId": "vehicle-model-versions"
@@ -236,7 +223,6 @@
     },
     {
       "pageId": "vehicle-model-versions",
-      "title": "¿Y la versión?",
       "nextOptionList": [
         {
           "nextPageId": "is-policy-owner"
@@ -245,7 +231,6 @@
     },
     {
       "pageId": "license-year",
-      "title": "Cuál es año de matriculación?",
       "nextOptionList": [
         {
           "nextPageId": "is-policy-owner"
@@ -255,7 +240,6 @@
     {
       "pageId": "is-policy-owner",
       "route": "is-policy-owner",
-      "title": "Datos del seguro",
       "nextOptionList": [
         {
           "nextPageId": "client-name",
@@ -312,7 +296,6 @@
     {
       "pageId": "insurance-companies",
       "route": "insurance-companies",
-      "title": "Datos del seguro",
       "nextOptionList": [
         {
           "nextPageId": "number-accidents"
@@ -322,7 +305,6 @@
     {
       "pageId": "number-accidents",
       "route": "number-accidents",
-      "title": "Datos del seguro",
       "showAsBreadcrumb": false,
       "nextOptionList": [
         {
@@ -333,7 +315,6 @@
     {
       "pageId": "client-name",
       "route": "client-name",
-      "title": "Datos del contacto",
       "nextOptionList": [
         {
           "nextPageId": "client-phone-number"
@@ -343,7 +324,6 @@
     {
       "pageId": "client-phone-number",
       "route": "client-phone-number",
-      "title": "Datos del contacto",
       "showAsBreadcrumb": false,
       "nextOptionList": [
         {
@@ -354,7 +334,6 @@
     {
       "pageId": "client-email",
       "route": "client-email",
-      "title": "Datos del contacto",
       "showAsBreadcrumb": false,
       "nextOptionList": [
         {
@@ -365,7 +344,6 @@
     {
       "pageId": "client-identification-number",
       "route": "client-identification-number",
-      "title": "Datos del contacto",
       "showAsBreadcrumb": false,
       "nextOptionList": [
         {
@@ -376,7 +354,6 @@
     {
       "pageId": "offerings",
       "route": "offerings",
-      "title": "Parrilla",
       "nextOptionList": [
         {
           "nextPageId": "contact-us"
@@ -386,23 +363,21 @@
     {
       "pageId": "contact-us",
       "route": "contact-us",
-      "title": "Te llamamos",
-      "pageConfiguration": {
-        "header": "¡Qué sorpresa!",
-        "subheader": "Actualmente no podemos hacer seguros con esas condiciones.",
-        "body": "Para cualquier consulta:"
+      "configuration": {
+        "literals": {
+          "header": { "value": "¡Qué sorpresa!", "type": "value" },
+          "subheader": "Actualmente no podemos hacer seguros con esas condiciones.",
+          "body": "Para cualquier consulta:"
+        }
       }
     },
     {
       "pageId": "apology-screen",
-      "route": "apology-screen",
-      "title": ""
+      "route": "apology-screen"
     },
-
     {
       "pageId": "is-client-client-name",
       "route": "client-name",
-      "title": "Datos del contacto",
       "nextOptionList": [
         {
           "nextPageId": "is-client-client-phone-number"
@@ -412,7 +387,6 @@
     {
       "pageId": "is-client-client-phone-number",
       "route": "client-phone-number",
-      "title": "Datos del contacto",
       "showAsBreadcrumb": false,
       "nextOptionList": [
         {
@@ -423,7 +397,6 @@
     {
       "pageId": "is-client-client-email",
       "route": "client-email",
-      "title": "Datos del contacto",
       "showAsBreadcrumb": false,
       "nextOptionList": [
         {
@@ -434,7 +407,6 @@
     {
       "pageId": "is-client-client-identification-number",
       "route": "client-identification-number",
-      "title": "Datos del contacto",
       "showAsBreadcrumb": false,
       "nextOptionList": [
         {
@@ -445,11 +417,12 @@
     {
       "pageId": "is-client-contact-us",
       "route": "contact-us",
-      "title": "Te llamamos",
-      "pageConfiguration": {
-        "header": "¡Qué sorpresa!",
-        "subheader": "Actualmente no podemos hacer seguros con esas condiciones.",
-        "body": "Para cualquier consulta:"
+      "configuration": {
+        "literals": {
+          "header": "Calcular mi seguro",
+          "subheader": "Actualmente no podemos hacer seguros con esas condiciones.",
+          "body": "Para cualquier consulta:"
+        }
       }
     }
   ]

@@ -22,16 +22,14 @@ export class QuoteStepperComponent implements OnInit, OnDestroy {
 
   private subscription$: Subscription[] = [];
 
-  private quoteStepperService = inject(QuoteStepperService);
-  private routingService = inject(RoutingService);
+  private readonly quoteStepperService = inject(QuoteStepperService);
+  private readonly routingService = inject(RoutingService);
 
   ngOnInit(): void {
     this.subscription$.push(
       this.quoteStepperService.asObservable().subscribe(data => {
-        if (data && this.stepperData?.stepKey !== data.stepKey) {
-          this.stepperData = data;
-          this.stepperIndex = data?.stepper.steps.findIndex(step => step.key === data.stepKey) ?? 0;
-        }
+        this.stepperData = data;
+        this.stepperIndex = data?.stepper.steps.findIndex(step => step.key === data.stepKey) ?? 0;
       })
     );
   }
