@@ -28,8 +28,10 @@ export class QuoteStepperComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.subscription$.push(
       this.quoteStepperService.asObservable().subscribe(data => {
-        this.stepperData = data;
-        this.stepperIndex = data?.stepper.steps.findIndex(step => step.key === data.stepKey) ?? 0;
+        if (data && this.stepperData?.stepKey !== data.stepKey) {
+          this.stepperData = data;
+          this.stepperIndex = data?.stepper.steps.findIndex(step => step.key === data.stepKey) ?? 0;
+        }
       })
     );
   }
