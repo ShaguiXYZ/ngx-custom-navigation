@@ -5,25 +5,27 @@ import { LiteralModel } from './literal.model';
 
 export type CompareOperations = 'AND' | 'OR';
 
+export type Links = DataInfo;
+
 export interface ConfigurationDTO {
   homePageId: string;
   lastUpdate?: Date;
   steppers?: StepperDTO[];
   pageMap: Page[];
+  links?: Links;
 }
 
 export interface PageConfiguration {
   literals?: DataInfo<LiteralModel>;
-  data?: unknown;
+  data?: DataInfo<any>;
 }
 
 export interface Page {
   configuration?: PageConfiguration;
   nextOptionList?: NextOption[];
   pageId: string;
-  route: string;
+  route?: string;
   stepper?: { key: string; stepKey: string };
-  showBack?: boolean;
 }
 
 export namespace Page {
@@ -47,6 +49,7 @@ export interface Configuration {
   lastUpdate?: Date;
   pageMap: DataInfo<Page>;
   steppers?: Steppers;
+  links?: Links;
 }
 
 export namespace Configuration {
@@ -54,6 +57,8 @@ export namespace Configuration {
     const quoteConfiguration: Configuration = initQuote(configuration);
 
     initSteppers(quoteConfiguration, configuration.steppers);
+
+    initLinks(quoteConfiguration, configuration.links);
 
     return quoteConfiguration;
   };
@@ -94,5 +99,9 @@ export namespace Configuration {
     });
 
     configuration.steppers = { steppersMap };
+  };
+
+  const initLinks = (configuration: Configuration, links?: Links): void => {
+    configuration.links = links;
   };
 }

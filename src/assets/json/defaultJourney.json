@@ -10,7 +10,7 @@
         },
         {
           "label": "Datos del coche",
-          "pages": ["license-plate", "your-car-is", "make", "vehicle-type", "vehicle-models", "vehicle-fuel", "vehicle-model-versions"]
+          "pages": ["vehicle-type", "license-plate", "your-car-is", "make", "vehicle-models", "vehicle-fuel", "vehicle-model-versions"]
         },
         {
           "label": "Datos del Seguro",
@@ -47,18 +47,19 @@
   "pageMap": [
     {
       "pageId": "on-boarding",
-      "route": "on-boarding",
-      "showBack": false,
       "nextOptionList": [
         {
           "nextPageId": "is-client"
         }
-      ]
+      ],
+      "configuration": {
+        "data": {
+          "showBack": false
+        }
+      }
     },
     {
       "pageId": "is-client",
-      "route": "is-client",
-      "showBack": false,
       "nextOptionList": [
         {
           "nextPageId": "is-client-client-name",
@@ -72,11 +73,15 @@
         {
           "nextPageId": "place"
         }
-      ]
+      ],
+      "configuration": {
+        "data": {
+          "showBack": false
+        }
+      }
     },
     {
       "pageId": "place",
-      "route": "place",
       "nextOptionList": [
         {
           "nextPageId": "contact-us",
@@ -99,8 +104,6 @@
     },
     {
       "pageId": "birthdate",
-      "route": "birthdate",
-      "showAsBreadcrumb": false,
       "nextOptionList": [
         {
           "nextPageId": "driving-license-location"
@@ -109,7 +112,6 @@
     },
     {
       "pageId": "driving-license-date",
-      "route": "driving-license-date",
       "nextOptionList": [
         {
           "nextPageId": "vehicle-type"
@@ -118,7 +120,6 @@
     },
     {
       "pageId": "driving-license-location",
-      "route": "driving-license-location",
       "nextOptionList": [
         {
           "nextPageId": "contact-us",
@@ -136,7 +137,6 @@
     },
     {
       "pageId": "date-of-issue",
-      "route": "date-of-issue",
       "nextOptionList": [
         {
           "nextPageId": "birthdate"
@@ -145,7 +145,6 @@
     },
     {
       "pageId": "license-plate",
-      "route": "license-plate",
       "nextOptionList": [
         {
           "nextPageId": "make",
@@ -163,7 +162,6 @@
     },
     {
       "pageId": "your-car-is",
-      "route": "your-car-is",
       "nextOptionList": [
         {
           "nextPageId": "license-year",
@@ -189,7 +187,6 @@
     },
     {
       "pageId": "vehicle-type",
-      "route": "vehicle-type",
       "nextOptionList": [
         {
           "nextPageId": "make",
@@ -239,7 +236,6 @@
     },
     {
       "pageId": "is-policy-owner",
-      "route": "is-policy-owner",
       "nextOptionList": [
         {
           "nextPageId": "client-name",
@@ -295,7 +291,6 @@
     },
     {
       "pageId": "insurance-companies",
-      "route": "insurance-companies",
       "nextOptionList": [
         {
           "nextPageId": "number-accidents"
@@ -304,8 +299,6 @@
     },
     {
       "pageId": "number-accidents",
-      "route": "number-accidents",
-      "showAsBreadcrumb": false,
       "nextOptionList": [
         {
           "nextPageId": "client-name"
@@ -314,7 +307,6 @@
     },
     {
       "pageId": "client-name",
-      "route": "client-name",
       "nextOptionList": [
         {
           "nextPageId": "client-phone-number"
@@ -323,8 +315,6 @@
     },
     {
       "pageId": "client-phone-number",
-      "route": "client-phone-number",
-      "showAsBreadcrumb": false,
       "nextOptionList": [
         {
           "nextPageId": "client-email"
@@ -333,8 +323,6 @@
     },
     {
       "pageId": "client-email",
-      "route": "client-email",
-      "showAsBreadcrumb": false,
       "nextOptionList": [
         {
           "nextPageId": "client-identification-number"
@@ -343,8 +331,6 @@
     },
     {
       "pageId": "client-identification-number",
-      "route": "client-identification-number",
-      "showAsBreadcrumb": false,
       "nextOptionList": [
         {
           "nextPageId": "offerings"
@@ -353,7 +339,6 @@
     },
     {
       "pageId": "offerings",
-      "route": "offerings",
       "nextOptionList": [
         {
           "nextPageId": "contact-us"
@@ -362,7 +347,6 @@
     },
     {
       "pageId": "contact-us",
-      "route": "contact-us",
       "configuration": {
         "literals": {
           "header": { "value": "¡Qué sorpresa!", "type": "value" },
@@ -372,8 +356,7 @@
       }
     },
     {
-      "pageId": "apology-screen",
-      "route": "apology-screen"
+      "pageId": "apology-screen"
     },
     {
       "pageId": "is-client-client-name",
@@ -387,7 +370,6 @@
     {
       "pageId": "is-client-client-phone-number",
       "route": "client-phone-number",
-      "showAsBreadcrumb": false,
       "nextOptionList": [
         {
           "nextPageId": "is-client-client-email"
@@ -397,7 +379,6 @@
     {
       "pageId": "is-client-client-email",
       "route": "client-email",
-      "showAsBreadcrumb": false,
       "nextOptionList": [
         {
           "nextPageId": "is-client-client-identification-number"
@@ -407,7 +388,6 @@
     {
       "pageId": "is-client-client-identification-number",
       "route": "client-identification-number",
-      "showAsBreadcrumb": false,
       "nextOptionList": [
         {
           "nextPageId": "is-client-contact-us"
@@ -424,6 +404,20 @@
           "body": "Para cualquier consulta:"
         }
       }
+    },
+    {
+      "pageId": "external-contact-us",
+      "route": "contact-us",
+      "configuration": {
+        "literals": {
+          "header": { "value": "Dinos cómo podemos contactarte", "type": "value" },
+          "subheader": "Podemos ayudarte, ¿Quieres que te llamemos?",
+          "body": "Podemos llamarte y ayudarte a encontrar el mejor seguro para ti, con las mejores coberturas."
+        }
+      }
     }
-  ]
+  ],
+  "links": {
+    "contact-us": "external-contact-us"
+  }
 }

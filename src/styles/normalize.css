@@ -1,6 +1,7 @@
 * {
   box-sizing: border-box;
   position: relative;
+  interpolate-size: allow-keywords;
 }
 
 *::before,

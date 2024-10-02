@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { NxCopytextModule } from '@aposin/ng-aquila/copytext';
 import { NxHeadlineModule } from '@aposin/ng-aquila/headline';
 import { NxIconModule } from '@aposin/ng-aquila/icon';
@@ -11,7 +11,8 @@ import { QuoteLiteralDirective } from 'src/app/shared/directives';
   templateUrl: './contact-us.component.html',
   styleUrl: './contact-us.component.scss',
   standalone: true,
-  imports: [HeaderTitleComponent, NxHeadlineModule, NxCopytextModule, NxIconModule, QuoteFooterComponent, QuoteLiteralDirective]
+  imports: [HeaderTitleComponent, NxHeadlineModule, NxCopytextModule, NxIconModule, QuoteFooterComponent, QuoteLiteralDirective],
+  encapsulation: ViewEncapsulation.None
 })
 export class ContactUsComponent {
   public footerConfig!: QuoteFooterConfig;

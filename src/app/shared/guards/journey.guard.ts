@@ -11,10 +11,6 @@ export const journeyGuard: CanActivateFn = (route: ActivatedRouteSnapshot, state
   const router = inject(Router);
   const { nextPage, viewedPages } = context.navigation;
 
-  console.groupCollapsed('Journey Guard');
-  console.log(`Journey Guard ${QUOTE_APP_CONTEXT_DATA}`, contextDataService.get<AppContextData>(QUOTE_APP_CONTEXT_DATA));
-  console.groupEnd();
-
   if (!nextPage?.pageId) {
     context.navigation.lastPage = undefined;
     context.navigation.nextPage = context.configuration.pageMap[viewedPages[viewedPages.length - 1]];

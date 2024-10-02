@@ -17,7 +17,7 @@ export class QuoteLiteralDirective {
   private readonly contextDataService = inject(ContextDataService);
   private readonly translateService = inject(TranslateService);
 
-  constructor(private el: ElementRef<HTMLElement>, private renderer: Renderer2) {
+  constructor(private readonly el: ElementRef<HTMLElement>, private readonly renderer: Renderer2) {
     const appContextData = this.contextDataService.get<AppContextData>(QUOTE_APP_CONTEXT_DATA);
 
     this.lastPage = appContextData.navigation.lastPage;
@@ -38,7 +38,7 @@ export class QuoteLiteralDirective {
   private isQuoteLiteral = (literal: any): literal is QuoteLiteral => typeof literal === 'object' && 'value' in literal;
 
   private getLiteral = (literal: QuoteLiteral): string => {
-    if (literal?.type === 'traslated') {
+    if (literal?.type === 'translate') {
       return this.translateService.instant(literal.value);
     } else {
       return literal.value;

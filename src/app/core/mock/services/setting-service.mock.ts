@@ -7,7 +7,6 @@ export class SettingServiceMock {
       'on-boarding': {
         pageId: 'on-boarding',
         route: 'on-boarding',
-        title: 'On boarding',
         nextOptionList: [
           {
             nextPageId: 'is-client'
@@ -17,7 +16,6 @@ export class SettingServiceMock {
       'is-client': {
         pageId: 'is-client',
         route: 'is-client',
-        title: 'Eres cliente',
         nextOptionList: [
           {
             nextPageId: 'contact-us',
@@ -36,17 +34,17 @@ export class SettingServiceMock {
       'contact-us': {
         pageId: 'contact-us',
         route: 'contact-us',
-        title: 'Te llamamos',
         configuration: {
-          header: '¡Qué sorpresa!',
-          subheader: 'Actualmente no podemos hacer seguros con esas condiciones.',
-          body: 'Para cualquier consulta:'
+          literals: {
+            header: '¡Qué sorpresa!',
+            subheader: 'Actualmente no podemos hacer seguros con esas condiciones.',
+            body: 'Para cualquier consulta:'
+          }
         }
       },
       'personal-data': {
         pageId: 'personal-data',
-        route: 'personal-data',
-        title: 'Datos personales'
+        route: 'personal-data'
       }
     }
   };

@@ -5,48 +5,48 @@
       <div class="selectable-container">
         <quote-selectable-option [selected]="selectedAccidents === 0" [fullHeight]="true" (uiSelect)="selectAccidents(0)">
           <div class="card-container">
-            <span nxCopytext="medium" class="nx-margin-s nx-margin-left-4m">No</span>
+            <span nxCopytext="normal" class="nx-margin-s nx-margin-left-4m">No</span>
           </div>
         </quote-selectable-option>
       </div>
       <div class="selectable-container">
         <quote-selectable-option [selected]="selectedAccidents === 1" [fullHeight]="true" (uiSelect)="selectAccidents(1)">
           <div class="card-container">
-            <span nxCopytext="medium" class="nx-margin-s nx-margin-left-4m">1</span>
+            <span nxCopytext="normal" class="nx-margin-s nx-margin-left-4m">1</span>
           </div>
         </quote-selectable-option>
       </div>
       <div class="selectable-container">
         <quote-selectable-option [selected]="selectedAccidents === 2" [fullHeight]="true" (uiSelect)="selectAccidents(2)">
           <div class="card-container">
-            <span nxCopytext="medium" class="nx-margin-s nx-margin-left-4m">2</span>
+            <span nxCopytext="normal" class="nx-margin-s nx-margin-left-4m">2</span>
           </div>
         </quote-selectable-option>
       </div>
       <div class="selectable-container">
         <quote-selectable-option [selected]="selectedAccidents === 3" [fullHeight]="true" (uiSelect)="selectAccidents(3)">
           <div class="card-container">
-            <span nxCopytext="medium" class="nx-margin-s nx-margin-left-4m">3</span>
+            <span nxCopytext="normal" class="nx-margin-s nx-margin-left-4m">3</span>
           </div>
         </quote-selectable-option>
       </div>
       <div class="selectable-container">
         <quote-selectable-option [selected]="selectedAccidents === 4" [fullHeight]="true" (uiSelect)="selectAccidents(4)">
           <div class="card-container">
-            <span nxCopytext="medium" class="nx-margin-s nx-margin-left-4m">4</span>
+            <span nxCopytext="normal" class="nx-margin-s nx-margin-left-4m">4</span>
           </div>
         </quote-selectable-option>
       </div>
       <div class="selectable-container">
         <quote-selectable-option [selected]="selectedAccidents === 5" [fullHeight]="true" (uiSelect)="selectAccidents(5)">
           <div class="card-container">
-            <span nxCopytext="medium" class="nx-margin-s nx-margin-left-4m">5 o más</span>
+            <span nxCopytext="normal" class="nx-margin-s nx-margin-left-4m">5 o más</span>
           </div>
         </quote-selectable-option>
       </div>
     </div>
   </section>
-  <quote-footer>
+  <quote-footer [config]="{ showNext: false }">
     <div class="extra__footer__info">
       <quote-footer-info icon="product-car-front">Nos gustaría acompañarte en tus próximos viajes.</quote-footer-info>
     </div>

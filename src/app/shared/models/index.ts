@@ -8,7 +8,6 @@ export * from './insurance.model';
 export * from './offering.model';
 export * from './operation-types';
 export * from './operatives';
-export * from './page.model';
 export * from './personal-data.model';
 export * from './place.model';
 export * from './quote.model';

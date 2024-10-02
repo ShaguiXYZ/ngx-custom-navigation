@@ -10,15 +10,21 @@
   <section class="stepper__list">
     @for(step of stepperData.stepper.steps; track step.key) { @let active=step.key === stepperData.stepKey; @let complete=stepperIndex >
     $index; @let disabled=stepperIndex < $index;
-    <div class="stepper__item" [ngClass]="{ active, complete, disabled }" [nxTooltip]="step.label" (click)="onStepClick(step)">
+    <div
+      class="stepper__item"
+      [ngClass]="{ active, complete, disabled }"
+      [nxTooltip]="step.label"
+      (click)="(active || complete) && onStepClick(step)"
+    >
       <div class="stepper__item__progress">
-        @if(complete) {
-        <nx-icon name="check" size="auto"></nx-icon>
-        }
+        <nx-icon class="stepper__state" [ngClass]="{complete}" name="check" size="auto"></nx-icon>
       </div>
     </div>
     @if(!$last) {
-    <div class="stepper__item__line" [ngClass]="{ solid__line: stepperIndex > $index }"></div>
+    <div class="stepper__item__line" [ngClass]="{ solid__line: stepperIndex > $index, dotted__line: stepperIndex <= $index }">
+      <div class="stepper__item__line__solid"></div>
+      <div class="stepper__item__line__dotted"></div>
+    </div>
     } }
   </section>
   }

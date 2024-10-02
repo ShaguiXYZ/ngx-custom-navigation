@@ -6,7 +6,17 @@
     height: 128px;
   }
 
-  .icon-image {
-    max-height: 25px;
+  .quote-avatar {
+    width: 56px;
+    height: 56px;
+
+    &.color-background-icon {
+      background-color: #eff6f6;
+    }
+
+    .icon-image {
+      max-height: 38px;
+      max-width: 38px;
+    }
   }
 }

@@ -1,12 +1,14 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { NxAvatarModule } from '@aposin/ng-aquila/avatar';
+import { NxCopytextModule } from '@aposin/ng-aquila/copytext';
 import { SelectableOptionComponent } from 'src/app/shared/components';
 import { BrandData, BrandKey, IVehicleDictionaryData } from 'src/app/shared/models';
 
 @Component({
   selector: 'quote-brand',
   standalone: true,
-  imports: [CommonModule, SelectableOptionComponent],
+  imports: [CommonModule, SelectableOptionComponent, NxAvatarModule, NxCopytextModule],
   templateUrl: './brand.component.html',
   styleUrl: './brand.component.scss'
 })

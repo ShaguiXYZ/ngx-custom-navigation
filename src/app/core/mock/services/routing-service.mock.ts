@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { PageModel } from '../../../shared/models';
 import { Page } from '../../models';
 
 export class RoutingServiceMock {
@@ -7,15 +6,12 @@ export class RoutingServiceMock {
     /* Mock method */
   }
 
-  public previousStep(page: PageModel): void {
+  public previousStep(page: Page): void {
     /* Mock method */
   }
 
-  public getNextRoute(url: string): string[] {
-    return [];
-  }
-
-  public getPage(url: string): Partial<Page> | undefined {
-    return {};
-  }
+  public goToStep = (pageId: string): Promise<boolean> => {
+    /* Mock method */
+    return Promise.resolve(false);
+  };
 }

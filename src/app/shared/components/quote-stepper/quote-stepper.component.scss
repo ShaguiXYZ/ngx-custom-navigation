@@ -1,4 +1,7 @@
 .stepper__container {
+  --line-transition-time: 0.5s;
+  --stepper-transition-time: 1s;
+
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -12,15 +15,24 @@
     .stepper__item,
     .stepper__item__progress {
       border-radius: 50px;
+
+      .stepper__state {
+        opacity: 0;
+        transition: opacity var(--stepper-transition-time) ease-in-out;
+
+        &.complete {
+          opacity: 1;
+        }
+      }
     }
 
     .stepper__item {
+      border: 1px solid;
       color: var(--text-01);
       cursor: pointer;
-      height: 20px;
-      border: 1px solid var(--interactive-primary);
+      height: 16px;
       position: relative;
-      width: 20px;
+      width: 16px;
 
       .stepper__item__progress {
         align-items: center;
@@ -28,14 +40,14 @@
         display: flex;
         justify-content: center;
         height: 100%;
-        opacity: 0;
         position: absolute;
-        scale: 0;
-        transition: background-color 0.5s ease-in-out, border-color 0.5s ease-in-out, opacity 0.5s ease-in-out, scale 0.5s ease-in-out;
+        transition: background-color var(--stepper-transition-time) ease-in-out, border-color 0.5s ease-in-out, opacity 0.5s ease-in-out,
+          scale 0.5s ease-in-out;
         width: 100%;
       }
 
       &.active {
+        border-color: var(--interactive-primary);
         color: var(--text-02);
 
         .stepper__item__progress {
@@ -45,6 +57,7 @@
       }
 
       &.complete {
+        border-color: var(--interactive-primary);
         color: var(--text-02);
 
         .stepper__item__progress {
@@ -54,8 +67,8 @@
       }
 
       &.disabled {
+        border-color: var(--ui-04);
         cursor: not-allowed;
-        border-color: var(--disabled-03);
 
         .stepper__item__progress {
           background-color: var(--disabled-03);
@@ -66,13 +79,44 @@
     }
 
     .stepper__item__line {
-      border-top: 5px dotted var(--ui-05);
+      border-radius: 10px;
+      display: flex;
       flex: 1;
       margin: 0 5px;
+      overflow: hidden;
 
-      &.solid__line {
+      .stepper__item__line__solid {
         border: none;
         border-top: 5px solid var(--interactive-primary);
+        transition: width var(--line-transition-time) ease-in-out;
+        width: 50%;
+      }
+
+      .stepper__item__line__dotted {
+        border: none;
+        border-top: 5px dotted var(--ui-05);
+        width: 50%;
+        transition: width var(--line-transition-time) ease-in-out;
+      }
+
+      &.solid__line {
+        .stepper__item__line__solid {
+          width: 100%;
+        }
+
+        .stepper__item__line__dotted {
+          width: 0%;
+        }
+      }
+
+      &.dotted__line {
+        .stepper__item__line__solid {
+          width: 0%;
+        }
+
+        .stepper__item__line__dotted {
+          width: 100%;
+        }
       }
     }
   }

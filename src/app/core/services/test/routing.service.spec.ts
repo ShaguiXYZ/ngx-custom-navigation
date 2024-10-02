@@ -14,10 +14,10 @@ import { OnboardingComponent } from '../../../modules/onboarding/onboarding.comp
 import { PagenotfoundComponent } from '../../../modules/pagenotfound/pagenotfound.component';
 import { PlaceComponent } from '../../../modules/place/place.component';
 import { AppUrls } from '../../../shared/config/routing';
-import { PageModel } from '../../../shared/models';
 import { ContextDataServiceMock, SettingServiceMock } from '../../mock/services';
 import { RoutingService } from '../routing.service';
 import { SettingsService } from '../setting.service';
+import { Page } from '../../models';
 
 const appRoutes: Routes = [
   {
@@ -138,7 +138,7 @@ describe('RoutingService', () => {
   }));
 
   it('should navigate to previous step', fakeAsync(async () => {
-    const page: PageModel = { id: 'is-client', title: 'Eres cliente', showAsBreadcrumb: false };
+    const page: Page = { pageId: 'is-client' };
     const { location } = await setup();
     routingService.previousStep(page).then((result: boolean) => {
       expect(result).toBe(true);

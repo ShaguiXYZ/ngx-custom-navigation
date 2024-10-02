@@ -1,5 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NxCopytextModule } from '@aposin/ng-aquila/copytext';
 import { NX_DATE_LOCALE } from '@aposin/ng-aquila/datefield';
 import { ContextDataService, hasValue } from '@shagui/ng-shagui/core';
 import { QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
@@ -19,6 +20,7 @@ import { QuoteModel } from 'src/app/shared/models';
     QuoteFooterComponent,
     QuoteFooterInfoComponent,
     SelectableOptionComponent,
+    NxCopytextModule,
     ReactiveFormsModule
   ],
   providers: [{ provide: NX_DATE_LOCALE, useValue: 'es-ES' }]

@@ -45,8 +45,7 @@ describe('JourneyHomeComponent', () => {
         pageMap: {
           home: {
             pageId: 'home',
-            route: 'home',
-            title: 'Home'
+            route: 'home'
           }
         }
       },
