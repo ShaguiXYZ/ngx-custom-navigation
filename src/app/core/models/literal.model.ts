@@ -1,4 +1,4 @@
-export type LiteralType = 'value' | 'traslated';
+export type LiteralType = 'value' | 'translate';
 
 export interface QuoteLiteral {
   value: string;
