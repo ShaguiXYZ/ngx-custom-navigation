@@ -1,4 +1,4 @@
-<div class="footer-options" [ngClass]="{ 'mobile-options': mobileMode }">
+<div class="footer-options nx-margin-top-l" [ngClass]="{ 'mobile-options': mobileMode }">
   @if (config.showBack) {
   <button
     class="footer-option nx-margin-x-2xs nx-margin-y-2xs"
@@ -14,7 +14,7 @@
     }
   </button>
   } @if (config.showNext) {
-  <button class="footer-option nx-margin-x-2xs nx-margin-y-2xs" nxButton="primary medium" type="button" (click)="goToNextStep()">
+  <button class="footer-option" nxButton="primary medium" type="button" (click)="goToNextStep()">
     {{ config.nextLabel }}
   </button>
   }

@@ -8,17 +8,16 @@
     </h3>
   </header>
   <section class="stepper__list">
-    @for(step of stepperData.stepper.steps; track step.key) { @if(step.key === stepperData.stepKey) {
-    <div class="stepper__item active" [nxTooltip]="step.label" (click)="onStepClick(step)">
-      <nx-icon name="point" size="auto"></nx-icon>
+    @for(step of stepperData.stepper.steps; track step.key) { @let active=step.key === stepperData.stepKey; @let complete=stepperIndex >
+    $index; @let disabled=stepperIndex < $index;
+    <div class="stepper__item" [ngClass]="{ active, complete, disabled }" [nxTooltip]="step.label" (click)="onStepClick(step)">
+      <div class="stepper__item__progress">
+        @if(complete) {
+        <nx-icon name="check" size="auto"></nx-icon>
+        }
+      </div>
     </div>
-    }@else if (stepperIndex > $index) {
-    <div class="stepper__item complete" [nxTooltip]="step.label" (click)="onStepClick(step)">
-      <nx-icon name="check" size="auto"></nx-icon>
-    </div>
-    } @else {
-    <div class="stepper__item disabled" [nxTooltip]="step.label"></div>
-    } @if(!$last) {
+    @if(!$last) {
     <div class="stepper__item__line" [ngClass]="{ solid__line: stepperIndex > $index }"></div>
     } }
   </section>

@@ -9,39 +9,59 @@
     display: flex;
     width: 100%;
 
-    .stepper__item {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 25px;
-      height: 25px;
+    .stepper__item,
+    .stepper__item__progress {
       border-radius: 50px;
-      background-color: var(--disabled-03);
+    }
+
+    .stepper__item {
       color: var(--text-01);
-      font-size: 1.5rem;
-      font-weight: 700;
       cursor: pointer;
-      transition: color 0.5s ease-out, background-color 0.5s ease-out;
+      height: 20px;
+      border: 1px solid var(--interactive-primary);
+      position: relative;
+      width: 20px;
+
+      .stepper__item__progress {
+        align-items: center;
+        background-color: var(--interactive-primary);
+        display: flex;
+        justify-content: center;
+        height: 100%;
+        opacity: 0;
+        position: absolute;
+        scale: 0;
+        transition: background-color 0.5s ease-in-out, border-color 0.5s ease-in-out, opacity 0.5s ease-in-out, scale 0.5s ease-in-out;
+        width: 100%;
+      }
 
       &.active {
-        background-color: inherit;
-        border: 2px solid var(--interactive-primary);
         color: var(--text-02);
 
-        .stepper__item__active {
-          background-color: var(--interactive-primary);
-          border-radius: 50px;
-          padding: 6px;
+        .stepper__item__progress {
+          opacity: 1;
+          scale: 0.5;
         }
       }
 
       &.complete {
-        background-color: var(--interactive-primary);
         color: var(--text-02);
+
+        .stepper__item__progress {
+          opacity: 1;
+          scale: 1;
+        }
       }
 
       &.disabled {
         cursor: not-allowed;
+        border-color: var(--disabled-03);
+
+        .stepper__item__progress {
+          background-color: var(--disabled-03);
+          opacity: 1;
+          scale: 1;
+        }
       }
     }
 
@@ -52,8 +72,7 @@
 
       &.solid__line {
         border: none;
-        margin: 0;
-        outline: 1px solid var(--interactive-primary);
+        border-top: 5px solid var(--interactive-primary);
       }
     }
   }
