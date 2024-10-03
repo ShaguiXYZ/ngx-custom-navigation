@@ -10,7 +10,16 @@
         },
         {
           "label": "Datos del coche",
-          "pages": ["vehicle-type", "license-plate", "your-car-is", "make", "vehicle-models", "vehicle-fuel", "vehicle-model-versions"]
+          "pages": [
+            "vehicle-type",
+            "license-plate",
+            "your-car-is",
+            "make",
+            "vehicle-models",
+            "vehicle-fuel",
+            "vehicle-model-versions",
+            "license-year"
+          ]
         },
         {
           "label": "Datos del Seguro",
