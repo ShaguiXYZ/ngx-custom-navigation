@@ -5,6 +5,7 @@ import { QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
 import { OfferingsService } from 'src/app/core/services/offerings.service';
 import { OfferingPriceModel, QuoteModel } from 'src/app/shared/models';
 import { QuoteOfferingPriceCardComponent } from './components';
+import { RoutingService } from 'src/app/core/services';
 
 @Component({
   selector: 'app-quote-offerings',
@@ -29,6 +30,7 @@ export class QuoteOfferingsComponent implements OnInit {
 
   private readonly contextDataService = inject(ContextDataService);
   private readonly offeringsService = inject(OfferingsService);
+  private readonly routingService = inject(RoutingService);
 
   constructor() {
     this.contextData = this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA);
@@ -53,7 +55,7 @@ export class QuoteOfferingsComponent implements OnInit {
 
     this.swipeCoord = coord;
     this.swipeTime = time;
-    e.preventDefault();
+    // e.preventDefault();
   }
 
   public swipeEnd(e: TouchEvent): void {
@@ -70,7 +72,7 @@ export class QuoteOfferingsComponent implements OnInit {
       this.selectSteper(trackIndex);
     }
 
-    e.preventDefault();
+    // e.preventDefault();
   }
 
   public selectSteper(index: number): void {
@@ -78,6 +80,15 @@ export class QuoteOfferingsComponent implements OnInit {
     this.contextDataService.set(QUOTE_CONTEXT_DATA, this.contextData);
     this.selectedPriceIndex = index;
     this.selectCarrouselCard();
+  }
+
+  public contactUs(price: OfferingPriceModel): void {
+    console.log('Contact us:', price);
+
+    this.contextData.offering.price = { ...this.contextData.offering.price, ...price };
+    this.contextDataService.set(QUOTE_CONTEXT_DATA, this.contextData);
+
+    this.routingService.nextStep();
   }
 
   /**

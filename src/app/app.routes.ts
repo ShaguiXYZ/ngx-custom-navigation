@@ -50,6 +50,12 @@ export const routes: Routes = configContextRoutes([
     canDeactivate: [isValidGuard]
   },
   {
+    path: AppUrls.contactTime,
+    loadComponent: () => import('./modules/contact-time/contact-time.component').then(c => c.ContactTimeComponent),
+    canActivate: [journeyGuard],
+    canDeactivate: [isValidGuard]
+  },
+  {
     path: AppUrls.dateOfIssue,
     loadComponent: () => import('./modules/date-of-issue/date-of-issue.component').then(c => c.DateOfIssueComponent),
     canActivate: [journeyGuard],

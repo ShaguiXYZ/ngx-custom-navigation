@@ -24,6 +24,7 @@
   }
 
   .card__data {
+    display: block;
     border: 1px solid var(--card-border-color);
     border-radius: 6px;
   }

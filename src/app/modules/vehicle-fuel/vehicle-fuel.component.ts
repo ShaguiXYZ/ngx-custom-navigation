@@ -11,7 +11,7 @@ import { ContextDataService } from '@shagui/ng-shagui/core';
 import { Observable } from 'rxjs';
 import { QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
 import { RoutingService, VehicleService } from 'src/app/core/services';
-import { HeaderTitleComponent, IconCardComponent, SelectableOptionComponent } from 'src/app/shared/components';
+import { HeaderTitleComponent, SelectableOptionComponent } from 'src/app/shared/components';
 import { IsValidData } from 'src/app/shared/guards';
 import { CubicCapacityModel, FuelModel, PowerRangesModel, QuoteModel } from 'src/app/shared/models';
 
@@ -22,7 +22,6 @@ import { CubicCapacityModel, FuelModel, PowerRangesModel, QuoteModel } from 'src
     CommonModule,
     FormsModule,
     HeaderTitleComponent,
-    IconCardComponent,
     SelectableOptionComponent,
     NxAccordionModule,
     NxButtonModule,
@@ -72,7 +71,7 @@ export class VehicleFuelComponent implements OnInit, IsValidData {
     });
   }
 
-  public canDeactivate = (): boolean | Observable<boolean> | Promise<boolean> => true;
+  public canDeactivate = (): boolean => true;
 
   public selectFuel(fuel: FuelModel) {
     this.contextData.vehicle = {

@@ -350,9 +350,12 @@
       "pageId": "offerings",
       "nextOptionList": [
         {
-          "nextPageId": "contact-us"
+          "nextPageId": "contact-time"
         }
       ]
+    },
+    {
+      "pageId": "contact-time"
     },
     {
       "pageId": "contact-us",

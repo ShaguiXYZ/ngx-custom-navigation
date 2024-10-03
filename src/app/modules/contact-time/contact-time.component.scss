@@ -1,0 +1,15 @@
+.hour__selections__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.hour__selections__section {
+  display: inline-flex;
+  flex-wrap: wrap;
+
+  .hour__selection {
+    width: 163px;
+    height: 56px;
+  }
+}

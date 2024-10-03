@@ -30,7 +30,13 @@ export class QuoteOfferingPriceCardComponent {
   public selected?: boolean;
 
   @Output()
-  public uiSelect: EventEmitter<OfferingPriceModel> = new EventEmitter<OfferingPriceModel>();
+  public uiShowCoverages: EventEmitter<OfferingPriceModel> = new EventEmitter<OfferingPriceModel>();
+
+  @Output()
+  public uiContactUs: EventEmitter<OfferingPriceModel> = new EventEmitter<OfferingPriceModel>();
+
+  @Output()
+  public uiCallNow: EventEmitter<OfferingPriceModel> = new EventEmitter<OfferingPriceModel>();
 
   public footerConfig!: QuoteFooterConfig;
 
@@ -41,7 +47,8 @@ export class QuoteOfferingPriceCardComponent {
   constructor() {
     this.footerConfig = {
       showNext: true,
-      nextLabel: 'LLAMAR AHORA'
+      nextLabel: 'LLAMAR AHORA',
+      nextFn: this.callNow.bind(this)
     };
   }
 
@@ -65,5 +72,17 @@ export class QuoteOfferingPriceCardComponent {
 
   public get now(): Date {
     return new Date();
+  }
+
+  public showCoverages(): void {
+    this.uiShowCoverages.emit(this.price);
+  }
+
+  public contactUs(): void {
+    this.uiContactUs.emit(this.price);
+  }
+
+  public callNow(): void {
+    this.uiCallNow.emit(this.price);
   }
 }

@@ -4,14 +4,20 @@
       <div #carrouselTrack class="track nx-margin-s" (touchstart)="swipeStart($event)" (touchend)="swipeEnd($event)">
         @for(price of prices; track price.modalityId) {
         <div class="carousel__card">
-          <quote-offering-price-card [price]="price" [selected]="selectedPriceIndex === $index" />
+          <quote-offering-price-card [price]="price" [selected]="selectedPriceIndex === $index" (uiContactUs)="contactUs($event)" />
         </div>
         }
       </div>
     </div>
     <div class="carousel__stepers nx-margin-top-s">
       @for(price of prices; track price.modalityId) {
-      <div class="carousel__steper" [ngClass]="{ 'selected-price': selectedPriceIndex === $index }" (click)="selectSteper($index)"></div>
+      <div
+        class="carousel__steper"
+        [ngClass]="{ 'selected-price': selectedPriceIndex === $index }"
+        (click)="selectSteper($index)"
+        (keydown)="selectSteper($index)"
+        tabindex="0"
+      ></div>
       }
     </div>
   </section>

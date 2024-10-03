@@ -9,6 +9,7 @@ export enum AppUrls {
   clientPhoneNumber = 'client-phone-number',
   confirmation = 'confirmation',
   contactUs = 'contact-us',
+  contactTime = 'contact-time',
   dateOfIssue = 'date-of-issue',
   drivingLicenseDate = 'driving-license-date',
   drivingLicenseLocation = 'driving-license-location',

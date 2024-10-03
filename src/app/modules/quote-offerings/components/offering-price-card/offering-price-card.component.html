@@ -27,14 +27,16 @@
       }
       <div class="view-coverages">
         <nx-link nxStyle="block icon-right">
-          <a routerLink="/documentation"><nx-icon name="password-show-o" aria-hidden="true"></nx-icon>Ver coberturas</a>
+          <a routerLink="/documentation" (click)="showCoverages()"
+            ><nx-icon name="password-show-o" aria-hidden="true"></nx-icon>Ver coberturas</a
+          >
         </nx-link>
       </div>
     </div>
   </section>
   <footer class="price-footer nx-margin-x-m">
     <quote-footer [config]="footerConfig" [mobileMode]="true">
-      <button class="footer-option nx-margin-y-2xs w-100" nxButton="secondary" type="button">
+      <button class="footer-option nx-margin-y-2xs w-100" nxButton="secondary" type="button" (click)="contactUs()">
         <span nxCopytext="medium" class="nx-font-weight-bold">TE LLAMAMOS</span>
       </button>
     </quote-footer>

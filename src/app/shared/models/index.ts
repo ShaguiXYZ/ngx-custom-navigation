@@ -1,5 +1,6 @@
 export * from './brand-dictionary';
 export * from './client.model';
+export * from './contact-data.model';
 export * from './dateOfIssue.model';
 export * from './driven.model';
 export * from './fuel-types.model';

@@ -1,0 +1,38 @@
+<article class="component-container">
+  <quote-header-title>¿Cuando prefieres que te contactemos?</quote-header-title>
+  <section class="form-container">
+    <article class="hour__selections nx-margin-bottom-s">
+      <header class="hour__selections__header nx-margin-bottom-2xs nx-font-weight-bold" nxCopytext="normal">Mañana</header>
+      <section class="hour__selections__section">
+        @for(hour of hours.am; track hour) { @defer(on viewport) {
+        <div class="hour__selection nx-margin-2xs">
+          <quote-selectable-option [selected]="hour === selectedHour" (uiSelect)="selectHour(hour)">
+            <div class="card-container">
+              <span nxCopytext="medium" class="nx-margin-s"> {{ hour }} h</span>
+            </div>
+          </quote-selectable-option>
+        </div>
+        } @placeholder {
+        <div class="card-container"></div>
+        } }
+      </section>
+    </article>
+    <article class="hour__selections">
+      <header class="hour__selections__header nx-margin-bottom-2xs nx-font-weight-bold" nxCopytext="normal">Tarde</header>
+      <section class="hour__selections__section">
+        @for(hour of hours.pm; track hour) { @defer(on viewport) {
+        <div class="hour__selection nx-margin-2xs">
+          <quote-selectable-option [selected]="hour === selectedHour" (uiSelect)="selectHour(hour)">
+            <div class="card-container">
+              <span nxCopytext="medium" class="nx-margin-s"> {{ hour }} h</span>
+            </div>
+          </quote-selectable-option>
+        </div>
+        } @placeholder {
+        <div class="card-container"></div>
+        } }
+      </section>
+    </article>
+  </section>
+  <quote-footer [config]="{ showNext: true, nextFn: updateValidData }"></quote-footer>
+</article>
