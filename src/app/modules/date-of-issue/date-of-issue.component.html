@@ -2,21 +2,19 @@
   <quote-header-title>¿Cuándo quieres que empiece tu seguro?</quote-header-title>
   <section class="form-container">
     <form [formGroup]="form">
-      <div class="quote-grow nx-margin-right-xs">
-        <nx-formfield label="Fecha de contratación">
-          <input
-            formControlName="dateOfIssue"
-            nxDatefield
-            nxInput
-            [datepicker]="myDatepicker"
-            [parseFormat]="['DD/MM/YYYY', 'DDMMYYYY', 'DDMMYY']"
-            displayFormat="DD/MM/YYYY"
-          />
-          <span nxFormfieldHint>{{ 'Label.DateFormat' | translate }}</span>
-          <nx-datepicker-toggle [for]="myDatepicker" nxFormfieldSuffix></nx-datepicker-toggle>
-          <nx-datepicker #myDatepicker></nx-datepicker>
-        </nx-formfield>
-      </div>
+      <nx-formfield label="Fecha de contratación">
+        <input
+          formControlName="dateOfIssue"
+          nxDatefield
+          nxInput
+          [datepicker]="myDatepicker"
+          [parseFormat]="['DD/MM/YYYY', 'DDMMYYYY', 'DDMMYY']"
+          displayFormat="DD/MM/YYYY"
+        />
+        <span nxFormfieldHint>{{ 'Label.DateFormat' | translate }}</span>
+        <nx-datepicker-toggle [for]="myDatepicker" nxFormfieldSuffix></nx-datepicker-toggle>
+        <nx-datepicker #myDatepicker></nx-datepicker>
+      </nx-formfield>
     </form>
   </section>
   <quote-footer />

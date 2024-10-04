@@ -9,7 +9,14 @@
   flex-wrap: wrap;
 
   .hour__selection {
-    width: 163px;
+    width: 155px;
     height: 56px;
+
+    .card-container {
+      align-items: start;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+    }
   }
 }

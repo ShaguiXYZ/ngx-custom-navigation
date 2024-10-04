@@ -2,12 +2,10 @@
   <quote-header-title>¿Cuál es la matrícula de tu coche?</quote-header-title>
   <section class="form-container">
     <form [formGroup]="form">
-      <div class="quote-grow nx-margin-right-xs">
-        <nx-formfield label="Matrícula">
-          <nx-licence-plate-euro-prefix nxFormfieldPrefix>E</nx-licence-plate-euro-prefix>
-          <input #searchInput type="text" formControlName="plateNumber" nxInput nxMask="0000-SSS" />
-        </nx-formfield>
-      </div>
+      <nx-formfield label="Matrícula">
+        <nx-licence-plate-euro-prefix nxFormfieldPrefix>E</nx-licence-plate-euro-prefix>
+        <input #searchInput type="text" formControlName="plateNumber" nxInput nxMask="0000-SSS" />
+      </nx-formfield>
     </form>
   </section>
   <quote-footer [config]="footerConfig">

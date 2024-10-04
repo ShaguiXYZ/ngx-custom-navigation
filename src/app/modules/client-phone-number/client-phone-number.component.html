@@ -7,11 +7,9 @@
   </quote-header-title>
   <section class="form-container">
     <form [formGroup]="form">
-      <div class="quote-grow">
-        <nx-formfield label="Teléfono">
-          <input formControlName="phoneNumber" nxInput nxMask="000 00 00 00" />
-        </nx-formfield>
-      </div>
+      <nx-formfield label="Teléfono">
+        <input formControlName="phoneNumber" nxInput nxMask="000 00 00 00" />
+      </nx-formfield>
     </form>
   </section>
   <quote-footer />

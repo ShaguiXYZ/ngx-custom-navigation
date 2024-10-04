@@ -2,24 +2,22 @@
   <quote-header-title>¿Cuándo naciste?</quote-header-title>
   <section class="form-container">
     <form [formGroup]="form">
-      <div class="quote-grow">
-        <nx-formfield label="Fecha de nacimiento">
-          <input
-            formControlName="birthdate"
-            nxDatefield
-            nxInput
-            [datepicker]="myDatepicker"
-            [parseFormat]="['DD/MM/YYYY', 'DDMMYYYY', 'DDMMYY']"
-            displayFormat="DD/MM/YYYY"
-          />
-          <span nxFormfieldHint>{{ 'Label.DateFormat' | translate }}</span>
-          <nx-datepicker-toggle [for]="myDatepicker" nxFormfieldSuffix></nx-datepicker-toggle>
-          <nx-datepicker #myDatepicker></nx-datepicker>
-          @if(formErrors['clientOld']) {
-          <nx-error appearance="text" nxFormfieldError>El cliente a de ser mayor de edad</nx-error>
-          }
-        </nx-formfield>
-      </div>
+      <nx-formfield label="Fecha de nacimiento">
+        <input
+          formControlName="birthdate"
+          nxDatefield
+          nxInput
+          [datepicker]="myDatepicker"
+          [parseFormat]="['DD/MM/YYYY', 'DDMMYYYY', 'DDMMYY']"
+          displayFormat="DD/MM/YYYY"
+        />
+        <span nxFormfieldHint>{{ 'Label.DateFormat' | translate }}</span>
+        <nx-datepicker-toggle [for]="myDatepicker" nxFormfieldSuffix></nx-datepicker-toggle>
+        <nx-datepicker #myDatepicker></nx-datepicker>
+        @if(formErrors['clientOld']) {
+        <nx-error appearance="text" nxFormfieldError>El cliente a de ser mayor de edad</nx-error>
+        }
+      </nx-formfield>
     </form>
   </section>
   <quote-footer />

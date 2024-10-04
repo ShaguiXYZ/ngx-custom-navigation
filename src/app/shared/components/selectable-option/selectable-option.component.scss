@@ -1,5 +1,8 @@
 .option__container {
   position: relative;
+  display: block;
+  outline: 1px solid var(--card-border-color);
+  border-radius: 6px;
 
   .option__checked {
     align-items: center;
@@ -21,12 +24,6 @@
       height: 100%;
       width: 56px;
     }
-  }
-
-  .card__data {
-    display: block;
-    border: 1px solid var(--card-border-color);
-    border-radius: 6px;
   }
 
   &.disabled {
@@ -56,10 +53,7 @@
   }
 
   &.selected {
-    .card__data {
-      background: #e6f4f6;
-      border: 2px solid var(--interactive-primary);
-      border-radius: 4px;
-    }
+    background: #e6f4f6;
+    outline: 2px solid var(--interactive-primary);
   }
 }

@@ -2,11 +2,9 @@
   <quote-header-title>Déjanos tu email y recibe tu presupuesto al instante</quote-header-title>
   <section class="form-container">
     <form [formGroup]="form">
-      <div class="quote-grow">
-        <nx-formfield label="Correo electrónico">
-          <input type="email" formControlName="email" nxInput email />
-        </nx-formfield>
-      </div>
+      <nx-formfield label="Correo electrónico">
+        <input type="email" formControlName="email" nxInput email />
+      </nx-formfield>
       <div class="products-info" nxCopytext="small">
         <div class="products-info-literal nx-margin-right-s">
           <span class="products-info-literal" nxCopytext="normal">Quiero recibir información sobre productos y ofertas de Shagui</span>

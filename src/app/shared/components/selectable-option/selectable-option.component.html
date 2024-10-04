@@ -1,12 +1,10 @@
 <!-- eslint-disable @angular-eslint/template/interactive-supports-focus -->
 <!-- eslint-disable @angular-eslint/template/click-events-have-key-events -->
-<div class="option__container" [ngClass]="{ selected, disabled }" (click)="!disabled && uiSelect.emit()">
+<span class="option__container" [ngClass]="{ selected, disabled }" (click)="!disabled && uiSelect.emit()">
   @if(selected){
   <div size="small" class="option__checked" [ngClass]="{ 'full-height': fullHeight }">
     <nx-icon name="check" size="auto" aria-hidden="true" />
   </div>
   }
-  <div class="card__data">
-    <ng-content></ng-content>
-  </div>
-</div>
+  <ng-content></ng-content>
+</span>

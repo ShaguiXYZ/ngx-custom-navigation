@@ -2,21 +2,19 @@
   <quote-header-title>¿Cuál es tu marca?</quote-header-title>
   <section class="form-container">
     <form [formGroup]="form">
-      <div class="quote-grow nx-margin-right-xs">
-        <nx-formfield label="Search..." appearance="outline">
-          <input #searchInput type="text" formControlName="searchInput" nxInput [nxAutocomplete]="brands" nxAutocompleteDebounce="0" />
-          <span nxFormfieldSuffix>
-            <nx-icon name="search" size="s"></nx-icon>
-          </span>
-        </nx-formfield>
-        <nx-autocomplete #brands="nxAutocomplete" (optionSelected)="selectAutocompleteMake($event)">
-          @for (item of searchedMakes; track item) {
-          <nx-autocomplete-option [value]="item">
-            {{ item | lowercase }}
-          </nx-autocomplete-option>
-          }
-        </nx-autocomplete>
-      </div>
+      <nx-formfield label="Search..." appearance="outline">
+        <input #searchInput type="text" formControlName="searchInput" nxInput [nxAutocomplete]="brands" nxAutocompleteDebounce="0" />
+        <span nxFormfieldSuffix>
+          <nx-icon name="search" size="s"></nx-icon>
+        </span>
+      </nx-formfield>
+      <nx-autocomplete #brands="nxAutocomplete" (optionSelected)="selectAutocompleteMake($event)">
+        @for (item of searchedMakes; track item) {
+        <nx-autocomplete-option [value]="item">
+          {{ item | lowercase }}
+        </nx-autocomplete-option>
+        }
+      </nx-autocomplete>
     </form>
 
     <div class="icon-brands">

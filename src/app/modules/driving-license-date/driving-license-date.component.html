@@ -2,22 +2,20 @@
   <quote-header-title>¿Cuándo te sacaste el carnet de conducir?</quote-header-title>
   <section class="form-container">
     <form [formGroup]="form">
-      <div class="quote-grow">
-        <nx-formfield label="Fecha de emisión">
-          <input
-            formControlName="drivenLicenseDate"
-            nxDatefield
-            nxInput
-            [datepicker]="myDatepicker"
-            [parseFormat]="['DD/MM/YYYY', 'DDMMYYYY', 'DDMMYY']"
-            displayFormat="DD/MM/YYYY"
-          />
-          <span nxFormfieldHint>{{ 'Label.DateFormat' | translate }}</span>
+      <nx-formfield label="Fecha de emisión">
+        <input
+          formControlName="drivenLicenseDate"
+          nxDatefield
+          nxInput
+          [datepicker]="myDatepicker"
+          [parseFormat]="['DD/MM/YYYY', 'DDMMYYYY', 'DDMMYY']"
+          displayFormat="DD/MM/YYYY"
+        />
+        <span nxFormfieldHint>{{ 'Label.DateFormat' | translate }}</span>
 
-          <nx-datepicker-toggle [for]="myDatepicker" nxFormfieldSuffix></nx-datepicker-toggle>
-          <nx-datepicker #myDatepicker></nx-datepicker>
-        </nx-formfield>
-      </div>
+        <nx-datepicker-toggle [for]="myDatepicker" nxFormfieldSuffix></nx-datepicker-toggle>
+        <nx-datepicker #myDatepicker></nx-datepicker>
+      </nx-formfield>
     </form>
   </section>
   <quote-footer />

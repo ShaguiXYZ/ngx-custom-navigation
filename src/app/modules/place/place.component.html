@@ -2,12 +2,10 @@
   <quote-header-title>¿Cuál es tu código postal?</quote-header-title>
   <section class="form-container">
     <form [formGroup]="form">
-      <div class="quote-grow nx-margin-right-xs">
-        <nx-formfield label="Código postal">
-          <input #searchInput type="text" formControlName="postalCode" required nxInput nxMask="00000" />
-          <span nxFormfieldHint> {{ province?.data }} </span>
-        </nx-formfield>
-      </div>
+      <nx-formfield label="Código postal">
+        <input #searchInput type="text" formControlName="postalCode" required nxInput nxMask="00000" />
+        <span nxFormfieldHint> {{ province?.data }} </span>
+      </nx-formfield>
     </form>
   </section>
   <quote-footer [config]="footerConfig">
