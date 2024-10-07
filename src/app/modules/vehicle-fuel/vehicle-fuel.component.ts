@@ -57,18 +57,12 @@ export class VehicleFuelComponent implements OnInit, IsValidData {
     this.selectedPower = this.contextData.vehicle.powerRange;
   }
 
-  ngOnInit(): void {
-    this.vehicleService.modelFuels(this.contextData.vehicle).then(fuel => {
-      this.fuels = fuel;
-    });
-
-    this.vehicleService.vehiclePowers(this.contextData.vehicle).then(powers => {
-      this.powers = powers;
-    });
-
-    this.vehicleService.cubicCapacities(this.contextData.vehicle).then(cubicCapacities => {
-      this.cubicCapacities = cubicCapacities;
-    });
+  async ngOnInit(): Promise<void> {
+    [this.fuels, this.powers, this.cubicCapacities] = await Promise.all([
+      this.vehicleService.modelFuels(this.contextData.vehicle),
+      this.vehicleService.vehiclePowers(this.contextData.vehicle),
+      this.vehicleService.cubicCapacities(this.contextData.vehicle)
+    ]);
   }
 
   public canDeactivate = (): boolean => true;

@@ -1,12 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { Component, ElementRef, inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
 import { NxAutocompleteModule, NxAutocompleteSelectedEvent } from '@aposin/ng-aquila/autocomplete';
 import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
 import { NxIconModule } from '@aposin/ng-aquila/icon';
 import { NxInputModule } from '@aposin/ng-aquila/input';
 import { NxPageSearchModule } from '@aposin/ng-aquila/page-search';
+import { TranslateModule } from '@ngx-translate/core';
 import { ContextDataService } from '@shagui/ng-shagui/core';
 import { debounceTime, distinctUntilChanged, fromEvent, map, Subscription } from 'rxjs';
 import { DEBOUNCE_TIME, QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
@@ -32,7 +32,8 @@ import { BrandComponent } from './components';
     NxFormfieldModule,
     NxInputModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    TranslateModule
   ],
   templateUrl: './make.component.html',
   styleUrl: './make.component.scss'
@@ -55,7 +56,7 @@ export class MakeComponent implements OnInit, OnDestroy, IsValidData {
   private readonly vehicleService = inject(VehicleService);
 
   // Update constructor
-  constructor(private readonly fb: FormBuilder, private readonly _router: Router) {
+  constructor(private readonly fb: FormBuilder) {
     this.makes = BrandData.iconBrands();
     this.contextData = this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA);
 

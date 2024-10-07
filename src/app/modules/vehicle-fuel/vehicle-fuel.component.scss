@@ -5,8 +5,15 @@
     flex-wrap: wrap;
     margin-bottom: 20px;
 
-    .fixed-width {
-      width: 110px;
+    .card-container {
+      align-items: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+
+      &.cubic-capacity-width {
+        width: 110px;
+      }
     }
   }
 }

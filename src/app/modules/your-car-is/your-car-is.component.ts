@@ -23,13 +23,13 @@ import { FuelTypes, IVehicleModel, QuoteModel } from 'src/app/shared/models';
     CommonModule,
     FormsModule,
     HeaderTitleComponent,
+    QuoteFooterComponent,
+    SelectableOptionComponent,
     NxButtonModule,
     NxCopytextModule,
     NxFormfieldModule,
     NxInputModule,
     NxMaskModule,
-    SelectableOptionComponent,
-    QuoteFooterComponent,
     ReactiveFormsModule
   ]
 })

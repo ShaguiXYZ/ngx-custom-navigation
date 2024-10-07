@@ -2,12 +2,8 @@
   <quote-header-title>¿Acabas de comprar tu coche?</quote-header-title>
   <div class="form-container">
     @for(type of vehicleTypes; track type.index) {
-    <div class="selectable-container">
-      <quote-selectable-option [selected]="type.index === selectedType?.index" [fullHeight]="true" (uiSelect)="selectType(type)">
-        <div class="card-container">
-          <span nxCopytext="medium" class="nx-margin-s nx-margin-left-4m"> {{ type.data }}</span>
-        </div>
-      </quote-selectable-option>
+    <div class="nx-margin-bottom-s">
+      <quote-text-card [selected]="type.index === selectedType?.index" [data]="type.data" (uiSelect)="selectType(type)" />
     </div>
     }
   </div>

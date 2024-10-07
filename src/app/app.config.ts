@@ -14,10 +14,10 @@ const initSettings = (settings: SettingsService) => (): Promise<void> => setting
 export const appConfig: ApplicationConfig = {
   providers: [
     importProvidersFrom(TranslateModule.forRoot(TRANSLATE_MODULE_CONFIG)),
-    provideZoneChangeDetection({ eventCoalescing: true }),
     provideAnimations(),
     provideHttpClient(withInterceptorsFromDi()),
     provideRouter(routes),
+    provideZoneChangeDetection({ eventCoalescing: true }),
     {
       provide: NX_CONTEX_CONFIG,
       useValue: { appName: APP_NAME.toUpperCase(), urls, home: AppUrls.onBoarding, cache: { schedulerPeriod: SCHEDULER_PERIOD } }

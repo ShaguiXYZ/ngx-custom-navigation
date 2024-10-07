@@ -4,14 +4,9 @@
 
   .products-info-literal {
     flex: 1;
-    margin: 0;
 
     &.privatity {
       display: block;
     }
   }
-}
-
-.products-info + .products-info {
-  margin-top: 16px;
 }

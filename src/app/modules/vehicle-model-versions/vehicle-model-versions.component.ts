@@ -1,16 +1,16 @@
 import { CommonModule } from '@angular/common';
 import { Component, ElementRef, inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
 import { NxCopytextModule } from '@aposin/ng-aquila/copytext';
 import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
 import { NxIconModule } from '@aposin/ng-aquila/icon';
 import { NxInputModule } from '@aposin/ng-aquila/input';
+import { TranslateModule } from '@ngx-translate/core';
 import { ContextDataService } from '@shagui/ng-shagui/core';
 import { debounceTime, distinctUntilChanged, fromEvent, map, Observable, Subscription } from 'rxjs';
 import { DEBOUNCE_TIME, QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
 import { RoutingService, VehicleService } from 'src/app/core/services';
-import { HeaderTitleComponent, IconCardComponent, SelectableOptionComponent } from 'src/app/shared/components';
+import { HeaderTitleComponent, IconCardComponent, TextCardComponent } from 'src/app/shared/components';
 import { IsValidData } from 'src/app/shared/guards';
 import { ModelVersionModel, QuoteModel } from 'src/app/shared/models';
 
@@ -21,13 +21,14 @@ import { ModelVersionModel, QuoteModel } from 'src/app/shared/models';
     CommonModule,
     HeaderTitleComponent,
     IconCardComponent,
-    SelectableOptionComponent,
+    TextCardComponent,
     NxCopytextModule,
     NxFormfieldModule,
     NxIconModule,
     NxInputModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    TranslateModule
   ],
   templateUrl: './vehicle-model-versions.component.html',
   styleUrl: './vehicle-model-versions.component.scss'
@@ -47,7 +48,7 @@ export class VehicleModelVersionsComponent implements OnInit, OnDestroy, IsValid
   private readonly routingService = inject(RoutingService);
   private readonly vehicleService = inject(VehicleService);
 
-  constructor(private readonly fb: FormBuilder, private _router: Router) {
+  constructor(private readonly fb: FormBuilder) {
     this.contextData = this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA);
   }
 

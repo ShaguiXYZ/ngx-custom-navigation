@@ -31,12 +31,12 @@
         </nx-expansion-panel-header>
         <div class="vehicle__selections">
           @for(cubicCapacity of cubicCapacities; track $index) { @defer(on viewport) {
-          <div class="vehicle__selections nx-margin-2xs">
+          <div class="vehicle__selection nx-margin-2xs">
             <quote-selectable-option
               [selected]="cubicCapacity.index === selectedCubicCapacity?.index"
               (uiSelect)="selectCubicCapacity(cubicCapacity)"
             >
-              <div class="card-container fixed-width">
+              <div class="card-container cubic-capacity-width">
                 <span nxCopytext="medium" class="nx-margin-s"> {{ cubicCapacity.data }}</span>
               </div>
             </quote-selectable-option>

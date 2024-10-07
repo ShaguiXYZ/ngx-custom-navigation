@@ -5,7 +5,7 @@
     </div>
 
     @if(showLabel){
-    <p nxCopytext="normal" [ngClass]="{ 'nx-font-weight-bold': selected }">{{ data.data | titlecase }}</p>
+    <span nxCopytext="normal" [ngClass]="{ 'nx-font-weight-bold': selected }">{{ data.data | titlecase }}</span>
     }
   </div>
 </quote-selectable-option>

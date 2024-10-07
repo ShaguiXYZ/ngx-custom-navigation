@@ -5,9 +5,18 @@
 .form-container {
   flex-direction: column;
 
-  .card-text {
-    width: 100%;
-    padding: 0 16px;
+  .selectable-container {
+    .card-container {
+      align-items: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+
+      .card-text {
+        width: 100%;
+        padding: 0 16px;
+      }
+    }
   }
 
   .selectable-container + .selectable-container {

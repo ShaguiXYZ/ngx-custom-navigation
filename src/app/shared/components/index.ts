@@ -6,3 +6,4 @@ export * from './quote-footer-info';
 export * from './quote-header';
 export * from './quote-stepper';
 export * from './selectable-option';
+export * from './text-card';

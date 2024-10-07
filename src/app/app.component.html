@@ -8,8 +8,8 @@
       </div>
     </header>
 
-    <div class="app__content">
-      <router-outlet />
+    <div class="app__content" [@routeTransitions]="prepareRoute(outlet)">
+      <router-outlet #outlet="outlet" />
     </div>
 
     <footer class="app__footer nx-margin-top-xs">

@@ -5,24 +5,26 @@
       <nx-formfield label="Correo electrónico">
         <input type="email" formControlName="email" nxInput email />
       </nx-formfield>
-      <div class="products-info" nxCopytext="small">
-        <div class="products-info-literal nx-margin-right-s">
-          <span class="products-info-literal" nxCopytext="normal">Quiero recibir información sobre productos y ofertas de Shagui</span>
+      <div class="products-info nx-margin-top-s">
+        <div class="products-info-literal" nxCopytext="normal">
+          <span class="products-info-literal">Quiero recibir información sobre productos y ofertas de Shagui </span>
         </div>
         <nx-switcher formControlName="productsInfo" />
       </div>
-      <div class="products-info" nxCopytext="small">
-        <div class="privatity products-info-literal nx-margin-right-s" nxCopytext="normal">
-          <span class="products-info-literal" nxCopytext="normal"
-            >He leído y acepto la
-            <nx-link nxStyle="text"><a routerLink="/documentation"> política de privacidad </a></nx-link>
-            de Shagui</span
-          >
+      <div class="products-info nx-margin-top-s">
+        <div class="privatity products-info-literal" nxCopytext="normal">
+          <span class="products-info-literal">
+            He leído y acepto la
+            <nx-link nxStyle="text">
+              <a routerLink="/documentation">política de privacidad</a>
+            </nx-link>
+            de Shagui
+          </span>
         </div>
         <nx-switcher formControlName="privacyPolicy" />
       </div>
-      <div class="legal-text nx-margin-y-s" nxCopytext="small">
-        <span class="products-info-literal" nxCopytext="normal"> Texto legal pendiente definir... </span>
+      <div class="legal-text nx-margin-top-s" nxCopytext="normal" quoteLiteral="legal-text">
+        <span class="products-info-literal nx-margin-y-s"></span>
       </div>
     </form>
   </section>

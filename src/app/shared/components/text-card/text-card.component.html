@@ -1,0 +1,5 @@
+<quote-selectable-option [selected]="selected" [fullHeight]="true" (uiSelect)="selectText()">
+  <div class="card-container" [ngClass]="{ selected }">
+    <span nxCopytext="medium" class="nx-margin-s nx-margin-left-4m" [ngClass]="{ 'nx-font-weight-bold': selected }">{{ data }}</span>
+  </div>
+</quote-selectable-option>

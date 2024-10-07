@@ -2,7 +2,7 @@
 <!-- eslint-disable @angular-eslint/template/click-events-have-key-events -->
 <span class="option__container" [ngClass]="{ selected, disabled }" (click)="!disabled && uiSelect.emit()">
   @if(selected){
-  <div size="small" class="option__checked" [ngClass]="{ 'full-height': fullHeight }">
+  <div class="option__checked" [ngClass]="{ 'full-height': fullHeight }">
     <nx-icon name="check" size="auto" aria-hidden="true" />
   </div>
   }
