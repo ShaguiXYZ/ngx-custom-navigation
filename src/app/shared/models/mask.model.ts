@@ -1,6 +1,9 @@
+import { DataInfo } from '@shagui/ng-shagui/core';
+
 const QUOTE_MASK_REGEX = {
   numeric: /^[0-9]*$/,
-  alphanumeric: /^[a-zA-Z0-9]*$/
+  alphanumeric: /^[a-zA-Z0-9]*$/,
+  mail: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/
 };
 
 export type QuoteMaskType = keyof typeof QUOTE_MASK_REGEX;
@@ -29,7 +32,8 @@ class QuoteMask {
   }
 }
 
-export const QUOTE_MASK = {
+export const QUOTE_MASK: DataInfo<QuoteMask, QuoteMaskType> = {
   numeric: new QuoteMask('numeric'),
-  alphanumeric: new QuoteMask('alphanumeric')
+  alphanumeric: new QuoteMask('alphanumeric'),
+  mail: new QuoteMask('mail')
 };
