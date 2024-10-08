@@ -40,6 +40,7 @@ export class VehicleService {
         })
         .pipe(
           map(res => res as string[]),
+          map(res => (!brand ? [] : res)),
           map(res => (search ? res.filter(data => data.toLowerCase().includes(search.toLowerCase())) : res))
         )
     );
@@ -55,34 +56,33 @@ export class VehicleService {
           showLoading: true,
           cache: { id: this.cacheModelVersionByBranch(model), ttl: TTL.L }
         })
-        .pipe(map(res => (res as ModelVersionModel[]).filter(data => !!data.data)))
+        .pipe(
+          map(res => (!model ? [] : res)),
+          map(res => (res as ModelVersionModel[]).filter(data => !!data.data))
+        )
     );
   }
 
   public modelFuels(vehicle: IVehicleModel): Promise<FuelModel[]> {
-    const params = new HttpParams().appendAll({
-      brand: vehicle.make,
-      model: vehicle.model!
-    });
+    const { make, model } = vehicle;
 
     return firstValueFrom(
       this.http
         .get<FuelModel[]>(`${this.vehicleUri}/fuel.mock.json`, {
-          clientOptions: { params },
           responseStatusMessage: {
             [HttpStatus.notFound]: { text: 'Notifications.FuelsNotFound' }
           },
           showLoading: true
         })
-        .pipe(map(res => res as FuelModel[]))
+        .pipe(
+          map(res => res as FuelModel[]),
+          map(res => (!make || !model ? [] : res))
+        )
     );
   }
 
   public vehiclePowers(vehicle: IVehicleModel): Promise<PowerRangesModel[]> {
-    const params = new HttpParams().appendAll({
-      brand: vehicle.make,
-      model: vehicle.model!
-    });
+    const { make, model } = vehicle;
 
     return firstValueFrom(
       this.http
@@ -93,26 +93,28 @@ export class VehicleService {
           },
           showLoading: true
         })
-        .pipe(map(res => res as PowerRangesModel[]))
+        .pipe(
+          map(res => res as PowerRangesModel[]),
+          map(res => (!make || !model ? [] : res))
+        )
     );
   }
 
   public cubicCapacities(vehicle: IVehicleModel): Promise<CubicCapacityModel[]> {
-    const params = new HttpParams().appendAll({
-      brand: vehicle.make,
-      model: vehicle.model!
-    });
+    const { make, model } = vehicle;
 
     return firstValueFrom(
       this.http
         .get<CubicCapacityModel[]>(`${this.vehicleUri}/cubic-capacity.mock.json`, {
-          // clientOptions: { params },
           responseStatusMessage: {
             [HttpStatus.notFound]: { text: 'Notifications.CubicCapacitiesNotFound' }
           },
           showLoading: true
         })
-        .pipe(map(res => res as CubicCapacityModel[]))
+        .pipe(
+          map(res => res as CubicCapacityModel[]),
+          map(res => (!make || !model ? [] : res))
+        )
     );
   }
 

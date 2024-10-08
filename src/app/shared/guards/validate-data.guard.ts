@@ -24,5 +24,5 @@ export const isValidGuard: CanDeactivateFn<IsValidData> = (
   const contextDataService = inject(ContextDataService);
   const context = contextDataService.get<AppContextData>(QUOTE_APP_CONTEXT_DATA);
 
-  return previousStep(context) || (component.canDeactivate?.(currentRoute, state, next) ?? true);
+  return previousStep(context) || (component.canDeactivate?.bind(component)(currentRoute, state, next) ?? true);
 };

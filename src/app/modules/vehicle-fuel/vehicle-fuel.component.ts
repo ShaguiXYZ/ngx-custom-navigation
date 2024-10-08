@@ -35,16 +35,20 @@ import { CubicCapacityModel, FuelModel, PowerRangesModel, QuoteModel } from 'src
   styleUrl: './vehicle-fuel.component.scss'
 })
 export class VehicleFuelComponent implements OnInit, IsValidData {
-  public contextData!: QuoteModel;
-  public cubicCapacities: CubicCapacityModel[] = [];
   public cubicCapacityNotKnown: CubicCapacityModel = { index: -1, data: 'nsnc' };
-  public form!: FormGroup;
-  public fuels: FuelModel[] = [];
   public powerNotKnown: PowerRangesModel = { index: '-1', data: 'nsnc' };
+
+  public cubicCapacities: CubicCapacityModel[] = [];
+  public fuels: FuelModel[] = [];
   public powers: PowerRangesModel[] = [];
+
+  public form!: FormGroup;
+
   public selectedCubicCapacity?: CubicCapacityModel;
   public selectedFuel?: FuelModel;
   public selectedPower?: PowerRangesModel;
+
+  private contextData!: QuoteModel;
 
   private readonly contextDataService = inject(ContextDataService);
   private readonly routingService = inject(RoutingService);
@@ -65,41 +69,37 @@ export class VehicleFuelComponent implements OnInit, IsValidData {
     ]);
   }
 
-  public canDeactivate = (): boolean => true;
+  public canDeactivate = (): boolean =>
+    this.contextData.vehicle.fuel !== undefined &&
+    this.contextData.vehicle.powerRange !== undefined &&
+    this.contextData.vehicle.cubicCapacity !== undefined;
 
-  public selectFuel(fuel: FuelModel) {
-    this.contextData.vehicle = {
-      ...this.contextData.vehicle,
-      fuel: fuel
-    };
-    this.contextDataService.set(QUOTE_CONTEXT_DATA, this.contextData);
+  public async selectFuel(fuel: FuelModel) {
     this.selectedFuel = fuel;
-    this.navigateToNextPage();
+    this.selectedCubicCapacity = undefined;
+    this.selectedPower = undefined;
   }
 
   public selectCubicCapacity(cubicCapacity: CubicCapacityModel) {
     this.selectedCubicCapacity = cubicCapacity;
-    this.contextData.vehicle = {
-      ...this.contextData.vehicle,
-      cubicCapacity: cubicCapacity
-    };
-    this.contextDataService.set(QUOTE_CONTEXT_DATA, this.contextData);
-    this.navigateToNextPage();
+    this.selectedPower = undefined;
   }
 
   public selectPower(power: PowerRangesModel) {
     this.selectedPower = power;
-    this.contextData.vehicle = {
-      ...this.contextData.vehicle,
-      powerRange: power
-    };
-    this.contextDataService.set(QUOTE_CONTEXT_DATA, this.contextData);
+
     this.navigateToNextPage();
   }
 
   private navigateToNextPage() {
-    if (this.contextData.vehicle.fuel && this.contextData.vehicle.cubicCapacity && this.contextData.vehicle.powerRange) {
-      this.routingService.nextStep();
-    }
+    this.contextData.vehicle = {
+      ...this.contextData.vehicle,
+      fuel: this.selectedFuel,
+      cubicCapacity: this.selectedCubicCapacity,
+      powerRange: this.selectedPower
+    };
+    this.contextDataService.set(QUOTE_CONTEXT_DATA, this.contextData);
+
+    this.routingService.nextStep();
   }
 }

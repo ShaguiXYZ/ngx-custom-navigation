@@ -23,7 +23,7 @@
         </div>
       </nx-expansion-panel>
 
-      <nx-expansion-panel #cubicCapacityPanel [expanded]="contextData.vehicle.fuel">
+      <nx-expansion-panel #cubicCapacityPanel [expanded]="selectedFuel">
         <nx-expansion-panel-header>
           <nx-expansion-panel-title nxHeadline="subsection-xsmall">
             {{ 'Label.CubicCapacity' | translate }}
@@ -46,18 +46,18 @@
           } }
         </div>
         <div class="button-container">
-          <button
-            class="nx-margin-y-2xs center"
-            nxButton="tertiary small"
-            type="button"
-            (click)="selectCubicCapacity(cubicCapacityNotKnown)"
+          <quote-selectable-option
+            [selected]="selectedCubicCapacity?.index === cubicCapacityNotKnown.index"
+            (uiSelect)="selectCubicCapacity(cubicCapacityNotKnown)"
           >
-            <span nxCopytext="medium">No sé la cilindrada</span>
-          </button>
+            <button class="nx-margin-y-2xs center" nxButton="tertiary small" type="button">
+              <span nxCopytext="medium">No sé la cilindrada</span>
+            </button>
+          </quote-selectable-option>
         </div>
       </nx-expansion-panel>
 
-      <nx-expansion-panel #powerPanel [expanded]="contextData.vehicle.cubicCapacity">
+      <nx-expansion-panel #powerPanel [expanded]="selectCubicCapacity">
         <nx-expansion-panel-header>
           <nx-expansion-panel-title nxHeadline="subsection-xsmall">
             {{ 'Label.Power' | translate }}
@@ -77,9 +77,11 @@
           } }
         </div>
         <div class="button-container">
-          <button class="nx-margin-y-2xs center" nxButton="tertiary small" type="button" (click)="selectPower(powerNotKnown)">
-            <span nxCopytext="medium">No sé la potencia</span>
-          </button>
+          <quote-selectable-option [selected]="selectedPower?.index === powerNotKnown.index" (uiSelect)="selectPower(powerNotKnown)">
+            <button class="nx-margin-y-2xs center" nxButton="tertiary small" type="button">
+              <span nxCopytext="medium">No sé la potencia</span>
+            </button>
+          </quote-selectable-option>
         </div>
       </nx-expansion-panel>
     </nx-accordion>

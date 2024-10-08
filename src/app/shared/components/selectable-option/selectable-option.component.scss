@@ -1,4 +1,6 @@
 .option__container {
+  --animation-duration: 0.3s;
+
   position: relative;
   display: block;
   outline: 1px solid var(--card-border-color);
@@ -13,6 +15,7 @@
     display: flex;
     height: 18px;
     justify-content: center;
+    opacity: 1;
     position: absolute;
     right: 0;
     top: 0;
@@ -22,7 +25,27 @@
     &.full-height {
       border-radius: 0 6px 6px 0;
       height: 100%;
+      transition: opacity var(--animation-duration) ease-in-out, width var(--animation-duration) ease-in-out;
       width: 56px;
+    }
+
+    &:not(.full-height) {
+      scale: 1;
+      transition: opacity var(--animation-duration) ease-in-out, height var(--animation-duration) ease-in-out,
+        width var(--animation-duration) ease-in-out;
+    }
+
+    @starting-style {
+      opacity: 0;
+
+      &.full-height {
+        width: 0;
+      }
+
+      &:not(.full-height) {
+        height: 0;
+        width: 0;
+      }
     }
   }
 
