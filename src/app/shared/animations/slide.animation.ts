@@ -68,10 +68,10 @@ const animationFade: AnimationMetadata[] = [
   )
 ];
 
-export const routeTransitions = trigger('routeTransitions', [
+export const slideTransitions = [
   transition('void => *', slideTo('right')),
   transition(':increment', slideTo('right')),
   transition(':decrement', slideTo('left')),
   transition(':enter', animationFade),
   transition('* <=> *', animationFade)
-]);
+];

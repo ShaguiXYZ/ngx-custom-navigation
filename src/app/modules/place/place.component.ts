@@ -1,16 +1,25 @@
-import { Component, ElementRef, OnDestroy, OnInit, ViewChild, inject } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { NX_DATE_LOCALE } from '@aposin/ng-aquila/datefield';
+import { Component, OnDestroy, OnInit, inject } from '@angular/core';
+import {
+  AbstractControl,
+  AsyncValidatorFn,
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+  Validators
+} from '@angular/forms';
 import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
 import { NxInputModule } from '@aposin/ng-aquila/input';
 import { NxMaskModule } from '@aposin/ng-aquila/mask';
 import { ContextDataService } from '@shagui/ng-shagui/core';
-import { Observable, Subscription, debounceTime, distinctUntilChanged, fromEvent, tap } from 'rxjs';
-import { DEBOUNCE_TIME, QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
+import { Subscription } from 'rxjs';
+import { QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
 import { IndexedData } from 'src/app/core/models';
 import { LocationService } from 'src/app/core/services';
 import { HeaderTitleComponent, QuoteFooterComponent, QuoteFooterInfoComponent } from 'src/app/shared/components';
 import { QuoteFooterConfig } from 'src/app/shared/components/quote-footer/models';
+import { QuoteMaskDirective } from 'src/app/shared/directives';
 import { IsValidData } from 'src/app/shared/guards';
 import { QuoteModel } from 'src/app/shared/models';
 
@@ -27,23 +36,19 @@ import { QuoteModel } from 'src/app/shared/models';
     NxFormfieldModule,
     NxInputModule,
     NxMaskModule,
-    ReactiveFormsModule
-  ],
-  providers: [{ provide: NX_DATE_LOCALE, useValue: 'es-ES' }]
+    ReactiveFormsModule,
+    QuoteMaskDirective
+  ]
 })
 export class PlaceComponent implements OnInit, OnDestroy, IsValidData {
-  @ViewChild('searchInput', { static: true })
-  private searchInput!: ElementRef;
-
   public form!: FormGroup;
   public footerConfig!: QuoteFooterConfig;
 
   private contextData!: QuoteModel;
+  private subscription$: Subscription[] = [];
 
   private readonly contextDataService = inject(ContextDataService);
   private readonly locationService = inject(LocationService);
-
-  private subscription$: Subscription[] = [];
 
   constructor(private readonly fb: FormBuilder) {
     this.contextData = this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA);
@@ -56,15 +61,13 @@ export class PlaceComponent implements OnInit, OnDestroy, IsValidData {
 
   ngOnInit(): void {
     this.createForm();
-
-    this.subscription$.push(this.searchBoxConfig());
   }
 
   ngOnDestroy(): void {
     this.subscription$.forEach(subscription => subscription.unsubscribe());
   }
 
-  public canDeactivate = (): boolean => this.isValidData();
+  public canDeactivate = (): boolean => this.form.valid;
 
   private updateValidData = (): boolean => {
     if (this.form.valid) {
@@ -79,35 +82,43 @@ export class PlaceComponent implements OnInit, OnDestroy, IsValidData {
     return !!this.contextData.place.province;
   };
 
-  private isValidData(): boolean {
-    return !!this.contextData.place.province?.data;
-  }
-
   public get province(): IndexedData | undefined {
     return this.contextData.place.province;
   }
 
-  private createForm() {
+  private createForm(): void {
     this.form = this.fb.group({
-      postalCode: new FormControl(this.contextData.place.postalCode, [
-        Validators.required,
-        Validators.minLength(5),
-        Validators.maxLength(5)
-      ])
-    });
-  }
-
-  private searchBoxConfig(): Subscription {
-    return fromEvent(this.searchInput.nativeElement, 'keyup')
-      .pipe(
-        tap(() => (this.contextData.place.province = undefined)),
-        debounceTime(DEBOUNCE_TIME),
-        distinctUntilChanged()
+      postalCode: new FormControl(
+        this.contextData.place.postalCode,
+        [Validators.required],
+        [this.postalCodeExistsValidator(this.locationService)]
       )
-      .subscribe(() => this.searchPlace());
+    });
+
+    this.subscription$.push(
+      this.form.controls['postalCode'].statusChanges.subscribe(status => {
+        if (status === 'INVALID') {
+          this.contextData.place.province = undefined;
+        }
+
+        this.footerConfig = {
+          ...this.footerConfig,
+          disableNext: status !== 'VALID'
+        };
+      })
+    );
   }
 
-  private searchPlace() {
-    this.locationService.location(this.form.value.postalCode).then(response => (this.contextData.place.province = response));
+  private postalCodeExistsValidator(locationService: LocationService): AsyncValidatorFn {
+    return async (control: AbstractControl) => {
+      const address = await locationService.getAddresses(control.value);
+
+      if (address) {
+        this.contextData.place.province = address;
+        return null;
+      } else {
+        return { postalCodeNotRecognized: true };
+      }
+    };
   }
 }

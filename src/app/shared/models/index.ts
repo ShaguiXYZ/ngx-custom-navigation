@@ -6,6 +6,7 @@ export * from './driven.model';
 export * from './fuel-types.model';
 export * from './icon-data.model';
 export * from './insurance.model';
+export * from './mask.model';
 export * from './offering.model';
 export * from './operation-types';
 export * from './operatives';

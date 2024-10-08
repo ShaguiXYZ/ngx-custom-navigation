@@ -60,12 +60,16 @@ const POSTAL_CODES = {
   providedIn: 'root'
 })
 export class LocationService {
-  public location = (postalCode: string): Promise<IndexedData | undefined> => {
+  public getAddresses = (postalCode: string): Promise<IndexedData | undefined> => {
     if (postalCode.length !== 5) {
       return Promise.resolve(undefined);
     }
 
     const provinceCode = postalCode.substring(0, 2) as keyof typeof POSTAL_CODES;
+
+    if (!POSTAL_CODES[provinceCode]) {
+      return Promise.resolve(undefined);
+    }
 
     return Promise.resolve({ index: provinceCode, data: POSTAL_CODES[provinceCode] });
   };

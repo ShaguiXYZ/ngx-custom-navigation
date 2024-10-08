@@ -51,6 +51,18 @@
           "pages": ["is-client-contact-us"]
         }
       ]
+    },
+    {
+      "steps": [
+        {
+          "label": "Como podemos contactarte",
+          "pages": ["external-contact-us"]
+        },
+        {
+          "label": "Cuando podemos contactarte",
+          "pages": ["external-contact-time"]
+        }
+      ]
     }
   ],
   "pageMap": [
@@ -336,7 +348,12 @@
         {
           "nextPageId": "client-identification-number"
         }
-      ]
+      ],
+      "configuration": {
+        "literals": {
+          "legal-text": { "value": "Texto legal pendiente definir...", "type": "value" }
+        }
+      }
     },
     {
       "pageId": "client-identification-number",
@@ -355,7 +372,12 @@
       ]
     },
     {
-      "pageId": "contact-time"
+      "pageId": "contact-time",
+      "nextOptionList": [
+        {
+          "nextPageId": "on-boarding"
+        }
+      ]
     },
     {
       "pageId": "contact-us",
@@ -420,6 +442,11 @@
     {
       "pageId": "external-contact-us",
       "route": "contact-us",
+      "nextOptionList": [
+        {
+          "nextPageId": "external-contact-time"
+        }
+      ],
       "configuration": {
         "literals": {
           "header": { "value": "Dinos cómo podemos contactarte", "type": "value" },
@@ -427,6 +454,15 @@
           "body": "Podemos llamarte y ayudarte a encontrar el mejor seguro para ti, con las mejores coberturas."
         }
       }
+    },
+    {
+      "pageId": "external-contact-time",
+      "route": "contact-time",
+      "nextOptionList": [
+        {
+          "nextPageId": "external-contact-us"
+        }
+      ]
     }
   ],
   "links": {

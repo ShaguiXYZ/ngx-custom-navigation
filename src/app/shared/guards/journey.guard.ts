@@ -7,8 +7,9 @@ import { AppContextData, Page } from 'src/app/core/models';
 
 export const journeyGuard: CanActivateFn = (route: ActivatedRouteSnapshot, state: RouterStateSnapshot): MaybeAsync<GuardResult> => {
   const contextDataService = inject(ContextDataService);
-  const context = contextDataService.get<AppContextData>(QUOTE_APP_CONTEXT_DATA);
   const router = inject(Router);
+
+  const context = contextDataService.get<AppContextData>(QUOTE_APP_CONTEXT_DATA);
   const { nextPage, viewedPages } = context.navigation;
 
   if (!nextPage?.pageId) {
@@ -31,6 +32,8 @@ export const journeyGuard: CanActivateFn = (route: ActivatedRouteSnapshot, state
   context.navigation.nextPage = undefined;
   context.navigation.viewedPages = viewedPages;
   contextDataService.set(QUOTE_APP_CONTEXT_DATA, context);
+
+  console.log('Journey Guard', context);
 
   return true;
 };

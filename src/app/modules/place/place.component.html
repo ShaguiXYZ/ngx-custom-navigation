@@ -3,8 +3,13 @@
   <section class="form-container">
     <form [formGroup]="form">
       <nx-formfield label="Código postal">
-        <input #searchInput type="text" formControlName="postalCode" required nxInput nxMask="00000" />
+        <input #searchInput type="text" formControlName="postalCode" required nxInput maxlength="5" quoteMask="numeric" />
         <span nxFormfieldHint> {{ province?.data }} </span>
+        @if(form.get('postalCode')?.errors?.['postalCodeNotRecognized']) {
+        <nx-error appearance="text" nxFormfieldError>El código postal no existe</nx-error>
+        } @if(form.get('postalCode')?.hasError('required')) {
+        <nx-error appearance="text" nxFormfieldError>El código postal es obligatorio para continuar</nx-error>
+        }
       </nx-formfield>
     </form>
   </section>

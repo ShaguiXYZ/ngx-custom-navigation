@@ -67,7 +67,7 @@ export class QuoteOfferingPriceCardComponent {
   }
 
   public get priceDecimal(): string {
-    return this.priceSegments.length > 0 ? this.priceSegments[1] : '0';
+    return this.priceSegments.length > 0 ? this.priceSegments[1] : '00';
   }
 
   public get now(): Date {

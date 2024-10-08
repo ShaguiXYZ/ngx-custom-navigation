@@ -1,4 +1,6 @@
 export interface QuoteFooterConfig {
+  disableBack?: boolean;
+  disableNext?: boolean;
   showBack?: boolean;
   showNext?: boolean;
   backLabel?: string;
