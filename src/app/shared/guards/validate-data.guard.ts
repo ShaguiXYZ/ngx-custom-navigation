@@ -7,6 +7,11 @@ import { AppContextData } from 'src/app/core/models';
 const previousStep = ({ navigation: { nextPage, viewedPages } }: AppContextData): boolean =>
   !!nextPage && viewedPages.includes(nextPage.pageId);
 
+const stepperChange = (context: AppContextData) =>
+  !!context.navigation.nextPage?.stepper &&
+  !!context.navigation.lastPage?.stepper &&
+  context.navigation.nextPage.stepper.key !== context.navigation.lastPage.stepper.key;
+
 export interface IsValidData {
   canDeactivate: (
     currentRoute?: ActivatedRouteSnapshot,
@@ -24,5 +29,7 @@ export const isValidGuard: CanDeactivateFn<IsValidData> = (
   const contextDataService = inject(ContextDataService);
   const context = contextDataService.get<AppContextData>(QUOTE_APP_CONTEXT_DATA);
 
-  return previousStep(context) || (component.canDeactivate?.bind(component)(currentRoute, state, next) ?? true);
+  console.log('isValidGuard', context);
+
+  return previousStep(context) || stepperChange(context) || (component.canDeactivate?.bind(component)(currentRoute, state, next) ?? true);
 };

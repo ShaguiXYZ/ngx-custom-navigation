@@ -33,7 +33,5 @@ export const journeyGuard: CanActivateFn = (route: ActivatedRouteSnapshot, state
   context.navigation.viewedPages = viewedPages;
   contextDataService.set(QUOTE_APP_CONTEXT_DATA, context);
 
-  console.log('Journey Guard', context);
-
   return true;
 };
