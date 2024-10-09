@@ -11,7 +11,7 @@
     </form>
 
     @for(model of models; track $index) { @defer(on viewport) {
-    <div class="nx-margin-bottom-s">
+    <div class="card-container nx-margin-bottom-s">
       <quote-text-card [selected]="model === selectedModel" [data]="model" (uiSelect)="selectModel(model)" />
     </div>
     } @placeholder {

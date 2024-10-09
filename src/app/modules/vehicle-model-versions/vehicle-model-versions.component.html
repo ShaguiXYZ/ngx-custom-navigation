@@ -10,7 +10,7 @@
       </nx-formfield>
     </form>
     @for(modelVersion of modelVersions; track modelVersion.index) { @defer(on viewport) {
-    <div class="nx-margin-bottom-s">
+    <div class="card-container nx-margin-bottom-s">
       <quote-text-card
         [selected]="modelVersion.index === selectedModelVersion?.index"
         [data]="modelVersion.data"
