@@ -1,4 +1,3 @@
-import { HttpParams } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { HttpService, HttpStatus, TTL, UniqueIds } from '@shagui/ng-shagui/core';
 import { firstValueFrom, map } from 'rxjs';
@@ -18,7 +17,7 @@ export class VehicleService {
   public vehicleBrands(brand: string): Promise<string[]> {
     return firstValueFrom(
       this.http
-        .get<string[]>(`${this.vehicleUri}/brand.mock.json`, {
+        .get<string[]>(`${this.vehicleUri}`, {
           responseStatusMessage: {
             [HttpStatus.notFound]: { text: 'Notifications.ModelsNotFound' }
           },
@@ -118,19 +117,17 @@ export class VehicleService {
     );
   }
 
-  public getYears(): Promise<number[]> {
-    if (!this.years.length) {
-      let year = new Date().getFullYear();
-      const length = year > this.MIN_YEAR ? year++ - this.MIN_YEAR : 0;
-      this.years = new Array(length);
-      let i = -1;
-
-      while (i < length) {
-        this.years[++i] = --year;
-      }
-    }
-
-    return Promise.resolve(this.years);
+  public vehicles(): Promise<IVehicleModel[]> {
+    return firstValueFrom(
+      this.http
+        .get<IVehicleModel[]>(`${this.vehicleUri}/vehicle.mock.json`, {
+          responseStatusMessage: {
+            [HttpStatus.notFound]: { text: 'Notifications.VehiclesNotFound' }
+          },
+          showLoading: true
+        })
+        .pipe(map(res => res as IVehicleModel[]))
+    );
   }
 
   private cacheModelByBranch = (branch: BrandKey): string => `${this._MODELS_CACHE_ID_}${branch}_`;

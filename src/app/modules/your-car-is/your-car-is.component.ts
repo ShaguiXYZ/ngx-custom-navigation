@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject } from '@angular/core';
-import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Component, inject, OnInit } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NxButtonModule } from '@aposin/ng-aquila/button';
 import { NxCopytextModule } from '@aposin/ng-aquila/copytext';
 import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
@@ -9,10 +8,11 @@ import { NxInputModule } from '@aposin/ng-aquila/input';
 import { NxMaskModule } from '@aposin/ng-aquila/mask';
 import { ContextDataService } from '@shagui/ng-shagui/core';
 import { QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
-import { RoutingService } from 'src/app/core/services';
+import { RoutingService, VehicleService } from 'src/app/core/services';
 import { HeaderTitleComponent, QuoteFooterComponent, SelectableOptionComponent } from 'src/app/shared/components';
 import { QuoteFooterConfig } from 'src/app/shared/components/quote-footer/models';
-import { FuelTypes, IVehicleModel, QuoteModel } from 'src/app/shared/models';
+import { IsValidData } from 'src/app/shared/guards';
+import { IVehicleModel, QuoteModel } from 'src/app/shared/models';
 
 @Component({
   selector: 'app-your-car-is',
@@ -33,8 +33,8 @@ import { FuelTypes, IVehicleModel, QuoteModel } from 'src/app/shared/models';
     ReactiveFormsModule
   ]
 })
-export class YourCarIsComponent {
-  public vehicleOptions: IVehicleModel[];
+export class YourCarIsComponent implements OnInit, IsValidData {
+  public vehicleOptions: IVehicleModel[] = [];
   public selectedVehicle?: IVehicleModel;
   public footerConfig!: QuoteFooterConfig;
 
@@ -42,8 +42,9 @@ export class YourCarIsComponent {
 
   private readonly contextDataService = inject(ContextDataService);
   private readonly routingService = inject(RoutingService);
+  private readonly vehicleService = inject(VehicleService);
 
-  constructor(private readonly fb: FormBuilder, private readonly _router: Router) {
+  constructor() {
     this.footerConfig = {
       showBack: false,
       showNext: false
@@ -51,42 +52,12 @@ export class YourCarIsComponent {
 
     this.contextData = this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA);
     this.selectedVehicle = this.contextData.vehicle;
+  }
 
-    //MOCK
-    this.vehicleOptions = [
-      {
-        vehicleCode: 'AudiQ3Diesel1202015',
-        make: 'Audi',
-        model: 'Q3',
-        fuel: { data: 'Diesel', index: FuelTypes.DIESEL },
-        power: 120,
-        yearOfManufacture: 2015
-      },
-      {
-        vehicleCode: 'AudiQ3Diesel1302015',
-        make: 'Audi',
-        model: 'Q3',
-        fuel: { data: 'Diesel', index: FuelTypes.DIESEL },
-        power: 130,
-        yearOfManufacture: 2015
-      },
-      {
-        vehicleCode: 'AudiQ3Diesel1402015',
-        make: 'Audi',
-        model: 'Q3',
-        fuel: { data: 'Diesel', index: FuelTypes.DIESEL },
-        power: 140,
-        yearOfManufacture: 2015
-      },
-      {
-        vehicleCode: 'AudiQ3Diesel1502015',
-        make: 'Audi',
-        model: 'Q3',
-        fuel: { data: 'Diesel', index: FuelTypes.DIESEL },
-        power: 150,
-        yearOfManufacture: 2015
-      }
-    ];
+  public canDeactivate = (): boolean => !!this.selectedVehicle;
+
+  async ngOnInit(): Promise<void> {
+    this.vehicleOptions = await this.vehicleService.vehicles();
   }
 
   public selectVehicle(vehicle: IVehicleModel) {
