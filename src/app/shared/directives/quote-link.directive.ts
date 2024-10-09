@@ -5,12 +5,12 @@ import { AppContextData } from 'src/app/core/models';
 import { RoutingService } from 'src/app/core/services';
 
 @Directive({
-  selector: '[quoteLink]',
+  selector: '[uiQuoteLink]',
   standalone: true
 })
 export class QuoteLinkDirective {
   @Input()
-  public quoteLink!: string;
+  public uiQuoteLink!: string;
 
   private readonly contextDataService = inject(ContextDataService);
   private readonly routingService = inject(RoutingService);
@@ -20,7 +20,7 @@ export class QuoteLinkDirective {
   public ngOnInit(): void {
     this.renderer.listen(this.el.nativeElement, 'click', () => {
       const appContextData = this.contextDataService.get<AppContextData>(QUOTE_APP_CONTEXT_DATA);
-      const link = appContextData.configuration.links?.[this.quoteLink];
+      const link = appContextData.configuration.links?.[this.uiQuoteLink];
 
       link && this.routingService.goToStep(link);
     });

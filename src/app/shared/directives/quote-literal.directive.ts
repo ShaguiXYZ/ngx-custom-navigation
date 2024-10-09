@@ -5,12 +5,12 @@ import { QUOTE_APP_CONTEXT_DATA } from 'src/app/core/constants';
 import { AppContextData, LiteralModel, Page, QuoteLiteral } from 'src/app/core/models';
 
 @Directive({
-  selector: '[quoteLiteral]',
+  selector: '[uiQuoteLiteral]',
   standalone: true
 })
 export class QuoteLiteralDirective {
   @Input()
-  public quoteLiteral!: string;
+  public uiQuoteLiteral!: string;
 
   @Input()
   public contentAsDefault = true;
@@ -26,8 +26,8 @@ export class QuoteLiteralDirective {
   }
 
   ngAfterViewInit(): void {
-    if (this.quoteLiteral && this.lastPage) {
-      const literal = this.lastPage.configuration?.literals?.[this.quoteLiteral];
+    if (this.uiQuoteLiteral && this.lastPage) {
+      const literal = this.lastPage.configuration?.literals?.[this.uiQuoteLiteral];
       this.updateElement(literal);
     }
   }

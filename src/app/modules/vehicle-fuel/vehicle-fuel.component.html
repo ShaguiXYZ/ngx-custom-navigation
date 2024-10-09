@@ -9,11 +9,11 @@
           </nx-expansion-panel-title>
         </nx-expansion-panel-header>
         <div class="vehicle__selections">
-          @for(fuel of fuels; track $index) { @defer(on viewport) {
+          @for(fuel of fuels; track $index) { @defer(on viewport) { @let _selectedFuel = fuel.index === selectedFuel?.index;
           <div class="vehicle__selection nx-margin-2xs">
-            <quote-selectable-option [selected]="fuel.index === selectedFuel?.index" (uiSelect)="selectFuel(fuel)">
+            <quote-selectable-option [selected]="_selectedFuel" (uiSelect)="selectFuel(fuel)">
               <div class="card-container">
-                <span nxCopytext="medium" class="nx-margin-s"> {{ fuel.data }}</span>
+                <span nxCopytext="medium" class="nx-margin-s" [ngClass]="{ 'nx-font-weight-bold': _selectedFuel }"> {{ fuel.data }}</span>
               </div>
             </quote-selectable-option>
           </div>
@@ -30,14 +30,14 @@
           </nx-expansion-panel-title>
         </nx-expansion-panel-header>
         <div class="vehicle__selections">
-          @for(cubicCapacity of cubicCapacities; track $index) { @defer(on viewport) {
+          @for(cubicCapacity of cubicCapacities; track $index) { @let _selectedCubicCapacityselected = cubicCapacity.index ===
+          selectedCubicCapacity?.index; @defer(on viewport) {
           <div class="vehicle__selection nx-margin-2xs">
-            <quote-selectable-option
-              [selected]="cubicCapacity.index === selectedCubicCapacity?.index"
-              (uiSelect)="selectCubicCapacity(cubicCapacity)"
-            >
+            <quote-selectable-option [selected]="_selectedCubicCapacityselected" (uiSelect)="selectCubicCapacity(cubicCapacity)">
               <div class="card-container cubic-capacity-width">
-                <span nxCopytext="medium" class="nx-margin-s"> {{ cubicCapacity.data }}</span>
+                <span nxCopytext="medium" class="nx-margin-s" [ngClass]="{ 'nx-font-weight-bold': _selectedCubicCapacityselected }">
+                  {{ cubicCapacity.data }}</span
+                >
               </div>
             </quote-selectable-option>
           </div>
@@ -46,29 +46,27 @@
           } }
         </div>
         <div class="button-container">
-          <quote-selectable-option
-            [selected]="selectedCubicCapacity?.index === cubicCapacityNotKnown.index"
-            (uiSelect)="selectCubicCapacity(cubicCapacityNotKnown)"
-          >
+          @let _cubicCapacityNotKnown = selectedCubicCapacity?.index === cubicCapacityNotKnown.index;
+          <quote-selectable-option [selected]="_cubicCapacityNotKnown" (uiSelect)="selectCubicCapacity(cubicCapacityNotKnown)">
             <button class="nx-margin-y-2xs center" nxButton="tertiary small" type="button">
-              <span nxCopytext="medium">No sé la cilindrada</span>
+              <span nxCopytext="medium" [ngClass]="{ 'nx-font-weight-bold': _cubicCapacityNotKnown }">No sé la cilindrada</span>
             </button>
           </quote-selectable-option>
         </div>
       </nx-expansion-panel>
 
-      <nx-expansion-panel #powerPanel [expanded]="selectCubicCapacity">
+      <nx-expansion-panel #powerPanel [expanded]="selectedCubicCapacity">
         <nx-expansion-panel-header>
           <nx-expansion-panel-title nxHeadline="subsection-xsmall">
             {{ 'Label.Power' | translate }}
           </nx-expansion-panel-title>
         </nx-expansion-panel-header>
         <div class="vehicle__selections">
-          @for(power of powers; track $index) { @defer(on viewport) {
+          @for(power of powers; track $index) { @defer(on viewport) { @let _selectedPower = power.index === selectedPower?.index;
           <div class="vehicle__selection nx-margin-2xs">
-            <quote-selectable-option [selected]="power.index === selectedPower?.index" (uiSelect)="selectPower(power)">
+            <quote-selectable-option [selected]="_selectedPower" (uiSelect)="selectPower(power)">
               <div class="card-container">
-                <span nxCopytext="medium" class="nx-margin-s"> {{ power.data }}</span>
+                <span nxCopytext="medium" class="nx-margin-s" [ngClass]="{ 'nx-font-weight-bold': _selectedPower }"> {{ power.data }}</span>
               </div>
             </quote-selectable-option>
           </div>
@@ -77,9 +75,10 @@
           } }
         </div>
         <div class="button-container">
-          <quote-selectable-option [selected]="selectedPower?.index === powerNotKnown.index" (uiSelect)="selectPower(powerNotKnown)">
+          @let _powerNotKnown = selectedPower?.index === powerNotKnown.index;
+          <quote-selectable-option [selected]="_powerNotKnown" (uiSelect)="selectPower(powerNotKnown)">
             <button class="nx-margin-y-2xs center" nxButton="tertiary small" type="button">
-              <span nxCopytext="medium">No sé la potencia</span>
+              <span nxCopytext="medium" [ngClass]="{ 'nx-font-weight-bold': _powerNotKnown }">No sé la potencia</span>
             </button>
           </quote-selectable-option>
         </div>

@@ -50,10 +50,12 @@ export class YourCarIsComponent {
     };
 
     this.contextData = this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA);
+    this.selectedVehicle = this.contextData.vehicle;
 
     //MOCK
     this.vehicleOptions = [
       {
+        vehicleCode: 'AudiQ3Diesel1202015',
         make: 'Audi',
         model: 'Q3',
         fuel: { data: 'Diesel', index: FuelTypes.DIESEL },
@@ -61,6 +63,7 @@ export class YourCarIsComponent {
         yearOfManufacture: 2015
       },
       {
+        vehicleCode: 'AudiQ3Diesel1302015',
         make: 'Audi',
         model: 'Q3',
         fuel: { data: 'Diesel', index: FuelTypes.DIESEL },
@@ -68,6 +71,7 @@ export class YourCarIsComponent {
         yearOfManufacture: 2015
       },
       {
+        vehicleCode: 'AudiQ3Diesel1402015',
         make: 'Audi',
         model: 'Q3',
         fuel: { data: 'Diesel', index: FuelTypes.DIESEL },
@@ -75,6 +79,7 @@ export class YourCarIsComponent {
         yearOfManufacture: 2015
       },
       {
+        vehicleCode: 'AudiQ3Diesel1502015',
         make: 'Audi',
         model: 'Q3',
         fuel: { data: 'Diesel', index: FuelTypes.DIESEL },

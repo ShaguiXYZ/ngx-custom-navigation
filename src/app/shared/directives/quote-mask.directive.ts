@@ -1,11 +1,17 @@
-import { Directive, ElementRef, HostListener, Input } from '@angular/core';
+import { Directive, ElementRef, EventEmitter, HostListener, Input, Output } from '@angular/core';
 import { QUOTE_MASK, QuoteMaskType } from '../models';
 
 @Directive({
-  selector: '[quoteMask]',
+  selector: '[uiQuoteMask]',
   standalone: true
 })
 export class QuoteMaskDirective {
+  @Input()
+  public value!: string;
+
+  @Output()
+  public uiValueMatch: EventEmitter<boolean> = new EventEmitter<boolean>();
+
   public _mask!: QuoteMaskType;
 
   private readonly specialKeys: Set<string> = new Set(['Backspace', 'Tab', 'End', 'Home', 'ArrowLeft', 'ArrowRight', 'Del', 'Delete']);
@@ -13,7 +19,7 @@ export class QuoteMaskDirective {
   constructor(private el: ElementRef) {}
 
   @Input()
-  public set quoteMask(value: QuoteMaskType) {
+  public set uiQuoteMask(value: QuoteMaskType) {
     this._mask = value;
   }
 
@@ -25,8 +31,12 @@ export class QuoteMaskDirective {
 
     const current: string = this.el.nativeElement.value;
     const next: string = current.concat(event.key);
+    const maskRegex = QUOTE_MASK[this._mask];
+    const valueMatch = !!maskRegex.match(next);
 
-    if (!QUOTE_MASK[this._mask].match(next)) {
+    this.uiValueMatch.emit(valueMatch);
+
+    if (maskRegex.preventEdition() && !valueMatch) {
       event.preventDefault();
     }
   }

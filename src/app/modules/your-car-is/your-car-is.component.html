@@ -3,7 +3,7 @@
   <div class="form-container">
     @for(vehicle of vehicleOptions; track vehicle; let index = $index) {
     <div class="selectable-container">
-      <quote-selectable-option [selected]="vehicle.power === selectedVehicle?.power" (uiSelect)="selectVehicle(vehicle)">
+      <quote-selectable-option [selected]="vehicle.vehicleCode === selectedVehicle?.vehicleCode" (uiSelect)="selectVehicle(vehicle)">
         <div class="card-container nx-margin-left-4m">
           <span nxCopytext="medium" class="card-text nx-margin-top-s nx-font-weight-bold"> {{ vehicle.make }} {{ vehicle.model }}</span>
           <span nxCopytext="medium" class="card-text nx-margin-bottom-s">

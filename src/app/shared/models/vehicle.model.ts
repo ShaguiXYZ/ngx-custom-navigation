@@ -61,7 +61,7 @@ export interface VehicleData {
   make: string;
   model: string;
   postalCode: string;
-  vehicleCode: number;
+  vehicleCode: string;
   version: string;
   power: number;
   value: string;
