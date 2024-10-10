@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-namespace */
-import { Configuration, Page } from './configuration';
+import { Configuration, Page } from './configuration.model';
 
 export interface Navigation {
   nextPage?: Page;

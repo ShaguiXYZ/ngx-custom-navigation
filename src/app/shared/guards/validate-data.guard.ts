@@ -4,7 +4,7 @@ import { ContextDataService } from '@shagui/ng-shagui/core';
 import { QUOTE_APP_CONTEXT_DATA } from 'src/app/core/constants';
 import { AppContextData } from 'src/app/core/models';
 
-const previousStep = ({ navigation: { nextPage, viewedPages } }: AppContextData): boolean =>
+const isPreviousStep = ({ navigation: { nextPage, viewedPages } }: AppContextData): boolean =>
   !!nextPage && viewedPages.includes(nextPage.pageId);
 
 const stepperChange = (context: AppContextData) =>
@@ -31,5 +31,5 @@ export const isValidGuard: CanDeactivateFn<IsValidData> = (
 
   console.log('isValidGuard', context);
 
-  return previousStep(context) || stepperChange(context) || (component.canDeactivate?.bind(component)(currentRoute, state, next) ?? true);
+  return isPreviousStep(context) || stepperChange(context) || (component.canDeactivate?.bind(component)(currentRoute, state, next) ?? true);
 };

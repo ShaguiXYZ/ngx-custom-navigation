@@ -36,24 +36,24 @@ export class RoutingService implements OnDestroy {
       return Promise.resolve(false);
     }
 
-    return this.goToPage(nextPage);
+    return this._goToPage(nextPage);
   }
 
   public previousStep = (): Promise<boolean> => {
     if (this.appContextData.navigation.viewedPages.length > 1) {
       const pageId = this.appContextData.navigation.viewedPages[this.appContextData.navigation.viewedPages.length - 2];
 
-      return this.goToPage(this.appContextData.configuration.pageMap[pageId]);
+      return this._goToPage(this.appContextData.configuration.pageMap[pageId]);
     }
 
     return Promise.resolve(false);
   };
 
-  public goToStep = (pageId: string): Promise<boolean> => this.goToPage(this.getPage(pageId)!);
+  public goToPage = (pageId: string): Promise<boolean> => this._goToPage(this.getPage(pageId)!);
 
   private getPage = (id: string): Page | undefined => this.appContextData.configuration.pageMap[id];
 
-  private goToPage = (page: Page): Promise<boolean> => {
+  private _goToPage = (page: Page): Promise<boolean> => {
     this.appContextData.navigation.nextPage = page;
     this.contextDataService.set(QUOTE_APP_CONTEXT_DATA, this.appContextData);
 

@@ -46,7 +46,7 @@ export class BirthdateComponent implements OnInit, IsValidData {
   public formErrors: DataInfo<boolean> = {};
   public birthdateFromContext: Moment | undefined;
 
-  private contextData!: QuoteModel;
+  private readonly contextData!: QuoteModel;
 
   private readonly contextDataService = inject(ContextDataService);
 

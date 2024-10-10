@@ -22,7 +22,7 @@ export class QuoteLinkDirective {
       const appContextData = this.contextDataService.get<AppContextData>(QUOTE_APP_CONTEXT_DATA);
       const link = appContextData.configuration.links?.[this.uiQuoteLink];
 
-      link && this.routingService.goToStep(link);
+      link && this.routingService.goToPage(link);
     });
   }
 }

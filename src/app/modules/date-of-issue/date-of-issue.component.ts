@@ -41,16 +41,13 @@ export const MY_FORMATS = {
     ReactiveFormsModule,
     TranslateModule
   ],
-  providers: [
-    { provide: NX_DATE_LOCALE, useValue: 'es-ES' }
-    // { provide: NX_DATE_FORMATS, useValue: MY_FORMATS }
-  ]
+  providers: [{ provide: NX_DATE_LOCALE, useValue: 'es-ES' }]
 })
 export class DateOfIssueComponent implements OnInit, IsValidData {
   public form!: FormGroup;
   public dateOfIssueFromContext: Moment | undefined;
 
-  private contextData!: QuoteModel;
+  private readonly contextData!: QuoteModel;
 
   private readonly contextDataService = inject(ContextDataService);
 

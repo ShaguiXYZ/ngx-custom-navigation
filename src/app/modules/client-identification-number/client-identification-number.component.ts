@@ -34,7 +34,7 @@ export class ClientIdentificationNumberComponent implements OnInit, IsValidData 
   public form!: FormGroup;
   public footerConfig!: QuoteFooterConfig;
 
-  private contextData!: QuoteModel;
+  private readonly contextData!: QuoteModel;
 
   private readonly contextDataService = inject(ContextDataService);
 

@@ -35,7 +35,7 @@ export class DrivingLicenseDateComponent implements OnInit, IsValidData {
   public form!: FormGroup;
   public drivingLicenseDateFromContext?: Moment;
 
-  private contextData!: QuoteModel;
+  private readonly contextData!: QuoteModel;
 
   private readonly contextDataService = inject(ContextDataService);
 
@@ -47,7 +47,7 @@ export class DrivingLicenseDateComponent implements OnInit, IsValidData {
     this.createForm();
   }
 
-  public canDeactivate = (): boolean | Observable<boolean> | Promise<boolean> => this.updateValidData();
+  public canDeactivate = (): boolean => this.updateValidData();
 
   private updateValidData = (): boolean => {
     if (this.form.valid) {

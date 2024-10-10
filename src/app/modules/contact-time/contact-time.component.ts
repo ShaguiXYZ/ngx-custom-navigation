@@ -22,8 +22,9 @@ export class ContactTimeComponent implements IsValidData {
     pm: ['14:00', '15:00', '16:00', '17:00', '18:00', '19:00']
   };
 
-  public contextData!: QuoteModel;
   public selectedHour?: Hour;
+
+  private readonly contextData!: QuoteModel;
 
   private readonly contextDataService = inject(ContextDataService);
 

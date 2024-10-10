@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, inject, OnDestroy, OnInit } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { NxCopytextModule } from '@aposin/ng-aquila/copytext';
 import { NxIconModule } from '@aposin/ng-aquila/icon';
 import { NxTooltipModule } from '@aposin/ng-aquila/tooltip';
@@ -39,6 +39,6 @@ export class QuoteStepperComponent implements OnInit, OnDestroy {
   }
 
   public onStepClick(step: Step): void {
-    this.routingService.goToStep(step.page);
+    this.routingService.goToPage(step.page);
   }
 }

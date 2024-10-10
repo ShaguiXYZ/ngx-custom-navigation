@@ -37,11 +37,11 @@ export class DrivingLicenseLocationComponent implements IsValidData {
   public selectedLocation?: IIconData;
   public footerConfig!: QuoteFooterConfig;
 
+  private readonly contextData!: QuoteModel;
+
   private readonly contextDataService = inject(ContextDataService);
   private readonly routingService = inject(RoutingService);
   private readonly dialogService = inject(NxDialogService);
-
-  private contextData!: QuoteModel;
 
   constructor() {
     this.contextData = this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA);

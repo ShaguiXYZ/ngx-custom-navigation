@@ -8,7 +8,6 @@ import { NxInputModule } from '@aposin/ng-aquila/input';
 import { ContextDataService } from '@shagui/ng-shagui/core';
 import { Observable } from 'rxjs';
 import { QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
-import { RoutingService } from 'src/app/core/services';
 import { HeaderTitleComponent, QuoteFooterComponent } from 'src/app/shared/components';
 import { IsValidData } from 'src/app/shared/guards';
 import { QuoteModel } from 'src/app/shared/models';
@@ -24,10 +23,9 @@ import { QuoteModel } from 'src/app/shared/models';
 export class ClientNameComponent implements OnInit, IsValidData {
   public form!: FormGroup;
 
-  private contextData!: QuoteModel;
+  private readonly contextData!: QuoteModel;
 
   private readonly contextDataService = inject(ContextDataService);
-  private readonly routingService = inject(RoutingService);
 
   constructor(private readonly fb: FormBuilder) {
     this.contextData = this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA);

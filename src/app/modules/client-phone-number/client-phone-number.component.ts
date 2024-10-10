@@ -32,12 +32,10 @@ import { QuoteModel } from 'src/app/shared/models';
 })
 export class ClientPhoneNumberComponent implements OnInit, IsValidData {
   public form!: FormGroup;
-  public countryCode = 'ES';
 
-  private contextData!: QuoteModel;
+  private readonly contextData!: QuoteModel;
 
   private readonly contextDataService = inject(ContextDataService);
-  private readonly routingService = inject(RoutingService);
 
   constructor(private readonly fb: FormBuilder) {
     this.contextData = this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA);
