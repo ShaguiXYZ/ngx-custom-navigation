@@ -26,6 +26,7 @@ export interface Page {
   pageId: string;
   route?: string;
   stepper?: { key: string; stepKey: string };
+  routeTree?: string;
 }
 
 export namespace Page {
@@ -90,7 +91,10 @@ export namespace Configuration {
 
             step.pages.forEach(pageId => {
               const page = configuration.pageMap[pageId];
-              if (page) page.stepper = { key: stepperKey, stepKey };
+              if (page) {
+                page.stepper = { key: stepperKey, stepKey };
+                page.routeTree = normalizeTextForUri(step.label);
+              }
             });
 
             return { key: stepKey, label: step.label, page: step.pages[0] };
@@ -105,3 +109,6 @@ export namespace Configuration {
     configuration.links = links;
   };
 }
+
+//
+const normalizeTextForUri = (text: string): string => text.toLowerCase().replace(/\s/g, '-');

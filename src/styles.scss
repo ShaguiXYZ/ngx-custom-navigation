@@ -11,7 +11,12 @@
 @import 'themes/dark';
 @import 'themes/light';
 
+body {
+  background: linear-gradient(121deg, rgba(255, 255, 255, 1) 0%, rgba(197, 197, 197, 1) 100%);
+}
+
 main {
+  background: inherit;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
@@ -25,6 +30,10 @@ main {
       button {
         text-transform: capitalize;
       }
+    }
+
+    .nx-formfield.has-outline .nx-formfield__input-container {
+      background-color: inherit;
     }
   }
 

@@ -3,14 +3,14 @@ import { Component, inject } from '@angular/core';
 import { NxCopytextModule } from '@aposin/ng-aquila/copytext';
 import { ContextDataService } from '@shagui/ng-shagui/core';
 import { QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
-import { HeaderTitleComponent, QuoteFooterComponent, SelectableOptionComponent } from 'src/app/shared/components';
+import { HeaderTitleComponent, QuoteFooterComponent, SelectableOptionComponent, TextCardComponent } from 'src/app/shared/components';
 import { IsValidData } from 'src/app/shared/guards';
 import { Hour, QuoteModel } from 'src/app/shared/models';
 
 @Component({
   selector: 'quote-contact-time',
   standalone: true,
-  imports: [CommonModule, HeaderTitleComponent, QuoteFooterComponent, SelectableOptionComponent, NxCopytextModule],
+  imports: [CommonModule, HeaderTitleComponent, QuoteFooterComponent, TextCardComponent, SelectableOptionComponent, NxCopytextModule],
   templateUrl: './contact-time.component.html',
   styleUrl: './contact-time.component.scss'
 })

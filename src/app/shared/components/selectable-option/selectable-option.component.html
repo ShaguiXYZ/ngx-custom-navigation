@@ -3,7 +3,7 @@
 <span class="option__container" [ngClass]="{ selected, disabled }" (click)="!disabled && uiSelect.emit()">
   @if(selected){
   <div class="option__checked" [ngClass]="{ 'full-height': fullHeight }">
-    <nx-icon name="check" size="auto" aria-hidden="true" />
+    <em class="fa-solid fa-check"></em>
   </div>
   }
   <ng-content></ng-content>

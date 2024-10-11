@@ -9,7 +9,7 @@ import { NxMaskModule } from '@aposin/ng-aquila/mask';
 import { ContextDataService } from '@shagui/ng-shagui/core';
 import { Observable } from 'rxjs';
 import { QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
-import { HeaderTitleComponent, QuoteFooterComponent, QuoteFooterInfoComponent } from 'src/app/shared/components';
+import { HeaderTitleComponent, QuoteFooterComponent } from 'src/app/shared/components';
 import { IsValidData } from 'src/app/shared/guards';
 import { QuoteModel } from 'src/app/shared/models';
 
@@ -27,7 +27,6 @@ import { QuoteModel } from 'src/app/shared/models';
     NxMaskModule,
     NxButtonModule,
     QuoteFooterComponent,
-    QuoteFooterInfoComponent,
     ReactiveFormsModule,
     CommonModule
   ]

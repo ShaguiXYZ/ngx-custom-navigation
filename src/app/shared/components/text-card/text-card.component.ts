@@ -15,6 +15,9 @@ export class TextCardComponent {
   @Input()
   public selected?: boolean;
 
+  @Input()
+  public fullHeight = true;
+
   @Output()
   public uiSelect: EventEmitter<string> = new EventEmitter<string>();
 

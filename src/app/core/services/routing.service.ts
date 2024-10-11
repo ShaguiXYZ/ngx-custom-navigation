@@ -57,7 +57,8 @@ export class RoutingService implements OnDestroy {
     this.appContextData.navigation.nextPage = page;
     this.contextDataService.set(QUOTE_APP_CONTEXT_DATA, this.appContextData);
 
-    return this._router.navigate([Page.routeFrom(page)]);
+    return this._router.navigate([Page.routeFrom(page)], { skipLocationChange: true });
+    // return this._router.navigate([Page.routeFrom(page)]);
   };
 
   private getNextRoute(): Page | undefined {

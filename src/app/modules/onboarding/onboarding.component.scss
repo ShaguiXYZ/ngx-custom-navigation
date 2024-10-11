@@ -1,4 +1,4 @@
-.form-container {
+.coverages {
   flex-direction: column;
 
   .coverage {
@@ -23,15 +23,17 @@
   justify-content: center;
   text-align: center;
 
-  .avatar__car {
+  .avatar__container {
+    align-items: center;
+    border-radius: 100%;
+    display: flex;
     height: 88px;
+    justify-content: center;
     width: 88px;
-  }
 
-  .nx-icon--fill {
-    color: var(--interactive-primary);
-    background-color: #eff6f6;
-    height: inherit;
-    width: inherit;
+    &.nx-icon--fill {
+      color: var(--interactive-primary);
+      background-color: #eff6f6;
+    }
   }
 }

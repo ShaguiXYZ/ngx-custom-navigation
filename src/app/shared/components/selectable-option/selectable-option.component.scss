@@ -3,7 +3,7 @@
 
   position: relative;
   display: block;
-  outline: 1px solid var(--card-border-color);
+  border: 1px solid var(--card-border-color);
   border-radius: 6px;
 
   .option__checked {
@@ -76,7 +76,10 @@
   }
 
   &.selected {
-    background: #e6f4f6;
-    outline: 1px solid var(--interactive-primary);
+    // background: #e6f4f6;
+    // haz un degradado del fondo elegante partiendo del color #e6f4f6
+    background: rgb(230, 244, 246);
+    background: radial-gradient(circle, rgba(230, 244, 246, 1) 0%, rgba(199, 219, 242, 1) 100%);
+    border: 1px solid var(--interactive-primary);
   }
 }

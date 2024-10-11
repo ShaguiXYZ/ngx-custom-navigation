@@ -6,11 +6,7 @@
       <section class="hour__selections__section">
         @for(hour of hours.am; track hour) { @defer(on viewport) {
         <div class="hour__selection nx-margin-2xs">
-          <quote-selectable-option [selected]="hour === selectedHour" (uiSelect)="selectHour(hour)">
-            <div class="card-container">
-              <span nxCopytext="medium" class="nx-margin-s nx-margin-left-4m"> {{ hour }} h</span>
-            </div>
-          </quote-selectable-option>
+          <quote-text-card [fullHeight]="false" [selected]="hour === selectedHour" data="{{ hour }} h" (uiSelect)="selectHour(hour)" />
         </div>
         } @placeholder {
         <div class="card-container"></div>
@@ -22,11 +18,7 @@
       <section class="hour__selections__section">
         @for(hour of hours.pm; track hour) { @defer(on viewport) {
         <div class="hour__selection nx-margin-2xs">
-          <quote-selectable-option [selected]="hour === selectedHour" (uiSelect)="selectHour(hour)">
-            <div class="card-container">
-              <span nxCopytext="medium" class="nx-margin-s nx-margin-left-4m"> {{ hour }} h</span>
-            </div>
-          </quote-selectable-option>
+          <quote-text-card [fullHeight]="false" [selected]="hour === selectedHour" data="{{ hour }} h" (uiSelect)="selectHour(hour)" />
         </div>
         } @placeholder {
         <div class="card-container"></div>

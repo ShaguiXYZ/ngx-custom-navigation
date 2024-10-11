@@ -1,5 +1,6 @@
 .app__container {
   display: flex;
+  flex: 1;
   flex-direction: column;
   height: 100vh;
 
@@ -20,9 +21,15 @@
     }
   }
 
-  .app__content {
-    display: block;
+  .outlet__container {
+    display: flex;
     flex: 1;
+
+    .outlet__content {
+      display: block;
+      flex: 1;
+      overflow: hidden;
+    }
   }
 
   .app__footer {

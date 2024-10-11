@@ -17,7 +17,7 @@ export class VehicleService {
   public vehicleBrands(brand: string): Promise<string[]> {
     return firstValueFrom(
       this.http
-        .get<string[]>(`${this.vehicleUri}`, {
+        .get<string[]>(`${this.vehicleUri}/brand.mock.json`, {
           responseStatusMessage: {
             [HttpStatus.notFound]: { text: 'Notifications.ModelsNotFound' }
           },

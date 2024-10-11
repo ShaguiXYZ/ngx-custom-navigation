@@ -2,8 +2,9 @@
 import { inject } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivateFn, GuardResult, MaybeAsync, Router, RouterStateSnapshot } from '@angular/router';
 import { ContextDataService } from '@shagui/ng-shagui/core';
-import { QUOTE_APP_CONTEXT_DATA } from 'src/app/core/constants';
+import { QUOTE_APP_CONTEXT_DATA, QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
 import { AppContextData, Page } from 'src/app/core/models';
+import { QuoteModel } from '../models';
 
 export const journeyGuard: CanActivateFn = (route: ActivatedRouteSnapshot, state: RouterStateSnapshot): MaybeAsync<GuardResult> => {
   const contextDataService = inject(ContextDataService);
@@ -11,13 +12,14 @@ export const journeyGuard: CanActivateFn = (route: ActivatedRouteSnapshot, state
 
   const context = contextDataService.get<AppContextData>(QUOTE_APP_CONTEXT_DATA);
   const { nextPage, viewedPages } = context.navigation;
+  const { homePageId } = context.configuration;
 
   if (!nextPage?.pageId) {
     context.navigation.lastPage = undefined;
     context.navigation.nextPage = context.configuration.pageMap[viewedPages[viewedPages.length - 1]];
     contextDataService.set(QUOTE_APP_CONTEXT_DATA, context);
 
-    return router.parseUrl(`/${Page.routeFrom(context.navigation.nextPage)}`);
+    return router.parseUrl(`${Page.routeFrom(context.navigation.nextPage)}`);
   }
 
   const pageIndex = viewedPages.indexOf(nextPage.pageId);
@@ -32,6 +34,10 @@ export const journeyGuard: CanActivateFn = (route: ActivatedRouteSnapshot, state
   context.navigation.nextPage = undefined;
   context.navigation.viewedPages = viewedPages;
   contextDataService.set(QUOTE_APP_CONTEXT_DATA, context);
+
+  homePageId === nextPage.pageId && contextDataService.set(QUOTE_CONTEXT_DATA, QuoteModel.init());
+
+  window.history.pushState({}, '', nextPage.routeTree ?? Page.routeFrom(nextPage));
 
   return true;
 };
