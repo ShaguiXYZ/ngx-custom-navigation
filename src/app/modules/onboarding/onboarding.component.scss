@@ -2,10 +2,11 @@
   flex-direction: column;
 
   .coverage {
-    align-items: start;
+    align-items: center;
     display: flex;
+    justify-content: flex-start;
 
-    .coverage-icon {
+    .fa-check {
       color: var(--success);
     }
   }

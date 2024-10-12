@@ -10,8 +10,10 @@ import { ContextDataService } from '@shagui/ng-shagui/core';
 import { Observable } from 'rxjs';
 import { QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
 import { HeaderTitleComponent, QuoteFooterComponent } from 'src/app/shared/components';
+import { QuoteLiteralDirective } from 'src/app/shared/directives';
 import { IsValidData } from 'src/app/shared/guards';
 import { QuoteModel } from 'src/app/shared/models';
+import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 
 @Component({
   selector: 'app-license-year',
@@ -21,14 +23,15 @@ import { QuoteModel } from 'src/app/shared/models';
   imports: [
     FormsModule,
     HeaderTitleComponent,
-    NxCopytextModule,
     NxFormfieldModule,
     NxInputModule,
     NxMaskModule,
     NxButtonModule,
     QuoteFooterComponent,
     ReactiveFormsModule,
-    CommonModule
+    CommonModule,
+    QuoteLiteralDirective,
+    QuoteLiteralPipe
   ]
 })
 export class LicenseYearComponent implements OnInit, IsValidData {

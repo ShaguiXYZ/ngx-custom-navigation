@@ -13,6 +13,7 @@ import { DEBOUNCE_TIME, QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
 import { RoutingService } from 'src/app/core/services';
 import { HeaderTitleComponent, QuoteFooterComponent, QuoteFooterInfoComponent } from 'src/app/shared/components';
 import { QuoteFooterConfig } from 'src/app/shared/components/quote-footer/models';
+import { QuoteLiteralDirective } from 'src/app/shared/directives';
 import { IsValidData } from 'src/app/shared/guards';
 import { QuoteModel } from 'src/app/shared/models';
 
@@ -22,6 +23,7 @@ import { QuoteModel } from 'src/app/shared/models';
   styleUrl: './license-plate.component.scss',
   standalone: true,
   imports: [
+    CommonModule,
     FormsModule,
     HeaderTitleComponent,
     NxCopytextModule,
@@ -33,7 +35,7 @@ import { QuoteModel } from 'src/app/shared/models';
     QuoteFooterComponent,
     QuoteFooterInfoComponent,
     ReactiveFormsModule,
-    CommonModule
+    QuoteLiteralDirective
   ]
 })
 export class LicensePlateComponent implements OnInit, OnDestroy, IsValidData {

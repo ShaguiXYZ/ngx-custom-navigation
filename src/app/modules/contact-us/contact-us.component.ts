@@ -19,8 +19,7 @@ export class ContactUsComponent {
 
   constructor() {
     this.footerConfig = {
-      showNext: true,
-      nextLabel: 'FINALIZAR'
+      showNext: true
     };
   }
 }

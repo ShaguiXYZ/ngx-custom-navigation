@@ -38,7 +38,7 @@ export class SettingServiceMock {
           literals: {
             header: '¡Qué sorpresa!',
             subheader: 'Actualmente no podemos hacer seguros con esas condiciones.',
-            body: 'Para cualquier consulta:'
+            body: 'Para cualquier consulta: Podemos llamarte y ayudarte a encontrar el mejor seguro para ti, con las mejores coberturas.'
           }
         }
       },

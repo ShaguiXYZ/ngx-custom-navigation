@@ -15,6 +15,10 @@
     box-shadow: 0px 0px 12px 0px #00000029;
   }
 
+  .uppercase {
+    text-transform: uppercase;
+  }
+
   .popular-header {
     align-items: center;
     display: flex;
@@ -62,8 +66,9 @@
       height: 188px;
 
       .coverage {
-        align-items: start;
+        align-items: flex-start;
         display: flex;
+        justify-content: flex-start;
 
         .coverage-icon {
           color: var(--success);
@@ -76,9 +81,4 @@
       }
     }
   }
-}
-
-.nx-icon--fill {
-  color: var(--interactive-primary);
-  background-color: #eff6f6;
 }

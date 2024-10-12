@@ -1,14 +1,18 @@
 <article class="component-container">
-  <quote-header-title>¿Cuál es tu código postal?</quote-header-title>
+  <quote-header-title><span uiQuoteLiteral="header"></span></quote-header-title>
   <section class="form-container">
     <form [formGroup]="form">
       <nx-formfield label="Código postal">
         <input #searchInput type="text" formControlName="postalCode" required nxInput maxlength="5" uiQuoteMask="numeric" />
         <span nxFormfieldHint> {{ province?.data }} </span>
         @if(form.get('postalCode')?.errors?.['postalCodeNotRecognized']) {
-        <nx-error appearance="text" nxFormfieldError>El código postal no existe</nx-error>
+        <nx-error appearance="text" nxFormfieldError>
+          <span uiQuoteLiteral="error-unknown"></span>
+        </nx-error>
         } @if(form.get('postalCode')?.hasError('required')) {
-        <nx-error appearance="text" nxFormfieldError>El código postal es obligatorio para continuar</nx-error>
+        <nx-error appearance="text" nxFormfieldError>
+          <span uiQuoteLiteral="error-required"></span>
+        </nx-error>
         }
       </nx-formfield>
     </form>
@@ -16,7 +20,7 @@
   <quote-footer [config]="footerConfig">
     <div class="extra__footer__info">
       <quote-footer-info icon="fa-hand-holding-heart">
-        ¿Sabías que ser cliente de Shagui tiene muchas ventajas exclusivas?
+        <span uiQuoteLiteral="footer-info"></span>
       </quote-footer-info>
     </div>
   </quote-footer>

@@ -6,7 +6,6 @@ import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
 import { NxIconModule } from '@aposin/ng-aquila/icon';
 import { NxInputModule } from '@aposin/ng-aquila/input';
 import { NxPageSearchModule } from '@aposin/ng-aquila/page-search';
-import { TranslateModule } from '@ngx-translate/core';
 import { ContextDataService } from '@shagui/ng-shagui/core';
 import { debounceTime, distinctUntilChanged, fromEvent, map, Subscription } from 'rxjs';
 import { DEBOUNCE_TIME, QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
@@ -15,7 +14,9 @@ import { HeaderTitleComponent, IconCardComponent, QuoteFooterComponent } from 's
 import { QuoteFooterConfig } from 'src/app/shared/components/quote-footer/models';
 import { IsValidData } from 'src/app/shared/guards';
 import { BrandData, QuoteModel } from 'src/app/shared/models';
+import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 import { BrandComponent } from './components';
+import { QuoteLiteralDirective } from 'src/app/shared/directives';
 
 @Component({
   selector: 'app-make',
@@ -33,7 +34,8 @@ import { BrandComponent } from './components';
     NxInputModule,
     FormsModule,
     ReactiveFormsModule,
-    TranslateModule
+    QuoteLiteralDirective,
+    QuoteLiteralPipe
   ],
   templateUrl: './make.component.html',
   styleUrl: './make.component.scss'

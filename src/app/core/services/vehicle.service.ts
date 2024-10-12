@@ -5,6 +5,7 @@ import { BrandKey, CubicCapacityModel, FuelModel, IVehicleModel, ModelVersionMod
 
 @Injectable({ providedIn: 'root' })
 export class VehicleService {
+  private readonly _BRANCHES_CACHE_ID_ = `_${UniqueIds.next()}_`;
   private readonly _MODELS_CACHE_ID_ = `_${UniqueIds.next()}_`;
   private readonly _MODEL_VERSIONS_CACHE_ID_ = `_${UniqueIds.next()}_`;
   private readonly MIN_YEAR = 1950;
@@ -21,7 +22,8 @@ export class VehicleService {
           responseStatusMessage: {
             [HttpStatus.notFound]: { text: 'Notifications.ModelsNotFound' }
           },
-          showLoading: true
+          showLoading: true,
+          cache: { id: this.cacheBranches(), ttl: TTL.XXL }
         })
         .pipe(map(res => (res as string[]).filter(data => data.toLowerCase().includes(brand.toLowerCase()))))
     );
@@ -130,6 +132,7 @@ export class VehicleService {
     );
   }
 
-  private cacheModelByBranch = (branch: BrandKey): string => `${this._MODELS_CACHE_ID_}${branch}_`;
-  private cacheModelVersionByBranch = (model: string): string => `${this._MODEL_VERSIONS_CACHE_ID_}${model}_`;
+  private cacheBranches = (): string => this._BRANCHES_CACHE_ID_;
+  private cacheModelByBranch = (branch: BrandKey): string => `_${this._MODELS_CACHE_ID_}${branch}_`;
+  private cacheModelVersionByBranch = (model: string): string => `_${this._MODEL_VERSIONS_CACHE_ID_}${model}_`;
 }

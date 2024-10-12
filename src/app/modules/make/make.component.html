@@ -1,8 +1,8 @@
 <article class="component-container">
-  <quote-header-title>¿Cuál es tu marca?</quote-header-title>
+  <quote-header-title><span uiQuoteLiteral="header"></span></quote-header-title>
   <section class="form-container">
     <form [formGroup]="form">
-      <nx-formfield label="{{ 'Label.Search' | translate }}..." appearance="outline">
+      <nx-formfield [label]="'Search' | quoteLiteral" appearance="outline">
         <input #searchInput type="text" formControlName="searchInput" nxInput [nxAutocomplete]="brands" nxAutocompleteDebounce="0" />
         <span nxFormfieldSuffix>
           <nx-icon name="search" size="s"></nx-icon>

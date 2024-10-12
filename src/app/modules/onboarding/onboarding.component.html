@@ -1,22 +1,23 @@
+<!-- eslint-disable @angular-eslint/template/elements-content -->
 <article>
   <quote-header-title>
     <div class="center__header">
-      <h3 nxHeadline="subsection-small" class="nx-font-weight-bold">Calcular mi seguro</h3>
+      <h3 nxHeadline="subsection-small" class="nx-font-weight-bold" uiQuoteLiteral="header"></h3>
       <div class="avatar__container nx-icon--fill nx-margin-y-m">
         <em class="fa-solid fa-xl fa-car-rear"></em>
       </div>
-      Estás a menos de 5 minutos de conseguir el seguro más completo
+      <span uiQuoteLiteral="subheader"></span>
     </div>
   </quote-header-title>
   <section class="form-container coverages nx-margin-bottom-l">
     <p nxCopytext="normal" class="coverage nx-margin-bottom-xs">
-      <nx-icon class="coverage-icon nx-margin-right-xs" name="check" size="s" />Asistencia en carretera nacional e internacional 24/7
+      <em class="fa-solid fa-check nx-margin-right-xs"></em><span uiQuoteLiteral="coverage-1"></span>
     </p>
     <p nxCopytext="normal" class="coverage nx-margin-bottom-xs">
-      <nx-icon class="coverage-icon nx-margin-right-xs" name="check" size="s" />Te llevamos el coche de sustitución a tu casa
+      <em class="fa-solid fa-check nx-margin-right-xs"></em><span uiQuoteLiteral="coverage-2"></span>
     </p>
     <p nxCopytext="normal" class="coverage nx-margin-bottom-xs">
-      <nx-icon class="coverage-icon nx-margin-right-xs" name="check" size="s" />Red de talleres excelentes a tu disposición
+      <em class="fa-solid fa-check nx-margin-right-xs"></em><span uiQuoteLiteral="coverage-3"></span>
     </p>
   </section>
   <quote-footer [config]="footerConfig" />

@@ -1,8 +1,12 @@
 <article class="component-container">
-  <quote-header-title>¿Cuando prefieres que te contactemos?</quote-header-title>
+  <quote-header-title>
+    <span uiQuoteLiteral="header"></span>
+  </quote-header-title>
   <section class="form-container">
     <article class="hour__selections nx-margin-bottom-s">
-      <header class="hour__selections__header nx-margin-bottom-2xs nx-font-weight-bold" nxCopytext="normal">Mañana</header>
+      <header class="hour__selections__header nx-margin-bottom-2xs nx-font-weight-bold" nxCopytext="normal">
+        <span uiQuoteLiteral="morning"></span>
+      </header>
       <section class="hour__selections__section">
         @for(hour of hours.am; track hour) { @defer(on viewport) {
         <div class="hour__selection nx-margin-2xs">
@@ -14,7 +18,9 @@
       </section>
     </article>
     <article class="hour__selections">
-      <header class="hour__selections__header nx-margin-bottom-2xs nx-font-weight-bold" nxCopytext="normal">Tarde</header>
+      <header class="hour__selections__header nx-margin-bottom-2xs nx-font-weight-bold" nxCopytext="normal">
+        <span uiQuoteLiteral="afternoon"></span>
+      </header>
       <section class="hour__selections__section">
         @for(hour of hours.pm; track hour) { @defer(on viewport) {
         <div class="hour__selection nx-margin-2xs">

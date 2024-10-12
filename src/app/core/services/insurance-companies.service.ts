@@ -1,7 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpService, HttpStatus, TTL, UniqueIds } from '@shagui/ng-shagui/core';
 import { firstValueFrom, map } from 'rxjs';
-import { IIconData } from 'src/app/shared/models';
 import { IndexedData } from '../models';
 
 @Injectable({ providedIn: 'root' })
@@ -12,7 +11,7 @@ export class InsuranceCompaniesService {
 
   private http = inject(HttpService);
 
-  public companies(): Promise<IIconData[]> {
+  public companies(): Promise<IndexedData[]> {
     return firstValueFrom(
       this.http
         .get<IndexedData[]>(`${this.vehicleUri}/insurance-companies.mock.json`, {
@@ -24,7 +23,7 @@ export class InsuranceCompaniesService {
         })
         .pipe(
           map(res => res as IndexedData[]),
-          map(data => data.map<IIconData>(value => ({ ...value, icon: `${this.uriImages}/${value.data}.png` })))
+          map(data => data.map<IndexedData>(value => ({ ...value, icon: `${this.uriImages}/${value.data}.png` })))
         )
     );
   }

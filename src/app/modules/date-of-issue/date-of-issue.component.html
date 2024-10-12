@@ -1,8 +1,8 @@
 <article class="component-container">
-  <quote-header-title>¿Cuándo quieres que empiece tu seguro?</quote-header-title>
+  <quote-header-title><span uiQuoteLiteral="header"></span></quote-header-title>
   <section class="form-container">
     <form [formGroup]="form">
-      <nx-formfield label="Fecha de contratación">
+      <nx-formfield [label]="'date-of-issue-label' | quoteLiteral">
         <input
           formControlName="dateOfIssue"
           nxDatefield
@@ -11,7 +11,7 @@
           [parseFormat]="['DD/MM/YYYY', 'DDMMYYYY', 'DDMMYY']"
           displayFormat="DD/MM/YYYY"
         />
-        <span nxFormfieldHint>{{ 'Label.DateFormat' | translate }}</span>
+        <span nxFormfieldHint uiQuoteLiteral="hint-date-format"></span>
         <nx-datepicker-toggle [for]="myDatepicker" nxFormfieldSuffix></nx-datepicker-toggle>
         <nx-datepicker #myDatepicker></nx-datepicker>
       </nx-formfield>

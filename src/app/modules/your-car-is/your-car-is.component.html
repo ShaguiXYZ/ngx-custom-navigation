@@ -1,5 +1,7 @@
 <article class="component-container">
-  <quote-header-title>Selecciona el modelo</quote-header-title>
+  <quote-header-title>
+    <span uiQuoteLiteral="header"></span>
+  </quote-header-title>
   <div class="form-container">
     @for(vehicle of vehicleOptions; track vehicle; let index = $index) {
     <div class="selectable-container">
@@ -16,8 +18,8 @@
   </div>
   <quote-footer [config]="footerConfig">
     <div class="extra__footer__options">
-      <button class="nx-margin-y-2xs w-100" nxButton="tertiary small" type="button" (click)="continue()">
-        <span nxCopytext="medium" class="nx-font-weight-bold">CONTINUAR SIN MODELO</span>
+      <button class="nx-margin-y-2xs" nxButton="tertiary small" type="button" (click)="continue()">
+        <span nxCopytext="medium" class="uppercase nx-font-weight-bold" uiQuoteLiteral="continue-without-car"></span>
       </button>
     </div>
   </quote-footer>

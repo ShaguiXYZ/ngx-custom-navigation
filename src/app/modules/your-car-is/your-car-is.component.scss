@@ -1,7 +1,3 @@
-.w-100 {
-  width: 100% !important;
-}
-
 .form-container {
   flex-direction: column;
 
@@ -21,5 +17,14 @@
 
   .selectable-container + .selectable-container {
     margin-top: 16px;
+  }
+}
+
+.extra__footer__options {
+  display: flex;
+  justify-content: center;
+
+  .uppercase {
+    text-transform: uppercase;
   }
 }

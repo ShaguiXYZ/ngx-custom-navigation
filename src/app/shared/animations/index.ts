@@ -1,7 +1,7 @@
 /**
  * Source: https://fireship.io/lessons/angular-router-animations/
  */
-import { AnimationMetadata, trigger } from '@angular/animations';
+import { trigger } from '@angular/animations';
 import { fadeTransitions } from './fade.animation';
 import { slideTransitions } from './slide.animation';
 import { stepperTransitions } from './stepper.animation';

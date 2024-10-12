@@ -1,5 +1,9 @@
 .quote__header {
   h3 {
     text-wrap: wrap;
+
+    ::ng-deep p {
+      margin-top: 12px;
+    }
   }
 }

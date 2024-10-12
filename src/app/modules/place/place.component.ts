@@ -19,7 +19,7 @@ import { IndexedData } from 'src/app/core/models';
 import { LocationService } from 'src/app/core/services';
 import { HeaderTitleComponent, QuoteFooterComponent, QuoteFooterInfoComponent } from 'src/app/shared/components';
 import { QuoteFooterConfig } from 'src/app/shared/components/quote-footer/models';
-import { QuoteMaskDirective } from 'src/app/shared/directives';
+import { QuoteLiteralDirective, QuoteMaskDirective } from 'src/app/shared/directives';
 import { IsValidData } from 'src/app/shared/guards';
 import { QuoteModel } from 'src/app/shared/models';
 
@@ -37,7 +37,8 @@ import { QuoteModel } from 'src/app/shared/models';
     NxInputModule,
     NxMaskModule,
     ReactiveFormsModule,
-    QuoteMaskDirective
+    QuoteMaskDirective,
+    QuoteLiteralDirective
   ]
 })
 export class PlaceComponent implements OnInit, OnDestroy, IsValidData {

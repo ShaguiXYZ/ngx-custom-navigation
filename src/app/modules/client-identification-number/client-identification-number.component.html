@@ -1,7 +1,7 @@
 <article class="component-container">
   <quote-header-title>
-    ¿Nos puedes facilitar tu documento de identidad?
-    <p nxCopytext="normal">Solo utilizaremos este dato para darte un presupuesto totalmente personalizado</p>
+    <span uiQuoteLiteral="header"></span>
+    <p nxCopytext="normal" uiQuoteLiteral="subheader"></p>
   </quote-header-title>
   <section class="form-container">
     <form [formGroup]="form">
@@ -12,7 +12,7 @@
   </section>
   <quote-footer>
     <div class="extra__footer__info">
-      <quote-footer-info icon="fa-id-card"> Para ofrecerte el mejor seguro es importante verificar tu identidad. </quote-footer-info>
+      <quote-footer-info icon="fa-id-card"><span uiQuoteLiteral="footer-info"></span></quote-footer-info>
     </div>
   </quote-footer>
 </article>

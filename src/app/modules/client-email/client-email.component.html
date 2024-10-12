@@ -1,5 +1,8 @@
+<!-- eslint-disable @angular-eslint/template/elements-content -->
 <article class="component-container">
-  <quote-header-title>Déjanos tu email y recibe tu presupuesto al instante</quote-header-title>
+  <quote-header-title>
+    <span uiQuoteLiteral="header"></span>
+  </quote-header-title>
   <section class="form-container">
     <form [formGroup]="form">
       <nx-formfield label="Correo electrónico">
@@ -7,19 +10,17 @@
       </nx-formfield>
       <div class="products-info nx-margin-top-s">
         <div class="products-info-literal nx-margin-right-xs" nxCopytext="normal">
-          <span class="products-info-literal">Quiero recibir información sobre productos y ofertas de Shagui </span>
+          <span uiQuoteLiteral="more-info"></span>
         </div>
         <nx-switcher formControlName="productsInfo" />
       </div>
       <div class="products-info nx-margin-top-s">
         <div class="privatity products-info-literal nx-margin-right-xs" nxCopytext="normal">
-          <span class="products-info-literal">
-            He leído y acepto la
-            <nx-link nxStyle="text">
-              <a routerLink="/documentation">política de privacidad</a>
-            </nx-link>
-            de Shagui
-          </span>
+          <span uiQuoteLiteral="text-01"></span>
+          <nx-link nxStyle="text">
+            <a routerLink="/documentation" uiQuoteLiteral="privacy-policy"></a>
+          </nx-link>
+          <span uiQuoteLiteral="text-02"></span>
         </div>
         <nx-switcher formControlName="privacyPolicy" />
       </div>

@@ -1,5 +1,5 @@
 <article class="component-container">
-  <quote-header-title>¿Has dado algún parte en los últimos 5 años?</quote-header-title>
+  <quote-header-title><span uiQuoteLiteral="header"></span></quote-header-title>
   <section class="form-container">
     <div class="selectable-container">
       <quote-selectable-option [selected]="selectedAccidents === 0" [fullHeight]="true" (uiSelect)="selectAccidents(0)">
@@ -39,14 +39,19 @@
     <div class="selectable-container">
       <quote-selectable-option [selected]="selectedAccidents === 5" [fullHeight]="true" (uiSelect)="selectAccidents(5)">
         <div class="card-container">
-          <span nxCopytext="normal" class="nx-margin-s nx-margin-left-4m">5 o más</span>
+          <span
+            nxCopytext="normal"
+            class="nx-margin-s nx-margin-left-4m"
+            uiQuoteLiteral="more-accidents"
+            [uiQuoteLitealParams]="{ value: '5' }"
+          ></span>
         </div>
       </quote-selectable-option>
     </div>
   </section>
   <quote-footer [config]="{ showNext: false }">
     <div class="extra__footer__info">
-      <quote-footer-info icon="fa-location-arrow">Nos gustaría acompañarte en tus próximos viajes.</quote-footer-info>
+      <quote-footer-info icon="fa-location-arrow"><span uiQuoteLiteral="footer-info"></span></quote-footer-info>
     </div>
   </quote-footer>
 </article>

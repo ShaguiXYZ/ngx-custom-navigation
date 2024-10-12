@@ -1,21 +1,18 @@
-import { IIconData } from 'src/app/shared/models';
+import { IndexedData } from '@shagui/ng-shagui/core';
 
 const iconPath = 'assets/images/wm/driving-license/location';
 
-export const DrivingLicenseIcons: IIconData[] = [
+export const DrivingLicenseIcons: IndexedData[] = [
   {
     index: 'eu',
-    icon: `${iconPath}/europe.png`,
-    data: 'Europa'
+    data: `${iconPath}/europe.png`
   },
   {
     index: 'uk',
-    icon: `${iconPath}/uk.png`,
-    data: 'Reino Unido'
+    data: `${iconPath}/uk.png`
   },
   {
     index: 'other',
-    icon: `${iconPath}/world.png`,
-    data: 'Otros'
+    data: `${iconPath}/world.png`
   }
 ];

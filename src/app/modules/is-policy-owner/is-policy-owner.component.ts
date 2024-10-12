@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
 import { RoutingService } from 'src/app/core/services';
 import { HeaderTitleComponent, SelectableOptionComponent } from 'src/app/shared/components';
+import { QuoteLiteralDirective } from 'src/app/shared/directives';
 import { IsValidData } from 'src/app/shared/guards';
 import { QuoteModel } from 'src/app/shared/models';
 
@@ -14,7 +15,7 @@ import { QuoteModel } from 'src/app/shared/models';
   templateUrl: './is-policy-owner.component.html',
   styleUrl: './is-policy-owner.component.scss',
   standalone: true,
-  imports: [CommonModule, HeaderTitleComponent, SelectableOptionComponent, NxButtonModule]
+  imports: [CommonModule, HeaderTitleComponent, SelectableOptionComponent, NxButtonModule, QuoteLiteralDirective]
 })
 export class IsPolicyOwnerComponent implements IsValidData {
   private readonly contextDataService = inject(ContextDataService);

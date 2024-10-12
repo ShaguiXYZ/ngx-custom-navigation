@@ -1,11 +1,11 @@
 <article class="component-container">
-  <quote-header-title>Seleccione sus características</quote-header-title>
+  <quote-header-title> <span uiQuoteLiteral="header"></span></quote-header-title>
   <div class="form-container">
     <nx-accordion variant="light" [multi]="true">
       <nx-expansion-panel [expanded]="true">
         <nx-expansion-panel-header>
           <nx-expansion-panel-title nxHeadline="subsection-xsmall">
-            {{ 'Label.Fuel' | translate }}
+            <span uiQuoteLiteral="fuel"></span>
           </nx-expansion-panel-title>
         </nx-expansion-panel-header>
         <div class="vehicle__selections">
@@ -26,7 +26,7 @@
       <nx-expansion-panel #cubicCapacityPanel [expanded]="selectedFuel">
         <nx-expansion-panel-header>
           <nx-expansion-panel-title nxHeadline="subsection-xsmall">
-            {{ 'Label.CubicCapacity' | translate }}
+            <span uiQuoteLiteral="cubic-capacity"></span>
           </nx-expansion-panel-title>
         </nx-expansion-panel-header>
         <div class="vehicle__selections">
@@ -58,7 +58,7 @@
       <nx-expansion-panel #powerPanel [expanded]="selectedCubicCapacity">
         <nx-expansion-panel-header>
           <nx-expansion-panel-title nxHeadline="subsection-xsmall">
-            {{ 'Label.Power' | translate }}
+            <span uiQuoteLiteral="power"></span>
           </nx-expansion-panel-title>
         </nx-expansion-panel-header>
         <div class="vehicle__selections">

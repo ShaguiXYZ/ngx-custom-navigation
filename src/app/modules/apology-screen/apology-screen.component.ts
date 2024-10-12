@@ -6,21 +6,30 @@ import { NxHeadlineModule } from '@aposin/ng-aquila/headline';
 import { NxIconModule } from '@aposin/ng-aquila/icon';
 import { HeaderTitleComponent, QuoteFooterComponent } from 'src/app/shared/components';
 import { QuoteFooterConfig } from 'src/app/shared/components/quote-footer/models';
+import { QuoteLiteralDirective } from 'src/app/shared/directives';
 
 @Component({
   selector: 'app-apology-screen',
   templateUrl: './apology-screen.component.html',
   styleUrl: './apology-screen.component.scss',
   standalone: true,
-  imports: [HeaderTitleComponent, QuoteFooterComponent, NxButtonModule, NxCardModule, NxCopytextModule, NxHeadlineModule, NxIconModule]
+  imports: [
+    HeaderTitleComponent,
+    QuoteFooterComponent,
+    NxButtonModule,
+    NxCardModule,
+    NxCopytextModule,
+    NxHeadlineModule,
+    NxIconModule,
+    QuoteLiteralDirective
+  ]
 })
 export class ApologyComponent {
   public footerConfig!: QuoteFooterConfig;
 
   constructor() {
     this.footerConfig = {
-      showNext: true,
-      nextLabel: 'FINALIZAR'
+      showNext: true
     };
   }
 }

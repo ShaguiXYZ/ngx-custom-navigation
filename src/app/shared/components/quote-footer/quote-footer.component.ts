@@ -3,16 +3,16 @@ import { CommonModule } from '@angular/common';
 import { Component, inject, Input, OnDestroy } from '@angular/core';
 import { NxButtonModule } from '@aposin/ng-aquila/button';
 import { NxIconModule } from '@aposin/ng-aquila/icon';
-import { TranslateService } from '@ngx-translate/core';
+import { hasValue } from '@shagui/ng-shagui/core';
 import { Subscription } from 'rxjs';
 import { QuoteFooterConfig } from './models';
 import { QuoteFooterService } from './services';
-import { hasValue } from '@shagui/ng-shagui/core';
+import { QuoteLiteralDirective } from '../../directives';
 
 @Component({
   selector: 'quote-footer',
   standalone: true,
-  imports: [CommonModule, NxButtonModule, NxIconModule],
+  imports: [CommonModule, NxButtonModule, NxIconModule, QuoteLiteralDirective],
   templateUrl: './quote-footer.component.html',
   styleUrl: './quote-footer.component.scss',
   providers: [QuoteFooterService]
@@ -25,7 +25,6 @@ export class QuoteFooterComponent implements OnDestroy {
   private readonly subscription$: Subscription[] = [];
   private readonly breakpointObserver = inject(BreakpointObserver);
   private readonly footerService = inject(QuoteFooterService);
-  private readonly translateService = inject(TranslateService);
 
   constructor() {
     this.subscription$.push(
@@ -36,9 +35,7 @@ export class QuoteFooterComponent implements OnDestroy {
 
     this._config = {
       showNext: true,
-      showBack: false,
-      backLabel: this.translateService.instant('Label.Back'),
-      nextLabel: this.translateService.instant('Label.Next')
+      showBack: false
     };
   }
 
@@ -50,9 +47,7 @@ export class QuoteFooterComponent implements OnDestroy {
   set config(value: QuoteFooterConfig) {
     this._config = {
       ...value,
-      showNext: value.showNext ?? true,
-      backLabel: value.backLabel ?? this.translateService.instant('Label.Back'),
-      nextLabel: value.nextLabel ?? this.translateService.instant('Label.Next')
+      showNext: value.showNext ?? true
     };
   }
 

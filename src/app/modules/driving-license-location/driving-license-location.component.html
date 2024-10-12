@@ -1,7 +1,7 @@
 <article class="component-container">
   <quote-header-title>
     <div class="component__header__title">
-      <span class="info__description">¿Dónde te sacaste el carnet de conducir?</span>
+      <span class="info__description" uiQuoteLiteral="header"></span>
       <span class="info__icon nx-margin-left-2xs">
         <em class="fa-solid fa-2xs fa-info-circle" aria-hidden="true" (click)="openFromTemplate()"></em>
       </span>
@@ -17,8 +17,6 @@
 <ng-template #template>
   <div nxModalContent class="modal-content">
     <h3 nxHeadline="subsection-medium" class="nx-margin-bottom-s">Obtención del carnet</h3>
-    <p nxCopytext="subsection-medium" class="nx-margin-bottom-2m">
-      Indica lugar de origen donde obtuviste tu primera licencia de condución.
-    </p>
+    <p nxCopytext="subsection-medium" class="nx-margin-bottom-2m" uiQuoteLiteral="help"></p>
   </div>
 </ng-template>

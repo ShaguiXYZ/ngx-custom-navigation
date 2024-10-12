@@ -2,13 +2,15 @@
   <div class="head">
     <img src="../../../../favicon.ico" class="logo" alt="Logo" />
     <nx-link>
-      <a class="contact-us" tabindex="0" uiQuoteLink="contact-us">¿Te llamamos?</a>
+      <a class="contact-us" tabindex="0" uiQuoteLink="contact-us" uiQuoteLiteral="we-call-you"> </a>
     </nx-link>
   </div>
   <div class="back">
     @if (showBackButton) {
     <nx-link nxStyle="block icon-left">
-      <a (click)="return()" (keydown.enter)="return()" tabindex="0"><nx-icon name="arrow-left" aria-hidden="true"></nx-icon> Volver</a>
+      <a (click)="return()" (keydown.enter)="return()" tabindex="0"
+        ><nx-icon name="arrow-left" aria-hidden="true"></nx-icon> <span uiQuoteLiteral="back"></span
+      ></a>
     </nx-link>
     }
   </div>

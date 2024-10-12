@@ -4,8 +4,8 @@ import { Stepper, StepperDTO, Steppers } from 'src/app/shared/models/stepper.mod
 import { LiteralModel } from './literal.model';
 
 export type CompareOperations = 'AND' | 'OR';
-
 export type Links = DataInfo;
+export type Literals = DataInfo<LiteralModel>;
 
 export interface ConfigurationDTO {
   homePageId: string;
@@ -13,10 +13,11 @@ export interface ConfigurationDTO {
   steppers?: StepperDTO[];
   pageMap: Page[];
   links?: Links;
+  literals?: Literals;
 }
 
 export interface PageConfiguration {
-  literals?: DataInfo<LiteralModel>;
+  literals?: Literals;
   data?: DataInfo<any>;
 }
 
@@ -51,6 +52,7 @@ export interface Configuration {
   pageMap: DataInfo<Page>;
   steppers?: Steppers;
   links?: Links;
+  literals?: Literals;
 }
 
 export namespace Configuration {
@@ -60,6 +62,8 @@ export namespace Configuration {
     initSteppers(quoteConfiguration, configuration.steppers);
 
     initLinks(quoteConfiguration, configuration.links);
+
+    initLiterals(quoteConfiguration, configuration.literals);
 
     return quoteConfiguration;
   };
@@ -107,6 +111,10 @@ export namespace Configuration {
 
   const initLinks = (configuration: Configuration, links?: Links): void => {
     configuration.links = links;
+  };
+
+  const initLiterals = (configuration: Configuration, literals?: Literals): void => {
+    configuration.literals = literals;
   };
 }
 

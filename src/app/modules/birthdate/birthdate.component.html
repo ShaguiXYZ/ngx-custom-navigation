@@ -1,5 +1,5 @@
 <article class="component-container">
-  <quote-header-title>¿Cuándo naciste?</quote-header-title>
+  <quote-header-title><span uiQuoteLiteral="header"></span></quote-header-title>
   <section class="form-container">
     <form [formGroup]="form">
       <nx-formfield label="Fecha de nacimiento">
@@ -11,11 +11,13 @@
           [parseFormat]="['DD/MM/YYYY', 'DDMMYYYY', 'DDMMYY']"
           displayFormat="DD/MM/YYYY"
         />
-        <span nxFormfieldHint>{{ 'Label.DateFormat' | translate }}</span>
+        <span nxFormfieldHint uiQuoteLiteral="hint-date-format"></span>
         <nx-datepicker-toggle [for]="myDatepicker" nxFormfieldSuffix></nx-datepicker-toggle>
         <nx-datepicker #myDatepicker></nx-datepicker>
-        @if(formErrors['clientOld']) {
-        <nx-error appearance="text" nxFormfieldError>El cliente a de ser mayor de edad</nx-error>
+        @if(form.get('birthdate')?.errors?.['required']) {
+        <nx-error appearance="text" nxFormfieldError><span uiQuoteLiteral="error-required"></span> </nx-error>
+        } @if(form.get('birthdate')?.errors?.['clientOld']) {
+        <nx-error appearance="text" nxFormfieldError><span uiQuoteLiteral="error-client-old"></span> </nx-error>
         }
       </nx-formfield>
     </form>

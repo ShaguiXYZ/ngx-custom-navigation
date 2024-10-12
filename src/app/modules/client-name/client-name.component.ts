@@ -9,6 +9,7 @@ import { ContextDataService } from '@shagui/ng-shagui/core';
 import { Observable } from 'rxjs';
 import { QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
 import { HeaderTitleComponent, QuoteFooterComponent } from 'src/app/shared/components';
+import { QuoteLiteralDirective } from 'src/app/shared/directives';
 import { IsValidData } from 'src/app/shared/guards';
 import { QuoteModel } from 'src/app/shared/models';
 
@@ -17,7 +18,15 @@ import { QuoteModel } from 'src/app/shared/models';
   templateUrl: './client-name.component.html',
   styleUrl: './client-name.component.scss',
   standalone: true,
-  imports: [FormsModule, HeaderTitleComponent, NxFormfieldModule, NxInputModule, QuoteFooterComponent, ReactiveFormsModule],
+  imports: [
+    FormsModule,
+    HeaderTitleComponent,
+    NxFormfieldModule,
+    NxInputModule,
+    QuoteFooterComponent,
+    ReactiveFormsModule,
+    QuoteLiteralDirective
+  ],
   providers: [{ provide: NX_DATE_LOCALE, useValue: 'es-ES' }]
 })
 export class ClientNameComponent implements OnInit, IsValidData {

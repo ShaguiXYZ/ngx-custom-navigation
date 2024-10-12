@@ -74,6 +74,14 @@
         }
       ],
       "configuration": {
+        "literals": {
+          "footer-next": "EMPEZAR",
+          "header": "Calcular mi seguro",
+          "subheader": "Estás a menos de 5 minutos de conseguir el seguro más completo",
+          "coverage-1": "Asistencia en carretera nacional e internacional 24/7",
+          "coverage-2": "Te llevamos el coche de sustitución a tu casa",
+          "coverage-3": "Red de talleres excelentes a tu disposición"
+        },
         "data": {
           "showBack": false
         }
@@ -96,6 +104,9 @@
         }
       ],
       "configuration": {
+        "literals": {
+          "header": "¿Eres cliente de Shagui?"
+        },
         "data": {
           "showBack": false
         }
@@ -121,7 +132,15 @@
         {
           "nextPageId": "date-of-issue"
         }
-      ]
+      ],
+      "configuration": {
+        "literals": {
+          "error-required": "El código postal es obligatorio para continuar",
+          "error-unknown": "El código postal no existe",
+          "header": "¿Cuál es tu código postal?",
+          "footer-info": "¿Sabías que ser cliente de Shagui tiene muchas ventajas exclusivas?"
+        }
+      }
     },
     {
       "pageId": "birthdate",
@@ -129,7 +148,14 @@
         {
           "nextPageId": "driving-license-location"
         }
-      ]
+      ],
+      "configuration": {
+        "literals": {
+          "header": "¿Cuándo naciste?",
+          "error-required": "La fecha de nacimiento es obligatoria para continuar",
+          "error-client-old": "El cliente a de ser mayor de edad"
+        }
+      }
     },
     {
       "pageId": "driving-license-date",
@@ -137,7 +163,12 @@
         {
           "nextPageId": "vehicle-type"
         }
-      ]
+      ],
+      "configuration": {
+        "literals": {
+          "header": "¿Cuándo sacaste el carnet de conducir?"
+        }
+      }
     },
     {
       "pageId": "driving-license-location",
@@ -154,7 +185,16 @@
         {
           "nextPageId": "driving-license-date"
         }
-      ]
+      ],
+      "configuration": {
+        "literals": {
+          "header": "¿Dónde sacaste el carnet de conducir?",
+          "help": "Indica lugar de origen donde obtuviste tu primera licencia de condución.",
+          "eu": "En Europa",
+          "uk": "En Reino Unido",
+          "other": "En otro país"
+        }
+      }
     },
     {
       "pageId": "date-of-issue",
@@ -162,7 +202,13 @@
         {
           "nextPageId": "birthdate"
         }
-      ]
+      ],
+      "configuration": {
+        "literals": {
+          "date-of-issue-label": "Fecha de contratación",
+          "header": "¿Cuándo quieres que empiece tu seguro?"
+        }
+      }
     },
     {
       "pageId": "license-plate",
@@ -179,7 +225,14 @@
         {
           "nextPageId": "your-car-is"
         }
-      ]
+      ],
+      "configuration": {
+        "literals": {
+          "continue-without-license-plate": "Continuar sin matrícula",
+          "header": "¿Cuál es la matrícula de tu coche?",
+          "footer-info": "Facilitando tu matrícula obtendrás tu cotización mucho más rápido"
+        }
+      }
     },
     {
       "pageId": "your-car-is",
@@ -196,7 +249,13 @@
         {
           "nextPageId": "is-policy-owner"
         }
-      ]
+      ],
+      "configuration": {
+        "literals": {
+          "continue-without-car": "Continuar sin vehículo",
+          "header": "Selecciona el modelo"
+        }
+      }
     },
     {
       "pageId": "make",
@@ -204,7 +263,12 @@
         {
           "nextPageId": "vehicle-models"
         }
-      ]
+      ],
+      "configuration": {
+        "literals": {
+          "header": "¿Qué marca es tu coche?"
+        }
+      }
     },
     {
       "pageId": "vehicle-type",
@@ -221,7 +285,16 @@
         {
           "nextPageId": "license-plate"
         }
-      ]
+      ],
+      "configuration": {
+        "literals": {
+          "header": "¿Acabas de comprar tu coche?",
+          "vehicle-old": "No, ya lo tenía",
+          "vehicle-new": "Sí, es nuevo",
+          "vehicle-second-hand": "Sí, es de segunda mano",
+          "vehicle-unregistered": "Es nuevo y todavía no lo he matriculado"
+        }
+      }
     },
     {
       "pageId": "vehicle-models",
@@ -229,7 +302,12 @@
         {
           "nextPageId": "vehicle-fuel"
         }
-      ]
+      ],
+      "configuration": {
+        "literals": {
+          "header": "¿Qué modelo es tu coche?"
+        }
+      }
     },
     {
       "pageId": "vehicle-fuel",
@@ -237,7 +315,12 @@
         {
           "nextPageId": "vehicle-model-versions"
         }
-      ]
+      ],
+      "configuration": {
+        "literals": {
+          "header": "Seleccione sus características"
+        }
+      }
     },
     {
       "pageId": "vehicle-model-versions",
@@ -245,7 +328,12 @@
         {
           "nextPageId": "is-policy-owner"
         }
-      ]
+      ],
+      "configuration": {
+        "literals": {
+          "header": "¿Y la versión?"
+        }
+      }
     },
     {
       "pageId": "license-year",
@@ -253,7 +341,13 @@
         {
           "nextPageId": "is-policy-owner"
         }
-      ]
+      ],
+      "configuration": {
+        "literals": {
+          "header": "¿En qué año matriculaste tu coche?",
+          "year-of-manufacture-label": "Año de matriculación"
+        }
+      }
     },
     {
       "pageId": "is-policy-owner",
@@ -308,7 +402,12 @@
         {
           "nextPageId": "number-accidents"
         }
-      ]
+      ],
+      "configuration": {
+        "literals": {
+          "header": "¿Eres o has sido titular de un seguro, para este coche u otro, en los últimos 60 días?"
+        }
+      }
     },
     {
       "pageId": "insurance-companies",
@@ -316,7 +415,12 @@
         {
           "nextPageId": "number-accidents"
         }
-      ]
+      ],
+      "configuration": {
+        "literals": {
+          "header": "¿Con qué compañía tienes tu seguro actualmente?"
+        }
+      }
     },
     {
       "pageId": "number-accidents",
@@ -324,7 +428,14 @@
         {
           "nextPageId": "client-name"
         }
-      ]
+      ],
+      "configuration": {
+        "literals": {
+          "header": "¿Has tenido algún accidente en los últimos 5 años?",
+          "more-accidents": "{{value}} o más",
+          "footer-info": "Nos gustaría acompañarte en tus próximos viajes."
+        }
+      }
     },
     {
       "pageId": "client-name",
@@ -332,7 +443,12 @@
         {
           "nextPageId": "client-phone-number"
         }
-      ]
+      ],
+      "configuration": {
+        "literals": {
+          "header": "Nos gustaría conocerte un poco más"
+        }
+      }
     },
     {
       "pageId": "client-phone-number",
@@ -340,7 +456,13 @@
         {
           "nextPageId": "client-email"
         }
-      ]
+      ],
+      "configuration": {
+        "literals": {
+          "header": "¿Cuál es tu número de teléfono?",
+          "subheader": "Sabemos que los seguros a veces son complejos. Por eso, solo te llamaremos para darte asistencia personalizada."
+        }
+      }
     },
     {
       "pageId": "client-email",
@@ -351,7 +473,12 @@
       ],
       "configuration": {
         "literals": {
-          "legal-text": { "value": "Texto legal pendiente definir...", "type": "value" }
+          "header": "Déjanos tu email y recibe tu presupuesto al instante",
+          "legal-text": { "value": "Texto legal pendiente definir...", "type": "value" },
+          "more-info": "Quiero recibir información sobre productos y ofertas de Shagui",
+          "privacy-policy": "política de privacidad",
+          "text-01": "He leído y acepto la",
+          "text-02": "de Shagui"
         }
       }
     },
@@ -361,7 +488,14 @@
         {
           "nextPageId": "offerings"
         }
-      ]
+      ],
+      "configuration": {
+        "literals": {
+          "header": "¿Nos puedes facilitar tu documento de identidad?",
+          "subheader": "Solo utilizaremos este dato para darte un presupuesto totalmente personalizado",
+          "footer-info": "Para ofrecerte el mejor seguro es importante verificar tu identidad."
+        }
+      }
     },
     {
       "pageId": "offerings",
@@ -369,7 +503,15 @@
         {
           "nextPageId": "contact-time"
         }
-      ]
+      ],
+      "configuration": {
+        "literals": {
+          "footer-next": "LLAMAR AHORA",
+          "from-now": "Desde hoy {{value}}",
+          "popular": "El más contratado",
+          "view-coverages": "Ver coberturas"
+        }
+      }
     },
     {
       "pageId": "contact-time",
@@ -377,12 +519,20 @@
         {
           "nextPageId": "on-boarding"
         }
-      ]
+      ],
+      "configuration": {
+        "literals": {
+          "afternoon": "Por la tarde",
+          "header": "¿Cuándo podemos llamarte?",
+          "morning": "Por la mañana"
+        }
+      }
     },
     {
       "pageId": "contact-us",
       "configuration": {
         "literals": {
+          "footer-next": "FINALIZAR",
           "header": { "value": "¡Qué sorpresa!", "type": "value" },
           "subheader": "Actualmente no podemos hacer seguros con esas condiciones.",
           "body": "Para cualquier consulta:"
@@ -390,7 +540,13 @@
       }
     },
     {
-      "pageId": "apology-screen"
+      "pageId": "apology-screen",
+      "configuration": {
+        "literals": {
+          "apology-text": "Lo sentimos, no podemos ofrecerte el seguro que necesitas en esta ocasión.",
+          "footer-next": "FINALIZAR"
+        }
+      }
     },
     {
       "pageId": "is-client-client-name",
@@ -399,7 +555,12 @@
         {
           "nextPageId": "is-client-client-phone-number"
         }
-      ]
+      ],
+      "configuration": {
+        "literals": {
+          "header": "¿Como te llamas?"
+        }
+      }
     },
     {
       "pageId": "is-client-client-phone-number",
@@ -408,7 +569,12 @@
         {
           "nextPageId": "is-client-client-email"
         }
-      ]
+      ],
+      "configuration": {
+        "literals": {
+          "header": "¿Cuál es tu número de teléfono?"
+        }
+      }
     },
     {
       "pageId": "is-client-client-email",
@@ -417,7 +583,17 @@
         {
           "nextPageId": "is-client-client-identification-number"
         }
-      ]
+      ],
+      "configuration": {
+        "literals": {
+          "header": "Déjanos tu email y recibe tu presupuesto al instante",
+          "legal-text": { "value": "Texto legal pendiente definir...", "type": "value" },
+          "more-info": "Quiero recibir información sobre productos y ofertas de Shagui",
+          "privacy-policy": "política de privacidad",
+          "text-01": "He leído y acepto la",
+          "text-02": "de Shagui"
+        }
+      }
     },
     {
       "pageId": "is-client-client-identification-number",
@@ -426,16 +602,23 @@
         {
           "nextPageId": "is-client-contact-us"
         }
-      ]
+      ],
+      "configuration": {
+        "literals": {
+          "header": "¿Nos puedes facilitar tu documento de identidad?",
+          "subheader": "Solo utilizaremos este dato para darte un presupuesto totalmente personalizado",
+          "footer-info": "Para ofrecerte el mejor seguro es importante verificar tu identidad. "
+        }
+      }
     },
     {
       "pageId": "is-client-contact-us",
       "route": "contact-us",
       "configuration": {
         "literals": {
-          "header": "Calcular mi seguro",
-          "subheader": "Actualmente no podemos hacer seguros con esas condiciones.",
-          "body": "Para cualquier consulta:"
+          "footer-next": "LLAMAR AHORA",
+          "header": "Nos pondremos en contacto contigo",
+          "body": "Muchas gracias por confiar en nosotros, te llamaremos en breve."
         }
       }
     },
@@ -462,10 +645,34 @@
         {
           "nextPageId": "external-contact-us"
         }
-      ]
+      ],
+      "configuration": {
+        "literals": {
+          "afternoon": "Por la tarde",
+          "header": "Nos pondremos en contacto contigo, dinos cuándo",
+          "morning": "Por la mañana"
+        }
+      }
     }
   ],
   "links": {
     "contact-us": "external-contact-us"
+  },
+  "literals": {
+    "back": "Volver",
+    "company-phone": "+49 55 5555 5555",
+    "contact-us-later": "También puedes contactarnos más tarde",
+    "cubic-capacity": { "value": "Label.CubicCapacity", "type": "translate" },
+    "footer-back": { "value": "Label.Back", "type": "translate" },
+    "footer-next": { "value": "Label.Next", "type": "translate" },
+    "fuel": { "value": "Label.Fuel", "type": "translate" },
+    "hint-date-format": { "value": "Label.DateFormat", "type": "translate" },
+    "no": { "value": "Label.No", "type": "translate" },
+    "power": { "value": "Label.Power", "type": "translate" },
+    "Search": { "value": "Label.Search", "type": "translate" },
+    "yes": { "value": "Label.Yes", "type": "translate" },
+    "we-call-you": "Te llamamos",
+    "warning-header-back-button": "¡ Aviso !",
+    "warning-text-back-button": "Usa los botones de la aplicación para desplazarte por ella."
   }
 }

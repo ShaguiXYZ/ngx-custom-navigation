@@ -3,22 +3,24 @@ import { Component, inject, OnInit } from '@angular/core';
 import { ContextDataService } from '@shagui/ng-shagui/core';
 import { Observable } from 'rxjs';
 import { QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
+import { IndexedData } from 'src/app/core/models';
 import { InsuranceCompaniesService, RoutingService } from 'src/app/core/services';
 import { HeaderTitleComponent, IconCardComponent } from 'src/app/shared/components';
 import { QuoteFooterConfig } from 'src/app/shared/components/quote-footer/models';
+import { QuoteLiteralDirective } from 'src/app/shared/directives';
 import { IsValidData } from 'src/app/shared/guards';
-import { IIconData, QuoteModel } from 'src/app/shared/models';
+import { QuoteModel } from 'src/app/shared/models';
 
 @Component({
   selector: 'app-insurance-companies',
   standalone: true,
-  imports: [CommonModule, IconCardComponent, HeaderTitleComponent],
+  imports: [CommonModule, IconCardComponent, HeaderTitleComponent, QuoteLiteralDirective],
   templateUrl: './insurance-companies.component.html',
   styleUrl: './insurance-companies.component.scss'
 })
 export class InsuranceCompaniesComponent implements OnInit, IsValidData {
-  public insuranceCompanies: IIconData[] = [];
-  public selectedCompany?: IIconData;
+  public insuranceCompanies: IndexedData[] = [];
+  public selectedCompany?: IndexedData;
   public footerConfig!: QuoteFooterConfig;
 
   private readonly insuranceCompaniesService = inject(InsuranceCompaniesService);
@@ -41,7 +43,7 @@ export class InsuranceCompaniesComponent implements OnInit, IsValidData {
 
   public canDeactivate = (): boolean | Observable<boolean> | Promise<boolean> => this.isValidData();
 
-  public selectCompany(icon: IIconData) {
+  public selectCompany(icon: IndexedData) {
     this.selectedCompany = icon;
 
     this.contextData.insuranceCompany = {

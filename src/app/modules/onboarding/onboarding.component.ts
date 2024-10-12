@@ -3,17 +3,25 @@ import { NxButtonModule } from '@aposin/ng-aquila/button';
 import { NxCardModule } from '@aposin/ng-aquila/card';
 import { NxCopytextModule } from '@aposin/ng-aquila/copytext';
 import { NxHeadlineModule } from '@aposin/ng-aquila/headline';
-import { NxIconModule } from '@aposin/ng-aquila/icon';
 import { RoutingService } from 'src/app/core/services';
 import { HeaderTitleComponent, QuoteFooterComponent } from 'src/app/shared/components';
 import { QuoteFooterConfig } from 'src/app/shared/components/quote-footer/models';
+import { QuoteLiteralDirective } from 'src/app/shared/directives';
 
 @Component({
   selector: 'app-onboarding',
   templateUrl: './onboarding.component.html',
   styleUrl: './onboarding.component.scss',
   standalone: true,
-  imports: [HeaderTitleComponent, QuoteFooterComponent, NxButtonModule, NxCardModule, NxCopytextModule, NxHeadlineModule, NxIconModule]
+  imports: [
+    HeaderTitleComponent,
+    QuoteFooterComponent,
+    NxButtonModule,
+    NxCardModule,
+    NxCopytextModule,
+    NxHeadlineModule,
+    QuoteLiteralDirective
+  ]
 })
 export class OnboardingComponent {
   private readonly routingService = inject(RoutingService);
@@ -22,8 +30,7 @@ export class OnboardingComponent {
 
   constructor() {
     this.footerConfig = {
-      showNext: true,
-      nextLabel: 'EMPEZAR'
+      showNext: true
     };
   }
 

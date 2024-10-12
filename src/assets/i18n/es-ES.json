@@ -9,8 +9,10 @@
     "Fuel": "Combustible",
     "Model": "Modelo",
     "Next": "Continuar",
+    "No": "No",
     "CubicCapacity": "Cilindrada",
     "Power": "Potencia",
-    "YearOfManufacture": "Año de fabricación"
+    "YearOfManufacture": "Año de fabricación",
+    "Yes": "Sí"
   }
 }

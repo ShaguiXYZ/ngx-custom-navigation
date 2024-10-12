@@ -16,9 +16,9 @@ export class SettingsService {
   private readonly translateService = inject(TranslateService);
 
   public async loadSettings(): Promise<void> {
-    this.translateService.setDefaultLang('es-ES');
-
     const contextData = this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA);
+
+    this.translateService.setDefaultLang('es-ES');
 
     this.contextDataService.set(
       QUOTE_CONTEXT_DATA,

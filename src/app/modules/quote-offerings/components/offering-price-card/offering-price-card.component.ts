@@ -7,6 +7,7 @@ import { NxIconModule } from '@aposin/ng-aquila/icon';
 import { NxLinkModule } from '@aposin/ng-aquila/link';
 import { HeaderTitleComponent, QuoteFooterComponent } from 'src/app/shared/components';
 import { QuoteFooterConfig } from 'src/app/shared/components/quote-footer/models';
+import { QuoteLiteralDirective } from 'src/app/shared/directives';
 import { OfferingPriceModel } from 'src/app/shared/models';
 
 @Component({
@@ -18,9 +19,9 @@ import { OfferingPriceModel } from 'src/app/shared/models';
     NxButtonModule,
     NxCopytextModule,
     NxHeadlineModule,
-    NxIconModule,
     NxLinkModule,
-    QuoteFooterComponent
+    QuoteFooterComponent,
+    QuoteLiteralDirective
   ],
   templateUrl: './offering-price-card.component.html',
   styleUrl: './offering-price-card.component.scss'
@@ -47,7 +48,6 @@ export class QuoteOfferingPriceCardComponent {
   constructor() {
     this.footerConfig = {
       showNext: true,
-      nextLabel: 'LLAMAR AHORA',
       nextFn: this.callNow.bind(this)
     };
   }

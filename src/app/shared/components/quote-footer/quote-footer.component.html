@@ -1,3 +1,4 @@
+<!-- eslint-disable @angular-eslint/template/elements-content -->
 <div class="footer-options nx-margin-top-l" [ngClass]="{ 'mobile-options': mobileMode }">
   @if (config.showBack) {
   <button
@@ -10,13 +11,11 @@
     @if(mobileMode) {
     <nx-icon name="chevron-left" size="s" aria-hidden="true" />
     }@else {
-    {{ config.backLabel }}
+    <span uuiQuoteLiteral="footer-back"></span>
     }
   </button>
   } @if (config.showNext) {
-  <button class="footer-option" nxButton="primary medium" type="button" (click)="goToNextStep()">
-    {{ config.nextLabel }}
-  </button>
+  <button class="footer-option" nxButton="primary medium" uiQuoteLiteral="footer-next" type="button" (click)="goToNextStep()"></button>
   }
 </div>
 <div class="footer-extras" [ngClass]="{ 'mobile-options': mobileMode }">

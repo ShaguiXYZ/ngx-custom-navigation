@@ -11,6 +11,7 @@ import { QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
 import { RoutingService, VehicleService } from 'src/app/core/services';
 import { HeaderTitleComponent, QuoteFooterComponent, SelectableOptionComponent } from 'src/app/shared/components';
 import { QuoteFooterConfig } from 'src/app/shared/components/quote-footer/models';
+import { QuoteLiteralDirective } from 'src/app/shared/directives';
 import { IsValidData } from 'src/app/shared/guards';
 import { IVehicleModel, QuoteModel } from 'src/app/shared/models';
 
@@ -30,7 +31,8 @@ import { IVehicleModel, QuoteModel } from 'src/app/shared/models';
     NxFormfieldModule,
     NxInputModule,
     NxMaskModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    QuoteLiteralDirective
   ]
 })
 export class YourCarIsComponent implements OnInit, IsValidData {

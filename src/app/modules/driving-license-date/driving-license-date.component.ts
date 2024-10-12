@@ -4,12 +4,11 @@ import { NX_DATE_LOCALE, NxDatefieldModule } from '@aposin/ng-aquila/datefield';
 import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
 import { NxInputModule } from '@aposin/ng-aquila/input';
 import { NxMomentDateModule } from '@aposin/ng-aquila/moment-date-adapter';
-import { TranslateModule } from '@ngx-translate/core';
 import { ContextDataService } from '@shagui/ng-shagui/core';
 import moment, { Moment } from 'moment';
-import { Observable } from 'rxjs';
 import { QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
 import { HeaderTitleComponent, QuoteFooterComponent } from 'src/app/shared/components';
+import { QuoteLiteralDirective } from 'src/app/shared/directives';
 import { IsValidData } from 'src/app/shared/guards';
 import { QuoteModel } from 'src/app/shared/models';
 
@@ -27,7 +26,7 @@ import { QuoteModel } from 'src/app/shared/models';
     ReactiveFormsModule,
     QuoteFooterComponent,
     NxMomentDateModule,
-    TranslateModule
+    QuoteLiteralDirective
   ],
   providers: [{ provide: NX_DATE_LOCALE, useValue: 'es-ES' }]
 })

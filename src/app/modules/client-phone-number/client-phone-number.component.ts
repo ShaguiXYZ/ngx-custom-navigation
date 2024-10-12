@@ -8,8 +8,8 @@ import { NxMaskModule } from '@aposin/ng-aquila/mask';
 import { ContextDataService } from '@shagui/ng-shagui/core';
 import { Observable } from 'rxjs';
 import { QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
-import { RoutingService } from 'src/app/core/services';
 import { HeaderTitleComponent, QuoteFooterComponent } from 'src/app/shared/components';
+import { QuoteLiteralDirective } from 'src/app/shared/directives';
 import { IsValidData } from 'src/app/shared/guards';
 import { QuoteModel } from 'src/app/shared/models';
 
@@ -26,7 +26,8 @@ import { QuoteModel } from 'src/app/shared/models';
     NxMaskModule,
     NxInputModule,
     QuoteFooterComponent,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    QuoteLiteralDirective
   ],
   providers: [{ provide: NX_DATE_LOCALE, useValue: 'es-ES' }]
 })

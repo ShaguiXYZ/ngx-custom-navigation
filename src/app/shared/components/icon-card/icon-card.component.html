@@ -1,11 +1,16 @@
 <quote-selectable-option [selected]="selected" (uiSelect)="selectIcon()">
   <div class="card-container" [ngClass]="{ selected, labeled: showLabel }">
     <div nxAvatar size="small" class="quote-avatar color-background-icon nx-margin-bottom-s">
-      <img class="icon-image" [alt]="data.data" [src]="data.icon" />
+      <img class="icon-image" [alt]="data.data" [src]="data.icon || data.data" />
     </div>
 
     @if(showLabel){
-    <span nxCopytext="normal" [ngClass]="{ 'nx-font-weight-bold': selected }">{{ data.data | titlecase }}</span>
+    <span
+      nxCopytext="normal"
+      [ngClass]="{ 'nx-font-weight-bold': selected }"
+      [uiQuoteLiteral]="data.index"
+      [uiQuoteDefaultLiteral]="data.data"
+    ></span>
     }
   </div>
 </quote-selectable-option>

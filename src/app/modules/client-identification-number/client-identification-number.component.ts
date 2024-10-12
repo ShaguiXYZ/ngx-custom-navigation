@@ -10,6 +10,7 @@ import { ContextDataService } from '@shagui/ng-shagui/core';
 import { QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
 import { HeaderTitleComponent, QuoteFooterComponent, QuoteFooterInfoComponent } from 'src/app/shared/components';
 import { QuoteFooterConfig } from 'src/app/shared/components/quote-footer/models';
+import { QuoteLiteralDirective } from 'src/app/shared/directives';
 import { IsValidData } from 'src/app/shared/guards';
 import { QuoteModel } from 'src/app/shared/models';
 
@@ -26,7 +27,8 @@ import { QuoteModel } from 'src/app/shared/models';
     NxInputModule,
     QuoteFooterComponent,
     QuoteFooterInfoComponent,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    QuoteLiteralDirective
   ],
   providers: [{ provide: NX_DATE_LOCALE, useValue: 'es-ES' }]
 })

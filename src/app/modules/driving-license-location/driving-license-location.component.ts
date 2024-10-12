@@ -3,15 +3,15 @@ import { Component, inject, TemplateRef, ViewChild } from '@angular/core';
 import { NxButtonModule } from '@aposin/ng-aquila/button';
 import { NxCopytextModule } from '@aposin/ng-aquila/copytext';
 import { NxHeadlineModule } from '@aposin/ng-aquila/headline';
-import { NxIconModule } from '@aposin/ng-aquila/icon';
 import { NxDialogService } from '@aposin/ng-aquila/modal';
-import { ContextDataService } from '@shagui/ng-shagui/core';
+import { ContextDataService, IndexedData } from '@shagui/ng-shagui/core';
 import { QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
 import { RoutingService } from 'src/app/core/services';
 import { HeaderTitleComponent, IconCardComponent, QuoteFooterComponent } from 'src/app/shared/components';
 import { QuoteFooterConfig } from 'src/app/shared/components/quote-footer/models';
+import { QuoteLiteralDirective } from 'src/app/shared/directives';
 import { IsValidData } from 'src/app/shared/guards';
-import { IIconData, QuoteModel } from 'src/app/shared/models';
+import { QuoteModel } from 'src/app/shared/models';
 import { DrivingLicenseIcons } from './models';
 
 @Component({
@@ -25,7 +25,7 @@ import { DrivingLicenseIcons } from './models';
     NxButtonModule,
     NxCopytextModule,
     NxHeadlineModule,
-    NxIconModule
+    QuoteLiteralDirective
   ],
   templateUrl: './driving-license-location.component.html',
   styleUrl: './driving-license-location.component.scss'
@@ -34,7 +34,7 @@ export class DrivingLicenseLocationComponent implements IsValidData {
   @ViewChild('template') infoModal!: TemplateRef<any>;
 
   public drivenLicenseCountries = DrivingLicenseIcons;
-  public selectedLocation?: IIconData;
+  public selectedLocation?: IndexedData;
   public footerConfig!: QuoteFooterConfig;
 
   private readonly contextData!: QuoteModel;
@@ -48,7 +48,7 @@ export class DrivingLicenseLocationComponent implements IsValidData {
     this.selectedLocation = this.drivenLicenseCountries.find(country => country.index === this.contextData.driven.drivenLicenseCountry);
   }
 
-  public selectLocation(icon: IIconData) {
+  public selectLocation(icon: IndexedData) {
     this.selectedLocation = icon;
 
     this.contextData.driven = {

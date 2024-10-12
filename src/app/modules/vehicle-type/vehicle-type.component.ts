@@ -10,11 +10,21 @@ import { HeaderTitleComponent, IconCardComponent, TextCardComponent } from 'src/
 import { IsValidData } from 'src/app/shared/guards';
 import { QuoteModel } from 'src/app/shared/models';
 import { VehicleTypes } from './models';
+import { QuoteLiteralDirective } from 'src/app/shared/directives';
+import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 
 @Component({
   selector: 'app-vehicle-type',
   standalone: true,
-  imports: [CommonModule, HeaderTitleComponent, IconCardComponent, TextCardComponent, NxCopytextModule],
+  imports: [
+    CommonModule,
+    HeaderTitleComponent,
+    IconCardComponent,
+    TextCardComponent,
+    NxCopytextModule,
+    QuoteLiteralDirective,
+    QuoteLiteralPipe
+  ],
   templateUrl: './vehicle-type.component.html',
   styleUrl: './vehicle-type.component.scss'
 })
