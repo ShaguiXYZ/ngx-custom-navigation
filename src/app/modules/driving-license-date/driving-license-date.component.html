@@ -2,7 +2,7 @@
   <quote-header-title><span uiQuoteLiteral="header"></span></quote-header-title>
   <section class="form-container">
     <form [formGroup]="form">
-      <nx-formfield label="Fecha de emisión">
+      <nx-formfield [label]="'issue-date' | quoteLiteral">
         <input
           formControlName="drivenLicenseDate"
           nxDatefield

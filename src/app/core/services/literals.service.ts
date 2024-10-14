@@ -15,7 +15,7 @@ export class LiteralsService {
       ? this.getValue(literal, params)
       : this.isQuoteLiteral(literal)
       ? this.getLiteral(literal, params)
-      : '';
+      : literal;
   }
 
   private isQuoteLiteral = (literal?: QuoteLiteral): literal is QuoteLiteral => typeof literal === 'object' && 'value' in literal;

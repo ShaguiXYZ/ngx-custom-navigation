@@ -152,6 +152,7 @@
       "configuration": {
         "literals": {
           "header": "¿Cuándo naciste?",
+          "birth-date": "Fecha de nacimiento",
           "error-required": "La fecha de nacimiento es obligatoria para continuar",
           "error-client-old": "El cliente a de ser mayor de edad"
         }
@@ -166,7 +167,8 @@
       ],
       "configuration": {
         "literals": {
-          "header": "¿Cuándo sacaste el carnet de conducir?"
+          "header": "¿Cuándo sacaste el carnet de conducir?",
+          "issue-date": "Fecha de emisión"
         }
       }
     },
@@ -229,8 +231,9 @@
       "configuration": {
         "literals": {
           "continue-without-license-plate": "Continuar sin matrícula",
+          "footer-info": "Facilitando tu matrícula obtendrás tu cotización mucho más rápido",
           "header": "¿Cuál es la matrícula de tu coche?",
-          "footer-info": "Facilitando tu matrícula obtendrás tu cotización mucho más rápido"
+          "license-plate": "Matrícula"
         }
       }
     },
@@ -318,7 +321,9 @@
       ],
       "configuration": {
         "literals": {
-          "header": "Seleccione sus características"
+          "cubic-capacity-not-known": "No sé la cilindrada",
+          "header": "Seleccione sus características",
+          "power-not-known": "No sé la potencia"
         }
       }
     },
@@ -446,7 +451,8 @@
       ],
       "configuration": {
         "literals": {
-          "header": "Nos gustaría conocerte un poco más"
+          "header": "Nos gustaría conocerte un poco más",
+          "name": "Nombre"
         }
       }
     },
@@ -460,6 +466,7 @@
       "configuration": {
         "literals": {
           "header": "¿Cuál es tu número de teléfono?",
+          "phone-number": "Número de teléfono",
           "subheader": "Sabemos que los seguros a veces son complejos. Por eso, solo te llamaremos para darte asistencia personalizada."
         }
       }
@@ -473,6 +480,7 @@
       ],
       "configuration": {
         "literals": {
+          "e-mail": "Correo electrónico",
           "header": "Déjanos tu email y recibe tu presupuesto al instante",
           "legal-text": { "value": "Texto legal pendiente definir...", "type": "value" },
           "more-info": "Quiero recibir información sobre productos y ofertas de Shagui",
@@ -492,6 +500,7 @@
       "configuration": {
         "literals": {
           "header": "¿Nos puedes facilitar tu documento de identidad?",
+          "identification-number": "Número de DNI o NIE",
           "subheader": "Solo utilizaremos este dato para darte un presupuesto totalmente personalizado",
           "footer-info": "Para ofrecerte el mejor seguro es importante verificar tu identidad."
         }
@@ -543,7 +552,7 @@
       "pageId": "apology-screen",
       "configuration": {
         "literals": {
-          "apology-text": "Lo sentimos, no podemos ofrecerte el seguro que necesitas en esta ocasión.",
+          "body": "Lo sentimos, no podemos ofrecerte el seguro que necesitas en esta ocasión.",
           "footer-next": "FINALIZAR"
         }
       }
@@ -558,7 +567,8 @@
       ],
       "configuration": {
         "literals": {
-          "header": "¿Como te llamas?"
+          "header": "¿Como te llamas?",
+          "name": "Nombre"
         }
       }
     },
@@ -572,7 +582,8 @@
       ],
       "configuration": {
         "literals": {
-          "header": "¿Cuál es tu número de teléfono?"
+          "header": "¿Cuál es tu número de teléfono?",
+          "phone-number": "Número de teléfono"
         }
       }
     },
@@ -606,6 +617,7 @@
       "configuration": {
         "literals": {
           "header": "¿Nos puedes facilitar tu documento de identidad?",
+          "identification-number": "Número de documento de identidad",
           "subheader": "Solo utilizaremos este dato para darte un presupuesto totalmente personalizado",
           "footer-info": "Para ofrecerte el mejor seguro es importante verificar tu identidad. "
         }
@@ -669,7 +681,7 @@
     "hint-date-format": { "value": "Label.DateFormat", "type": "translate" },
     "no": { "value": "Label.No", "type": "translate" },
     "power": { "value": "Label.Power", "type": "translate" },
-    "Search": { "value": "Label.Search", "type": "translate" },
+    "search": { "value": "Label.Search", "type": "translate" },
     "yes": { "value": "Label.Yes", "type": "translate" },
     "we-call-you": "Te llamamos",
     "warning-header-back-button": "¡ Aviso !",

@@ -13,6 +13,7 @@ import { QuoteFooterConfig } from 'src/app/shared/components/quote-footer/models
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
 import { IsValidData } from 'src/app/shared/guards';
 import { QuoteModel } from 'src/app/shared/models';
+import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 
 @Component({
   selector: 'app-client-identification-number',
@@ -28,7 +29,8 @@ import { QuoteModel } from 'src/app/shared/models';
     QuoteFooterComponent,
     QuoteFooterInfoComponent,
     ReactiveFormsModule,
-    QuoteLiteralDirective
+    QuoteLiteralDirective,
+    QuoteLiteralPipe
   ],
   providers: [{ provide: NX_DATE_LOCALE, useValue: 'es-ES' }]
 })

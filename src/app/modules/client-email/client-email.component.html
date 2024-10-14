@@ -5,7 +5,7 @@
   </quote-header-title>
   <section class="form-container">
     <form [formGroup]="form">
-      <nx-formfield label="Correo electrónico">
+      <nx-formfield [label]="'e-mail' | quoteLiteral">
         <input type="email" formControlName="email" nxInput email />
         @if(form.get('email')?.errors?.['required']) {
         <nx-error appearance="text" nxFormfieldError><span uiQuoteLiteral="error-required"></span> </nx-error>

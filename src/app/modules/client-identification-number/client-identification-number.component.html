@@ -5,7 +5,7 @@
   </quote-header-title>
   <section class="form-container">
     <form [formGroup]="form">
-      <nx-formfield label="Número de DNI o NIE">
+      <nx-formfield [label]="'identification-number' | quoteLiteral">
         <input formControlName="identificationNumber" nxInput />
         @if(form.get('identificationNumber')?.errors?.['required']) {
         <nx-error appearance="text" nxFormfieldError><span uiQuoteLiteral="error-required"></span> </nx-error>

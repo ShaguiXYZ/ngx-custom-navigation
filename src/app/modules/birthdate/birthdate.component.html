@@ -2,7 +2,7 @@
   <quote-header-title><span uiQuoteLiteral="header"></span></quote-header-title>
   <section class="form-container">
     <form [formGroup]="form">
-      <nx-formfield label="Fecha de nacimiento">
+      <nx-formfield [label]="'birth-date' | quoteLiteral">
         <input
           formControlName="birthdate"
           nxDatefield

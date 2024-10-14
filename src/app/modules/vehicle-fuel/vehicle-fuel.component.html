@@ -49,7 +49,11 @@
           @let _cubicCapacityNotKnown = selectedCubicCapacity?.index === cubicCapacityNotKnown.index;
           <quote-selectable-option [selected]="_cubicCapacityNotKnown" (uiSelect)="selectCubicCapacity(cubicCapacityNotKnown)">
             <button class="nx-margin-y-2xs center" nxButton="tertiary small" type="button">
-              <span nxCopytext="medium" [ngClass]="{ 'nx-font-weight-bold': _cubicCapacityNotKnown }">No sé la cilindrada</span>
+              <span
+                nxCopytext="medium"
+                [ngClass]="{ 'nx-font-weight-bold': _cubicCapacityNotKnown }"
+                uiQuoteLiteral="cubic-capacity-not-known"
+              ></span>
             </button>
           </quote-selectable-option>
         </div>
@@ -78,7 +82,7 @@
           @let _powerNotKnown = selectedPower?.index === powerNotKnown.index;
           <quote-selectable-option [selected]="_powerNotKnown" (uiSelect)="selectPower(powerNotKnown)">
             <button class="nx-margin-y-2xs center" nxButton="tertiary small" type="button">
-              <span nxCopytext="medium" [ngClass]="{ 'nx-font-weight-bold': _powerNotKnown }">No sé la potencia</span>
+              <span nxCopytext="medium" [ngClass]="{ 'nx-font-weight-bold': _powerNotKnown }" uiQuoteLiteral="power-not-known"></span>
             </button>
           </quote-selectable-option>
         </div>

@@ -11,6 +11,7 @@ import { HeaderTitleComponent, QuoteFooterComponent } from 'src/app/shared/compo
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
 import { IsValidData } from 'src/app/shared/guards';
 import { QuoteModel } from 'src/app/shared/models';
+import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 
 @Component({
   selector: 'app-driving-license-date',
@@ -26,7 +27,8 @@ import { QuoteModel } from 'src/app/shared/models';
     ReactiveFormsModule,
     QuoteFooterComponent,
     NxMomentDateModule,
-    QuoteLiteralDirective
+    QuoteLiteralDirective,
+    QuoteLiteralPipe
   ],
   providers: [{ provide: NX_DATE_LOCALE, useValue: 'es-ES' }]
 })

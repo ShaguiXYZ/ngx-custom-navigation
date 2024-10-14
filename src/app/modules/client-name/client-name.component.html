@@ -2,7 +2,7 @@
   <quote-header-title><span uiQuoteLiteral="header"></span></quote-header-title>
   <section class="form-container">
     <form [formGroup]="form">
-      <nx-formfield label="Nombre">
+      <nx-formfield [label]="'name' | quoteLiteral">
         <input formControlName="name" nxInput />
         @if(form.get('name')?.errors?.['required']) {
         <nx-error appearance="text" nxFormfieldError><span uiQuoteLiteral="error-required"></span> </nx-error>

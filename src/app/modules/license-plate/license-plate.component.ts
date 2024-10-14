@@ -16,6 +16,7 @@ import { QuoteFooterConfig } from 'src/app/shared/components/quote-footer/models
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
 import { IsValidData } from 'src/app/shared/guards';
 import { QuoteModel } from 'src/app/shared/models';
+import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 
 @Component({
   selector: 'app-license-plate',
@@ -35,7 +36,8 @@ import { QuoteModel } from 'src/app/shared/models';
     QuoteFooterComponent,
     QuoteFooterInfoComponent,
     ReactiveFormsModule,
-    QuoteLiteralDirective
+    QuoteLiteralDirective,
+    QuoteLiteralPipe
   ]
 })
 export class LicensePlateComponent implements OnInit, OnDestroy, IsValidData {
