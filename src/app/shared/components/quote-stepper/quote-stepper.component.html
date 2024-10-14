@@ -4,7 +4,7 @@
   @if(stepperData) {
   <header class="nx-margin-y-2xs">
     <h3 nxCopytext="normal" class="nx-font-weight-semibold">
-      {{ stepperData.stepper.steps[stepperIndex].label }}
+      {{ stepperData.stepper.steps[stepperIndex].label | literalToString }}
     </h3>
   </header>
   <section class="stepper__list">
@@ -13,7 +13,7 @@
     <div
       class="stepper__item"
       [ngClass]="{ active: _active, complete: _complete, disabled: _disabled }"
-      [nxTooltip]="step.label"
+      [nxTooltip]="step.label | literalToString"
       (click)="(_active || _complete) && onStepClick(step)"
     >
       <div class="stepper__item__progress">

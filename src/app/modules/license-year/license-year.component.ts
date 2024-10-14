@@ -58,6 +58,8 @@ export class LicenseYearComponent implements OnInit, IsValidData {
   }
 
   private updateValidData = (): boolean => {
+    this.form.markAllAsTouched();
+
     if (this.form.valid) {
       this.contextData.vehicle.yearOfManufacture = this.form.value.yearOfManufacture;
       this.contextDataService.set(QUOTE_CONTEXT_DATA, this.contextData);

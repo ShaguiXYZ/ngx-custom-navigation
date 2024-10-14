@@ -80,6 +80,8 @@ export class LicensePlateComponent implements OnInit, OnDestroy, IsValidData {
       return true;
     }
 
+    this.form.markAllAsTouched();
+
     if (this.form.valid) {
       this.contextData.vehicle.plateNumber = this.form.value.plateNumber;
       this.contextData.driven.hasDrivenLicense = true;

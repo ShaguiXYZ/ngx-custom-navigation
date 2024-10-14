@@ -673,6 +673,7 @@
     "yes": { "value": "Label.Yes", "type": "translate" },
     "we-call-you": "Te llamamos",
     "warning-header-back-button": "¡ Aviso !",
-    "warning-text-back-button": "Usa los botones de la aplicación para desplazarte por ella."
+    "warning-text-back-button": "Usa los botones de la aplicación para desplazarte por ella.",
+    "error-required": { "value": "Errors.FieldRequired", "type": "translate" }
   }
 }

@@ -49,6 +49,8 @@ export class DrivingLicenseDateComponent implements OnInit, IsValidData {
   public canDeactivate = (): boolean => this.updateValidData();
 
   private updateValidData = (): boolean => {
+    this.form.markAllAsTouched();
+
     if (this.form.valid) {
       this.contextData.driven = {
         ...this.contextData.driven,

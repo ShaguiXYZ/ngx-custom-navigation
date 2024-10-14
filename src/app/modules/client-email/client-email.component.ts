@@ -53,6 +53,8 @@ export class ClientEMailComponent implements OnInit, IsValidData {
   public canDeactivate = (): boolean | Observable<boolean> | Promise<boolean> => this.updateValidData();
 
   private updateValidData = (): boolean => {
+    this.form.markAllAsTouched();
+
     if (this.form.valid) {
       this.contextData.personalData = {
         ...this.contextData.personalData,
@@ -69,7 +71,7 @@ export class ClientEMailComponent implements OnInit, IsValidData {
     this.form = this.fb.group({
       email: new FormControl(this.contextData.personalData.email, [Validators.required, Validators.email]),
       productsInfo: new FormControl(this.contextData.personalData.productsInfo, [Validators.required]),
-      privacyPolicy: new FormControl(this.contextData.personalData.privacyPolicy, [Validators.required])
+      privacyPolicy: new FormControl(this.contextData.personalData.privacyPolicy, [Validators.requiredTrue])
     });
   }
 }

@@ -1,4 +1,7 @@
 {
+  "Errors": {
+    "FieldRequired": "Campo requerido"
+  },
   "Label": {
     "AllBrands": "Todas las marcas",
     "AllModels": "Todos los modelos",

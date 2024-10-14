@@ -7,6 +7,9 @@
     <form [formGroup]="form">
       <nx-formfield label="Correo electrónico">
         <input type="email" formControlName="email" nxInput email />
+        @if(form.get('email')?.errors?.['required']) {
+        <nx-error appearance="text" nxFormfieldError><span uiQuoteLiteral="error-required"></span> </nx-error>
+        }
       </nx-formfield>
       <div class="products-info nx-margin-top-s">
         <div class="products-info-literal nx-margin-right-xs" nxCopytext="normal">
@@ -24,6 +27,9 @@
         </div>
         <nx-switcher formControlName="privacyPolicy" />
       </div>
+      @if(form.get('privacyPolicy')?.touched && form.get('privacyPolicy')?.errors?.['required']) {
+      <nx-error class="align-right" appearance="text" nxFormfieldError><span uiQuoteLiteral="error-required"></span> </nx-error>
+      }
       <div class="legal-text nx-margin-top-s" nxCopytext="normal" uiQuoteLiteral="legal-text">
         <span class="products-info-literal nx-margin-y-s"></span>
       </div>

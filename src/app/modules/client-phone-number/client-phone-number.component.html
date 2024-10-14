@@ -7,6 +7,9 @@
     <form [formGroup]="form">
       <nx-formfield label="Teléfono">
         <input formControlName="phoneNumber" nxInput nxMask="000 00 00 00" />
+        @if(form.get('phoneNumber')?.errors?.['required']) {
+        <nx-error appearance="text" nxFormfieldError><span uiQuoteLiteral="error-required"></span> </nx-error>
+        }
       </nx-formfield>
     </form>
   </section>

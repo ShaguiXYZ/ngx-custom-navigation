@@ -7,14 +7,15 @@ import { Subscription } from 'rxjs';
 import { RoutingService } from 'src/app/core/services';
 import { Step, Stepper } from '../../models/stepper.model';
 import { QuoteStepperService } from './services';
+import { LiteralToStringPipe } from '../../pipes';
 
 @Component({
   selector: 'quote-stepper',
   standalone: true,
-  imports: [CommonModule, NxCopytextModule, NxIconModule, NxTooltipModule],
+  imports: [CommonModule, NxCopytextModule, NxIconModule, NxTooltipModule, LiteralToStringPipe],
   templateUrl: './quote-stepper.component.html',
   styleUrls: ['./quote-stepper.component.scss'],
-  providers: [QuoteStepperService]
+  providers: [QuoteStepperService, LiteralToStringPipe]
 })
 export class QuoteStepperComponent implements OnInit, OnDestroy {
   public stepperData?: { stepper: Stepper; stepKey: string };
@@ -24,6 +25,8 @@ export class QuoteStepperComponent implements OnInit, OnDestroy {
 
   private readonly quoteStepperService = inject(QuoteStepperService);
   private readonly routingService = inject(RoutingService);
+
+  constructor(private readonly literalToStringPipe: LiteralToStringPipe) {}
 
   ngOnInit(): void {
     this.subscription$.push(

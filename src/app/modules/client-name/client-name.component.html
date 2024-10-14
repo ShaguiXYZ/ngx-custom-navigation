@@ -4,9 +4,15 @@
     <form [formGroup]="form">
       <nx-formfield label="Nombre">
         <input formControlName="name" nxInput />
+        @if(form.get('name')?.errors?.['required']) {
+        <nx-error appearance="text" nxFormfieldError><span uiQuoteLiteral="error-required"></span> </nx-error>
+        }
       </nx-formfield>
       <nx-formfield label="Apellidos">
         <input formControlName="surname" nxInput />
+        @if(form.get('surname')?.errors?.['required']) {
+        <nx-error appearance="text" nxFormfieldError><span uiQuoteLiteral="error-required"></span> </nx-error>
+        }
       </nx-formfield>
     </form>
   </section>

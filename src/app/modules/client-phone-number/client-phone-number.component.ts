@@ -49,6 +49,8 @@ export class ClientPhoneNumberComponent implements OnInit, IsValidData {
   public canDeactivate = (): boolean | Observable<boolean> | Promise<boolean> => this.updateValidData();
 
   private updateValidData = (): boolean => {
+    this.form.markAllAsTouched();
+
     if (this.form.valid) {
       this.contextData.personalData = {
         ...this.contextData.personalData,

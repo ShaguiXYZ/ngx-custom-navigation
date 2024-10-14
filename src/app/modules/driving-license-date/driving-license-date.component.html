@@ -14,6 +14,9 @@
         <span nxFormfieldHint uiQuoteLiteral="hint-date-format"></span>
         <nx-datepicker-toggle [for]="myDatepicker" nxFormfieldSuffix></nx-datepicker-toggle>
         <nx-datepicker #myDatepicker></nx-datepicker>
+        @if(form.get('drivenLicenseDate')?.errors?.['required']) {
+        <nx-error appearance="text" nxFormfieldError><span uiQuoteLiteral="error-required"></span> </nx-error>
+        }
       </nx-formfield>
     </form>
   </section>

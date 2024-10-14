@@ -71,6 +71,8 @@ export class PlaceComponent implements OnInit, OnDestroy, IsValidData {
   public canDeactivate = (): boolean => this.form.valid;
 
   private updateValidData = (): boolean => {
+    this.form.markAllAsTouched();
+
     if (this.form.valid) {
       this.contextData.place = {
         ...this.contextData.place,

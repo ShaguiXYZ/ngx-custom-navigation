@@ -14,18 +14,6 @@ import { IsValidData } from 'src/app/shared/guards';
 import { QuoteModel } from 'src/app/shared/models';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 
-export const MY_FORMATS = {
-  parse: {
-    dateInput: 'LL'
-  },
-  display: {
-    dateInput: 'LL',
-    monthYearLabel: 'MMM YYYY',
-    dateA11yLabel: 'LL',
-    monthYearA11yLabel: 'MMMM YYYY'
-  }
-};
-
 @Component({
   selector: 'app-date-of-issue',
   templateUrl: './date-of-issue.component.html',
@@ -64,6 +52,8 @@ export class DateOfIssueComponent implements OnInit, IsValidData {
   public canDeactivate = (): boolean | Observable<boolean> | Promise<boolean> => this.updateValidData();
 
   private updateValidData = (): boolean => {
+    this.form.markAllAsTouched();
+
     if (this.form.valid) {
       this.contextData.dateOfIssue = {
         ...this.contextData.dateOfIssue,

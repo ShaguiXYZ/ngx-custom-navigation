@@ -87,6 +87,9 @@ export const mockQuoteData: QuoteModel = {
       ],
       configurableCoverageList: []
     }
+  },
+  contactData: {
+    contactHour: '10:00'
   }
 };
 

@@ -4,6 +4,9 @@
     <form [formGroup]="form">
       <nx-formfield [label]="'year-of-manufacture-label' | quoteLiteral">
         <input type="text" formControlName="yearOfManufacture" nxInput nxMask="0000" />
+        @if(form.get('yearOfManufacture')?.errors?.['required']) {
+        <nx-error appearance="text" nxFormfieldError><span uiQuoteLiteral="error-required"></span> </nx-error>
+        }
       </nx-formfield>
     </form>
   </section>
