@@ -3,12 +3,13 @@
     <div #carrouselInner class="inner__carrousel">
       <div #carrouselTrack class="track nx-margin-s" (touchstart)="swipeStart($event)" (touchend)="swipeEnd($event)">
         @for(price of prices; track price.modalityId) {
-        <div class="carousel__card">
+        <div class="carousel__card" [ngClass]="{ selected: selectedPriceIndex === $index }">
           <quote-offering-price-card [price]="price" [selected]="selectedPriceIndex === $index" (uiContactUs)="contactUs($event)" />
         </div>
         }
       </div>
     </div>
+
     <div class="carousel__stepers nx-margin-top-s">
       @for(price of prices; track price.modalityId) {
       <div
