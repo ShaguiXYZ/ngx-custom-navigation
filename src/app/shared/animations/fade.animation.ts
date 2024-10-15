@@ -1,5 +1,7 @@
+/**
+ * Source: https://fireship.io/lessons/angular-router-animations/
+ */
 import { animate, AnimationMetadata, query, state, style, transition, trigger } from '@angular/animations';
-import { optional } from '.';
 
 const fader = (): AnimationMetadata[] => [
   // Set a default  style for enter and leave
@@ -14,7 +16,7 @@ const fader = (): AnimationMetadata[] => [
         transform: 'scale(0) translateY(100%)'
       })
     ],
-    optional
+    { optional: true }
   ),
   // Animate the new page in
   query(':enter', [animate('600ms ease', style({ opacity: 1, transform: 'scale(1) translateY(0)' }))])
