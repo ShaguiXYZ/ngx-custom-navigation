@@ -59,7 +59,7 @@ export class AppComponent {
     event.stopPropagation();
   }
 
-  public prepareRoute = (outlet?: RouterOutlet) => outlet?.isActivated && this.slideTo();
+  public prepareRoute = (outlet?: RouterOutlet): number => (outlet?.isActivated ? this.slideTo() : -1);
 
   private slideTo(): number {
     const contextData = this.contextDataService.get<AppContextData>(QUOTE_APP_CONTEXT_DATA);

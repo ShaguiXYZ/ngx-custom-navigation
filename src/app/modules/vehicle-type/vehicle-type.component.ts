@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { NxCopytextModule } from '@aposin/ng-aquila/copytext';
 import { ContextDataService } from '@shagui/ng-shagui/core';
 import { Observable } from 'rxjs';
@@ -28,16 +28,16 @@ import { QuoteLiteralPipe } from 'src/app/shared/pipes';
   templateUrl: './vehicle-type.component.html',
   styleUrl: './vehicle-type.component.scss'
 })
-export class VehicleTypeComponent implements IsValidData {
+export class VehicleTypeComponent implements OnInit, IsValidData {
   public vehicleTypes = VehicleTypes;
   public selectedType?: IndexedData;
+
+  private contextData!: QuoteModel;
 
   private readonly contextDataService = inject(ContextDataService);
   private readonly routingService = inject(RoutingService);
 
-  private contextData!: QuoteModel;
-
-  constructor() {
+  ngOnInit(): void {
     this.contextData = this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA);
     this.selectedType = this.vehicleTypes.find(type => type.index === this.contextData.vehicle.vehicleTtype);
   }

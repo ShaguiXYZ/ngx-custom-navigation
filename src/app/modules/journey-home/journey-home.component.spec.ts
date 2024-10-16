@@ -1,51 +1,51 @@
-import { provideHttpClient } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { provideRouter } from '@angular/router';
+import { Router } from '@angular/router';
 import { ContextDataService } from '@shagui/ng-shagui/core';
-import { QUOTE_APP_CONTEXT_DATA, QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
-import { RoutingServiceMock } from 'src/app/core/mock/services';
+import { QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
 import { AppContextData } from 'src/app/core/models';
 import { RoutingService } from 'src/app/core/services';
-import { QuoteModel } from 'src/app/shared/models';
 import { JourneyHomeComponent } from './journey-home.component';
 
 describe('JourneyHomeComponent', () => {
   let component: JourneyHomeComponent;
   let fixture: ComponentFixture<JourneyHomeComponent>;
-  let contextDataServiceSpy: jasmine.SpyObj<ContextDataService>;
+  let mockRouter: jasmine.SpyObj<Router>;
+  let mockContextDataService: jasmine.SpyObj<ContextDataService>;
+  let mockRoutingService: jasmine.SpyObj<RoutingService>;
 
   beforeEach(async () => {
-    const spyContextDataService = jasmine.createSpyObj('ContextDataService', ['get', 'set']);
+    mockRouter = jasmine.createSpyObj('Router', ['navigate']);
+    mockContextDataService = jasmine.createSpyObj('ContextDataService', ['get', 'set']);
+    mockRoutingService = jasmine.createSpyObj('RoutingService', ['someMethod']);
 
     await TestBed.configureTestingModule({
+      declarations: [],
       imports: [JourneyHomeComponent],
       providers: [
-        provideHttpClient(),
-        provideRouter([]),
-        { provide: ContextDataService, useValue: spyContextDataService },
-        { provide: RoutingService, useClass: RoutingServiceMock }
+        { provide: Router, useValue: mockRouter },
+        { provide: ContextDataService, useValue: mockContextDataService },
+        { provide: RoutingService, useValue: mockRoutingService }
       ]
     }).compileComponents();
+  });
 
+  beforeEach(() => {
     fixture = TestBed.createComponent(JourneyHomeComponent);
     component = fixture.componentInstance;
-
-    // initServices();
-
-    fixture.detectChanges();
-  });
-  beforeEach(() => {
-    contextDataServiceSpy = TestBed.inject(ContextDataService) as jasmine.SpyObj<ContextDataService>;
   });
 
-  xit('should navigate to homePageId route if homePageId exists', () => {
-    const appContextData: AppContextData = {
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+
+  it('should navigate to homePageId route on init', () => {
+    const mockContext: AppContextData = {
       configuration: {
         homePageId: 'home',
         pageMap: {
           home: {
             pageId: 'home',
-            route: 'home'
+            route: 'home-route'
           }
         }
       },
@@ -54,23 +54,36 @@ describe('JourneyHomeComponent', () => {
       }
     };
 
-    contextDataServiceSpy.get.and.returnValue(appContextData);
+    mockContextDataService.get.and.returnValue(mockContext);
 
     component.ngOnInit();
 
-    expect(contextDataServiceSpy.get).toHaveBeenCalledWith(QUOTE_APP_CONTEXT_DATA);
-    expect(contextDataServiceSpy.set).toHaveBeenCalledWith(QUOTE_CONTEXT_DATA, QuoteModel.init());
+    expect(mockRouter.navigate).toHaveBeenCalledWith(['home-route'], { skipLocationChange: true });
   });
 
-  it('should throw an error if homePageId does not exist', () => {
-    const appContextData: AppContextData = {
+  it('should throw error if homePageId is not found', () => {
+    const mockContext: AppContextData = {
       configuration: {
-        pageMap: {}
+        pageMap: {
+          home: {
+            pageId: 'home',
+            route: 'home-route'
+          }
+        }
+      },
+      navigation: {
+        viewedPages: []
       }
-    } as AppContextData;
+    } as unknown as AppContextData;
 
-    contextDataServiceSpy.get.and.returnValue(appContextData);
+    mockContextDataService.get.and.returnValue(mockContext);
 
     expect(() => component.ngOnInit()).toThrowError('Home page not found in configuration');
+  });
+
+  it('should initialize app data values', () => {
+    component['initAppDataValues']();
+
+    expect(mockContextDataService.set).toHaveBeenCalledWith(QUOTE_CONTEXT_DATA, jasmine.any(Object));
   });
 });

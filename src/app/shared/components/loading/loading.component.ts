@@ -13,14 +13,15 @@ import { Subscription } from 'rxjs';
   standalone: true
 })
 export class QuoteLoadingComponent implements OnInit, OnDestroy {
-  @ViewChild('loadingBody') templateLoadingRef!: TemplateRef<any>;
+  @ViewChild('loadingBody')
+  private templateLoadingRef!: TemplateRef<any>;
+
   private templateLoadingDialogRef!: NxModalRef<any>;
 
   private loadingObs!: Subscription;
 
   private readonly loadingService = inject(LoadingService);
-
-  constructor(private readonly dialogService: NxDialogService) {}
+  private readonly dialogService = inject(NxDialogService);
 
   ngOnInit(): void {
     this.loadingObs = this.loadingService.asObservable().subscribe((show: boolean) => {

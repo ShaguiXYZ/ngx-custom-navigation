@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import {
   AbstractControl,
   AsyncValidatorFn,
@@ -7,13 +7,13 @@ import {
   FormGroup,
   FormsModule,
   ReactiveFormsModule,
+  ValidationErrors,
   Validators
 } from '@angular/forms';
 import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
 import { NxInputModule } from '@aposin/ng-aquila/input';
 import { NxMaskModule } from '@aposin/ng-aquila/mask';
 import { ContextDataService } from '@shagui/ng-shagui/core';
-import { Subscription } from 'rxjs';
 import { QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
 import { IndexedData } from 'src/app/core/models';
 import { LocationService } from 'src/app/core/services';
@@ -41,19 +41,16 @@ import { QuoteModel } from 'src/app/shared/models';
     QuoteLiteralDirective
   ]
 })
-export class PlaceComponent implements OnInit, OnDestroy, IsValidData {
+export class PlaceComponent implements OnInit, IsValidData {
   public form!: FormGroup;
   public footerConfig!: QuoteFooterConfig;
 
   private contextData!: QuoteModel;
-  private subscription$: Subscription[] = [];
 
   private readonly contextDataService = inject(ContextDataService);
   private readonly locationService = inject(LocationService);
 
   constructor(private readonly fb: FormBuilder) {
-    this.contextData = this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA);
-
     this.footerConfig = {
       showNext: true,
       nextFn: () => this.updateValidData()
@@ -61,11 +58,9 @@ export class PlaceComponent implements OnInit, OnDestroy, IsValidData {
   }
 
   ngOnInit(): void {
-    this.createForm();
-  }
+    this.contextData = this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA);
 
-  ngOnDestroy(): void {
-    this.subscription$.forEach(subscription => subscription.unsubscribe());
+    this.createForm();
   }
 
   public canDeactivate = (): boolean => this.form.valid;
@@ -97,23 +92,10 @@ export class PlaceComponent implements OnInit, OnDestroy, IsValidData {
         [this.postalCodeExistsValidator(this.locationService)]
       )
     });
-
-    this.subscription$.push(
-      this.form.controls['postalCode'].statusChanges.subscribe(status => {
-        if (status === 'INVALID') {
-          this.contextData.place.province = undefined;
-        }
-
-        this.footerConfig = {
-          ...this.footerConfig,
-          disableNext: status !== 'VALID'
-        };
-      })
-    );
   }
 
   private postalCodeExistsValidator(locationService: LocationService): AsyncValidatorFn {
-    return async (control: AbstractControl) => {
+    return async (control: AbstractControl): Promise<ValidationErrors | null> => {
       const address = await locationService.getAddresses(control.value);
 
       if (address) {

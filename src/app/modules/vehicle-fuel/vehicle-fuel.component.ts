@@ -53,14 +53,12 @@ export class VehicleFuelComponent implements OnInit, IsValidData {
   private readonly routingService = inject(RoutingService);
   private readonly vehicleService = inject(VehicleService);
 
-  constructor() {
+  async ngOnInit(): Promise<void> {
     this.contextData = this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA);
     this.selectedFuel = this.contextData.vehicle.fuel;
     this.selectedCubicCapacity = this.contextData.vehicle.cubicCapacity;
     this.selectedPower = this.contextData.vehicle.powerRange;
-  }
 
-  async ngOnInit(): Promise<void> {
     [this.fuels, this.powers, this.cubicCapacities] = await Promise.all([
       this.vehicleService.modelFuels(this.contextData.vehicle),
       this.vehicleService.vehiclePowers(this.contextData.vehicle),

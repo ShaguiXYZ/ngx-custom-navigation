@@ -6,7 +6,6 @@ import { NxInputModule } from '@aposin/ng-aquila/input';
 import { NxMomentDateModule } from '@aposin/ng-aquila/moment-date-adapter';
 import { ContextDataService } from '@shagui/ng-shagui/core';
 import moment, { Moment } from 'moment';
-import { Observable } from 'rxjs';
 import { QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
 import { HeaderTitleComponent, QuoteFooterComponent } from 'src/app/shared/components';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
@@ -37,19 +36,18 @@ export class DateOfIssueComponent implements OnInit, IsValidData {
   public form!: FormGroup;
   public dateOfIssueFromContext: Moment | undefined;
 
-  private readonly contextData!: QuoteModel;
+  private contextData!: QuoteModel;
 
   private readonly contextDataService = inject(ContextDataService);
 
-  constructor(private fb: FormBuilder) {
-    this.contextData = this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA);
-  }
+  constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {
+    this.contextData = this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA);
     this.createForm();
   }
 
-  public canDeactivate = (): boolean | Observable<boolean> | Promise<boolean> => this.updateValidData();
+  public canDeactivate = (): boolean => this.updateValidData();
 
   private updateValidData = (): boolean => {
     this.form.markAllAsTouched();

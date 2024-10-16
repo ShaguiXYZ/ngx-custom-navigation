@@ -46,7 +46,7 @@ export class YourCarIsComponent implements OnInit, IsValidData {
   private readonly routingService = inject(RoutingService);
   private readonly vehicleService = inject(VehicleService);
 
-  constructor() {
+  async ngOnInit(): Promise<void> {
     this.footerConfig = {
       showBack: false,
       showNext: false
@@ -54,13 +54,11 @@ export class YourCarIsComponent implements OnInit, IsValidData {
 
     this.contextData = this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA);
     this.selectedVehicle = this.contextData.vehicle;
+
+    this.vehicleOptions = await this.vehicleService.vehicles();
   }
 
   public canDeactivate = (): boolean => !!this.selectedVehicle;
-
-  async ngOnInit(): Promise<void> {
-    this.vehicleOptions = await this.vehicleService.vehicles();
-  }
 
   public selectVehicle(vehicle: IVehicleModel) {
     this.contextData.vehicle = { ...this.contextData.vehicle, ...vehicle };

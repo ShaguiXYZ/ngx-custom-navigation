@@ -1,1 +1,1 @@
-export * from './quote-stepper-service.service';
+export * from './quote-stepper.service';

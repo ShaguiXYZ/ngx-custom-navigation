@@ -2,10 +2,10 @@ import { CommonModule } from '@angular/common';
 import { Component, ElementRef, inject, OnInit, ViewChild } from '@angular/core';
 import { ContextDataService } from '@shagui/ng-shagui/core';
 import { QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
+import { RoutingService } from 'src/app/core/services';
 import { OfferingsService } from 'src/app/core/services/offerings.service';
 import { OfferingPriceModel, QuoteModel } from 'src/app/shared/models';
 import { QuoteOfferingPriceCardComponent } from './components';
-import { RoutingService } from 'src/app/core/services';
 
 @Component({
   selector: 'app-quote-offerings',
@@ -32,21 +32,13 @@ export class QuoteOfferingsComponent implements OnInit {
   private readonly offeringsService = inject(OfferingsService);
   private readonly routingService = inject(RoutingService);
 
-  constructor() {
+  async ngOnInit(): Promise<void> {
     this.contextData = this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA);
-  }
 
-  ngOnInit(): void {
-    this.offeringsService
-      .offerings()
-      .then(prices => {
-        this.prices = prices;
-        this.selectedPriceIndex = prices.findIndex(price => price.modalityId === this.contextData.offering.price?.modalityId);
-        setTimeout(() => this.selectSteper(this.selectedPriceIndex < 0 ? 0 : this.selectedPriceIndex), 300);
-      })
-      .catch(error => {
-        console.error('Error fetching offerings:', error);
-      });
+    this.prices = await this.offeringsService.offerings();
+
+    this.selectedPriceIndex = this.prices.findIndex(price => price.modalityId === this.contextData.offering.price?.modalityId);
+    setTimeout(() => this.selectSteper(this.selectedPriceIndex < 0 ? 0 : this.selectedPriceIndex), 300);
   }
 
   public swipeStart(e: TouchEvent): void {
@@ -83,8 +75,6 @@ export class QuoteOfferingsComponent implements OnInit {
   }
 
   public contactUs(price: OfferingPriceModel): void {
-    console.log('Contact us:', price);
-
     this.contextData.offering.price = { ...this.contextData.offering.price, ...price };
     this.contextDataService.set(QUOTE_CONTEXT_DATA, this.contextData);
 

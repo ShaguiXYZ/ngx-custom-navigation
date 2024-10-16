@@ -1,148 +1,82 @@
-import { Location } from '@angular/common';
-import { provideHttpClientTesting } from '@angular/common/http/testing';
-import { provideLocationMocks } from '@angular/common/testing';
-import { fakeAsync, TestBed } from '@angular/core/testing';
-import { provideRouter, Router, Routes } from '@angular/router';
-import { RouterTestingHarness } from '@angular/router/testing';
+import { TestBed } from '@angular/core/testing';
+import { Router } from '@angular/router';
 import { ContextDataService } from '@shagui/ng-shagui/core';
-import { BirthdateComponent } from '../../../modules/birthdate/birthdate.component';
-import { ContactUsComponent } from '../../../modules/contact-us/contact-us.component';
-import { DateOfIssueComponent } from '../../../modules/date-of-issue/date-of-issue.component';
-import { DrivingLicenseDateComponent } from '../../../modules/driving-license-date/driving-license-date.component';
-import { IsClientComponent } from '../../../modules/is-client/is-client.component';
-import { OnboardingComponent } from '../../../modules/onboarding/onboarding.component';
-import { PagenotfoundComponent } from '../../../modules/pagenotfound/pagenotfound.component';
-import { PlaceComponent } from '../../../modules/place/place.component';
-import { AppUrls } from '../../../shared/config/routing';
-import { ContextDataServiceMock, SettingServiceMock } from '../../mock/services';
+import { QUOTE_APP_CONTEXT_DATA } from '../../constants';
+import { ContextDataServiceMock } from '../../mock/services';
+import { AppContextData } from '../../models';
 import { RoutingService } from '../routing.service';
-import { SettingsService } from '../setting.service';
-import { Page } from '../../models';
-
-const appRoutes: Routes = [
-  {
-    path: AppUrls.onBoarding,
-    component: OnboardingComponent
-  },
-  {
-    path: AppUrls.isClient,
-    component: IsClientComponent
-  },
-  {
-    path: AppUrls.place,
-    component: PlaceComponent
-  },
-  {
-    path: AppUrls.dateOfIssue,
-    component: DateOfIssueComponent
-  },
-  {
-    path: AppUrls.contactUs,
-    component: ContactUsComponent
-  },
-  {
-    path: AppUrls.birthdate,
-    component: BirthdateComponent
-  },
-  {
-    path: AppUrls.drivingLicenseDate,
-    component: DrivingLicenseDateComponent
-  },
-  {
-    path: AppUrls.pageNotFound,
-    component: PagenotfoundComponent
-  }
-];
-
-const setup = async () => {
-  const harness = await RouterTestingHarness.create('/on-boarding');
-  const location = TestBed.inject(Location);
-  return { harness, location };
-};
 
 describe('RoutingService', () => {
-  let routingService: any;
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  let router: Router;
-
-  beforeEach(() =>
-    TestBed.configureTestingModule({
-      providers: [
-        provideRouter(appRoutes),
-        provideHttpClientTesting(),
-        provideLocationMocks(),
-        { provide: SettingsService, useClass: SettingServiceMock },
-        { provide: ContextDataService, useClass: ContextDataServiceMock }
-      ]
-    })
-  );
+  let service: RoutingService;
+  let router: jasmine.SpyObj<Router>;
+  let contextDataService: jasmine.SpyObj<ContextDataService>;
+  let mockAppContextData: AppContextData;
 
   beforeEach(() => {
-    router = TestBed.inject(Router);
-    routingService = TestBed.inject(RoutingService);
-  });
+    const routerSpy = jasmine.createSpyObj('Router', ['navigate']);
 
-  it('should create service', () => {
-    expect(routingService).toBeTruthy();
-  });
-
-  it('should navigate to next step', fakeAsync(async () => {
-    const { location } = await setup();
-    routingService
-      .nextStep(() => true)
-      .then((result: boolean) => {
-        expect(result).toBe(true);
-        expect(location.path()).toEqual('/is-client');
-      });
-  }));
-
-  it('should not navigate and return false', fakeAsync(async () => {
-    const { location } = await setup();
-    routingService
-      .nextStep(() => false)
-      .then((result: boolean) => {
-        expect(result).toBe(false);
-        expect(location.path()).toEqual('/on-boarding');
-      });
-  }));
-
-  it('should not navigate and execute the onError function', fakeAsync(async () => {
-    const { location } = await setup();
-    routingService
-      .nextStep(
-        () => false,
-        () => true
-      )
-      .then((result: boolean) => {
-        expect(result).toBe(false);
-        expect(location.path()).toEqual('/on-boarding');
-      });
-  }));
-
-  it('should return a empty array because the page has no next option ', fakeAsync(async () => {
-    expect(routingService.getNextRoute('/contact-us')).toEqual([]);
-  }));
-
-  it('should navigate to next step that match the conditions', fakeAsync(async () => {
-    const { location } = await setup();
-    routingService
-      .nextStep(() => true)
-      .then(() => {
-        routingService
-          .nextStep(() => true)
-          .then((result: boolean) => {
-            expect(result).toBe(true);
-            expect(location.path()).toEqual('/contact-us');
-          });
-      });
-  }));
-
-  it('should navigate to previous step', fakeAsync(async () => {
-    const page: Page = { pageId: 'is-client' };
-    const { location } = await setup();
-    routingService.previousStep(page).then((result: boolean) => {
-      expect(result).toBe(true);
-      expect(location.path()).toEqual('/is-client');
+    TestBed.configureTestingModule({
+      providers: [
+        RoutingService,
+        { provide: Router, useValue: routerSpy },
+        { provide: ContextDataService, useClass: ContextDataServiceMock }
+      ]
     });
-  }));
+
+    contextDataService = TestBed.inject(ContextDataService) as jasmine.SpyObj<ContextDataService>;
+    router = TestBed.inject(Router) as jasmine.SpyObj<Router>;
+    service = TestBed.inject(RoutingService);
+
+    mockAppContextData = contextDataService.get<AppContextData>(QUOTE_APP_CONTEXT_DATA);
+    service['appContextData'] = mockAppContextData;
+  });
+
+  it('should be created', () => {
+    expect(service).toBeTruthy();
+  });
+
+  it('should navigate to the next step', async () => {
+    spyOn(service as any, 'getNextRoute').and.returnValue(mockAppContextData.configuration.pageMap['page3']);
+    router.navigate.and.returnValue(Promise.resolve(true));
+
+    const result = await service.nextStep();
+
+    expect(result).toBeTrue();
+    expect(router.navigate).toHaveBeenCalledWith(['route3'], { skipLocationChange: true });
+  });
+
+  it('should navigate to the previous step', async () => {
+    router.navigate.and.returnValue(Promise.resolve(true));
+
+    const result = await service.previousStep();
+
+    expect(result).toBeTrue();
+    expect(router.navigate).toHaveBeenCalledWith(['route1'], { skipLocationChange: true });
+  });
+
+  it('should not navigate to the previous step if there is only one viewed page', async () => {
+    service['appContextData'].navigation.viewedPages = ['page1'];
+
+    const result = await service.previousStep();
+
+    expect(result).toBeFalse();
+    expect(router.navigate).not.toHaveBeenCalled();
+  });
+
+  it('should navigate to a specific page', async () => {
+    router.navigate.and.returnValue(Promise.resolve(true));
+
+    const result = await service.goToPage('page2');
+
+    expect(result).toBeTrue();
+    expect(router.navigate).toHaveBeenCalledWith(['route2'], { skipLocationChange: true });
+  });
+
+  it('should unsubscribe from all subscriptions on destroy', () => {
+    const unsubscribeSpy = spyOn(service['subscrition$'][0], 'unsubscribe');
+
+    service.ngOnDestroy();
+
+    expect(unsubscribeSpy).toHaveBeenCalled();
+  });
 });

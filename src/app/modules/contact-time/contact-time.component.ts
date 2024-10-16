@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { NxCopytextModule } from '@aposin/ng-aquila/copytext';
 import { ContextDataService } from '@shagui/ng-shagui/core';
 import { QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
@@ -23,7 +23,7 @@ import { Hour, QuoteModel } from 'src/app/shared/models';
   templateUrl: './contact-time.component.html',
   styleUrl: './contact-time.component.scss'
 })
-export class ContactTimeComponent implements IsValidData {
+export class ContactTimeComponent implements OnInit, IsValidData {
   public hours: { am: Hour[]; pm: Hour[] } = {
     // AM hours
     am: ['08:00', '09:00', '10:00', '11:00', '12:00', '13:00'],
@@ -33,11 +33,13 @@ export class ContactTimeComponent implements IsValidData {
 
   public selectedHour?: Hour;
 
-  private readonly contextData!: QuoteModel;
+  private contextData!: QuoteModel;
 
   private readonly contextDataService = inject(ContextDataService);
 
-  constructor() {
+  constructor() {}
+
+  ngOnInit(): void {
     this.contextData = this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA);
     this.selectedHour = this.contextData.contactData.contactHour;
   }

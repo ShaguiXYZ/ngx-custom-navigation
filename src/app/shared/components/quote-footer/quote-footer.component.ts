@@ -1,32 +1,33 @@
 import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout';
 import { CommonModule } from '@angular/common';
-import { Component, inject, Input, OnDestroy } from '@angular/core';
+import { Component, inject, Input, OnDestroy, OnInit } from '@angular/core';
 import { NxButtonModule } from '@aposin/ng-aquila/button';
 import { NxIconModule } from '@aposin/ng-aquila/icon';
 import { hasValue } from '@shagui/ng-shagui/core';
 import { Subscription } from 'rxjs';
+import { QuoteLiteralDirective } from '../../directives';
 import { QuoteFooterConfig } from './models';
 import { QuoteFooterService } from './services';
-import { QuoteLiteralDirective } from '../../directives';
 
 @Component({
   selector: 'quote-footer',
-  standalone: true,
-  imports: [CommonModule, NxButtonModule, NxIconModule, QuoteLiteralDirective],
   templateUrl: './quote-footer.component.html',
   styleUrl: './quote-footer.component.scss',
+  standalone: true,
+  imports: [CommonModule, NxButtonModule, NxIconModule, QuoteLiteralDirective],
   providers: [QuoteFooterService]
 })
-export class QuoteFooterComponent implements OnDestroy {
-  public _config: QuoteFooterConfig;
+export class QuoteFooterComponent implements OnInit, OnDestroy {
+  public _config!: QuoteFooterConfig;
   public _mobileMode?: boolean;
   public _observedMobileMode?: boolean;
 
   private readonly subscription$: Subscription[] = [];
+
   private readonly breakpointObserver = inject(BreakpointObserver);
   private readonly footerService = inject(QuoteFooterService);
 
-  constructor() {
+  ngOnInit(): void {
     this.subscription$.push(
       this.breakpointObserver
         .observe([Breakpoints.HandsetPortrait, Breakpoints.TabletPortrait, Breakpoints.WebPortrait])

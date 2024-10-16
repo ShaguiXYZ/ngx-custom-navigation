@@ -1,9 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NxButtonModule } from '@aposin/ng-aquila/button';
 import { NxCopytextModule } from '@aposin/ng-aquila/copytext';
 import { NxHeadlineModule } from '@aposin/ng-aquila/headline';
-import { NxIconModule } from '@aposin/ng-aquila/icon';
 import { NxLinkModule } from '@aposin/ng-aquila/link';
 import { HeaderTitleComponent, QuoteFooterComponent } from 'src/app/shared/components';
 import { QuoteFooterConfig } from 'src/app/shared/components/quote-footer/models';
@@ -26,7 +25,7 @@ import { OfferingPriceModel } from 'src/app/shared/models';
   templateUrl: './offering-price-card.component.html',
   styleUrl: './offering-price-card.component.scss'
 })
-export class QuoteOfferingPriceCardComponent {
+export class QuoteOfferingPriceCardComponent implements OnInit {
   @Input()
   public selected?: boolean;
 
@@ -45,7 +44,7 @@ export class QuoteOfferingPriceCardComponent {
 
   private _price!: OfferingPriceModel;
 
-  constructor() {
+  ngOnInit(): void {
     this.footerConfig = {
       showNext: true,
       nextFn: this.callNow.bind(this)

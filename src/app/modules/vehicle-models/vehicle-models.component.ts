@@ -6,7 +6,7 @@ import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
 import { NxIconModule } from '@aposin/ng-aquila/icon';
 import { NxInputModule } from '@aposin/ng-aquila/input';
 import { ContextDataService } from '@shagui/ng-shagui/core';
-import { debounceTime, distinctUntilChanged, fromEvent, map, Observable, Subscription } from 'rxjs';
+import { debounceTime, distinctUntilChanged, fromEvent, map, Subscription } from 'rxjs';
 import { DEBOUNCE_TIME, QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
 import { RoutingService, VehicleService } from 'src/app/core/services';
 import { HeaderTitleComponent, IconCardComponent, TextCardComponent } from 'src/app/shared/components';
@@ -50,12 +50,12 @@ export class VehicleModelsComponent implements OnInit, OnDestroy, IsValidData {
   private readonly routingService = inject(RoutingService);
   private readonly vehicleService = inject(VehicleService);
 
-  constructor(private readonly fb: FormBuilder) {
-    this.contextData = this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA);
-    this.selectedModel = this.contextData.vehicle.model;
-  }
+  constructor(private readonly fb: FormBuilder) {}
 
   ngOnInit(): void {
+    this.contextData = this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA);
+    this.selectedModel = this.contextData.vehicle.model;
+
     this.vehicleService.vehicleModels(this.contextData.vehicle.make, this.contextData.vehicle.model).then(models => {
       this.models = models;
     });
@@ -69,7 +69,7 @@ export class VehicleModelsComponent implements OnInit, OnDestroy, IsValidData {
     this.subscription$.forEach(subscription => subscription.unsubscribe());
   }
 
-  public canDeactivate = (): boolean | Observable<boolean> | Promise<boolean> => this.updateValidData();
+  public canDeactivate = (): boolean => this.updateValidData();
 
   public selectModel(model: string) {
     this.selectedModel = model;

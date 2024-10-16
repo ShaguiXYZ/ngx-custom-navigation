@@ -50,11 +50,10 @@ export class VehicleModelVersionsComponent implements OnInit, OnDestroy, IsValid
   private readonly routingService = inject(RoutingService);
   private readonly vehicleService = inject(VehicleService);
 
-  constructor(private readonly fb: FormBuilder) {
-    this.contextData = this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA);
-  }
+  constructor(private readonly fb: FormBuilder) {}
 
   async ngOnInit(): Promise<void> {
+    this.contextData = this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA);
     this.selectedModelVersion = this.contextData.vehicle.vehicleModelVersion;
     this.createForm();
 

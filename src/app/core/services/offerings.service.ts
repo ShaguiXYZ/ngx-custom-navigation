@@ -7,11 +7,11 @@ import { OfferingPriceModel } from 'src/app/shared/models';
 export class OfferingsService {
   private readonly offeringsUri = './assets/json/mock';
 
-  private http = inject(HttpService);
+  private readonly httpService = inject(HttpService);
 
   public offerings(): Promise<OfferingPriceModel[]> {
     return firstValueFrom(
-      this.http
+      this.httpService
         .get(`${this.offeringsUri}/offerings.mock.json`, {
           responseStatusMessage: {
             [HttpStatus.notFound]: { text: 'Notifications.ModelsNotFound' }

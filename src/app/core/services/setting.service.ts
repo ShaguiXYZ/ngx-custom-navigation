@@ -19,13 +19,13 @@ export class SettingsService {
   private readonly translateService = inject(TranslateService);
 
   public async loadSettings(): Promise<void> {
-    const contextData = this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA);
+    const quoteData = this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA);
 
     this.translateService.setDefaultLang('es-ES');
 
     this.contextDataService.set(
       QUOTE_CONTEXT_DATA,
-      { ...QuoteModel.init(), ...contextData },
+      { ...QuoteModel.init(), ...quoteData },
       {
         persistent: true
       }
@@ -38,6 +38,8 @@ export class SettingsService {
       )
     );
     const appContextData = this.contextDataService.get<AppContextData>(QUOTE_APP_CONTEXT_DATA);
+
+    console.log('AppCntextData', appContextData);
 
     this.contextDataService.set(QUOTE_APP_CONTEXT_DATA, AppContextData.init(configuration, appContextData?.navigation.viewedPages ?? []), {
       persistent: true

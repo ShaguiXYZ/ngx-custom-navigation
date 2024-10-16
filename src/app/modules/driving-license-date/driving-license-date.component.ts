@@ -36,15 +36,14 @@ export class DrivingLicenseDateComponent implements OnInit, IsValidData {
   public form!: FormGroup;
   public drivingLicenseDateFromContext?: Moment;
 
-  private readonly contextData!: QuoteModel;
+  private contextData!: QuoteModel;
 
   private readonly contextDataService = inject(ContextDataService);
 
-  constructor(private fb: FormBuilder) {
-    this.contextData = this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA);
-  }
+  constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {
+    this.contextData = this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA);
     this.createForm();
   }
 

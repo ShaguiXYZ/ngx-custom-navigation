@@ -2,10 +2,9 @@ import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { NxAvatarModule } from '@aposin/ng-aquila/avatar';
 import { NxCopytextModule } from '@aposin/ng-aquila/copytext';
-import { IndexedData } from '@shagui/ng-shagui/core';
 import { QuoteLiteralDirective } from '../../directives';
-import { SelectableOptionComponent } from '../selectable-option';
 import { IIconData } from '../../models';
+import { SelectableOptionComponent } from '../selectable-option';
 
 @Component({
   selector: 'quote-icon-card',

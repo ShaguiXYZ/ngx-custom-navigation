@@ -44,11 +44,10 @@ export class ClientEMailComponent implements OnInit, IsValidData {
 
   private readonly contextDataService = inject(ContextDataService);
 
-  constructor(private readonly fb: FormBuilder) {
-    this.contextData = this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA);
-  }
+  constructor(private readonly fb: FormBuilder) {}
 
   ngOnInit(): void {
+    this.contextData = this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA);
     this.createForm();
   }
 

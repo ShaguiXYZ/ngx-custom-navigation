@@ -14,9 +14,8 @@ import { NX_DATE_LOCALE, NxDatefieldModule } from '@aposin/ng-aquila/datefield';
 import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
 import { NxInputModule } from '@aposin/ng-aquila/input';
 import { NxMomentDateModule } from '@aposin/ng-aquila/moment-date-adapter';
-import { ContextDataService, DataInfo, dateBetween } from '@shagui/ng-shagui/core';
+import { ContextDataService, dateBetween } from '@shagui/ng-shagui/core';
 import moment, { Moment } from 'moment';
-import { Observable } from 'rxjs';
 import { QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
 import { HeaderTitleComponent, QuoteFooterComponent } from 'src/app/shared/components';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
@@ -47,19 +46,19 @@ export class BirthdateComponent implements OnInit, IsValidData {
   public form!: FormGroup;
   public birthdateFromContext: Moment | undefined;
 
-  private readonly contextData!: QuoteModel;
+  private contextData!: QuoteModel;
 
   private readonly contextDataService = inject(ContextDataService);
 
-  constructor(private readonly fb: FormBuilder) {
-    this.contextData = this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA);
-  }
+  constructor(private readonly fb: FormBuilder) {}
 
   ngOnInit(): void {
+    this.contextData = this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA);
+
     this.createForm();
   }
 
-  public canDeactivate = (): boolean | Observable<boolean> | Promise<boolean> => this.updateValidData();
+  public canDeactivate = (): boolean => this.updateValidData();
 
   private updateValidData = (): boolean => {
     this.form.markAllAsTouched();

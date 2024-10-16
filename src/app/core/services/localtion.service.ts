@@ -61,7 +61,7 @@ const POSTAL_CODES = {
 })
 export class LocationService {
   public getAddresses = (postalCode: string): Promise<IndexedData | undefined> => {
-    if (postalCode.length !== 5) {
+    if (postalCode.length !== 5 || isNaN(Number(postalCode))) {
       return Promise.resolve(undefined);
     }
 

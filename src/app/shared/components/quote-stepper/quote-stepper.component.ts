@@ -26,8 +26,6 @@ export class QuoteStepperComponent implements OnInit, OnDestroy {
   private readonly quoteStepperService = inject(QuoteStepperService);
   private readonly routingService = inject(RoutingService);
 
-  constructor(private readonly literalToStringPipe: LiteralToStringPipe) {}
-
   ngOnInit(): void {
     this.subscription$.push(
       this.quoteStepperService.asObservable().subscribe(data => {

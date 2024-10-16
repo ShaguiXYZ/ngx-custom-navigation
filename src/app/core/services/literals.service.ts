@@ -6,7 +6,7 @@ import { LiteralModel, QuoteLiteral } from '../models';
 export class LiteralsService {
   private readonly translateService = inject(TranslateService);
 
-  public toString(literal: LiteralModel, params?: { [key: string]: any }): string {
+  public toString(literal?: LiteralModel, params?: { [key: string]: any }): string {
     if (!literal) {
       return '';
     }

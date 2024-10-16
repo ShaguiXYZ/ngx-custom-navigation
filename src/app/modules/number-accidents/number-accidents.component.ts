@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NxCopytextModule } from '@aposin/ng-aquila/copytext';
 import { NX_DATE_LOCALE } from '@aposin/ng-aquila/datefield';
@@ -27,7 +27,7 @@ import { QuoteModel } from 'src/app/shared/models';
   ],
   providers: [{ provide: NX_DATE_LOCALE, useValue: 'es-ES' }]
 })
-export class NumberAccidentsComponent implements IsValidData {
+export class NumberAccidentsComponent implements OnInit, IsValidData {
   public selectedAccidents?: number;
 
   private contextData!: QuoteModel;
@@ -35,7 +35,7 @@ export class NumberAccidentsComponent implements IsValidData {
   private readonly contextDataService = inject(ContextDataService);
   private readonly routingService = inject(RoutingService);
 
-  constructor() {
+  ngOnInit(): void {
     this.contextData = this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA);
     this.selectedAccidents = this.contextData.client.accidents;
   }

@@ -53,11 +53,10 @@ export class LicensePlateComponent implements OnInit, OnDestroy, IsValidData {
   private readonly contextDataService = inject(ContextDataService);
   private readonly routingService = inject(RoutingService);
 
-  constructor(private readonly fb: FormBuilder) {
-    this.contextData = this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA);
-  }
+  constructor(private readonly fb: FormBuilder) {}
 
   ngOnInit(): void {
+    this.contextData = this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA);
     this.createForm();
     this.footerConfig = { showNext: true, nextFn: this.saveContextData };
 

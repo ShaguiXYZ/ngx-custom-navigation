@@ -2,6 +2,7 @@ import { inject, Injectable } from '@angular/core';
 import { HttpService, HttpStatus, TTL, UniqueIds } from '@shagui/ng-shagui/core';
 import { firstValueFrom, map } from 'rxjs';
 import { IndexedData } from '../models';
+import { IIconData } from 'src/app/shared/models';
 
 @Injectable({ providedIn: 'root' })
 export class InsuranceCompaniesService {
@@ -9,11 +10,11 @@ export class InsuranceCompaniesService {
   private readonly vehicleUri = './assets/json/mock';
   private readonly uriImages = 'assets/images/wm/insurances/company';
 
-  private http = inject(HttpService);
+  private readonly httpService = inject(HttpService);
 
-  public companies(): Promise<IndexedData[]> {
+  public companies(): Promise<IIconData[]> {
     return firstValueFrom(
-      this.http
+      this.httpService
         .get<IndexedData[]>(`${this.vehicleUri}/insurance-companies.mock.json`, {
           responseStatusMessage: {
             [HttpStatus.notFound]: { text: 'Notifications.ModelsNotFound' }

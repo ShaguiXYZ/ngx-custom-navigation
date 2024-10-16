@@ -1,4 +1,7 @@
+import { CommonModule } from '@angular/common';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
+import { NxHeadlineModule } from '@aposin/ng-aquila/headline';
 import { HeaderTitleComponent } from './header-title.component';
 
 describe('HeaderTitleComponent', () => {
@@ -7,9 +10,12 @@ describe('HeaderTitleComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HeaderTitleComponent]
+      declarations: [],
+      imports: [HeaderTitleComponent, CommonModule, NxHeadlineModule]
     }).compileComponents();
+  });
 
+  beforeEach(() => {
     fixture = TestBed.createComponent(HeaderTitleComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
@@ -17,5 +23,15 @@ describe('HeaderTitleComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should have the correct selector', () => {
+    expect(fixture.debugElement.query(By.css('.quote__header'))).toBeTruthy();
+  });
+
+  it('should render the template', () => {
+    const compiled = fixture.nativeElement;
+
+    expect(compiled.querySelector('h3')).toBeTruthy();
   });
 });

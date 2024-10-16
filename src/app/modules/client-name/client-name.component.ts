@@ -34,15 +34,14 @@ import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 export class ClientNameComponent implements OnInit, IsValidData {
   public form!: FormGroup;
 
-  private readonly contextData!: QuoteModel;
+  private contextData!: QuoteModel;
 
   private readonly contextDataService = inject(ContextDataService);
 
-  constructor(private readonly fb: FormBuilder) {
-    this.contextData = this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA);
-  }
+  constructor(private readonly fb: FormBuilder) {}
 
   ngOnInit(): void {
+    this.contextData = this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA);
     this.createForm();
   }
 

@@ -45,7 +45,7 @@ export class MakeComponent implements OnInit, OnDestroy, IsValidData {
   private searchInput!: ElementRef;
 
   public form!: FormGroup;
-  public makes: string[];
+  public makes!: string[];
   public searchedMakes: string[] = [];
   public footerConfig!: QuoteFooterConfig;
   public selectedMake?: string;
@@ -57,15 +57,13 @@ export class MakeComponent implements OnInit, OnDestroy, IsValidData {
   private readonly routingService = inject(RoutingService);
   private readonly vehicleService = inject(VehicleService);
 
-  // Update constructor
-  constructor(private readonly fb: FormBuilder) {
-    this.makes = BrandData.iconBrands();
-    this.contextData = this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA);
-
-    this.selectedMake = this.contextData.vehicle.make;
-  }
+  constructor(private readonly fb: FormBuilder) {}
 
   ngOnInit(): void {
+    this.makes = BrandData.iconBrands();
+    this.contextData = this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA);
+    this.selectedMake = this.contextData.vehicle.make;
+
     this.createForm();
 
     this.subscription$.push(this.searchBoxConfig());

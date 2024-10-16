@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
 import { ContextDataService } from '@shagui/ng-shagui/core';
-import { Observable } from 'rxjs';
 import { QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
 import { IndexedData } from 'src/app/core/models';
 import { InsuranceCompaniesService, RoutingService } from 'src/app/core/services';
@@ -29,11 +28,11 @@ export class InsuranceCompaniesComponent implements OnInit, IsValidData {
 
   private contextData!: QuoteModel;
 
-  constructor() {
-    this.contextData = this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA);
-  }
+  constructor() {}
 
   async ngOnInit(): Promise<void> {
+    this.contextData = this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA);
+
     this.insuranceCompanies = await this.insuranceCompaniesService.companies();
 
     if (this.contextData.insuranceCompany?.company) {
@@ -41,7 +40,7 @@ export class InsuranceCompaniesComponent implements OnInit, IsValidData {
     }
   }
 
-  public canDeactivate = (): boolean | Observable<boolean> | Promise<boolean> => this.isValidData();
+  public canDeactivate = (): boolean => this.isValidData();
 
   public selectCompany(icon: IndexedData) {
     this.selectedCompany = icon;

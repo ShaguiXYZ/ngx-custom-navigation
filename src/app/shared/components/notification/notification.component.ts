@@ -14,6 +14,7 @@ import { Subscription } from 'rxjs';
 })
 export class NotificationComponent implements OnInit, OnDestroy {
   public notifications: NotificationModel[] = [];
+
   private notificationSubscription!: Subscription;
   private closeNotificationSubscription!: Subscription;
 

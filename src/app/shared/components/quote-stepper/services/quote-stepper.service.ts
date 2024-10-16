@@ -16,6 +16,7 @@ export class QuoteStepperService implements OnDestroy {
   constructor() {
     const subscription = this.contextDataService.onDataChange<AppContextData>(QUOTE_APP_CONTEXT_DATA).subscribe(data => {
       const pageId = data.navigation.lastPage?.pageId;
+
       if (!pageId) {
         this.quoteSteps$.next(undefined);
         return;
