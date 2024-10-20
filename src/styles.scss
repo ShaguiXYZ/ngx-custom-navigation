@@ -35,9 +35,16 @@ main {
     .nx-formfield.has-outline .nx-formfield__input-container {
       background-color: inherit;
     }
-  }
 
-  .nx-formfield-hint {
-    text-align: left;
+    .nx-formfield-hint {
+      text-align: left;
+    }
+
+    .nx-formfield__label-holder {
+      align-items: center;
+      display: flex;
+      justify-content: space-between;
+      margin-left: 6px;
+    }
   }
 }
