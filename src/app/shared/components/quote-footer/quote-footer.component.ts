@@ -18,7 +18,10 @@ import { QuoteFooterService } from './services';
   providers: [QuoteFooterService]
 })
 export class QuoteFooterComponent implements OnInit, OnDestroy {
-  public _config!: QuoteFooterConfig;
+  public _config: QuoteFooterConfig = {
+    showNext: true,
+    showBack: false
+  };
   public _mobileMode?: boolean;
   public _observedMobileMode?: boolean;
 
@@ -33,11 +36,6 @@ export class QuoteFooterComponent implements OnInit, OnDestroy {
         .observe([Breakpoints.HandsetPortrait, Breakpoints.TabletPortrait, Breakpoints.WebPortrait])
         .subscribe((state: BreakpointState) => (this._observedMobileMode = state.breakpoints[Breakpoints.HandsetPortrait]))
     );
-
-    this._config = {
-      showNext: true,
-      showBack: false
-    };
   }
 
   get config(): QuoteFooterConfig {
