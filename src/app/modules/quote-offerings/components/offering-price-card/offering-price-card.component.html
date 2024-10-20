@@ -21,7 +21,7 @@
           nxCopytext="medium"
           class="nx-margin-left-3xs"
           uiQuoteLiteral="from-now"
-          [uiQuoteLitealParams]="{ value: now | date : 'dd/MM/YYYY' }"
+          [uiQuoteLitealParams]="{ value: (now | date : 'dd/MM/YYYY') || '' }"
         ></span>
       </p>
     </div>

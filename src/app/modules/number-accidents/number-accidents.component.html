@@ -1,5 +1,15 @@
 <article class="component-container">
-  <quote-header-title><span uiQuoteLiteral="header"></span></quote-header-title>
+  @let years = 5;
+  <quote-header-title
+    ><span
+      uiQuoteLiteral="header"
+      [uiQuoteLitealParams]="{
+        years: years.toString(),
+        'literal-last': years > 1 ? 'los últimos' : 'el último',
+        'literal-year': { value: years > 1 ? 'Label.Years' : 'Label.Year', type: 'translate' }
+      }"
+    ></span
+  ></quote-header-title>
   <section class="form-container">
     <div class="selectable-container">
       <quote-selectable-option [selected]="selectedAccidents === 0" [fullHeight]="true" (uiSelect)="selectAccidents(0)">

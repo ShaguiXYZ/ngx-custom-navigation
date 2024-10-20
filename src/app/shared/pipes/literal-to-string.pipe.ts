@@ -1,5 +1,5 @@
 import { inject, Pipe } from '@angular/core';
-import { LiteralModel } from 'src/app/core/models';
+import { LiteralModel, LiteralParam } from 'src/app/core/models';
 import { LiteralsService } from 'src/app/core/services';
 
 @Pipe({
@@ -9,7 +9,7 @@ import { LiteralsService } from 'src/app/core/services';
 export class LiteralToStringPipe {
   private readonly literalsService = inject(LiteralsService);
 
-  public transform = (value: LiteralModel, params?: { [key: string]: any }): string => {
+  public transform = (value: LiteralModel, params?: LiteralParam): string => {
     return this.literalsService.toString(value, params);
   };
 }

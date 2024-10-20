@@ -1,5 +1,6 @@
 import { Directive, ElementRef, Input, Renderer2 } from '@angular/core';
 import { QuoteLiteralPipe } from '../pipes';
+import { LiteralParam } from 'src/app/core/models';
 
 @Directive({
   selector: '[uiQuoteLiteral]',
@@ -11,7 +12,7 @@ export class QuoteLiteralDirective {
   public uiQuoteLiteral!: string;
 
   @Input()
-  public uiQuoteLitealParams?: {};
+  public uiQuoteLitealParams?: LiteralParam;
 
   @Input()
   public uiQuoteDefaultLiteral: string = '';

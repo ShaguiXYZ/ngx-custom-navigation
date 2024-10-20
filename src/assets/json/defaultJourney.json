@@ -410,7 +410,7 @@
       ],
       "configuration": {
         "literals": {
-          "header": "¿Eres o has sido titular de un seguro, para este coche u otro, en los últimos 60 días?"
+          "header": "¿Eres o has sido titular de un seguro, para este coche u otro, en los últimos {{days}} días?"
         }
       }
     },
@@ -436,7 +436,7 @@
       ],
       "configuration": {
         "literals": {
-          "header": "¿Has tenido algún accidente en los últimos 5 años?",
+          "header": "¿Has tenido algún accidente en {{literal-last}} {{years}} {{literal-year}}?",
           "more-accidents": "{{value}} o más",
           "footer-info": "Nos gustaría acompañarte en tus próximos viajes."
         }
