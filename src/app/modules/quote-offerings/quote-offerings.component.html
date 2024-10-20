@@ -1,9 +1,11 @@
+<!-- eslint-disable @angular-eslint/template/interactive-supports-focus -->
+<!-- eslint-disable @angular-eslint/template/click-events-have-key-events -->
 <article class="component-container">
   <section class="form-container">
     <div #carrouselInner class="inner__carrousel">
       <div #carrouselTrack class="track nx-margin-s" (touchstart)="swipeStart($event)" (touchend)="swipeEnd($event)">
         @for(price of prices; track price.modalityId) {
-        <div class="carousel__card" [ngClass]="{ selected: selectedPriceIndex === $index }">
+        <div class="carousel__card" [ngClass]="{ selected: selectedPriceIndex === $index }" (click)="selectSteper($index)">
           <quote-offering-price-card [price]="price" [selected]="selectedPriceIndex === $index" (uiContactUs)="contactUs($event)" />
         </div>
         }
