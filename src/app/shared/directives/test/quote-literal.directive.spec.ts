@@ -79,8 +79,6 @@ describe('QuoteLiteralDirective', () => {
     component.property = 'innerText';
     fixture.detectChanges();
 
-    console.log(debugElement.nativeElement);
-
     expect(debugElement.nativeElement.innerText).toContain('testQuote');
   });
 

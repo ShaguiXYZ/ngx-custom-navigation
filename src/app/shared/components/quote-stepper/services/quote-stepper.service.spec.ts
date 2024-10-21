@@ -61,8 +61,6 @@ describe('QuoteStepperService', () => {
     // });
 
     contextDataServiceSpy.onDataChange.and.callFake((contextDataKey: string): Observable<any> => {
-      console.log('contextDataKey', contextDataKey);
-
       if (contextDataKey === QUOTE_APP_CONTEXT_DATA) {
         return of(mockAppContextData);
       }
@@ -71,8 +69,6 @@ describe('QuoteStepperService', () => {
     });
 
     service.asObservable().subscribe(value => {
-      console.log('value', value);
-
       expect(value).toEqual({ stepper: mockStepper, stepKey: 'step1' });
       done();
     });

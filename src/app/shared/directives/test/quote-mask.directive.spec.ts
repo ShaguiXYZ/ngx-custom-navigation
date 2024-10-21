@@ -32,8 +32,6 @@ describe('QuoteMaskDirective', () => {
     fixture = TestBed.createComponent(TestComponent);
     component = fixture.componentInstance;
     inputEl = fixture.debugElement.query(By.css('input')).nativeElement;
-
-    console.log(inputEl);
   });
 
   it('should create an instance', () => {
