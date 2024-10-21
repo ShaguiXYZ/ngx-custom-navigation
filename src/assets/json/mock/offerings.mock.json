@@ -40,6 +40,24 @@
         "value": 0,
         "options": [],
         "subcoverages": []
+      },
+      {
+        "code": 4,
+        "texto": "COVERTURA-4",
+        "description": "Asistencia en carretera nacional e internacional",
+        "isContracted": "OK",
+        "value": 0,
+        "options": [],
+        "subcoverages": []
+      },
+      {
+        "code": 5,
+        "texto": "COVERTURA-5",
+        "description": "Talleres con servicios premium",
+        "isContracted": "OK",
+        "value": 0,
+        "options": [],
+        "subcoverages": []
       }
     ],
     "configurableCoverageList": [],
@@ -81,6 +99,15 @@
         "code": 6,
         "texto": "COVERTURA-6",
         "description": "Talleres con servicios premium",
+        "isContracted": "OK",
+        "value": 0,
+        "options": [],
+        "subcoverages": []
+      },
+      {
+        "code": 7,
+        "texto": "COVERTURA-7",
+        "description": "Daños propios incluidos",
         "isContracted": "OK",
         "value": 0,
         "options": [],

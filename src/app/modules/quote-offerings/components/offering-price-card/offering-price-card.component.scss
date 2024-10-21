@@ -33,6 +33,7 @@
   }
 
   .price-title {
+    height: 65px;
     text-align: center;
   }
 
@@ -64,7 +65,8 @@
     }
 
     .coverages {
-      height: 188px;
+      height: 150px;
+      overflow: hidden;
 
       .coverage {
         align-items: flex-start;
@@ -75,11 +77,11 @@
           color: var(--success);
         }
       }
+    }
 
-      .view-coverages {
-        display: flex;
-        justify-content: center;
-      }
+    .view-coverages {
+      display: flex;
+      justify-content: center;
     }
   }
 }

@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { Component, inject, Input, OnDestroy, OnInit } from '@angular/core';
 import { NxButtonModule } from '@aposin/ng-aquila/button';
 import { NxIconModule } from '@aposin/ng-aquila/icon';
-import { hasValue } from '@shagui/ng-shagui/core';
 import { Subscription } from 'rxjs';
 import { QuoteLiteralDirective } from '../../directives';
 import { QuoteFooterConfig } from './models';
@@ -41,7 +40,7 @@ export class QuoteFooterComponent implements OnInit, OnDestroy {
   }
 
   get mobileMode(): boolean | undefined {
-    return hasValue(this._mobileMode) ? this._mobileMode : this._observedMobileMode;
+    return this._mobileMode ?? this._observedMobileMode;
   }
 
   @Input()
@@ -57,7 +56,5 @@ export class QuoteFooterComponent implements OnInit, OnDestroy {
     this.footerService.nextStep(this.config);
   }
 
-  public goToPreviousStep(): void {
-    this.footerService.previousStep();
-  }
+  public goToPreviousStep = (): void => this.footerService.previousStep();
 }

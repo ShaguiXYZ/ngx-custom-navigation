@@ -41,13 +41,13 @@ export class AppComponent {
 
   // @howto Detect the Closing of a Browser Tab
   @HostListener('window:beforeunload', ['$event'])
-  beforeunloadHandler(event: BeforeUnloadEvent) {
+  beforeunloadHandler(event: BeforeUnloadEvent): void {
     event.preventDefault();
   }
 
   // @howto Detect the Browser Back Button
   @HostListener('window:popstate', ['$event'])
-  onPopState(event: PopStateEvent) {
+  onPopState(event: PopStateEvent): void {
     this.notificationService.warning(
       this.quoteLiteralPipe.transform('warning-header-back-button'),
       this.quoteLiteralPipe.transform('warning-text-back-button')

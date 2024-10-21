@@ -47,6 +47,7 @@ export class QuoteOfferingsComponent implements OnInit {
 
     this.swipeCoord = coord;
     this.swipeTime = time;
+
     // e.preventDefault();
   }
 
