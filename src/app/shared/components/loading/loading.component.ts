@@ -14,9 +14,8 @@ import { Subscription } from 'rxjs';
 })
 export class QuoteLoadingComponent implements OnInit, OnDestroy {
   @ViewChild('loadingBody')
-  private templateLoadingRef!: TemplateRef<any>;
-
-  private templateLoadingDialogRef!: NxModalRef<any>;
+  private templateLoadingRef!: TemplateRef<unknown>;
+  private templateLoadingDialogRef!: NxModalRef<unknown>;
 
   private loadingObs!: Subscription;
 

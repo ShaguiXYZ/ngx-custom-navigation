@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ContextDataService } from '@shagui/ng-shagui/core';
 import { IndexedData } from 'src/app/core/models';
@@ -10,7 +11,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
 
 describe('VehicleTypeComponent', () => {
-  let component: any;
+  let component: VehicleTypeComponent;
   let fixture: ComponentFixture<VehicleTypeComponent>;
   let contextDataService: jasmine.SpyObj<ContextDataService>;
   let routingService: jasmine.SpyObj<RoutingService>;
@@ -55,7 +56,7 @@ describe('VehicleTypeComponent', () => {
   });
 
   it('should select a vehicle type and update context data', () => {
-    let setContextDataSpy = spyOn(contextDataService, 'set');
+    const setContextDataSpy = spyOn(contextDataService, 'set');
 
     const type: IndexedData = { index: 'old', data: 'SUV' };
     component.selectType(type);
@@ -79,7 +80,7 @@ describe('VehicleTypeComponent', () => {
   });
 
   it('should call isValidData on canDeactivate', () => {
-    spyOn(component, 'isValidData').and.returnValue(true);
+    spyOn(component as any, 'isValidData').and.returnValue(true);
 
     expect(component.canDeactivate()).toBeTrue();
     expect(component['isValidData']).toHaveBeenCalled();

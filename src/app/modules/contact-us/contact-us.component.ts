@@ -7,7 +7,7 @@ import { QuoteFooterConfig } from 'src/app/shared/components/quote-footer/models
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
 
 @Component({
-  selector: 'app-contact-us',
+  selector: 'quote-contact-us',
   templateUrl: './contact-us.component.html',
   styleUrl: './contact-us.component.scss',
   standalone: true,

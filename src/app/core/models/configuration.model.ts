@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-namespace */
 import { DataInfo } from '@shagui/ng-shagui/core';
 import { StepperDTO, Steppers } from 'src/app/shared/models/stepper.model';
 import { LiteralModel } from './literal.model';
@@ -17,7 +18,7 @@ export interface ConfigurationDTO {
 
 export interface PageConfiguration {
   literals?: Literals;
-  data?: DataInfo<any>;
+  data?: DataInfo<unknown>;
 }
 
 export interface Page {

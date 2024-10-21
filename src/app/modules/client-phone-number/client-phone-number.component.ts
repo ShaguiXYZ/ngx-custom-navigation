@@ -14,7 +14,7 @@ import { QuoteModel } from 'src/app/shared/models';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 
 @Component({
-  selector: 'app-client-phone-number',
+  selector: 'quote-client-phone-number',
   templateUrl: './client-phone-number.component.html',
   styleUrl: './client-phone-number.component.scss',
   standalone: true,

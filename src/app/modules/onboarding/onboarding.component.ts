@@ -9,7 +9,7 @@ import { QuoteFooterConfig } from 'src/app/shared/components/quote-footer/models
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
 
 @Component({
-  selector: 'app-onboarding',
+  selector: 'quote-onboarding',
   templateUrl: './onboarding.component.html',
   styleUrl: './onboarding.component.scss',
   standalone: true,

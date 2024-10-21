@@ -14,7 +14,7 @@ import { QuoteLiteralDirective } from 'src/app/shared/directives';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 
 @Component({
-  selector: 'app-vehicle-type',
+  selector: 'quote-vehicle-type',
   standalone: true,
   imports: [
     CommonModule,

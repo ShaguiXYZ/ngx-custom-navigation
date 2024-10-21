@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { TranslateService } from '@ngx-translate/core';
 import { ContextDataService } from '@shagui/ng-shagui/core';
@@ -8,7 +9,7 @@ import { QuoteModel } from 'src/app/shared/models';
 import { IsPolicyOwnerComponent } from './is-policy-owner.component';
 
 describe('IsPolicyOwnerComponent', () => {
-  let component: any;
+  let component: IsPolicyOwnerComponent;
   let fixture: ComponentFixture<IsPolicyOwnerComponent>;
   let contextDataService: jasmine.SpyObj<ContextDataService>;
   let routingService: jasmine.SpyObj<RoutingService>;
@@ -49,7 +50,8 @@ describe('IsPolicyOwnerComponent', () => {
   });
 
   it('should initialize contextData on ngOnInit', () => {
-    let getContextDataSpy = spyOn(contextDataService, 'get');
+    const getContextDataSpy = spyOn(contextDataService, 'get');
+
     contextDataService.get.and.returnValue({ client: { isPolicyOwner: true } } as QuoteModel);
 
     component.ngOnInit();
@@ -59,19 +61,19 @@ describe('IsPolicyOwnerComponent', () => {
   });
 
   it('should return true from canDeactivate if data is valid', () => {
-    spyOn(component, 'isValidData').and.returnValue(true);
+    spyOn(component as any, 'isValidData').and.returnValue(true);
 
     expect(component.canDeactivate()).toBeTrue();
   });
 
   it('should return false from canDeactivate if data is invalid', () => {
-    spyOn(component, 'isValidData').and.returnValue(false);
+    spyOn(component as any, 'isValidData').and.returnValue(false);
 
     expect(component.canDeactivate()).toBeFalse();
   });
 
   it('should update contextData and call nextStep on onIsPolicyOwnerChange', () => {
-    let setContextDataSpy = spyOn(contextDataService, 'set');
+    const setContextDataSpy = spyOn(contextDataService, 'set');
 
     component.ngOnInit();
     component.onIsPolicyOwnerChange(false);

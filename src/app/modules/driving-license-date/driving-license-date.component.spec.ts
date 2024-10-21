@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NxDatefieldModule } from '@aposin/ng-aquila/datefield';
@@ -13,7 +14,7 @@ import { QuoteModel } from 'src/app/shared/models';
 import { DrivingLicenseDateComponent } from './driving-license-date.component';
 
 describe('DrivingLicenseDateComponent', () => {
-  let component: any;
+  let component: DrivingLicenseDateComponent;
   let fixture: ComponentFixture<DrivingLicenseDateComponent>;
   let contextDataService: jasmine.SpyObj<ContextDataService>;
 
@@ -56,13 +57,13 @@ describe('DrivingLicenseDateComponent', () => {
   });
 
   it('should initialize form with context data', () => {
-    let drivenLicenseDate = moment(new Date(component.form.controls['drivenLicenseDate'].value)).format('YYYY-MM-DD');
+    const drivenLicenseDate = moment(new Date(component.form.controls['drivenLicenseDate'].value)).format('YYYY-MM-DD');
 
     expect(drivenLicenseDate).toEqual('2022-01-01');
   });
 
   it('should mark all fields as touched and update context data on valid form', () => {
-    let setContextDataSpy = spyOn(contextDataService, 'set');
+    const setContextDataSpy = spyOn(contextDataService, 'set');
 
     component.form.controls['drivenLicenseDate'].setValue('2022-01-01');
     const isValid = component['updateValidData']();
@@ -72,7 +73,7 @@ describe('DrivingLicenseDateComponent', () => {
   });
 
   it('should not update context data on invalid form', () => {
-    let setContextDataSpy = spyOn(contextDataService, 'set');
+    const setContextDataSpy = spyOn(contextDataService, 'set');
 
     component.form.controls['drivenLicenseDate'].setValue(null);
     const isValid = component['updateValidData']();
@@ -82,7 +83,7 @@ describe('DrivingLicenseDateComponent', () => {
   });
 
   it('should call canDeactivate and return form validity', () => {
-    spyOn(component, 'updateValidData').and.callThrough();
+    spyOn<any>(component, 'updateValidData').and.callThrough();
     const canDeactivate = component.canDeactivate();
 
     expect(component['updateValidData']).toHaveBeenCalled();

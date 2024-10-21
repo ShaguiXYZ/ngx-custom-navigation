@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-namespace */
-/* eslint-disable no-redeclare */
 import { ClientModel } from './client.model';
 import { ContactDataModel } from './contact-data.model';
 import { DateOfIssueModel } from './date-of-issue.model';

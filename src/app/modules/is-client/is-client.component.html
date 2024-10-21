@@ -1,12 +1,12 @@
 <!-- eslint-disable @angular-eslint/template/elements-content -->
 <article class="component-container">
-  <quote-header-title><span uiQuoteLiteral="header"></span></quote-header-title>
+  <quote-header-title><span nxQuoteLiteral="header"></span></quote-header-title>
   <section class="form-container">
     <quote-selectable-option [selected]="isClient">
-      <button nxButton="tertiary medium" type="button" uiQuoteLiteral="yes" (click)="onIsClientChange(true)"></button>
+      <button nxButton="tertiary medium" type="button" nxQuoteLiteral="yes" (click)="onIsClientChange(true)"></button>
     </quote-selectable-option>
     <quote-selectable-option [selected]="isClient === false">
-      <button nxButton="tertiary medium" type="button" uiQuoteLiteral="no" (click)="onIsClientChange(false)"></button>
+      <button nxButton="tertiary medium" type="button" nxQuoteLiteral="no" (click)="onIsClientChange(false)"></button>
     </quote-selectable-option>
   </section>
 </article>

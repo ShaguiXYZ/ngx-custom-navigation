@@ -1,36 +1,36 @@
 <!-- eslint-disable @angular-eslint/template/elements-content -->
 <article class="component-container">
   <quote-header-title>
-    <span uiQuoteLiteral="header"></span>
+    <span nxQuoteLiteral="header"></span>
   </quote-header-title>
   <section class="form-container">
     <form [formGroup]="form">
       <nx-formfield [label]="'e-mail' | quoteLiteral">
         <input type="email" formControlName="email" nxInput email />
         @if(form.get('email')?.errors?.['required']) {
-        <nx-error appearance="text" nxFormfieldError><span uiQuoteLiteral="error-required"></span> </nx-error>
+        <nx-error appearance="text" nxFormfieldError><span nxQuoteLiteral="error-required"></span> </nx-error>
         }
       </nx-formfield>
       <div class="products-info nx-margin-top-s">
         <div class="products-info-literal nx-margin-right-xs" nxCopytext="normal">
-          <span uiQuoteLiteral="more-info"></span>
+          <span nxQuoteLiteral="more-info"></span>
         </div>
         <nx-switcher formControlName="productsInfo" />
       </div>
       <div class="products-info nx-margin-top-s">
         <div class="privatity products-info-literal nx-margin-right-xs" nxCopytext="normal">
-          <span uiQuoteLiteral="text-01"></span>
+          <span nxQuoteLiteral="text-01"></span>
           <nx-link nxStyle="text">
-            <a routerLink="/documentation" uiQuoteLiteral="privacy-policy"></a>
+            <a routerLink="/documentation" nxQuoteLiteral="privacy-policy"></a>
           </nx-link>
-          <span uiQuoteLiteral="text-02"></span>
+          <span nxQuoteLiteral="text-02"></span>
         </div>
         <nx-switcher formControlName="privacyPolicy" />
       </div>
       @if(form.get('privacyPolicy')?.touched && form.get('privacyPolicy')?.errors?.['required']) {
-      <nx-error class="align-right" appearance="text" nxFormfieldError><span uiQuoteLiteral="error-required"></span> </nx-error>
+      <nx-error class="align-right" appearance="text" nxFormfieldError><span nxQuoteLiteral="error-required"></span> </nx-error>
       }
-      <div class="legal-text nx-margin-top-s" nxCopytext="normal" uiQuoteLiteral="legal-text">
+      <div class="legal-text nx-margin-top-s" nxCopytext="normal" nxQuoteLiteral="legal-text">
         <span class="products-info-literal nx-margin-y-s"></span>
       </div>
     </form>

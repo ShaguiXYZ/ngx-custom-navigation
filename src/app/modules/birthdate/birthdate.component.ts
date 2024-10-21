@@ -24,7 +24,7 @@ import { QuoteModel } from 'src/app/shared/models';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 
 @Component({
-  selector: 'app-birthdate',
+  selector: 'quote-birthdate',
   templateUrl: './birthdate.component.html',
   styleUrl: './birthdate.component.scss',
   standalone: true,

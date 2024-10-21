@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-namespace */
-/* eslint-disable no-redeclare */
 
 export interface ClientModel {
   isClient?: boolean;

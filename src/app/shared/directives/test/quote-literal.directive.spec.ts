@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Component, DebugElement, Renderer2 } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
@@ -9,7 +10,7 @@ import { AppContextData } from 'src/app/core/models';
 
 @Component({
   template: `<div
-    [uiQuoteLiteral]="quote"
+    [nxQuoteLiteral]="quote"
     [uiQuoteLitealParams]="params"
     [uiQuoteDefaultLiteral]="defaultLiteral"
     [uiAttribute]="attribute"

@@ -16,7 +16,7 @@ import { ModelVersionModel, QuoteModel } from 'src/app/shared/models';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 
 @Component({
-  selector: 'app-vehicle-model-versions',
+  selector: 'quote-vehicle-model-versions',
   standalone: true,
   imports: [
     CommonModule,

@@ -1,6 +1,6 @@
 <article class="component-container">
   <quote-header-title>
-    <span uiQuoteLiteral="header"></span>
+    <span nxQuoteLiteral="header"></span>
   </quote-header-title>
   <section class="form-container">
     <form [formGroup]="form">
@@ -8,7 +8,7 @@
         <nx-licence-plate-euro-prefix nxFormfieldPrefix>E</nx-licence-plate-euro-prefix>
         <input #searchInput type="text" formControlName="plateNumber" nxInput nxMask="0000-SSS" />
         @if(form.get('plateNumber')?.errors?.['required']) {
-        <nx-error appearance="text" nxFormfieldError><span uiQuoteLiteral="error-required"></span> </nx-error>
+        <nx-error appearance="text" nxFormfieldError><span nxQuoteLiteral="error-required"></span> </nx-error>
         }
       </nx-formfield>
     </form>
@@ -16,12 +16,12 @@
   <quote-footer [config]="footerConfig">
     <div class="extra__footer__options">
       <button class="nx-margin-y-2xs w-100" nxButton="tertiary small" type="button" (click)="continueWithOutLicensePlate()">
-        <span nxCopytext="medium" class="uppercase nx-font-weight-bold" uiQuoteLiteral="continue-without-license-plate"></span>
+        <span nxCopytext="medium" class="uppercase nx-font-weight-bold" nxQuoteLiteral="continue-without-license-plate"></span>
       </button>
     </div>
     <div class="extra__footer__info">
       <quote-footer-info icon="fa-car">
-        <span uiQuoteLiteral="footer-info"></span>
+        <span nxQuoteLiteral="footer-info"></span>
       </quote-footer-info>
     </div>
   </quote-footer>

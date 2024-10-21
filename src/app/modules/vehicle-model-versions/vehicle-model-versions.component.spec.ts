@@ -88,8 +88,9 @@ describe('VehicleModelVersionsComponent', () => {
   });
 
   it('should select a model version and update context data', () => {
-    let setContextDataSpy = spyOn(contextDataService, 'set');
+    const setContextDataSpy = spyOn(contextDataService, 'set');
     const version = { index: 2, data: 'newVersion' } as ModelVersionModel;
+
     component.selectVersion(version);
 
     expect(component.selectedModelVersion).toBe(version);

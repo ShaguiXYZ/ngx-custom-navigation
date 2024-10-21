@@ -1,10 +1,11 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { TemplateRef } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { provideAnimations } from '@angular/platform-browser/animations';
 import { NxDialogService } from '@aposin/ng-aquila/modal';
 import { LoadingService } from '@shagui/ng-shagui/core';
 import { of } from 'rxjs';
 import { QuoteLoadingComponent } from './loading.component';
-import { provideAnimations } from '@angular/platform-browser/animations';
 
 describe('QuoteLoadingComponent', () => {
   let component: QuoteLoadingComponent;

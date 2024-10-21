@@ -68,7 +68,8 @@ describe('VehicleModelsComponent', () => {
   });
 
   it('should update selected model and context data on selectModel', () => {
-    let setContextDataSpy = spyOn(contextDataService, 'set');
+    const setContextDataSpy = spyOn(contextDataService, 'set');
+
     component.selectModel('Corolla');
 
     expect(component.selectedModel).toBe('Corolla');
@@ -88,8 +89,9 @@ describe('VehicleModelsComponent', () => {
     expect(spy).toHaveBeenCalled();
   });
 
-  it('should update models on search input keyup', fakeAsync((done: any) => {
+  it('should update models on search input keyup', fakeAsync(() => {
     const input = fixture.debugElement.query(By.css('input')).nativeElement;
+
     input.value = 'Prius';
     input.dispatchEvent(new Event('keyup'));
 

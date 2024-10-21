@@ -8,7 +8,7 @@ import { OfferingPriceModel, QuoteModel } from 'src/app/shared/models';
 import { QuoteOfferingPriceCardComponent } from './components';
 
 @Component({
-  selector: 'app-quote-offerings',
+  selector: 'quote-quote-offerings',
   templateUrl: './quote-offerings.component.html',
   styleUrl: './quote-offerings.component.scss',
   standalone: true,

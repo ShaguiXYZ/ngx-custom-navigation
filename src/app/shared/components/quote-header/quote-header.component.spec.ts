@@ -1,12 +1,11 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { QuoteHeaderComponent } from './quote-header.component';
-import { ContextDataService } from '@shagui/ng-shagui/core';
-import { RoutingService } from 'src/app/core/services';
-import { of } from 'rxjs';
-import { AppContextData, Page } from 'src/app/core/models';
-import { ContextDataServiceMock } from 'src/app/core/mock/services';
 import { TranslateService } from '@ngx-translate/core';
+import { ContextDataService } from '@shagui/ng-shagui/core';
 import { QUOTE_APP_CONTEXT_DATA } from 'src/app/core/constants';
+import { ContextDataServiceMock } from 'src/app/core/mock/services';
+import { AppContextData } from 'src/app/core/models';
+import { RoutingService } from 'src/app/core/services';
+import { QuoteHeaderComponent } from './quote-header.component';
 
 describe('QuoteHeaderComponent', () => {
   let component: QuoteHeaderComponent;

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NxCopytextModule } from '@aposin/ng-aquila/copytext';
@@ -12,7 +13,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
 
 describe('NumberAccidentsComponent', () => {
-  let component: any;
+  let component: NumberAccidentsComponent;
   let fixture: ComponentFixture<NumberAccidentsComponent>;
   let contextDataService: jasmine.SpyObj<ContextDataService>;
   let routingService: jasmine.SpyObj<RoutingService>;
@@ -69,7 +70,7 @@ describe('NumberAccidentsComponent', () => {
   });
 
   it('should update contextData and call nextStep on selectAccidents', () => {
-    let setContextDataSpy = spyOn(contextDataService, 'set');
+    const setContextDataSpy = spyOn(contextDataService, 'set');
 
     component.selectAccidents(3);
 
@@ -91,7 +92,7 @@ describe('NumberAccidentsComponent', () => {
   });
 
   it('should call updateValidData on canDeactivate', () => {
-    spyOn(component, 'updateValidData').and.callThrough();
+    spyOn(component as any, 'updateValidData').and.callThrough();
     component.canDeactivate();
 
     expect(component['updateValidData']).toHaveBeenCalled();

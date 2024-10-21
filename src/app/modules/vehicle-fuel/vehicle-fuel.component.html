@@ -1,11 +1,11 @@
 <article class="component-container">
-  <quote-header-title> <span uiQuoteLiteral="header"></span></quote-header-title>
+  <quote-header-title> <span nxQuoteLiteral="header"></span></quote-header-title>
   <div class="form-container">
     <nx-accordion variant="light" [multi]="true">
       <nx-expansion-panel [expanded]="true">
         <nx-expansion-panel-header>
           <nx-expansion-panel-title nxHeadline="subsection-xsmall">
-            <span uiQuoteLiteral="fuel"></span>
+            <span nxQuoteLiteral="fuel"></span>
           </nx-expansion-panel-title>
         </nx-expansion-panel-header>
         <div class="vehicle__selections">
@@ -26,7 +26,7 @@
       <nx-expansion-panel #cubicCapacityPanel [expanded]="selectedFuel">
         <nx-expansion-panel-header>
           <nx-expansion-panel-title nxHeadline="subsection-xsmall">
-            <span uiQuoteLiteral="cubic-capacity"></span>
+            <span nxQuoteLiteral="cubic-capacity"></span>
           </nx-expansion-panel-title>
         </nx-expansion-panel-header>
         <div class="vehicle__selections">
@@ -52,7 +52,7 @@
               <span
                 nxCopytext="medium"
                 [ngClass]="{ 'nx-font-weight-bold': _cubicCapacityNotKnown }"
-                uiQuoteLiteral="cubic-capacity-not-known"
+                nxQuoteLiteral="cubic-capacity-not-known"
               ></span>
             </button>
           </quote-selectable-option>
@@ -62,7 +62,7 @@
       <nx-expansion-panel #powerPanel [expanded]="selectedCubicCapacity">
         <nx-expansion-panel-header>
           <nx-expansion-panel-title nxHeadline="subsection-xsmall">
-            <span uiQuoteLiteral="power"></span>
+            <span nxQuoteLiteral="power"></span>
           </nx-expansion-panel-title>
         </nx-expansion-panel-header>
         <div class="vehicle__selections">
@@ -82,7 +82,7 @@
           @let _powerNotKnown = selectedPower?.index === powerNotKnown.index;
           <quote-selectable-option [selected]="_powerNotKnown" (uiSelect)="selectPower(powerNotKnown)">
             <button class="nx-margin-y-2xs center" nxButton="tertiary small" type="button">
-              <span nxCopytext="medium" [ngClass]="{ 'nx-font-weight-bold': _powerNotKnown }" uiQuoteLiteral="power-not-known"></span>
+              <span nxCopytext="medium" [ngClass]="{ 'nx-font-weight-bold': _powerNotKnown }" nxQuoteLiteral="power-not-known"></span>
             </button>
           </quote-selectable-option>
         </div>

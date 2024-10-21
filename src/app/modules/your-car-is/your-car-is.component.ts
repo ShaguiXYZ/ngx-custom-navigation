@@ -16,7 +16,7 @@ import { IsValidData } from 'src/app/shared/guards';
 import { IVehicleModel, QuoteModel } from 'src/app/shared/models';
 
 @Component({
-  selector: 'app-your-car-is',
+  selector: 'quote-your-car-is',
   templateUrl: './your-car-is.component.html',
   styleUrl: './your-car-is.component.scss',
   standalone: true,

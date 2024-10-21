@@ -17,7 +17,7 @@ import { QuoteModel } from 'src/app/shared/models';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 
 @Component({
-  selector: 'app-client-email',
+  selector: 'quote-client-email',
   templateUrl: './client-email.component.html',
   styleUrl: './client-email.component.scss',
   standalone: true,

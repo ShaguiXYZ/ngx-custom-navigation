@@ -1,11 +1,12 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { ElementRef } from '@angular/core';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ContextDataService } from '@shagui/ng-shagui/core';
+import { QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
 import { RoutingService } from 'src/app/core/services';
 import { OfferingsService } from 'src/app/core/services/offerings.service';
-import { QuoteOfferingsComponent } from './quote-offerings.component';
 import { OfferingPriceModel, QuoteModel } from 'src/app/shared/models';
-import { QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
+import { QuoteOfferingsComponent } from './quote-offerings.component';
 
 describe('QuoteOfferingsComponent', () => {
   let component: QuoteOfferingsComponent;

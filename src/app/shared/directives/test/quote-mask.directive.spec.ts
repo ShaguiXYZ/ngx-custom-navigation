@@ -5,13 +5,13 @@ import { QuoteMaskType } from '../../models';
 import { QuoteMaskDirective } from '../quote-mask.directive';
 
 @Component({
-  template: `<input type="text" [uiQuoteMask]="mask" (uiValueMatch)="onValueMatch($event)" />`,
+  template: `<input type="text" [nxQuoteMask]="mask" (uiValueMatch)="onValueMatch($event)" />`,
   standalone: true,
   imports: [QuoteMaskDirective]
 })
 class TestComponent {
   public mask: QuoteMaskType = 'numeric';
-  public valueMatch: boolean = false;
+  public valueMatch = false;
 
   onValueMatch(match: boolean) {
     this.valueMatch = match;

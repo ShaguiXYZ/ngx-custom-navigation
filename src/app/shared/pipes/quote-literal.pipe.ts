@@ -10,7 +10,7 @@ import { LiteralsService } from 'src/app/core/services';
 })
 export class QuoteLiteralPipe implements PipeTransform {
   @Input()
-  public uiQuoteLiteral!: string;
+  public nxQuoteLiteral!: string;
 
   private readonly contextDataService = inject(ContextDataService);
   private readonly literalsService = inject(LiteralsService);

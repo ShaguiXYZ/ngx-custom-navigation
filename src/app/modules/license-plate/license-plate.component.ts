@@ -19,7 +19,7 @@ import { QuoteModel } from 'src/app/shared/models';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 
 @Component({
-  selector: 'app-license-plate',
+  selector: 'quote-license-plate',
   templateUrl: './license-plate.component.html',
   styleUrl: './license-plate.component.scss',
   standalone: true,

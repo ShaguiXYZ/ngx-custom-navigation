@@ -24,7 +24,7 @@ import { IsValidData } from 'src/app/shared/guards';
 import { QuoteModel } from 'src/app/shared/models';
 
 @Component({
-  selector: 'app-place',
+  selector: 'quote-place',
   templateUrl: './place.component.html',
   styleUrl: './place.component.scss',
   standalone: true,

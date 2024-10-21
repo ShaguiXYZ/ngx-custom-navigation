@@ -1,18 +1,16 @@
+import { HttpClient } from '@angular/common/http';
 import { TestBed } from '@angular/core/testing';
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { VehicleService } from '../vehicle.service';
-import { HttpService } from '@shagui/ng-shagui/core';
+import { of } from 'rxjs';
 import {
   BrandKey,
+  CubicCapacityModel,
+  FuelModel,
+  FuelTypes,
   IVehicleModel,
   ModelVersionModel,
-  FuelModel,
-  PowerRangesModel,
-  CubicCapacityModel,
-  FuelTypes
+  PowerRangesModel
 } from 'src/app/shared/models';
-import { HttpClient } from '@angular/common/http';
-import { of } from 'rxjs';
+import { VehicleService } from '../vehicle.service';
 
 describe('VehicleService', () => {
   let service: VehicleService;

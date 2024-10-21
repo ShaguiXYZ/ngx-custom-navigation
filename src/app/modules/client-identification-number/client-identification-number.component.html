@@ -1,21 +1,21 @@
 <article class="component-container">
   <quote-header-title>
-    <span uiQuoteLiteral="header"></span>
-    <p nxCopytext="normal" uiQuoteLiteral="subheader"></p>
+    <span nxQuoteLiteral="header"></span>
+    <p nxCopytext="normal" nxQuoteLiteral="subheader"></p>
   </quote-header-title>
   <section class="form-container">
     <form [formGroup]="form">
       <nx-formfield [label]="'identification-number' | quoteLiteral">
         <input formControlName="identificationNumber" nxInput />
         @if(form.get('identificationNumber')?.errors?.['required']) {
-        <nx-error appearance="text" nxFormfieldError><span uiQuoteLiteral="error-required"></span> </nx-error>
+        <nx-error appearance="text" nxFormfieldError><span nxQuoteLiteral="error-required"></span> </nx-error>
         }
       </nx-formfield>
     </form>
   </section>
   <quote-footer>
     <div class="extra__footer__info">
-      <quote-footer-info icon="fa-id-card"><span uiQuoteLiteral="footer-info"></span></quote-footer-info>
+      <quote-footer-info icon="fa-id-card"><span nxQuoteLiteral="footer-info"></span></quote-footer-info>
     </div>
   </quote-footer>
 </article>

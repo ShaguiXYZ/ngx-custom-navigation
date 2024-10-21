@@ -6,11 +6,11 @@ import { QuoteFooterConfig } from '../models';
 export class QuoteFooterService {
   private readonly routingService = inject(RoutingService);
 
-  public nextStep = (config: QuoteFooterConfig = { showNext: true }): void => {
-    const preventDefault = config.nextFn?.();
-    console.log(preventDefault);
-
-    !preventDefault && this.routingService.nextStep();
+  public nextStep = async (config: QuoteFooterConfig = { showNext: true }): Promise<boolean> => {
+    if (config.nextFn?.()) {
+      return false;
+    }
+    return this.routingService.nextStep();
   };
 
   public previousStep = (config: QuoteFooterConfig = { showNext: true }): void => {

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { CacheData, DataInfo, deepCopy } from '@shagui/ng-shagui/core';
 import { Observable, of } from 'rxjs';
 import { QuoteModel } from 'src/app/shared/models';

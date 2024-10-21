@@ -11,11 +11,11 @@
     @if(mobileMode) {
     <nx-icon name="chevron-left" size="s" aria-hidden="true" />
     }@else {
-    <span uuiQuoteLiteral="footer-back"></span>
+    <span unxQuoteLiteral="footer-back"></span>
     }
   </button>
   } @if (config.showNext) {
-  <button class="footer-option" nxButton="primary medium" uiQuoteLiteral="footer-next" type="button" (click)="goToNextStep()"></button>
+  <button class="footer-option" nxButton="primary medium" nxQuoteLiteral="footer-next" type="button" (click)="goToNextStep()"></button>
   }
 </div>
 <div class="footer-extras" [ngClass]="{ 'mobile-options': mobileMode }">

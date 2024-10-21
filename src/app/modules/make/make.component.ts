@@ -19,7 +19,7 @@ import { BrandComponent } from './components';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
 
 @Component({
-  selector: 'app-make',
+  selector: 'quote-make',
   standalone: true,
   imports: [
     CommonModule,

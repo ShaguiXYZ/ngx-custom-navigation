@@ -1,4 +1,4 @@
-import { inject, Pipe } from '@angular/core';
+import { inject, Pipe, PipeTransform } from '@angular/core';
 import { LiteralModel, LiteralParam } from 'src/app/core/models';
 import { LiteralsService } from 'src/app/core/services';
 
@@ -6,7 +6,7 @@ import { LiteralsService } from 'src/app/core/services';
   name: 'literalToString',
   standalone: true
 })
-export class LiteralToStringPipe {
+export class LiteralToStringPipe implements PipeTransform {
   private readonly literalsService = inject(LiteralsService);
 
   public transform = (value: LiteralModel, params?: LiteralParam): string => {

@@ -37,8 +37,6 @@ export class ContactTimeComponent implements OnInit, IsValidData {
 
   private readonly contextDataService = inject(ContextDataService);
 
-  constructor() {}
-
   ngOnInit(): void {
     this.contextData = this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA);
     this.selectedHour = this.contextData.contactData.contactHour;

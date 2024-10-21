@@ -54,7 +54,7 @@ describe('DrivingLicenseLocationComponent', () => {
   });
 
   it('should select location and update context data', () => {
-    let setContextDataSpy = spyOn(contextDataService, 'set');
+    const setContextDataSpy = spyOn(contextDataService, 'set');
 
     const icon = { index: 'eu', data: 'Country 2' };
     component.selectLocation(icon);
@@ -74,7 +74,7 @@ describe('DrivingLicenseLocationComponent', () => {
   it('should open modal from template', () => {
     component.openFromTemplate();
 
-    expect(dialogService.open).toHaveBeenCalledWith(component.infoModal, {
+    expect(dialogService.open).toHaveBeenCalledWith(component['infoModal'], {
       maxWidth: '350px',
       showCloseIcon: true
     });

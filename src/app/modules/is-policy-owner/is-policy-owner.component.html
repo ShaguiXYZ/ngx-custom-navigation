@@ -1,14 +1,14 @@
 <!-- eslint-disable @angular-eslint/template/elements-content -->
 <article class="component-container">
   <quote-header-title>
-    <span uiQuoteLiteral="header" [uiQuoteLitealParams]="{ days: '60' }"></span>
+    <span nxQuoteLiteral="header" [uiQuoteLitealParams]="{ days: '60' }"></span>
   </quote-header-title>
   <section class="form-container">
     <quote-selectable-option [selected]="isPolicyOwner">
-      <button nxButton="tertiary medium" type="button" (click)="onIsPolicyOwnerChange(true)" uiQuoteLiteral="yes"></button>
+      <button nxButton="tertiary medium" type="button" (click)="onIsPolicyOwnerChange(true)" nxQuoteLiteral="yes"></button>
     </quote-selectable-option>
     <quote-selectable-option [selected]="isPolicyOwner === false">
-      <button nxButton="tertiary medium" type="button" (click)="onIsPolicyOwnerChange(false)" uiQuoteLiteral="no"></button>
+      <button nxButton="tertiary medium" type="button" (click)="onIsPolicyOwnerChange(false)" nxQuoteLiteral="no"></button>
     </quote-selectable-option>
   </section>
 </article>

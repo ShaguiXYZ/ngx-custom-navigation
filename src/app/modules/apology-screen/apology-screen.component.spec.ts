@@ -15,8 +15,6 @@ describe('ApologyComponent', () => {
   let component: ApologyComponent;
   let fixture: ComponentFixture<ApologyComponent>;
 
-  let contextDataService: jasmine.SpyObj<ContextDataService>;
-
   beforeEach(async () => {
     const translationsServiceSpy = jasmine.createSpyObj('TranslationsService', ['translate']);
 
@@ -38,10 +36,6 @@ describe('ApologyComponent', () => {
         { provide: TranslateService, useValue: translationsServiceSpy }
       ]
     }).compileComponents();
-  });
-
-  beforeEach(() => {
-    contextDataService = TestBed.inject(ContextDataService) as jasmine.SpyObj<ContextDataService>;
   });
 
   beforeEach(() => {

@@ -1,25 +1,28 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { TestBed } from '@angular/core/testing';
 import { ContextDataService } from '@shagui/ng-shagui/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable, of, Subject } from 'rxjs';
 import { QUOTE_APP_CONTEXT_DATA } from 'src/app/core/constants';
-import { ContextDataServiceMock } from 'src/app/core/mock/services';
 import { AppContextData } from 'src/app/core/models';
 import { Stepper } from 'src/app/shared/models/stepper.model';
 import { QuoteStepperService } from './quote-stepper.service';
 
 describe('QuoteStepperService', () => {
   let service: QuoteStepperService;
-  let contextDataService: jasmine.SpyObj<ContextDataService>;
+  let contextDataServiceSpy: jasmine.SpyObj<ContextDataService>;
 
   beforeEach(() => {
+    contextDataServiceSpy = jasmine.createSpyObj('ContextDataService', ['get', 'set', 'onDataChange']);
+    const contextDataSubject = new Subject<AppContextData>();
+    contextDataServiceSpy.onDataChange.and.returnValue(contextDataSubject.asObservable());
+
     TestBed.configureTestingModule({
-      providers: [QuoteStepperService, { provide: ContextDataService, useClass: ContextDataServiceMock }]
+      providers: [QuoteStepperService, { provide: ContextDataService, useValue: contextDataServiceSpy }]
     });
   });
 
   beforeEach(() => {
     service = TestBed.inject(QuoteStepperService);
-    contextDataService = TestBed.inject(ContextDataService) as jasmine.SpyObj<ContextDataService>;
   });
 
   it('should be created', () => {
@@ -49,18 +52,30 @@ describe('QuoteStepperService', () => {
       }
     } as unknown as AppContextData;
 
-    contextDataService.set<AppContextData>(QUOTE_APP_CONTEXT_DATA, mockAppContextData);
+    // contextDataServiceSpy.get.and.callFake((contextDataKey: string): any => {
+    //   if (contextDataKey === QUOTE_APP_CONTEXT_DATA) {
+    //     return mockAppContextData;
+    //   }
 
-    const contextDataSubject = new BehaviorSubject<AppContextData>(mockAppContextData);
-    const contextDataServiceSpy = jasmine.createSpyObj('ContextDataService', ['onDataChange']);
-    contextDataServiceSpy.onDataChange.and.returnValue(contextDataSubject.asObservable());
+    //   return null;
+    // });
+
+    contextDataServiceSpy.onDataChange.and.callFake((contextDataKey: string): Observable<any> => {
+      console.log('contextDataKey', contextDataKey);
+
+      if (contextDataKey === QUOTE_APP_CONTEXT_DATA) {
+        return of(mockAppContextData);
+      }
+
+      return new Subject<AppContextData>().asObservable();
+    });
 
     service.asObservable().subscribe(value => {
+      console.log('value', value);
+
       expect(value).toEqual({ stepper: mockStepper, stepKey: 'step1' });
       done();
     });
-
-    contextDataService.set<AppContextData>(QUOTE_APP_CONTEXT_DATA, mockAppContextData);
   });
 
   xit('should set quoteSteps$ to undefined if pageId is not present', done => {

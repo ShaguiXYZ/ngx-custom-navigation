@@ -16,7 +16,7 @@ import {
 import { QuoteLiteralPipe } from './shared/pipes';
 
 @Component({
-  selector: 'app-root',
+  selector: 'quote-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
   animations: [routeTransitions('slide')],

@@ -1,6 +1,7 @@
-import { TestBed } from '@angular/core/testing';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideAnimations } from '@angular/platform-browser/animations';
-import { provideRouter } from '@angular/router';
+import { provideRouter, RouterOutlet } from '@angular/router';
 import { NxGridModule } from '@aposin/ng-aquila/grid';
 import { NxLinkModule } from '@aposin/ng-aquila/link';
 import { TranslateService } from '@ngx-translate/core';
@@ -20,10 +21,8 @@ import { QuoteLiteralPipe } from './shared/pipes';
 
 describe('AppComponent', () => {
   let component: AppComponent;
-  let fixture: any;
-  let contextDataService: jasmine.SpyObj<ContextDataService>;
+  let fixture: ComponentFixture<AppComponent>;
   let notificationService: jasmine.SpyObj<NotificationService>;
-  let routingService: jasmine.SpyObj<RoutingService>;
 
   beforeEach(async () => {
     // const contextDataServiceSpy = jasmine.createSpyObj('ContextDataService', ['get', 'onDataChange']);
@@ -58,9 +57,7 @@ describe('AppComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(AppComponent);
     component = fixture.componentInstance;
-    contextDataService = TestBed.inject(ContextDataService) as jasmine.SpyObj<ContextDataService>;
     notificationService = TestBed.inject(NotificationService) as jasmine.SpyObj<NotificationService>;
-    routingService = TestBed.inject(RoutingService) as jasmine.SpyObj<RoutingService>;
 
     notificationService.onNotification.and.returnValue(
       of({
@@ -89,7 +86,11 @@ describe('AppComponent', () => {
   });
 
   it('should prevent default behavior on beforeunload event', () => {
-    const event = { preventDefault: () => {} } as unknown as BeforeUnloadEvent;
+    const event = {
+      preventDefault: () => {
+        return;
+      }
+    } as unknown as BeforeUnloadEvent;
     spyOn(event, 'preventDefault');
     component.beforeunloadHandler(event);
 
@@ -103,15 +104,17 @@ describe('AppComponent', () => {
   });
 
   it('should prepare route correctly', () => {
-    const mockOutlet = { isActivated: true };
+    const mockOutlet = { isActivated: true } as RouterOutlet;
     spyOn<any>(component, 'slideTo').and.returnValue(5);
-    const result = component.prepareRoute(mockOutlet as any);
+    const result = component.prepareRoute(mockOutlet);
+
     expect(result).toBe(5);
   });
 
   it('should return undefined if outlet is not activated in prepareRoute', () => {
-    const mockOutlet = { isActivated: false };
-    const result = component.prepareRoute(mockOutlet as any);
+    const mockOutlet = { isActivated: false } as RouterOutlet;
+    const result = component.prepareRoute(mockOutlet);
+
     expect(result).toBe(-1);
   });
 });

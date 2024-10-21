@@ -63,13 +63,13 @@ describe('DateOfIssueComponent', () => {
   });
 
   it('should initialize form with context data', () => {
-    let dateOfIssue = moment(new Date(component.form.controls['dateOfIssue'].value)).format('YYYY-MM-DD');
+    const dateOfIssue = moment(new Date(component.form.controls['dateOfIssue'].value)).format('YYYY-MM-DD');
 
     expect(dateOfIssue).toEqual('2003-01-01');
   });
 
   it('should mark form as touched and update context data on updateValidData', () => {
-    let setContextDataSpy = spyOn(contextDataService, 'set');
+    const setContextDataSpy = spyOn(contextDataService, 'set');
 
     component.form.controls['dateOfIssue'].setValue('2023-01-02');
     const isValid = component['updateValidData']();
@@ -86,7 +86,7 @@ describe('DateOfIssueComponent', () => {
 
   it('should return form validity on canDeactivate', done => {
     component.form.controls['dateOfIssue'].setValue('2023-01-02');
-    let result = component.canDeactivate();
+    const result = component.canDeactivate();
 
     expect(result).toBeTrue();
     done();

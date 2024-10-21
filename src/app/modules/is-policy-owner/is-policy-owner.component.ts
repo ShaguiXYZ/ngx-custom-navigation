@@ -11,7 +11,7 @@ import { IsValidData } from 'src/app/shared/guards';
 import { QuoteModel } from 'src/app/shared/models';
 
 @Component({
-  selector: 'app-is-policy-owner',
+  selector: 'quote-is-policy-owner',
   templateUrl: './is-policy-owner.component.html',
   styleUrl: './is-policy-owner.component.scss',
   standalone: true,

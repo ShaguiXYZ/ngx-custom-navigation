@@ -104,11 +104,10 @@ describe('YourCarIsComponent', () => {
   });
 
   it('should update context data and navigate to next step on vehicle selection', () => {
-    let setContextDataSpy = spyOn(contextDataService, 'set');
-
+    const setContextDataSpy = spyOn(contextDataService, 'set');
     const mockVehicle = { make: 'Nissan', vehicleTtype: 'Test Vehicle' } as IVehicleModel;
-    component['contextData'] = { vehicle: {} } as QuoteModel;
 
+    component['contextData'] = { vehicle: {} } as QuoteModel;
     component.selectVehicle(mockVehicle);
 
     expect(setContextDataSpy).toHaveBeenCalledWith(QUOTE_CONTEXT_DATA, { vehicle: mockVehicle });

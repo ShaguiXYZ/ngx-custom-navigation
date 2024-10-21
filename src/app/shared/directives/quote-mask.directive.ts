@@ -2,7 +2,7 @@ import { Directive, ElementRef, EventEmitter, HostListener, Input, Output } from
 import { QUOTE_MASK, QuoteMaskType } from '../models';
 
 @Directive({
-  selector: '[uiQuoteMask]',
+  selector: '[nxQuoteMask]',
   standalone: true
 })
 export class QuoteMaskDirective {
@@ -14,12 +14,14 @@ export class QuoteMaskDirective {
 
   public _mask!: QuoteMaskType;
 
-  private readonly specialKeys: Set<string> = new Set(['Backspace', 'Tab', 'End', 'Home', 'ArrowLeft', 'ArrowRight', 'Del', 'Delete']);
+  private readonly specialKeys: Set<string>;
 
-  constructor(private el: ElementRef) {}
+  constructor(private el: ElementRef) {
+    this.specialKeys = new Set(['Backspace', 'Tab', 'End', 'Home', 'ArrowLeft', 'ArrowRight', 'Del', 'Delete']);
+  }
 
   @Input()
-  public set uiQuoteMask(value: QuoteMaskType) {
+  public set nxQuoteMask(value: QuoteMaskType) {
     this._mask = value;
   }
 

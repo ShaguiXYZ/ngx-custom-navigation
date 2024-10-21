@@ -7,7 +7,7 @@ import { RoutingService } from 'src/app/core/services';
 import { QuoteLinkDirective } from '../quote-link.directive';
 
 @Component({
-  template: `<div uiQuoteLink="testLink"></div>`
+  template: `<div nxQuoteLink="testLink"></div>`
 })
 class TestComponent {}
 

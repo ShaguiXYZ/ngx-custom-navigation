@@ -15,7 +15,7 @@ import { QuoteModel } from 'src/app/shared/models';
 import { DrivingLicenseIcons } from './models';
 
 @Component({
-  selector: 'app-driving-license-location',
+  selector: 'quote-driving-license-location',
   standalone: true,
   imports: [
     CommonModule,
@@ -31,7 +31,8 @@ import { DrivingLicenseIcons } from './models';
   styleUrl: './driving-license-location.component.scss'
 })
 export class DrivingLicenseLocationComponent implements OnInit, IsValidData {
-  @ViewChild('template') infoModal!: TemplateRef<any>;
+  @ViewChild('template')
+  private infoModal!: TemplateRef<unknown>;
 
   public drivenLicenseCountries = DrivingLicenseIcons;
   public selectedLocation?: IndexedData;
@@ -42,8 +43,6 @@ export class DrivingLicenseLocationComponent implements OnInit, IsValidData {
   private readonly contextDataService = inject(ContextDataService);
   private readonly routingService = inject(RoutingService);
   private readonly dialogService = inject(NxDialogService);
-
-  constructor() {}
 
   ngOnInit(): void {
     this.contextData = this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA);

@@ -13,15 +13,15 @@ module.exports = tseslint.config(
         'error',
         {
           type: 'attribute',
-          prefix: ['app', 'quote'],
-          style: ['camelCase']
+          prefix: ['nx', 'quote'],
+          style: 'camelCase'
         }
       ],
       '@angular-eslint/component-selector': [
         'error',
         {
           type: 'element',
-          prefix: ['app', 'quote'],
+          prefix: ['nx', 'quote'],
           style: 'kebab-case'
         }
       ]

@@ -58,13 +58,13 @@ describe('BirthdateComponent', () => {
   });
 
   it('should initialize form with birthdate from context', () => {
-    let birthdate = moment(new Date(component.form.controls['birthdate'].value)).format('YYYY-MM-DD');
+    const birthdate = moment(new Date(component.form.controls['birthdate'].value)).format('YYYY-MM-DD');
 
     expect(birthdate).toEqual('2000-01-01');
   });
 
   it('should mark form as touched and update context data on updateValidData', () => {
-    let setContextDataSpy = spyOn(contextDataService, 'set');
+    const setContextDataSpy = spyOn(contextDataService, 'set');
 
     component.form.controls['birthdate'].setValue('2000-01-01');
     const isValid = component['updateValidData']();

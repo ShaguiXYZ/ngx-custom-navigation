@@ -40,5 +40,9 @@ export class QuoteHeaderComponent implements OnInit, OnDestroy {
     this.routingService.previousStep();
   }
 
-  private backButtonProperty = (lastPage?: Page): boolean => lastPage?.configuration?.data?.['showBack'] ?? true;
+  private backButtonProperty = (lastPage?: Page): boolean => {
+    const showBack = lastPage?.configuration?.data?.['showBack'];
+
+    return typeof showBack === 'boolean' ? showBack : true;
+  };
 }

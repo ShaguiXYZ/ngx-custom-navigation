@@ -81,7 +81,7 @@ describe('MakeComponent', () => {
   });
 
   it('should select make and update context data', () => {
-    let setContextDataSpy = spyOn(contextDataService, 'set');
+    const setContextDataSpy = spyOn(contextDataService, 'set');
 
     component.selectMake('Honda');
 

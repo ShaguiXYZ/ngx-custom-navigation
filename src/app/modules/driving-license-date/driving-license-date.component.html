@@ -1,5 +1,5 @@
 <article class="component-container">
-  <quote-header-title><span uiQuoteLiteral="header"></span></quote-header-title>
+  <quote-header-title><span nxQuoteLiteral="header"></span></quote-header-title>
   <section class="form-container">
     <form [formGroup]="form">
       <nx-formfield [label]="'issue-date' | quoteLiteral">
@@ -11,11 +11,11 @@
           [parseFormat]="['DD/MM/YYYY', 'DDMMYYYY', 'DDMMYY']"
           displayFormat="DD/MM/YYYY"
         />
-        <span nxFormfieldHint uiQuoteLiteral="hint-date-format"></span>
+        <span nxFormfieldHint nxQuoteLiteral="hint-date-format"></span>
         <nx-datepicker-toggle [for]="myDatepicker" nxFormfieldSuffix></nx-datepicker-toggle>
         <nx-datepicker #myDatepicker></nx-datepicker>
         @if(form.get('drivenLicenseDate')?.errors?.['required']) {
-        <nx-error appearance="text" nxFormfieldError><span uiQuoteLiteral="error-required"></span> </nx-error>
+        <nx-error appearance="text" nxFormfieldError><span nxQuoteLiteral="error-required"></span> </nx-error>
         }
       </nx-formfield>
     </form>

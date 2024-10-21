@@ -1,27 +1,27 @@
-import { Directive, ElementRef, Input, Renderer2 } from '@angular/core';
+import { AfterViewInit, Directive, ElementRef, Input, Renderer2 } from '@angular/core';
 import { QuoteLiteralPipe } from '../pipes';
 import { LiteralParam } from 'src/app/core/models';
 
 @Directive({
-  selector: '[uiQuoteLiteral]',
+  selector: '[nxQuoteLiteral]',
   providers: [QuoteLiteralPipe],
   standalone: true
 })
-export class QuoteLiteralDirective {
+export class QuoteLiteralDirective implements AfterViewInit {
   @Input()
-  public uiQuoteLiteral!: string;
+  public nxQuoteLiteral!: string;
 
   @Input()
   public uiQuoteLitealParams?: LiteralParam;
 
   @Input()
-  public uiQuoteDefaultLiteral: string = '';
+  public uiQuoteDefaultLiteral = '';
 
   @Input()
   public uiAttribute?: string;
 
   @Input()
-  public uiProperty: string = 'innerText';
+  public uiProperty = 'innerText';
 
   constructor(
     private readonly el: ElementRef<HTMLElement>,
@@ -34,7 +34,7 @@ export class QuoteLiteralDirective {
   }
 
   private updateElement(): void {
-    const value = this.literalPipe.transform(this.uiQuoteLiteral, this.uiQuoteLitealParams) || this.uiQuoteDefaultLiteral;
+    const value = this.literalPipe.transform(this.nxQuoteLiteral, this.uiQuoteLitealParams) || this.uiQuoteDefaultLiteral;
 
     if (this.uiAttribute) {
       this.renderer.setAttribute(this.el.nativeElement, this.uiAttribute, value);

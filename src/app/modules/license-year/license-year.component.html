@@ -1,11 +1,11 @@
 <article class="component-container">
-  <quote-header-title><span uiQuoteLiteral="header"></span></quote-header-title>
+  <quote-header-title><span nxQuoteLiteral="header"></span></quote-header-title>
   <section class="form-container">
     <form [formGroup]="form">
       <nx-formfield [label]="'year-of-manufacture-label' | quoteLiteral">
         <input type="text" formControlName="yearOfManufacture" nxInput nxMask="0000" />
         @if(form.get('yearOfManufacture')?.errors?.['required']) {
-        <nx-error appearance="text" nxFormfieldError><span uiQuoteLiteral="error-required"></span> </nx-error>
+        <nx-error appearance="text" nxFormfieldError><span nxQuoteLiteral="error-required"></span> </nx-error>
         }
       </nx-formfield>
     </form>

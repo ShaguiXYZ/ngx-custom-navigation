@@ -1,18 +1,19 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NxCopytextModule } from '@aposin/ng-aquila/copytext';
 import { NX_DATE_LOCALE } from '@aposin/ng-aquila/datefield';
 import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
 import { NxInputModule } from '@aposin/ng-aquila/input';
+import { TranslateService } from '@ngx-translate/core';
 import { ContextDataService } from '@shagui/ng-shagui/core';
+import { QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
+import { ContextDataServiceMock } from 'src/app/core/mock/services';
 import { HeaderTitleComponent, QuoteFooterComponent, QuoteFooterInfoComponent } from 'src/app/shared/components';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
 import { QuoteModel } from 'src/app/shared/models';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 import { ClientIdentificationNumberComponent } from './client-identification-number.component';
-import { ContextDataServiceMock } from 'src/app/core/mock/services';
-import { TranslateService } from '@ngx-translate/core';
-import { QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
 
 describe('ClientIdentificationNumberComponent', () => {
   let component: ClientIdentificationNumberComponent;
@@ -69,7 +70,7 @@ describe('ClientIdentificationNumberComponent', () => {
   });
 
   it('should mark all fields as touched and update context data on updateValidData', () => {
-    let setContextDataSpy = spyOn(contextDataService, 'set');
+    const setContextDataSpy = spyOn(contextDataService, 'set');
 
     component.form.controls['identificationNumber'].setValue('987654321');
     const isValid = component['updateValidData']();
@@ -86,7 +87,7 @@ describe('ClientIdentificationNumberComponent', () => {
   });
 
   it('should return false if form is invalid on updateValidData', () => {
-    let setContextDataSpy = spyOn(contextDataService, 'set');
+    const setContextDataSpy = spyOn(contextDataService, 'set');
 
     component.form.controls['identificationNumber'].setValue('');
     const isValid = component['updateValidData']();

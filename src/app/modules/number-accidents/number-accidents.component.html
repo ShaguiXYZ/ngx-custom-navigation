@@ -2,7 +2,7 @@
   @let years = 5;
   <quote-header-title
     ><span
-      uiQuoteLiteral="header"
+      nxQuoteLiteral="header"
       [uiQuoteLitealParams]="{
         years: years.toString(),
         'literal-last': years > 1 ? 'los últimos' : 'el último',
@@ -52,7 +52,7 @@
           <span
             nxCopytext="normal"
             class="nx-margin-s nx-margin-left-4m"
-            uiQuoteLiteral="more-accidents"
+            nxQuoteLiteral="more-accidents"
             [uiQuoteLitealParams]="{ value: '5' }"
           ></span>
         </div>
@@ -61,7 +61,7 @@
   </section>
   <quote-footer [config]="{ showNext: false }">
     <div class="extra__footer__info">
-      <quote-footer-info icon="fa-location-arrow"><span uiQuoteLiteral="footer-info"></span></quote-footer-info>
+      <quote-footer-info icon="fa-location-arrow"><span nxQuoteLiteral="footer-info"></span></quote-footer-info>
     </div>
   </quote-footer>
 </article>

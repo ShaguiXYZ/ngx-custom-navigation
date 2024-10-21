@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-namespace */
 export type Hour = `${number}:${number}`;
 
 export interface ContactDataModel {

@@ -61,7 +61,7 @@ describe('LicenseYearComponent', () => {
   });
 
   it('should mark form as touched and update context data on updateValidData', () => {
-    let setContextDataSpy = spyOn(contextDataService, 'set');
+    const setContextDataSpy = spyOn(contextDataService, 'set');
 
     component.form.controls['yearOfManufacture'].setValue(2021);
     const isValid = component['updateValidData']();
@@ -76,7 +76,7 @@ describe('LicenseYearComponent', () => {
   });
 
   it('should not update context data if form is invalid', () => {
-    let setContextDataSpy = spyOn(contextDataService, 'set');
+    const setContextDataSpy = spyOn(contextDataService, 'set');
 
     component.form.controls['yearOfManufacture'].setValue('');
     const isValid = component['updateValidData']();
@@ -86,7 +86,7 @@ describe('LicenseYearComponent', () => {
   });
 
   it('should set hasDrivenLicense to false on continue', () => {
-    let setContextDataSpy = spyOn(contextDataService, 'set');
+    const setContextDataSpy = spyOn(contextDataService, 'set');
 
     component.continue();
     expect(setContextDataSpy).toHaveBeenCalledWith(

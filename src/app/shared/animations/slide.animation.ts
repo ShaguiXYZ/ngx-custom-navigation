@@ -1,4 +1,4 @@
-import { AnimationMetadata, animate, animateChild, group, query, style, transition, trigger } from '@angular/animations';
+import { AnimationMetadata, animate, animateChild, group, query, style, transition } from '@angular/animations';
 
 type Direction = 'left' | 'right';
 

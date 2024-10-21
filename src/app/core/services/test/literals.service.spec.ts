@@ -1,7 +1,8 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { TestBed } from '@angular/core/testing';
 import { TranslateService } from '@ngx-translate/core';
+import { QuoteLiteral } from '../../models';
 import { LiteralsService } from '../literals.service';
-import { LiteralModel, QuoteLiteral } from '../../models';
 
 describe('LiteralsService', () => {
   let service: LiteralsService;

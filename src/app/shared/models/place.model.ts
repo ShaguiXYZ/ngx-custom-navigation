@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-namespace */
-/* eslint-disable no-redeclare */
 import { IndexedData } from 'src/app/core/models';
 
 export interface PlaceModel {

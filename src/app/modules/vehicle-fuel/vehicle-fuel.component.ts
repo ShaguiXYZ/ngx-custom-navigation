@@ -15,7 +15,7 @@ import { IsValidData } from 'src/app/shared/guards';
 import { CubicCapacityModel, FuelModel, PowerRangesModel, QuoteModel } from 'src/app/shared/models';
 
 @Component({
-  selector: 'app-vehicle-fuel',
+  selector: 'quote-vehicle-fuel',
   standalone: true,
   imports: [
     CommonModule,

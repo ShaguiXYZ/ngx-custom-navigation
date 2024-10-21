@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-namespace */
-/* eslint-disable no-redeclare */
+
 export interface DrivenModel {
   hasDrivenLicense?: boolean;
   drivenLicense?: string;

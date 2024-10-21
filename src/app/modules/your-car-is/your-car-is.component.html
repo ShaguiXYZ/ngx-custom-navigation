@@ -1,6 +1,6 @@
 <article class="component-container">
   <quote-header-title>
-    <span uiQuoteLiteral="header"></span>
+    <span nxQuoteLiteral="header"></span>
   </quote-header-title>
   <div class="form-container">
     @for(vehicle of vehicleOptions; track vehicle; let index = $index) {
@@ -23,7 +23,7 @@
   <quote-footer [config]="footerConfig">
     <div class="extra__footer__options">
       <button class="nx-margin-y-2xs" nxButton="tertiary small" type="button" (click)="continue()">
-        <span nxCopytext="medium" class="uppercase nx-font-weight-bold" uiQuoteLiteral="continue-without-car"></span>
+        <span nxCopytext="medium" class="uppercase nx-font-weight-bold" nxQuoteLiteral="continue-without-car"></span>
       </button>
     </div>
   </quote-footer>

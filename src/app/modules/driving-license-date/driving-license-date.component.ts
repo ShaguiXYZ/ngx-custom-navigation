@@ -14,7 +14,7 @@ import { QuoteModel } from 'src/app/shared/models';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 
 @Component({
-  selector: 'app-driving-license-date',
+  selector: 'quote-driving-license-date',
   templateUrl: './driving-license-date.component.html',
   styleUrl: './driving-license-date.component.scss',
   standalone: true,

@@ -9,7 +9,7 @@ import { QuoteFooterConfig } from 'src/app/shared/components/quote-footer/models
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
 
 @Component({
-  selector: 'app-apology-screen',
+  selector: 'quote-apology-screen',
   templateUrl: './apology-screen.component.html',
   styleUrl: './apology-screen.component.scss',
   standalone: true,

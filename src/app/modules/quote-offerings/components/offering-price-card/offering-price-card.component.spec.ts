@@ -8,7 +8,6 @@ import { QuoteOfferingPriceCardComponent } from './offering-price-card.component
 describe('QuoteOfferingPriceCardComponent', () => {
   let component: QuoteOfferingPriceCardComponent;
   let fixture: ComponentFixture<QuoteOfferingPriceCardComponent>;
-  let contextDataService: jasmine.SpyObj<ContextDataService>;
 
   beforeEach(async () => {
     const translationsServiceSpy = jasmine.createSpyObj('TranslationsService', ['translate']);
@@ -25,9 +24,6 @@ describe('QuoteOfferingPriceCardComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(QuoteOfferingPriceCardComponent);
     component = fixture.componentInstance;
-
-    contextDataService = TestBed.inject(ContextDataService) as jasmine.SpyObj<ContextDataService>;
-
     component.price = { totalPremiumAmount: '123.45' } as OfferingPriceModel;
 
     fixture.detectChanges();

@@ -11,7 +11,7 @@ import { IsValidData } from 'src/app/shared/guards';
 import { QuoteModel } from 'src/app/shared/models';
 
 @Component({
-  selector: 'app-is-client',
+  selector: 'quote-is-client',
   templateUrl: './is-client.component.html',
   styleUrl: './is-client.component.scss',
   standalone: true,

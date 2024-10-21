@@ -57,7 +57,7 @@ describe('ClientNameComponent', () => {
   });
 
   it('should mark all fields as touched and update context data on valid form', () => {
-    let setContextDataSpy = spyOn(contextDataService, 'set');
+    const setContextDataSpy = spyOn(contextDataService, 'set');
 
     component.form.setValue({ name: 'Jane', surname: 'Smith' });
     const isValid = component['updateValidData']();
@@ -73,7 +73,7 @@ describe('ClientNameComponent', () => {
   });
 
   it('should not update context data on invalid form', () => {
-    let setContextDataSpy = spyOn(contextDataService, 'set');
+    const setContextDataSpy = spyOn(contextDataService, 'set');
 
     component.form.setValue({ name: '', surname: 'Smith' });
     const isValid = component['updateValidData']();

@@ -51,7 +51,7 @@ describe('ContactTimeComponent', () => {
   });
 
   it('should update valid data correctly', () => {
-    let setContextDataSpy = spyOn(contextDataService, 'set');
+    const setContextDataSpy = spyOn(contextDataService, 'set');
 
     component.selectHour('15:00');
     component.updateValidData();

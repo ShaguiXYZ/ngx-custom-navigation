@@ -1,14 +1,15 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { TranslateService } from '@ngx-translate/core';
 import { ContextDataService } from '@shagui/ng-shagui/core';
+import { QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
+import { ContextDataServiceMock } from 'src/app/core/mock/services';
 import { RoutingService } from 'src/app/core/services';
 import { QuoteModel } from 'src/app/shared/models';
 import { IsClientComponent } from './is-client.component';
-import { ContextDataServiceMock } from 'src/app/core/mock/services';
-import { TranslateService } from '@ngx-translate/core';
-import { QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
 
 describe('IsClientComponent', () => {
-  let component: any;
+  let component: IsClientComponent;
   let fixture: ComponentFixture<IsClientComponent>;
   let contextDataService: jasmine.SpyObj<ContextDataService>;
   let routingService: jasmine.SpyObj<RoutingService>;
@@ -49,7 +50,7 @@ describe('IsClientComponent', () => {
   });
 
   it('should initialize contextData on ngOnInit', () => {
-    let getContextDataSpy = spyOn(contextDataService, 'get');
+    const getContextDataSpy = spyOn(contextDataService, 'get');
     contextDataService.get.and.returnValue({ client: { isClient: true } } as QuoteModel);
 
     component.ngOnInit();
@@ -59,7 +60,7 @@ describe('IsClientComponent', () => {
   });
 
   it('should update contextData and call nextStep on onIsClientChange', () => {
-    let setContextDataSpy = spyOn(contextDataService, 'set');
+    const setContextDataSpy = spyOn(contextDataService, 'set');
 
     component.onIsClientChange(false);
 
@@ -81,9 +82,9 @@ describe('IsClientComponent', () => {
   });
 
   it('should call isValidData in canDeactivate', () => {
-    spyOn(component, 'isValidData').and.returnValue(true);
+    spyOn(component as any, 'isValidData').and.returnValue(true);
 
     expect(component.canDeactivate()).toBeTrue();
-    expect(component.isValidData).toHaveBeenCalled();
+    expect(component['isValidData']).toHaveBeenCalled();
   });
 });

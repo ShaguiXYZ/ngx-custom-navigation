@@ -1,7 +1,7 @@
 /**
  * Source: https://fireship.io/lessons/angular-router-animations/
  */
-import { animate, AnimationMetadata, query, state, style, transition, trigger } from '@angular/animations';
+import { animate, AnimationMetadata, query, style, transition } from '@angular/animations';
 
 const fader = (): AnimationMetadata[] => [
   // Set a default  style for enter and leave

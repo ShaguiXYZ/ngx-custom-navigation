@@ -65,9 +65,9 @@ describe('InsuranceCompaniesComponent', () => {
   });
 
   it('should select a company and update context data', () => {
-    let setContextDataSpy = spyOn(contextDataService, 'set');
-
+    const setContextDataSpy = spyOn(contextDataService, 'set');
     const company: IndexedData = { index: 'CIAB', data: 'Company B' };
+
     component.selectCompany(company);
 
     expect(component.selectedCompany).toEqual(company);

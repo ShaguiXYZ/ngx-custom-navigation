@@ -1,4 +1,4 @@
-import { animate, AnimationMetadata, group, keyframes, query, style, transition, trigger } from '@angular/animations';
+import { animate, AnimationMetadata, group, keyframes, query, style, transition } from '@angular/animations';
 
 const stepper = (): AnimationMetadata[] => [
   query(':enter, :leave', [

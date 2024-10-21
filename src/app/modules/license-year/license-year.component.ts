@@ -15,7 +15,7 @@ import { QuoteModel } from 'src/app/shared/models';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 
 @Component({
-  selector: 'app-license-year',
+  selector: 'quote-license-year',
   templateUrl: './license-year.component.html',
   styleUrl: './license-year.component.scss',
   standalone: true,

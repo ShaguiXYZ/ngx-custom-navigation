@@ -11,7 +11,7 @@ import { IsValidData } from 'src/app/shared/guards';
 import { QuoteModel } from 'src/app/shared/models';
 
 @Component({
-  selector: 'app-insurance-companies',
+  selector: 'quote-insurance-companies',
   standalone: true,
   imports: [CommonModule, IconCardComponent, HeaderTitleComponent, QuoteLiteralDirective],
   templateUrl: './insurance-companies.component.html',
@@ -27,8 +27,6 @@ export class InsuranceCompaniesComponent implements OnInit, IsValidData {
   private readonly routingService = inject(RoutingService);
 
   private contextData!: QuoteModel;
-
-  constructor() {}
 
   async ngOnInit(): Promise<void> {
     this.contextData = this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA);

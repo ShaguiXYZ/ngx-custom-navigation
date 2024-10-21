@@ -3,7 +3,7 @@
     <div class="popular-header" [ngClass]="{ 'popular-price': price.popular }">
       @if(price.popular) {
       <em class="fa-regular fa-star fa-xs nx-margin-x-xs"></em>
-      <span uiQuoteLiteral="popular" nxCopytext="normal"></span>
+      <span nxQuoteLiteral="popular" nxCopytext="normal"></span>
       }
     </div>
     <h3 class="price-title">
@@ -20,7 +20,7 @@
         <span
           nxCopytext="medium"
           class="nx-margin-left-3xs"
-          uiQuoteLiteral="from-now"
+          nxQuoteLiteral="from-now"
           [uiQuoteLitealParams]="{ value: (now | date : 'dd/MM/YYYY') || '' }"
         ></span>
       </p>
@@ -36,7 +36,7 @@
           <a routerLink="/documentation" (click)="showCoverages()">
             <div>
               <em class="fa-regular fa-eye nx-margin-x-xs"></em>
-              <span uiQuoteLiteral="view-coverages"></span>
+              <span nxQuoteLiteral="view-coverages"></span>
             </div>
           </a>
         </nx-link>
@@ -46,7 +46,7 @@
   <footer class="price-footer nx-margin-x-m">
     <quote-footer [config]="footerConfig" [mobileMode]="true">
       <button class="footer-option nx-margin-y-2xs" nxButton="secondary" type="button" (click)="contactUs()">
-        <span nxCopytext="medium" class="uppercase nx-font-weight-bold" uiQuoteLiteral="we-call-you"></span>
+        <span nxCopytext="medium" class="uppercase nx-font-weight-bold" nxQuoteLiteral="we-call-you"></span>
       </button>
     </quote-footer>
   </footer>

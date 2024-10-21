@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NxCopytextModule } from '@aposin/ng-aquila/copytext';
@@ -78,7 +79,7 @@ describe('ClientEMailComponent', () => {
   });
 
   it('should mark all fields as touched and update context data on updateValidData', () => {
-    let setContextDataSpy = spyOn(contextDataService, 'set');
+    const setContextDataSpy = spyOn(contextDataService, 'set');
 
     component.form.controls['email'].setValue('new@example.com');
     component.form.controls['productsInfo'].setValue(false);

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
@@ -19,7 +20,7 @@ import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 import { LicensePlateComponent } from './license-plate.component';
 
 describe('LicensePlateComponent', () => {
-  let component: any;
+  let component: LicensePlateComponent;
   let fixture: ComponentFixture<LicensePlateComponent>;
   let contextDataService: jasmine.SpyObj<ContextDataService>;
   let routingService: jasmine.SpyObj<RoutingService>;
@@ -80,7 +81,7 @@ describe('LicensePlateComponent', () => {
   });
 
   it('should mark form as touched and update context data on valid form', () => {
-    let setContextDataSpy = spyOn(contextDataService, 'set');
+    const setContextDataSpy = spyOn(contextDataService, 'set');
 
     component.form.setValue({ plateNumber: '1234-SSS' });
     const isValid = component['updateValidData']();
@@ -90,7 +91,7 @@ describe('LicensePlateComponent', () => {
   });
 
   it('should not update context data on invalid form', () => {
-    let setContextDataSpy = spyOn(contextDataService, 'set');
+    const setContextDataSpy = spyOn(contextDataService, 'set');
 
     component.form.setValue({ plateNumber: '' });
     const isValid = component['updateValidData']();
@@ -114,8 +115,8 @@ describe('LicensePlateComponent', () => {
     expect(subscription.unsubscribe).toHaveBeenCalled();
   });
 
-  it('should call searchVehicle on keyup event in search input', fakeAsync((done: any) => {
-    let searchVehicleSpy = spyOn(component, 'searchVehicle');
+  it('should call searchVehicle on keyup event in search input', fakeAsync(() => {
+    const searchVehicleSpy = spyOn(component as any, 'searchVehicle');
 
     const input = fixture.debugElement.query(By.css('input')).nativeElement;
     input.dispatchEvent(new Event('keyup'));

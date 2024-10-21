@@ -11,7 +11,7 @@ import { IsValidData } from 'src/app/shared/guards';
 import { QuoteModel } from 'src/app/shared/models';
 
 @Component({
-  selector: 'app-number-accidents',
+  selector: 'quote-number-accidents',
   templateUrl: './number-accidents.component.html',
   styleUrl: './number-accidents.component.scss',
   standalone: true,

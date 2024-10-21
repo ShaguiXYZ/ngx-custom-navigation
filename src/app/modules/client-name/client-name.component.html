@@ -1,17 +1,17 @@
 <article class="component-container">
-  <quote-header-title><span uiQuoteLiteral="header"></span></quote-header-title>
+  <quote-header-title><span nxQuoteLiteral="header"></span></quote-header-title>
   <section class="form-container">
     <form [formGroup]="form">
       <nx-formfield [label]="'name' | quoteLiteral">
         <input formControlName="name" nxInput />
         @if(form.get('name')?.errors?.['required']) {
-        <nx-error appearance="text" nxFormfieldError><span uiQuoteLiteral="error-required"></span> </nx-error>
+        <nx-error appearance="text" nxFormfieldError><span nxQuoteLiteral="error-required"></span> </nx-error>
         }
       </nx-formfield>
       <nx-formfield label="Apellidos">
         <input formControlName="surname" nxInput />
         @if(form.get('surname')?.errors?.['required']) {
-        <nx-error appearance="text" nxFormfieldError><span uiQuoteLiteral="error-required"></span> </nx-error>
+        <nx-error appearance="text" nxFormfieldError><span nxQuoteLiteral="error-required"></span> </nx-error>
         }
       </nx-formfield>
     </form>

@@ -15,7 +15,6 @@ describe('IconCardComponent', () => {
   const iconData: IIconData = { index: '1', data: 'icon' };
   let component: IconCardComponent;
   let fixture: ComponentFixture<IconCardComponent>;
-  let contextDataService: jasmine.SpyObj<ContextDataService>;
 
   beforeEach(async () => {
     const translationsServiceSpy = jasmine.createSpyObj('TranslationsService', ['translate']);
@@ -28,8 +27,6 @@ describe('IconCardComponent', () => {
         { provide: TranslateService, useValue: translationsServiceSpy }
       ]
     }).compileComponents();
-
-    contextDataService = TestBed.inject(ContextDataService) as jasmine.SpyObj<ContextDataService>;
 
     fixture = TestBed.createComponent(IconCardComponent);
     component = fixture.componentInstance;

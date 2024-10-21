@@ -14,7 +14,7 @@ import { QuoteModel } from 'src/app/shared/models';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 
 @Component({
-  selector: 'app-date-of-issue',
+  selector: 'quote-date-of-issue',
   templateUrl: './date-of-issue.component.html',
   styleUrl: './date-of-issue.component.scss',
   standalone: true,

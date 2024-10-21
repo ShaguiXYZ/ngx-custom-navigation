@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-pagenotfound',
+  selector: 'quote-pagenotfound',
   templateUrl: './pagenotfound.component.html',
-  standalone: true,
+  standalone: true
 })
 export class PagenotfoundComponent {}
