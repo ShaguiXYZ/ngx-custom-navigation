@@ -5,7 +5,6 @@ import { NxLinkModule } from '@aposin/ng-aquila/link';
 import { ContextDataService, NotificationService } from '@shagui/ng-shagui/core';
 import { QUOTE_APP_CONTEXT_DATA } from './core/constants';
 import { AppContextData } from './core/models';
-import { RoutingService } from './core/services';
 import { routeTransitions } from './shared/animations';
 import {
   NotificationComponent,
@@ -37,7 +36,6 @@ import { QuoteLiteralPipe } from './shared/pipes';
 export class AppComponent {
   private readonly contextDataService = inject(ContextDataService);
   private readonly notificationService = inject(NotificationService);
-  private readonly routingService = inject(RoutingService);
 
   constructor(private readonly quoteLiteralPipe: QuoteLiteralPipe) {}
 
@@ -54,8 +52,10 @@ export class AppComponent {
       this.quoteLiteralPipe.transform('warning-header-back-button'),
       this.quoteLiteralPipe.transform('warning-text-back-button')
     );
-    this.routingService.previousStep();
 
+    // window.history.forward();
+
+    event.preventDefault();
     event.stopPropagation();
   }
 

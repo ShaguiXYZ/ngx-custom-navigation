@@ -7,8 +7,10 @@ export class QuoteFooterService {
   private readonly routingService = inject(RoutingService);
 
   public nextStep = (config: QuoteFooterConfig = { showNext: true }): void => {
-    config.nextFn?.();
-    this.routingService.nextStep();
+    const preventDefault = config.nextFn?.();
+    console.log(preventDefault);
+
+    !preventDefault && this.routingService.nextStep();
   };
 
   public previousStep = (config: QuoteFooterConfig = { showNext: true }): void => {

@@ -65,7 +65,7 @@ export class PlaceComponent implements OnInit, IsValidData {
 
   public canDeactivate = (): boolean => this.form.valid;
 
-  private updateValidData = (): boolean => {
+  private updateValidData = (): void => {
     this.form.markAllAsTouched();
 
     if (this.form.valid) {
@@ -76,8 +76,6 @@ export class PlaceComponent implements OnInit, IsValidData {
 
       this.contextDataService.set(QUOTE_CONTEXT_DATA, this.contextData);
     }
-
-    return !!this.contextData.place.province;
   };
 
   public get province(): IndexedData | undefined {
@@ -98,12 +96,9 @@ export class PlaceComponent implements OnInit, IsValidData {
     return async (control: AbstractControl): Promise<ValidationErrors | null> => {
       const address = await locationService.getAddresses(control.value);
 
-      if (address) {
-        this.contextData.place.province = address;
-        return null;
-      } else {
-        return { postalCodeNotRecognized: true };
-      }
+      this.contextData.place.province = address;
+
+      return address ? null : { postalCodeNotRecognized: true };
     };
   }
 }

@@ -85,7 +85,6 @@ describe('AppComponent', () => {
     component.onPopState(event);
 
     expect(notificationService.warning).toHaveBeenCalled();
-    expect(routingService.previousStep).toHaveBeenCalled();
     expect(event.stopPropagation).toHaveBeenCalled();
   });
 

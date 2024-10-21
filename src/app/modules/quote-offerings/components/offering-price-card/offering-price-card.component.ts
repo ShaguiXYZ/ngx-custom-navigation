@@ -81,7 +81,9 @@ export class QuoteOfferingPriceCardComponent implements OnInit {
     this.uiContactUs.emit(this.price);
   }
 
-  public callNow(): void {
+  public callNow(): boolean {
     this.uiCallNow.emit(this.price);
+
+    return true;
   }
 }
