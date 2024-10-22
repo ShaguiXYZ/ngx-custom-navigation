@@ -24,7 +24,8 @@ module.exports = tseslint.config(
           prefix: ['nx', 'quote'],
           style: 'kebab-case'
         }
-      ]
+      ],
+      '@typescript-eslint/no-unused-expressions': 'off'
     }
   },
   {
