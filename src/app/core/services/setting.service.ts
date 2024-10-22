@@ -39,14 +39,15 @@ export class SettingsService {
     );
     const appContextData = this.contextDataService.get<AppContextData>(QUOTE_APP_CONTEXT_DATA);
 
-    console.log('AppCntextData', appContextData);
-
     this.contextDataService.set(QUOTE_APP_CONTEXT_DATA, AppContextData.init(configuration, appContextData?.navigation.viewedPages ?? []), {
       persistent: true
     });
 
+    console.group('SettingsService');
+    console.log('AppCntextData', appContextData);
     console.log(QUOTE_CONTEXT_DATA, this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA));
     console.log(QUOTE_APP_CONTEXT_DATA, this.contextDataService.get<AppContextData>(QUOTE_APP_CONTEXT_DATA));
+    console.groupEnd();
   }
 
   private init = (configuration: ConfigurationDTO): Configuration => {

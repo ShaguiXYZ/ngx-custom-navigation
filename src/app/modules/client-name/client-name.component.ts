@@ -1,16 +1,13 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-
-// Modules
 import { NX_DATE_LOCALE } from '@aposin/ng-aquila/datefield';
 import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
 import { NxInputModule } from '@aposin/ng-aquila/input';
 import { ContextDataService } from '@shagui/ng-shagui/core';
-import { Observable } from 'rxjs';
 import { QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
 import { HeaderTitleComponent, QuoteFooterComponent } from 'src/app/shared/components';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
-import { IsValidData } from 'src/app/shared/guards';
+import { QuoteComponent } from 'src/app/core/models';
 import { QuoteModel } from 'src/app/shared/models';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 
@@ -31,21 +28,20 @@ import { QuoteLiteralPipe } from 'src/app/shared/pipes';
   ],
   providers: [{ provide: NX_DATE_LOCALE, useValue: 'es-ES' }]
 })
-export class ClientNameComponent implements OnInit, IsValidData {
+export class ClientNameComponent extends QuoteComponent implements OnInit {
   public form!: FormGroup;
 
   private contextData!: QuoteModel;
 
   private readonly contextDataService = inject(ContextDataService);
-
-  constructor(private readonly fb: FormBuilder) {}
+  private readonly fb = inject(FormBuilder);
 
   ngOnInit(): void {
     this.contextData = this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA);
     this.createForm();
   }
 
-  public canDeactivate = (): boolean | Observable<boolean> | Promise<boolean> => this.updateValidData();
+  public override canDeactivate = (): boolean => this.updateValidData();
 
   private updateValidData = (): boolean => {
     this.form.markAllAsTouched();

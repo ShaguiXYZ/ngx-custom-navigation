@@ -11,7 +11,7 @@ import { DEBOUNCE_TIME, QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
 import { RoutingService, VehicleService } from 'src/app/core/services';
 import { HeaderTitleComponent, IconCardComponent, TextCardComponent } from 'src/app/shared/components';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
-import { IsValidData } from 'src/app/shared/guards';
+import { QuoteComponent } from 'src/app/core/models';
 import { QuoteModel } from 'src/app/shared/models';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 
@@ -35,7 +35,7 @@ import { QuoteLiteralPipe } from 'src/app/shared/pipes';
   templateUrl: './vehicle-models.component.html',
   styleUrl: './vehicle-models.component.scss'
 })
-export class VehicleModelsComponent implements OnInit, OnDestroy, IsValidData {
+export class VehicleModelsComponent extends QuoteComponent implements OnInit, OnDestroy {
   @ViewChild('searchInput', { static: true })
   private searchInput!: ElementRef;
 
@@ -49,8 +49,7 @@ export class VehicleModelsComponent implements OnInit, OnDestroy, IsValidData {
   private readonly contextDataService = inject(ContextDataService);
   private readonly routingService = inject(RoutingService);
   private readonly vehicleService = inject(VehicleService);
-
-  constructor(private readonly fb: FormBuilder) {}
+  private readonly fb = inject(FormBuilder);
 
   ngOnInit(): void {
     this.contextData = this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA);
@@ -69,7 +68,7 @@ export class VehicleModelsComponent implements OnInit, OnDestroy, IsValidData {
     this.subscription$.forEach(subscription => subscription.unsubscribe());
   }
 
-  public canDeactivate = (): boolean => this.updateValidData();
+  public override canDeactivate = (): boolean => this.updateValidData();
 
   public selectModel(model: string) {
     this.selectedModel = model;

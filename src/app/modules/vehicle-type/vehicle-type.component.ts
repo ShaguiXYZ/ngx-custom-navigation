@@ -7,7 +7,7 @@ import { QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
 import { IndexedData } from 'src/app/core/models';
 import { RoutingService } from 'src/app/core/services';
 import { HeaderTitleComponent, IconCardComponent, TextCardComponent } from 'src/app/shared/components';
-import { IsValidData } from 'src/app/shared/guards';
+import { QuoteComponent } from 'src/app/core/models';
 import { QuoteModel } from 'src/app/shared/models';
 import { VehicleTypes } from './models';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
@@ -28,7 +28,7 @@ import { QuoteLiteralPipe } from 'src/app/shared/pipes';
   templateUrl: './vehicle-type.component.html',
   styleUrl: './vehicle-type.component.scss'
 })
-export class VehicleTypeComponent implements OnInit, IsValidData {
+export class VehicleTypeComponent extends QuoteComponent implements OnInit {
   public vehicleTypes = VehicleTypes;
   public selectedType?: IndexedData;
 
@@ -42,7 +42,7 @@ export class VehicleTypeComponent implements OnInit, IsValidData {
     this.selectedType = this.vehicleTypes.find(type => type.index === this.contextData.vehicle.vehicleTtype);
   }
 
-  public canDeactivate = (): boolean | Observable<boolean> | Promise<boolean> => this.isValidData();
+  public override canDeactivate = (): boolean | Observable<boolean> | Promise<boolean> => this.isValidData();
 
   public selectType(type: IndexedData) {
     this.selectedType = type;

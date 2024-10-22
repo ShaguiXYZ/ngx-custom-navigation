@@ -10,7 +10,7 @@ import { RoutingService } from 'src/app/core/services';
 import { HeaderTitleComponent, IconCardComponent, QuoteFooterComponent } from 'src/app/shared/components';
 import { QuoteFooterConfig } from 'src/app/shared/components/quote-footer/models';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
-import { IsValidData } from 'src/app/shared/guards';
+import { QuoteComponent } from 'src/app/core/models';
 import { QuoteModel } from 'src/app/shared/models';
 import { DrivingLicenseIcons } from './models';
 
@@ -30,7 +30,7 @@ import { DrivingLicenseIcons } from './models';
   templateUrl: './driving-license-location.component.html',
   styleUrl: './driving-license-location.component.scss'
 })
-export class DrivingLicenseLocationComponent implements OnInit, IsValidData {
+export class DrivingLicenseLocationComponent extends QuoteComponent implements OnInit {
   @ViewChild('template')
   private infoModal!: TemplateRef<unknown>;
 
@@ -69,9 +69,7 @@ export class DrivingLicenseLocationComponent implements OnInit, IsValidData {
     });
   }
 
-  public canDeactivate = (): boolean => {
-    return this.isValidData();
-  };
+  public override canDeactivate = (): boolean => this.isValidData();
 
   private isValidData = (): boolean => {
     return !!this.contextData.driven.drivenLicenseCountry;

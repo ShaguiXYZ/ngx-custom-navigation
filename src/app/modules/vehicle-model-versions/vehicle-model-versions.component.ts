@@ -6,12 +6,12 @@ import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
 import { NxIconModule } from '@aposin/ng-aquila/icon';
 import { NxInputModule } from '@aposin/ng-aquila/input';
 import { ContextDataService } from '@shagui/ng-shagui/core';
-import { debounceTime, distinctUntilChanged, fromEvent, map, Observable, Subscription } from 'rxjs';
+import { debounceTime, distinctUntilChanged, fromEvent, map, Subscription } from 'rxjs';
 import { DEBOUNCE_TIME, QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
 import { RoutingService, VehicleService } from 'src/app/core/services';
 import { HeaderTitleComponent, IconCardComponent, TextCardComponent } from 'src/app/shared/components';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
-import { IsValidData } from 'src/app/shared/guards';
+import { QuoteComponent } from 'src/app/core/models';
 import { ModelVersionModel, QuoteModel } from 'src/app/shared/models';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 
@@ -35,7 +35,7 @@ import { QuoteLiteralPipe } from 'src/app/shared/pipes';
   templateUrl: './vehicle-model-versions.component.html',
   styleUrl: './vehicle-model-versions.component.scss'
 })
-export class VehicleModelVersionsComponent implements OnInit, OnDestroy, IsValidData {
+export class VehicleModelVersionsComponent extends QuoteComponent implements OnInit, OnDestroy {
   @ViewChild('searchInput', { static: true })
   private searchInput!: ElementRef;
 
@@ -49,8 +49,7 @@ export class VehicleModelVersionsComponent implements OnInit, OnDestroy, IsValid
   private readonly contextDataService = inject(ContextDataService);
   private readonly routingService = inject(RoutingService);
   private readonly vehicleService = inject(VehicleService);
-
-  constructor(private readonly fb: FormBuilder) {}
+  private readonly fb = inject(FormBuilder);
 
   async ngOnInit(): Promise<void> {
     this.contextData = this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA);
@@ -66,7 +65,7 @@ export class VehicleModelVersionsComponent implements OnInit, OnDestroy, IsValid
     this.subscription$.forEach(subscription => subscription.unsubscribe());
   }
 
-  public canDeactivate = (): boolean | Observable<boolean> | Promise<boolean> => this.updateValidData();
+  public override canDeactivate = (): boolean => this.updateValidData();
 
   public selectVersion(version: ModelVersionModel) {
     this.selectedModelVersion = version;

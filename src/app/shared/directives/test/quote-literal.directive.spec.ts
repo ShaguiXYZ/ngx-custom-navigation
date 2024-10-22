@@ -3,10 +3,11 @@ import { Component, DebugElement, Renderer2 } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { TranslateService } from '@ngx-translate/core';
+import { ContextDataService } from '@shagui/ng-shagui/core';
+import { Observable, of } from 'rxjs';
+import { AppContextData } from 'src/app/core/models';
 import { QuoteLiteralPipe } from '../../pipes';
 import { QuoteLiteralDirective } from '../quote-literal.directive';
-import { ContextDataService } from '@shagui/ng-shagui/core';
-import { AppContextData } from 'src/app/core/models';
 
 @Component({
   template: `<div
@@ -34,7 +35,7 @@ describe('QuoteLiteralDirective', () => {
   let debugElement: DebugElement;
 
   beforeEach(() => {
-    const contextDataServiceSpy = jasmine.createSpyObj('ContextDataService', ['get']);
+    const contextDataServiceSpy = jasmine.createSpyObj('ContextDataService', ['get', 'onDataChange']);
     const translationsServiceSpy = jasmine.createSpyObj('TranslationsService', ['translate']);
     const rederer2Spy = jasmine.createSpyObj('Renderer2', ['setAttribute', 'setProperty']);
 
@@ -47,6 +48,10 @@ describe('QuoteLiteralDirective', () => {
         { provide: TranslateService, useValue: translationsServiceSpy },
         { provide: Renderer2, useValue: rederer2Spy }
       ]
+    });
+
+    contextDataServiceSpy.onDataChange.and.callFake((): Observable<any> => {
+      return of({ navigation: {}, configuration: { literals: { testQuote: 'testQuote', type: 'value' } } } as unknown as AppContextData);
     });
   });
 

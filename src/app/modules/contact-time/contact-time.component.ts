@@ -5,7 +5,7 @@ import { ContextDataService } from '@shagui/ng-shagui/core';
 import { QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
 import { HeaderTitleComponent, QuoteFooterComponent, SelectableOptionComponent, TextCardComponent } from 'src/app/shared/components';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
-import { IsValidData } from 'src/app/shared/guards';
+import { QuoteComponent } from 'src/app/core/models';
 import { Hour, QuoteModel } from 'src/app/shared/models';
 
 @Component({
@@ -23,7 +23,7 @@ import { Hour, QuoteModel } from 'src/app/shared/models';
   templateUrl: './contact-time.component.html',
   styleUrl: './contact-time.component.scss'
 })
-export class ContactTimeComponent implements OnInit, IsValidData {
+export class ContactTimeComponent extends QuoteComponent implements OnInit {
   public hours: { am: Hour[]; pm: Hour[] } = {
     // AM hours
     am: ['08:00', '09:00', '10:00', '11:00', '12:00', '13:00'],
@@ -42,7 +42,7 @@ export class ContactTimeComponent implements OnInit, IsValidData {
     this.selectedHour = this.contextData.contactData.contactHour;
   }
 
-  public canDeactivate = (): boolean => !!this.selectedHour;
+  public override canDeactivate = (): boolean => !!this.selectedHour;
 
   public selectHour(hour: Hour): void {
     this.selectedHour = hour;

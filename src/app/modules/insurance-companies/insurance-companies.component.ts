@@ -7,7 +7,7 @@ import { InsuranceCompaniesService, RoutingService } from 'src/app/core/services
 import { HeaderTitleComponent, IconCardComponent } from 'src/app/shared/components';
 import { QuoteFooterConfig } from 'src/app/shared/components/quote-footer/models';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
-import { IsValidData } from 'src/app/shared/guards';
+import { QuoteComponent } from 'src/app/core/models';
 import { QuoteModel } from 'src/app/shared/models';
 
 @Component({
@@ -17,7 +17,7 @@ import { QuoteModel } from 'src/app/shared/models';
   templateUrl: './insurance-companies.component.html',
   styleUrl: './insurance-companies.component.scss'
 })
-export class InsuranceCompaniesComponent implements OnInit, IsValidData {
+export class InsuranceCompaniesComponent extends QuoteComponent implements OnInit {
   public insuranceCompanies: IndexedData[] = [];
   public selectedCompany?: IndexedData;
   public footerConfig!: QuoteFooterConfig;
@@ -38,7 +38,7 @@ export class InsuranceCompaniesComponent implements OnInit, IsValidData {
     }
   }
 
-  public canDeactivate = (): boolean => this.isValidData();
+  public override canDeactivate = (): boolean => this.isValidData();
 
   public selectCompany(icon: IndexedData) {
     this.selectedCompany = icon;

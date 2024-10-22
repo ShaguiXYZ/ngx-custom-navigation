@@ -11,7 +11,7 @@ import { QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
 import { HeaderTitleComponent, QuoteFooterComponent, QuoteFooterInfoComponent } from 'src/app/shared/components';
 import { QuoteFooterConfig } from 'src/app/shared/components/quote-footer/models';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
-import { IsValidData } from 'src/app/shared/guards';
+import { QuoteComponent } from 'src/app/core/models';
 import { QuoteModel } from 'src/app/shared/models';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 
@@ -34,22 +34,21 @@ import { QuoteLiteralPipe } from 'src/app/shared/pipes';
   ],
   providers: [{ provide: NX_DATE_LOCALE, useValue: 'es-ES' }]
 })
-export class ClientIdentificationNumberComponent implements OnInit, IsValidData {
+export class ClientIdentificationNumberComponent extends QuoteComponent implements OnInit {
   public form!: FormGroup;
   public footerConfig!: QuoteFooterConfig;
 
   private contextData!: QuoteModel;
 
   private readonly contextDataService = inject(ContextDataService);
-
-  constructor(private readonly fb: FormBuilder) {}
+  private readonly fb = inject(FormBuilder);
 
   ngOnInit(): void {
     this.contextData = this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA);
     this.createForm();
   }
 
-  public canDeactivate = (): boolean => this.updateValidData();
+  public override canDeactivate = (): boolean => this.updateValidData();
 
   private updateValidData = (): boolean => {
     this.form.markAllAsTouched();

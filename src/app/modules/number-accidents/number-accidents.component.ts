@@ -1,13 +1,12 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NxCopytextModule } from '@aposin/ng-aquila/copytext';
-import { NX_DATE_LOCALE } from '@aposin/ng-aquila/datefield';
 import { ContextDataService, hasValue } from '@shagui/ng-shagui/core';
 import { QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
 import { RoutingService } from 'src/app/core/services';
 import { HeaderTitleComponent, QuoteFooterComponent, QuoteFooterInfoComponent, SelectableOptionComponent } from 'src/app/shared/components';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
-import { IsValidData } from 'src/app/shared/guards';
+import { QuoteComponent } from 'src/app/core/models';
 import { QuoteModel } from 'src/app/shared/models';
 
 @Component({
@@ -24,11 +23,11 @@ import { QuoteModel } from 'src/app/shared/models';
     NxCopytextModule,
     ReactiveFormsModule,
     QuoteLiteralDirective
-  ],
-  providers: [{ provide: NX_DATE_LOCALE, useValue: 'es-ES' }]
+  ]
 })
-export class NumberAccidentsComponent implements OnInit, IsValidData {
+export class NumberAccidentsComponent extends QuoteComponent implements OnInit {
   public selectedAccidents?: number;
+  public accidents: number[] = [1, 2, 3, 4];
 
   private contextData!: QuoteModel;
 
@@ -40,7 +39,7 @@ export class NumberAccidentsComponent implements OnInit, IsValidData {
     this.selectedAccidents = this.contextData.client.accidents;
   }
 
-  public canDeactivate = (): boolean => this.updateValidData();
+  public override canDeactivate = (): boolean => this.updateValidData();
 
   public selectAccidents(accidents: number): void {
     this.contextData.client.accidents = accidents;

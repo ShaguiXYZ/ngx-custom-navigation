@@ -8,11 +8,11 @@ import { NxInputModule } from '@aposin/ng-aquila/input';
 import { NxMaskModule } from '@aposin/ng-aquila/mask';
 import { ContextDataService } from '@shagui/ng-shagui/core';
 import { QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
+import { QuoteComponent } from 'src/app/core/models';
 import { RoutingService, VehicleService } from 'src/app/core/services';
 import { HeaderTitleComponent, QuoteFooterComponent, SelectableOptionComponent } from 'src/app/shared/components';
 import { QuoteFooterConfig } from 'src/app/shared/components/quote-footer/models';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
-import { IsValidData } from 'src/app/shared/guards';
 import { IVehicleModel, QuoteModel } from 'src/app/shared/models';
 
 @Component({
@@ -35,7 +35,7 @@ import { IVehicleModel, QuoteModel } from 'src/app/shared/models';
     QuoteLiteralDirective
   ]
 })
-export class YourCarIsComponent implements OnInit, IsValidData {
+export class YourCarIsComponent extends QuoteComponent implements OnInit {
   public vehicleOptions: IVehicleModel[] = [];
   public selectedVehicle?: IVehicleModel;
   public footerConfig!: QuoteFooterConfig;
@@ -58,7 +58,7 @@ export class YourCarIsComponent implements OnInit, IsValidData {
     this.vehicleOptions = await this.vehicleService.vehicles();
   }
 
-  public canDeactivate = (): boolean => !!this.selectedVehicle;
+  public override canDeactivate = (): boolean => !!this.selectedVehicle;
 
   public selectVehicle(vehicle: IVehicleModel) {
     this.contextData.vehicle = { ...this.contextData.vehicle, ...vehicle };

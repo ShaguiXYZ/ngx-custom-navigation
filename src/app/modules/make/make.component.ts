@@ -12,7 +12,7 @@ import { DEBOUNCE_TIME, QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
 import { RoutingService, VehicleService } from 'src/app/core/services';
 import { HeaderTitleComponent, IconCardComponent, QuoteFooterComponent } from 'src/app/shared/components';
 import { QuoteFooterConfig } from 'src/app/shared/components/quote-footer/models';
-import { IsValidData } from 'src/app/shared/guards';
+import { QuoteComponent } from 'src/app/core/models';
 import { BrandData, QuoteModel } from 'src/app/shared/models';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 import { BrandComponent } from './components';
@@ -40,7 +40,7 @@ import { QuoteLiteralDirective } from 'src/app/shared/directives';
   templateUrl: './make.component.html',
   styleUrl: './make.component.scss'
 })
-export class MakeComponent implements OnInit, OnDestroy, IsValidData {
+export class MakeComponent extends QuoteComponent implements OnInit, OnDestroy {
   @ViewChild('searchInput', { static: true })
   private searchInput!: ElementRef;
 
@@ -56,8 +56,7 @@ export class MakeComponent implements OnInit, OnDestroy, IsValidData {
   private readonly contextDataService = inject(ContextDataService);
   private readonly routingService = inject(RoutingService);
   private readonly vehicleService = inject(VehicleService);
-
-  constructor(private readonly fb: FormBuilder) {}
+  private readonly fb = inject(FormBuilder);
 
   ngOnInit(): void {
     this.makes = BrandData.iconBrands();
@@ -73,7 +72,7 @@ export class MakeComponent implements OnInit, OnDestroy, IsValidData {
     this.subscription$.forEach(subscription => subscription.unsubscribe());
   }
 
-  public canDeactivate = (): boolean => this.updateValidData();
+  public override canDeactivate = (): boolean => this.updateValidData();
 
   public selectAutocompleteMake(event: NxAutocompleteSelectedEvent): void {
     this.selectMake(event.option.value);

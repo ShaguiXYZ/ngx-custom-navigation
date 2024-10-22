@@ -439,6 +439,9 @@
           "header": "¿Has tenido algún accidente en {{literal-last}} {{years}} {{literal-year}}?",
           "more-accidents": "{{value}} o más",
           "footer-info": "Nos gustaría acompañarte en tus próximos viajes."
+        },
+        "data": {
+          "accidents": [1, 2, 3]
         }
       }
     },
@@ -534,6 +537,12 @@
           "afternoon": "Por la tarde",
           "header": "¿Cuándo podemos llamarte?",
           "morning": "Por la mañana"
+        },
+        "data": {
+          "hours": {
+            "am": ["08:00", "09:00", "10:00", "11:00", "12:00", "13:00"],
+            "pm": ["15:00", "16:00", "17:00", "18:00"]
+          }
         }
       }
     },

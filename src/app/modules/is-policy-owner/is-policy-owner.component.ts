@@ -2,12 +2,11 @@ import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
 import { NxButtonModule } from '@aposin/ng-aquila/button';
 import { ContextDataService, hasValue } from '@shagui/ng-shagui/core';
-import { Observable } from 'rxjs';
 import { QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
 import { RoutingService } from 'src/app/core/services';
 import { HeaderTitleComponent, SelectableOptionComponent } from 'src/app/shared/components';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
-import { IsValidData } from 'src/app/shared/guards';
+import { QuoteComponent } from 'src/app/core/models';
 import { QuoteModel } from 'src/app/shared/models';
 
 @Component({
@@ -17,7 +16,7 @@ import { QuoteModel } from 'src/app/shared/models';
   standalone: true,
   imports: [CommonModule, HeaderTitleComponent, SelectableOptionComponent, NxButtonModule, QuoteLiteralDirective]
 })
-export class IsPolicyOwnerComponent implements OnInit, IsValidData {
+export class IsPolicyOwnerComponent extends QuoteComponent implements OnInit {
   private readonly contextDataService = inject(ContextDataService);
   private readonly routingService = inject(RoutingService);
 
@@ -27,7 +26,7 @@ export class IsPolicyOwnerComponent implements OnInit, IsValidData {
     this.contextData = this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA);
   }
 
-  public canDeactivate = (): boolean | Observable<boolean> | Promise<boolean> => this.isValidData();
+  public override canDeactivate = (): boolean => this.isValidData();
 
   public onIsPolicyOwnerChange(value: boolean): void {
     this.contextData.client.isPolicyOwner = value;

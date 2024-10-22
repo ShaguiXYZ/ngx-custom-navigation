@@ -20,7 +20,7 @@ import { LocationService } from 'src/app/core/services';
 import { HeaderTitleComponent, QuoteFooterComponent, QuoteFooterInfoComponent } from 'src/app/shared/components';
 import { QuoteFooterConfig } from 'src/app/shared/components/quote-footer/models';
 import { QuoteLiteralDirective, QuoteMaskDirective } from 'src/app/shared/directives';
-import { IsValidData } from 'src/app/shared/guards';
+import { QuoteComponent } from 'src/app/core/models';
 import { QuoteModel } from 'src/app/shared/models';
 
 @Component({
@@ -41,7 +41,7 @@ import { QuoteModel } from 'src/app/shared/models';
     QuoteLiteralDirective
   ]
 })
-export class PlaceComponent implements OnInit, IsValidData {
+export class PlaceComponent extends QuoteComponent implements OnInit {
   public form!: FormGroup;
   public footerConfig!: QuoteFooterConfig;
 
@@ -49,21 +49,19 @@ export class PlaceComponent implements OnInit, IsValidData {
 
   private readonly contextDataService = inject(ContextDataService);
   private readonly locationService = inject(LocationService);
+  private readonly fb = inject(FormBuilder);
 
-  constructor(private readonly fb: FormBuilder) {
+  ngOnInit(): void {
+    this.contextData = this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA);
     this.footerConfig = {
       showNext: true,
       nextFn: () => this.updateValidData()
     };
-  }
-
-  ngOnInit(): void {
-    this.contextData = this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA);
 
     this.createForm();
   }
 
-  public canDeactivate = (): boolean => this.form.valid;
+  public override canDeactivate = (): boolean => this.form.valid;
 
   private updateValidData = (): void => {
     this.form.markAllAsTouched();

@@ -14,7 +14,7 @@ import { RoutingService } from 'src/app/core/services';
 import { HeaderTitleComponent, QuoteFooterComponent, QuoteFooterInfoComponent } from 'src/app/shared/components';
 import { QuoteFooterConfig } from 'src/app/shared/components/quote-footer/models';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
-import { IsValidData } from 'src/app/shared/guards';
+import { QuoteComponent } from 'src/app/core/models';
 import { QuoteModel } from 'src/app/shared/models';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 
@@ -40,7 +40,7 @@ import { QuoteLiteralPipe } from 'src/app/shared/pipes';
     QuoteLiteralPipe
   ]
 })
-export class LicensePlateComponent implements OnInit, OnDestroy, IsValidData {
+export class LicensePlateComponent extends QuoteComponent implements OnInit, OnDestroy {
   @ViewChild('searchInput', { static: true })
   private searchInput!: ElementRef;
 
@@ -52,8 +52,7 @@ export class LicensePlateComponent implements OnInit, OnDestroy, IsValidData {
 
   private readonly contextDataService = inject(ContextDataService);
   private readonly routingService = inject(RoutingService);
-
-  constructor(private readonly fb: FormBuilder) {}
+  private readonly fb = inject(FormBuilder);
 
   ngOnInit(): void {
     this.contextData = this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA);
@@ -67,7 +66,7 @@ export class LicensePlateComponent implements OnInit, OnDestroy, IsValidData {
     this.subscription$.forEach(subscription => subscription.unsubscribe());
   }
 
-  public canDeactivate = (): boolean | Observable<boolean> | Promise<boolean> => this.updateValidData();
+  public override canDeactivate = (): boolean | Observable<boolean> | Promise<boolean> => this.updateValidData();
 
   public continueWithOutLicensePlate() {
     this.contextData.driven.hasDrivenLicense = false;

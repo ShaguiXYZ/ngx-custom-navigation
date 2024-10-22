@@ -1,6 +1,5 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
-import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NxAccordionModule } from '@aposin/ng-aquila/accordion';
 import { NxButtonModule } from '@aposin/ng-aquila/button';
 import { NxCopytextModule } from '@aposin/ng-aquila/copytext';
@@ -11,7 +10,7 @@ import { QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
 import { RoutingService, VehicleService } from 'src/app/core/services';
 import { HeaderTitleComponent, SelectableOptionComponent } from 'src/app/shared/components';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
-import { IsValidData } from 'src/app/shared/guards';
+import { QuoteComponent } from 'src/app/core/models';
 import { CubicCapacityModel, FuelModel, PowerRangesModel, QuoteModel } from 'src/app/shared/models';
 
 @Component({
@@ -19,7 +18,6 @@ import { CubicCapacityModel, FuelModel, PowerRangesModel, QuoteModel } from 'src
   standalone: true,
   imports: [
     CommonModule,
-    FormsModule,
     HeaderTitleComponent,
     SelectableOptionComponent,
     NxAccordionModule,
@@ -27,21 +25,18 @@ import { CubicCapacityModel, FuelModel, PowerRangesModel, QuoteModel } from 'src
     NxCopytextModule,
     NxFormfieldModule,
     NxInputModule,
-    ReactiveFormsModule,
     QuoteLiteralDirective
   ],
   templateUrl: './vehicle-fuel.component.html',
   styleUrl: './vehicle-fuel.component.scss'
 })
-export class VehicleFuelComponent implements OnInit, IsValidData {
+export class VehicleFuelComponent extends QuoteComponent implements OnInit {
   public cubicCapacityNotKnown: CubicCapacityModel = { index: -1, data: 'nsnc' };
   public powerNotKnown: PowerRangesModel = { index: '-1', data: 'nsnc' };
 
   public cubicCapacities: CubicCapacityModel[] = [];
   public fuels: FuelModel[] = [];
   public powers: PowerRangesModel[] = [];
-
-  public form!: FormGroup;
 
   public selectedCubicCapacity?: CubicCapacityModel;
   public selectedFuel?: FuelModel;
@@ -66,7 +61,7 @@ export class VehicleFuelComponent implements OnInit, IsValidData {
     ]);
   }
 
-  public canDeactivate = (): boolean =>
+  public override canDeactivate = (): boolean =>
     this.contextData.vehicle.fuel !== undefined &&
     this.contextData.vehicle.powerRange !== undefined &&
     this.contextData.vehicle.cubicCapacity !== undefined;

@@ -14,46 +14,33 @@
     <div class="selectable-container">
       <quote-selectable-option [selected]="selectedAccidents === 0" [fullHeight]="true" (uiSelect)="selectAccidents(0)">
         <div class="card-container">
-          <span nxCopytext="normal" class="nx-margin-s nx-margin-left-4m">No</span>
+          <span nxCopytext="normal" class="nx-margin-s nx-margin-left-4m" nxQuoteLiteral="no"></span>
         </div>
       </quote-selectable-option>
     </div>
+    @for (item of accidents; track item) {
     <div class="selectable-container">
-      <quote-selectable-option [selected]="selectedAccidents === 1" [fullHeight]="true" (uiSelect)="selectAccidents(1)">
+      <quote-selectable-option [selected]="selectedAccidents === item" [fullHeight]="true" (uiSelect)="selectAccidents(item)">
         <div class="card-container">
-          <span nxCopytext="normal" class="nx-margin-s nx-margin-left-4m">1</span>
+          <span nxCopytext="normal" class="nx-margin-s nx-margin-left-4m">{{ item }}</span>
         </div>
       </quote-selectable-option>
     </div>
+    }
     <div class="selectable-container">
-      <quote-selectable-option [selected]="selectedAccidents === 2" [fullHeight]="true" (uiSelect)="selectAccidents(2)">
-        <div class="card-container">
-          <span nxCopytext="normal" class="nx-margin-s nx-margin-left-4m">2</span>
-        </div>
-      </quote-selectable-option>
-    </div>
-    <div class="selectable-container">
-      <quote-selectable-option [selected]="selectedAccidents === 3" [fullHeight]="true" (uiSelect)="selectAccidents(3)">
-        <div class="card-container">
-          <span nxCopytext="normal" class="nx-margin-s nx-margin-left-4m">3</span>
-        </div>
-      </quote-selectable-option>
-    </div>
-    <div class="selectable-container">
-      <quote-selectable-option [selected]="selectedAccidents === 4" [fullHeight]="true" (uiSelect)="selectAccidents(4)">
-        <div class="card-container">
-          <span nxCopytext="normal" class="nx-margin-s nx-margin-left-4m">4</span>
-        </div>
-      </quote-selectable-option>
-    </div>
-    <div class="selectable-container">
-      <quote-selectable-option [selected]="selectedAccidents === 5" [fullHeight]="true" (uiSelect)="selectAccidents(5)">
+      @let maxAccidents = this.accidents.length ? this.accidents[this.accidents.length - 1] + 1 : 0;
+
+      <quote-selectable-option
+        [selected]="selectedAccidents === maxAccidents"
+        [fullHeight]="true"
+        (uiSelect)="selectAccidents(maxAccidents)"
+      >
         <div class="card-container">
           <span
             nxCopytext="normal"
             class="nx-margin-s nx-margin-left-4m"
             nxQuoteLiteral="more-accidents"
-            [uiQuoteLitealParams]="{ value: '5' }"
+            [uiQuoteLitealParams]="{ value: maxAccidents.toString() }"
           ></span>
         </div>
       </quote-selectable-option>
