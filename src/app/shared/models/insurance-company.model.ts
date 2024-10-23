@@ -2,6 +2,7 @@
 
 export interface InsuranceCompanyModel {
   company?: string;
+  yearsAsOwner?: number;
 }
 
 export namespace InsuranceCompanyModel {

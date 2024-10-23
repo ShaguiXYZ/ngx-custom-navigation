@@ -1,0 +1,10 @@
+.selectable-container + .selectable-container {
+  margin-top: 16px;
+}
+
+.card-container {
+  align-items: start;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}

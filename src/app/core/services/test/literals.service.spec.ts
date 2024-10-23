@@ -54,6 +54,6 @@ describe('LiteralsService', () => {
 
   it('should return the literal if it is an object but not a QuoteLiteral', () => {
     const literal: any = { some: 'object' };
-    expect(service.toString(literal)).toBe(literal);
+    expect(service.toString(literal)).toBe('');
   });
 });

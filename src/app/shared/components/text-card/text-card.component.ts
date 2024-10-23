@@ -19,15 +19,15 @@ export class TextCardComponent {
   public fullHeight = true;
 
   @Output()
-  public uiSelect: EventEmitter<string> = new EventEmitter<string>();
+  public uiSelect: EventEmitter<string | number | symbol> = new EventEmitter<string | number | symbol>();
 
-  public _data!: string;
+  public _data!: string | number | symbol;
 
-  public get data(): string {
+  public get data(): string | number | symbol {
     return this._data;
   }
   @Input()
-  public set data(value: string) {
+  public set data(value: string | number | symbol) {
     this._data = value;
   }
 

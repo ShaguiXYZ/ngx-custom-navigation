@@ -23,7 +23,7 @@
         },
         {
           "label": "Datos del Seguro",
-          "pages": ["is-policy-owner", "insurance-companies", "number-accidents"]
+          "pages": ["is-policy-owner", "insurance-companies", "time-insurance-holder", "number-accidents"]
         },
         {
           "label": "Datos del Contacto",
@@ -405,7 +405,7 @@
           ]
         },
         {
-          "nextPageId": "number-accidents"
+          "nextPageId": "time-insurance-holder"
         }
       ],
       "configuration": {
@@ -418,12 +418,26 @@
       "pageId": "insurance-companies",
       "nextOptionList": [
         {
-          "nextPageId": "number-accidents"
+          "nextPageId": "time-insurance-holder"
         }
       ],
       "configuration": {
         "literals": {
           "header": "¿Con qué compañía tienes tu seguro actualmente?"
+        }
+      }
+    },
+    {
+      "pageId": "time-insurance-holder",
+      "nextOptionList": [
+        {
+          "nextPageId": "number-accidents"
+        }
+      ],
+      "configuration": {
+        "literals": {
+          "header": "¿Cuánto tiempo llevas como titular de un seguro en esta u otras compañías?",
+          "time-desc": "{{value}} {{literal-year}} {{or-more}}"
         }
       }
     },
@@ -437,11 +451,11 @@
       "configuration": {
         "literals": {
           "header": "¿Has tenido algún accidente en {{literal-last}} {{years}} {{literal-year}}?",
-          "more-accidents": "{{value}} o más",
+          "more-accidents": "{{value}} {{or-more}}",
           "footer-info": "Nos gustaría acompañarte en tus próximos viajes."
         },
         "data": {
-          "accidents": [1, 2, 3]
+          "accidents": [5, 6, 7]
         }
       }
     },
@@ -689,6 +703,7 @@
     "fuel": { "value": "Label.Fuel", "type": "translate" },
     "hint-date-format": { "value": "Label.DateFormat", "type": "translate" },
     "no": { "value": "Label.No", "type": "translate" },
+    "or-more": { "value": "Label.OrMore", "type": "translate" },
     "power": { "value": "Label.Power", "type": "translate" },
     "search": { "value": "Label.Search", "type": "translate" },
     "yes": { "value": "Label.Yes", "type": "translate" },

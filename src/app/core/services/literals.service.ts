@@ -16,11 +16,15 @@ export class LiteralsService {
       ? Object.fromEntries(Object.entries(params).map(([key, value]) => [key, this.toString(value)]) as [string, string][])
       : undefined;
 
-    return typeof literal === 'string'
-      ? this.getValue(literal, normalizedParams)
-      : this.isQuoteLiteral(literal)
-      ? this.getLiteral(literal, normalizedParams)
-      : literal;
+    const strLiteral =
+      typeof literal === 'string'
+        ? this.getValue(literal, normalizedParams)
+        : this.isQuoteLiteral(literal)
+        ? this.getLiteral(literal, normalizedParams)
+        : '';
+
+    return strLiteral.replaceAll(/{{.*?}}/g, '');
+    // return strLiteral?.replaceAll(/{{[^ ]*?}}/g, '');
   }
 
   private isQuoteLiteral = (literal?: QuoteLiteral): literal is QuoteLiteral => typeof literal === 'object' && 'value' in literal;
@@ -32,7 +36,7 @@ export class LiteralsService {
       return literal;
     }
 
-    return keys.reduce((acc, key) => acc.replace(new RegExp(`{{${key}}}`, 'g'), params?.[key] ?? ''), literal);
+    return keys.reduce((acc, key) => acc.replaceAll(new RegExp(`{{\\s*${key}\\s*}}`, 'g'), params?.[key] ?? ''), literal);
   };
 
   private getLiteral = (literal: QuoteLiteral, params?: DataInfo): string =>

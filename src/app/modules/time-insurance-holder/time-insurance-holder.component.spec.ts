@@ -9,11 +9,11 @@ import { RoutingService } from 'src/app/core/services';
 import { HeaderTitleComponent, QuoteFooterComponent, QuoteFooterInfoComponent, SelectableOptionComponent } from 'src/app/shared/components';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
 import { QuoteModel } from 'src/app/shared/models';
-import { NumberAccidentsComponent } from './number-accidents.component';
+import { TimeInsuranceHolderComponent } from './time-insurance-holder.component';
 
-describe('NumberAccidentsComponent', () => {
-  let component: NumberAccidentsComponent;
-  let fixture: ComponentFixture<NumberAccidentsComponent>;
+describe('TimeInsuranceHolderComponent', () => {
+  let component: TimeInsuranceHolderComponent;
+  let fixture: ComponentFixture<TimeInsuranceHolderComponent>;
   let contextDataService: jasmine.SpyObj<ContextDataService>;
   let routingService: jasmine.SpyObj<RoutingService>;
 
@@ -24,7 +24,7 @@ describe('NumberAccidentsComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [],
       imports: [
-        NumberAccidentsComponent,
+        TimeInsuranceHolderComponent,
         NxCopytextModule,
         HeaderTitleComponent,
         QuoteFooterComponent,
@@ -41,17 +41,14 @@ describe('NumberAccidentsComponent', () => {
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(NumberAccidentsComponent);
+    fixture = TestBed.createComponent(TimeInsuranceHolderComponent);
     component = fixture.componentInstance;
     contextDataService = TestBed.inject(ContextDataService) as jasmine.SpyObj<ContextDataService>;
     routingService = TestBed.inject(RoutingService) as jasmine.SpyObj<RoutingService>;
 
     contextDataService.set<QuoteModel>(QUOTE_CONTEXT_DATA, {
-      client: {
-        accidents: 2
-      },
       insuranceCompany: {
-        yearsAsOwner: 5
+        yearsAsOwner: 2
       }
     } as QuoteModel);
 
@@ -62,36 +59,31 @@ describe('NumberAccidentsComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should initialize contextData and selectedAccidents on ngOnInit', () => {
+  it('should initialize contextData and selectedYears on ngOnInit', () => {
     component.ngOnInit();
 
-    expect(component['contextData']).toEqual({
-      client: { accidents: 2 },
-      insuranceCompany: {
-        yearsAsOwner: 5
-      }
-    } as QuoteModel);
-    expect(component.selectedAccidents).toBe(2);
+    expect(component['contextData']).toEqual({ insuranceCompany: { yearsAsOwner: 2 } } as QuoteModel);
+    expect(component.selectedYears).toBe(2);
   });
 
-  it('should update contextData and call nextStep on selectAccidents', () => {
+  it('should update contextData and call nextStep on selectedYears', () => {
     const setContextDataSpy = spyOn(contextDataService, 'set');
 
-    component.selectAccidents(3);
+    component.selectData(3);
 
-    expect(component['contextData'].client.accidents).toBe(3);
+    expect(component['contextData'].insuranceCompany.yearsAsOwner).toBe(3);
     expect(setContextDataSpy).toHaveBeenCalledWith(QUOTE_CONTEXT_DATA, component['contextData']);
     expect(routingService.nextStep).toHaveBeenCalled();
   });
 
-  it('should return true if accidents value is valid in updateValidData', () => {
-    component['contextData'] = { client: { accidents: 1 } } as QuoteModel;
+  it('should return true if yearsAsOwner value is valid in updateValidData', () => {
+    component['contextData'] = { insuranceCompany: { yearsAsOwner: 1 } } as QuoteModel;
 
     expect(component['updateValidData']()).toBeTrue();
   });
 
-  it('should return false if accidents value is invalid in updateValidData', () => {
-    component['contextData'] = { client: { accidents: null } } as unknown as QuoteModel;
+  it('should return false if yearsAsOwner value is invalid in updateValidData', () => {
+    component['contextData'] = { insuranceCompany: { YearsAsOwner: null } } as unknown as QuoteModel;
 
     expect(component['updateValidData']()).toBeFalse();
   });

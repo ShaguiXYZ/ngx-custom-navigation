@@ -1,0 +1,34 @@
+<article class="component-container">
+  <quote-header-title><span nxQuoteLiteral="header"></span></quote-header-title>
+  <section class="form-container">
+    @for (item of yearsAsOwner; track item) {
+    <div class="selectable-container">
+      <quote-text-card
+        [selected]="selectedYears === item"
+        [data]="
+          'time-desc'
+            | quoteLiteral
+              : { value: item.toString(), 'literal-year': { value: item > 1 ? 'Label.Years' : 'Label.Year', type: 'translate' } }
+        "
+        (uiSelect)="selectData(item)"
+      />
+    </div>
+    }
+    <div class="selectable-container">
+      @let maxYears = this.yearsAsOwner.length ? this.yearsAsOwner[this.yearsAsOwner.length - 1] + 1 : 0;
+      <quote-text-card
+        [selected]="selectedYears === maxYears"
+        [data]="
+          'time-desc'
+            | quoteLiteral
+              : {
+                  value: maxYears.toString(),
+                  'literal-year': { value: maxYears > 1 ? 'Label.Years' : 'Label.Year', type: 'translate' },
+                  'or-more': { value: 'Label.OrMore', type: 'translate' }
+                }
+        "
+        (uiSelect)="selectData(maxYears)"
+      />
+    </div>
+  </section>
+</article>

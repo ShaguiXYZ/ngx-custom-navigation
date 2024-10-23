@@ -40,11 +40,21 @@ main {
       text-align: left;
     }
 
-    .nx-formfield__label-holder {
-      align-items: center;
-      display: flex;
-      justify-content: space-between;
-      margin-left: 6px;
+    .nx-formfield--type-nx-input {
+      .nx-formfield__label-holder {
+        align-items: center;
+        display: flex;
+        justify-content: space-between;
+        margin-left: 6px;
+      }
+
+      &.is-focused,
+      &.is-filled {
+        .nx-formfield__label-holder {
+          align-items: start;
+          margin-left: 0;
+        }
+      }
     }
   }
 }

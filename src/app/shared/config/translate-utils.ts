@@ -6,7 +6,9 @@ export const createTranslateLoader = (http: HttpClient) => new TranslateHttpLoad
 
 export class CustomMissingTranslationHandler implements MissingTranslationHandler {
   public handle(params: MissingTranslationHandlerParams): string {
-    return `!${params.key}!`;
+    console.warn('i18n: Parameter not found', params.key);
+
+    return '';
   }
 }
 

@@ -141,6 +141,13 @@ export const routes: Routes = configContextRoutes([
     canDeactivate: [isValidGuard]
   },
   {
+    path: AppUrls.timeInsuranceHolder,
+    loadComponent: () =>
+      import('./modules/time-insurance-holder/time-insurance-holder.component').then(c => c.TimeInsuranceHolderComponent),
+    canActivate: [journeyGuard],
+    canDeactivate: [isValidGuard]
+  },
+  {
     path: AppUrls.vehicleFuel,
     loadComponent: () => import('./modules/vehicle-fuel/vehicle-fuel.component').then(c => c.VehicleFuelComponent),
     canActivate: [journeyGuard],

@@ -1,13 +1,13 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NxCopytextModule } from '@aposin/ng-aquila/copytext';
 import { ContextDataService, hasValue } from '@shagui/ng-shagui/core';
 import { QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
-import { RoutingService } from 'src/app/core/services';
-import { HeaderTitleComponent, QuoteFooterComponent, QuoteFooterInfoComponent, SelectableOptionComponent } from 'src/app/shared/components';
-import { QuoteLiteralDirective } from 'src/app/shared/directives';
 import { QuoteComponent } from 'src/app/core/models';
+import { RoutingService } from 'src/app/core/services';
+import { HeaderTitleComponent, QuoteFooterComponent, QuoteFooterInfoComponent, TextCardComponent } from 'src/app/shared/components';
+import { QuoteLiteralDirective } from 'src/app/shared/directives';
 import { QuoteModel } from 'src/app/shared/models';
+import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 
 @Component({
   selector: 'quote-number-accidents',
@@ -15,18 +15,18 @@ import { QuoteModel } from 'src/app/shared/models';
   styleUrl: './number-accidents.component.scss',
   standalone: true,
   imports: [
-    FormsModule,
     HeaderTitleComponent,
     QuoteFooterComponent,
     QuoteFooterInfoComponent,
-    SelectableOptionComponent,
+    TextCardComponent,
     NxCopytextModule,
-    ReactiveFormsModule,
-    QuoteLiteralDirective
+    QuoteLiteralDirective,
+    QuoteLiteralPipe
   ]
 })
 export class NumberAccidentsComponent extends QuoteComponent implements OnInit {
   public selectedAccidents?: number;
+  public yearsAsOwner = 5;
   public accidents: number[] = [1, 2, 3, 4];
 
   private contextData!: QuoteModel;
@@ -36,6 +36,7 @@ export class NumberAccidentsComponent extends QuoteComponent implements OnInit {
 
   ngOnInit(): void {
     this.contextData = this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA);
+    this.yearsAsOwner = this.contextData.insuranceCompany.yearsAsOwner || this.yearsAsOwner;
     this.selectedAccidents = this.contextData.client.accidents;
   }
 

@@ -1,10 +1,11 @@
 <article class="component-container">
-  @let years = 5;
+  @let years = yearsAsOwner;
+
   <quote-header-title
     ><span
       nxQuoteLiteral="header"
       [uiQuoteLitealParams]="{
-        years: years.toString(),
+        years: years === 1 ? '' : years.toString(),
         'literal-last': years > 1 ? 'los últimos' : 'el último',
         'literal-year': { value: years > 1 ? 'Label.Years' : 'Label.Year', type: 'translate' }
       }"
@@ -12,38 +13,23 @@
   ></quote-header-title>
   <section class="form-container">
     <div class="selectable-container">
-      <quote-selectable-option [selected]="selectedAccidents === 0" [fullHeight]="true" (uiSelect)="selectAccidents(0)">
-        <div class="card-container">
-          <span nxCopytext="normal" class="nx-margin-s nx-margin-left-4m" nxQuoteLiteral="no"></span>
-        </div>
-      </quote-selectable-option>
+      <quote-text-card [selected]="selectedAccidents === 0" [data]="'no' | quoteLiteral" (uiSelect)="selectAccidents(0)" />
     </div>
     @for (item of accidents; track item) {
     <div class="selectable-container">
-      <quote-selectable-option [selected]="selectedAccidents === item" [fullHeight]="true" (uiSelect)="selectAccidents(item)">
-        <div class="card-container">
-          <span nxCopytext="normal" class="nx-margin-s nx-margin-left-4m">{{ item }}</span>
-        </div>
-      </quote-selectable-option>
+      <quote-text-card [selected]="selectedAccidents === item" [data]="item" (uiSelect)="selectAccidents(item)" />
     </div>
     }
     <div class="selectable-container">
       @let maxAccidents = this.accidents.length ? this.accidents[this.accidents.length - 1] + 1 : 0;
 
-      <quote-selectable-option
+      <quote-text-card
         [selected]="selectedAccidents === maxAccidents"
-        [fullHeight]="true"
+        [data]="
+          'more-accidents' | quoteLiteral : { value: maxAccidents.toString(), 'or-more': { value: 'Label.OrMore', type: 'translate' } }
+        "
         (uiSelect)="selectAccidents(maxAccidents)"
-      >
-        <div class="card-container">
-          <span
-            nxCopytext="normal"
-            class="nx-margin-s nx-margin-left-4m"
-            nxQuoteLiteral="more-accidents"
-            [uiQuoteLitealParams]="{ value: maxAccidents.toString() }"
-          ></span>
-        </div>
-      </quote-selectable-option>
+      />
     </div>
   </section>
   <quote-footer [config]="{ showNext: false }">
