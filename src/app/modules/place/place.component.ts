@@ -13,14 +13,13 @@ import {
 import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
 import { NxInputModule } from '@aposin/ng-aquila/input';
 import { NxMaskModule } from '@aposin/ng-aquila/mask';
-import { ContextDataService } from '@shagui/ng-shagui/core';
+import { ContextDataService, IndexedData } from '@shagui/ng-shagui/core';
 import { QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
-import { IndexedData } from 'src/app/core/models';
+import { QuoteComponent } from 'src/app/core/models';
 import { LocationService } from 'src/app/core/services';
 import { HeaderTitleComponent, QuoteFooterComponent, QuoteFooterInfoComponent } from 'src/app/shared/components';
 import { QuoteFooterConfig } from 'src/app/shared/components/quote-footer/models';
 import { QuoteLiteralDirective, QuoteMaskDirective } from 'src/app/shared/directives';
-import { QuoteComponent } from 'src/app/core/models';
 import { QuoteModel } from 'src/app/shared/models';
 
 @Component({

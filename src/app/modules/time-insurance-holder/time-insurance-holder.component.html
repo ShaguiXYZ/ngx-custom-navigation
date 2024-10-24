@@ -2,7 +2,7 @@
   <quote-header-title><span nxQuoteLiteral="header"></span></quote-header-title>
   <section class="form-container">
     @for (item of yearsAsOwner; track item) {
-    <div class="selectable-container">
+    <div class="selectable-row">
       <quote-text-card
         [selected]="selectedYears === item"
         [data]="
@@ -14,7 +14,7 @@
       />
     </div>
     }
-    <div class="selectable-container">
+    <div class="selectable-row">
       @let maxYears = this.yearsAsOwner.length ? this.yearsAsOwner[this.yearsAsOwner.length - 1] + 1 : 0;
       <quote-text-card
         [selected]="selectedYears === maxYears"

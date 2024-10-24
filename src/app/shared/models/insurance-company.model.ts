@@ -1,10 +1,17 @@
 /* eslint-disable @typescript-eslint/no-namespace */
+import { IndexedData } from '@shagui/ng-shagui/core';
 
-export interface InsuranceCompanyModel {
-  company?: string;
-  yearsAsOwner?: number;
+export interface InsuranceCompanyDTO {
+  label: string;
+  TIREASN: string;
+  value: string;
 }
 
-export namespace InsuranceCompanyModel {
-  export const init = (): InsuranceCompanyModel => ({});
+export type InsuranceCompany = IndexedData;
+
+export namespace InsuranceCompany {
+  export const create = (data: InsuranceCompanyDTO): InsuranceCompany => ({
+    index: data.value,
+    data: data.label
+  });
 }

@@ -9,16 +9,14 @@
         </span>
       </nx-formfield>
     </form>
-    @for(modelVersion of modelVersions; track modelVersion.index) { @defer(on viewport) {
-    <div class="card-container nx-margin-bottom-s">
+    @for(modelVersion of modelVersions; track modelVersion.index) {
+    <div class="selectable-row">
       <quote-text-card
         [selected]="modelVersion.index === selectedModelVersion?.index"
         [data]="modelVersion.data"
         (uiSelect)="selectVersion(modelVersion)"
       />
     </div>
-    } @placeholder {
-    <div class="card-container"></div>
-    } }
+    }
   </div>
 </article>

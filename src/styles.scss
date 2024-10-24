@@ -30,6 +30,15 @@ main {
       button {
         text-transform: capitalize;
       }
+
+      .selectable-row {
+        // @howto: render the card-container when element is viewed
+        content-visibility: auto;
+      }
+
+      .selectable-row + .selectable-row {
+        margin-top: 4px;
+      }
     }
 
     .nx-formfield.has-outline .nx-formfield__input-container {

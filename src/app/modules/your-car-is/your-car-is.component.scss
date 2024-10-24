@@ -1,7 +1,7 @@
 .form-container {
   flex-direction: column;
 
-  .selectable-container {
+  .selectable-row {
     .card-container {
       align-items: center;
       display: flex;
@@ -13,10 +13,6 @@
         padding: 0 16px;
       }
     }
-  }
-
-  .selectable-container + .selectable-container {
-    margin-top: 16px;
   }
 }
 

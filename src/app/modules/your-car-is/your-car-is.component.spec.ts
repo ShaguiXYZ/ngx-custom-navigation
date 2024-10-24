@@ -11,7 +11,7 @@ import { RoutingService, VehicleService } from 'src/app/core/services';
 import { HeaderTitleComponent, QuoteFooterComponent, SelectableOptionComponent } from 'src/app/shared/components';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
 import { YourCarIsComponent } from './your-car-is.component';
-import { IVehicleModel, QuoteModel } from 'src/app/shared/models';
+import { QuoteVehicleModel, QuoteModel } from 'src/app/shared/models';
 import { ContextDataServiceMock } from 'src/app/core/mock/services';
 import { TranslateService } from '@ngx-translate/core';
 import { QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
@@ -80,7 +80,7 @@ describe('YourCarIsComponent', () => {
   });
 
   it('should set selected vehicle from context data on init', async () => {
-    const mockVehicle = { make: 'Nissan', vehicleTtype: 'Test Vehicle' } as IVehicleModel;
+    const mockVehicle = { make: 'Nissan', vehicleTtype: 'Test Vehicle' } as QuoteVehicleModel;
 
     contextDataService.set<QuoteModel>(QUOTE_CONTEXT_DATA, {
       vehicle: mockVehicle
@@ -92,7 +92,7 @@ describe('YourCarIsComponent', () => {
   });
 
   it('should allow deactivation if a vehicle is selected', () => {
-    component.selectedVehicle = { make: 'Nissan', vehicleTtype: 'Test Vehicle' } as IVehicleModel;
+    component.selectedVehicle = { make: 'Nissan', vehicleTtype: 'Test Vehicle' } as QuoteVehicleModel;
 
     expect(component.canDeactivate()).toBeTrue();
   });
@@ -105,7 +105,7 @@ describe('YourCarIsComponent', () => {
 
   it('should update context data and navigate to next step on vehicle selection', () => {
     const setContextDataSpy = spyOn(contextDataService, 'set');
-    const mockVehicle = { make: 'Nissan', vehicleTtype: 'Test Vehicle' } as IVehicleModel;
+    const mockVehicle = { make: 'Nissan', vehicleTtype: 'Test Vehicle' } as QuoteVehicleModel;
 
     component['contextData'] = { vehicle: {} } as QuoteModel;
     component.selectVehicle(mockVehicle);

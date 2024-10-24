@@ -1,9 +1,10 @@
 .form-container {
   display: flex;
-  flex-wrap: wrap;
-  min-width: 340px;
+  flex-direction: column;
 
-  quote-icon-card {
-    margin: 7.5px;
+  .icon-cards {
+    display: flex;
+    flex-wrap: wrap;
+    min-width: 340px;
   }
 }

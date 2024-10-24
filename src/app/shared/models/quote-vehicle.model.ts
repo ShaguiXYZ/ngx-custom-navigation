@@ -12,17 +12,17 @@ export type ModelVersionModel = IndexedData<string, number>;
 export const MAX_ICON_BRANDS = 12;
 export const MAX_BUTTON_MODELS = 10;
 
-export interface IVehicleModel extends Partial<VehicleData> {
+export interface QuoteVehicleModel extends Partial<VehicleData> {
   make: string;
   yearOfManufacture?: number;
   vehicleTtype?: string;
 }
 
-export namespace IVehicleModel {
-  export const init = (): IVehicleModel =>
+export namespace QuoteVehicleModel {
+  export const init = (): QuoteVehicleModel =>
     ({
       make: ''
-    } as IVehicleModel);
+    } as QuoteVehicleModel);
 }
 
 export type IVehicleDictionaryData = Partial<IIconData>;

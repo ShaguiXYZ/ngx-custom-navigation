@@ -1,22 +1,20 @@
 import { CommonModule } from '@angular/common';
 import { Component, ElementRef, inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NxAutocompleteModule, NxAutocompleteSelectedEvent } from '@aposin/ng-aquila/autocomplete';
 import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
 import { NxIconModule } from '@aposin/ng-aquila/icon';
 import { NxInputModule } from '@aposin/ng-aquila/input';
-import { NxPageSearchModule } from '@aposin/ng-aquila/page-search';
 import { ContextDataService } from '@shagui/ng-shagui/core';
 import { debounceTime, distinctUntilChanged, fromEvent, map, Subscription } from 'rxjs';
 import { DEBOUNCE_TIME, QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
-import { RoutingService, VehicleService } from 'src/app/core/services';
-import { HeaderTitleComponent, IconCardComponent, QuoteFooterComponent } from 'src/app/shared/components';
-import { QuoteFooterConfig } from 'src/app/shared/components/quote-footer/models';
 import { QuoteComponent } from 'src/app/core/models';
+import { RoutingService, VehicleService } from 'src/app/core/services';
+import { HeaderTitleComponent, IconCardComponent, TextCardComponent } from 'src/app/shared/components';
+import { QuoteFooterConfig } from 'src/app/shared/components/quote-footer/models';
+import { QuoteLiteralDirective } from 'src/app/shared/directives';
 import { BrandData, QuoteModel } from 'src/app/shared/models';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 import { BrandComponent } from './components';
-import { QuoteLiteralDirective } from 'src/app/shared/directives';
 
 @Component({
   selector: 'quote-make',
@@ -25,11 +23,9 @@ import { QuoteLiteralDirective } from 'src/app/shared/directives';
     CommonModule,
     IconCardComponent,
     HeaderTitleComponent,
-    QuoteFooterComponent,
     BrandComponent,
-    NxAutocompleteModule,
+    TextCardComponent,
     NxIconModule,
-    NxPageSearchModule,
     NxFormfieldModule,
     NxInputModule,
     FormsModule,
@@ -64,8 +60,7 @@ export class MakeComponent extends QuoteComponent implements OnInit, OnDestroy {
     this.selectedMake = this.contextData.vehicle.make;
 
     this.createForm();
-
-    this.subscription$.push(this.searchBoxConfig());
+    this.searchBrands();
   }
 
   ngOnDestroy(): void {
@@ -73,10 +68,6 @@ export class MakeComponent extends QuoteComponent implements OnInit, OnDestroy {
   }
 
   public override canDeactivate = (): boolean => this.updateValidData();
-
-  public selectAutocompleteMake(event: NxAutocompleteSelectedEvent): void {
-    this.selectMake(event.option.value);
-  }
 
   public selectMake(event: string): void {
     this.selectedMake = event;
@@ -91,10 +82,12 @@ export class MakeComponent extends QuoteComponent implements OnInit, OnDestroy {
     this.routingService.nextStep();
   }
 
-  private createForm() {
+  private createForm(): void {
     this.form = this.fb.group({
       searchInput: new FormControl(this.contextData.vehicle.make)
     });
+
+    this.subscription$.push(this.searchBoxConfig());
   }
 
   private searchBoxConfig(): Subscription {
@@ -104,11 +97,11 @@ export class MakeComponent extends QuoteComponent implements OnInit, OnDestroy {
         debounceTime(DEBOUNCE_TIME),
         distinctUntilChanged()
       )
-      .subscribe(() => this.searchPlace());
+      .subscribe(() => this.searchBrands());
   }
 
-  private async searchPlace(): Promise<void> {
-    this.searchedMakes = await this.vehicleService.vehicleBrands(this.form.value.searchInput);
+  private async searchBrands(): Promise<void> {
+    this.searchedMakes = this.form.value.searchInput ? await this.vehicleService.vehicleBrands(this.form.value.searchInput) : [];
   }
 
   /**

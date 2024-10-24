@@ -4,7 +4,7 @@
   </quote-header-title>
   <div class="form-container">
     @for(vehicle of vehicleOptions; track vehicle; let index = $index) {
-    <div class="selectable-container">
+    <div class="selectable-row">
       <quote-selectable-option
         [selected]="vehicle.vehicleCode === selectedVehicle?.vehicleCode"
         [fullHeight]="true"

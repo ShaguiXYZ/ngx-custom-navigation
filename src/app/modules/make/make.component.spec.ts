@@ -1,17 +1,15 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NxAutocompleteModule } from '@aposin/ng-aquila/autocomplete';
 import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
 import { NxIconModule } from '@aposin/ng-aquila/icon';
 import { NxInputModule } from '@aposin/ng-aquila/input';
-import { NxPageSearchModule } from '@aposin/ng-aquila/page-search';
+import { TranslateService } from '@ngx-translate/core';
 import { ContextDataService } from '@shagui/ng-shagui/core';
+import { QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
+import { ContextDataServiceMock } from 'src/app/core/mock/services';
 import { RoutingService, VehicleService } from 'src/app/core/services';
 import { QuoteModel } from 'src/app/shared/models';
 import { MakeComponent } from './make.component';
-import { ContextDataServiceMock } from 'src/app/core/mock/services';
-import { TranslateService } from '@ngx-translate/core';
-import { QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
 
 describe('MakeComponent', () => {
   let component: MakeComponent;
@@ -27,16 +25,7 @@ describe('MakeComponent', () => {
 
     await TestBed.configureTestingModule({
       declarations: [],
-      imports: [
-        MakeComponent,
-        ReactiveFormsModule,
-        FormsModule,
-        NxAutocompleteModule,
-        NxIconModule,
-        NxPageSearchModule,
-        NxFormfieldModule,
-        NxInputModule
-      ],
+      imports: [MakeComponent, ReactiveFormsModule, FormsModule, NxIconModule, NxFormfieldModule, NxInputModule],
       providers: [
         { provide: ContextDataService, useClass: ContextDataServiceMock },
         { provide: TranslateService, useValue: translationsServiceSpy },
@@ -75,7 +64,7 @@ describe('MakeComponent', () => {
 
   it('should update searchedMakes on searchPlace', async () => {
     component.form.controls['searchInput'].setValue('Toy');
-    await component['searchPlace']();
+    await component['searchBrands']();
 
     expect(component.searchedMakes).toEqual(['Toyota', 'Honda']);
   });

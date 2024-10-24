@@ -13,7 +13,7 @@ import { RoutingService, VehicleService } from 'src/app/core/services';
 import { HeaderTitleComponent, QuoteFooterComponent, SelectableOptionComponent } from 'src/app/shared/components';
 import { QuoteFooterConfig } from 'src/app/shared/components/quote-footer/models';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
-import { IVehicleModel, QuoteModel } from 'src/app/shared/models';
+import { QuoteVehicleModel, QuoteModel } from 'src/app/shared/models';
 
 @Component({
   selector: 'quote-your-car-is',
@@ -36,8 +36,8 @@ import { IVehicleModel, QuoteModel } from 'src/app/shared/models';
   ]
 })
 export class YourCarIsComponent extends QuoteComponent implements OnInit {
-  public vehicleOptions: IVehicleModel[] = [];
-  public selectedVehicle?: IVehicleModel;
+  public vehicleOptions: QuoteVehicleModel[] = [];
+  public selectedVehicle?: QuoteVehicleModel;
   public footerConfig!: QuoteFooterConfig;
 
   private contextData!: QuoteModel;
@@ -60,7 +60,7 @@ export class YourCarIsComponent extends QuoteComponent implements OnInit {
 
   public override canDeactivate = (): boolean => !!this.selectedVehicle;
 
-  public selectVehicle(vehicle: IVehicleModel) {
+  public selectVehicle(vehicle: QuoteVehicleModel) {
     this.contextData.vehicle = { ...this.contextData.vehicle, ...vehicle };
     this.contextDataService.set(QUOTE_CONTEXT_DATA, this.contextData);
 
@@ -68,6 +68,6 @@ export class YourCarIsComponent extends QuoteComponent implements OnInit {
   }
 
   public continue() {
-    this.selectVehicle(IVehicleModel.init());
+    this.selectVehicle(QuoteVehicleModel.init());
   }
 }

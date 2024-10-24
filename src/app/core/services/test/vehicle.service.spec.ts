@@ -6,7 +6,7 @@ import {
   CubicCapacityModel,
   FuelModel,
   FuelTypes,
-  IVehicleModel,
+  QuoteVehicleModel,
   ModelVersionModel,
   PowerRangesModel
 } from 'src/app/shared/models';
@@ -73,7 +73,7 @@ describe('VehicleService', () => {
       { index: FuelTypes.GASOLINE, data: 'Petrol' },
       { index: FuelTypes.DIESEL, data: 'Diesel' }
     ];
-    const vehicle: IVehicleModel = { make: 'Toyota', model: 'Corolla' };
+    const vehicle: QuoteVehicleModel = { make: 'Toyota', model: 'Corolla' };
 
     httpClientSpy.get.and.returnValue(of(mockFuels));
 
@@ -87,7 +87,7 @@ describe('VehicleService', () => {
       { index: 'range-1', data: '100-200' },
       { index: 'range-2', data: '200-300' }
     ];
-    const vehicle: IVehicleModel = { make: 'Toyota', model: 'Corolla' };
+    const vehicle: QuoteVehicleModel = { make: 'Toyota', model: 'Corolla' };
 
     httpClientSpy.get.and.returnValue(of(mockPowers));
 
@@ -101,7 +101,7 @@ describe('VehicleService', () => {
       { index: 1, data: '1.5L' },
       { index: 2, data: '2.0L' }
     ];
-    const vehicle: IVehicleModel = { make: 'Toyota', model: 'Corolla' };
+    const vehicle: QuoteVehicleModel = { make: 'Toyota', model: 'Corolla' };
 
     httpClientSpy.get.and.returnValue(of(mockCapacities));
 
@@ -111,7 +111,7 @@ describe('VehicleService', () => {
   });
 
   it('should fetch vehicles', async () => {
-    const mockVehicles: IVehicleModel[] = [
+    const mockVehicles: QuoteVehicleModel[] = [
       { make: 'Toyota', model: 'Corolla' },
       { make: 'Honda', model: 'Civic' }
     ];

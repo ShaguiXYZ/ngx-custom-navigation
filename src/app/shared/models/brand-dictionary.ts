@@ -1,5 +1,5 @@
 import { DataInfo } from '@shagui/ng-shagui/core';
-import { IVehicleDictionaryData } from './vehicle.model';
+import { IVehicleDictionaryData } from './quote-vehicle.model';
 
 export type BrandKey = keyof typeof brandDictionary;
 

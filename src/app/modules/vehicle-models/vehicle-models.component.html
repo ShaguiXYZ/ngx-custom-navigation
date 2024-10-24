@@ -10,12 +10,10 @@
       </nx-formfield>
     </form>
 
-    @for(model of models; track $index) { @defer(on viewport) {
-    <div class="card-container nx-margin-bottom-s">
+    @for(model of models; track $index) {
+    <div class="selectable-row">
       <quote-text-card [selected]="model === selectedModel" [data]="model" (uiSelect)="selectModel(model)" />
     </div>
-    } @placeholder {
-    <div class="card-container"></div>
-    } }
+    }
   </div>
 </article>

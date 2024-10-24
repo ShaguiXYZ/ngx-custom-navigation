@@ -12,15 +12,15 @@
     ></span
   ></quote-header-title>
   <section class="form-container">
-    <div class="selectable-container">
+    <div class="selectable-row">
       <quote-text-card [selected]="selectedAccidents === 0" [data]="'no' | quoteLiteral" (uiSelect)="selectAccidents(0)" />
     </div>
     @for (item of accidents; track item) {
-    <div class="selectable-container">
+    <div class="selectable-row">
       <quote-text-card [selected]="selectedAccidents === item" [data]="item" (uiSelect)="selectAccidents(item)" />
     </div>
     }
-    <div class="selectable-container">
+    <div class="selectable-row">
       @let maxAccidents = this.accidents.length ? this.accidents[this.accidents.length - 1] + 1 : 0;
 
       <quote-text-card

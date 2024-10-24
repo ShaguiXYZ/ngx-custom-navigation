@@ -8,13 +8,11 @@
         <span nxQuoteLiteral="morning"></span>
       </header>
       <section class="hour__selections__section">
-        @for(hour of hours.am; track hour) { @defer(on viewport) {
+        @for(hour of hours.am; track hour) {
         <div class="hour__selection nx-margin-2xs">
           <quote-text-card [fullHeight]="false" [selected]="hour === selectedHour" data="{{ hour }} h" (uiSelect)="selectHour(hour)" />
         </div>
-        } @placeholder {
-        <div class="card-container"></div>
-        } }
+        }
       </section>
     </article>
     <article class="hour__selections">

@@ -29,10 +29,10 @@ export interface OfferingPriceModel {
   configurableCoverageList: Coverage[];
 }
 
-export interface IOfferingModel {
+export interface QuoteOfferingModel {
   price: OfferingPriceModel;
 }
 
-export namespace IOfferingModel {
-  export const init = (): IOfferingModel => ({} as IOfferingModel);
+export namespace QuoteOfferingModel {
+  export const init = (): QuoteOfferingModel => ({} as QuoteOfferingModel);
 }

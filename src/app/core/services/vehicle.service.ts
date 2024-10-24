@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpService, HttpStatus, TTL, UniqueIds } from '@shagui/ng-shagui/core';
 import { firstValueFrom, map } from 'rxjs';
-import { BrandKey, CubicCapacityModel, FuelModel, IVehicleModel, ModelVersionModel, PowerRangesModel } from 'src/app/shared/models';
+import { BrandKey, CubicCapacityModel, FuelModel, QuoteVehicleModel, ModelVersionModel, PowerRangesModel } from 'src/app/shared/models';
 
 @Injectable({ providedIn: 'root' })
 export class VehicleService {
@@ -64,7 +64,7 @@ export class VehicleService {
     );
   }
 
-  public modelFuels(vehicle: IVehicleModel): Promise<FuelModel[]> {
+  public modelFuels(vehicle: QuoteVehicleModel): Promise<FuelModel[]> {
     const { make, model } = vehicle;
 
     return firstValueFrom(
@@ -82,7 +82,7 @@ export class VehicleService {
     );
   }
 
-  public vehiclePowers(vehicle: IVehicleModel): Promise<PowerRangesModel[]> {
+  public vehiclePowers(vehicle: QuoteVehicleModel): Promise<PowerRangesModel[]> {
     const { make, model } = vehicle;
 
     return firstValueFrom(
@@ -101,7 +101,7 @@ export class VehicleService {
     );
   }
 
-  public cubicCapacities(vehicle: IVehicleModel): Promise<CubicCapacityModel[]> {
+  public cubicCapacities(vehicle: QuoteVehicleModel): Promise<CubicCapacityModel[]> {
     const { make, model } = vehicle;
 
     return firstValueFrom(
@@ -119,16 +119,16 @@ export class VehicleService {
     );
   }
 
-  public vehicles(): Promise<IVehicleModel[]> {
+  public vehicles(): Promise<QuoteVehicleModel[]> {
     return firstValueFrom(
       this.http
-        .get<IVehicleModel[]>(`${this.vehicleUri}/vehicle.mock.json`, {
+        .get<QuoteVehicleModel[]>(`${this.vehicleUri}/vehicle.mock.json`, {
           responseStatusMessage: {
             [HttpStatus.notFound]: { text: 'Notifications.VehiclesNotFound' }
           },
           showLoading: true
         })
-        .pipe(map(res => res as IVehicleModel[]))
+        .pipe(map(res => res as QuoteVehicleModel[]))
     );
   }
 

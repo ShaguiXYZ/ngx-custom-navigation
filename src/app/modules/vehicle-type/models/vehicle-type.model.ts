@@ -1,4 +1,4 @@
-import { IndexedData } from 'src/app/core/models';
+import { IndexedData } from '@shagui/ng-shagui/core';
 
 export const VehicleTypes: IndexedData[] = [
   {

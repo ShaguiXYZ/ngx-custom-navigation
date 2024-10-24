@@ -1,17 +1,16 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
 import { NxCopytextModule } from '@aposin/ng-aquila/copytext';
-import { ContextDataService } from '@shagui/ng-shagui/core';
+import { ContextDataService, IndexedData } from '@shagui/ng-shagui/core';
 import { Observable } from 'rxjs';
 import { QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
-import { IndexedData } from 'src/app/core/models';
+import { QuoteComponent } from 'src/app/core/models';
 import { RoutingService } from 'src/app/core/services';
 import { HeaderTitleComponent, IconCardComponent, TextCardComponent } from 'src/app/shared/components';
-import { QuoteComponent } from 'src/app/core/models';
-import { QuoteModel } from 'src/app/shared/models';
-import { VehicleTypes } from './models';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
+import { QuoteModel } from 'src/app/shared/models';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
+import { VehicleTypes } from './models';
 
 @Component({
   selector: 'quote-vehicle-type',

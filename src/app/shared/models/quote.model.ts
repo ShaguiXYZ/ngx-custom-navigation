@@ -1,36 +1,36 @@
 /* eslint-disable @typescript-eslint/no-namespace */
-import { ClientModel } from './client.model';
-import { ContactDataModel } from './contact-data.model';
-import { DateOfIssueModel } from './date-of-issue.model';
-import { DrivenModel } from './driven.model';
-import { InsuranceCompanyModel } from './insurance-company.model';
-import { IOfferingModel } from './offering.model';
-import { PersonalDataModel } from './personal-data.model';
-import { PlaceModel } from './place.model';
-import { IVehicleModel } from './vehicle.model';
+import { QuoteClientModel } from './quote-client.model';
+import { QuoteContactDataModel } from './quote-contact-data.model';
+import { QuoteDateOfIssueModel } from './quote-date-of-issue.model';
+import { QuoteDrivenModel } from './quote-driven.model';
+import { QuoteInsuranceCompanyModel } from './quote-insurance-company.model';
+import { QuoteOfferingModel } from './quote-offering.model';
+import { QuotePersonalDataModel } from './quote-personal-data.model';
+import { QuotePlaceModel } from './quote-place.model';
+import { QuoteVehicleModel } from './quote-vehicle.model';
 
 export interface QuoteModel {
-  client: ClientModel;
-  contactData: ContactDataModel;
-  dateOfIssue: DateOfIssueModel;
-  driven: DrivenModel;
-  insuranceCompany: InsuranceCompanyModel;
-  offering: IOfferingModel;
-  personalData: PersonalDataModel;
-  place: PlaceModel;
-  vehicle: IVehicleModel;
+  client: QuoteClientModel;
+  contactData: QuoteContactDataModel;
+  dateOfIssue: QuoteDateOfIssueModel;
+  driven: QuoteDrivenModel;
+  insuranceCompany: QuoteInsuranceCompanyModel;
+  offering: QuoteOfferingModel;
+  personalData: QuotePersonalDataModel;
+  place: QuotePlaceModel;
+  vehicle: QuoteVehicleModel;
 }
 
 export namespace QuoteModel {
   export const init = (): QuoteModel => ({
-    client: ClientModel.init(),
-    contactData: ContactDataModel.init(),
-    dateOfIssue: DateOfIssueModel.init(),
-    driven: DrivenModel.init(),
-    insuranceCompany: InsuranceCompanyModel.init(),
-    personalData: PersonalDataModel.init(),
-    place: PlaceModel.init(),
-    vehicle: IVehicleModel.init(),
-    offering: IOfferingModel.init()
+    client: QuoteClientModel.init(),
+    contactData: QuoteContactDataModel.init(),
+    dateOfIssue: QuoteDateOfIssueModel.init(),
+    driven: QuoteDrivenModel.init(),
+    insuranceCompany: QuoteInsuranceCompanyModel.init(),
+    personalData: QuotePersonalDataModel.init(),
+    place: QuotePlaceModel.init(),
+    vehicle: QuoteVehicleModel.init(),
+    offering: QuoteOfferingModel.init()
   });
 }

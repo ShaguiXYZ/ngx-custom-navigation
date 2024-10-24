@@ -25,9 +25,9 @@ describe('DrivingLicenseLocationComponent', () => {
       imports: [DrivingLicenseLocationComponent],
       providers: [
         { provide: ContextDataService, useClass: ContextDataServiceMock },
+        { provide: TranslateService, useValue: translationsServiceSpy },
         { provide: RoutingService, useValue: routingServiceSpy },
-        { provide: NxDialogService, useValue: dialogServiceSpy },
-        { provide: TranslateService, useValue: translationsServiceSpy }
+        { provide: NxDialogService, useValue: dialogServiceSpy }
       ]
     }).compileComponents();
   });

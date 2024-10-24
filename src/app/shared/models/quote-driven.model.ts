@@ -1,12 +1,12 @@
 /* eslint-disable @typescript-eslint/no-namespace */
 
-export interface DrivenModel {
+export interface QuoteDrivenModel {
   hasDrivenLicense?: boolean;
   drivenLicense?: string;
   drivenLicenseDate?: Date;
   drivenLicenseCountry?: string;
 }
 
-export namespace DrivenModel {
-  export const init = (): DrivenModel => ({});
+export namespace QuoteDrivenModel {
+  export const init = (): QuoteDrivenModel => ({});
 }

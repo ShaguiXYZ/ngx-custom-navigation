@@ -2,13 +2,9 @@
   display: flex;
   flex-direction: column;
 
-  .icon-brands {
+  .icon-cards {
     display: flex;
     flex-wrap: wrap;
     min-width: 340px;
-
-    quote-icon-card {
-      margin: 7.5px;
-    }
   }
 }

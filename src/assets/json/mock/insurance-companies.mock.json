@@ -1,34 +1,424 @@
 [
   {
-    "index": "AMV",
-    "data": "amv"
+    "label": "****************TOP****************",
+    "TIREASN": "S",
+    "value": "0000",
+    "disabled": true
   },
   {
-    "index": "AXA",
-    "data": "axa"
+    "label": "ALLIANZ SEGUROS",
+    "TIREASN": "S",
+    "value": "C109"
   },
   {
-    "index": "CASER",
-    "data": "caser"
+    "label": "AMV",
+    "TIREASN": "S",
+    "value": "CAMV"
   },
   {
-    "index": "CATALANA-OCCIDENTE",
-    "data": "catalana-occidente"
+    "label": "AXA",
+    "TIREASN": "S",
+    "value": "CAXA"
   },
   {
-    "index": "ING",
-    "data": "ing"
+    "label": "CASER",
+    "TIREASN": "S",
+    "value": "C031"
   },
   {
-    "index": "MAPFRE",
-    "data": "mapfre"
+    "label": "CATALANA OCCIDENTE, S.A. DE SEGUROS Y REASEGUROS",
+    "TIREASN": "S",
+    "value": "C468"
   },
   {
-    "index": "PELAYO",
-    "data": "pelayo"
+    "label": "GENERALI-LA ESTRELLA",
+    "TIREASN": "S",
+    "value": "C072"
   },
   {
-    "index": "ZURICH",
-    "data": "zurich"
+    "label": "GROUPAMA PLUS ULTRA/CLICK SEGUROS",
+    "TIREASN": "S",
+    "value": "C517"
+  },
+  {
+    "label": "ING DIRECT",
+    "TIREASN": "S",
+    "value": "CING"
+  },
+  {
+    "label": "LÍNEA DIRECTA/SEGUROS NUEZ",
+    "TIREASN": "S",
+    "value": "C720"
+  },
+  {
+    "label": "LA PATRIA HISPANA",
+    "TIREASN": "N",
+    "value": "C139"
+  },
+  {
+    "label": "LIBERTY INSURANCE-GENESIS SEGUROS",
+    "TIREASN": "S",
+    "value": "C467"
+  },
+  {
+    "label": "MAPFRE ESPAÑA COMPAÑÍA DE SEGUROS",
+    "TIREASN": "S",
+    "value": "C058"
+  },
+  {
+    "label": "MUTUA MADRILEÑA AUTOMOVILISTA",
+    "TIREASN": "N",
+    "value": "M083"
+  },
+  {
+    "label": "PELAYO/PELAYONEX",
+    "TIREASN": "S",
+    "value": "M050"
+  },
+  {
+    "label": "REALE AUTOS",
+    "TIREASN": "S",
+    "value": "C613"
+  },
+  {
+    "label": "ZURICH INSURANCE PLC SUC. ESPAÑA",
+    "TIREASN": "S",
+    "value": "E189"
+  },
+  {
+    "label": "************************************",
+    "TIREASN": "S",
+    "value": "0001",
+    "disabled": true
+  },
+  {
+    "label": "ADMIRAL EUROPE COMPAÑÍA DE SEGUROS, S.A.U.",
+    "TIREASN": "S",
+    "value": "C805"
+  },
+  {
+    "label": "AEGON SEGUROS GENERALES, S.A.",
+    "TIREASN": "N",
+    "value": "C751"
+  },
+  {
+    "label": "AGRUPACION MUTUAL ASEGURADORA (AMA), PREV. SANIT. NACIONAL",
+    "TIREASN": "S",
+    "value": "M328"
+  },
+  {
+    "label": "ALLIANZ DIRECT VERSICHERUNGS-AG, SUCURSAL EN ESPAÑA",
+    "TIREASN": "S",
+    "value": "E247"
+  },
+  {
+    "label": "AMIC",
+    "TIREASN": "N",
+    "value": "C682"
+  },
+  {
+    "label": "ASEFA-SABADELL ASEGURADORA",
+    "TIREASN": "N",
+    "value": "C715"
+  },
+  {
+    "label": "AZUR MULTIRRAMOS",
+    "TIREASN": "N",
+    "value": "C076"
+  },
+  {
+    "label": "BANCO VITALICIO DE ESPAÑA",
+    "TIREASN": "N",
+    "value": "C021"
+  },
+  {
+    "label": "BBVA SEGUROS, S..A. DE SEGUROS Y REASEG.",
+    "TIREASN": "N",
+    "value": "C502"
+  },
+  {
+    "label": "BILBAO CIA ANONIMA",
+    "TIREASN": "S",
+    "value": "C026"
+  },
+  {
+    "label": "CAHISPA, S.A. DE SEGUROS GENERALES",
+    "TIREASN": "N",
+    "value": "C038"
+  },
+  {
+    "label": "CAI SEGUROS GENERALES DE SEGUROS Y REASEGUROS",
+    "TIREASN": "N",
+    "value": "C772"
+  },
+  {
+    "label": "CATALUNYACAIXA ASSEGURANCES",
+    "TIREASN": "N",
+    "value": "C761"
+  },
+  {
+    "label": "CAUDAL",
+    "TIREASN": "N",
+    "value": "C530"
+  },
+  {
+    "label": "COMERCIAL UNIÓN ESPAÑA",
+    "TIREASN": "N",
+    "value": "C713"
+  },
+  {
+    "label": "COMPAÑIAS EXTRANJERAS",
+    "TIREASN": "N",
+    "value": "C999"
+  },
+  {
+    "label": "EUROINS INSURANCE AD",
+    "TIREASN": "S",
+    "value": "L639"
+  },
+  {
+    "label": "EUROMUTUA SEGUROS",
+    "TIREASN": "N",
+    "value": "M042"
+  },
+  {
+    "label": "FENIX DIRECTO",
+    "TIREASN": "S",
+    "value": "C706"
+  },
+  {
+    "label": "FIATC MUTUA DE SEGUROS",
+    "TIREASN": "S",
+    "value": "M134"
+  },
+  {
+    "label": "FIDELIDADE-COMPANHIA DE SEGUROS",
+    "TIREASN": "S",
+    "value": "E118"
+  },
+  {
+    "label": "GAN SEGUROS",
+    "TIREASN": "N",
+    "value": "C681"
+  },
+  {
+    "label": "GERUNDENSE DE SEGUROS S.A",
+    "TIREASN": "S",
+    "value": "C090"
+  },
+  {
+    "label": "GES SEGUROS",
+    "TIREASN": "S",
+    "value": "C089"
+  },
+  {
+    "label": "HDI, HANNOVER INTERNATIONAL",
+    "TIREASN": "N",
+    "value": "C726"
+  },
+  {
+    "label": "HELLO INSURANCE GROUP",
+    "TIREASN": "S",
+    "value": "C804"
+  },
+  {
+    "label": "HELVETIA-PREVISIÓN ESPAÑOLA",
+    "TIREASN": "S",
+    "value": "C157"
+  },
+  {
+    "label": "IMPERIO SEGUROS",
+    "TIREASN": "N",
+    "value": "C728"
+  },
+  {
+    "label": "L´ÉQUITÉ COMPAGNIE D´ASSURANCES ET DE REASSURANCES",
+    "TIREASN": "S",
+    "value": "L376"
+  },
+  {
+    "label": "LA VASCO NAVARRA",
+    "TIREASN": "N",
+    "value": "C205"
+  },
+  {
+    "label": "LAGUN ARO",
+    "TIREASN": "S",
+    "value": "C572"
+  },
+  {
+    "label": "LE MANS SEGUROS",
+    "TIREASN": "N",
+    "value": "C552"
+  },
+  {
+    "label": "LEPANTO",
+    "TIREASN": "N",
+    "value": "C108"
+  },
+  {
+    "label": "MAAF SEGUROS",
+    "TIREASN": "N",
+    "value": "C666"
+  },
+  {
+    "label": "MERCURIO",
+    "TIREASN": "N",
+    "value": "C630"
+  },
+  {
+    "label": "METROPOLIS, S.A. CIA. NAL. SEG. Y REASEG",
+    "TIREASN": "N",
+    "value": "C121"
+  },
+  {
+    "label": "MGS",
+    "TIREASN": "S",
+    "value": "C794"
+  },
+  {
+    "label": "MUNAT SEGUROS",
+    "TIREASN": "N",
+    "value": "C665"
+  },
+  {
+    "label": "MUSSAP",
+    "TIREASN": "S",
+    "value": "M107"
+  },
+  {
+    "label": "MUTUA CATALANA DE SEGUROS",
+    "TIREASN": "N",
+    "value": "M336"
+  },
+  {
+    "label": "MUTUA LLEIDATANA",
+    "TIREASN": "N",
+    "value": "M081"
+  },
+  {
+    "label": "MUTUA MADRILEÑA DE TAXIS (MMT)",
+    "TIREASN": "S",
+    "value": "M084"
+  },
+  {
+    "label": "MUTUA SEGORBINA DE SEGUROS A PRIMA FIJA",
+    "TIREASN": "N",
+    "value": "M167"
+  },
+  {
+    "label": "MUTUA SEVILLANA DE TAXIS",
+    "TIREASN": "N",
+    "value": "M245"
+  },
+  {
+    "label": "MUTUA TINERFEÑA",
+    "TIREASN": "S",
+    "value": "M216"
+  },
+  {
+    "label": "MUTUA VALENCIA AUTOMOVILISTA",
+    "TIREASN": "N",
+    "value": "M323"
+  },
+  {
+    "label": "MUTUAL FLEQUERA DE CATALUNYA",
+    "TIREASN": "N",
+    "value": "M115"
+  },
+  {
+    "label": "MUTUALIDAD DE LEVANTE",
+    "TIREASN": "S",
+    "value": "M140"
+  },
+  {
+    "label": "MUTUALIDAD SEGUROS PANADERIA VALENCIA",
+    "TIREASN": "N",
+    "value": "M327"
+  },
+  {
+    "label": "PREVIASA SEGUROS",
+    "TIREASN": "N",
+    "value": "C161"
+  },
+  {
+    "label": "PROBUS INSURANCE COMPANY",
+    "TIREASN": "N",
+    "value": "L116"
+  },
+  {
+    "label": "PROSPERITY SA DE SEGUROS GENERALES",
+    "TIREASN": "N",
+    "value": "C734"
+  },
+  {
+    "label": "PRUEBA MLZ1",
+    "TIREASN": "S",
+    "value": "X997"
+  },
+  {
+    "label": "PRUEBA MLZ1",
+    "TIREASN": "S",
+    "value": "X998"
+  },
+  {
+    "label": "RACC/AMGEN SEGUROS",
+    "TIREASN": "S",
+    "value": "C708"
+  },
+  {
+    "label": "REGAL INSURANCE",
+    "TIREASN": "N",
+    "value": "C624"
+  },
+  {
+    "label": "SEGURCAIXA/CAN",
+    "TIREASN": "S",
+    "value": "C124"
+  },
+  {
+    "label": "SOCIEDAD DE SEGUROS SALUS, S.A.",
+    "TIREASN": "S",
+    "value": "C485"
+  },
+  {
+    "label": "SOLISS",
+    "TIREASN": "N",
+    "value": "M191"
+  },
+  {
+    "label": "SOVAG",
+    "TIREASN": "N",
+    "value": "L375"
+  },
+  {
+    "label": "UMAS, UNION MUTUA ASISTENCIAL DE SEGUROS",
+    "TIREASN": "N",
+    "value": "M363"
+  },
+  {
+    "label": "UNIÓN ALCOYANA",
+    "TIREASN": "S",
+    "value": "C188"
+  },
+  {
+    "label": "USAA LIMITED",
+    "TIREASN": "N",
+    "value": "L106"
+  },
+  {
+    "label": "VASCONGADA DE SEGUROS Y REASEGUROS S.A.",
+    "TIREASN": "N",
+    "value": "C051"
+  },
+  {
+    "label": "VERTI ASEGURADORA, COMPAÑÍA SEG Y REAG SA",
+    "TIREASN": "N",
+    "value": "C785"
+  },
+  {
+    "label": "VICTORIA MERIDIONAL",
+    "TIREASN": "N",
+    "value": "C120"
   }
 ]

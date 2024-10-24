@@ -1,14 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ContextDataService } from '@shagui/ng-shagui/core';
-import { IndexedData } from 'src/app/core/models';
+import { TranslateService } from '@ngx-translate/core';
+import { ContextDataService, IndexedData } from '@shagui/ng-shagui/core';
+import { QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
+import { ContextDataServiceMock } from 'src/app/core/mock/services';
 import { RoutingService } from 'src/app/core/services';
 import { QuoteModel } from 'src/app/shared/models';
 import { VehicleTypes } from './models';
 import { VehicleTypeComponent } from './vehicle-type.component';
-import { ContextDataServiceMock } from 'src/app/core/mock/services';
-import { TranslateService } from '@ngx-translate/core';
-import { QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
 
 describe('VehicleTypeComponent', () => {
   let component: VehicleTypeComponent;

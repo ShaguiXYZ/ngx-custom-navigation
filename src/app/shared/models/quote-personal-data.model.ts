@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-namespace */
 
-export interface PersonalDataModel {
+export interface QuotePersonalDataModel {
   birthdate?: Date;
   email?: string;
   name: string;
@@ -11,6 +11,6 @@ export interface PersonalDataModel {
   phoneNumber?: string;
 }
 
-export namespace PersonalDataModel {
-  export const init = (): PersonalDataModel => ({ name: '', productsInfo: false });
+export namespace QuotePersonalDataModel {
+  export const init = (): QuotePersonalDataModel => ({ name: '', productsInfo: false });
 }

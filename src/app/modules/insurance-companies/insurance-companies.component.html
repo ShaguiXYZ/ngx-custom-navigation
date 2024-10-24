@@ -1,13 +1,35 @@
 <article class="component-container">
   <quote-header-title><span nxQuoteLiteral="header"></span></quote-header-title>
   <section class="form-container">
-    @for(icon of insuranceCompanies; track icon.index) {
-    <quote-icon-card
-      [data]="icon"
-      [showLabel]="false"
-      [selected]="selectedCompany?.index === icon.index"
-      (uiSelect)="selectCompany(icon)"
-    />
+    <form [formGroup]="form">
+      <nx-formfield [label]="'search' | quoteLiteral" appearance="outline">
+        <input #searchInput type="text" formControlName="searchInput" nxInput />
+        <span nxFormfieldSuffix>
+          <nx-icon name="search" size="s"></nx-icon>
+        </span>
+      </nx-formfield>
+    </form>
+
+    @if(!form.value.searchInput) {
+    <div class="icon-cards">
+      @for(icon of insuranceIconList; track icon.index) {
+      <quote-icon-card
+        class="nx-margin-x-3xs nx-margin-y-3xs"
+        [data]="icon"
+        [showLabel]="false"
+        [selected]="selectedCompany?.index === icon.index"
+        (uiSelect)="selectCompany(icon)"
+      />
+      }
+    </div>
+    } @else {
+    <div class="serached-data">
+      @for (item of searchedInsurances; track item.index) {
+      <div class="selectable-row">
+        <quote-text-card [selected]="selectedCompany?.index === item.index" [data]="item.data" (uiSelect)="selectCompany(item)" />
+      </div>
+      }
+    </div>
     }
   </section>
 </article>
