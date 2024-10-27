@@ -38,7 +38,9 @@ export class NumberAccidentsComponent extends QuoteComponent implements OnInit {
     this.contextData = this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA);
     this.yearsAsOwner = this.contextData.insuranceCompany.yearsAsOwner || this.yearsAsOwner;
     this.selectedAccidents = this.contextData.client.accidents;
-    this.accidents = this.accidents.sort((a, b) => a - b);
+
+    // @howto - Remove duplicates and sort the accidents array
+    this.accidents = this.accidents.filter((value, index) => this.accidents.indexOf(value) === index).sort((a, b) => a - b);
   }
 
   public override canDeactivate = (): boolean => this.updateValidData();
