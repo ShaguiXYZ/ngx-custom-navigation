@@ -43,7 +43,7 @@ describe('LocationService', () => {
 
     const result = await service.getAddresses('46001');
 
-    expect(result).toEqual({ postalCode: '46001', province: 'Valencia', location: 'location46' });
+    expect(result).toEqual({ postalCode: '46001', province: 'Valencia', provinceCode: '46', location: 'location46' });
   });
 
   it('should return undefined for postal code with invalid characters', async () => {

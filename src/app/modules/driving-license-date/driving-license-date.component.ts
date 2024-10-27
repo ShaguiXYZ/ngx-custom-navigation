@@ -1,5 +1,15 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  AbstractControl,
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+  ValidationErrors,
+  ValidatorFn,
+  Validators
+} from '@angular/forms';
 import { NX_DATE_LOCALE, NxDatefieldModule } from '@aposin/ng-aquila/datefield';
 import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
 import { NxInputModule } from '@aposin/ng-aquila/input';
@@ -70,7 +80,11 @@ export class DrivingLicenseDateComponent extends QuoteComponent implements OnIni
     }
 
     this.form = this.fb.group({
-      drivenLicenseDate: new FormControl(this.drivingLicenseDateFromContext, [Validators.required])
+      drivenLicenseDate: new FormControl(this.drivingLicenseDateFromContext, [Validators.required, this.preventFutureDate()])
     });
+  }
+
+  private preventFutureDate(): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => (moment(control.value).isAfter(moment()) ? { futureDate: true } : null);
   }
 }

@@ -89,4 +89,12 @@ describe('DrivingLicenseDateComponent', () => {
     expect(component['updateValidData']).toHaveBeenCalled();
     expect(canDeactivate).toBe(component.form.valid);
   });
+
+  it('should invalidate form if driving license date is a future date', () => {
+    component.form.controls['drivenLicenseDate'].setValue(moment().add(1, 'years').format('YYYY-MM-DD'));
+    const isValid = component['updateValidData']();
+
+    expect(isValid).toBeFalse();
+    expect(component.form.controls['drivenLicenseDate'].errors).toEqual({ futureDate: true });
+  });
 });

@@ -76,7 +76,7 @@ describe('PlaceComponent', () => {
   });
 
   it('should validate postal code asynchronously', waitForAsync(() => {
-    const mockLocation = { postalCode: '12345', province: 'TestProvince', location: 'TestLocation' };
+    const mockLocation = { postalCode: '12345', province: 'TestProvince', provinceCode: '12', location: 'TestLocation' };
     locationService.getAddresses.and.returnValue(Promise.resolve(mockLocation));
 
     component.form.controls['postalCode'].setValue('12345');
@@ -84,7 +84,7 @@ describe('PlaceComponent', () => {
 
     fixture.whenStable().then(() => {
       expect(component.form.controls['postalCode'].valid).toBeTrue();
-      expect(component.location).toBe('TestProvince, TestLocation');
+      expect(component.location).toBe(component['locationFormfieldHint'](mockLocation));
     });
   }));
 

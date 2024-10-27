@@ -16,6 +16,8 @@
         <nx-datepicker #myDatepicker></nx-datepicker>
         @if(form.get('drivenLicenseDate')?.errors?.['required']) {
         <nx-error appearance="text" nxFormfieldError><span nxQuoteLiteral="error-required"></span> </nx-error>
+        } @if(form.get('drivenLicenseDate')?.errors?.['futureDate']) {
+        <nx-error appearance="text" nxFormfieldError><span nxQuoteLiteral="error-future-date"></span> </nx-error>
         }
       </nx-formfield>
     </form>
