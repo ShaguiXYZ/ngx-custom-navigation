@@ -4,7 +4,7 @@ import { By } from '@angular/platform-browser';
 import { TranslateService } from '@ngx-translate/core';
 import { ContextDataService } from '@shagui/ng-shagui/core';
 import { DEBOUNCE_TIME, QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
-import { ContextDataServiceMock } from 'src/app/core/mock/services';
+import { ContextDataServiceStub } from 'src/app/core/stub';
 import { RoutingService, VehicleService } from 'src/app/core/services';
 import { QuoteModel } from 'src/app/shared/models';
 import { VehicleModelsComponent } from './vehicle-models.component';
@@ -25,7 +25,7 @@ describe('VehicleModelsComponent', () => {
       declarations: [],
       imports: [VehicleModelsComponent, ReactiveFormsModule, FormsModule],
       providers: [
-        { provide: ContextDataService, useClass: ContextDataServiceMock },
+        { provide: ContextDataService, useClass: ContextDataServiceStub },
         { provide: TranslateService, useValue: translationsServiceSpy },
         { provide: RoutingService, useValue: routingServiceSpy },
         { provide: VehicleService, useValue: vehicleServiceSpy }

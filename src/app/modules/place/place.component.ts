@@ -13,9 +13,9 @@ import {
 import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
 import { NxInputModule } from '@aposin/ng-aquila/input';
 import { NxMaskModule } from '@aposin/ng-aquila/mask';
-import { ContextDataService, IndexedData } from '@shagui/ng-shagui/core';
+import { ContextDataService } from '@shagui/ng-shagui/core';
 import { QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
-import { QuoteComponent } from 'src/app/core/models';
+import { LocationModel, QuoteComponent } from 'src/app/core/models';
 import { LocationService } from 'src/app/core/services';
 import { HeaderTitleComponent, QuoteFooterComponent, QuoteFooterInfoComponent } from 'src/app/shared/components';
 import { QuoteFooterConfig } from 'src/app/shared/components/quote-footer/models';
@@ -41,8 +41,9 @@ import { QuoteModel } from 'src/app/shared/models';
   ]
 })
 export class PlaceComponent extends QuoteComponent implements OnInit {
+  public location?: string;
   public form!: FormGroup;
-  public footerConfig!: QuoteFooterConfig;
+  public footerConfig: QuoteFooterConfig = {};
 
   private contextData!: QuoteModel;
 
@@ -52,17 +53,13 @@ export class PlaceComponent extends QuoteComponent implements OnInit {
 
   ngOnInit(): void {
     this.contextData = this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA);
-    this.footerConfig = {
-      showNext: true,
-      nextFn: () => this.updateValidData()
-    };
 
     this.createForm();
   }
 
-  public override canDeactivate = (): boolean => this.form.valid;
+  public override canDeactivate = (): boolean => this.updateValidData();
 
-  private updateValidData = (): void => {
+  private updateValidData = (): boolean => {
     this.form.markAllAsTouched();
 
     if (this.form.valid) {
@@ -73,11 +70,9 @@ export class PlaceComponent extends QuoteComponent implements OnInit {
 
       this.contextDataService.set(QUOTE_CONTEXT_DATA, this.contextData);
     }
-  };
 
-  public get province(): IndexedData | undefined {
-    return this.contextData.place.province;
-  }
+    return this.form.valid;
+  };
 
   private createForm(): void {
     this.form = this.fb.group({
@@ -91,11 +86,16 @@ export class PlaceComponent extends QuoteComponent implements OnInit {
 
   private postalCodeExistsValidator(locationService: LocationService): AsyncValidatorFn {
     return async (control: AbstractControl): Promise<ValidationErrors | null> => {
-      const address = await locationService.getAddresses(control.value);
+      const location = await locationService.getAddresses(control.value);
 
-      this.contextData.place.province = address;
+      this.updateContextData(location);
 
-      return address ? null : { postalCodeNotRecognized: true };
+      return location?.postalCode ? null : { postalCodeNotRecognized: true };
     };
+  }
+
+  private updateContextData(location?: LocationModel) {
+    this.contextData.place = { ...location };
+    this.location = location?.postalCode ? `${location?.province}, ${location?.location}` : '';
   }
 }

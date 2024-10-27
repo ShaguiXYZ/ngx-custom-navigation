@@ -216,11 +216,31 @@
       "pageId": "license-plate",
       "nextOptionList": [
         {
+          "nextPageId": "license-year",
+          "conditions": [
+            {
+              "expression": "driven.hasDrivenLicense",
+              "value": "false"
+            },
+            {
+              "expression": "vehicle.vehicleTtype",
+              "union": "AND",
+              "operation": "!==",
+              "value": "new"
+            }
+          ]
+        },
+        {
           "nextPageId": "make",
           "conditions": [
             {
               "expression": "driven.hasDrivenLicense",
               "value": "false"
+            },
+            {
+              "expression": "vehicle.vehicleTtype",
+              "union": "AND",
+              "value": "new"
             }
           ]
         },
@@ -240,15 +260,6 @@
     {
       "pageId": "your-car-is",
       "nextOptionList": [
-        {
-          "nextPageId": "license-year",
-          "conditions": [
-            {
-              "expression": "vehicle.make",
-              "value": ""
-            }
-          ]
-        },
         {
           "nextPageId": "is-policy-owner"
         }
@@ -343,6 +354,15 @@
     {
       "pageId": "license-year",
       "nextOptionList": [
+        {
+          "nextPageId": "make",
+          "conditions": [
+            {
+              "expression": "driven.hasDrivenLicense",
+              "value": "false"
+            }
+          ]
+        },
         {
           "nextPageId": "is-policy-owner"
         }

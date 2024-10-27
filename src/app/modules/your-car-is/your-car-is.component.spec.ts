@@ -12,7 +12,7 @@ import { HeaderTitleComponent, QuoteFooterComponent, SelectableOptionComponent }
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
 import { YourCarIsComponent } from './your-car-is.component';
 import { QuoteVehicleModel, QuoteModel } from 'src/app/shared/models';
-import { ContextDataServiceMock } from 'src/app/core/mock/services';
+import { ContextDataServiceStub } from 'src/app/core/stub';
 import { TranslateService } from '@ngx-translate/core';
 import { QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
 
@@ -45,7 +45,7 @@ describe('YourCarIsComponent', () => {
         QuoteLiteralDirective
       ],
       providers: [
-        { provide: ContextDataService, useClass: ContextDataServiceMock },
+        { provide: ContextDataService, useClass: ContextDataServiceStub },
         { provide: TranslateService, useValue: translationsServiceSpy },
         { provide: RoutingService, useValue: routingServiceSpy },
         { provide: VehicleService, useValue: vehicleServiceSpy }

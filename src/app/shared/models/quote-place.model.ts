@@ -1,14 +1,8 @@
 /* eslint-disable @typescript-eslint/no-namespace */
-import { IndexedData } from '@shagui/ng-shagui/core';
+import { LocationModel } from 'src/app/core/models';
 
-export interface QuotePlaceModel {
-  postalCode: string;
-  province?: IndexedData;
-}
+export type QuotePlaceModel = Partial<LocationModel>;
 
 export namespace QuotePlaceModel {
-  export const init = (): QuotePlaceModel => ({
-    postalCode: '',
-    province: undefined
-  });
+  export const init = (): QuotePlaceModel => ({});
 }

@@ -1,11 +1,19 @@
 import { TestBed } from '@angular/core/testing';
 import { LocationService } from '../localtion.service';
+import { HttpClient } from '@angular/common/http';
+import { of } from 'rxjs';
 
 describe('LocationService', () => {
   let service: LocationService;
+  let httpClientSpy: jasmine.SpyObj<HttpClient>;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    httpClientSpy = jasmine.createSpyObj('HttpClient', ['get', 'post', 'put', 'delete']);
+
+    TestBed.configureTestingModule({
+      providers: [LocationService, { provide: HttpClient, useValue: httpClientSpy }]
+    });
+
     service = TestBed.inject(LocationService);
   });
 
@@ -23,14 +31,19 @@ describe('LocationService', () => {
     expect(result).toBeUndefined();
   });
 
-  it('should return correct address for valid postal code', async () => {
-    const result = await service.getAddresses('28001');
-    expect(result).toEqual({ index: '28', data: 'Madrid' });
-  });
-
   it('should return correct address for another valid postal code', async () => {
+    const expectedValue = {
+      province: '46',
+      code: '001',
+      dc: '9',
+      location: 'location46'
+    };
+
+    httpClientSpy.get.and.returnValue(of([expectedValue]));
+
     const result = await service.getAddresses('46001');
-    expect(result).toEqual({ index: '46', data: 'Valencia' });
+
+    expect(result).toEqual({ postalCode: '46001', province: 'Valencia', location: 'location46' });
   });
 
   it('should return undefined for postal code with invalid characters', async () => {

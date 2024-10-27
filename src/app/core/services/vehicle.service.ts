@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpService, HttpStatus, TTL, UniqueIds } from '@shagui/ng-shagui/core';
 import { firstValueFrom, map } from 'rxjs';
-import { BrandKey, CubicCapacityModel, FuelModel, QuoteVehicleModel, ModelVersionModel, PowerRangesModel } from 'src/app/shared/models';
+import { BrandKey, CubicCapacityModel, FuelModel, ModelVersionModel, PowerRangesModel, QuoteVehicleModel } from 'src/app/shared/models';
 
 @Injectable({ providedIn: 'root' })
 export class VehicleService {
@@ -14,6 +14,22 @@ export class VehicleService {
   private years: number[] = [];
 
   private http = inject(HttpService);
+
+  public findByPlate(plate: string): Promise<QuoteVehicleModel | undefined> {
+    return firstValueFrom(
+      this.http
+        .get<QuoteVehicleModel[]>(`${this.vehicleUri}/plate.mock.json`, {
+          responseStatusMessage: {
+            [HttpStatus.notFound]: { text: 'Notifications.VehicleNotFound' }
+          },
+          showLoading: true
+        })
+        .pipe(
+          map(res => res as QuoteVehicleModel[]),
+          map(res => res.find(data => data.plateNumber === plate.toLocaleUpperCase().replace(/[^A-Z0-9]/g, '')))
+        )
+    );
+  }
 
   public vehicleBrands(brand: string): Promise<string[]> {
     return firstValueFrom(

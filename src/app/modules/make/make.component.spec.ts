@@ -6,7 +6,7 @@ import { NxInputModule } from '@aposin/ng-aquila/input';
 import { TranslateService } from '@ngx-translate/core';
 import { ContextDataService } from '@shagui/ng-shagui/core';
 import { QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
-import { ContextDataServiceMock } from 'src/app/core/mock/services';
+import { ContextDataServiceStub } from 'src/app/core/stub';
 import { RoutingService, VehicleService } from 'src/app/core/services';
 import { QuoteModel } from 'src/app/shared/models';
 import { MakeComponent } from './make.component';
@@ -27,7 +27,7 @@ describe('MakeComponent', () => {
       declarations: [],
       imports: [MakeComponent, ReactiveFormsModule, FormsModule, NxIconModule, NxFormfieldModule, NxInputModule],
       providers: [
-        { provide: ContextDataService, useClass: ContextDataServiceMock },
+        { provide: ContextDataService, useClass: ContextDataServiceStub },
         { provide: TranslateService, useValue: translationsServiceSpy },
         { provide: VehicleService, useValue: vehicleServiceSpy },
         { provide: RoutingService, useValue: routingServiceSpy }

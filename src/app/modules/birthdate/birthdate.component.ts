@@ -14,12 +14,12 @@ import { NX_DATE_LOCALE, NxDatefieldModule } from '@aposin/ng-aquila/datefield';
 import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
 import { NxInputModule } from '@aposin/ng-aquila/input';
 import { NxMomentDateModule } from '@aposin/ng-aquila/moment-date-adapter';
-import { ContextDataService, dateBetween } from '@shagui/ng-shagui/core';
+import { ContextDataService, NxDate } from '@shagui/ng-shagui/core';
 import moment, { Moment } from 'moment';
 import { QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
+import { QuoteComponent } from 'src/app/core/models';
 import { HeaderTitleComponent, QuoteFooterComponent } from 'src/app/shared/components';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
-import { QuoteComponent } from 'src/app/core/models';
 import { QuoteModel } from 'src/app/shared/models';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 
@@ -87,8 +87,8 @@ export class BirthdateComponent extends QuoteComponent implements OnInit {
 
   private clientOldValidator(): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
-      const bornDate = new Date(control.value);
-      const timeBetween = dateBetween(bornDate, new Date()).years();
+      const bornDate = new NxDate(control.value);
+      const timeBetween = bornDate.between(new Date()).years();
 
       return timeBetween < 18 ? { clientOld: true } : null;
     };

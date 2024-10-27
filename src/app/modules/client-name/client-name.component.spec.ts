@@ -6,7 +6,7 @@ import { NxInputModule } from '@aposin/ng-aquila/input';
 import { TranslateService } from '@ngx-translate/core';
 import { ContextDataService } from '@shagui/ng-shagui/core';
 import { QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
-import { ContextDataServiceMock } from 'src/app/core/mock/services';
+import { ContextDataServiceStub } from 'src/app/core/stub';
 import { QuoteModel } from 'src/app/shared/models';
 import { ClientNameComponent } from './client-name.component';
 
@@ -23,7 +23,7 @@ describe('ClientNameComponent', () => {
       imports: [ClientNameComponent, ReactiveFormsModule, FormsModule, NxFormfieldModule, NxInputModule],
       providers: [
         { provide: NX_DATE_LOCALE, useValue: 'es-ES' },
-        { provide: ContextDataService, useClass: ContextDataServiceMock },
+        { provide: ContextDataService, useClass: ContextDataServiceStub },
         { provide: TranslateService, useValue: translationsServiceSpy }
       ]
     }).compileComponents();

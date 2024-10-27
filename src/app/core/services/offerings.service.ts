@@ -12,7 +12,7 @@ export class OfferingsService {
   public offerings(): Promise<OfferingPriceModel[]> {
     return firstValueFrom(
       this.httpService
-        .get(`${this.offeringsUri}/offerings.mock.json`, {
+        .get<OfferingPriceModel[]>(`${this.offeringsUri}/offerings.mock.json`, {
           responseStatusMessage: {
             [HttpStatus.notFound]: { text: 'Notifications.ModelsNotFound' }
           },

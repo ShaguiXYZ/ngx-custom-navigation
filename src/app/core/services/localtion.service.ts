@@ -1,7 +1,9 @@
-import { Injectable } from '@angular/core';
-import { IndexedData } from '@shagui/ng-shagui/core';
+import { inject, Injectable } from '@angular/core';
+import { DataInfo, HttpService, HttpStatus } from '@shagui/ng-shagui/core';
+import { firstValueFrom, map } from 'rxjs';
+import { LocationDTO, LocationModel } from '../models';
 
-const POSTAL_CODES = {
+const POSTAL_CODES: DataInfo = {
   ['01']: 'Araba/Álava',
   ['02']: 'Albacete',
   ['03']: 'Alicante',
@@ -60,17 +62,38 @@ const POSTAL_CODES = {
   providedIn: 'root'
 })
 export class LocationService {
-  public getAddresses = (postalCode: string): Promise<IndexedData | undefined> => {
-    if (postalCode.length !== 5 || isNaN(Number(postalCode))) {
-      return Promise.resolve(undefined);
+  private readonly locationUri = './assets/json/mock';
+
+  private readonly httpService = inject(HttpService);
+
+  public getAddresses = async (postalCode: string): Promise<LocationModel | undefined> => {
+    if (!/^\d{5}$/.test(postalCode)) {
+      return undefined;
     }
 
     const provinceCode = postalCode.substring(0, 2) as keyof typeof POSTAL_CODES;
 
     if (!POSTAL_CODES[provinceCode]) {
-      return Promise.resolve(undefined);
+      return undefined;
     }
 
-    return Promise.resolve({ index: provinceCode, data: POSTAL_CODES[provinceCode] });
+    const locationCode = postalCode.substring(2);
+
+    const locations = await firstValueFrom(
+      this.httpService
+        .get<LocationDTO[]>(`${this.locationUri}/locations.mock.json`, {
+          responseStatusMessage: {
+            [HttpStatus.notFound]: { text: 'Notifications.ModelsNotFound' }
+          },
+          showLoading: true
+        })
+        .pipe(map(res => res as LocationDTO[]))
+    );
+
+    const location = locations.find(data => data.province === provinceCode && data.code === locationCode);
+
+    return location
+      ? LocationModel.create(`${location.province}${location.code}`, POSTAL_CODES[location.province], location.location)
+      : undefined;
   };
 }

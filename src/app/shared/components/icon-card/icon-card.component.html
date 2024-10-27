@@ -1,3 +1,4 @@
+@defer(on viewport) {
 <quote-selectable-option [selected]="selected" (uiSelect)="selectIcon()">
   <div class="card-container" [ngClass]="{ selected, labeled: showLabel }">
     <div nxAvatar size="small" class="quote-avatar color-background-icon nx-margin-bottom-s">
@@ -14,3 +15,6 @@
     }
   </div>
 </quote-selectable-option>
+} @placeholder {
+<div class="card-placeholder"></div>
+}

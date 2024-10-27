@@ -31,10 +31,10 @@ main {
         text-transform: capitalize;
       }
 
-      .selectable-row {
-        // @howto: render the card-container when element is viewed
-        content-visibility: auto;
-      }
+      // .selectable-row {
+      //   // @howto: render the card-container when element is viewed
+      //   content-visibility: auto;
+      // }
 
       .selectable-row + .selectable-row {
         margin-top: 4px;
@@ -65,5 +65,23 @@ main {
         }
       }
     }
+  }
+}
+
+.reveal {
+  animation: reveal linear both;
+  animation-range: entry 5%;
+  animation-timeline: view();
+}
+
+@keyframes reveal {
+  from {
+    opacity: 0;
+    scale: 0.5;
+  }
+
+  to {
+    opacity: 1;
+    scale: 1;
   }
 }

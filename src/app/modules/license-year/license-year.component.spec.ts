@@ -8,7 +8,7 @@ import { NxMaskModule } from '@aposin/ng-aquila/mask';
 import { ContextDataService } from '@shagui/ng-shagui/core';
 import { QuoteModel } from 'src/app/shared/models';
 import { LicenseYearComponent } from './license-year.component';
-import { ContextDataServiceMock } from 'src/app/core/mock/services';
+import { ContextDataServiceStub } from 'src/app/core/stub';
 import { TranslateService } from '@ngx-translate/core';
 import { QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
 
@@ -33,7 +33,7 @@ describe('LicenseYearComponent', () => {
         NxButtonModule
       ],
       providers: [
-        { provide: ContextDataService, useClass: ContextDataServiceMock },
+        { provide: ContextDataService, useClass: ContextDataServiceStub },
         { provide: TranslateService, useValue: translationsServiceSpy }
       ]
     }).compileComponents();

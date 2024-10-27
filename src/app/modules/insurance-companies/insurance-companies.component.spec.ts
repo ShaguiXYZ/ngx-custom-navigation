@@ -5,7 +5,7 @@ import { By } from '@angular/platform-browser';
 import { TranslateService } from '@ngx-translate/core';
 import { ContextDataService, IndexedData } from '@shagui/ng-shagui/core';
 import { DEBOUNCE_TIME, QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
-import { ContextDataServiceMock } from 'src/app/core/mock/services';
+import { ContextDataServiceStub } from 'src/app/core/stub';
 import { InsuranceCompaniesService, RoutingService } from 'src/app/core/services';
 import { QuoteModel } from 'src/app/shared/models';
 import { InsuranceCompaniesComponent } from './insurance-companies.component';
@@ -27,7 +27,7 @@ describe('InsuranceCompaniesComponent', () => {
       imports: [InsuranceCompaniesComponent, ReactiveFormsModule],
       providers: [
         FormBuilder,
-        { provide: ContextDataService, useClass: ContextDataServiceMock },
+        { provide: ContextDataService, useClass: ContextDataServiceStub },
         { provide: TranslateService, useValue: translationsServiceSpy },
         { provide: InsuranceCompaniesService, useValue: insuranceCompaniesServiceSpy },
         { provide: RoutingService, useValue: routingServiceSpy }

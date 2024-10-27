@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { TranslateService } from '@ngx-translate/core';
 import { ContextDataService } from '@shagui/ng-shagui/core';
 import { QUOTE_APP_CONTEXT_DATA } from 'src/app/core/constants';
-import { ContextDataServiceMock } from 'src/app/core/mock/services';
+import { ContextDataServiceStub } from 'src/app/core/stub';
 import { AppContextData } from 'src/app/core/models';
 import { RoutingService } from 'src/app/core/services';
 import { QuoteHeaderComponent } from './quote-header.component';
@@ -20,7 +20,7 @@ describe('QuoteHeaderComponent', () => {
     await TestBed.configureTestingModule({
       imports: [QuoteHeaderComponent],
       providers: [
-        { provide: ContextDataService, useClass: ContextDataServiceMock },
+        { provide: ContextDataService, useClass: ContextDataServiceStub },
         { provide: TranslateService, useValue: translationsServiceSpy },
         { provide: RoutingService, useValue: routingServiceSpy }
       ]

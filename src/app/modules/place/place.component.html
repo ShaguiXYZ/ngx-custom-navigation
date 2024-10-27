@@ -4,7 +4,7 @@
     <form [formGroup]="form">
       <nx-formfield label="Código postal">
         <input #searchInput type="text" formControlName="postalCode" required nxInput maxlength="5" nxQuoteMask="numeric" />
-        <span nxFormfieldHint> {{ province?.data }} </span>
+        <span nxFormfieldHint> {{ location }} </span>
         @if(form.get('postalCode')?.errors?.['postalCodeNotRecognized']) {
         <nx-error appearance="text" nxFormfieldError>
           <span nxQuoteLiteral="error-unknown"></span>
@@ -17,7 +17,7 @@
       </nx-formfield>
     </form>
   </section>
-  <quote-footer [config]="footerConfig">
+  <quote-footer>
     <div class="extra__footer__info">
       <quote-footer-info icon="fa-hand-holding-heart">
         <span nxQuoteLiteral="footer-info"></span>

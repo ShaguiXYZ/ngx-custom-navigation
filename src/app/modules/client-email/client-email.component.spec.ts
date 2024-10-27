@@ -10,7 +10,7 @@ import { NxSwitcherModule } from '@aposin/ng-aquila/switcher';
 import { TranslateService } from '@ngx-translate/core';
 import { ContextDataService } from '@shagui/ng-shagui/core';
 import { QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
-import { ContextDataServiceMock } from 'src/app/core/mock/services';
+import { ContextDataServiceStub } from 'src/app/core/stub';
 import { HeaderTitleComponent, QuoteFooterComponent } from 'src/app/shared/components';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
 import { QuoteModel } from 'src/app/shared/models';
@@ -43,7 +43,7 @@ describe('ClientEMailComponent', () => {
       ],
       providers: [
         { provide: NX_DATE_LOCALE, useValue: 'es-ES' },
-        { provide: ContextDataService, useClass: ContextDataServiceMock },
+        { provide: ContextDataService, useClass: ContextDataServiceStub },
         { provide: TranslateService, useValue: translationsServiceSpy }
       ]
     }).compileComponents();

@@ -24,7 +24,7 @@
     } @else {
     <div class="serached-data">
       @for (item of searchedMakes; track item) {
-      <div class="selectable-row">
+      <div class="selectable-row reveal">
         <quote-text-card [selected]="selectedMake === item" [data]="item" (uiSelect)="selectMake(item)" />
       </div>
       }

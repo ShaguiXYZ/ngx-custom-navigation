@@ -3,8 +3,8 @@ import { TestBed } from '@angular/core/testing';
 import { Router } from '@angular/router';
 import { ContextDataService } from '@shagui/ng-shagui/core';
 import { QUOTE_APP_CONTEXT_DATA } from '../../constants';
-import { ContextDataServiceMock } from '../../mock/services';
 import { AppContextData } from '../../models';
+import { ContextDataServiceStub } from '../../stub';
 import { RoutingService } from '../routing.service';
 
 describe('RoutingService', () => {
@@ -20,7 +20,7 @@ describe('RoutingService', () => {
       providers: [
         RoutingService,
         { provide: Router, useValue: routerSpy },
-        { provide: ContextDataService, useClass: ContextDataServiceMock }
+        { provide: ContextDataService, useClass: ContextDataServiceStub }
       ]
     });
 

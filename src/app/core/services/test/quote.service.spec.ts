@@ -7,10 +7,8 @@ import { QuoteService } from '../quote.service';
 describe('QuoteService', () => {
   let service: QuoteService;
   let appContextData: AppContextData;
-  let dataChangeSubject: Subject<AppContextData>;
 
   beforeEach(() => {
-    dataChangeSubject = new Subject<AppContextData>();
     appContextData = {
       navigation: {
         lastPage: {
@@ -25,12 +23,13 @@ describe('QuoteService', () => {
       }
     } as unknown as AppContextData;
 
-    const spy = jasmine.createSpyObj('ContextDataService', ['get', 'onDataChange']);
-    spy.get.and.returnValue(appContextData);
-    spy.onDataChange.and.returnValue(dataChangeSubject.asObservable());
+    const dataChangeSubject = new Subject<AppContextData>();
+    const contextDataServiceSpy = jasmine.createSpyObj('ContextDataService', ['get', 'onDataChange']);
+    contextDataServiceSpy.onDataChange.and.returnValue(dataChangeSubject.asObservable());
+    contextDataServiceSpy.get.and.returnValue(appContextData);
 
     TestBed.configureTestingModule({
-      providers: [QuoteService, { provide: ContextDataService, useValue: spy }]
+      providers: [QuoteService, { provide: ContextDataService, useValue: contextDataServiceSpy }]
     });
 
     service = TestBed.inject(QuoteService);

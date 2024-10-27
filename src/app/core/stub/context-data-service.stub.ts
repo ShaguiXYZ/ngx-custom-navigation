@@ -1,9 +1,8 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import { CacheData, DataInfo, deepCopy } from '@shagui/ng-shagui/core';
+import { DataInfo, deepCopy } from '@shagui/ng-shagui/core';
 import { Observable, of } from 'rxjs';
 import { QuoteModel } from 'src/app/shared/models';
-import { QUOTE_APP_CONTEXT_DATA, QUOTE_CONTEXT_DATA } from '../../constants';
-import { AppContextData, Page } from '../../models';
+import { QUOTE_APP_CONTEXT_DATA, QUOTE_CONTEXT_DATA } from '../constants';
+import { AppContextData, Page } from '../models';
 
 const appContextDataMock: AppContextData = {
   navigation: {
@@ -44,34 +43,21 @@ const appContextDataMock: AppContextData = {
   }
 };
 
-export class ContextDataServiceMock {
-  private _contextData: DataInfo<any> = {
+export class ContextDataServiceStub {
+  private _contextData: DataInfo<unknown> = {
     [QUOTE_APP_CONTEXT_DATA]: deepCopy(appContextDataMock) as AppContextData,
     [QUOTE_CONTEXT_DATA]: deepCopy({}) as QuoteModel
   };
-  private _cache: DataInfo<CacheData> = {};
 
-  get cache(): DataInfo<CacheData> {
-    return this._cache;
-  }
-
-  set cache(value: DataInfo<CacheData>) {
-    this._cache = value;
-  }
-
-  set<T>(key: string, data: T) {
+  set<T = unknown>(key: string, data: T) {
     this._contextData[key] = data;
   }
 
-  get<T>(key: string): T {
-    return this._contextData[key];
+  get<T = unknown>(key: string): T {
+    return this._contextData[key] as T;
   }
 
-  delete(key: string) {
-    delete this._contextData[key];
-  }
-
-  onDataChange<T = any>(key: string): Observable<T> {
-    return of(this._contextData[key]);
+  onDataChange<T = unknown>(key: string): Observable<T> {
+    return of(this._contextData[key] as T);
   }
 }

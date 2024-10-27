@@ -1,15 +1,16 @@
 import { CommonModule } from '@angular/common';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, DeferBlockBehavior, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { NxAvatarModule } from '@aposin/ng-aquila/avatar';
 import { NxCopytextModule } from '@aposin/ng-aquila/copytext';
 import { TranslateService } from '@ngx-translate/core';
 import { ContextDataService } from '@shagui/ng-shagui/core';
-import { ContextDataServiceMock } from 'src/app/core/mock/services';
+import { ContextDataServiceStub } from 'src/app/core/stub';
 import { QuoteLiteralDirective } from '../../directives';
 import { IIconData } from '../../models';
 import { SelectableOptionComponent } from '../selectable-option';
 import { IconCardComponent } from './icon-card.component';
+import { ɵDeferBlockState } from '@angular/core';
 
 describe('IconCardComponent', () => {
   const iconData: IIconData = { index: '1', data: 'icon' };
@@ -23,9 +24,10 @@ describe('IconCardComponent', () => {
       declarations: [],
       imports: [IconCardComponent, CommonModule, SelectableOptionComponent, NxAvatarModule, NxCopytextModule, QuoteLiteralDirective],
       providers: [
-        { provide: ContextDataService, useClass: ContextDataServiceMock },
+        { provide: ContextDataService, useClass: ContextDataServiceStub },
         { provide: TranslateService, useValue: translationsServiceSpy }
-      ]
+      ],
+      deferBlockBehavior: DeferBlockBehavior.Manual
     }).compileComponents();
 
     fixture = TestBed.createComponent(IconCardComponent);
@@ -47,7 +49,10 @@ describe('IconCardComponent', () => {
     expect(component.uiSelect.emit).toHaveBeenCalledWith(iconData);
   });
 
-  it('should display label when showLabel is true', () => {
+  it('should display label when showLabel is true', async () => {
+    const firstDeferBlock = (await fixture.getDeferBlocks())[0];
+    await firstDeferBlock.render(ɵDeferBlockState.Complete);
+
     component.showLabel = true;
     fixture.detectChanges();
 
@@ -63,7 +68,14 @@ describe('IconCardComponent', () => {
     expect(labelElement).toBeFalsy();
   });
 
-  it('should apply selected class when selected is true', () => {
+  /**
+   * @howto How to Unit Test the Deferrable Views
+   * ref: https://angular.love/learn-how-to-unit-test-the-deferrable-views
+   */
+  it('should apply selected class when selected is true', async () => {
+    const firstDeferBlock = (await fixture.getDeferBlocks())[0];
+    await firstDeferBlock.render(ɵDeferBlockState.Complete);
+
     component.selected = true;
     fixture.detectChanges();
 
@@ -71,7 +83,10 @@ describe('IconCardComponent', () => {
     expect(cardElement.classes['selected']).toBeTrue();
   });
 
-  it('should not apply selected class when selected is false', () => {
+  it('should not apply selected class when selected is false', async () => {
+    const firstDeferBlock = (await fixture.getDeferBlocks())[0];
+    await firstDeferBlock.render(ɵDeferBlockState.Complete);
+
     component.selected = false;
     fixture.detectChanges();
 

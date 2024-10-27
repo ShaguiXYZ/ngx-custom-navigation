@@ -8,7 +8,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { ContextDataService, NotificationModel, NotificationService } from '@shagui/ng-shagui/core';
 import { of } from 'rxjs';
 import { AppComponent } from './app.component';
-import { ContextDataServiceMock } from './core/mock/services';
+import { ContextDataServiceStub } from './core/stub';
 import { RoutingService } from './core/services';
 import {
   NotificationComponent,
@@ -45,7 +45,7 @@ describe('AppComponent', () => {
       providers: [
         provideAnimations(),
         provideRouter([]),
-        { provide: ContextDataService, useClass: ContextDataServiceMock },
+        { provide: ContextDataService, useClass: ContextDataServiceStub },
         { provide: NotificationService, useValue: notificationServiceSpy },
         { provide: RoutingService, useValue: routingServiceSpy },
         { provide: TranslateService, useValue: translationsServiceSpy },

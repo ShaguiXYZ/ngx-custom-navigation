@@ -9,7 +9,7 @@
           </nx-expansion-panel-title>
         </nx-expansion-panel-header>
         <div class="vehicle__selections">
-          @for(fuel of fuels; track $index) { @defer(on viewport) { @let _selectedFuel = fuel.index === selectedFuel?.index;
+          @for(fuel of fuels; track $index) { @let _selectedFuel = fuel.index === selectedFuel?.index;
           <div class="vehicle__selection nx-margin-2xs">
             <quote-selectable-option [selected]="_selectedFuel" (uiSelect)="selectFuel(fuel)">
               <div class="card-container">
@@ -17,9 +17,7 @@
               </div>
             </quote-selectable-option>
           </div>
-          } @placeholder {
-          <div class="card-container"></div>
-          } }
+          }
         </div>
       </nx-expansion-panel>
 
@@ -31,7 +29,7 @@
         </nx-expansion-panel-header>
         <div class="vehicle__selections">
           @for(cubicCapacity of cubicCapacities; track $index) { @let _selectedCubicCapacityselected = cubicCapacity.index ===
-          selectedCubicCapacity?.index; @defer(on viewport) {
+          selectedCubicCapacity?.index;
           <div class="vehicle__selection nx-margin-2xs">
             <quote-selectable-option [selected]="_selectedCubicCapacityselected" (uiSelect)="selectCubicCapacity(cubicCapacity)">
               <div class="card-container cubic-capacity-width">
@@ -41,9 +39,7 @@
               </div>
             </quote-selectable-option>
           </div>
-          } @placeholder {
-          <div class="card-container"></div>
-          } }
+          }
         </div>
         <div class="button-container">
           @let _cubicCapacityNotKnown = selectedCubicCapacity?.index === cubicCapacityNotKnown.index;
@@ -66,7 +62,7 @@
           </nx-expansion-panel-title>
         </nx-expansion-panel-header>
         <div class="vehicle__selections">
-          @for(power of powers; track $index) { @defer(on viewport) { @let _selectedPower = power.index === selectedPower?.index;
+          @for(power of powers; track $index) { @let _selectedPower = power.index === selectedPower?.index;
           <div class="vehicle__selection nx-margin-2xs">
             <quote-selectable-option [selected]="_selectedPower" (uiSelect)="selectPower(power)">
               <div class="card-container">
@@ -74,9 +70,7 @@
               </div>
             </quote-selectable-option>
           </div>
-          } @placeholder {
-          <div class="card-container"></div>
-          } }
+          }
         </div>
         <div class="button-container">
           @let _powerNotKnown = selectedPower?.index === powerNotKnown.index;

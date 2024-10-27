@@ -7,7 +7,7 @@ import { NxMomentDateModule } from '@aposin/ng-aquila/moment-date-adapter';
 import { TranslateService } from '@ngx-translate/core';
 import { ContextDataService } from '@shagui/ng-shagui/core';
 import moment from 'moment';
-import { ContextDataServiceMock } from 'src/app/core/mock/services';
+import { ContextDataServiceStub } from 'src/app/core/stub';
 import { BirthdateComponent } from './birthdate.component';
 import { QuoteModel } from 'src/app/shared/models';
 import { QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
@@ -32,7 +32,7 @@ describe('BirthdateComponent', () => {
         NxMomentDateModule
       ],
       providers: [
-        { provide: ContextDataService, useClass: ContextDataServiceMock },
+        { provide: ContextDataService, useClass: ContextDataServiceStub },
         { provide: TranslateService, useValue: translationsServiceSpy }
       ]
     }).compileComponents();
