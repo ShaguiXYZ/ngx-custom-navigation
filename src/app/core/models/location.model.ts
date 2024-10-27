@@ -10,10 +10,11 @@ export interface LocationModel {
   location: string;
   postalCode: string;
   province: string;
+  provinceCode: string;
 }
 
 export namespace LocationModel {
   export function create(postalCode: string, province: string, location: string): LocationModel {
-    return { postalCode, province, location };
+    return { postalCode, province, provinceCode: postalCode.substring(0, 2), location };
   }
 }

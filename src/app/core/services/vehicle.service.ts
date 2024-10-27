@@ -41,7 +41,10 @@ export class VehicleService {
           showLoading: true,
           cache: { id: this.cacheBranches(), ttl: TTL.XXL }
         })
-        .pipe(map(res => (res as string[]).filter(data => data.toLowerCase().includes(brand.toLowerCase()))))
+        .pipe(
+          map(res => (res as string[]).filter(data => data.toLowerCase().includes(brand.toLowerCase()))),
+          map(res => res.sort((a, b) => a.localeCompare(b)))
+        )
     );
   }
 
@@ -58,7 +61,8 @@ export class VehicleService {
         .pipe(
           map(res => res as string[]),
           map(res => (!brand ? [] : res)),
-          map(res => (search ? res.filter(data => data.toLowerCase().includes(search.toLowerCase())) : res))
+          map(res => (search ? res.filter(data => data.toLowerCase().includes(search.toLowerCase())) : res)),
+          map(res => res.sort((a, b) => a.localeCompare(b)))
         )
     );
   }
@@ -75,7 +79,8 @@ export class VehicleService {
         })
         .pipe(
           map(res => (!model ? [] : res)),
-          map(res => (res as ModelVersionModel[]).filter(data => !!data.data))
+          map(res => (res as ModelVersionModel[]).filter(data => !!data.data)),
+          map(res => res.sort((a, b) => a.data.localeCompare(b.data)))
         )
     );
   }

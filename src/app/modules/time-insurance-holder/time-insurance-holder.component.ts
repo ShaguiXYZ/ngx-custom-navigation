@@ -28,6 +28,7 @@ export class TimeInsuranceHolderComponent extends QuoteComponent implements OnIn
   ngOnInit(): void {
     this.contextData = this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA);
     this.selectedYears = this.contextData.insuranceCompany?.yearsAsOwner;
+    this.yearsAsOwner = this.yearsAsOwner.sort((a, b) => a - b);
   }
 
   public override canDeactivate = (): boolean => this.updateValidData();

@@ -119,11 +119,11 @@
           "nextPageId": "contact-us",
           "conditions": [
             {
-              "expression": "place.province.index",
+              "expression": "place.provinceCode",
               "value": "51"
             },
             {
-              "expression": "place.province.index",
+              "expression": "place.provinceCode",
               "union": "OR",
               "value": "52"
             }
@@ -192,6 +192,7 @@
         "literals": {
           "header": "¿Dónde sacaste el carnet de conducir?",
           "help": "Indica lugar de origen donde obtuviste tu primera licencia de condución.",
+          "help-header": "Obtención del carnet",
           "eu": "En Europa",
           "uk": "En Reino Unido",
           "other": "En otro país"

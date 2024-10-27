@@ -38,6 +38,7 @@ export class NumberAccidentsComponent extends QuoteComponent implements OnInit {
     this.contextData = this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA);
     this.yearsAsOwner = this.contextData.insuranceCompany.yearsAsOwner || this.yearsAsOwner;
     this.selectedAccidents = this.contextData.client.accidents;
+    this.accidents = this.accidents.sort((a, b) => a - b);
   }
 
   public override canDeactivate = (): boolean => this.updateValidData();

@@ -4,7 +4,8 @@
   </quote-header-title>
   <div class="form-container">
     @for(vehicle of vehicleOptions; track vehicle; let index = $index) {
-    <div class="selectable-row">
+    <div class="selectable-row reveal">
+      @defer(on viewport) {
       <quote-selectable-option
         [selected]="vehicle.vehicleCode === selectedVehicle?.vehicleCode"
         [fullHeight]="true"
@@ -17,6 +18,9 @@
           </span>
         </div>
       </quote-selectable-option>
+      } @placeholder {
+      <div class="card-placeholder"></div>
+      }
     </div>
     }
   </div>

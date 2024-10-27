@@ -43,7 +43,7 @@ import { QuoteModel } from 'src/app/shared/models';
 export class PlaceComponent extends QuoteComponent implements OnInit {
   public location?: string;
   public form!: FormGroup;
-  public footerConfig: QuoteFooterConfig = {};
+  public footerConfig: QuoteFooterConfig = { showNext: true };
 
   private contextData!: QuoteModel;
 
@@ -53,13 +53,14 @@ export class PlaceComponent extends QuoteComponent implements OnInit {
 
   ngOnInit(): void {
     this.contextData = this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA);
+    this.footerConfig = { ...this.footerConfig, nextFn: this.updateValidData };
 
     this.createForm();
   }
 
-  public override canDeactivate = (): boolean => this.updateValidData();
+  public override canDeactivate = (): boolean => this.form.valid;
 
-  private updateValidData = (): boolean => {
+  private updateValidData = (): void => {
     this.form.markAllAsTouched();
 
     if (this.form.valid) {
@@ -70,8 +71,6 @@ export class PlaceComponent extends QuoteComponent implements OnInit {
 
       this.contextDataService.set(QUOTE_CONTEXT_DATA, this.contextData);
     }
-
-    return this.form.valid;
   };
 
   private createForm(): void {
@@ -96,6 +95,6 @@ export class PlaceComponent extends QuoteComponent implements OnInit {
 
   private updateContextData(location?: LocationModel) {
     this.contextData.place = { ...location };
-    this.location = location?.postalCode ? `${location?.province}, ${location?.location}` : '';
+    this.location = location?.postalCode ? `${location?.location}, ${location?.province}` : '';
   }
 }
