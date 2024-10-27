@@ -98,5 +98,6 @@ export class PlaceComponent extends QuoteComponent implements OnInit {
     this.location = this.locationFormfieldHint(location);
   }
 
-  private locationFormfieldHint = (location?: LocationModel) => (location?.postalCode ? 'quote.place.locationHint' : '');
+  private locationFormfieldHint = (location?: LocationModel) =>
+    location?.postalCode ? `${location?.location}, ${location?.province}` : '';
 }

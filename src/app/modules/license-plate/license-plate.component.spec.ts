@@ -103,4 +103,29 @@ describe('LicensePlateComponent', () => {
 
     expect(routingService.nextStep).toHaveBeenCalled();
   });
+
+  it('should save context data on saveContextData', () => {
+    const setContextDataSpy = spyOn(contextDataService, 'set');
+
+    component['saveContextData']();
+
+    expect(setContextDataSpy).toHaveBeenCalled();
+  });
+
+  it('clear license plate if not has driven license', () => {
+    component['contextData'].driven.hasDrivenLicense = false;
+    component['updateValidData']();
+
+    expect(component['contextData'].vehicle.plateNumber).toBe('');
+    expect(component['updateValidData']()).toBeTrue();
+  });
+
+  it('should return true on canDeactivate', () => {
+    expect(component.canDeactivate()).toBeTrue();
+  });
+
+  it('should return false on canDeactivate', () => {
+    component.form.setValue({ plateNumber: '' });
+    expect(component.canDeactivate()).toBeFalse();
+  });
 });
