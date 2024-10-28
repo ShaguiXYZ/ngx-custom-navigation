@@ -2,6 +2,7 @@ import { Injectable, inject } from '@angular/core';
 import { HttpService, HttpStatus, TTL, UniqueIds } from '@shagui/ng-shagui/core';
 import { firstValueFrom, map } from 'rxjs';
 import { BrandKey, CubicCapacityModel, FuelModel, ModelVersionModel, PowerRangesModel, QuoteVehicleModel } from 'src/app/shared/models';
+import { environment } from 'src/environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class VehicleService {
@@ -9,7 +10,6 @@ export class VehicleService {
   private readonly _MODELS_CACHE_ID_ = `_${UniqueIds.next()}_`;
   private readonly _MODEL_VERSIONS_CACHE_ID_ = `_${UniqueIds.next()}_`;
   private readonly MIN_YEAR = 1950;
-  private readonly vehicleUri = './assets/json/mock';
 
   private years: number[] = [];
 
@@ -18,7 +18,7 @@ export class VehicleService {
   public findByPlate(plate: string): Promise<QuoteVehicleModel | undefined> {
     return firstValueFrom(
       this.http
-        .get<QuoteVehicleModel[]>(`${this.vehicleUri}/plate.mock.json`, {
+        .get<QuoteVehicleModel[]>(`${environment.baseUrl}/plate`, {
           responseStatusMessage: {
             [HttpStatus.notFound]: { text: 'Notifications.VehicleNotFound' }
           },
@@ -34,7 +34,7 @@ export class VehicleService {
   public vehicleBrands(brand: string): Promise<string[]> {
     return firstValueFrom(
       this.http
-        .get<string[]>(`${this.vehicleUri}/brand.mock.json`, {
+        .get<string[]>(`${environment.baseUrl}/brand`, {
           responseStatusMessage: {
             [HttpStatus.notFound]: { text: 'Notifications.ModelsNotFound' }
           },
@@ -51,7 +51,7 @@ export class VehicleService {
   public vehicleModels(brand: BrandKey, search?: string): Promise<string[]> {
     return firstValueFrom(
       this.http
-        .get<string[]>(`${this.vehicleUri}/model.mock.json`, {
+        .get<string[]>(`${environment.baseUrl}/model`, {
           responseStatusMessage: {
             [HttpStatus.notFound]: { text: 'Notifications.ModelsNotFound' }
           },
@@ -70,7 +70,7 @@ export class VehicleService {
   public vehicleModelVersions(model: string): Promise<ModelVersionModel[]> {
     return firstValueFrom(
       this.http
-        .get<ModelVersionModel[]>(`${this.vehicleUri}/version.mock.json`, {
+        .get<ModelVersionModel[]>(`${environment.baseUrl}/version`, {
           responseStatusMessage: {
             [HttpStatus.notFound]: { text: 'Notifications.ModelVersionsNotFound' }
           },
@@ -90,7 +90,7 @@ export class VehicleService {
 
     return firstValueFrom(
       this.http
-        .get<FuelModel[]>(`${this.vehicleUri}/fuel.mock.json`, {
+        .get<FuelModel[]>(`${environment.baseUrl}/fuel`, {
           responseStatusMessage: {
             [HttpStatus.notFound]: { text: 'Notifications.FuelsNotFound' }
           },
@@ -108,7 +108,7 @@ export class VehicleService {
 
     return firstValueFrom(
       this.http
-        .get<PowerRangesModel[]>(`${this.vehicleUri}/power.mock.json`, {
+        .get<PowerRangesModel[]>(`${environment.baseUrl}/power`, {
           // clientOptions: { params },
           responseStatusMessage: {
             [HttpStatus.notFound]: { text: 'Notifications.PowersNotFound' }
@@ -127,7 +127,7 @@ export class VehicleService {
 
     return firstValueFrom(
       this.http
-        .get<CubicCapacityModel[]>(`${this.vehicleUri}/cubic-capacity.mock.json`, {
+        .get<CubicCapacityModel[]>(`${environment.baseUrl}/cubic-capacity`, {
           responseStatusMessage: {
             [HttpStatus.notFound]: { text: 'Notifications.CubicCapacitiesNotFound' }
           },
@@ -143,7 +143,7 @@ export class VehicleService {
   public vehicles(): Promise<QuoteVehicleModel[]> {
     return firstValueFrom(
       this.http
-        .get<QuoteVehicleModel[]>(`${this.vehicleUri}/vehicle.mock.json`, {
+        .get<QuoteVehicleModel[]>(`${environment.baseUrl}/vehicle`, {
           responseStatusMessage: {
             [HttpStatus.notFound]: { text: 'Notifications.VehiclesNotFound' }
           },

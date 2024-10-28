@@ -5,8 +5,8 @@
 
 export const environment = {
   production: false,
-  appName: 'ngx-car-quote-azs',
-  baseUrl: 'http://localhost:3000/rws-bff-car-quote-azs', // url bff mock server
+  appName: 'ngx-custom-navigation',
+  baseUrl: './assets/json/mock', // url bff mock server
   domain: 'localhost:3000', // domain localhost
   mockUrl: 'assets/json/defaultJourney.json'
 };

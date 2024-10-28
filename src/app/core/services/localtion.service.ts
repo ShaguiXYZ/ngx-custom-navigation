@@ -1,6 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { DataInfo, HttpService, HttpStatus } from '@shagui/ng-shagui/core';
 import { firstValueFrom, map } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { LocationDTO, LocationModel } from '../models';
 
 const POSTAL_CODES: DataInfo = {
@@ -62,8 +63,6 @@ const POSTAL_CODES: DataInfo = {
   providedIn: 'root'
 })
 export class LocationService {
-  private readonly locationUri = './assets/json/mock';
-
   private readonly httpService = inject(HttpService);
 
   public getAddresses = async (postalCode: string): Promise<LocationModel | undefined> => {
@@ -81,7 +80,7 @@ export class LocationService {
 
     const locations = await firstValueFrom(
       this.httpService
-        .get<LocationDTO[]>(`${this.locationUri}/locations.mock.json`, {
+        .get<LocationDTO[]>(`${environment.baseUrl}/locations`, {
           responseStatusMessage: {
             [HttpStatus.notFound]: { text: 'Notifications.ModelsNotFound' }
           },

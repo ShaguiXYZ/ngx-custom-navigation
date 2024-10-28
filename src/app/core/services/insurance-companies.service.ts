@@ -2,18 +2,18 @@ import { inject, Injectable } from '@angular/core';
 import { HttpService, HttpStatus, IndexedData, TTL, UniqueIds } from '@shagui/ng-shagui/core';
 import { firstValueFrom, map } from 'rxjs';
 import { InsuranceCompany, InsuranceCompanyDTO } from 'src/app/shared/models';
+import { environment } from 'src/environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class InsuranceCompaniesService {
   private readonly _COMPANIES_CACHE_ID_ = `_${UniqueIds.next()}_`;
-  private readonly vehicleUri = './assets/json/mock';
 
   private readonly httpService = inject(HttpService);
 
   public companies(insurance?: string): Promise<IndexedData[]> {
     return firstValueFrom(
       this.httpService
-        .get<InsuranceCompanyDTO[]>(`${this.vehicleUri}/insurance-companies.mock.json`, {
+        .get<InsuranceCompanyDTO[]>(`${environment.baseUrl}/insurance-companies`, {
           responseStatusMessage: {
             [HttpStatus.notFound]: { text: 'Notifications.ModelsNotFound' }
           },
