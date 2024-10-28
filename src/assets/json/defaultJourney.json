@@ -476,7 +476,7 @@
           "footer-info": "Nos gustaría acompañarte en tus próximos viajes."
         },
         "data": {
-          "accidents": [5, 6, 7]
+          "accidents": [0, 5, 6, 7, 3]
         }
       }
     },

@@ -9,10 +9,12 @@ export abstract class QuoteComponent {
   private readonly quoteService = inject(QuoteService);
 
   constructor() {
-    Promise.resolve().then(() => this.quoteService.loadComponentData(this));
+    this.updateComponentData();
   }
 
   public canDeactivate:
     | ((currentRoute?: ActivatedRouteSnapshot, state?: RouterStateSnapshot, next?: RouterStateSnapshot) => MaybeAsync<GuardResult>)
     | undefined;
+
+  private updateComponentData = (): Promise<void> => Promise.resolve().then(() => this.quoteService.loadComponentData(this));
 }

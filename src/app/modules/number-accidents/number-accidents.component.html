@@ -12,25 +12,23 @@
     ></span
   ></quote-header-title>
   <section class="form-container">
-    <div class="selectable-row">
-      <quote-text-card [selected]="selectedAccidents === 0" [data]="'no' | quoteLiteral" (uiSelect)="selectAccidents(0)" />
-    </div>
     @for (item of accidents; track item) {
     <div class="selectable-row">
-      <quote-text-card [selected]="selectedAccidents === item" [data]="item" (uiSelect)="selectAccidents(item)" />
+      @if(item === 0) {
+      <quote-text-card [selected]="selectedAccidents === 0" [data]="'no' | quoteLiteral" (uiSelect)="selectAccidents(0)" />
+      } @else {
+      <quote-text-card
+        [selected]="selectedAccidents === item"
+        [data]="
+          'more-accidents'
+            | quoteLiteral
+              : ($last ? { value: item.toString(), 'or-more': { value: 'Label.OrMore', type: 'translate' } } : { value: item.toString() })
+        "
+        (uiSelect)="selectAccidents(item)"
+      />
+      }
     </div>
     }
-    <div class="selectable-row">
-      @let maxAccidents = this.accidents.length ? this.accidents[this.accidents.length - 1] + 1 : 0;
-
-      <quote-text-card
-        [selected]="selectedAccidents === maxAccidents"
-        [data]="
-          'more-accidents' | quoteLiteral : { value: maxAccidents.toString(), 'or-more': { value: 'Label.OrMore', type: 'translate' } }
-        "
-        (uiSelect)="selectAccidents(maxAccidents)"
-      />
-    </div>
   </section>
   <quote-footer [config]="{ showNext: false }">
     <div class="extra__footer__info">

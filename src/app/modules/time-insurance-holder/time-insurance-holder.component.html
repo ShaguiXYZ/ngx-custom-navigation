@@ -8,27 +8,20 @@
         [data]="
           'time-desc'
             | quoteLiteral
-              : { value: item.toString(), 'literal-year': { value: item > 1 ? 'Label.Years' : 'Label.Year', type: 'translate' } }
+              : ($last
+                  ? {
+                      value: item.toString(),
+                      'literal-year': { value: item > 1 ? 'Label.Years' : 'Label.Year', type: 'translate' },
+                      'or-more': { value: 'Label.OrMore', type: 'translate' }
+                    }
+                  : {
+                      value: item.toString(),
+                      'literal-year': { value: item > 1 ? 'Label.Years' : 'Label.Year', type: 'translate' }
+                    })
         "
         (uiSelect)="selectData(item)"
       />
     </div>
     }
-    <div class="selectable-row">
-      @let maxYears = this.yearsAsOwner.length ? this.yearsAsOwner[this.yearsAsOwner.length - 1] + 1 : 0;
-      <quote-text-card
-        [selected]="selectedYears === maxYears"
-        [data]="
-          'time-desc'
-            | quoteLiteral
-              : {
-                  value: maxYears.toString(),
-                  'literal-year': { value: maxYears > 1 ? 'Label.Years' : 'Label.Year', type: 'translate' },
-                  'or-more': { value: 'Label.OrMore', type: 'translate' }
-                }
-        "
-        (uiSelect)="selectData(maxYears)"
-      />
-    </div>
   </section>
 </article>

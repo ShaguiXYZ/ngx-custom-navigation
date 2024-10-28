@@ -18,7 +18,7 @@ import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 })
 export class TimeInsuranceHolderComponent extends QuoteComponent implements OnInit {
   public selectedYears?: number;
-  public yearsAsOwner: number[] = [1, 2, 3, 4];
+  public yearsAsOwner: number[] = [1, 2, 3, 4, 5];
 
   private contextData!: QuoteModel;
 

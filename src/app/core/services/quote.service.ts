@@ -1,33 +1,21 @@
-import { inject, Injectable, OnDestroy } from '@angular/core';
-import { ContextDataService, DataInfo, deepCopy } from '@shagui/ng-shagui/core';
-import { Subscription } from 'rxjs';
+import { inject, Injectable } from '@angular/core';
+import { ContextDataService, deepCopy } from '@shagui/ng-shagui/core';
 import { QUOTE_APP_CONTEXT_DATA } from '../constants';
-import { AppContextData, Page } from '../models';
+import { AppContextData } from '../models';
 
 @Injectable({
   providedIn: 'root'
 })
-export class QuoteService implements OnDestroy {
-  private lastPage?: Page;
-  private pageData: DataInfo = {};
-
-  private subscription: Subscription;
-
+export class QuoteService {
   private contextDataService = inject(ContextDataService);
 
-  constructor() {
-    this.subscription = this.contextDataService.onDataChange<AppContextData>(QUOTE_APP_CONTEXT_DATA).subscribe(data => {
-      this.lastPage = data.navigation.lastPage;
-      this.pageData = { ...{}, ...this.lastPage?.configuration?.data };
-    });
-  }
+  public loadComponentData = <T extends object>(component: T): void => {
+    const contextData = this.contextDataService.get<AppContextData>(QUOTE_APP_CONTEXT_DATA);
+    const lastPage = contextData?.navigation.lastPage;
+    const pageData = { ...{}, ...lastPage?.configuration?.data };
 
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
-  }
-
-  public loadComponentData = <T extends object>(component: T): void =>
-    Object.entries(this.pageData).forEach(
+    Object.entries(pageData).forEach(
       ([key, value]) => Object.prototype.hasOwnProperty.call(component, key) && Object.assign(component, { [key]: deepCopy(value) })
     );
+  };
 }

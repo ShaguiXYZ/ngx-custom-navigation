@@ -27,7 +27,7 @@ import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 export class NumberAccidentsComponent extends QuoteComponent implements OnInit {
   public selectedAccidents?: number;
   public yearsAsOwner = 5;
-  public accidents: number[] = [1, 2, 3, 4];
+  public accidents: number[] = [0, 1, 2, 3, 4];
 
   private contextData!: QuoteModel;
 
