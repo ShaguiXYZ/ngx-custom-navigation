@@ -25,12 +25,10 @@
             "inlineStyleLanguage": "scss",
             "assets": [
               "src/assets",
-              "src/favicon.ico",
               "src/.htaccess",
               {
                 "glob": "**/*",
-                "input": "public",
-                "output": "/public"
+                "input": "public"
               }
             ],
             "styles": [
