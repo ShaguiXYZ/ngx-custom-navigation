@@ -16,12 +16,21 @@ export class LiteralsService {
       ? Object.fromEntries(Object.entries(params).map(([key, value]) => [key, this.toString(value)]) as [string, string][])
       : undefined;
 
-    const strLiteral =
-      typeof literal === 'string'
-        ? this.getValue(literal, normalizedParams)
-        : this.isQuoteLiteral(literal)
-        ? this.getLiteral(literal, normalizedParams)
-        : '';
+    const strLiteral = (() => {
+      if (typeof literal === 'number') {
+        return literal.toString();
+      }
+
+      if (typeof literal === 'string') {
+        return this.getValue(literal, normalizedParams);
+      }
+
+      if (this.isQuoteLiteral(literal)) {
+        return this.getLiteral(literal, normalizedParams);
+      }
+
+      return '';
+    })();
 
     return strLiteral.replaceAll(/{{.*?}}/g, '');
     // return strLiteral?.replaceAll(/{{[^ ]*?}}/g, '');

@@ -6,6 +6,12 @@
         <input type="text" formControlName="yearOfManufacture" nxInput nxMask="0000" />
         @if(form.get('yearOfManufacture')?.errors?.['required']) {
         <nx-error appearance="text" nxFormfieldError><span nxQuoteLiteral="error-required"></span> </nx-error>
+        } @if(form.get('yearOfManufacture')?.errors?.['futureDate']) {
+        <nx-error appearance="text" nxFormfieldError><span nxQuoteLiteral="error-future-date"></span> </nx-error>
+        } @if(form.get('yearOfManufacture')?.errors?.['oldDate']) {
+        <nx-error appearance="text" nxFormfieldError
+          ><span nxQuoteLiteral="error-old-date" [uiQuoteLitealParams]="{ value: minYear }"></span>
+        </nx-error>
         }
       </nx-formfield>
     </form>

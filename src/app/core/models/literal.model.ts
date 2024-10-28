@@ -9,4 +9,4 @@ export interface QuoteLiteral {
 
 export type LiteralParam = DataInfo<LiteralModel>;
 
-export type LiteralModel = string | QuoteLiteral;
+export type LiteralModel = string | number | QuoteLiteral;

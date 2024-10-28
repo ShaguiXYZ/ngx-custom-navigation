@@ -1,7 +1,8 @@
 {
   "Errors": {
     "FieldRequired": "Campo requerido",
-    "FutureDate": "La fecha no puede ser futura"
+    "FutureDate": "La fecha no puede ser futura",
+    "OldDate": "La fecha no puede ser anterior a {{value}}"
   },
   "Label": {
     "AllBrands": "Todas las marcas",

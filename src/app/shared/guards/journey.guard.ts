@@ -12,7 +12,6 @@ export const journeyGuard: CanActivateFn = (route: ActivatedRouteSnapshot, state
 
   const context = contextDataService.get<AppContextData>(QUOTE_APP_CONTEXT_DATA);
   const { nextPage, viewedPages } = context.navigation;
-  const { homePageId } = context.configuration;
 
   if (!nextPage?.pageId) {
     context.navigation.lastPage = undefined;
@@ -22,6 +21,7 @@ export const journeyGuard: CanActivateFn = (route: ActivatedRouteSnapshot, state
     return router.parseUrl(`${Page.routeFrom(context.navigation.nextPage)}`);
   }
 
+  const { homePageId } = context.configuration;
   const pageIndex = viewedPages.indexOf(nextPage.pageId);
 
   if (pageIndex > -1) {
@@ -30,9 +30,7 @@ export const journeyGuard: CanActivateFn = (route: ActivatedRouteSnapshot, state
     viewedPages.push(nextPage.pageId);
   }
 
-  context.navigation.lastPage = nextPage;
-  context.navigation.nextPage = undefined;
-  context.navigation.viewedPages = viewedPages;
+  context.navigation = { ...context.navigation, viewedPages, lastPage: nextPage, nextPage: undefined };
   contextDataService.set(QUOTE_APP_CONTEXT_DATA, context);
 
   homePageId === nextPage.pageId && contextDataService.set(QUOTE_CONTEXT_DATA, QuoteModel.init());

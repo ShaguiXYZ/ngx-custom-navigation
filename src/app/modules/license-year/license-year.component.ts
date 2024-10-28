@@ -1,11 +1,21 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  AbstractControl,
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+  ValidationErrors,
+  ValidatorFn,
+  Validators
+} from '@angular/forms';
 import { NxButtonModule } from '@aposin/ng-aquila/button';
 import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
 import { NxInputModule } from '@aposin/ng-aquila/input';
 import { NxMaskModule } from '@aposin/ng-aquila/mask';
-import { ContextDataService } from '@shagui/ng-shagui/core';
+import { ContextDataService, NxDate } from '@shagui/ng-shagui/core';
 import { QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
 import { HeaderTitleComponent, QuoteFooterComponent } from 'src/app/shared/components';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
@@ -33,6 +43,8 @@ import { QuoteLiteralPipe } from 'src/app/shared/pipes';
   ]
 })
 export class LicenseYearComponent extends QuoteComponent implements OnInit {
+  public maxYearsOld = 50;
+  public minYear!: number;
   public form!: FormGroup;
 
   private contextData!: QuoteModel;
@@ -41,6 +53,7 @@ export class LicenseYearComponent extends QuoteComponent implements OnInit {
   private readonly fb = inject(FormBuilder);
 
   ngOnInit(): void {
+    this.minYear = new NxDate().getFullYear() - this.maxYearsOld;
     this.contextData = this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA);
     this.createForm();
   }
@@ -66,7 +79,20 @@ export class LicenseYearComponent extends QuoteComponent implements OnInit {
 
   private createForm() {
     this.form = this.fb.group({
-      yearOfManufacture: new FormControl(this.contextData.vehicle.yearOfManufacture, [Validators.required])
+      yearOfManufacture: new FormControl(this.contextData.vehicle.yearOfManufacture, [
+        Validators.required,
+        this.preventFutureDate(),
+        this.preventMinDate()
+      ])
     });
+  }
+
+  private preventFutureDate(): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null =>
+      Number(control.value) > new NxDate().getFullYear() ? { futureDate: true } : null;
+  }
+
+  private preventMinDate(): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => (Number(control.value) < this.minYear ? { oldDate: true } : null);
   }
 }

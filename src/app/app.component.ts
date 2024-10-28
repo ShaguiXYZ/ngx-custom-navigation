@@ -2,9 +2,10 @@ import { Component, HostListener, inject } from '@angular/core';
 import { RouterModule, RouterOutlet } from '@angular/router';
 import { NxGridModule } from '@aposin/ng-aquila/grid';
 import { NxLinkModule } from '@aposin/ng-aquila/link';
-import { ContextDataService, NotificationService } from '@shagui/ng-shagui/core';
+import { ContextDataService } from '@shagui/ng-shagui/core';
 import { QUOTE_APP_CONTEXT_DATA } from './core/constants';
 import { AppContextData } from './core/models';
+import { RoutingService } from './core/services';
 import { routeTransitions } from './shared/animations';
 import {
   NotificationComponent,
@@ -35,9 +36,7 @@ import { QuoteLiteralPipe } from './shared/pipes';
 })
 export class AppComponent {
   private readonly contextDataService = inject(ContextDataService);
-  private readonly notificationService = inject(NotificationService);
-
-  constructor(private readonly quoteLiteralPipe: QuoteLiteralPipe) {}
+  private readonly routingService = inject(RoutingService);
 
   // @howto Detect the Closing of a Browser Tab
   @HostListener('window:beforeunload', ['$event'])
@@ -48,12 +47,7 @@ export class AppComponent {
   // @howto Detect the Browser Back Button
   @HostListener('window:popstate', ['$event'])
   onPopState(event: PopStateEvent): void {
-    this.notificationService.warning(
-      this.quoteLiteralPipe.transform('warning-header-back-button'),
-      this.quoteLiteralPipe.transform('warning-text-back-button')
-    );
-
-    // window.history.forward();
+    this.routingService.previousStep();
 
     event.preventDefault();
     event.stopPropagation();

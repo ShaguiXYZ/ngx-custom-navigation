@@ -369,6 +369,9 @@
         "literals": {
           "header": "¿En qué año matriculaste tu coche?",
           "year-of-manufacture-label": "Año de matriculación"
+        },
+        "data": {
+          "maxYearsOld": 25
         }
       }
     },
@@ -726,6 +729,7 @@
     "warning-header-back-button": "¡ Aviso !",
     "warning-text-back-button": "Usa los botones de la aplicación para desplazarte por ella.",
     "error-required": { "value": "Errors.FieldRequired", "type": "translate" },
-    "error-future-date": { "value": "Errors.FutureDate", "type": "translate" }
+    "error-future-date": { "value": "Errors.FutureDate", "type": "translate" },
+    "error-old-date": { "value": "Errors.OldDate", "type": "translate" }
   }
 }

@@ -9,7 +9,6 @@ export class VehicleService {
   private readonly _BRANCHES_CACHE_ID_ = `_${UniqueIds.next()}_`;
   private readonly _MODELS_CACHE_ID_ = `_${UniqueIds.next()}_`;
   private readonly _MODEL_VERSIONS_CACHE_ID_ = `_${UniqueIds.next()}_`;
-  private readonly MIN_YEAR = 1950;
 
   private years: number[] = [];
 
