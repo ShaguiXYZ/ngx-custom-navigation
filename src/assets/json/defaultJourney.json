@@ -81,9 +81,6 @@
           "coverage-1": "Asistencia en carretera nacional e internacional 24/7",
           "coverage-2": "Te llevamos el coche de sustitución a tu casa",
           "coverage-3": "Red de talleres excelentes a tu disposición"
-        },
-        "data": {
-          "showBack": false
         }
       }
     },
@@ -474,9 +471,6 @@
           "header": "¿Has tenido algún accidente en {{literal-last}} {{years}} {{literal-year}}?",
           "more-accidents": "{{value}} {{or-more}}",
           "footer-info": "Nos gustaría acompañarte en tus próximos viajes."
-        },
-        "data": {
-          "accidents": [0, 5, 6, 7, 3]
         }
       }
     },

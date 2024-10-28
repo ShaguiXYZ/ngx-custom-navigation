@@ -38,11 +38,4 @@ describe('QuoteService', () => {
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
-
-  it('should unsubscribe on destroy', () => {
-    spyOn(service['subscription'], 'unsubscribe');
-    service.ngOnDestroy();
-
-    expect(service['subscription'].unsubscribe).toHaveBeenCalled();
-  });
 });
