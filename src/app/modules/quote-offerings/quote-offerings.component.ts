@@ -28,21 +28,32 @@ export class QuoteOfferingsComponent implements OnInit {
 
   private contextData!: QuoteModel;
 
+  // private resizeObserver!: ResizeObserver;
+
   private readonly contextDataService = inject(ContextDataService);
   private readonly offeringsService = inject(OfferingsService);
   private readonly routingService = inject(RoutingService);
 
   async ngOnInit(): Promise<void> {
+    const offering = await this.offeringsService.pricing();
+
     this.contextData = this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA);
+    this.contextData.offering = { quotationId: offering.quotationId };
 
-    this.prices = await this.offeringsService.offerings();
+    this.prices = offering.prices;
 
-    this.selectedPriceIndex = this.prices.findIndex(price => price.modalityId === this.contextData.offering.price?.modalityId);
-    setTimeout(() => this.selectSteper(this.selectedPriceIndex < 0 ? 0 : this.selectedPriceIndex), 300);
+    // this.resizeObserver = new ResizeObserver(entries => {
+    //   for (const entry of entries) {
+    //     console.log('Element size changed:', entry.contentRect);
+    //     // Manejar el cambio de tamaño aquí
+    //   }
+    // });
+
+    // this.resizeObserver.observe(this.inner.nativeElement);
   }
 
-  public swipeStart(e: TouchEvent): void {
-    const coord: [number, number] = [e.changedTouches[0].clientX, e.changedTouches[0].clientY];
+  public swipeStart(event: TouchEvent): void {
+    const coord: [number, number] = [event.changedTouches[0].clientX, event.changedTouches[0].clientY];
     const time = new Date().getTime();
 
     this.swipeCoord = coord;
@@ -51,8 +62,8 @@ export class QuoteOfferingsComponent implements OnInit {
     // e.preventDefault();
   }
 
-  public swipeEnd(e: TouchEvent): void {
-    const coord: [number, number] = [e.changedTouches[0].clientX, e.changedTouches[0].clientY];
+  public swipeEnd(event: TouchEvent): void {
+    const coord: [number, number] = [event.changedTouches[0].clientX, event.changedTouches[0].clientY];
     const time = new Date().getTime();
     const direction = [coord[0] - this.swipeCoord[0], coord[1] - this.swipeCoord[1]];
     const duration = time - this.swipeTime;

@@ -32,7 +32,7 @@ export class SettingsService {
     );
 
     const configuration = await firstValueFrom(
-      this.httpService.get<ConfigurationDTO>(environment.mockUrl).pipe(
+      this.httpService.get<ConfigurationDTO>(environment.journeyUrl).pipe(
         map(res => res as ConfigurationDTO),
         map(this.init)
       )

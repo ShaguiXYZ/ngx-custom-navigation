@@ -74,7 +74,7 @@ describe('QuoteOfferingPriceCardComponent', () => {
 
   it('should have a footerConfig with showNext set to true and nextFn bound to callNow', () => {
     expect(component.footerConfig.showNext).toBeTrue();
-    // resolve error Expected Function to be Function.
+
     expect(typeof component.footerConfig.nextFn).toBe('function');
     expect(component.footerConfig.nextFn?.name).toBe('bound callNow');
   });

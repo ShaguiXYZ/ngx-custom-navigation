@@ -2,11 +2,12 @@
 import { ElementRef } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ContextDataService } from '@shagui/ng-shagui/core';
-import { QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
+import { QUOTE_APP_CONTEXT_DATA, QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
 import { RoutingService } from 'src/app/core/services';
 import { OfferingsService } from 'src/app/core/services/offerings.service';
-import { OfferingPriceModel, QuoteModel } from 'src/app/shared/models';
+import { OfferingModel, OfferingPriceModel, QuoteModel } from 'src/app/shared/models';
 import { QuoteOfferingsComponent } from './quote-offerings.component';
+import { TranslateService } from '@ngx-translate/core';
 
 describe('QuoteOfferingsComponent', () => {
   let component: QuoteOfferingsComponent;
@@ -17,7 +18,8 @@ describe('QuoteOfferingsComponent', () => {
 
   beforeEach(async () => {
     const contextDataServiceSpy = jasmine.createSpyObj('ContextDataService', ['get', 'set']);
-    const offeringsServiceSpy = jasmine.createSpyObj('OfferingsService', ['offerings']);
+    const translationsServiceSpy = jasmine.createSpyObj('TranslationsService', ['translate']);
+    const offeringsServiceSpy = jasmine.createSpyObj('OfferingsService', ['pricing']);
     const routingServiceSpy = jasmine.createSpyObj('RoutingService', ['nextStep']);
 
     await TestBed.configureTestingModule({
@@ -25,6 +27,7 @@ describe('QuoteOfferingsComponent', () => {
       imports: [QuoteOfferingsComponent],
       providers: [
         { provide: ContextDataService, useValue: contextDataServiceSpy },
+        { provide: TranslateService, useValue: translationsServiceSpy },
         { provide: OfferingsService, useValue: offeringsServiceSpy },
         { provide: RoutingService, useValue: routingServiceSpy }
       ]
@@ -53,16 +56,35 @@ describe('QuoteOfferingsComponent', () => {
 
   it('should initialize context data and prices on init', async () => {
     const mockQuote: QuoteModel = { offering: { price: { modalityId: '1' } } } as unknown as QuoteModel;
-    const mockPrices: OfferingPriceModel[] = [{ modalityId: '1' }, { modalityId: '2' }] as unknown as OfferingPriceModel[];
+    const mockOffering: OfferingModel = {
+      prices: [
+        { modalityId: '1', totalPremiumAmount: '10.1' },
+        { modalityId: '2', totalPremiumAmount: '20.1' }
+      ]
+    } as unknown as OfferingModel;
 
-    contextDataService.get.and.returnValue(mockQuote);
-    offeringsService.offerings.and.returnValue(Promise.resolve(mockPrices));
+    component['contextData'] = mockQuote;
+
+    contextDataService.get.and.callFake((contextDataKey: string): any => {
+      if (contextDataKey === QUOTE_APP_CONTEXT_DATA) {
+        return { navigation: { lastPage: 'page' }, configuration: { literals: {} } };
+      } else if (contextDataKey === QUOTE_CONTEXT_DATA) {
+        return mockQuote;
+      }
+
+      return null;
+    });
+
+    offeringsService.pricing.and.returnValue(Promise.resolve(mockOffering));
 
     await component.ngOnInit();
 
-    expect(component['contextData']).toEqual(mockQuote);
-    expect(component.prices).toEqual(mockPrices);
-    expect(component.selectedPriceIndex).toBe(0);
+    fixture.detectChanges();
+
+    fixture.whenStable().then(() => {
+      expect(component['contextData']).toEqual(mockQuote);
+      expect(component.prices).toEqual(mockOffering.prices);
+    });
   });
 
   it('should handle swipe start', () => {

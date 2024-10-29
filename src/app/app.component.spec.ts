@@ -23,9 +23,9 @@ describe('AppComponent', () => {
   let component: AppComponent;
   let fixture: ComponentFixture<AppComponent>;
   let notificationService: jasmine.SpyObj<NotificationService>;
+  let routingService: jasmine.SpyObj<RoutingService>;
 
   beforeEach(async () => {
-    // const contextDataServiceSpy = jasmine.createSpyObj('ContextDataService', ['get', 'onDataChange']);
     const notificationServiceSpy = jasmine.createSpyObj('NotificationService', ['warning', 'onNotification', 'onCloseNotification']);
     const routingServiceSpy = jasmine.createSpyObj('RoutingService', ['previousStep']);
     const translationsServiceSpy = jasmine.createSpyObj('TranslationsService', ['translate']);
@@ -58,6 +58,7 @@ describe('AppComponent', () => {
     fixture = TestBed.createComponent(AppComponent);
     component = fixture.componentInstance;
     notificationService = TestBed.inject(NotificationService) as jasmine.SpyObj<NotificationService>;
+    routingService = TestBed.inject(RoutingService) as jasmine.SpyObj<RoutingService>;
 
     notificationService.onNotification.and.returnValue(
       of({
@@ -81,7 +82,7 @@ describe('AppComponent', () => {
     spyOn(event, 'stopPropagation');
     component.onPopState(event);
 
-    expect(notificationService.warning).toHaveBeenCalled();
+    expect(routingService.previousStep).toHaveBeenCalled();
     expect(event.stopPropagation).toHaveBeenCalled();
   });
 

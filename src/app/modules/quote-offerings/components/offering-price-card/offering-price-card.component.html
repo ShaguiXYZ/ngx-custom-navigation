@@ -7,7 +7,7 @@
       }
     </div>
     <h3 class="price-title">
-      {{ price.modalityFullDescription }}
+      {{ price.modalityDescription }}
     </h3>
   </quote-header-title>
   <section class="form-container">
@@ -28,7 +28,7 @@
     <div class="coverages nx-margin-bottom-s">
       @for(coverage of price.coverageList; track coverage.code) {
       <p nxCopytext="normal" class="coverage nx-margin-bottom-xs">
-        <em class="coverage-icon fa-solid fa-check nx-margin-y-3xs nx-margin-x-xs"></em>{{ coverage.description }}
+        <em class="coverage-icon fa-solid fa-check nx-margin-y-3xs nx-margin-x-xs"></em>{{ coverage.text }}
       </p>
       }
     </div>

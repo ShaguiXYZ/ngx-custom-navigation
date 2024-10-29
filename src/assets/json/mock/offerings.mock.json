@@ -1,165 +1,459 @@
-[
-  {
-    "modalityId": 1,
-    "modalityDescription": "Terceros-basico",
-    "modalityFullDescription": "Terceros básico Robo + Incendio",
-    "paymentType": "€",
-    "paymentTypeDescription": "EUR",
-    "popular": true,
-    "contractable": "",
-    "totalPremiumAmount": "822.06",
-    "fee": "",
-    "receiptData": {
-      "firstReceiptAmount": 822.06,
-      "followingReceiptAmount": 0
+{
+  "operationData": {
+    "allianzOperationId": "22747914",
+    "policyDates": {
+      "policyEffectiveDate": "20240314",
+      "policyExpirationDate": "20250301"
     },
-    "coverageList": [
+    "quotationId": 12345,
+    "policyDTO": null,
+    "priceGrid": [
       {
-        "code": 1,
-        "texto": "COVERTURA-1",
-        "description": "Lunas + Robo + Incendio",
-        "isContracted": "OK",
-        "value": 0,
-        "options": [],
-        "subcoverages": []
+        "modalityId": 1,
+        "modalityDescription": "Todo riesgo",
+        "modalityFullDescription": null,
+        "paymentType": "A",
+        "paymentTypeDescription": "Anual",
+        "contractable": "S",
+        "totalPremiumAmount": "510.30",
+        "fee": "",
+        "newPremium": null,
+        "receiptData": {
+          "firstReceiptAmount": "450.90",
+          "followingReceiptAmount": "510.30"
+        },
+        "coverageList": [
+          {
+            "code": 1001,
+            "text": "RC Obligatoria",
+            "description": "La indemnización a un tercero por los daños y perjuicios causados, cuando con motivo de la circulación del vehículo, el asegurado sea responsable de los mismos. ¿Y esta prestación que incluye? El pago de las indemnizaciones debidas por el asegurado. La constitución de las fianzas para las responsabilidades civiles exigidas al asegurado. La dirección jurídica frente a la reclamación.",
+            "isContracted": "S",
+            "value": "1",
+            "subcoverages": null
+          },
+          {
+            "code": 1002,
+            "text": "RC Complementaria",
+            "description": "La indemnización que exceda de la responsabilidad civil obligatoria. La responsabilidad civil del asegurado con motivo de la circulación en vehículos de movilidad personal que no requieran seguro obligatorio para circular.",
+            "isContracted": "S",
+            "value": "2",
+            "subcoverages": null
+          },
+          {
+            "code": 90,
+            "text": "Accidentes del conductor (muerte, invalidez y asistencia sanitaria)",
+            "description": "La indemnización por los gastos de asistencia sanitaria y daños corporales que sufra el conductor asegurado en caso de muerte o invalidez.",
+            "isContracted": "S",
+            "value": "3",
+            "subcoverages": null
+          },
+          {
+            "code": 91,
+            "text": "Invalidez",
+            "description": "Invalidez",
+            "isContracted": "S",
+            "value": "4",
+            "subcoverages": null
+          },
+          {
+            "code": 92,
+            "text": "asistencia sanitaria ocupantes",
+            "description": "asistencia sanitaria ocupantes",
+            "isContracted": "S",
+            "value": "5",
+            "subcoverages": null
+          },
+          {
+            "code": 1004,
+            "text": "Asistencia en carretera",
+            "description": "Prestación permanente de asistencia en carretera y de viaje  ya sea nacional o internacional, las 24 horas del día y durante los 365 días del año.",
+            "isContracted": "S",
+            "value": "6",
+            "subcoverages": null
+          },
+          {
+            "code": 93,
+            "text": "Reclamación de daños, asistencia jurídica y adelanto de Indemnización.",
+            "description": "Reclamación de daños frente a un tercero. Adicionalmente, adelanto de los daños sufridos por tu vehículo asegurado cuando se acredite la responsabilidad de otro vehículo identificado. ¿Y esta prestación que incluye? Asistencia jurídica en nombre del asegurado con los profesionales designados por Allianz.",
+            "isContracted": "S",
+            "value": "7",
+            "subcoverages": null
+          },
+          {
+            "code": 94,
+            "text": "Gastos abogados libre eleccion",
+            "description": "Gastos abogados libre eleccion",
+            "isContracted": "S",
+            "value": "8",
+            "subcoverages": null
+          },
+          {
+            "code": 95,
+            "text": "Siempre en marcha",
+            "description": "¿Y esta prestación que incluye? Puesta a disposición del asegurado de un conjunto de servicios destinados a garantizar su movilidad en caso de accidente o avería ocurrido en España, y una amplia gama de servicios siempre que el vehículo sea trasladado para su reparación a un taller de la ＂Red Allianz Excelentes＂.",
+            "isContracted": "S",
+            "value": "9",
+            "subcoverages": null
+          },
+          {
+            "code": 1006,
+            "text": "Cristales",
+            "description": "La reparación, reposición o indemnización en caso de daños en: El parabrisas, las ventanillas laterales, la luneta trasera, el techo traslúcido.",
+            "isContracted": "S",
+            "value": "10",
+            "subcoverages": null
+          }
+        ],
+        "configurableCoverageList": [],
+        "blockageList": []
       },
       {
-        "code": 2,
-        "texto": "COVERTURA-2",
-        "description": "Daños por granizo o lluvia",
-        "isContracted": "OK",
-        "value": 0,
-        "options": [],
-        "subcoverages": []
+        "modalityId": 2,
+        "modalityDescription": "Terceros con lunas",
+        "modalityFullDescription": null,
+        "paymentType": "A",
+        "paymentTypeDescription": "Anual",
+        "contractable": "S",
+        "totalPremiumAmount": "610",
+        "fee": "",
+        "newPremium": null,
+        "receiptData": {
+          "firstReceiptAmount": "550",
+          "followingReceiptAmount": "610"
+        },
+        "coverageList": [
+          {
+            "code": 1001,
+            "text": "RC Obligatoria",
+            "description": "La indemnización a un tercero por los daños y perjuicios causados, cuando con motivo de la circulación del vehículo, el asegurado sea responsable de los mismos. ¿Y esta prestación que incluye? El pago de las indemnizaciones debidas por el asegurado. La constitución de las fianzas para las responsabilidades civiles exigidas al asegurado. La dirección jurídica frente a la reclamación.",
+            "isContracted": "S",
+            "value": "1",
+            "subcoverages": null
+          },
+          {
+            "code": 1002,
+            "text": "RC Complementaria",
+            "description": "La indemnización que exceda de la responsabilidad civil obligatoria. La responsabilidad civil del asegurado con motivo de la circulación en vehículos de movilidad personal que no requieran seguro obligatorio para circular.",
+            "isContracted": "S",
+            "value": "2",
+            "subcoverages": null
+          },
+          {
+            "code": 90,
+            "text": "Accidentes del conductor (muerte, invalidez y asistencia sanitaria)",
+            "description": "La indemnización por los gastos de asistencia sanitaria y daños corporales que sufra el conductor asegurado en caso de muerte o invalidez.",
+            "isContracted": "S",
+            "value": "3",
+            "subcoverages": null
+          },
+          {
+            "code": 91,
+            "text": "Invalidez",
+            "description": "Invalidez",
+            "isContracted": "S",
+            "value": "4",
+            "subcoverages": null
+          },
+          {
+            "code": 92,
+            "text": "asistencia sanitaria ocupantes",
+            "description": "asistencia sanitaria ocupantes",
+            "isContracted": "S",
+            "value": "5",
+            "subcoverages": null
+          },
+          {
+            "code": 1004,
+            "text": "Asistencia en carretera",
+            "description": "Prestación permanente de asistencia en carretera y de viaje  ya sea nacional o internacional, las 24 horas del día y durante los 365 días del año.",
+            "isContracted": "S",
+            "value": "6",
+            "subcoverages": null
+          },
+          {
+            "code": 93,
+            "text": "Reclamación de daños, asistencia jurídica y adelanto de Indemnización.",
+            "description": "Reclamación de daños frente a un tercero. Adicionalmente, adelanto de los daños sufridos por tu vehículo asegurado cuando se acredite la responsabilidad de otro vehículo identificado. ¿Y esta prestación que incluye? Asistencia jurídica en nombre del asegurado con los profesionales designados por Allianz.",
+            "isContracted": "S",
+            "value": "7",
+            "subcoverages": null
+          },
+          {
+            "code": 94,
+            "text": "Gastos abogados libre eleccion",
+            "description": "Gastos abogados libre eleccion",
+            "isContracted": "S",
+            "value": "8",
+            "subcoverages": null
+          },
+          {
+            "code": 95,
+            "text": "Siempre en marcha",
+            "description": "¿Y esta prestación que incluye? Puesta a disposición del asegurado de un conjunto de servicios destinados a garantizar su movilidad en caso de accidente o avería ocurrido en España, y una amplia gama de servicios siempre que el vehículo sea trasladado para su reparación a un taller de la ＂Red Allianz Excelentes＂.",
+            "isContracted": "S",
+            "value": "9",
+            "subcoverages": null
+          },
+          {
+            "code": 1006,
+            "text": "Cristales",
+            "description": "La reparación, reposición o indemnización en caso de daños en: El parabrisas, las ventanillas laterales, la luneta trasera, el techo traslúcido.",
+            "isContracted": "S",
+            "value": "10",
+            "subcoverages": null
+          }
+        ],
+        "configurableCoverageList": [
+          {
+            "code": 10090,
+            "text": "Intereses préstamos para reparación",
+            "description": "La cobertura de los intereses y gastos financieros del préstamo puesto disposición del propietario del vehículo para la reparación del mismo cuando éste haya sufrido daños, siendo estos consecuencia de un accidente de circulación del vehículo (no pudiendo ser imputados a un tercero culpable de los mismos) y el vehículo sea reparado en un taller de la ＂Red de talleres Excelentes＂.",
+            "isContracted": "S",
+            "value": "",
+            "subcoverages": null
+          }
+        ],
+        "blockageList": []
       },
       {
-        "code": 3,
-        "texto": "COVERTURA-3",
-        "description": "Daños por colisión con animales cinegéticos",
-        "isContracted": "OK",
-        "value": 0,
-        "options": [],
-        "subcoverages": []
+        "modalityId": 3,
+        "modalityDescription": "Terceros ampliado",
+        "modalityFullDescription": null,
+        "paymentType": "A",
+        "paymentTypeDescription": "Anual",
+        "contractable": "S",
+        "totalPremiumAmount": "720",
+        "fee": "",
+        "newPremium": null,
+        "receiptData": {
+          "firstReceiptAmount": "660",
+          "followingReceiptAmount": "720"
+        },
+        "coverageList": [
+          {
+            "code": 1001,
+            "text": "RC Obligatoria",
+            "description": "La indemnización a un tercero por los daños y perjuicios causados, cuando con motivo de la circulación del vehículo, el asegurado sea responsable de los mismos. ¿Y esta prestación que incluye? El pago de las indemnizaciones debidas por el asegurado. La constitución de las fianzas para las responsabilidades civiles exigidas al asegurado. La dirección jurídica frente a la reclamación.",
+            "isContracted": "S",
+            "value": "1",
+            "subcoverages": null
+          },
+          {
+            "code": 1002,
+            "text": "RC Complementaria",
+            "description": "La indemnización que exceda de la responsabilidad civil obligatoria. La responsabilidad civil del asegurado con motivo de la circulación en vehículos de movilidad personal que no requieran seguro obligatorio para circular.",
+            "isContracted": "S",
+            "value": "2",
+            "subcoverages": null
+          },
+          {
+            "code": 90,
+            "text": "Accidentes del conductor (muerte, invalidez y asistencia sanitaria)",
+            "description": "La indemnización por los gastos de asistencia sanitaria y daños corporales que sufra el conductor asegurado en caso de muerte o invalidez.",
+            "isContracted": "S",
+            "value": "3",
+            "subcoverages": null
+          },
+          {
+            "code": 91,
+            "text": "Invalidez",
+            "description": "Invalidez",
+            "isContracted": "S",
+            "value": "4",
+            "subcoverages": null
+          },
+          {
+            "code": 92,
+            "text": "asistencia sanitaria ocupantes",
+            "description": "asistencia sanitaria ocupantes",
+            "isContracted": "S",
+            "value": "5",
+            "subcoverages": null
+          },
+          {
+            "code": 1004,
+            "text": "Asistencia en carretera",
+            "description": "Prestación permanente de asistencia en carretera y de viaje  ya sea nacional o internacional, las 24 horas del día y durante los 365 días del año.",
+            "isContracted": "S",
+            "value": "6",
+            "subcoverages": null
+          },
+          {
+            "code": 93,
+            "text": "Reclamación de daños, asistencia jurídica y adelanto de Indemnización.",
+            "description": "Reclamación de daños frente a un tercero. Adicionalmente, adelanto de los daños sufridos por tu vehículo asegurado cuando se acredite la responsabilidad de otro vehículo identificado. ¿Y esta prestación que incluye? Asistencia jurídica en nombre del asegurado con los profesionales designados por Allianz.",
+            "isContracted": "S",
+            "value": "7",
+            "subcoverages": null
+          },
+          {
+            "code": 94,
+            "text": "Gastos abogados libre eleccion",
+            "description": "Gastos abogados libre eleccion",
+            "isContracted": "S",
+            "value": "8",
+            "subcoverages": null
+          },
+          {
+            "code": 95,
+            "text": "Siempre en marcha",
+            "description": "¿Y esta prestación que incluye? Puesta a disposición del asegurado de un conjunto de servicios destinados a garantizar su movilidad en caso de accidente o avería ocurrido en España, y una amplia gama de servicios siempre que el vehículo sea trasladado para su reparación a un taller de la ＂Red Allianz Excelentes＂.",
+            "isContracted": "S",
+            "value": "9",
+            "subcoverages": null
+          },
+          {
+            "code": 1006,
+            "text": "Cristales",
+            "description": "La reparación, reposición o indemnización en caso de daños en: El parabrisas, las ventanillas laterales, la luneta trasera, el techo traslúcido.",
+            "isContracted": "S",
+            "value": "10",
+            "subcoverages": null
+          }
+        ],
+        "configurableCoverageList": [],
+        "blockageList": []
       },
       {
-        "code": 4,
-        "texto": "COVERTURA-4",
-        "description": "Asistencia en carretera nacional e internacional",
-        "isContracted": "OK",
-        "value": 0,
-        "options": [],
-        "subcoverages": []
-      },
-      {
-        "code": 5,
-        "texto": "COVERTURA-5",
-        "description": "Talleres con servicios premium",
-        "isContracted": "OK",
-        "value": 0,
-        "options": [],
-        "subcoverages": []
+        "modalityId": 4,
+        "modalityDescription": "Terceros básico",
+        "modalityFullDescription": null,
+        "paymentType": "A",
+        "paymentTypeDescription": "Anual",
+        "contractable": "S",
+        "totalPremiumAmount": "450",
+        "fee": "",
+        "newPremium": null,
+        "receiptData": {
+          "firstReceiptAmount": "400",
+          "followingReceiptAmount": "450"
+        },
+        "coverageList": [
+          {
+            "code": 1001,
+            "text": "RC Obligatoria",
+            "description": "La indemnización a un tercero por los daños y perjuicios causados, cuando con motivo de la circulación del vehículo, el asegurado sea responsable de los mismos. ¿Y esta prestación que incluye? El pago de las indemnizaciones debidas por el asegurado. La constitución de las fianzas para las responsabilidades civiles exigidas al asegurado. La dirección jurídica frente a la reclamación.",
+            "isContracted": "S",
+            "value": "1",
+            "subcoverages": null
+          },
+          {
+            "code": 1002,
+            "text": "RC Complementaria",
+            "description": "La indemnización que exceda de la responsabilidad civil obligatoria. La responsabilidad civil del asegurado con motivo de la circulación en vehículos de movilidad personal que no requieran seguro obligatorio para circular.",
+            "isContracted": "S",
+            "value": "2",
+            "subcoverages": null
+          },
+          {
+            "code": 90,
+            "text": "Accidentes del conductor (muerte, invalidez y asistencia sanitaria)",
+            "description": "La indemnización por los gastos de asistencia sanitaria y daños corporales que sufra el conductor asegurado en caso de muerte o invalidez.",
+            "isContracted": "S",
+            "value": "3",
+            "subcoverages": null
+          },
+          {
+            "code": 91,
+            "text": "Invalidez",
+            "description": "Invalidez",
+            "isContracted": "S",
+            "value": "4",
+            "subcoverages": null
+          },
+          {
+            "code": 92,
+            "text": "asistencia sanitaria ocupantes",
+            "description": "asistencia sanitaria ocupantes",
+            "isContracted": "S",
+            "value": "5",
+            "subcoverages": null
+          },
+          {
+            "code": 1004,
+            "text": "Asistencia en carretera",
+            "description": "Prestación permanente de asistencia en carretera y de viaje  ya sea nacional o internacional, las 24 horas del día y durante los 365 días del año.",
+            "isContracted": "S",
+            "value": "6",
+            "subcoverages": null
+          },
+          {
+            "code": 93,
+            "text": "Reclamación de daños, asistencia jurídica y adelanto de Indemnización.",
+            "description": "Reclamación de daños frente a un tercero. Adicionalmente, adelanto de los daños sufridos por tu vehículo asegurado cuando se acredite la responsabilidad de otro vehículo identificado. ¿Y esta prestación que incluye? Asistencia jurídica en nombre del asegurado con los profesionales designados por Allianz.",
+            "isContracted": "S",
+            "value": "7",
+            "subcoverages": null
+          },
+          {
+            "code": 94,
+            "text": "Gastos abogados libre eleccion",
+            "description": "Gastos abogados libre eleccion",
+            "isContracted": "S",
+            "value": "8",
+            "subcoverages": null
+          },
+          {
+            "code": 95,
+            "text": "Siempre en marcha",
+            "description": "¿Y esta prestación que incluye? Puesta a disposición del asegurado de un conjunto de servicios destinados a garantizar su movilidad en caso de accidente o avería ocurrido en España, y una amplia gama de servicios siempre que el vehículo sea trasladado para su reparación a un taller de la ＂Red Allianz Excelentes＂.",
+            "isContracted": "S",
+            "value": "9",
+            "subcoverages": null
+          },
+          {
+            "code": 1006,
+            "text": "Cristales",
+            "description": "La reparación, reposición o indemnización en caso de daños en: El parabrisas, las ventanillas laterales, la luneta trasera, el techo traslúcido.",
+            "isContracted": "S",
+            "value": "10",
+            "subcoverages": null
+          }
+        ],
+        "configurableCoverageList": [],
+        "blockageList": []
       }
     ],
-    "configurableCoverageList": [],
-    "blockageList": []
+    "receipt": {
+      "receiptNumber": null,
+      "receiptsDates": null,
+      "amounts": null,
+      "firstReceiptType": 0,
+      "followingReceiptType": 0,
+      "paymentFrequency": "IBAN"
+    },
+    "discounts": null,
+    "segmentRisk": 0,
+    "status": null,
+    "agentHasAuthorization": null,
+    "accidentRatePercentage": null,
+    "listAddons": [],
+    "tireaCodeData": null,
+    "adjustmentsResult": {
+      "comissionType": null,
+      "capDiscount": {
+        "max": null,
+        "value": null,
+        "maxValue": "0",
+        "appliedValue": "0"
+      },
+      "transferDiscount": {
+        "max": null,
+        "value": null,
+        "maxValue": "0",
+        "appliedValue": "0"
+      },
+      "crossSellingDiscount": null,
+      "antecedentsLevel": "0",
+      "levelApplied": "0",
+      "capSurchargeDiscount": null,
+      "maxSurcharge": "0"
+    },
+    "bundleIdSuggested": null,
+    "bnsCode": null
   },
-  {
-    "modalityId": 2,
-    "modalityDescription": "Terceros-Lunas",
-    "modalityFullDescription": "Terceros básico con lunas",
-    "paymentType": "€",
-    "paymentTypeDescription": "EUR",
-    "contractable": "",
-    "totalPremiumAmount": "611.06",
-    "fee": "",
-    "receiptData": {
-      "firstReceiptAmount": 611.06,
-      "followingReceiptAmount": 0
-    },
-    "coverageList": [
-      {
-        "code": 4,
-        "texto": "COVERTURA-4",
-        "description": "Lunas",
-        "isContracted": "OK",
-        "value": 0,
-        "options": [],
-        "subcoverages": []
-      },
-      {
-        "code": 5,
-        "texto": "COVERTURA-5",
-        "description": "Asistencia en carretera nacional e internacional",
-        "isContracted": "OK",
-        "value": 0,
-        "options": [],
-        "subcoverages": []
-      },
-      {
-        "code": 6,
-        "texto": "COVERTURA-6",
-        "description": "Talleres con servicios premium",
-        "isContracted": "OK",
-        "value": 0,
-        "options": [],
-        "subcoverages": []
-      },
-      {
-        "code": 7,
-        "texto": "COVERTURA-7",
-        "description": "Daños propios incluidos",
-        "isContracted": "OK",
-        "value": 0,
-        "options": [],
-        "subcoverages": []
-      }
-    ],
-    "configurableCoverageList": [],
-    "blockageList": []
-  },
-  {
-    "modalityId": 3,
-    "modalityDescription": "Riesgo-Franquicia",
-    "modalityFullDescription": "Todo riesgo con franquicia",
-    "paymentType": "€",
-    "paymentTypeDescription": "EUR",
-    "contractable": "",
-    "totalPremiumAmount": "922.06",
-    "fee": "",
-    "receiptData": {
-      "firstReceiptAmount": 922.06,
-      "followingReceiptAmount": 0
-    },
-    "coverageList": [
-      {
-        "code": 7,
-        "texto": "COVERTURA-7",
-        "description": "Daños propios incluidos",
-        "isContracted": "OK",
-        "value": 0,
-        "options": [],
-        "subcoverages": []
-      },
-      {
-        "code": 8,
-        "texto": "COVERTURA-8",
-        "description": "Entrega de vehiculo de sustitución en tu casa",
-        "isContracted": "OK",
-        "value": 0,
-        "options": [],
-        "subcoverages": []
-      },
-      {
-        "code": 9,
-        "texto": "COVERTURA-9",
-        "description": "Revisamos y llevamos tu vehículo a la ITV por ti",
-        "isContracted": "OK",
-        "value": 0,
-        "options": [],
-        "subcoverages": []
-      }
-    ],
-    "configurableCoverageList": [],
-    "blockageList": []
-  }
-]
+  "operationWarningList": [],
+  "operationErrorList": [],
+  "legalInformation": null,
+  "agentCluster": 0
+}
