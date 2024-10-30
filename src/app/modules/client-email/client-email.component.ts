@@ -53,7 +53,12 @@ export class ClientEMailComponent extends QuoteComponent implements OnInit {
     if (this.form.valid) {
       this.contextData.personalData = {
         ...this.contextData.personalData,
-        ...this.form.value
+        email: this.form.value['email']
+      };
+      this.contextData.client = {
+        ...this.contextData.client,
+        accepInfo: this.form.value['accepInfo'],
+        acceptPrivacyPolicy: this.form.value['acceptPrivacyPolicy']
       };
 
       this.contextDataService.set(QUOTE_CONTEXT_DATA, this.contextData);
@@ -65,8 +70,8 @@ export class ClientEMailComponent extends QuoteComponent implements OnInit {
   private createForm() {
     this.form = this.fb.group({
       email: new FormControl(this.contextData.personalData.email, [Validators.required, Validators.email]),
-      productsInfo: new FormControl(this.contextData.personalData.productsInfo, [Validators.required]),
-      privacyPolicy: new FormControl(this.contextData.personalData.privacyPolicy, [Validators.requiredTrue])
+      accepInfo: new FormControl(this.contextData.client.accepInfo, [Validators.required]),
+      acceptPrivacyPolicy: new FormControl(this.contextData.client.acceptPrivacyPolicy, [Validators.requiredTrue])
     });
   }
 }

@@ -52,8 +52,8 @@ export class DateOfIssueComponent extends QuoteComponent implements OnInit {
     this.form.markAllAsTouched();
 
     if (this.form.valid) {
-      this.contextData.dateOfIssue = {
-        ...this.contextData.dateOfIssue,
+      this.contextData.client = {
+        ...this.contextData.client,
         ...this.form.value,
         dateOfIssue: moment(new Date(this.form.controls['dateOfIssue'].value)).format('YYYY-MM-DD')
       };
@@ -65,8 +65,8 @@ export class DateOfIssueComponent extends QuoteComponent implements OnInit {
   };
 
   private createForm() {
-    if (this.contextData.dateOfIssue.dateOfIssue) {
-      this.dateOfIssueFromContext = moment(new Date(this.contextData.dateOfIssue.dateOfIssue));
+    if (this.contextData.client.dateOfIssue) {
+      this.dateOfIssueFromContext = moment(new Date(this.contextData.client.dateOfIssue));
     }
     this.form = this.fb.group({
       dateOfIssue: new FormControl(this.dateOfIssueFromContext, [Validators.required])

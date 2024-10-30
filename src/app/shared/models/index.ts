@@ -7,7 +7,6 @@ export * from './operation-types';
 export * from './operatives';
 export * from './quote-client.model';
 export * from './quote-contact-data.model';
-export * from './quote-date-of-issue.model';
 export * from './quote-driven.model';
 export * from './quote-offering.model';
 export * from './quote-personal-data.model';

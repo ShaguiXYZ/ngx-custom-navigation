@@ -57,9 +57,11 @@ describe('ClientEMailComponent', () => {
 
     contextDataService.set<QuoteModel>(QUOTE_CONTEXT_DATA, {
       personalData: {
-        email: 'test@example.com',
-        productsInfo: false,
-        privacyPolicy: true
+        email: 'test@example.com'
+      },
+      client: {
+        accepInfo: false,
+        acceptPrivacyPolicy: true
       }
     } as QuoteModel);
 
@@ -73,8 +75,8 @@ describe('ClientEMailComponent', () => {
   it('should initialize form with context data', () => {
     expect(component.form.value).toEqual({
       email: 'test@example.com',
-      productsInfo: false,
-      privacyPolicy: true
+      accepInfo: false,
+      acceptPrivacyPolicy: true
     });
   });
 
@@ -82,8 +84,8 @@ describe('ClientEMailComponent', () => {
     const setContextDataSpy = spyOn(contextDataService, 'set');
 
     component.form.controls['email'].setValue('new@example.com');
-    component.form.controls['productsInfo'].setValue(false);
-    component.form.controls['privacyPolicy'].setValue(true);
+    component.form.controls['accepInfo'].setValue(false);
+    component.form.controls['acceptPrivacyPolicy'].setValue(true);
 
     const isValid = component['updateValidData']();
 
@@ -91,9 +93,11 @@ describe('ClientEMailComponent', () => {
     expect(component.form.touched).toBeTrue();
     expect(setContextDataSpy).toHaveBeenCalledWith(QUOTE_CONTEXT_DATA, {
       personalData: {
-        email: 'new@example.com',
-        productsInfo: false,
-        privacyPolicy: true
+        email: 'new@example.com'
+      },
+      client: {
+        accepInfo: false,
+        acceptPrivacyPolicy: true
       }
     });
   });

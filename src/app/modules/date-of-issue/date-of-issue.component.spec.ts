@@ -50,7 +50,7 @@ describe('DateOfIssueComponent', () => {
     contextDataService = TestBed.inject(ContextDataService) as jasmine.SpyObj<ContextDataService>;
 
     contextDataService.set<QuoteModel>(QUOTE_CONTEXT_DATA, {
-      dateOfIssue: {
+      client: {
         dateOfIssue: '01-01-2003'
       }
     } as unknown as QuoteModel);
@@ -79,7 +79,7 @@ describe('DateOfIssueComponent', () => {
     expect(setContextDataSpy).toHaveBeenCalledWith(
       QUOTE_CONTEXT_DATA,
       jasmine.objectContaining({
-        dateOfIssue: { dateOfIssue: '2023-01-02' }
+        client: { dateOfIssue: '2023-01-02' }
       })
     );
   });
