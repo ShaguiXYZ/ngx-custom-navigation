@@ -19,7 +19,7 @@ describe('VehicleModelsComponent', () => {
   beforeEach(async () => {
     const translationsServiceSpy = jasmine.createSpyObj('TranslationsService', ['translate']);
     const routingServiceSpy = jasmine.createSpyObj('RoutingService', ['nextStep']);
-    const vehicleServiceSpy = jasmine.createSpyObj('VehicleService', ['vehicleModels']);
+    const vehicleServiceSpy = jasmine.createSpyObj('VehicleService', ['getModels']);
 
     await TestBed.configureTestingModule({
       declarations: [],
@@ -48,7 +48,7 @@ describe('VehicleModelsComponent', () => {
       }
     } as QuoteModel);
 
-    vehicleService.vehicleModels.and.returnValue(Promise.resolve(['Camry', 'Corolla', 'Prius']));
+    vehicleService.getModels.and.returnValue(Promise.resolve(['Camry', 'Corolla', 'Prius']));
 
     fixture.detectChanges();
   });
@@ -102,7 +102,7 @@ describe('VehicleModelsComponent', () => {
     tick(DEBOUNCE_TIME);
     // await fixture.whenStable();
 
-    expect(vehicleService.vehicleModels).toHaveBeenCalledWith('Toyota', 'Prius');
+    expect(vehicleService.getModels).toHaveBeenCalledWith('Toyota', 'Prius');
   }));
 
   it('should return true for canDeactivate if model is selected', () => {

@@ -14,7 +14,7 @@ import { ContextDataServiceStub } from 'src/app/core/stub';
 import { RoutingService, VehicleService } from 'src/app/core/services';
 import { HeaderTitleComponent, SelectableOptionComponent } from 'src/app/shared/components';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
-import { CubicCapacityModel, FuelModel, FuelTypes, PowerRangesModel, QuoteModel } from 'src/app/shared/models';
+import { CubicCapacityModel, FuelModel, FuelTypes, VehicleClassesModel, QuoteModel } from 'src/app/shared/models';
 import { VehicleFuelComponent } from './vehicle-fuel.component';
 
 describe('VehicleFuelComponent', () => {
@@ -26,9 +26,8 @@ describe('VehicleFuelComponent', () => {
   let vehicleService: jasmine.SpyObj<VehicleService>;
 
   beforeEach(async () => {
-    // const contextDataServiceSpy = jasmine.createSpyObj('ContextDataService', ['get', 'set']);
     const routingServiceSpy = jasmine.createSpyObj('RoutingService', ['nextStep']);
-    const vehicleServiceSpy = jasmine.createSpyObj('VehicleService', ['modelFuels', 'vehiclePowers', 'cubicCapacities']);
+    const vehicleServiceSpy = jasmine.createSpyObj('VehicleService', ['getFuelTypes', 'getVehicleClasses', 'cubicCapacities']);
     const translationsServiceSpy = jasmine.createSpyObj('TranslationsService', ['translate']);
 
     await TestBed.configureTestingModule({
@@ -66,9 +65,9 @@ describe('VehicleFuelComponent', () => {
 
     contextDataService.set<QuoteModel>(QUOTE_CONTEXT_DATA, {
       vehicle: {
-        fuel: { index: 1, data: 'Petrol' },
-        cubicCapacity: { index: 1, data: '1000cc' },
-        powerRange: { index: 1, data: '100hp' }
+        fuel: { index: '1', data: 'Petrol' },
+        cubicCapacity: { index: '1', data: '1000cc' },
+        powerRange: { index: '1', data: '100hp' }
       }
     } as unknown as QuoteModel);
 
@@ -82,8 +81,8 @@ describe('VehicleFuelComponent', () => {
     //   }
     // });
 
-    vehicleService.modelFuels.and.returnValue(Promise.resolve([] as FuelModel[]));
-    vehicleService.vehiclePowers.and.returnValue(Promise.resolve([] as PowerRangesModel[]));
+    vehicleService.getFuelTypes.and.returnValue(Promise.resolve([] as FuelModel[]));
+    vehicleService.getVehicleClasses.and.returnValue(Promise.resolve([] as VehicleClassesModel[]));
     vehicleService.cubicCapacities.and.returnValue(Promise.resolve([] as CubicCapacityModel[]));
 
     fixture.detectChanges();
@@ -95,29 +94,33 @@ describe('VehicleFuelComponent', () => {
 
   it('should initialize context data on init', async () => {
     await component.ngOnInit();
-    expect(vehicleService.modelFuels).toHaveBeenCalled();
-    expect(vehicleService.vehiclePowers).toHaveBeenCalled();
+
+    expect(vehicleService.getFuelTypes).toHaveBeenCalled();
+    expect(vehicleService.getVehicleClasses).toHaveBeenCalled();
     expect(vehicleService.cubicCapacities).toHaveBeenCalled();
   });
 
   it('should select fuel and reset cubic capacity and power', () => {
     const fuel: FuelModel = { index: FuelTypes.DIESEL, data: 'Diesel' };
     component.selectFuel(fuel);
+
     expect(component.selectedFuel).toEqual(fuel);
     expect(component.selectedCubicCapacity).toBeUndefined();
     expect(component.selectedPower).toBeUndefined();
   });
 
   it('should select cubic capacity and reset power', () => {
-    const cubicCapacity: CubicCapacityModel = { index: 2, data: '1500cc' };
+    const cubicCapacity: CubicCapacityModel = { index: '2', data: '1500cc' };
     component.selectCubicCapacity(cubicCapacity);
+
     expect(component.selectedCubicCapacity).toEqual(cubicCapacity);
     expect(component.selectedPower).toBeUndefined();
   });
 
   it('should select power and navigate to next page', () => {
-    const power: PowerRangesModel = { index: '150hp', data: '150hp' };
+    const power: VehicleClassesModel = { index: '150hp', data: '150hp' };
     component.selectPower(power);
+
     expect(component.selectedPower).toEqual(power);
     expect(routingService.nextStep).toHaveBeenCalled();
   });

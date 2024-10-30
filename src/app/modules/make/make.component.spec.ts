@@ -20,7 +20,7 @@ describe('MakeComponent', () => {
 
   beforeEach(async () => {
     const translationsServiceSpy = jasmine.createSpyObj('TranslationsService', ['translate']);
-    const vehicleServiceSpy = jasmine.createSpyObj('VehicleService', ['vehicleBrands']);
+    const vehicleServiceSpy = jasmine.createSpyObj('VehicleService', ['getBrands']);
     const routingServiceSpy = jasmine.createSpyObj('RoutingService', ['nextStep']);
 
     await TestBed.configureTestingModule({
@@ -43,7 +43,7 @@ describe('MakeComponent', () => {
     vehicleService = TestBed.inject(VehicleService) as jasmine.SpyObj<VehicleService>;
     routingService = TestBed.inject(RoutingService) as jasmine.SpyObj<RoutingService>;
 
-    vehicleService.vehicleBrands.and.returnValue(Promise.resolve(['Toyota', 'Honda']));
+    vehicleService.getBrands.and.returnValue(Promise.resolve(['Toyota', 'Honda']));
 
     contextDataService.set<QuoteModel>(QUOTE_CONTEXT_DATA, {
       vehicle: {

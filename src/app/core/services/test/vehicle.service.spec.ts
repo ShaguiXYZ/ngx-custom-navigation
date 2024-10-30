@@ -8,7 +8,10 @@ import {
   FuelTypes,
   QuoteVehicleModel,
   ModelVersionModel,
-  PowerRangesModel
+  VehicleClassesModel,
+  CubicCapacityDTO,
+  FuelDTO,
+  VehicleClassesDTO
 } from 'src/app/shared/models';
 import { VehicleService } from '../vehicle.service';
 
@@ -37,7 +40,7 @@ describe('VehicleService', () => {
 
     httpClientSpy.get.and.returnValue(of(mockBrands));
 
-    service.vehicleBrands(brand).then(brands => {
+    service.getBrands(brand).then(brands => {
       expect(brands).toEqual(['Toyota']);
     });
   });
@@ -49,7 +52,7 @@ describe('VehicleService', () => {
 
     httpClientSpy.get.and.returnValue(of(mockModels));
 
-    service.vehicleModels(brand, search).then(models => {
+    service.getModels(brand, search).then(models => {
       expect(models).toEqual(['Corolla']);
     });
   });
@@ -69,44 +72,47 @@ describe('VehicleService', () => {
   });
 
   it('should fetch model fuels', async () => {
-    const mockFuels: FuelModel[] = [
-      { index: FuelTypes.GASOLINE, data: 'Petrol' },
-      { index: FuelTypes.DIESEL, data: 'Diesel' }
+    const mockFuels: FuelDTO[] = [
+      { value: FuelTypes.GASOLINE, label: 'Petrol' },
+      { value: FuelTypes.DIESEL, label: 'Diesel' }
     ];
     const vehicle: QuoteVehicleModel = { make: 'Toyota', model: 'Corolla' };
 
     httpClientSpy.get.and.returnValue(of(mockFuels));
 
-    service.modelFuels(vehicle).then(fuels => {
-      expect(fuels).toEqual(mockFuels);
+    service.getFuelTypes(vehicle).then(fuels => {
+      const expectedFuels: FuelModel[] = mockFuels.map(fuel => FuelModel.fromDTO(fuel));
+
+      expect(fuels).toEqual(expectedFuels);
     });
   });
 
   it('should fetch vehicle powers', async () => {
-    const mockPowers: PowerRangesModel[] = [
-      { index: 'range-1', data: '100-200' },
-      { index: 'range-2', data: '200-300' }
-    ];
+    const mockPowers: VehicleClassesDTO[] = ['range-1.100-200', 'range-2.200-300'];
     const vehicle: QuoteVehicleModel = { make: 'Toyota', model: 'Corolla' };
 
     httpClientSpy.get.and.returnValue(of(mockPowers));
 
-    service.vehiclePowers(vehicle).then(powers => {
-      expect(powers).toEqual(mockPowers);
+    service.getVehicleClasses(vehicle).then(powers => {
+      const expectedPowers: VehicleClassesModel[] = mockPowers.map(power => VehicleClassesModel.fromDTO(power));
+
+      expect(powers).toEqual(expectedPowers);
     });
   });
 
   it('should fetch cubic capacities', async () => {
-    const mockCapacities: CubicCapacityModel[] = [
-      { index: 1, data: '1.5L' },
-      { index: 2, data: '2.0L' }
+    const mockCapacities: CubicCapacityDTO[] = [
+      { value: '1', label: '1.5L' },
+      { value: '2', label: '2.0L' }
     ];
     const vehicle: QuoteVehicleModel = { make: 'Toyota', model: 'Corolla' };
 
     httpClientSpy.get.and.returnValue(of(mockCapacities));
 
     service.cubicCapacities(vehicle).then(capacities => {
-      expect(capacities).toEqual(mockCapacities);
+      const expectedCapacities: CubicCapacityModel[] = mockCapacities.map(capacity => CubicCapacityModel.fromDTO(capacity));
+
+      expect(capacities).toEqual(expectedCapacities);
     });
   });
 

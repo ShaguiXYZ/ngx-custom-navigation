@@ -1,7 +1,17 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpService, HttpStatus, TTL, UniqueIds } from '@shagui/ng-shagui/core';
 import { firstValueFrom, map } from 'rxjs';
-import { BrandKey, CubicCapacityModel, FuelModel, ModelVersionModel, PowerRangesModel, QuoteVehicleModel } from 'src/app/shared/models';
+import {
+  BrandKey,
+  CubicCapacityDTO,
+  CubicCapacityModel,
+  FuelDTO,
+  FuelModel,
+  ModelVersionModel,
+  QuoteVehicleModel,
+  VehicleClassesDTO,
+  VehicleClassesModel
+} from 'src/app/shared/models';
 import { environment } from 'src/environments/environment';
 
 @Injectable({ providedIn: 'root' })
@@ -30,7 +40,7 @@ export class VehicleService {
     );
   }
 
-  public vehicleBrands(brand: string): Promise<string[]> {
+  public getBrands(brand: string): Promise<string[]> {
     return firstValueFrom(
       this.http
         .get<string[]>(`${environment.baseUrl}/brand`, {
@@ -47,7 +57,7 @@ export class VehicleService {
     );
   }
 
-  public vehicleModels(brand: BrandKey, search?: string): Promise<string[]> {
+  public getModels(brand: BrandKey, search?: string): Promise<string[]> {
     return firstValueFrom(
       this.http
         .get<string[]>(`${environment.baseUrl}/model`, {
@@ -84,38 +94,20 @@ export class VehicleService {
     );
   }
 
-  public modelFuels(vehicle: QuoteVehicleModel): Promise<FuelModel[]> {
+  public getFuelTypes(vehicle: QuoteVehicleModel): Promise<FuelModel[]> {
     const { make, model } = vehicle;
 
     return firstValueFrom(
       this.http
-        .get<FuelModel[]>(`${environment.baseUrl}/fuel`, {
+        .get<FuelDTO[]>(`${environment.baseUrl}/fuel`, {
           responseStatusMessage: {
             [HttpStatus.notFound]: { text: 'Notifications.FuelsNotFound' }
           },
           showLoading: true
         })
         .pipe(
-          map(res => res as FuelModel[]),
-          map(res => (!make || !model ? [] : res))
-        )
-    );
-  }
-
-  public vehiclePowers(vehicle: QuoteVehicleModel): Promise<PowerRangesModel[]> {
-    const { make, model } = vehicle;
-
-    return firstValueFrom(
-      this.http
-        .get<PowerRangesModel[]>(`${environment.baseUrl}/power`, {
-          // clientOptions: { params },
-          responseStatusMessage: {
-            [HttpStatus.notFound]: { text: 'Notifications.PowersNotFound' }
-          },
-          showLoading: true
-        })
-        .pipe(
-          map(res => res as PowerRangesModel[]),
+          map(res => res as FuelDTO[]),
+          map(res => res.map(FuelModel.fromDTO)),
           map(res => (!make || !model ? [] : res))
         )
     );
@@ -126,14 +118,35 @@ export class VehicleService {
 
     return firstValueFrom(
       this.http
-        .get<CubicCapacityModel[]>(`${environment.baseUrl}/cubic-capacity`, {
+        .get<CubicCapacityDTO[]>(`${environment.baseUrl}/cubic-capacity`, {
           responseStatusMessage: {
             [HttpStatus.notFound]: { text: 'Notifications.CubicCapacitiesNotFound' }
           },
           showLoading: true
         })
         .pipe(
-          map(res => res as CubicCapacityModel[]),
+          map(res => res as CubicCapacityDTO[]),
+          map(res => res.map(CubicCapacityModel.fromDTO)),
+          map(res => (!make || !model ? [] : res))
+        )
+    );
+  }
+
+  public getVehicleClasses(vehicle: QuoteVehicleModel): Promise<VehicleClassesModel[]> {
+    const { make, model } = vehicle;
+
+    return firstValueFrom(
+      this.http
+        .get<VehicleClassesDTO[]>(`${environment.baseUrl}/power`, {
+          // clientOptions: { params },
+          responseStatusMessage: {
+            [HttpStatus.notFound]: { text: 'Notifications.PowersNotFound' }
+          },
+          showLoading: true
+        })
+        .pipe(
+          map(res => res as VehicleClassesDTO[]),
+          map(res => res.map(VehicleClassesModel.fromDTO)),
           map(res => (!make || !model ? [] : res))
         )
     );

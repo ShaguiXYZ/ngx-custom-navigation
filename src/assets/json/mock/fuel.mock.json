@@ -1,18 +1,32 @@
 [
   {
-    "index": "G",
-    "data": "Gasolina"
+    "value": "G",
+    "label": "Gasolina",
+    "additionalText": null
   },
   {
-    "index": "D",
-    "data": "Diesel"
+    "value": "D",
+    "label": "Diesel",
+    "additionalText": null
   },
   {
-    "index": "E",
-    "data": "Eléctrico"
+    "value": "E",
+    "label": "Eléctrico",
+    "additionalText": null
   },
   {
-    "index": "O",
-    "data": "Otros"
+    "value": "H",
+    "label": "Híbrido",
+    "additionalText": null
+  },
+  {
+    "value": "H",
+    "label": "Híbrido Enchufable",
+    "additionalText": null
+  },
+  {
+    "value": "O",
+    "label": "Otros",
+    "additionalText": null
   }
 ]

@@ -1,26 +1,9 @@
 [
-  {
-    "index": "1",
-    "data": "CV <= 75"
-  },
-  {
-    "index": "2",
-    "data": "75 < CV <= 100"
-  },
-  {
-    "index": "3",
-    "data": "100 < CV <= 125"
-  },
-  {
-    "index": "4",
-    "data": "125 < CV <= 150"
-  },
-  {
-    "index": "5",
-    "data": "150 < CV <= 175"
-  },
-  {
-    "index": "6",
-    "data": "CV > 175"
-  }
+  "C.Turismo Gasolina CV> 175",
+  "F.Todo Terreno Gasolina CV> 175",
+  "I.Der.Turismo Gasolina CV> 175",
+  "S.Autocaravana Gasolina CV> 175",
+  "V.Motocicleta Gasolina CV> 175",
+  "X.Camioneta Gasolina CV> 175",
+  "Z.Furgoneta Gasolina CV> 175"
 ]

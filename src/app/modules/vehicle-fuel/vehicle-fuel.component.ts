@@ -11,7 +11,7 @@ import { RoutingService, VehicleService } from 'src/app/core/services';
 import { HeaderTitleComponent, SelectableOptionComponent } from 'src/app/shared/components';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
 import { QuoteComponent } from 'src/app/core/models';
-import { CubicCapacityModel, FuelModel, PowerRangesModel, QuoteModel } from 'src/app/shared/models';
+import { CubicCapacityModel, FuelModel, VehicleClassesModel, QuoteModel } from 'src/app/shared/models';
 
 @Component({
   selector: 'quote-vehicle-fuel',
@@ -31,16 +31,16 @@ import { CubicCapacityModel, FuelModel, PowerRangesModel, QuoteModel } from 'src
   styleUrl: './vehicle-fuel.component.scss'
 })
 export class VehicleFuelComponent extends QuoteComponent implements OnInit {
-  public cubicCapacityNotKnown: CubicCapacityModel = { index: -1, data: 'nsnc' };
-  public powerNotKnown: PowerRangesModel = { index: '-1', data: 'nsnc' };
+  public cubicCapacityNotKnown: CubicCapacityModel = { index: '-1', data: 'nsnc' };
+  public powerNotKnown: VehicleClassesModel = { index: '-1', data: 'nsnc' };
 
   public cubicCapacities: CubicCapacityModel[] = [];
   public fuels: FuelModel[] = [];
-  public powers: PowerRangesModel[] = [];
+  public powers: VehicleClassesModel[] = [];
 
   public selectedCubicCapacity?: CubicCapacityModel;
   public selectedFuel?: FuelModel;
-  public selectedPower?: PowerRangesModel;
+  public selectedPower?: VehicleClassesModel;
 
   private contextData!: QuoteModel;
 
@@ -55,8 +55,8 @@ export class VehicleFuelComponent extends QuoteComponent implements OnInit {
     this.selectedPower = this.contextData.vehicle.powerRange;
 
     [this.fuels, this.powers, this.cubicCapacities] = await Promise.all([
-      this.vehicleService.modelFuels(this.contextData.vehicle),
-      this.vehicleService.vehiclePowers(this.contextData.vehicle),
+      this.vehicleService.getFuelTypes(this.contextData.vehicle),
+      this.vehicleService.getVehicleClasses(this.contextData.vehicle),
       this.vehicleService.cubicCapacities(this.contextData.vehicle)
     ]);
   }
@@ -77,7 +77,7 @@ export class VehicleFuelComponent extends QuoteComponent implements OnInit {
     this.selectedPower = undefined;
   }
 
-  public selectPower(power: PowerRangesModel) {
+  public selectPower(power: VehicleClassesModel) {
     this.selectedPower = power;
 
     this.navigateToNextPage();

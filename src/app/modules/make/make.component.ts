@@ -101,7 +101,7 @@ export class MakeComponent extends QuoteComponent implements OnInit, OnDestroy {
   }
 
   private async searchBrands(): Promise<void> {
-    this.searchedMakes = this.form.value.searchInput ? await this.vehicleService.vehicleBrands(this.form.value.searchInput) : [];
+    this.searchedMakes = this.form.value.searchInput ? await this.vehicleService.getBrands(this.form.value.searchInput) : [];
   }
 
   /**

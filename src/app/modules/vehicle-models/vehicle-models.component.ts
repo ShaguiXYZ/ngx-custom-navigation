@@ -55,7 +55,7 @@ export class VehicleModelsComponent extends QuoteComponent implements OnInit, On
     this.contextData = this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA);
     this.selectedModel = this.contextData.vehicle.model;
 
-    this.vehicleService.vehicleModels(this.contextData.vehicle.make, this.contextData.vehicle.model).then(models => {
+    this.vehicleService.getModels(this.contextData.vehicle.make, this.contextData.vehicle.model).then(models => {
       this.models = models;
     });
 
@@ -101,7 +101,7 @@ export class VehicleModelsComponent extends QuoteComponent implements OnInit, On
         distinctUntilChanged()
       )
       .subscribe(
-        async () => (this.models = await this.vehicleService.vehicleModels(this.contextData.vehicle.make, this.form.value.searchInput))
+        async () => (this.models = await this.vehicleService.getModels(this.contextData.vehicle.make, this.form.value.searchInput))
       );
   }
 }
