@@ -71,7 +71,7 @@ describe('SettingsService', () => {
                 {
                   key: '1',
                   label: { value: 'Step 1' },
-                  page: 'home'
+                  pages: ['home']
                 }
               ]
             }

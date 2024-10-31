@@ -18,7 +18,7 @@ describe('QuoteStepperComponent', () => {
 
   beforeEach(async () => {
     const quoteStepperServiceSpy = jasmine.createSpyObj('QuoteStepperService', ['asObservable']);
-    const routingServiceSpy = jasmine.createSpyObj('RoutingService', ['goToPage']);
+    const routingServiceSpy = jasmine.createSpyObj('RoutingService', ['goToStep']);
 
     await TestBed.configureTestingModule({
       declarations: [],
@@ -50,8 +50,8 @@ describe('QuoteStepperComponent', () => {
   it('should initialize stepper data on init', () => {
     const mockStepper: Stepper = {
       steps: [
-        { key: 'step1', page: 'page1' },
-        { key: 'step2', page: 'page2' }
+        { key: 'step1', pages: ['page1'] },
+        { key: 'step2', pages: ['page2'] }
       ]
     } as Stepper;
     const mockData = { stepper: mockStepper, stepKey: 'step1' };
@@ -71,9 +71,10 @@ describe('QuoteStepperComponent', () => {
   });
 
   it('should navigate to the correct page on step click', () => {
-    const mockStep = { key: 'step1', page: 'page1' } as Step;
+    const mockStep = { key: 'step1', pages: ['page1'] } as Step;
+
     component.onStepClick(mockStep);
 
-    expect(routingService.goToPage).toHaveBeenCalledWith('page1');
+    expect(routingService.goToStep).toHaveBeenCalledWith(mockStep);
   });
 });

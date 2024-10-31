@@ -2,9 +2,8 @@ import { Injectable, inject } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { ContextDataService, DataInfo, HttpService, UniqueIds } from '@shagui/ng-shagui/core';
 import { firstValueFrom, map } from 'rxjs';
-import { Stepper, StepperDTO } from 'src/app/shared/models/stepper.model';
 import { environment } from 'src/environments/environment';
-import { QuoteModel } from '../../shared/models';
+import { QuoteModel, Step, Stepper, StepperDTO } from '../../shared/models';
 import { QUOTE_APP_CONTEXT_DATA, QUOTE_CONTEXT_DATA } from '../constants';
 import { AppContextData, Configuration, ConfigurationDTO, Links, LiteralModel, Literals, Page } from '../models';
 import { LiteralsService } from './literals.service';
@@ -44,9 +43,8 @@ export class SettingsService {
     });
 
     console.group('SettingsService');
-    console.log('AppCntextData', appContextData);
-    console.log(QUOTE_CONTEXT_DATA, this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA));
-    console.log(QUOTE_APP_CONTEXT_DATA, this.contextDataService.get<AppContextData>(QUOTE_APP_CONTEXT_DATA));
+    console.log('Quote data', QUOTE_CONTEXT_DATA, this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA));
+    console.log('Quote app context data', QUOTE_APP_CONTEXT_DATA, this.contextDataService.get<AppContextData>(QUOTE_APP_CONTEXT_DATA));
     console.groupEnd();
   }
 
@@ -54,9 +52,7 @@ export class SettingsService {
     const quoteConfiguration: Configuration = this.initQuote(configuration);
 
     this.initSteppers(quoteConfiguration, configuration.steppers);
-
     this.initLinks(quoteConfiguration, configuration.links);
-
     this.initLiterals(quoteConfiguration, configuration.literals);
 
     return quoteConfiguration;
@@ -95,7 +91,7 @@ export class SettingsService {
               }
             });
 
-            return { key: stepKey, label: step.label, page: step.pages[0] };
+            return { key: stepKey, label: step.label, pages: step.pages } as Step;
           })
       };
     });

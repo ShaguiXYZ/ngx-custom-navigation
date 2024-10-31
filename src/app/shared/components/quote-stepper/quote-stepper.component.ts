@@ -40,6 +40,6 @@ export class QuoteStepperComponent implements OnInit, OnDestroy {
   }
 
   public onStepClick(step: Step): void {
-    this.routingService.goToPage(step.page);
+    this.routingService.goToStep(step);
   }
 }

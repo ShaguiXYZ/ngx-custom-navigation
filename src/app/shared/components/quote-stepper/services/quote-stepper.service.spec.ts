@@ -2,7 +2,7 @@ import { TestBed } from '@angular/core/testing';
 import { ContextDataService } from '@shagui/ng-shagui/core';
 import { Subject } from 'rxjs';
 import { AppContextData } from 'src/app/core/models';
-import { Stepper } from 'src/app/shared/models/stepper.model';
+import { Stepper } from 'src/app/shared/models';
 import { QuoteStepperService } from './quote-stepper.service';
 
 describe('QuoteStepperService', () => {
@@ -30,7 +30,7 @@ describe('QuoteStepperService', () => {
   });
 
   it('should update quoteSteps$ when context data changes', done => {
-    const mockStepper: Stepper = { steps: [{ key: 'step1', label: 'step1', page: 'page1' }] };
+    const mockStepper: Stepper = { steps: [{ key: 'step1', label: 'step1', pages: ['page1'] }] };
     const mockAppContextData: AppContextData = {
       navigation: { lastPage: { pageId: 'page1' } },
       configuration: {

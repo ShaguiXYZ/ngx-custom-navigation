@@ -66,7 +66,7 @@ export class VehicleFuelComponent extends QuoteComponent implements OnInit {
     this.contextData.vehicle.powerRange !== undefined &&
     this.contextData.vehicle.cubicCapacity !== undefined;
 
-  public async selectFuel(fuel: FuelModel) {
+  public selectFuel(fuel: FuelModel) {
     this.selectedFuel = fuel;
     this.selectedCubicCapacity = undefined;
     this.selectedPower = undefined;

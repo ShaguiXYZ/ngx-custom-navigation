@@ -2,7 +2,7 @@ import { Injectable, OnDestroy, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { ContextDataService, JsonUtils } from '@shagui/ng-shagui/core';
 import { Subscription } from 'rxjs';
-import { QuoteModel } from '../../shared/models';
+import { QuoteModel, Step } from '../../shared/models';
 import { QUOTE_APP_CONTEXT_DATA, QUOTE_CONTEXT_DATA } from '../constants';
 import { AppContextData, CompareOperations, Condition, NextOption, Page } from '../models';
 
@@ -50,6 +50,12 @@ export class RoutingService implements OnDestroy {
   };
 
   public goToPage = (pageId: string): Promise<boolean> => this._goToPage(this.getPage(pageId)!);
+
+  public goToStep = (step: Step): Promise<boolean> => {
+    const pageId = this.appContextData.navigation.viewedPages.find(id => step.pages.includes(id))!;
+
+    return this._goToPage(this.getPage(pageId)!);
+  };
 
   private getPage = (id: string): Page | undefined => this.appContextData.configuration.pageMap[id];
 

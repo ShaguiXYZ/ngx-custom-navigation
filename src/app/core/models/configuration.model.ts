@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-namespace */
 import { DataInfo } from '@shagui/ng-shagui/core';
-import { StepperDTO, Steppers } from 'src/app/shared/models/stepper.model';
+import { StepperDTO, Steppers } from 'src/app/shared/models';
 import { LiteralModel } from './literal.model';
 
 export type CompareOperations = 'AND' | 'OR';

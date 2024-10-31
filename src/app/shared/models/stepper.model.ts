@@ -14,7 +14,7 @@ export interface StepperDTO {
 export interface Step {
   key: string;
   label: LiteralModel;
-  page: string;
+  pages: string[];
 }
 
 export interface Stepper {

@@ -3,7 +3,7 @@ import { ContextDataService } from '@shagui/ng-shagui/core';
 import { Observable, Subject, Subscription } from 'rxjs';
 import { QUOTE_APP_CONTEXT_DATA } from 'src/app/core/constants';
 import { AppContextData } from 'src/app/core/models';
-import { Stepper } from 'src/app/shared/models/stepper.model';
+import { Stepper } from 'src/app/shared/models';
 
 @Injectable()
 export class QuoteStepperService implements OnDestroy {

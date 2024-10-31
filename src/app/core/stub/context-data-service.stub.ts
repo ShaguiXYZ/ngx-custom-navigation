@@ -18,12 +18,12 @@ const appContextDataMock: AppContextData = {
             {
               key: 'step1',
               label: { value: 'key1', type: 'translate' },
-              page: 'page1'
+              pages: ['page1']
             },
             {
               key: 'step2',
               label: 'key2',
-              page: 'page2'
+              pages: ['page2']
             }
           ]
         }
