@@ -4,10 +4,9 @@ import { NxCopytextModule } from '@aposin/ng-aquila/copytext';
 import { NxIconModule } from '@aposin/ng-aquila/icon';
 import { NxTooltipModule } from '@aposin/ng-aquila/tooltip';
 import { Subscription } from 'rxjs';
-import { RoutingService } from 'src/app/core/services';
 import { Step, Stepper } from '../../models/stepper.model';
-import { QuoteStepperService } from './services';
 import { LiteralToStringPipe } from '../../pipes';
+import { QuoteStepperService } from './services';
 
 @Component({
   selector: 'quote-stepper',
@@ -24,7 +23,6 @@ export class QuoteStepperComponent implements OnInit, OnDestroy {
   private subscription$: Subscription[] = [];
 
   private readonly quoteStepperService = inject(QuoteStepperService);
-  private readonly routingService = inject(RoutingService);
 
   ngOnInit(): void {
     this.subscription$.push(
@@ -40,6 +38,6 @@ export class QuoteStepperComponent implements OnInit, OnDestroy {
   }
 
   public onStepClick(step: Step): void {
-    this.routingService.goToStep(step);
+    this.quoteStepperService.goToStep(step);
   }
 }

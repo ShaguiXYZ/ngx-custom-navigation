@@ -51,7 +51,7 @@ export class RoutingService implements OnDestroy {
 
   public goToPage = (pageId: string): Promise<boolean> => this._goToPage(this.getPage(pageId)!);
 
-  public goToStep = (step: Step): Promise<boolean> => {
+  public goToStep = (step: Omit<Step, 'label'>): Promise<boolean> => {
     const pageId = this.appContextData.navigation.viewedPages.find(id => step.pages.includes(id))!;
 
     return this._goToPage(this.getPage(pageId)!);

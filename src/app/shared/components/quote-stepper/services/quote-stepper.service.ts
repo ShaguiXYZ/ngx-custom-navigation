@@ -3,7 +3,8 @@ import { ContextDataService } from '@shagui/ng-shagui/core';
 import { Observable, Subject, Subscription } from 'rxjs';
 import { QUOTE_APP_CONTEXT_DATA } from 'src/app/core/constants';
 import { AppContextData } from 'src/app/core/models';
-import { Stepper } from 'src/app/shared/models';
+import { RoutingService } from 'src/app/core/services';
+import { Step, Stepper } from 'src/app/shared/models';
 
 @Injectable()
 export class QuoteStepperService implements OnDestroy {
@@ -12,6 +13,7 @@ export class QuoteStepperService implements OnDestroy {
   private quoteSteps$ = new Subject<{ stepper: Stepper; stepKey: string } | undefined>();
 
   private readonly contextDataService = inject(ContextDataService);
+  private readonly routingService = inject(RoutingService);
 
   constructor() {
     this.subscription$.push(
@@ -44,5 +46,9 @@ export class QuoteStepperService implements OnDestroy {
 
   public asObservable(): Observable<{ stepper: Stepper; stepKey: string } | undefined> {
     return this.quoteSteps$.asObservable();
+  }
+
+  public goToStep(step: Step): void {
+    this.routingService.goToStep(step);
   }
 }

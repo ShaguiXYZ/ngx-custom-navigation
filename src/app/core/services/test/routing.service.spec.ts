@@ -55,6 +55,15 @@ describe('RoutingService', () => {
     expect(router.navigate).toHaveBeenCalledWith(['route1'], { skipLocationChange: true });
   });
 
+  it('should navigate to the first page of a specific step', async () => {
+    router.navigate.and.returnValue(Promise.resolve(true));
+
+    const result = await service.goToStep({ key: 'step2', pages: ['page2'] });
+
+    expect(result).toBeTrue();
+    expect(router.navigate).toHaveBeenCalledWith(['route2'], { skipLocationChange: true });
+  });
+
   it('should not navigate to the previous step if there is only one viewed page', async () => {
     service['appContextData'].navigation.viewedPages = ['page1'];
 

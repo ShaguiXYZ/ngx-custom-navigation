@@ -4,7 +4,6 @@ import { NxCopytextModule } from '@aposin/ng-aquila/copytext';
 import { NxIconModule } from '@aposin/ng-aquila/icon';
 import { NxTooltipModule } from '@aposin/ng-aquila/tooltip';
 import { of } from 'rxjs';
-import { RoutingService } from 'src/app/core/services';
 import { Step, Stepper } from '../../models/stepper.model';
 import { LiteralToStringPipe } from '../../pipes';
 import { QuoteStepperComponent } from './quote-stepper.component';
@@ -14,19 +13,14 @@ describe('QuoteStepperComponent', () => {
   let component: QuoteStepperComponent;
   let fixture: ComponentFixture<QuoteStepperComponent>;
   let quoteStepperService: jasmine.SpyObj<QuoteStepperService>;
-  let routingService: jasmine.SpyObj<RoutingService>;
 
   beforeEach(async () => {
-    const quoteStepperServiceSpy = jasmine.createSpyObj('QuoteStepperService', ['asObservable']);
-    const routingServiceSpy = jasmine.createSpyObj('RoutingService', ['goToStep']);
+    const quoteStepperServiceSpy = jasmine.createSpyObj('QuoteStepperService', ['asObservable', 'goToStep']);
 
     await TestBed.configureTestingModule({
       declarations: [],
       imports: [QuoteStepperComponent, CommonModule, NxCopytextModule, NxIconModule, NxTooltipModule, LiteralToStringPipe],
-      providers: [
-        { provide: QuoteStepperService, useValue: quoteStepperServiceSpy },
-        { provide: RoutingService, useValue: routingServiceSpy }
-      ]
+      providers: [{ provide: QuoteStepperService, useValue: quoteStepperServiceSpy }]
     }).compileComponents();
 
     TestBed.overrideComponent(QuoteStepperComponent, {
@@ -40,7 +34,6 @@ describe('QuoteStepperComponent', () => {
     fixture = TestBed.createComponent(QuoteStepperComponent);
     component = fixture.componentInstance;
     quoteStepperService = TestBed.inject(QuoteStepperService) as jasmine.SpyObj<QuoteStepperService>;
-    routingService = TestBed.inject(RoutingService) as jasmine.SpyObj<RoutingService>;
   });
 
   it('should create', () => {
@@ -75,6 +68,6 @@ describe('QuoteStepperComponent', () => {
 
     component.onStepClick(mockStep);
 
-    expect(routingService.goToStep).toHaveBeenCalledWith(mockStep);
+    expect(quoteStepperService.goToStep).toHaveBeenCalledWith(mockStep);
   });
 });

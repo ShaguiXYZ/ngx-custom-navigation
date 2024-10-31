@@ -54,10 +54,10 @@ export class VehicleFuelComponent extends QuoteComponent implements OnInit {
     this.selectedCubicCapacity = this.contextData.vehicle.cubicCapacity;
     this.selectedPower = this.contextData.vehicle.powerRange;
 
-    [this.fuels, this.powers, this.cubicCapacities] = await Promise.all([
+    [this.fuels, this.cubicCapacities, this.powers] = await Promise.all([
       this.vehicleService.getFuelTypes(this.contextData.vehicle),
-      this.vehicleService.getVehicleClasses(this.contextData.vehicle),
-      this.vehicleService.cubicCapacities(this.contextData.vehicle)
+      this.vehicleService.cubicCapacities(this.contextData.vehicle),
+      this.vehicleService.getVehicleClasses(this.contextData.vehicle)
     ]);
   }
 
@@ -66,32 +66,48 @@ export class VehicleFuelComponent extends QuoteComponent implements OnInit {
     this.contextData.vehicle.powerRange !== undefined &&
     this.contextData.vehicle.cubicCapacity !== undefined;
 
-  public selectFuel(fuel: FuelModel) {
+  public async selectFuel(fuel: FuelModel) {
     this.selectedFuel = fuel;
     this.selectedCubicCapacity = undefined;
     this.selectedPower = undefined;
+
+    this.populateContextData();
+
+    [this.cubicCapacities, this.powers] = await Promise.all([
+      this.vehicleService.cubicCapacities(this.contextData.vehicle),
+      this.vehicleService.getVehicleClasses(this.contextData.vehicle)
+    ]);
   }
 
-  public selectCubicCapacity(cubicCapacity: CubicCapacityModel) {
+  public async selectCubicCapacity(cubicCapacity: CubicCapacityModel) {
     this.selectedCubicCapacity = cubicCapacity;
     this.selectedPower = undefined;
+
+    this.populateContextData();
+
+    this.powers = await this.vehicleService.getVehicleClasses(this.contextData.vehicle);
   }
 
   public selectPower(power: VehicleClassesModel) {
     this.selectedPower = power;
 
+    this.populateContextData();
+
     this.navigateToNextPage();
   }
 
   private navigateToNextPage() {
+    this.contextDataService.set(QUOTE_CONTEXT_DATA, this.contextData);
+
+    this.routingService.nextStep();
+  }
+
+  private populateContextData() {
     this.contextData.vehicle = {
       ...this.contextData.vehicle,
       fuel: this.selectedFuel,
       cubicCapacity: this.selectedCubicCapacity,
       powerRange: this.selectedPower
     };
-    this.contextDataService.set(QUOTE_CONTEXT_DATA, this.contextData);
-
-    this.routingService.nextStep();
   }
 }
