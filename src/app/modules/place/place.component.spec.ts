@@ -52,7 +52,7 @@ describe('PlaceComponent', () => {
   });
 
   it('should mark all fields as touched and update context data on valid form', () => {
-    const setContextDataSpy = spyOn(contextDataService, 'set');
+    // const setContextDataSpy = spyOn(contextDataService, 'set');
     const markAllAsTouchedSpy = spyOn(component.form, 'markAllAsTouched');
     const mockLocation = { postalCode: '12345', province: 'TestProvince', provinceCode: '12', location: 'TestLocation' };
 
