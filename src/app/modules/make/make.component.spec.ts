@@ -45,11 +45,11 @@ describe('MakeComponent', () => {
 
     vehicleService.getBrands.and.returnValue(Promise.resolve(['Toyota', 'Honda']));
 
-    contextDataService.set<QuoteModel>(QUOTE_CONTEXT_DATA, {
+    component['contextData'] = {
       vehicle: {
         make: 'Toyota'
       }
-    } as QuoteModel);
+    } as QuoteModel;
 
     fixture.detectChanges();
   });

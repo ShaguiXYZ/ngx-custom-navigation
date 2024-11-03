@@ -60,12 +60,12 @@ describe('VehicleModelVersionsComponent', () => {
     routingService = TestBed.inject(RoutingService) as jasmine.SpyObj<RoutingService>;
     vehicleService = TestBed.inject(VehicleService) as jasmine.SpyObj<VehicleService>;
 
-    contextDataService.set<QuoteModel>(QUOTE_CONTEXT_DATA, {
+    component['contextData'] = {
       vehicle: {
         model: 'testModel',
         vehicleModelVersion: { data: 'testVersion' }
       }
-    } as QuoteModel);
+    } as QuoteModel;
 
     vehicleService.vehicleModelVersions.and.returnValue(Promise.resolve([{ index: 1, data: 'testVersion' }] as ModelVersionModel[]));
 

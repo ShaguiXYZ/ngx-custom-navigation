@@ -82,9 +82,9 @@ describe('YourCarIsComponent', () => {
   it('should set selected vehicle from context data on init', async () => {
     const mockVehicle = { make: 'Nissan', vehicleTtype: 'Test Vehicle' } as QuoteVehicleModel;
 
-    contextDataService.set<QuoteModel>(QUOTE_CONTEXT_DATA, {
+    component['contextData'] = {
       vehicle: mockVehicle
-    } as QuoteModel);
+    } as QuoteModel;
 
     await component.ngOnInit();
 

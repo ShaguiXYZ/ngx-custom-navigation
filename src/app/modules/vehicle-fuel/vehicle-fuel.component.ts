@@ -5,13 +5,11 @@ import { NxButtonModule } from '@aposin/ng-aquila/button';
 import { NxCopytextModule } from '@aposin/ng-aquila/copytext';
 import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
 import { NxInputModule } from '@aposin/ng-aquila/input';
-import { ContextDataService } from '@shagui/ng-shagui/core';
-import { QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
+import { QuoteComponent } from 'src/app/core/models';
 import { RoutingService, VehicleService } from 'src/app/core/services';
 import { HeaderTitleComponent, SelectableOptionComponent } from 'src/app/shared/components';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
-import { QuoteComponent } from 'src/app/core/models';
-import { CubicCapacityModel, FuelModel, VehicleClassesModel, QuoteModel } from 'src/app/shared/models';
+import { CubicCapacityModel, FuelModel, VehicleClassesModel } from 'src/app/shared/models';
 
 @Component({
   selector: 'quote-vehicle-fuel',
@@ -41,15 +39,10 @@ export class VehicleFuelComponent extends QuoteComponent implements OnInit {
   public selectedCubicCapacity?: CubicCapacityModel;
   public selectedFuel?: FuelModel;
   public selectedPower?: VehicleClassesModel;
-
-  private contextData!: QuoteModel;
-
-  private readonly contextDataService = inject(ContextDataService);
   private readonly routingService = inject(RoutingService);
   private readonly vehicleService = inject(VehicleService);
 
   async ngOnInit(): Promise<void> {
-    this.contextData = this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA);
     this.selectedFuel = this.contextData.vehicle.fuel;
     this.selectedCubicCapacity = this.contextData.vehicle.cubicCapacity;
     this.selectedPower = this.contextData.vehicle.powerRange;
@@ -71,7 +64,7 @@ export class VehicleFuelComponent extends QuoteComponent implements OnInit {
     this.selectedCubicCapacity = undefined;
     this.selectedPower = undefined;
 
-    this.populateContextData();
+    this.populateData();
 
     [this.cubicCapacities, this.powers] = await Promise.all([
       this.vehicleService.cubicCapacities(this.contextData.vehicle),
@@ -83,7 +76,7 @@ export class VehicleFuelComponent extends QuoteComponent implements OnInit {
     this.selectedCubicCapacity = cubicCapacity;
     this.selectedPower = undefined;
 
-    this.populateContextData();
+    this.populateData();
 
     this.powers = await this.vehicleService.getVehicleClasses(this.contextData.vehicle);
   }
@@ -91,18 +84,18 @@ export class VehicleFuelComponent extends QuoteComponent implements OnInit {
   public selectPower(power: VehicleClassesModel) {
     this.selectedPower = power;
 
-    this.populateContextData();
+    this.populateData();
 
     this.navigateToNextPage();
   }
 
   private navigateToNextPage() {
-    this.contextDataService.set(QUOTE_CONTEXT_DATA, this.contextData);
+    this.populateContextData();
 
     this.routingService.nextStep();
   }
 
-  private populateContextData() {
+  private populateData() {
     this.contextData.vehicle = {
       ...this.contextData.vehicle,
       fuel: this.selectedFuel,

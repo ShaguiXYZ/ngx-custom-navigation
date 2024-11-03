@@ -45,9 +45,9 @@ describe('DrivingLicenseDateComponent', () => {
 
     contextDataService = TestBed.inject(ContextDataService) as jasmine.SpyObj<ContextDataService>;
 
-    contextDataService.set<QuoteModel>(QUOTE_CONTEXT_DATA, {
+    component['contextData'] = {
       driven: { drivenLicenseDate: '01-01-2022' }
-    } as unknown as QuoteModel);
+    } as unknown as QuoteModel;
 
     fixture.detectChanges();
   });

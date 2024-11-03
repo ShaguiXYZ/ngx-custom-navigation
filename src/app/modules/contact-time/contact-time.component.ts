@@ -1,12 +1,10 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NxCopytextModule } from '@aposin/ng-aquila/copytext';
-import { ContextDataService } from '@shagui/ng-shagui/core';
-import { QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
+import { QuoteComponent } from 'src/app/core/models';
 import { HeaderTitleComponent, QuoteFooterComponent, SelectableOptionComponent, TextCardComponent } from 'src/app/shared/components';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
-import { QuoteComponent } from 'src/app/core/models';
-import { Hour, QuoteModel } from 'src/app/shared/models';
+import { Hour } from 'src/app/shared/models';
 
 @Component({
   selector: 'quote-contact-time',
@@ -33,12 +31,7 @@ export class ContactTimeComponent extends QuoteComponent implements OnInit {
 
   public selectedHour?: Hour;
 
-  private contextData!: QuoteModel;
-
-  private readonly contextDataService = inject(ContextDataService);
-
   ngOnInit(): void {
-    this.contextData = this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA);
     this.selectedHour = this.contextData.contactData.contactHour;
   }
 
@@ -50,6 +43,6 @@ export class ContactTimeComponent extends QuoteComponent implements OnInit {
 
   public updateValidData = (): void => {
     this.contextData.contactData.contactHour = this.selectedHour;
-    this.contextDataService.set(QUOTE_CONTEXT_DATA, this.contextData);
+    this.populateContextData();
   };
 }

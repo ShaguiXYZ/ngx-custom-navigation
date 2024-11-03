@@ -41,12 +41,12 @@ describe('VehicleModelsComponent', () => {
     routingService = TestBed.inject(RoutingService) as jasmine.SpyObj<RoutingService>;
     vehicleService = TestBed.inject(VehicleService) as jasmine.SpyObj<VehicleService>;
 
-    contextDataService.set<QuoteModel>(QUOTE_CONTEXT_DATA, {
+    component['contextData'] = {
       vehicle: {
         make: 'Toyota',
         model: 'Camry'
       }
-    } as QuoteModel);
+    } as QuoteModel;
 
     vehicleService.getModels.and.returnValue(Promise.resolve(['Camry', 'Corolla', 'Prius']));
 

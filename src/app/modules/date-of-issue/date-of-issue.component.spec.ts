@@ -49,11 +49,11 @@ describe('DateOfIssueComponent', () => {
     component = fixture.componentInstance;
     contextDataService = TestBed.inject(ContextDataService) as jasmine.SpyObj<ContextDataService>;
 
-    contextDataService.set<QuoteModel>(QUOTE_CONTEXT_DATA, {
+    component['contextData'] = {
       client: {
         dateOfIssue: '01-01-2003'
       }
-    } as unknown as QuoteModel);
+    } as unknown as QuoteModel;
 
     fixture.detectChanges();
   });

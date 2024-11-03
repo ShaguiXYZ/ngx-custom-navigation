@@ -44,10 +44,10 @@ describe('LicenseYearComponent', () => {
     component = fixture.componentInstance;
     contextDataService = TestBed.inject(ContextDataService) as jasmine.SpyObj<ContextDataService>;
 
-    contextDataService.set<QuoteModel>(QUOTE_CONTEXT_DATA, {
+    component['contextData'] = {
       vehicle: { yearOfManufacture: 2020 },
       driven: { hasDrivenLicense: true }
-    } as QuoteModel);
+    } as QuoteModel;
 
     fixture.detectChanges();
   });
@@ -83,18 +83,6 @@ describe('LicenseYearComponent', () => {
 
     expect(isValid).toBeFalse();
     expect(setContextDataSpy).not.toHaveBeenCalled();
-  });
-
-  it('should set hasDrivenLicense to false on continue', () => {
-    const setContextDataSpy = spyOn(contextDataService, 'set');
-
-    component.continue();
-    expect(setContextDataSpy).toHaveBeenCalledWith(
-      QUOTE_CONTEXT_DATA,
-      jasmine.objectContaining({
-        driven: { hasDrivenLicense: false }
-      })
-    );
   });
 
   it('should allow deactivation if form is valid', () => {

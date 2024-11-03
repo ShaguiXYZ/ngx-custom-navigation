@@ -8,9 +8,8 @@ import { TranslateService } from '@ngx-translate/core';
 import { ContextDataService } from '@shagui/ng-shagui/core';
 import moment from 'moment';
 import { ContextDataServiceStub } from 'src/app/core/stub';
-import { BirthdateComponent } from './birthdate.component';
 import { QuoteModel } from 'src/app/shared/models';
-import { QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
+import { BirthdateComponent } from './birthdate.component';
 
 describe('BirthdateComponent', () => {
   let component: BirthdateComponent;
@@ -44,11 +43,11 @@ describe('BirthdateComponent', () => {
     fixture = TestBed.createComponent(BirthdateComponent);
     component = fixture.componentInstance;
 
-    contextDataService.set<QuoteModel>(QUOTE_CONTEXT_DATA, {
+    component['contextData'] = {
       personalData: {
         birthdate: '01-01-2000'
       }
-    } as unknown as QuoteModel);
+    } as unknown as QuoteModel;
 
     fixture.detectChanges();
   });

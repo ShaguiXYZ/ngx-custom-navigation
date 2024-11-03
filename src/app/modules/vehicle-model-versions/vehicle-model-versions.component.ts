@@ -5,14 +5,13 @@ import { NxCopytextModule } from '@aposin/ng-aquila/copytext';
 import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
 import { NxIconModule } from '@aposin/ng-aquila/icon';
 import { NxInputModule } from '@aposin/ng-aquila/input';
-import { ContextDataService } from '@shagui/ng-shagui/core';
 import { debounceTime, distinctUntilChanged, fromEvent, map, Subscription } from 'rxjs';
-import { DEBOUNCE_TIME, QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
+import { DEBOUNCE_TIME } from 'src/app/core/constants';
+import { QuoteComponent } from 'src/app/core/models';
 import { RoutingService, VehicleService } from 'src/app/core/services';
 import { HeaderTitleComponent, IconCardComponent, TextCardComponent } from 'src/app/shared/components';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
-import { QuoteComponent } from 'src/app/core/models';
-import { ModelVersionModel, QuoteModel } from 'src/app/shared/models';
+import { ModelVersionModel } from 'src/app/shared/models';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 
 @Component({
@@ -43,16 +42,13 @@ export class VehicleModelVersionsComponent extends QuoteComponent implements OnI
   public modelVersions: ModelVersionModel[] = [];
   public selectedModelVersion?: ModelVersionModel;
 
-  private contextData!: QuoteModel;
   private subscription$: Subscription[] = [];
 
-  private readonly contextDataService = inject(ContextDataService);
   private readonly routingService = inject(RoutingService);
   private readonly vehicleService = inject(VehicleService);
   private readonly fb = inject(FormBuilder);
 
   async ngOnInit(): Promise<void> {
-    this.contextData = this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA);
     this.selectedModelVersion = this.contextData.vehicle.vehicleModelVersion;
     this.createForm();
 
@@ -75,7 +71,7 @@ export class VehicleModelVersionsComponent extends QuoteComponent implements OnI
       vehicleModelVersion: this.selectedModelVersion
     };
 
-    this.contextDataService.set(QUOTE_CONTEXT_DATA, this.contextData);
+    this.populateContextData();
 
     this.routingService.nextStep();
   }

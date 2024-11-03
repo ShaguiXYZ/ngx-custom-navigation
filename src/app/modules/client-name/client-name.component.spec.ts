@@ -35,12 +35,12 @@ describe('ClientNameComponent', () => {
 
     contextDataService = TestBed.inject(ContextDataService) as jasmine.SpyObj<ContextDataService>;
 
-    contextDataService.set<QuoteModel>(QUOTE_CONTEXT_DATA, {
+    component['contextData'] = {
       personalData: {
         name: 'John',
         surname: 'Doe'
       }
-    } as QuoteModel);
+    } as QuoteModel;
 
     fixture.detectChanges();
   });

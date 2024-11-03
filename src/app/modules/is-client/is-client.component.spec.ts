@@ -3,8 +3,8 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { TranslateService } from '@ngx-translate/core';
 import { ContextDataService } from '@shagui/ng-shagui/core';
 import { QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
-import { ContextDataServiceStub } from 'src/app/core/stub';
 import { RoutingService } from 'src/app/core/services';
+import { ContextDataServiceStub } from 'src/app/core/stub';
 import { QuoteModel } from 'src/app/shared/models';
 import { IsClientComponent } from './is-client.component';
 
@@ -36,27 +36,17 @@ describe('IsClientComponent', () => {
     contextDataService = TestBed.inject(ContextDataService) as jasmine.SpyObj<ContextDataService>;
     routingService = TestBed.inject(RoutingService) as jasmine.SpyObj<RoutingService>;
 
-    contextDataService.set<QuoteModel>(QUOTE_CONTEXT_DATA, {
+    component['contextData'] = {
       client: {
         isClient: true
       }
-    } as QuoteModel);
+    } as QuoteModel;
 
     fixture.detectChanges();
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
-  });
-
-  it('should initialize contextData on ngOnInit', () => {
-    const getContextDataSpy = spyOn(contextDataService, 'get');
-    contextDataService.get.and.returnValue({ client: { isClient: true } } as QuoteModel);
-
-    component.ngOnInit();
-
-    expect(getContextDataSpy).toHaveBeenCalledWith(QUOTE_CONTEXT_DATA);
-    expect(component['contextData']).toEqual({ client: { isClient: true } } as QuoteModel);
   });
 
   it('should update contextData and call nextStep on onIsClientChange', () => {

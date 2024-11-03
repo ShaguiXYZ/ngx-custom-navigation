@@ -14,13 +14,11 @@ import { NX_DATE_LOCALE, NxDatefieldModule } from '@aposin/ng-aquila/datefield';
 import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
 import { NxInputModule } from '@aposin/ng-aquila/input';
 import { NxMomentDateModule } from '@aposin/ng-aquila/moment-date-adapter';
-import { ContextDataService, NxDate } from '@shagui/ng-shagui/core';
+import { NxDate } from '@shagui/ng-shagui/core';
 import moment, { Moment } from 'moment';
-import { QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
 import { QuoteComponent } from 'src/app/core/models';
 import { HeaderTitleComponent, QuoteFooterComponent } from 'src/app/shared/components';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
-import { QuoteModel } from 'src/app/shared/models';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 
 @Component({
@@ -46,14 +44,9 @@ export class BirthdateComponent extends QuoteComponent implements OnInit {
   public form!: FormGroup;
   public birthdateFromContext: Moment | undefined;
 
-  private contextData!: QuoteModel;
-
-  private readonly contextDataService = inject(ContextDataService);
   private readonly fb = inject(FormBuilder);
 
   ngOnInit(): void {
-    this.contextData = this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA);
-
     this.createForm();
   }
 
@@ -69,7 +62,7 @@ export class BirthdateComponent extends QuoteComponent implements OnInit {
         birthdate: moment(new Date(this.form.controls['birthdate'].value)).format('YYYY-MM-DD')
       };
 
-      this.contextDataService.set(QUOTE_CONTEXT_DATA, this.contextData);
+      this.populateContextData();
     }
 
     return this.form.valid;

@@ -9,19 +9,17 @@ import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
 import { NxInputModule } from '@aposin/ng-aquila/input';
 import { TranslateService } from '@ngx-translate/core';
 import { ContextDataService } from '@shagui/ng-shagui/core';
-import { QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
-import { ContextDataServiceStub } from 'src/app/core/stub';
 import { RoutingService, VehicleService } from 'src/app/core/services';
+import { ContextDataServiceStub } from 'src/app/core/stub';
 import { HeaderTitleComponent, SelectableOptionComponent } from 'src/app/shared/components';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
-import { CubicCapacityModel, FuelModel, FuelTypes, VehicleClassesModel, QuoteModel } from 'src/app/shared/models';
+import { CubicCapacityModel, FuelModel, FuelTypes, QuoteModel, VehicleClassesModel } from 'src/app/shared/models';
 import { VehicleFuelComponent } from './vehicle-fuel.component';
 
 describe('VehicleFuelComponent', () => {
   let component: VehicleFuelComponent;
   let fixture: ComponentFixture<VehicleFuelComponent>;
 
-  let contextDataService: jasmine.SpyObj<ContextDataService>;
   let routingService: jasmine.SpyObj<RoutingService>;
   let vehicleService: jasmine.SpyObj<VehicleService>;
 
@@ -59,17 +57,16 @@ describe('VehicleFuelComponent', () => {
     fixture = TestBed.createComponent(VehicleFuelComponent);
     component = fixture.componentInstance;
 
-    contextDataService = TestBed.inject(ContextDataService) as jasmine.SpyObj<ContextDataService>;
     routingService = TestBed.inject(RoutingService) as jasmine.SpyObj<RoutingService>;
     vehicleService = TestBed.inject(VehicleService) as jasmine.SpyObj<VehicleService>;
 
-    contextDataService.set<QuoteModel>(QUOTE_CONTEXT_DATA, {
+    component['contextData'] = {
       vehicle: {
         fuel: { index: '1', data: 'Petrol' },
         cubicCapacity: { index: '1', data: '1000cc' },
         powerRange: { index: '1', data: '100hp' }
       }
-    } as unknown as QuoteModel);
+    } as unknown as QuoteModel;
 
     // contextDataService.get.and.returnValue({
     //   configuration: { literals: {} },

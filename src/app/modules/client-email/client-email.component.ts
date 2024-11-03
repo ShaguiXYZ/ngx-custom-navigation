@@ -5,12 +5,9 @@ import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
 import { NxInputModule } from '@aposin/ng-aquila/input';
 import { NxLinkModule } from '@aposin/ng-aquila/link';
 import { NxSwitcherModule } from '@aposin/ng-aquila/switcher';
-import { ContextDataService } from '@shagui/ng-shagui/core';
-import { QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
 import { QuoteComponent } from 'src/app/core/models';
 import { HeaderTitleComponent, QuoteFooterComponent } from 'src/app/shared/components';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
-import { QuoteModel } from 'src/app/shared/models';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 
 @Component({
@@ -35,13 +32,9 @@ import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 export class ClientEMailComponent extends QuoteComponent implements OnInit {
   public form!: FormGroup;
 
-  private contextData!: QuoteModel;
-
-  private readonly contextDataService = inject(ContextDataService);
   private readonly fb = inject(FormBuilder);
 
   ngOnInit(): void {
-    this.contextData = this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA);
     this.createForm();
   }
 
@@ -61,7 +54,7 @@ export class ClientEMailComponent extends QuoteComponent implements OnInit {
         acceptPrivacyPolicy: this.form.value['acceptPrivacyPolicy']
       };
 
-      this.contextDataService.set(QUOTE_CONTEXT_DATA, this.contextData);
+      this.populateContextData();
     }
 
     return this.form.valid;

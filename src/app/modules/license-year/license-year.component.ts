@@ -15,12 +15,10 @@ import { NxButtonModule } from '@aposin/ng-aquila/button';
 import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
 import { NxInputModule } from '@aposin/ng-aquila/input';
 import { NxMaskModule } from '@aposin/ng-aquila/mask';
-import { ContextDataService, NxDate } from '@shagui/ng-shagui/core';
-import { QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
+import { NxDate } from '@shagui/ng-shagui/core';
+import { QuoteComponent } from 'src/app/core/models';
 import { HeaderTitleComponent, QuoteFooterComponent } from 'src/app/shared/components';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
-import { QuoteComponent } from 'src/app/core/models';
-import { QuoteModel } from 'src/app/shared/models';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 
 @Component({
@@ -47,31 +45,21 @@ export class LicenseYearComponent extends QuoteComponent implements OnInit {
   public minYear!: number;
   public form!: FormGroup;
 
-  private contextData!: QuoteModel;
-
-  private readonly contextDataService = inject(ContextDataService);
   private readonly fb = inject(FormBuilder);
 
   ngOnInit(): void {
     this.minYear = new NxDate().getFullYear() - this.maxYearsOld;
-    this.contextData = this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA);
     this.createForm();
   }
 
   public override canDeactivate = (): boolean => this.updateValidData();
-
-  public continue() {
-    this.contextData.driven.hasDrivenLicense = false;
-
-    this.contextDataService.set(QUOTE_CONTEXT_DATA, this.contextData);
-  }
 
   private updateValidData = (): boolean => {
     this.form.markAllAsTouched();
 
     if (this.form.valid) {
       this.contextData.vehicle.yearOfManufacture = this.form.value.yearOfManufacture;
-      this.contextDataService.set(QUOTE_CONTEXT_DATA, this.contextData);
+      this.populateContextData();
     }
 
     return this.form.valid;

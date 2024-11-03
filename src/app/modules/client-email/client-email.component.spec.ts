@@ -55,7 +55,7 @@ describe('ClientEMailComponent', () => {
 
     contextDataService = TestBed.inject(ContextDataService) as jasmine.SpyObj<ContextDataService>;
 
-    contextDataService.set<QuoteModel>(QUOTE_CONTEXT_DATA, {
+    component['contextData'] = {
       personalData: {
         email: 'test@example.com'
       },
@@ -63,7 +63,7 @@ describe('ClientEMailComponent', () => {
         accepInfo: false,
         acceptPrivacyPolicy: true
       }
-    } as QuoteModel);
+    } as QuoteModel;
 
     fixture.detectChanges();
   });

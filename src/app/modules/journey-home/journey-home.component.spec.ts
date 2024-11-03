@@ -1,7 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Router } from '@angular/router';
 import { ContextDataService } from '@shagui/ng-shagui/core';
-import { QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
 import { AppContextData } from 'src/app/core/models';
 import { RoutingService } from 'src/app/core/services';
 import { JourneyHomeComponent } from './journey-home.component';
@@ -79,11 +78,5 @@ describe('JourneyHomeComponent', () => {
     mockContextDataService.get.and.returnValue(mockContext);
 
     expect(() => component.ngOnInit()).toThrowError('Home page not found in configuration');
-  });
-
-  it('should initialize app data values', () => {
-    component['initAppDataValues']();
-
-    expect(mockContextDataService.set).toHaveBeenCalledWith(QUOTE_CONTEXT_DATA, jasmine.any(Object));
   });
 });

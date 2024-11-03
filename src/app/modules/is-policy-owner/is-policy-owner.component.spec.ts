@@ -36,28 +36,17 @@ describe('IsPolicyOwnerComponent', () => {
     contextDataService = TestBed.inject(ContextDataService) as jasmine.SpyObj<ContextDataService>;
     routingService = TestBed.inject(RoutingService) as jasmine.SpyObj<RoutingService>;
 
-    contextDataService.set<QuoteModel>(QUOTE_CONTEXT_DATA, {
+    component['contextData'] = {
       client: {
         isPolicyOwner: true
       }
-    } as QuoteModel);
+    } as QuoteModel;
 
     fixture.detectChanges();
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
-  });
-
-  it('should initialize contextData on ngOnInit', () => {
-    const getContextDataSpy = spyOn(contextDataService, 'get');
-
-    contextDataService.get.and.returnValue({ client: { isPolicyOwner: true } } as QuoteModel);
-
-    component.ngOnInit();
-
-    expect(getContextDataSpy).toHaveBeenCalledWith(QUOTE_CONTEXT_DATA);
-    expect(component['contextData']).toEqual({ client: { isPolicyOwner: true } } as QuoteModel);
   });
 
   it('should return true from canDeactivate if data is valid', () => {
@@ -75,7 +64,6 @@ describe('IsPolicyOwnerComponent', () => {
   it('should update contextData and call nextStep on onIsPolicyOwnerChange', () => {
     const setContextDataSpy = spyOn(contextDataService, 'set');
 
-    component.ngOnInit();
     component.onIsPolicyOwnerChange(false);
 
     expect(component['contextData'].client.isPolicyOwner).toBeFalse();
@@ -84,13 +72,13 @@ describe('IsPolicyOwnerComponent', () => {
   });
 
   it('should return isPolicyOwner value from contextData', () => {
-    component.ngOnInit();
+    component['contextData'].client.isPolicyOwner = true;
 
     expect(component.isPolicyOwner).toBeTrue();
   });
 
   it('should validate data correctly in isValidData', () => {
-    component.ngOnInit();
+    component['contextData'].client.isPolicyOwner = true;
 
     expect(component['isValidData']()).toBeTrue();
 

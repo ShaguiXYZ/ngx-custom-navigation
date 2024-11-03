@@ -1,10 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component, ElementRef, inject, OnInit, ViewChild } from '@angular/core';
-import { ContextDataService } from '@shagui/ng-shagui/core';
-import { QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
+import { QuoteComponent } from 'src/app/core/models';
 import { RoutingService } from 'src/app/core/services';
 import { OfferingsService } from 'src/app/core/services/offerings.service';
-import { OfferingPriceModel, QuoteModel } from 'src/app/shared/models';
+import { OfferingPriceModel } from 'src/app/shared/models';
 import { QuoteOfferingPriceCardComponent } from './components';
 
 @Component({
@@ -14,7 +13,7 @@ import { QuoteOfferingPriceCardComponent } from './components';
   standalone: true,
   imports: [CommonModule, QuoteOfferingPriceCardComponent]
 })
-export class QuoteOfferingsComponent implements OnInit {
+export class QuoteOfferingsComponent extends QuoteComponent implements OnInit {
   @ViewChild('carrouselInner', { static: true })
   private inner!: ElementRef;
   @ViewChild('carrouselTrack', { static: true })
@@ -26,18 +25,14 @@ export class QuoteOfferingsComponent implements OnInit {
   private swipeCoord!: [number, number];
   private swipeTime!: number;
 
-  private contextData!: QuoteModel;
-
   // private resizeObserver!: ResizeObserver;
 
-  private readonly contextDataService = inject(ContextDataService);
   private readonly offeringsService = inject(OfferingsService);
   private readonly routingService = inject(RoutingService);
 
   async ngOnInit(): Promise<void> {
     const offering = await this.offeringsService.pricing();
 
-    this.contextData = this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA);
     this.contextData.offering = { quotationId: offering.quotationId };
 
     this.prices = offering.prices;
@@ -81,14 +76,14 @@ export class QuoteOfferingsComponent implements OnInit {
 
   public selectSteper(index: number): void {
     this.contextData.offering.price = { ...this.contextData.offering.price, ...this.prices[index] };
-    this.contextDataService.set(QUOTE_CONTEXT_DATA, this.contextData);
+    this.populateContextData();
     this.selectedPriceIndex = index;
     this.selectCarrouselCard();
   }
 
   public contactUs(price: OfferingPriceModel): void {
     this.contextData.offering.price = { ...this.contextData.offering.price, ...price };
-    this.contextDataService.set(QUOTE_CONTEXT_DATA, this.contextData);
+    this.populateContextData();
 
     this.routingService.nextStep();
   }

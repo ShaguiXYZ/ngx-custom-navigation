@@ -1,12 +1,9 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { NxCopytextModule } from '@aposin/ng-aquila/copytext';
-import { ContextDataService } from '@shagui/ng-shagui/core';
-import { QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
 import { QuoteComponent } from 'src/app/core/models';
 import { RoutingService } from 'src/app/core/services';
 import { HeaderTitleComponent, TextCardComponent } from 'src/app/shared/components';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
-import { QuoteModel } from 'src/app/shared/models';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 
 @Component({
@@ -20,13 +17,9 @@ export class TimeInsuranceHolderComponent extends QuoteComponent implements OnIn
   public selectedYears?: number;
   public yearsAsOwner: number[] = [1, 2, 3, 4, 5];
 
-  private contextData!: QuoteModel;
-
-  private readonly contextDataService = inject(ContextDataService);
   private readonly routingService = inject(RoutingService);
 
   ngOnInit(): void {
-    this.contextData = this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA);
     this.selectedYears = this.contextData.insuranceCompany?.yearsAsOwner;
     this.yearsAsOwner = this.yearsAsOwner.filter((value, index) => this.yearsAsOwner.indexOf(value) === index).sort((a, b) => a - b);
   }
@@ -35,7 +28,7 @@ export class TimeInsuranceHolderComponent extends QuoteComponent implements OnIn
 
   public selectData(years: number): void {
     this.contextData.insuranceCompany.yearsAsOwner = years;
-    this.contextDataService.set(QUOTE_CONTEXT_DATA, this.contextData);
+    this.populateContextData();
 
     this.routingService.nextStep();
   }

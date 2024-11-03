@@ -14,13 +14,10 @@ import { NX_DATE_LOCALE, NxDatefieldModule } from '@aposin/ng-aquila/datefield';
 import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
 import { NxInputModule } from '@aposin/ng-aquila/input';
 import { NxMomentDateModule } from '@aposin/ng-aquila/moment-date-adapter';
-import { ContextDataService } from '@shagui/ng-shagui/core';
 import moment, { Moment } from 'moment';
-import { QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
+import { QuoteComponent } from 'src/app/core/models';
 import { HeaderTitleComponent, QuoteFooterComponent } from 'src/app/shared/components';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
-import { QuoteComponent } from 'src/app/core/models';
-import { QuoteModel } from 'src/app/shared/models';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 
 @Component({
@@ -46,13 +43,9 @@ export class DrivingLicenseDateComponent extends QuoteComponent implements OnIni
   public form!: FormGroup;
   public drivingLicenseDateFromContext?: Moment;
 
-  private contextData!: QuoteModel;
-
-  private readonly contextDataService = inject(ContextDataService);
   private readonly fb = inject(FormBuilder);
 
   ngOnInit(): void {
-    this.contextData = this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA);
     this.createForm();
   }
 
@@ -68,7 +61,7 @@ export class DrivingLicenseDateComponent extends QuoteComponent implements OnIni
         drivenLicenseDate: moment(new Date(this.form.controls['drivenLicenseDate'].value)).format('YYYY-MM-DD')
       };
 
-      this.contextDataService.set(QUOTE_CONTEXT_DATA, this.contextData);
+      this.populateContextData();
     }
 
     return this.form.valid;

@@ -2,11 +2,10 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { ContextDataService } from '@shagui/ng-shagui/core';
-import { ContextDataServiceStub } from 'src/app/core/stub';
 import { LocationService } from 'src/app/core/services';
+import { ContextDataServiceStub } from 'src/app/core/stub';
 import { QuoteModel } from 'src/app/shared/models';
 import { PlaceComponent } from './place.component';
-import { QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
 
 describe('PlaceComponent', () => {
   let component: PlaceComponent;
@@ -36,9 +35,9 @@ describe('PlaceComponent', () => {
     fixture = TestBed.createComponent(PlaceComponent);
     component = fixture.componentInstance;
 
-    contextDataService.set<QuoteModel>(QUOTE_CONTEXT_DATA, {
+    component['contextData'] = {
       place: { postalCode: '12345', province: 'TestProvince', location: 'TestLocation' }
-    } as QuoteModel);
+    } as QuoteModel;
 
     fixture.detectChanges();
   });

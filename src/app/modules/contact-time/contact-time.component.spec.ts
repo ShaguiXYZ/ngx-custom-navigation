@@ -28,11 +28,11 @@ describe('ContactTimeComponent', () => {
     component = fixture.componentInstance;
     contextDataService = TestBed.inject(ContextDataService) as jasmine.SpyObj<ContextDataService>;
 
-    contextDataService.set<QuoteModel>(QUOTE_CONTEXT_DATA, {
+    component['contextData'] = {
       contactData: {
         contactHour: '10:00'
       }
-    } as unknown as QuoteModel);
+    } as unknown as QuoteModel;
 
     fixture.detectChanges();
   });

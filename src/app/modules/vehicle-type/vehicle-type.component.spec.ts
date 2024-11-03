@@ -36,9 +36,7 @@ describe('VehicleTypeComponent', () => {
     contextDataService = TestBed.inject(ContextDataService) as jasmine.SpyObj<ContextDataService>;
     routingService = TestBed.inject(RoutingService) as jasmine.SpyObj<RoutingService>;
 
-    contextDataService.set<QuoteModel>(QUOTE_CONTEXT_DATA, {
-      vehicle: { vehicleTtype: 'new' }
-    } as QuoteModel);
+    component['contextData'] = { vehicle: { vehicleTtype: 'new' } } as QuoteModel;
 
     fixture.detectChanges();
   });

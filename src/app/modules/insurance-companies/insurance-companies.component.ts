@@ -4,15 +4,15 @@ import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule }
 import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
 import { NxIconModule } from '@aposin/ng-aquila/icon';
 import { NxInputModule } from '@aposin/ng-aquila/input';
-import { ContextDataService, IndexedData } from '@shagui/ng-shagui/core';
+import { IndexedData } from '@shagui/ng-shagui/core';
 import { debounceTime, distinctUntilChanged, fromEvent, Subscription } from 'rxjs';
-import { DEBOUNCE_TIME, QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
+import { DEBOUNCE_TIME } from 'src/app/core/constants';
 import { QuoteComponent } from 'src/app/core/models';
 import { InsuranceCompaniesService, RoutingService } from 'src/app/core/services';
 import { HeaderTitleComponent, IconCardComponent, TextCardComponent } from 'src/app/shared/components';
 import { QuoteFooterConfig } from 'src/app/shared/components/quote-footer/models';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
-import { IIconData, QuoteModel } from 'src/app/shared/models';
+import { IIconData } from 'src/app/shared/models';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 
 @Component({
@@ -48,16 +48,12 @@ export class InsuranceCompaniesComponent extends QuoteComponent implements OnIni
   private readonly uriImages = 'assets/images/wm/insurances/company';
 
   private readonly insuranceCompaniesService = inject(InsuranceCompaniesService);
-  private readonly contextDataService = inject(ContextDataService);
   private readonly routingService = inject(RoutingService);
   private readonly fb = inject(FormBuilder);
 
-  private contextData!: QuoteModel;
   private subscription$: Subscription[] = [];
 
   async ngOnInit(): Promise<void> {
-    this.contextData = this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA);
-
     this.selectedCompany = this.contextData.insuranceCompany?.company;
 
     this.createForm();
@@ -84,7 +80,7 @@ export class InsuranceCompaniesComponent extends QuoteComponent implements OnIni
       company: this.selectedCompany
     };
 
-    this.contextDataService.set(QUOTE_CONTEXT_DATA, this.contextData);
+    this.populateContextData();
 
     this.routingService.nextStep();
   }

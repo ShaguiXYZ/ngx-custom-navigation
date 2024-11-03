@@ -8,9 +8,8 @@ import { NxLicencePlateModule } from '@aposin/ng-aquila/licence-plate';
 import { NxMaskModule } from '@aposin/ng-aquila/mask';
 import { TranslateService } from '@ngx-translate/core';
 import { ContextDataService } from '@shagui/ng-shagui/core';
-import { QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
-import { ContextDataServiceStub } from 'src/app/core/stub';
 import { RoutingService } from 'src/app/core/services';
+import { ContextDataServiceStub } from 'src/app/core/stub';
 import { HeaderTitleComponent, QuoteFooterComponent, QuoteFooterInfoComponent } from 'src/app/shared/components';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
 import { QuoteModel } from 'src/app/shared/models';
@@ -59,13 +58,12 @@ describe('LicensePlateComponent', () => {
     contextDataService = TestBed.inject(ContextDataService) as jasmine.SpyObj<ContextDataService>;
     routingService = TestBed.inject(RoutingService) as jasmine.SpyObj<RoutingService>;
 
-    // contextDataService.get.and.returnValue({ driven: {}, vehicle: {} });
-    contextDataService.set<QuoteModel>(QUOTE_CONTEXT_DATA, {
+    component['contextData'] = {
       driven: {},
       vehicle: {
         plateNumber: '1234-SSS'
       }
-    } as QuoteModel);
+    } as QuoteModel;
 
     fixture.detectChanges();
   });
@@ -89,13 +87,10 @@ describe('LicensePlateComponent', () => {
   });
 
   it('should not update context data on invalid form', () => {
-    const setContextDataSpy = spyOn(contextDataService, 'set');
-
     component.form.setValue({ plateNumber: '' });
     const isValid = component['updateValidData']();
 
     expect(isValid).toBeFalse();
-    expect(setContextDataSpy).not.toHaveBeenCalled();
   });
 
   it('should call nextStep on continueWithOutLicensePlate', () => {
@@ -107,7 +102,7 @@ describe('LicensePlateComponent', () => {
   it('should save context data on saveContextData', () => {
     const setContextDataSpy = spyOn(contextDataService, 'set');
 
-    component['saveContextData']();
+    component['populateContextData']();
 
     expect(setContextDataSpy).toHaveBeenCalled();
   });

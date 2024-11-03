@@ -13,14 +13,11 @@ import {
 import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
 import { NxInputModule } from '@aposin/ng-aquila/input';
 import { NxMaskModule } from '@aposin/ng-aquila/mask';
-import { ContextDataService } from '@shagui/ng-shagui/core';
-import { QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
 import { LocationModel, QuoteComponent } from 'src/app/core/models';
 import { LocationService } from 'src/app/core/services';
 import { HeaderTitleComponent, QuoteFooterComponent, QuoteFooterInfoComponent } from 'src/app/shared/components';
 import { QuoteFooterConfig } from 'src/app/shared/components/quote-footer/models';
 import { QuoteLiteralDirective, QuoteMaskDirective } from 'src/app/shared/directives';
-import { QuoteModel } from 'src/app/shared/models';
 
 @Component({
   selector: 'quote-place',
@@ -45,14 +42,10 @@ export class PlaceComponent extends QuoteComponent implements OnInit {
   public form!: FormGroup;
   public footerConfig: QuoteFooterConfig = { showNext: true };
 
-  private contextData!: QuoteModel;
-
-  private readonly contextDataService = inject(ContextDataService);
   private readonly locationService = inject(LocationService);
   private readonly fb = inject(FormBuilder);
 
   ngOnInit(): void {
-    this.contextData = this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA);
     this.footerConfig = { ...this.footerConfig, nextFn: this.updateValidData };
 
     this.createForm();
@@ -69,7 +62,7 @@ export class PlaceComponent extends QuoteComponent implements OnInit {
         ...this.form.value
       };
 
-      this.contextDataService.set(QUOTE_CONTEXT_DATA, this.contextData);
+      this.populateContextData();
     }
   };
 

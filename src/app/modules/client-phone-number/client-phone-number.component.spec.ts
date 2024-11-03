@@ -36,11 +36,11 @@ describe('ClientPhoneNumberComponent', () => {
     component = fixture.componentInstance;
     contextDataService = TestBed.inject(ContextDataService) as jasmine.SpyObj<ContextDataService>;
 
-    contextDataService.set<QuoteModel>(QUOTE_CONTEXT_DATA, {
+    component['contextData'] = {
       personalData: {
         phoneNumber: '123456789'
       }
-    } as QuoteModel);
+    } as QuoteModel;
 
     fixture.detectChanges();
   });

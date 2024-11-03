@@ -4,15 +4,14 @@ import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule }
 import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
 import { NxIconModule } from '@aposin/ng-aquila/icon';
 import { NxInputModule } from '@aposin/ng-aquila/input';
-import { ContextDataService } from '@shagui/ng-shagui/core';
 import { debounceTime, distinctUntilChanged, fromEvent, map, Subscription } from 'rxjs';
-import { DEBOUNCE_TIME, QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
+import { DEBOUNCE_TIME } from 'src/app/core/constants';
 import { QuoteComponent } from 'src/app/core/models';
 import { RoutingService, VehicleService } from 'src/app/core/services';
 import { HeaderTitleComponent, IconCardComponent, TextCardComponent } from 'src/app/shared/components';
 import { QuoteFooterConfig } from 'src/app/shared/components/quote-footer/models';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
-import { BrandData, QuoteModel } from 'src/app/shared/models';
+import { BrandData } from 'src/app/shared/models';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 import { BrandComponent } from './components';
 
@@ -46,17 +45,14 @@ export class MakeComponent extends QuoteComponent implements OnInit, OnDestroy {
   public footerConfig!: QuoteFooterConfig;
   public selectedMake?: string;
 
-  private contextData!: QuoteModel;
   private subscription$: Subscription[] = [];
 
-  private readonly contextDataService = inject(ContextDataService);
   private readonly routingService = inject(RoutingService);
   private readonly vehicleService = inject(VehicleService);
   private readonly fb = inject(FormBuilder);
 
   ngOnInit(): void {
     this.makes = BrandData.iconBrands();
-    this.contextData = this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA);
     this.selectedMake = this.contextData.vehicle.make;
 
     this.createForm();
@@ -77,7 +73,7 @@ export class MakeComponent extends QuoteComponent implements OnInit, OnDestroy {
       make: this.selectedMake!
     };
 
-    this.contextDataService.set(QUOTE_CONTEXT_DATA, this.contextData);
+    this.populateContextData();
 
     this.routingService.nextStep();
   }

@@ -3,8 +3,8 @@ import { NxDialogService } from '@aposin/ng-aquila/modal';
 import { TranslateService } from '@ngx-translate/core';
 import { ContextDataService } from '@shagui/ng-shagui/core';
 import { QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
-import { ContextDataServiceStub } from 'src/app/core/stub';
 import { RoutingService } from 'src/app/core/services';
+import { ContextDataServiceStub } from 'src/app/core/stub';
 import { QuoteModel } from 'src/app/shared/models';
 import { DrivingLicenseLocationComponent } from './driving-license-location.component';
 
@@ -40,11 +40,11 @@ describe('DrivingLicenseLocationComponent', () => {
     routingService = TestBed.inject(RoutingService) as jasmine.SpyObj<RoutingService>;
     dialogService = TestBed.inject(NxDialogService) as jasmine.SpyObj<NxDialogService>;
 
-    contextDataService.set<QuoteModel>(QUOTE_CONTEXT_DATA, {
+    component['contextData'] = {
       driven: {
         drivenLicenseCountry: 'eu'
       }
-    } as unknown as QuoteModel);
+    } as unknown as QuoteModel;
 
     fixture.detectChanges();
   });
