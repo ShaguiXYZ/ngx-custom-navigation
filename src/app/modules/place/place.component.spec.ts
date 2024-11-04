@@ -55,7 +55,7 @@ describe('PlaceComponent', () => {
     const markAllAsTouchedSpy = spyOn(component.form, 'markAllAsTouched');
     const mockLocation = { postalCode: '12345', province: 'TestProvince', provinceCode: '12', location: 'TestLocation' };
 
-    locationService.getAddresses.and.returnValue(Promise.resolve(mockLocation));
+    locationService.getAddress.and.returnValue(Promise.resolve(mockLocation));
 
     component.form.setValue({ postalCode: '12345' });
     component['updateValidData']();
@@ -79,7 +79,7 @@ describe('PlaceComponent', () => {
 
   it('should validate postal code asynchronously', waitForAsync(() => {
     const mockLocation = { postalCode: '12345', province: 'TestProvince', provinceCode: '12', location: 'TestLocation' };
-    locationService.getAddresses.and.returnValue(Promise.resolve(mockLocation));
+    locationService.getAddress.and.returnValue(Promise.resolve(mockLocation));
 
     component.form.controls['postalCode'].setValue('12345');
     fixture.detectChanges();
@@ -91,7 +91,7 @@ describe('PlaceComponent', () => {
   }));
 
   it('should invalidate postal code if not recognized', waitForAsync(() => {
-    locationService.getAddresses.and.returnValue(Promise.resolve(undefined));
+    locationService.getAddress.and.returnValue(Promise.resolve(undefined));
 
     component.form.controls['postalCode'].setValue('99999');
     fixture.detectChanges();

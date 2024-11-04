@@ -16,7 +16,7 @@ export class QuoteService {
 
     Object.entries(pageData).forEach(([key, value]) => {
       if (key === 'contextData' && typeof component['contextData'] === 'object' && typeof value === 'object') {
-        Object.assign(component, { [key]: { ...component['contextData'], ...value } });
+        Object.assign(component, { [key]: { ...component[key], ...value } });
       } else if (Object.prototype.hasOwnProperty.call(component, key)) {
         Object.assign(component, { [key]: deepCopy(value) });
       }

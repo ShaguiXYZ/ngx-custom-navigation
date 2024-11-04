@@ -22,12 +22,12 @@ describe('LocationService', () => {
   });
 
   it('should return undefined for invalid postal code length', async () => {
-    const result = await service.getAddresses('123');
+    const result = await service.getAddress('123');
     expect(result).toBeUndefined();
   });
 
   it('should return undefined for non-existent province code', async () => {
-    const result = await service.getAddresses('99999');
+    const result = await service.getAddress('99999');
     expect(result).toBeUndefined();
   });
 
@@ -41,13 +41,13 @@ describe('LocationService', () => {
 
     httpClientSpy.get.and.returnValue(of([expectedValue]));
 
-    const result = await service.getAddresses('46001');
+    const result = await service.getAddress('46001');
 
     expect(result).toEqual({ postalCode: '46001', province: 'Valencia', provinceCode: '46', location: 'location46' });
   });
 
   it('should return undefined for postal code with invalid characters', async () => {
-    const result = await service.getAddresses('28A01');
+    const result = await service.getAddress('28A01');
     expect(result).toBeUndefined();
   });
 });

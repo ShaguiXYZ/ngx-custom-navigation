@@ -78,7 +78,7 @@ export class PlaceComponent extends QuoteComponent implements OnInit {
 
   private postalCodeExistsValidator(locationService: LocationService): AsyncValidatorFn {
     return async (control: AbstractControl): Promise<ValidationErrors | null> => {
-      const location = await locationService.getAddresses(control.value);
+      const location = await locationService.getAddress(control.value);
 
       this.updateContextData(location);
 
