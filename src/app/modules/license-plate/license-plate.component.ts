@@ -43,6 +43,12 @@ export class LicensePlateComponent extends QuoteComponent implements OnInit {
   private readonly routingService = inject(RoutingService);
   private readonly fb = inject(FormBuilder);
 
+  constructor() {
+    super();
+
+    this.contextData.driven.hasDrivenLicense = true;
+  }
+
   ngOnInit(): void {
     this.createForm();
   }
@@ -62,11 +68,12 @@ export class LicensePlateComponent extends QuoteComponent implements OnInit {
       return true;
     }
 
+    this.contextData.driven.hasDrivenLicense = true;
+
     this.form.markAllAsTouched();
 
     if (this.form.valid) {
       this.contextData.vehicle.plateNumber = this.form.value.plateNumber;
-      this.contextData.driven.hasDrivenLicense = true;
     }
 
     this.populateContextData();
