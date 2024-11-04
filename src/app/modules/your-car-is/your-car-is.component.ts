@@ -12,6 +12,7 @@ import { HeaderTitleComponent, QuoteFooterComponent, SelectableOptionComponent }
 import { QuoteFooterConfig } from 'src/app/shared/components/quote-footer/models';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
 import { QuoteVehicleModel } from 'src/app/shared/models';
+import { YourCarIsService } from './services';
 
 @Component({
   selector: 'quote-your-car-is',
@@ -31,7 +32,8 @@ import { QuoteVehicleModel } from 'src/app/shared/models';
     NxMaskModule,
     ReactiveFormsModule,
     QuoteLiteralDirective
-  ]
+  ],
+  providers: [YourCarIsService]
 })
 export class YourCarIsComponent extends QuoteComponent implements OnInit {
   public vehicleOptions: QuoteVehicleModel[] = [];

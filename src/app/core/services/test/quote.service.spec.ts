@@ -25,6 +25,7 @@ describe('QuoteService', () => {
 
     const dataChangeSubject = new Subject<AppContextData>();
     const contextDataServiceSpy = jasmine.createSpyObj('ContextDataService', ['get', 'onDataChange']);
+
     contextDataServiceSpy.onDataChange.and.returnValue(dataChangeSubject.asObservable());
     contextDataServiceSpy.get.and.returnValue(appContextData);
 
