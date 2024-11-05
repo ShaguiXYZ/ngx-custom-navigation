@@ -1,10 +1,11 @@
 import { Injectable, OnDestroy, inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { ContextDataService, JsonUtils } from '@shagui/ng-shagui/core';
+import { ContextDataService } from '@shagui/ng-shagui/core';
 import { Subscription } from 'rxjs';
-import { QuoteModel, Step } from '../../shared/models';
-import { QUOTE_APP_CONTEXT_DATA, QUOTE_CONTEXT_DATA } from '../constants';
-import { AppContextData, CompareOperations, Condition, NextOption, Page } from '../models';
+import { Step } from '../../shared/models';
+import { QUOTE_APP_CONTEXT_DATA } from '../constants';
+import { AppContextData, NextOption, Page } from '../models';
+import { ConditionService } from './condition.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +15,7 @@ export class RoutingService implements OnDestroy {
 
   private readonly subscrition$: Subscription[] = [];
   private readonly contextDataService = inject(ContextDataService);
+  private readonly conditionService = inject(ConditionService);
 
   constructor(private readonly _router: Router) {
     this.appContextData = this.contextDataService.get<AppContextData>(QUOTE_APP_CONTEXT_DATA);
@@ -91,37 +93,8 @@ export class RoutingService implements OnDestroy {
    * Devuelve el nextPageId que cumpla las condiciones, o en última instancia el nextPageId por defecto (último)
    */
   private nextPageIdFromNextOptionList(nextOptionList: NextOption[]): string | undefined {
-    const nextOption = nextOptionList.find(nextOption => this.checkConditions(nextOption.conditions));
+    const nextOption = nextOptionList.find(nextOption => this.conditionService.checkConditions(nextOption.conditions));
 
     return nextOption?.nextPageId;
   }
-
-  /**
-   * Verifica si se cumplen las condiciones
-   */
-  private checkConditions = (conditions?: Condition[]): boolean =>
-    conditions?.reduce((isValid: boolean, current: Condition) => {
-      const currentEval = this.evalCondition(current);
-
-      return this.applyPreviousEval(isValid, currentEval, current.union);
-    }, true) ?? true;
-
-  private evalCondition = (condition: Condition): boolean => {
-    const contextExp = this.contextDataItemValue(condition.expression);
-
-    return typeof contextExp === 'string'
-      ? (0, eval)(`'${this.contextDataItemValue(condition.expression)}'${condition.operation ?? '==='}'${condition.value}'`)
-      : (0, eval)(`${this.contextDataItemValue(condition.expression)}${condition.operation ?? '==='}${condition.value}`);
-  };
-
-  private contextDataItemValue = (key: string): unknown =>
-    JsonUtils.valueOf(this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA), key);
-
-  private applyPreviousEval = (previous: boolean, current: boolean, union?: CompareOperations): boolean =>
-    (union &&
-      {
-        ['AND']: previous && current,
-        ['OR']: previous || current
-      }[union]) ??
-    current;
 }

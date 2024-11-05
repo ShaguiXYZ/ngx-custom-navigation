@@ -1,7 +1,10 @@
+import { HttpClient, provideHttpClient } from '@angular/common/http';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
-import { LocationService } from '../localtion.service';
-import { HttpClient } from '@angular/common/http';
+import { DataInfo } from '@shagui/ng-shagui/core';
 import { of } from 'rxjs';
+import { LocationDTO, LocationModel } from '../../models';
+import { LocationService } from '../localtion.service';
 
 describe('LocationService', () => {
   let service: LocationService;
@@ -11,9 +14,9 @@ describe('LocationService', () => {
     httpClientSpy = jasmine.createSpyObj('HttpClient', ['get', 'post', 'put', 'delete']);
 
     TestBed.configureTestingModule({
-      providers: [LocationService, { provide: HttpClient, useValue: httpClientSpy }]
+      imports: [],
+      providers: [provideHttpClient(), provideHttpClientTesting(), LocationService, { provide: HttpClient, useValue: httpClientSpy }]
     });
-
     service = TestBed.inject(LocationService);
   });
 
@@ -21,33 +24,55 @@ describe('LocationService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should return undefined for invalid postal code length', async () => {
-    const result = await service.getAddress('123');
+  it('should fetch province by code', async () => {
+    const mockResponse: DataInfo = { '01': 'ProvinceName' };
+    const provinceCode = '01';
+
+    httpClientSpy.get.and.returnValue(of(mockResponse));
+
+    service.getProvince(provinceCode).then(result => {
+      expect(result).toBe('ProvinceName');
+    });
+  });
+
+  it('should return undefined for invalid postal code', async () => {
+    const result = await service.getAddress('1234');
+
     expect(result).toBeUndefined();
   });
 
-  it('should return undefined for non-existent province code', async () => {
-    const result = await service.getAddress('99999');
-    expect(result).toBeUndefined();
+  it('should fetch address by postal code', async () => {
+    const mockProvinceResponse: DataInfo = { '01': 'ProvinceName' };
+    const mockLocationResponse: LocationDTO[] = [{ province: '01', code: '234', location: 'LocationName' }] as LocationDTO[];
+    const postalCode = '01234';
+
+    httpClientSpy.get.and.returnValues(of(mockProvinceResponse), of(mockLocationResponse));
+
+    service.getAddress(postalCode).then(result => {
+      expect(result).toEqual(LocationModel.create('01234', 'ProvinceName', 'LocationName'));
+    });
   });
 
-  it('should return correct address for another valid postal code', async () => {
-    const expectedValue = {
-      province: '46',
-      code: '001',
-      dc: '9',
-      location: 'location46'
-    };
+  it('should return undefined if province not found', async () => {
+    const mockProvinceResponse: DataInfo = {};
+    const postalCode = '01234';
 
-    httpClientSpy.get.and.returnValue(of([expectedValue]));
+    httpClientSpy.get.and.returnValue(of(mockProvinceResponse));
 
-    const result = await service.getAddress('46001');
-
-    expect(result).toEqual({ postalCode: '46001', province: 'Valencia', provinceCode: '46', location: 'location46' });
+    service.getAddress(postalCode).then(result => {
+      expect(result).toBeUndefined();
+    });
   });
 
-  it('should return undefined for postal code with invalid characters', async () => {
-    const result = await service.getAddress('28A01');
-    expect(result).toBeUndefined();
+  it('should return undefined if location not found', async () => {
+    const mockProvinceResponse: DataInfo = { '01': 'ProvinceName' };
+    const mockLocationResponse: LocationDTO[] = [];
+    const postalCode = '01234';
+
+    httpClientSpy.get.and.returnValues(of(mockProvinceResponse), of(mockLocationResponse));
+
+    service.getAddress(postalCode).then(result => {
+      expect(result).toBeUndefined();
+    });
   });
 });

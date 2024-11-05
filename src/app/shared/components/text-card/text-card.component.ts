@@ -21,17 +21,10 @@ export class TextCardComponent {
   @Output()
   public uiSelect: EventEmitter<string | number | symbol> = new EventEmitter<string | number | symbol>();
 
-  public _data!: string | number | symbol;
-
-  public get data(): string | number | symbol {
-    return this._data;
-  }
   @Input()
-  public set data(value: string | number | symbol) {
-    this._data = value;
-  }
+  public data?: string | number | symbol;
 
   public selectText(): void {
-    this.uiSelect.emit(this._data);
+    this.uiSelect.emit(this.data);
   }
 }

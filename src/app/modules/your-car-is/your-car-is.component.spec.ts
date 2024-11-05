@@ -92,13 +92,13 @@ describe('YourCarIsComponent', () => {
   });
 
   it('should allow deactivation if a vehicle is selected', () => {
-    component.selectedVehicle = { make: 'Nissan', vehicleTtype: 'Test Vehicle' } as QuoteVehicleModel;
+    component['contextData'].vehicle = { make: 'Nissan', vehicleTtype: 'Test Vehicle' } as QuoteVehicleModel;
 
     expect(component.canDeactivate()).toBeTrue();
   });
 
   it('should not allow deactivation if no vehicle is selected', () => {
-    component.selectedVehicle = undefined;
+    component['contextData'].vehicle = QuoteVehicleModel.init();
 
     expect(component.canDeactivate()).toBeFalse();
   });
@@ -114,10 +114,13 @@ describe('YourCarIsComponent', () => {
     expect(routingService.nextStep).toHaveBeenCalled();
   });
 
-  it('should call selectVehicle with a new vehicle instance on continue', () => {
-    spyOn(component, 'selectVehicle');
+  it('should update context data and navigate to next step on continue', () => {
+    const setContextDataSpy = spyOn(contextDataService, 'set');
+
+    component['contextData'] = { vehicle: { make: '' } } as QuoteModel;
     component.continue();
 
-    expect(component.selectVehicle).toHaveBeenCalled();
+    expect(setContextDataSpy).toHaveBeenCalledWith(QUOTE_CONTEXT_DATA, { vehicle: QuoteVehicleModel.init() });
+    expect(routingService.nextStep).toHaveBeenCalled();
   });
 });

@@ -4,7 +4,7 @@
   </quote-header-title>
   <div class="form-container">
     @for(type of vehicleTypes; track type.index) {
-    <div class="nx-margin-bottom-s">
+    <div class="selectable-row">
       <quote-text-card [selected]="type.index === selectedType?.index" [data]="type.data | quoteLiteral" (uiSelect)="selectType(type)" />
     </div>
     }

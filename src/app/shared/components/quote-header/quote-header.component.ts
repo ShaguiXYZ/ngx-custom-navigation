@@ -9,6 +9,11 @@ import { AppContextData, Page } from 'src/app/core/models';
 import { RoutingService } from 'src/app/core/services';
 import { QuoteLinkDirective, QuoteLiteralDirective } from '../../directives';
 
+interface HeaderConfig {
+  showBack?: boolean;
+  showContactUs?: boolean;
+}
+
 @Component({
   selector: 'quote-header',
   standalone: true,
@@ -17,7 +22,7 @@ import { QuoteLinkDirective, QuoteLiteralDirective } from '../../directives';
   styleUrl: './quote-header.component.scss'
 })
 export class QuoteHeaderComponent implements OnInit, OnDestroy {
-  public showBackButton?: boolean;
+  public config: HeaderConfig = {};
 
   private subscription$: Subscription[] = [];
 
@@ -27,7 +32,7 @@ export class QuoteHeaderComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.subscription$.push(
       this.contextDataService.onDataChange<AppContextData>(QUOTE_APP_CONTEXT_DATA).subscribe(data => {
-        this.showBackButton = this.backButtonProperty(data.navigation.lastPage);
+        this.config = this.headerConfig(data.navigation.lastPage);
       })
     );
   }
@@ -40,9 +45,9 @@ export class QuoteHeaderComponent implements OnInit, OnDestroy {
     this.routingService.previousStep();
   }
 
-  private backButtonProperty = (lastPage?: Page): boolean => {
-    const showBack = lastPage?.configuration?.data?.['showBack'];
+  private headerConfig = (lastPage?: Page): HeaderConfig => {
+    const config = lastPage?.configuration?.data?.['headerConfig'] ?? {};
 
-    return typeof showBack === 'boolean' ? showBack : true;
+    return { ...{ showBack: true, showContactUs: true }, ...config };
   };
 }

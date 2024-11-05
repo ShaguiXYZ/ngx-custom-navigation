@@ -54,7 +54,7 @@ describe('ContactTimeComponent', () => {
     const setContextDataSpy = spyOn(contextDataService, 'set');
 
     component.selectHour('15:00');
-    component.updateValidData();
+    component['updateValidData']();
     expect(setContextDataSpy).toHaveBeenCalledWith(QUOTE_CONTEXT_DATA, {
       contactData: {
         contactHour: '15:00'

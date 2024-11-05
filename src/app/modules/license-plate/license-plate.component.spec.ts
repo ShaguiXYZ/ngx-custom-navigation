@@ -59,7 +59,9 @@ describe('LicensePlateComponent', () => {
     routingService = TestBed.inject(RoutingService) as jasmine.SpyObj<RoutingService>;
 
     component['contextData'] = {
-      driven: {},
+      driven: {
+        hasDrivenLicense: true
+      },
       vehicle: {
         plateNumber: '1234-SSS'
       }
@@ -69,6 +71,15 @@ describe('LicensePlateComponent', () => {
   });
 
   it('should create', () => {
+    component['contextData'] = {
+      driven: {
+        hasDrivenLicense: true
+      },
+      vehicle: {
+        plateNumber: '1234-SSS'
+      }
+    } as QuoteModel;
+
     expect(component).toBeTruthy();
   });
 

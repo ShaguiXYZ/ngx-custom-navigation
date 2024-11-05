@@ -10,7 +10,6 @@ import { NxMaskModule } from '@aposin/ng-aquila/mask';
 import { QuoteComponent } from 'src/app/core/models';
 import { RoutingService } from 'src/app/core/services';
 import { HeaderTitleComponent, QuoteFooterComponent, QuoteFooterInfoComponent } from 'src/app/shared/components';
-import { QuoteFooterConfig } from 'src/app/shared/components/quote-footer/models';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 
@@ -38,7 +37,6 @@ import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 })
 export class LicensePlateComponent extends QuoteComponent implements OnInit {
   public form!: FormGroup;
-  public footerConfig!: QuoteFooterConfig;
 
   private readonly routingService = inject(RoutingService);
   private readonly fb = inject(FormBuilder);
@@ -46,7 +44,7 @@ export class LicensePlateComponent extends QuoteComponent implements OnInit {
   constructor() {
     super();
 
-    this.contextData.driven.hasDrivenLicense = true;
+    this.contextData = { ...this.contextData, driven: { ...this.contextData.driven, hasDrivenLicense: true } };
   }
 
   ngOnInit(): void {

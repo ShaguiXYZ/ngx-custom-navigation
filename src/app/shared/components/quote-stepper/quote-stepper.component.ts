@@ -7,6 +7,9 @@ import { Subscription } from 'rxjs';
 import { Step, Stepper } from '../../models/stepper.model';
 import { LiteralToStringPipe } from '../../pipes';
 import { QuoteStepperService } from './services';
+import { ContextDataService } from '@shagui/ng-shagui/core';
+import { AppContextData } from 'src/app/core/models';
+import { QUOTE_APP_CONTEXT_DATA } from 'src/app/core/constants';
 
 @Component({
   selector: 'quote-stepper',
@@ -22,6 +25,7 @@ export class QuoteStepperComponent implements OnInit, OnDestroy {
 
   private subscription$: Subscription[] = [];
 
+  private readonly contextDataService = inject(ContextDataService);
   private readonly quoteStepperService = inject(QuoteStepperService);
 
   ngOnInit(): void {
@@ -29,6 +33,8 @@ export class QuoteStepperComponent implements OnInit, OnDestroy {
       this.quoteStepperService.asObservable().subscribe(data => {
         this.stepperData = data;
         this.stepperIndex = data?.stepper.steps.findIndex(step => step.key === data.stepKey) ?? 0;
+
+        this.stepperProperties();
       })
     );
   }
@@ -40,4 +46,14 @@ export class QuoteStepperComponent implements OnInit, OnDestroy {
   public onStepClick(step: Step): void {
     this.quoteStepperService.goToStep(step);
   }
+
+  private stepperProperties = (): void => {
+    const { navigation } = this.contextDataService.get<AppContextData>(QUOTE_APP_CONTEXT_DATA);
+    const lastPage = navigation?.lastPage;
+    const config: { label?: string } = lastPage?.configuration?.data?.['stepperConfig'] ?? {};
+
+    if (this.stepperData && this.stepperData.stepper && config.label) {
+      this.stepperData.stepper.steps[this.stepperIndex].label = config.label;
+    }
+  };
 }

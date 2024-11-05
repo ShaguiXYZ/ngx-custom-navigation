@@ -46,10 +46,6 @@ describe('ContactUsComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should have footerConfig with showNext set to true', () => {
-    expect(component.footerConfig.showNext).toBeTrue();
-  });
-
   it('should render HeaderTitleComponent', () => {
     const headerTitleElement = fixture.debugElement.query(By.directive(HeaderTitleComponent));
     expect(headerTitleElement).toBeTruthy();

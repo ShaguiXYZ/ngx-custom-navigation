@@ -6,25 +6,26 @@
     @for(vehicle of vehicleOptions; track vehicle; let index = $index) {
     <div class="selectable-row reveal">
       @defer(on viewport) {
-      <quote-selectable-option
+      <quote-text-card
         [selected]="vehicle.vehicleCode === selectedVehicle?.vehicleCode"
         [fullHeight]="true"
         (uiSelect)="selectVehicle(vehicle)"
       >
-        <div class="card-container nx-margin-left-4m">
+        <div class="card-container">
           <span nxCopytext="medium" class="card-text nx-margin-top-s nx-font-weight-bold"> {{ vehicle.make }} {{ vehicle.model }}</span>
           <span nxCopytext="medium" class="card-text nx-margin-bottom-s">
             {{ vehicle.fuel?.data }} - {{ vehicle.power }} CV - {{ vehicle.yearOfManufacture }}
           </span>
         </div>
-      </quote-selectable-option>
+      </quote-text-card>
+
       } @placeholder {
       <div class="card-placeholder"></div>
       }
     </div>
     }
   </div>
-  <quote-footer [config]="footerConfig">
+  <quote-footer>
     <div class="extra__footer__options">
       <button class="nx-margin-y-2xs" nxButton="tertiary small" type="button" (click)="continue()">
         <span nxCopytext="medium" class="uppercase nx-font-weight-bold" nxQuoteLiteral="continue-without-car"></span>

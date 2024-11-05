@@ -81,6 +81,12 @@
           "coverage-1": "Asistencia en carretera nacional e internacional 24/7",
           "coverage-2": "Te llevamos el coche de sustitución a tu casa",
           "coverage-3": "Red de talleres excelentes a tu disposición"
+        },
+        "data": {
+          "headerConfig": {
+            "showBack": false,
+            "showContactUs": false
+          }
         }
       }
     },
@@ -105,7 +111,11 @@
           "header": "¿Eres cliente de Shagui?"
         },
         "data": {
-          "showBack": false
+          "contextData": { "client": { "isClient": false } },
+          "headerConfig": {
+            "showBack": true,
+            "showContactUs": false
+          }
         }
       }
     },
@@ -252,6 +262,11 @@
           "footer-info": "Facilitando tu matrícula obtendrás tu cotización mucho más rápido",
           "header": "¿Cuál es la matrícula de tu coche?",
           "license-plate": "Matrícula"
+        },
+        "data": {
+          "stepperConfig": {
+            "label": { "value": "Matrícula del coche", "type": "value" }
+          }
         }
       }
     },
@@ -266,6 +281,11 @@
         "literals": {
           "continue-without-car": "Continuar sin vehículo",
           "header": "Selecciona el modelo"
+        },
+        "data": {
+          "footerConfig": {
+            "showNext": false
+          }
         }
       }
     },

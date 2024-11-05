@@ -9,7 +9,6 @@ import { DEBOUNCE_TIME } from 'src/app/core/constants';
 import { QuoteComponent } from 'src/app/core/models';
 import { RoutingService, VehicleService } from 'src/app/core/services';
 import { HeaderTitleComponent, IconCardComponent, TextCardComponent } from 'src/app/shared/components';
-import { QuoteFooterConfig } from 'src/app/shared/components/quote-footer/models';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
 import { BrandData } from 'src/app/shared/models';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
@@ -42,7 +41,6 @@ export class MakeComponent extends QuoteComponent implements OnInit, OnDestroy {
   public form!: FormGroup;
   public makes!: string[];
   public searchedMakes: string[] = [];
-  public footerConfig!: QuoteFooterConfig;
   public selectedMake?: string;
 
   private subscription$: Subscription[] = [];

@@ -10,7 +10,6 @@ import { DEBOUNCE_TIME } from 'src/app/core/constants';
 import { QuoteComponent } from 'src/app/core/models';
 import { InsuranceCompaniesService, RoutingService } from 'src/app/core/services';
 import { HeaderTitleComponent, IconCardComponent, TextCardComponent } from 'src/app/shared/components';
-import { QuoteFooterConfig } from 'src/app/shared/components/quote-footer/models';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
 import { IIconData } from 'src/app/shared/models';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
@@ -42,7 +41,6 @@ export class InsuranceCompaniesComponent extends QuoteComponent implements OnIni
   public searchedInsurances: IndexedData[] = [];
   public insuranceIconList: IIconData[] = [];
   public selectedCompany?: IndexedData;
-  public footerConfig!: QuoteFooterConfig;
   public form!: FormGroup;
 
   private readonly uriImages = 'assets/images/wm/insurances/company';

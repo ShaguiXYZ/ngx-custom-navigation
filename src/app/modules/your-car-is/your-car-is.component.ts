@@ -8,8 +8,7 @@ import { NxInputModule } from '@aposin/ng-aquila/input';
 import { NxMaskModule } from '@aposin/ng-aquila/mask';
 import { QuoteComponent } from 'src/app/core/models';
 import { RoutingService, VehicleService } from 'src/app/core/services';
-import { HeaderTitleComponent, QuoteFooterComponent, SelectableOptionComponent } from 'src/app/shared/components';
-import { QuoteFooterConfig } from 'src/app/shared/components/quote-footer/models';
+import { HeaderTitleComponent, QuoteFooterComponent, SelectableOptionComponent, TextCardComponent } from 'src/app/shared/components';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
 import { QuoteVehicleModel } from 'src/app/shared/models';
 import { YourCarIsService } from './services';
@@ -25,6 +24,7 @@ import { YourCarIsService } from './services';
     HeaderTitleComponent,
     QuoteFooterComponent,
     SelectableOptionComponent,
+    TextCardComponent,
     NxButtonModule,
     NxCopytextModule,
     NxFormfieldModule,
@@ -38,23 +38,19 @@ import { YourCarIsService } from './services';
 export class YourCarIsComponent extends QuoteComponent implements OnInit {
   public vehicleOptions: QuoteVehicleModel[] = [];
   public selectedVehicle?: QuoteVehicleModel;
-  public footerConfig!: QuoteFooterConfig;
+
+  private continueWithSelectedVehicle = true;
 
   private readonly routingService = inject(RoutingService);
   private readonly vehicleService = inject(VehicleService);
 
   async ngOnInit(): Promise<void> {
-    this.footerConfig = {
-      showBack: false,
-      showNext: false
-    };
-
     this.selectedVehicle = this.contextData.vehicle;
 
     this.vehicleOptions = await this.vehicleService.vehicles();
   }
 
-  public override canDeactivate = (): boolean => !!this.selectedVehicle;
+  public override canDeactivate = (): boolean => this.isValidData();
 
   public selectVehicle(vehicle: QuoteVehicleModel) {
     this.contextData.vehicle = { ...this.contextData.vehicle, ...vehicle };
@@ -64,6 +60,12 @@ export class YourCarIsComponent extends QuoteComponent implements OnInit {
   }
 
   public continue() {
-    this.selectVehicle(QuoteVehicleModel.init());
+    this.continueWithSelectedVehicle = false;
+    this.contextData.vehicle = QuoteVehicleModel.init();
+    this.populateContextData();
+
+    this.routingService.nextStep();
   }
+
+  private isValidData = (): boolean => !this.continueWithSelectedVehicle || !!this.contextData.vehicle?.make;
 }

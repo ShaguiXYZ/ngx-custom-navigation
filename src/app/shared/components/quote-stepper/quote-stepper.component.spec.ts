@@ -8,19 +8,25 @@ import { Step, Stepper } from '../../models/stepper.model';
 import { LiteralToStringPipe } from '../../pipes';
 import { QuoteStepperComponent } from './quote-stepper.component';
 import { QuoteStepperService } from './services';
+import { ContextDataService } from '@shagui/ng-shagui/core';
 
 describe('QuoteStepperComponent', () => {
   let component: QuoteStepperComponent;
   let fixture: ComponentFixture<QuoteStepperComponent>;
+  let contextDataService: jasmine.SpyObj<ContextDataService>;
   let quoteStepperService: jasmine.SpyObj<QuoteStepperService>;
 
   beforeEach(async () => {
+    const contextDataServiceSpy = jasmine.createSpyObj('ContextDataService', ['get']);
     const quoteStepperServiceSpy = jasmine.createSpyObj('QuoteStepperService', ['asObservable', 'goToStep']);
 
     await TestBed.configureTestingModule({
       declarations: [],
       imports: [QuoteStepperComponent, CommonModule, NxCopytextModule, NxIconModule, NxTooltipModule, LiteralToStringPipe],
-      providers: [{ provide: QuoteStepperService, useValue: quoteStepperServiceSpy }]
+      providers: [
+        { provide: ContextDataService, useValue: contextDataServiceSpy },
+        { provide: QuoteStepperService, useValue: quoteStepperServiceSpy }
+      ]
     }).compileComponents();
 
     TestBed.overrideComponent(QuoteStepperComponent, {
@@ -33,6 +39,8 @@ describe('QuoteStepperComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(QuoteStepperComponent);
     component = fixture.componentInstance;
+
+    contextDataService = TestBed.inject(ContextDataService) as jasmine.SpyObj<ContextDataService>;
     quoteStepperService = TestBed.inject(QuoteStepperService) as jasmine.SpyObj<QuoteStepperService>;
   });
 
@@ -48,10 +56,13 @@ describe('QuoteStepperComponent', () => {
       ]
     } as Stepper;
     const mockData = { stepper: mockStepper, stepKey: 'step1' };
+
     quoteStepperService.asObservable.and.returnValue(of(mockData));
+    contextDataService.get.and.returnValue({ navigation: { lastPage: { configuration: { data: { stepperConfig: { label: 'test' } } } } } });
 
     component.ngOnInit();
 
+    expect(contextDataService.get).toHaveBeenCalled();
     expect(component.stepperData).toEqual(mockData);
     expect(component.stepperIndex).toBe(0);
   });

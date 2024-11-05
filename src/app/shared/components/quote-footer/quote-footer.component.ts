@@ -3,7 +3,10 @@ import { CommonModule } from '@angular/common';
 import { Component, inject, Input, OnDestroy, OnInit } from '@angular/core';
 import { NxButtonModule } from '@aposin/ng-aquila/button';
 import { NxIconModule } from '@aposin/ng-aquila/icon';
+import { ContextDataService } from '@shagui/ng-shagui/core';
 import { Subscription } from 'rxjs';
+import { QUOTE_APP_CONTEXT_DATA } from 'src/app/core/constants';
+import { AppContextData } from 'src/app/core/models';
 import { QuoteLiteralDirective } from '../../directives';
 import { QuoteFooterConfig } from './models';
 import { QuoteFooterService } from './services';
@@ -28,6 +31,7 @@ export class QuoteFooterComponent implements OnInit, OnDestroy {
 
   private readonly subscription$: Subscription[] = [];
 
+  private readonly contextDataService = inject(ContextDataService);
   private readonly breakpointObserver = inject(BreakpointObserver);
   private readonly footerService = inject(QuoteFooterService);
 
@@ -37,6 +41,8 @@ export class QuoteFooterComponent implements OnInit, OnDestroy {
         .observe([Breakpoints.HandsetPortrait, Breakpoints.TabletPortrait, Breakpoints.WebPortrait])
         .subscribe((state: BreakpointState) => (this._observedMobileMode = state.breakpoints[Breakpoints.HandsetPortrait]))
     );
+
+    !this.config.ignoreQuoteConfig && this.footerButtonProperties();
   }
 
   get mobileMode(): boolean | undefined {
@@ -57,4 +63,12 @@ export class QuoteFooterComponent implements OnInit, OnDestroy {
   }
 
   public goToPreviousStep = (): void => this.footerService.previousStep();
+
+  private footerButtonProperties = (): void => {
+    const { navigation } = this.contextDataService.get<AppContextData>(QUOTE_APP_CONTEXT_DATA);
+    const lastPage = navigation?.lastPage;
+    const config: Omit<QuoteFooterConfig, 'nextFn' | 'backFn'> = lastPage?.configuration?.data?.['footerConfig'] ?? {};
+
+    this.config = { ...this.config, ...config };
+  };
 }

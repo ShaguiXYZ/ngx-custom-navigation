@@ -8,7 +8,6 @@ import { IndexedData } from '@shagui/ng-shagui/core';
 import { QuoteComponent } from 'src/app/core/models';
 import { RoutingService } from 'src/app/core/services';
 import { HeaderTitleComponent, IconCardComponent, QuoteFooterComponent } from 'src/app/shared/components';
-import { QuoteFooterConfig } from 'src/app/shared/components/quote-footer/models';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
 import { DrivingLicenseIcons } from './models';
 
@@ -34,7 +33,6 @@ export class DrivingLicenseLocationComponent extends QuoteComponent implements O
 
   public drivenLicenseCountries = DrivingLicenseIcons;
   public selectedLocation?: IndexedData;
-  public footerConfig!: QuoteFooterConfig;
 
   private readonly routingService = inject(RoutingService);
   private readonly dialogService = inject(NxDialogService);

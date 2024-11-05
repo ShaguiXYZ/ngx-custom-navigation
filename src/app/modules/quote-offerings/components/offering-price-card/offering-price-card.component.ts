@@ -47,6 +47,7 @@ export class QuoteOfferingPriceCardComponent implements OnInit {
   ngOnInit(): void {
     this.footerConfig = {
       showNext: true,
+      ignoreQuoteConfig: true,
       nextFn: this.callNow.bind(this)
     };
   }

@@ -12,7 +12,7 @@ export class LocationService {
 
   private readonly httpService = inject(HttpService);
 
-  public getProvince = async (provinceCode: string): Promise<string> => {
+  public getProvince = (provinceCode: string): Promise<string> => {
     return firstValueFrom(
       this.httpService
         .get<DataInfo>(`${environment.baseUrl}/provinces`, {
@@ -36,7 +36,9 @@ export class LocationService {
 
     const [provinceCode, locationCode] = [postalCode.slice(0, 2), postalCode.slice(2)];
 
-    return this.getProvince(provinceCode).then(async province => {
+    try {
+      const province = await this.getProvince(provinceCode);
+
       if (!province) {
         return undefined;
       }
@@ -55,7 +57,10 @@ export class LocationService {
       const location = locations.find(data => data.province === provinceCode && data.code === locationCode);
 
       return location ? LocationModel.create(`${location.province}${location.code}`, province, location.location) : undefined;
-    });
+    } catch (error) {
+      console.error('Error fetching address:', error);
+      return undefined;
+    }
   };
 
   private cacheProvinces = (): string => this._PROVINCES_CACHE_ID_;

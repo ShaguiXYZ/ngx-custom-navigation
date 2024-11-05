@@ -16,7 +16,6 @@ import { NxMaskModule } from '@aposin/ng-aquila/mask';
 import { LocationModel, QuoteComponent } from 'src/app/core/models';
 import { LocationService } from 'src/app/core/services';
 import { HeaderTitleComponent, QuoteFooterComponent, QuoteFooterInfoComponent } from 'src/app/shared/components';
-import { QuoteFooterConfig } from 'src/app/shared/components/quote-footer/models';
 import { QuoteLiteralDirective, QuoteMaskDirective } from 'src/app/shared/directives';
 
 @Component({
@@ -40,20 +39,17 @@ import { QuoteLiteralDirective, QuoteMaskDirective } from 'src/app/shared/direct
 export class PlaceComponent extends QuoteComponent implements OnInit {
   public location?: string;
   public form!: FormGroup;
-  public footerConfig: QuoteFooterConfig = { showNext: true };
 
   private readonly locationService = inject(LocationService);
   private readonly fb = inject(FormBuilder);
 
   ngOnInit(): void {
-    this.footerConfig = { ...this.footerConfig, nextFn: this.updateValidData };
-
     this.createForm();
   }
 
-  public override canDeactivate = (): boolean => this.form.valid;
+  public override canDeactivate = (): boolean => this.updateValidData();
 
-  private updateValidData = (): void => {
+  private updateValidData = (): boolean => {
     this.form.markAllAsTouched();
 
     if (this.form.valid) {
@@ -64,6 +60,8 @@ export class PlaceComponent extends QuoteComponent implements OnInit {
 
       this.populateContextData();
     }
+
+    return this.form.valid;
   };
 
   private createForm(): void {

@@ -6,7 +6,6 @@ import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
 import { NxInputModule } from '@aposin/ng-aquila/input';
 import { QuoteComponent } from 'src/app/core/models';
 import { HeaderTitleComponent, QuoteFooterComponent, QuoteFooterInfoComponent } from 'src/app/shared/components';
-import { QuoteFooterConfig } from 'src/app/shared/components/quote-footer/models';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 
@@ -31,7 +30,6 @@ import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 })
 export class ClientIdentificationNumberComponent extends QuoteComponent implements OnInit {
   public form!: FormGroup;
-  public footerConfig!: QuoteFooterConfig;
 
   private readonly fb = inject(FormBuilder);
 

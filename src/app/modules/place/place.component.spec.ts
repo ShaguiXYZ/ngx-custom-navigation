@@ -15,7 +15,7 @@ describe('PlaceComponent', () => {
 
   beforeEach(waitForAsync(() => {
     const translationsServiceSpy = jasmine.createSpyObj('TranslationsService', ['translate']);
-    const locationServiceSpy = jasmine.createSpyObj('LocationService', ['getAddresses']);
+    const locationServiceSpy = jasmine.createSpyObj('LocationService', ['getAddress']);
 
     TestBed.configureTestingModule({
       declarations: [],

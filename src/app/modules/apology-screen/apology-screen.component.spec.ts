@@ -49,14 +49,6 @@ describe('ApologyComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should have footerConfig defined', () => {
-    expect(component.footerConfig).toBeDefined();
-  });
-
-  it('should set showNext to true in footerConfig', () => {
-    expect(component.footerConfig.showNext).toBeTrue();
-  });
-
   it('should render HeaderTitleComponent', () => {
     const headerTitleElement = fixture.debugElement.nativeElement.querySelector('quote-header-title');
     expect(headerTitleElement).not.toBeNull();

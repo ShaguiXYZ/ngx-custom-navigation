@@ -56,7 +56,7 @@ describe('QuoteHeaderComponent', () => {
 
     component.ngOnInit();
 
-    expect(component.showBackButton).toBe(true);
+    expect(component.config.showBack).toBe(true);
   });
 
   it('should unsubscribe on destroy', () => {
@@ -85,7 +85,7 @@ describe('QuoteHeaderComponent', () => {
 
     component.ngOnInit();
 
-    expect(component.showBackButton).toBe(true);
+    expect(component.config.showBack).toBe(true);
   });
 
   it('should set showBackButton to true if showBack is not defined in lastPage', () => {
@@ -103,6 +103,6 @@ describe('QuoteHeaderComponent', () => {
 
     component.ngOnInit();
 
-    expect(component.showBackButton).toBe(true);
+    expect(component.config.showBack).toBe(true);
   });
 });
