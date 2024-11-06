@@ -2,6 +2,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ContextDataService } from '@shagui/ng-shagui/core';
 import { QUOTE_APP_CONTEXT_DATA } from 'src/app/core/constants';
+import { JourneyError } from 'src/app/core/errors';
 import { AppContextData, Page } from 'src/app/core/models';
 
 /**
@@ -26,7 +27,7 @@ export class JourneyHomeComponent implements OnInit {
     if (homePageId) {
       this._router.navigate([Page.routeFrom(pageMap[homePageId])], { skipLocationChange: true });
     } else {
-      throw new Error('Home page not found in configuration');
+      throw new JourneyError('Home page not found in configuration');
     }
   }
 }

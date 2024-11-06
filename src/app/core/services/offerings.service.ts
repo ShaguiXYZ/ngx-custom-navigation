@@ -1,5 +1,6 @@
+import { HttpStatusCode } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { HttpService, HttpStatus } from '@shagui/ng-shagui/core';
+import { HttpService } from '@shagui/ng-shagui/core';
 import { firstValueFrom, map } from 'rxjs';
 import { OfferingDTO, OfferingModel } from 'src/app/shared/models';
 import { environment } from 'src/environments/environment';
@@ -13,7 +14,7 @@ export class OfferingsService {
       this.httpService
         .get<OfferingDTO>(`${environment.baseUrl}/offerings`, {
           responseStatusMessage: {
-            [HttpStatus.notFound]: { text: 'Notifications.ModelsNotFound' }
+            [HttpStatusCode.NotFound]: { text: 'Notifications.ModelsNotFound' }
           },
           showLoading: true
         })

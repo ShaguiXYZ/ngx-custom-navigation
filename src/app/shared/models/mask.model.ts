@@ -20,16 +20,8 @@ class QuoteMask {
     this.mask = QUOTE_MASK_REGEX[maskType];
   }
 
-  public getRegex(): QuoteMaskRegex {
-    return this.mask;
-  }
-
   public test(value: string): boolean {
     return this.mask.regExp.test(value);
-  }
-
-  public exec(value: string): RegExpExecArray | null {
-    return this.mask.regExp.exec(value);
   }
 
   public match(value: string): RegExpMatchArray | null {

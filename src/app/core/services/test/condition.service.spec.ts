@@ -70,4 +70,15 @@ describe('ConditionService', () => {
 
     expect(service.checkConditions(conditions)).toBeTrue();
   });
+
+  it('should log an error if condition evaluation fails', () => {
+    const conditions: Condition[] = [{ expression: 'quote.status', operation: 'xxx', value: 'approved' }];
+
+    contextDataServiceSpy.get.and.returnValue({ quote: { status: 'approved' } });
+    spyOn(console, 'group');
+    spyOn(console, 'error');
+
+    expect(service.checkConditions(conditions)).toBeFalse();
+    expect(console.error).toHaveBeenCalled();
+  });
 });

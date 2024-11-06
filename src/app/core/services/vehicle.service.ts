@@ -1,6 +1,7 @@
+import { HttpStatusCode } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-import { HttpService, HttpStatus, TTL, UniqueIds } from '@shagui/ng-shagui/core';
-import { firstValueFrom, map } from 'rxjs';
+import { HttpService, TTL, UniqueIds } from '@shagui/ng-shagui/core';
+import { catchError, firstValueFrom, map } from 'rxjs';
 import {
   BrandKey,
   CubicCapacityDTO,
@@ -13,6 +14,7 @@ import {
   VehicleClassesModel
 } from 'src/app/shared/models';
 import { environment } from 'src/environments/environment';
+import { HttpError } from '../errors';
 
 @Injectable({ providedIn: 'root' })
 export class VehicleService {
@@ -29,11 +31,14 @@ export class VehicleService {
       this.http
         .get<QuoteVehicleModel[]>(`${environment.baseUrl}/plate`, {
           responseStatusMessage: {
-            [HttpStatus.notFound]: { text: 'Notifications.VehicleNotFound' }
+            [HttpStatusCode.NotFound]: { text: 'Notifications.VehicleNotFound' }
           },
           showLoading: true
         })
         .pipe(
+          catchError(error => {
+            throw new HttpError(error.status, error.statusText);
+          }),
           map(res => res as QuoteVehicleModel[]),
           map(res => res.find(data => data.plateNumber === plate.toLocaleUpperCase().replace(/[^A-Z0-9]/g, '')))
         )
@@ -45,12 +50,17 @@ export class VehicleService {
       this.http
         .get<string[]>(`${environment.baseUrl}/brand`, {
           responseStatusMessage: {
-            [HttpStatus.notFound]: { text: 'Notifications.ModelsNotFound' }
+            [HttpStatusCode.NotFound]: { text: 'Notifications.ModelsNotFound' }
           },
           showLoading: true,
           cache: { id: this.cacheBranches(), ttl: TTL.XXL }
         })
         .pipe(
+          catchError(error => {
+            console.log('error', error);
+
+            throw new HttpError(error.status, error.statusText);
+          }),
           map(res => (res as string[]).filter(data => data.toLowerCase().includes(brand.toLowerCase()))),
           map(res => res.sort((a, b) => a.localeCompare(b)))
         )
@@ -62,12 +72,15 @@ export class VehicleService {
       this.http
         .get<string[]>(`${environment.baseUrl}/model`, {
           responseStatusMessage: {
-            [HttpStatus.notFound]: { text: 'Notifications.ModelsNotFound' }
+            [HttpStatusCode.NotFound]: { text: 'Notifications.ModelsNotFound' }
           },
           showLoading: true,
           cache: { id: this.cacheModelByBranch(brand), ttl: TTL.L }
         })
         .pipe(
+          catchError(error => {
+            throw new HttpError(error.status, error.statusText);
+          }),
           map(res => res as string[]),
           map(res => (!brand ? [] : res)),
           map(res => (search ? res.filter(data => data.toLowerCase().includes(search.toLowerCase())) : res)),
@@ -81,12 +94,15 @@ export class VehicleService {
       this.http
         .get<ModelVersionModel[]>(`${environment.baseUrl}/version`, {
           responseStatusMessage: {
-            [HttpStatus.notFound]: { text: 'Notifications.ModelVersionsNotFound' }
+            [HttpStatusCode.NotFound]: { text: 'Notifications.ModelVersionsNotFound' }
           },
           showLoading: true,
           cache: { id: this.cacheModelVersionByBranch(model), ttl: TTL.L }
         })
         .pipe(
+          catchError(error => {
+            throw new HttpError(error.status, error.statusText);
+          }),
           map(res => (!model ? [] : res)),
           map(res => (res as ModelVersionModel[]).filter(data => !!data.data)),
           map(res => res.sort((a, b) => a.data.localeCompare(b.data)))
@@ -101,11 +117,14 @@ export class VehicleService {
       this.http
         .get<FuelDTO[]>(`${environment.baseUrl}/fuel`, {
           responseStatusMessage: {
-            [HttpStatus.notFound]: { text: 'Notifications.FuelsNotFound' }
+            [HttpStatusCode.NotFound]: { text: 'Notifications.FuelsNotFound' }
           },
           showLoading: true
         })
         .pipe(
+          catchError(error => {
+            throw new HttpError(error.status, error.statusText);
+          }),
           map(res => res as FuelDTO[]),
           map(res => res.map(FuelModel.fromDTO)),
           map(res => (!make || !model ? [] : res))
@@ -120,11 +139,14 @@ export class VehicleService {
       this.http
         .get<CubicCapacityDTO[]>(`${environment.baseUrl}/cubic-capacity`, {
           responseStatusMessage: {
-            [HttpStatus.notFound]: { text: 'Notifications.CubicCapacitiesNotFound' }
+            [HttpStatusCode.NotFound]: { text: 'Notifications.CubicCapacitiesNotFound' }
           },
           showLoading: true
         })
         .pipe(
+          catchError(error => {
+            throw new HttpError(error.status, error.statusText);
+          }),
           map(res => res as CubicCapacityDTO[]),
           map(res => res.map(CubicCapacityModel.fromDTO)),
           map(res => (!make || !model ? [] : res))
@@ -140,11 +162,14 @@ export class VehicleService {
         .get<VehicleClassesDTO[]>(`${environment.baseUrl}/power`, {
           // clientOptions: { params },
           responseStatusMessage: {
-            [HttpStatus.notFound]: { text: 'Notifications.PowersNotFound' }
+            [HttpStatusCode.NotFound]: { text: 'Notifications.PowersNotFound' }
           },
           showLoading: true
         })
         .pipe(
+          catchError(error => {
+            throw new HttpError(error.status, error.statusText);
+          }),
           map(res => res as VehicleClassesDTO[]),
           map(res => res.map(VehicleClassesModel.fromDTO)),
           map(res => (!make || !model ? [] : res))
@@ -157,11 +182,16 @@ export class VehicleService {
       this.http
         .get<QuoteVehicleModel[]>(`${environment.baseUrl}/vehicle`, {
           responseStatusMessage: {
-            [HttpStatus.notFound]: { text: 'Notifications.VehiclesNotFound' }
+            [HttpStatusCode.NotFound]: { text: 'Notifications.VehiclesNotFound' }
           },
           showLoading: true
         })
-        .pipe(map(res => res as QuoteVehicleModel[]))
+        .pipe(
+          catchError(error => {
+            throw new HttpError(error.status, error.statusText);
+          }),
+          map(res => res as QuoteVehicleModel[])
+        )
     );
   }
 

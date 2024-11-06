@@ -1,8 +1,10 @@
+import { HttpStatusCode } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { DataInfo, HttpService, HttpStatus, TTL, UniqueIds } from '@shagui/ng-shagui/core';
-import { firstValueFrom, map } from 'rxjs';
+import { DataInfo, HttpService, TTL, UniqueIds } from '@shagui/ng-shagui/core';
+import { catchError, firstValueFrom, map } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { LocationDTO, LocationModel } from '../models';
+import { HttpError } from '../errors';
 
 @Injectable({
   providedIn: 'root'
@@ -17,12 +19,15 @@ export class LocationService {
       this.httpService
         .get<DataInfo>(`${environment.baseUrl}/provinces`, {
           responseStatusMessage: {
-            [HttpStatus.notFound]: { text: 'Notifications.ProvinceNotFound' }
+            [HttpStatusCode.NotFound]: { text: 'Notifications.ProvinceNotFound' }
           },
           showLoading: true,
           cache: { id: this.cacheProvinces(), ttl: TTL.XXL }
         })
         .pipe(
+          catchError(error => {
+            throw new HttpError(error.status, error.statusText);
+          }),
           map(res => res as DataInfo),
           map(res => res[provinceCode])
         )
@@ -47,11 +52,16 @@ export class LocationService {
         this.httpService
           .get<LocationDTO[]>(`${environment.baseUrl}/locations`, {
             responseStatusMessage: {
-              [HttpStatus.notFound]: { text: 'Notifications.ModelsNotFound' }
+              [HttpStatusCode.NotFound]: { text: 'Notifications.ModelsNotFound' }
             },
             showLoading: true
           })
-          .pipe(map(res => res as LocationDTO[]))
+          .pipe(
+            catchError(error => {
+              throw new HttpError(error.status, error.statusText);
+            }),
+            map(res => res as LocationDTO[])
+          )
       );
 
       const location = locations.find(data => data.province === provinceCode && data.code === locationCode);

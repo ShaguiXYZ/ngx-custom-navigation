@@ -1,8 +1,10 @@
+import { HttpStatusCode } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { HttpService, HttpStatus, IndexedData, TTL, UniqueIds } from '@shagui/ng-shagui/core';
-import { firstValueFrom, map } from 'rxjs';
+import { HttpService, IndexedData, TTL, UniqueIds } from '@shagui/ng-shagui/core';
+import { catchError, firstValueFrom, map } from 'rxjs';
 import { InsuranceCompany, InsuranceCompanyDTO } from 'src/app/shared/models';
 import { environment } from 'src/environments/environment';
+import { HttpError } from '../errors';
 
 @Injectable({ providedIn: 'root' })
 export class InsuranceCompaniesService {
@@ -15,12 +17,15 @@ export class InsuranceCompaniesService {
       this.httpService
         .get<InsuranceCompanyDTO[]>(`${environment.baseUrl}/insurance-companies`, {
           responseStatusMessage: {
-            [HttpStatus.notFound]: { text: 'Notifications.ModelsNotFound' }
+            [HttpStatusCode.NotFound]: { text: 'Notifications.ModelsNotFound' }
           },
           showLoading: true,
           cache: { id: this.cacheInsuranceCompanies(), ttl: TTL.XXL }
         })
         .pipe(
+          catchError(error => {
+            throw new HttpError(error.status, error.statusText);
+          }),
           map(res => res as InsuranceCompanyDTO[]),
           map(res => res.map(data => InsuranceCompany.create(data))),
           map(res => (insurance ? res.filter(data => data.data.toLowerCase().includes(insurance.toLowerCase())) : res)),
