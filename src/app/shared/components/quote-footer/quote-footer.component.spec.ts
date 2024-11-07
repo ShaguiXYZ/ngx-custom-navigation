@@ -17,7 +17,7 @@ describe('QuoteFooterComponent', () => {
   beforeEach(async () => {
     const breakpointObserverSpy = jasmine.createSpyObj('BreakpointObserver', ['observe']);
     const quoteFooterServiceSpy = jasmine.createSpyObj('QuoteFooterService', ['nextStep', 'previousStep']);
-    const translationsServiceSpy = jasmine.createSpyObj('TranslationsService', ['translate']);
+    const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate']);
 
     await TestBed.configureTestingModule({
       declarations: [],
@@ -26,7 +26,7 @@ describe('QuoteFooterComponent', () => {
         { provide: BreakpointObserver, useValue: breakpointObserverSpy },
         { provide: QuoteFooterService, useValue: quoteFooterServiceSpy },
         { provide: ContextDataService, useClass: ContextDataServiceStub },
-        { provide: TranslateService, useValue: translationsServiceSpy }
+        { provide: TranslateService, useValue: translateServiceSpy }
       ]
     }).compileComponents();
 

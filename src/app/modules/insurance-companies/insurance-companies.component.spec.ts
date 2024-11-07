@@ -19,7 +19,7 @@ describe('InsuranceCompaniesComponent', () => {
 
   beforeEach(async () => {
     const insuranceCompaniesServiceSpy = jasmine.createSpyObj('InsuranceCompaniesService', ['companies']);
-    const translationsServiceSpy = jasmine.createSpyObj('TranslationsService', ['translate']);
+    const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate']);
     const routingServiceSpy = jasmine.createSpyObj('RoutingService', ['nextStep']);
 
     await TestBed.configureTestingModule({
@@ -28,7 +28,7 @@ describe('InsuranceCompaniesComponent', () => {
       providers: [
         FormBuilder,
         { provide: ContextDataService, useClass: ContextDataServiceStub },
-        { provide: TranslateService, useValue: translationsServiceSpy },
+        { provide: TranslateService, useValue: translateServiceSpy },
         { provide: InsuranceCompaniesService, useValue: insuranceCompaniesServiceSpy },
         { provide: RoutingService, useValue: routingServiceSpy }
       ]

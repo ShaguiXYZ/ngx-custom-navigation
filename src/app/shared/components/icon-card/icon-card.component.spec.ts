@@ -18,14 +18,14 @@ describe('IconCardComponent', () => {
   let fixture: ComponentFixture<IconCardComponent>;
 
   beforeEach(async () => {
-    const translationsServiceSpy = jasmine.createSpyObj('TranslationsService', ['translate']);
+    const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate']);
 
     await TestBed.configureTestingModule({
       declarations: [],
       imports: [IconCardComponent, CommonModule, SelectableOptionComponent, NxAvatarModule, NxCopytextModule, QuoteLiteralDirective],
       providers: [
         { provide: ContextDataService, useClass: ContextDataServiceStub },
-        { provide: TranslateService, useValue: translationsServiceSpy }
+        { provide: TranslateService, useValue: translateServiceSpy }
       ],
       deferBlockBehavior: DeferBlockBehavior.Manual
     }).compileComponents();

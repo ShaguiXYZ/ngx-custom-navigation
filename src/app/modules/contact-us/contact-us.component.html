@@ -1,24 +1,16 @@
 <!-- eslint-disable @angular-eslint/template/elements-content -->
-<article>
+<article class="center__info">
   <header class="nx-margin-bottom-3m">
-    <div class="center__header">
-      <h4 nxHeadline="subsection-xsmall" class="nx-font-weight-bold" nxQuoteLiteral="header"></h4>
-      <div class="avatar__container nx-icon--fill nx-margin-y-m">
-        <em class="fa-solid fa-2xl fa-phone"></em>
-      </div>
+    <div class="info__header nx-margin-bottom-xl">
+      <h4 nxHeadline="subsection-xsmall" class="nx-font-weight-bold" nxQuoteLiteral="contact-us-header"></h4>
     </div>
-    <quote-header-title>
-      <h4 class="nx-font-weight-semibold" nxHeadline="subsection-xsmall" nxQuoteLiteral="subheader" size="s"></h4>
-      <p class="nx-margin-top-xs" nxCopytext="large" nxQuoteLiteral="body"></p>
-    </quote-header-title>
+    <h3 nxHeadline="subsection-xsmall" nxQuoteLiteral="contact-us-title"></h3>
+    <section class="form-container">
+      <div class="info-row info-phone nx-margin-y-s" nxQuoteLiteral="contact-us-phone"></div>
+      @for(text of contactUsTexts; track $index) {
+      <div nxCopytext="medium" class="info-row" [nxQuoteLiteral]="text"></div>
+      }
+    </section>
   </header>
-  <quote-footer>
-    <div class="extra__footer__options nx-margin-top-3m">
-      <p nxCopytext="large" nxQuoteLiteral="contact-us-later"></p>
-      <p nxCopytext="large" class="phone-number nx-margin-top-3xs nx-font-weight-bold">
-        <em class="fa-solid fa-sm fa-phone fa-shake nx-margin-right-2xs"></em>
-        <span nxQuoteLiteral="company-phone"></span>
-      </p>
-    </div>
-  </quote-footer>
+  <quote-footer />
 </article>

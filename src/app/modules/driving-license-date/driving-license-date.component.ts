@@ -1,20 +1,11 @@
 import { Component, OnInit, inject } from '@angular/core';
-import {
-  AbstractControl,
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  FormsModule,
-  ReactiveFormsModule,
-  ValidationErrors,
-  ValidatorFn,
-  Validators
-} from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { NX_DATE_LOCALE, NxDatefieldModule } from '@aposin/ng-aquila/datefield';
 import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
 import { NxInputModule } from '@aposin/ng-aquila/input';
 import { NxMomentDateModule } from '@aposin/ng-aquila/moment-date-adapter';
 import moment, { Moment } from 'moment';
+import { isFutureDate, minYearsBetweenDates } from 'src/app/core/form';
 import { QuoteComponent } from 'src/app/core/models';
 import { HeaderTitleComponent, QuoteFooterComponent } from 'src/app/shared/components';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
@@ -41,8 +32,9 @@ import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 })
 export class DrivingLicenseDateComponent extends QuoteComponent implements OnInit {
   public form!: FormGroup;
-  public drivingLicenseDateFromContext?: Moment;
+  public minYears = 18;
 
+  private drivingLicenseDateFromContext?: Moment;
   private readonly fb = inject(FormBuilder);
 
   ngOnInit(): void {
@@ -72,12 +64,14 @@ export class DrivingLicenseDateComponent extends QuoteComponent implements OnIni
       this.drivingLicenseDateFromContext = moment(new Date(this.contextData.driven.drivenLicenseDate));
     }
 
-    this.form = this.fb.group({
-      drivenLicenseDate: new FormControl(this.drivingLicenseDateFromContext, [Validators.required, this.preventFutureDate()])
-    });
-  }
+    const birthdate = moment(this.contextData.personalData.birthdate).toDate();
 
-  private preventFutureDate(): ValidatorFn {
-    return (control: AbstractControl): ValidationErrors | null => (moment(control.value).isAfter(moment()) ? { futureDate: true } : null);
+    this.form = this.fb.group({
+      drivenLicenseDate: new FormControl(this.drivingLicenseDateFromContext, [
+        Validators.required,
+        isFutureDate(),
+        minYearsBetweenDates(birthdate, this.minYears)
+      ])
+    });
   }
 }

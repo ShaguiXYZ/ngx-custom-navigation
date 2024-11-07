@@ -19,7 +19,7 @@ describe('MakeComponent', () => {
   let routingService: jasmine.SpyObj<RoutingService>;
 
   beforeEach(async () => {
-    const translationsServiceSpy = jasmine.createSpyObj('TranslationsService', ['translate']);
+    const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate']);
     const vehicleServiceSpy = jasmine.createSpyObj('VehicleService', ['getBrands']);
     const routingServiceSpy = jasmine.createSpyObj('RoutingService', ['nextStep']);
 
@@ -28,7 +28,7 @@ describe('MakeComponent', () => {
       imports: [MakeComponent, ReactiveFormsModule, FormsModule, NxIconModule, NxFormfieldModule, NxInputModule],
       providers: [
         { provide: ContextDataService, useClass: ContextDataServiceStub },
-        { provide: TranslateService, useValue: translationsServiceSpy },
+        { provide: TranslateService, useValue: translateServiceSpy },
         { provide: VehicleService, useValue: vehicleServiceSpy },
         { provide: RoutingService, useValue: routingServiceSpy }
       ]

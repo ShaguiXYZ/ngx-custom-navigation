@@ -18,14 +18,14 @@ describe('DrivingLicenseLocationComponent', () => {
   beforeEach(async () => {
     const routingServiceSpy = jasmine.createSpyObj('RoutingService', ['nextStep']);
     const dialogServiceSpy = jasmine.createSpyObj('NxDialogService', ['open']);
-    const translationsServiceSpy = jasmine.createSpyObj('TranslationsService', ['translate']);
+    const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate']);
 
     await TestBed.configureTestingModule({
       declarations: [],
       imports: [DrivingLicenseLocationComponent],
       providers: [
         { provide: ContextDataService, useClass: ContextDataServiceStub },
-        { provide: TranslateService, useValue: translationsServiceSpy },
+        { provide: TranslateService, useValue: translateServiceSpy },
         { provide: RoutingService, useValue: routingServiceSpy },
         { provide: NxDialogService, useValue: dialogServiceSpy }
       ]

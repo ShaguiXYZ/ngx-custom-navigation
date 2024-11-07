@@ -26,7 +26,7 @@ describe('VehicleFuelComponent', () => {
   beforeEach(async () => {
     const routingServiceSpy = jasmine.createSpyObj('RoutingService', ['nextStep']);
     const vehicleServiceSpy = jasmine.createSpyObj('VehicleService', ['getFuelTypes', 'getVehicleClasses', 'cubicCapacities']);
-    const translationsServiceSpy = jasmine.createSpyObj('TranslationsService', ['translate']);
+    const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate']);
 
     await TestBed.configureTestingModule({
       declarations: [],
@@ -48,7 +48,7 @@ describe('VehicleFuelComponent', () => {
         { provide: ContextDataService, useClass: ContextDataServiceStub },
         { provide: RoutingService, useValue: routingServiceSpy },
         { provide: VehicleService, useValue: vehicleServiceSpy },
-        { provide: TranslateService, useValue: translationsServiceSpy }
+        { provide: TranslateService, useValue: translateServiceSpy }
       ]
     }).compileComponents();
   });

@@ -18,6 +18,10 @@
         <nx-error appearance="text" nxFormfieldError><span nxQuoteLiteral="error-required"></span> </nx-error>
         } @if(form.get('drivenLicenseDate')?.errors?.['futureDate']) {
         <nx-error appearance="text" nxFormfieldError><span nxQuoteLiteral="error-future-date"></span> </nx-error>
+        } @if(form.get('drivenLicenseDate')?.errors?.['minYearsBetweenDates']) {
+        <nx-error appearance="text" nxFormfieldError
+          ><span nxQuoteLiteral="error-min-years-between" [uiQuoteLitealParams]="{ value: minYears }"></span>
+        </nx-error>
         }
       </nx-formfield>
     </form>

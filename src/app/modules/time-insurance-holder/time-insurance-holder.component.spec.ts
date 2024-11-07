@@ -18,7 +18,7 @@ describe('TimeInsuranceHolderComponent', () => {
   let routingService: jasmine.SpyObj<RoutingService>;
 
   beforeEach(async () => {
-    const translationsServiceSpy = jasmine.createSpyObj('TranslationsService', ['translate']);
+    const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['instant', 'translate']);
     const routingServiceSpy = jasmine.createSpyObj('RoutingService', ['nextStep']);
 
     await TestBed.configureTestingModule({
@@ -34,7 +34,7 @@ describe('TimeInsuranceHolderComponent', () => {
       ],
       providers: [
         { provide: ContextDataService, useClass: ContextDataServiceStub },
-        { provide: TranslateService, useValue: translationsServiceSpy },
+        { provide: TranslateService, useValue: translateServiceSpy },
         { provide: RoutingService, useValue: routingServiceSpy }
       ]
     }).compileComponents();

@@ -18,7 +18,7 @@ describe('QuoteOfferingsComponent', () => {
 
   beforeEach(async () => {
     const contextDataServiceSpy = jasmine.createSpyObj('ContextDataService', ['get', 'set']);
-    const translationsServiceSpy = jasmine.createSpyObj('TranslationsService', ['translate']);
+    const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate']);
     const offeringsServiceSpy = jasmine.createSpyObj('OfferingsService', ['pricing']);
     const routingServiceSpy = jasmine.createSpyObj('RoutingService', ['nextStep']);
 
@@ -27,7 +27,7 @@ describe('QuoteOfferingsComponent', () => {
       imports: [QuoteOfferingsComponent],
       providers: [
         { provide: ContextDataService, useValue: contextDataServiceSpy },
-        { provide: TranslateService, useValue: translationsServiceSpy },
+        { provide: TranslateService, useValue: translateServiceSpy },
         { provide: OfferingsService, useValue: offeringsServiceSpy },
         { provide: RoutingService, useValue: routingServiceSpy }
       ]

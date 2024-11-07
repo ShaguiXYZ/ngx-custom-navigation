@@ -1,8 +1,7 @@
 import { DataInfo } from '@shagui/ng-shagui/core';
-import { LiteralModel } from 'src/app/core/models';
 
 export interface StepDTO {
-  label: LiteralModel;
+  label: string;
   pages: string[];
 }
 
@@ -13,7 +12,7 @@ export interface StepperDTO {
 
 export interface Step {
   key: string;
-  label: LiteralModel;
+  label: string;
   pages: string[];
 }
 

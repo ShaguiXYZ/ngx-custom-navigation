@@ -28,7 +28,7 @@ describe('AppComponent', () => {
   beforeEach(async () => {
     const notificationServiceSpy = jasmine.createSpyObj('NotificationService', ['warning', 'onNotification', 'onCloseNotification']);
     const routingServiceSpy = jasmine.createSpyObj('RoutingService', ['previousStep']);
-    const translationsServiceSpy = jasmine.createSpyObj('TranslationsService', ['translate']);
+    const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate']);
 
     await TestBed.configureTestingModule({
       declarations: [],
@@ -48,7 +48,7 @@ describe('AppComponent', () => {
         { provide: ContextDataService, useClass: ContextDataServiceStub },
         { provide: NotificationService, useValue: notificationServiceSpy },
         { provide: RoutingService, useValue: routingServiceSpy },
-        { provide: TranslateService, useValue: translationsServiceSpy },
+        { provide: TranslateService, useValue: translateServiceSpy },
         QuoteLiteralPipe
       ]
     }).compileComponents();

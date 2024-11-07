@@ -5,6 +5,7 @@ import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
 import { NxInputModule } from '@aposin/ng-aquila/input';
 import { NxMomentDateModule } from '@aposin/ng-aquila/moment-date-adapter';
 import moment, { Moment } from 'moment';
+import { isPastDate } from 'src/app/core/form';
 import { QuoteComponent } from 'src/app/core/models';
 import { HeaderTitleComponent, QuoteFooterComponent } from 'src/app/shared/components';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
@@ -62,7 +63,7 @@ export class DateOfIssueComponent extends QuoteComponent implements OnInit {
       this.dateOfIssueFromContext = moment(new Date(this.contextData.client.dateOfIssue));
     }
     this.form = this.fb.group({
-      dateOfIssue: new FormControl(this.dateOfIssueFromContext, [Validators.required])
+      dateOfIssue: new FormControl(this.dateOfIssueFromContext, [Validators.required, isPastDate()])
     });
   }
 }

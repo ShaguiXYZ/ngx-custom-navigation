@@ -16,7 +16,7 @@ describe('ApologyComponent', () => {
   let fixture: ComponentFixture<ApologyComponent>;
 
   beforeEach(async () => {
-    const translationsServiceSpy = jasmine.createSpyObj('TranslationsService', ['translate']);
+    const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate']);
 
     await TestBed.configureTestingModule({
       declarations: [],
@@ -33,7 +33,7 @@ describe('ApologyComponent', () => {
       ],
       providers: [
         { provide: ContextDataService, useClass: ContextDataServiceStub },
-        { provide: TranslateService, useValue: translationsServiceSpy }
+        { provide: TranslateService, useValue: translateServiceSpy }
       ]
     }).compileComponents();
   });

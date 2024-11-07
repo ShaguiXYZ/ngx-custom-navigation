@@ -1,0 +1,23 @@
+<article class="component-container">
+  <quote-header-title
+    ><span class="coverages__title" nxHeadline="subsection-medium">Compara las coberturas de tu seguro</span></quote-header-title
+  >
+  <section class="form-container">
+    <nx-tab-group [selectedIndex]="selectedPriceIndex" [mobileAccordion]="false" (selectedTabChange)="selectedPriceIndexChange($event)">
+      @for(price of prices; track price.modalityId) {
+      <nx-tab [label]="price.modalityDescription || price.modalityId.toString()">
+        <div class="coverages">
+          @for(coverage of coverageList; track coverage.code) {
+          <div class="coverage">
+            <p nxCopytext="normal" class="nx-margin-right-m">
+              <!-- {{ coverage.texto }} -->
+            </p>
+            <nx-icon class="coverage-icon nx-margin-right-xs" name="check" size="s" />
+          </div>
+          }
+        </div>
+      </nx-tab>
+      }
+    </nx-tab-group>
+  </section>
+</article>

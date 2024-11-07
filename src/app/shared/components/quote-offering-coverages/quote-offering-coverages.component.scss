@@ -1,0 +1,31 @@
+.coverages__title {
+  display: flex;
+  font-size: 26px;
+  font-weight: 300;
+  justify-content: center;
+  text-align: center;
+}
+
+.coverages {
+  padding: 16px 0;
+
+  .coverage {
+    align-items: flex-start;
+    display: flex;
+    padding: 16px 0;
+
+    p {
+      flex: 1;
+      margin: 0;
+      padding: 0;
+    }
+
+    .coverage-icon {
+      color: var(--success);
+    }
+  }
+
+  .coverage + .coverage {
+    border-top: 1px solid var(--tab-item-border-color);
+  }
+}

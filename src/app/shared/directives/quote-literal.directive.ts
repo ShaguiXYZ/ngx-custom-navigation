@@ -21,7 +21,7 @@ export class QuoteLiteralDirective implements AfterViewInit {
   public uiAttribute?: string;
 
   @Input()
-  public uiProperty = 'innerText';
+  public uiProperty = 'innerHTML';
 
   constructor(
     private readonly el: ElementRef<HTMLElement>,

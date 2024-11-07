@@ -21,7 +21,7 @@ describe('DateOfIssueComponent', () => {
   let contextDataService: jasmine.SpyObj<ContextDataService>;
 
   beforeEach(async () => {
-    const translationsServiceSpy = jasmine.createSpyObj('TranslationsService', ['translate']);
+    const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate']);
 
     await TestBed.configureTestingModule({
       declarations: [],
@@ -41,7 +41,7 @@ describe('DateOfIssueComponent', () => {
       providers: [
         { provide: NX_DATE_LOCALE, useValue: 'es-ES' },
         { provide: ContextDataService, useClass: ContextDataServiceStub },
-        { provide: TranslateService, useValue: translationsServiceSpy }
+        { provide: TranslateService, useValue: translateServiceSpy }
       ]
     }).compileComponents();
 
@@ -70,8 +70,9 @@ describe('DateOfIssueComponent', () => {
 
   it('should mark form as touched and update context data on updateValidData', () => {
     const setContextDataSpy = spyOn(contextDataService, 'set');
+    const futureDate = moment().add(1, 'day').format('YYYY-MM-DD');
 
-    component.form.controls['dateOfIssue'].setValue('2023-01-02');
+    component.form.controls['dateOfIssue'].setValue(futureDate);
     const isValid = component['updateValidData']();
 
     expect(isValid).toBeTrue();
@@ -79,13 +80,15 @@ describe('DateOfIssueComponent', () => {
     expect(setContextDataSpy).toHaveBeenCalledWith(
       QUOTE_CONTEXT_DATA,
       jasmine.objectContaining({
-        client: { dateOfIssue: '2023-01-02' }
+        client: { dateOfIssue: futureDate }
       })
     );
   });
 
   it('should return form validity on canDeactivate', done => {
-    component.form.controls['dateOfIssue'].setValue('2023-01-02');
+    const futureDate = moment().add(1, 'day').format('YYYY-MM-DD');
+
+    component.form.controls['dateOfIssue'].setValue(futureDate);
     const result = component.canDeactivate();
 
     expect(result).toBeTrue();

@@ -19,7 +19,7 @@ describe('DrivingLicenseDateComponent', () => {
   let contextDataService: jasmine.SpyObj<ContextDataService>;
 
   beforeEach(async () => {
-    const translationsServiceSpy = jasmine.createSpyObj('TranslationsService', ['translate']);
+    const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate']);
 
     await TestBed.configureTestingModule({
       declarations: [],
@@ -34,7 +34,7 @@ describe('DrivingLicenseDateComponent', () => {
       ],
       providers: [
         { provide: ContextDataService, useClass: ContextDataServiceStub },
-        { provide: TranslateService, useValue: translationsServiceSpy }
+        { provide: TranslateService, useValue: translateServiceSpy }
       ]
     }).compileComponents();
   });
@@ -46,6 +46,7 @@ describe('DrivingLicenseDateComponent', () => {
     contextDataService = TestBed.inject(ContextDataService) as jasmine.SpyObj<ContextDataService>;
 
     component['contextData'] = {
+      personalData: { birthdate: '01-01-2000' },
       driven: { drivenLicenseDate: '01-01-2022' }
     } as unknown as QuoteModel;
 

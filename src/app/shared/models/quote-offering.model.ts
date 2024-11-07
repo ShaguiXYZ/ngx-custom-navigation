@@ -6,7 +6,7 @@ export interface ReceiptDataDTO {
 
 export interface CoverageDTO {
   code: number;
-  text: string;
+  texto: string;
   description: string;
   isContracted: string;
   value: string;
@@ -135,7 +135,7 @@ export namespace OfferingModel {
     const prices: OfferingPriceModel[] = dto.operationData.priceGrid.map(priceGrid => {
       const mapCoverage = (coverageDTO: CoverageDTO): Coverage => ({
         code: coverageDTO.code,
-        text: coverageDTO.text,
+        text: coverageDTO.texto,
         description: coverageDTO.description,
         isContracted: coverageDTO.isContracted,
         value: coverageDTO.value,

@@ -17,7 +17,7 @@ const appContextDataMock: AppContextData = {
           steps: [
             {
               key: 'step1',
-              label: { value: 'key1', type: 'translate' },
+              label: 'key1',
               pages: ['page1']
             },
             {

@@ -2,6 +2,7 @@
   "Errors": {
     "FieldRequired": "Campo requerido",
     "FutureDate": "La fecha no puede ser futura",
+    "PastDate": "La fecha no puede ser pasada",
     "OldDate": "La fecha no puede ser anterior a {{value}}"
   },
   "Label": {

@@ -175,7 +175,8 @@
       "configuration": {
         "literals": {
           "header": "¿Cuándo sacaste el carnet de conducir?",
-          "issue-date": "Fecha de emisión"
+          "issue-date": "Fecha de emisión",
+          "error-min-years-between": "El carnet de conducir debe tener al menos {{value}} años"
         }
       }
     },
@@ -262,11 +263,6 @@
           "footer-info": "Facilitando tu matrícula obtendrás tu cotización mucho más rápido",
           "header": "¿Cuál es la matrícula de tu coche?",
           "license-plate": "Matrícula"
-        },
-        "data": {
-          "stepperConfig": {
-            "label": { "value": "Matrícula del coche", "type": "value" }
-          }
         }
       }
     },
@@ -602,10 +598,13 @@
       "pageId": "contact-us",
       "configuration": {
         "literals": {
-          "footer-next": "FINALIZAR",
-          "header": { "value": "¡Qué sorpresa!", "type": "value" },
-          "subheader": "Actualmente no podemos hacer seguros con esas condiciones.",
-          "body": "Para cualquier consulta:"
+          "footer-next": "FINALIZAR"
+        },
+        "data": {
+          "contactUsTexts": ["Horario comercial", "Lunes a Jueves de 9h a 19h", "Viernes de 9h a 18h"],
+          "stepperConfig": {
+            "label": { "value": "contact-us-header", "type": "translate" }
+          }
         }
       }
     },
@@ -689,9 +688,20 @@
       "route": "contact-us",
       "configuration": {
         "literals": {
-          "footer-next": "LLAMAR AHORA",
-          "header": "Nos pondremos en contacto contigo",
-          "body": "Muchas gracias por confiar en nosotros, te llamaremos en breve."
+          "contact-us-header": "",
+          "stepper-header": "Información de contacto",
+          "footer-next": "LLAMAR AHORA"
+        },
+        "data": {
+          "contactUsTexts": [
+            "<h1 class='info-header nx-font-weight-bold'>Horario comercial</h1>",
+            "Lunes a Jueves de 9h a 19h",
+            "Viernes de 9h a 18h"
+          ],
+          "stepperConfig": {
+            "label": "stepper-header",
+            "showSteps": false
+          }
         }
       }
     },
@@ -705,9 +715,12 @@
       ],
       "configuration": {
         "literals": {
-          "header": { "value": "Dinos cómo podemos contactarte", "type": "value" },
-          "subheader": "Podemos ayudarte, ¿Quieres que te llamemos?",
+          "contact-us-header": { "value": "Dinos cómo podemos contactarte", "type": "value" },
+          "contact-us-title": "Podemos ayudarte, <br/>¿Quieres que te llamemos?",
           "body": "Podemos llamarte y ayudarte a encontrar el mejor seguro para ti, con las mejores coberturas."
+        },
+        "stepperConfig": {
+          "label": { "value": "contact-us-header", "type": "translate" }
         }
       }
     },
@@ -733,8 +746,9 @@
   },
   "literals": {
     "back": "Volver",
-    "company-phone": "+49 55 5555 5555",
-    "contact-us-later": "También puedes contactarnos más tarde",
+    "contact-us-phone": "+49 55 5555 5555",
+    "contact-us-header": "Información de contacto",
+    "contact-us-title": "Nos gustaría poder ayudarte, <br/>¡contactanos!",
     "cubic-capacity": { "value": "Label.CubicCapacity", "type": "translate" },
     "footer-back": { "value": "Label.Back", "type": "translate" },
     "footer-next": { "value": "Label.Next", "type": "translate" },
@@ -750,6 +764,7 @@
     "warning-text-back-button": "Usa los botones de la aplicación para desplazarte por ella.",
     "error-required": { "value": "Errors.FieldRequired", "type": "translate" },
     "error-future-date": { "value": "Errors.FutureDate", "type": "translate" },
+    "error-past-date": { "value": "Errors.PastDate", "type": "translate" },
     "error-old-date": { "value": "Errors.OldDate", "type": "translate" }
   }
 }

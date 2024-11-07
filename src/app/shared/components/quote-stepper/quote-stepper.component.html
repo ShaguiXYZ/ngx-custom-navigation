@@ -3,17 +3,17 @@
 <article class="stepper__container">
   @if(stepperData) {
   <header class="nx-margin-y-2xs">
-    <h3 nxCopytext="normal" class="nx-font-weight-semibold">
-      {{ stepperData.stepper.steps[stepperIndex].label | literalToString }}
-    </h3>
+    @if(showLabel) {
+    <h3 nxCopytext="normal" class="nx-font-weight-semibold" [innerHTML]="stepperData.stepper.steps[stepperIndex].label | quoteLiteral"></h3>
+    }
   </header>
   <section class="stepper__list">
-    @for(step of stepperData.stepper.steps; track step.key) { @let _active=step.key === stepperData.stepKey; @let _complete=stepperIndex >
-    $index; @let _disabled=stepperIndex < $index;
+    @if(showSteps) { @for(step of stepperData.stepper.steps; track step.key) { @let _active=step.key === stepperData.stepKey; @let
+    _complete=stepperIndex > $index; @let _disabled=stepperIndex < $index;
     <div
       class="stepper__item"
       [ngClass]="{ active: _active, complete: _complete, disabled: _disabled }"
-      [nxTooltip]="step.label | literalToString"
+      [nxTooltip]="step.label | quoteLiteral"
       (click)="(_active || _complete) && onStepClick(step)"
     >
       <div class="stepper__item__progress">
@@ -25,7 +25,7 @@
       <div class="stepper__item__line__solid"></div>
       <div class="stepper__item__line__dotted"></div>
     </div>
-    } }
+    } } }
   </section>
   }
 </article>

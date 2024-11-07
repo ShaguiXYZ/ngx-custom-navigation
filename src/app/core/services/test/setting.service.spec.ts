@@ -45,7 +45,7 @@ describe('SettingsService', () => {
           title: 'Stepper 1',
           steps: [
             {
-              label: { value: 'Step 1' },
+              label: 'Step 1',
               pages: ['home']
             }
           ]
@@ -70,7 +70,7 @@ describe('SettingsService', () => {
               steps: [
                 {
                   key: '1',
-                  label: { value: 'Step 1' },
+                  label: 'Step 1',
                   pages: ['home']
                 }
               ]

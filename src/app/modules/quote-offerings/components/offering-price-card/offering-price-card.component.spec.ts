@@ -10,13 +10,13 @@ describe('QuoteOfferingPriceCardComponent', () => {
   let fixture: ComponentFixture<QuoteOfferingPriceCardComponent>;
 
   beforeEach(async () => {
-    const translationsServiceSpy = jasmine.createSpyObj('TranslationsService', ['translate']);
+    const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate']);
 
     await TestBed.configureTestingModule({
       imports: [QuoteOfferingPriceCardComponent],
       providers: [
         { provide: ContextDataService, useClass: ContextDataServiceStub },
-        { provide: TranslateService, useValue: translationsServiceSpy }
+        { provide: TranslateService, useValue: translateServiceSpy }
       ]
     }).compileComponents();
   });

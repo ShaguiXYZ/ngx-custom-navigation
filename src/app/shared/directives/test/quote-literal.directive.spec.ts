@@ -36,7 +36,7 @@ describe('QuoteLiteralDirective', () => {
 
   beforeEach(() => {
     const contextDataServiceSpy = jasmine.createSpyObj('ContextDataService', ['get', 'onDataChange']);
-    const translationsServiceSpy = jasmine.createSpyObj('TranslationsService', ['translate']);
+    const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate']);
     const rederer2Spy = jasmine.createSpyObj('Renderer2', ['setAttribute', 'setProperty']);
 
     TestBed.configureTestingModule({
@@ -45,7 +45,7 @@ describe('QuoteLiteralDirective', () => {
       providers: [
         QuoteLiteralPipe,
         { provide: ContextDataService, useValue: contextDataServiceSpy },
-        { provide: TranslateService, useValue: translationsServiceSpy },
+        { provide: TranslateService, useValue: translateServiceSpy },
         { provide: Renderer2, useValue: rederer2Spy }
       ]
     });

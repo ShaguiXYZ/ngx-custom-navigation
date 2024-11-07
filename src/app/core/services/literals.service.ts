@@ -26,7 +26,7 @@ export class LiteralsService {
       }
 
       if (this.isQuoteLiteral(literal)) {
-        return this.getLiteral(literal, normalizedParams);
+        return this.getLiteral(literal, normalizedParams) ?? '';
       }
 
       return '';

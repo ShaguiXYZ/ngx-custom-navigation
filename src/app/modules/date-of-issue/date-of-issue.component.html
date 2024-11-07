@@ -16,6 +16,8 @@
         <nx-datepicker #myDatepicker></nx-datepicker>
         @if(form.get('dateOfIssue')?.errors?.['required']) {
         <nx-error appearance="text" nxFormfieldError><span nxQuoteLiteral="error-required"></span> </nx-error>
+        } @if(form.get('dateOfIssue')?.errors?.['pastDate']) {
+        <nx-error appearance="text" nxFormfieldError><span nxQuoteLiteral="error-past-date"></span> </nx-error>
         }
       </nx-formfield>
     </form>

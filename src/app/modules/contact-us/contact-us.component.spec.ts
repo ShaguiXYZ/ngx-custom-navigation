@@ -15,7 +15,7 @@ describe('ContactUsComponent', () => {
   let fixture: ComponentFixture<ContactUsComponent>;
 
   beforeEach(async () => {
-    const translationsServiceSpy = jasmine.createSpyObj('TranslationsService', ['translate']);
+    const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate']);
 
     await TestBed.configureTestingModule({
       declarations: [],
@@ -30,7 +30,7 @@ describe('ContactUsComponent', () => {
       ],
       providers: [
         { provide: ContextDataService, useClass: ContextDataServiceStub },
-        { provide: TranslateService, useValue: translationsServiceSpy }
+        { provide: TranslateService, useValue: translateServiceSpy }
       ]
     }).compileComponents();
   });
@@ -44,11 +44,6 @@ describe('ContactUsComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
-  });
-
-  it('should render HeaderTitleComponent', () => {
-    const headerTitleElement = fixture.debugElement.query(By.directive(HeaderTitleComponent));
-    expect(headerTitleElement).toBeTruthy();
   });
 
   it('should render QuoteFooterComponent', () => {

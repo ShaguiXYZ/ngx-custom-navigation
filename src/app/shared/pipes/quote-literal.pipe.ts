@@ -19,7 +19,7 @@ export class QuoteLiteralPipe implements PipeTransform {
     const appContextData = this.contextDataService.get<AppContextData>(QUOTE_APP_CONTEXT_DATA);
     const lastPage = appContextData.navigation.lastPage;
     const literals = { ...appContextData.configuration.literals, ...lastPage?.configuration?.literals };
-    const value = literals[literal];
+    const value = literals[literal] ?? literal;
 
     return this.literalsService.toString(value, params);
   };

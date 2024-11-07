@@ -16,7 +16,7 @@ describe('IsClientComponent', () => {
 
   beforeEach(async () => {
     const routingServiceSpy = jasmine.createSpyObj('RoutingService', ['nextStep']);
-    const translationsServiceSpy = jasmine.createSpyObj('TranslationsService', ['translate']);
+    const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate']);
 
     await TestBed.configureTestingModule({
       declarations: [],
@@ -24,7 +24,7 @@ describe('IsClientComponent', () => {
       providers: [
         { provide: RoutingService, useValue: routingServiceSpy },
         { provide: ContextDataService, useClass: ContextDataServiceStub },
-        { provide: TranslateService, useValue: translationsServiceSpy }
+        { provide: TranslateService, useValue: translateServiceSpy }
       ]
     }).compileComponents();
   });

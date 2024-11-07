@@ -14,7 +14,7 @@ describe('PlaceComponent', () => {
   let locationService: jasmine.SpyObj<LocationService>;
 
   beforeEach(waitForAsync(() => {
-    const translationsServiceSpy = jasmine.createSpyObj('TranslationsService', ['translate']);
+    const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate']);
     const locationServiceSpy = jasmine.createSpyObj('LocationService', ['getAddress']);
 
     TestBed.configureTestingModule({
@@ -22,7 +22,7 @@ describe('PlaceComponent', () => {
       imports: [PlaceComponent, ReactiveFormsModule],
       providers: [
         { provide: ContextDataService, useClass: ContextDataServiceStub },
-        { provide: TranslateService, useValue: translationsServiceSpy },
+        { provide: TranslateService, useValue: translateServiceSpy },
         { provide: LocationService, useValue: locationServiceSpy }
       ]
     }).compileComponents();

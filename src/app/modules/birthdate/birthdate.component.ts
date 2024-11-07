@@ -1,21 +1,11 @@
 import { Component, OnInit, inject } from '@angular/core';
-import {
-  AbstractControl,
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  FormsModule,
-  ReactiveFormsModule,
-  ValidationErrors,
-  ValidatorFn,
-  Validators
-} from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { NX_DATE_LOCALE, NxDatefieldModule } from '@aposin/ng-aquila/datefield';
 import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
 import { NxInputModule } from '@aposin/ng-aquila/input';
 import { NxMomentDateModule } from '@aposin/ng-aquila/moment-date-adapter';
-import { NxDate } from '@shagui/ng-shagui/core';
 import moment, { Moment } from 'moment';
+import { isOlderThanYears } from 'src/app/core/form';
 import { QuoteComponent } from 'src/app/core/models';
 import { HeaderTitleComponent, QuoteFooterComponent } from 'src/app/shared/components';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
@@ -43,6 +33,7 @@ import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 export class BirthdateComponent extends QuoteComponent implements OnInit {
   public form!: FormGroup;
   public birthdateFromContext: Moment | undefined;
+  public minDate = 18;
 
   private readonly fb = inject(FormBuilder);
 
@@ -74,16 +65,7 @@ export class BirthdateComponent extends QuoteComponent implements OnInit {
     }
 
     this.form = this.fb.group({
-      birthdate: new FormControl(this.birthdateFromContext, [Validators.required, this.clientOldValidator()])
+      birthdate: new FormControl(this.birthdateFromContext, [Validators.required, isOlderThanYears(this.minDate)])
     });
-  }
-
-  private clientOldValidator(): ValidatorFn {
-    return (control: AbstractControl): ValidationErrors | null => {
-      const bornDate = new NxDate(control.value);
-      const timeBetween = bornDate.between(new Date()).years();
-
-      return timeBetween < 18 ? { clientOld: true } : null;
-    };
   }
 }

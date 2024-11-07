@@ -21,7 +21,7 @@ describe('ClientIdentificationNumberComponent', () => {
   let contextDataService: jasmine.SpyObj<ContextDataService>;
 
   beforeEach(async () => {
-    const translationsServiceSpy = jasmine.createSpyObj('TranslationsService', ['translate']);
+    const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate']);
 
     await TestBed.configureTestingModule({
       declarations: [],
@@ -41,7 +41,7 @@ describe('ClientIdentificationNumberComponent', () => {
       providers: [
         { provide: NX_DATE_LOCALE, useValue: 'es-ES' },
         { provide: ContextDataService, useClass: ContextDataServiceStub },
-        { provide: TranslateService, useValue: translationsServiceSpy }
+        { provide: TranslateService, useValue: translateServiceSpy }
       ]
     }).compileComponents();
   });

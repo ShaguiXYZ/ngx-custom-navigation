@@ -24,7 +24,7 @@ describe('YourCarIsComponent', () => {
   let vehicleService: jasmine.SpyObj<VehicleService>;
 
   beforeEach(async () => {
-    const translationsServiceSpy = jasmine.createSpyObj('TranslationsService', ['translate']);
+    const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate']);
     const routingServiceSpy = jasmine.createSpyObj('RoutingService', ['nextStep']);
     const vehicleServiceSpy = jasmine.createSpyObj('VehicleService', ['vehicles']);
 
@@ -46,7 +46,7 @@ describe('YourCarIsComponent', () => {
       ],
       providers: [
         { provide: ContextDataService, useClass: ContextDataServiceStub },
-        { provide: TranslateService, useValue: translationsServiceSpy },
+        { provide: TranslateService, useValue: translateServiceSpy },
         { provide: RoutingService, useValue: routingServiceSpy },
         { provide: VehicleService, useValue: vehicleServiceSpy }
       ]

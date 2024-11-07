@@ -17,7 +17,7 @@ describe('BirthdateComponent', () => {
   let contextDataService: jasmine.SpyObj<ContextDataService>;
 
   beforeEach(async () => {
-    const translationsServiceSpy = jasmine.createSpyObj('TranslationsService', ['translate']);
+    const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate']);
 
     await TestBed.configureTestingModule({
       declarations: [],
@@ -32,7 +32,7 @@ describe('BirthdateComponent', () => {
       ],
       providers: [
         { provide: ContextDataService, useClass: ContextDataServiceStub },
-        { provide: TranslateService, useValue: translationsServiceSpy }
+        { provide: TranslateService, useValue: translateServiceSpy }
       ]
     }).compileComponents();
   });
@@ -78,7 +78,7 @@ describe('BirthdateComponent', () => {
     const isValid = component['updateValidData']();
 
     expect(isValid).toBeFalse();
-    expect(component.form.controls['birthdate'].errors).toEqual({ clientOld: true });
+    expect(component.form.controls['birthdate'].errors).toEqual({ olderThanYears: true });
   });
 
   it('should validate form if birthdate is 18 years or more ago', () => {
