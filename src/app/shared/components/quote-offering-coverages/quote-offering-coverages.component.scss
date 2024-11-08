@@ -5,12 +5,9 @@
 }
 
 .coverages {
-  padding: 16px 0;
-
   .coverage {
     align-items: flex-start;
     display: flex;
-    padding: 16px 0;
 
     p {
       flex: 1;
@@ -21,9 +18,5 @@
     .coverage-icon {
       color: var(--success);
     }
-  }
-
-  .coverage + .coverage {
-    border-top: 1px solid var(--tab-item-border-color);
   }
 }

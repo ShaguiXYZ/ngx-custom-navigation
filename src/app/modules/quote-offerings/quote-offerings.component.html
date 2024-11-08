@@ -33,5 +33,7 @@
 </article>
 
 <ng-template #priceCoverages>
-  <quote-offering-coverages [prices]="prices" [selectedPriceIndex]="selectedPriceIndex"></quote-offering-coverages>
+  <div class="offering-coverages" nxModalContent tabindex="0">
+    <quote-offering-coverages [prices]="prices" [selectedPriceIndex]="selectedPriceIndex"></quote-offering-coverages>
+  </div>
 </ng-template>

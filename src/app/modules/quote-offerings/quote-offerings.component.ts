@@ -1,19 +1,19 @@
 import { CommonModule } from '@angular/common';
 import { Component, ElementRef, inject, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { NxDialogService, NxModalModule, NxModalRef } from '@aposin/ng-aquila/modal';
 import { QuoteComponent } from 'src/app/core/models';
 import { RoutingService } from 'src/app/core/services';
 import { OfferingsService } from 'src/app/core/services/offerings.service';
+import { QuoteOfferingCoveragesComponent } from 'src/app/shared/components';
 import { OfferingPriceModel } from 'src/app/shared/models';
 import { QuoteOfferingPriceCardComponent } from './components';
-import { QuoteOfferingCoveragesComponent } from 'src/app/shared/components';
-import { NxDialogService, NxModalRef } from '@aposin/ng-aquila/modal';
 
 @Component({
   selector: 'quote-quote-offerings',
   templateUrl: './quote-offerings.component.html',
   styleUrl: './quote-offerings.component.scss',
   standalone: true,
-  imports: [CommonModule, QuoteOfferingCoveragesComponent, QuoteOfferingPriceCardComponent]
+  imports: [CommonModule, QuoteOfferingCoveragesComponent, QuoteOfferingPriceCardComponent, NxModalModule]
 })
 export class QuoteOfferingsComponent extends QuoteComponent implements OnInit {
   @ViewChild('carrouselInner', { static: true })
@@ -96,7 +96,7 @@ export class QuoteOfferingsComponent extends QuoteComponent implements OnInit {
     this.selectedPriceIndex = index;
     this.componentDialogRef = this.dialogService.open(this.priceCoveragesRef, {
       maxWidth: '98%',
-      showCloseIcon: true
+      showCloseIcon: false
     });
   }
 

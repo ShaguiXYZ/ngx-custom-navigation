@@ -8,12 +8,21 @@
       @for(price of prices; track price.modalityId) {
       <nx-tab class="" [label]="price.modalityDescription">
         <div class="coverages">
-          @for(coverage of price.coverageList; track coverage.code) {
-          <div class="coverage">
-            <p nxCopytext="normal" class="nx-margin-right-m">{{ coverage.text }}</p>
-            <em class="coverage-icon nx-margin-right-xs fa-solid fa-check"></em>
-          </div>
-          }
+          <nx-accordion variant="light" [multi]="false">
+            @for(coverage of price.coverageList; track coverage.code) {
+            <nx-expansion-panel [expanded]="false">
+              <nx-expansion-panel-header>
+                <nx-expansion-panel-title nxHeadline="subsection-xsmall">
+                  <div class="coverage">
+                    <em class="coverage-icon nx-margin-right-xs fa-solid fa-check"></em>
+                    <p nxCopytext="normal" class="nx-margin-right-m">{{ coverage.text }}</p>
+                  </div>
+                </nx-expansion-panel-title>
+              </nx-expansion-panel-header>
+              {{ coverage.description || coverage.text }}
+            </nx-expansion-panel>
+            }
+          </nx-accordion>
         </div>
       </nx-tab>
       }
