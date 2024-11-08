@@ -40,8 +40,17 @@
   .form-container {
     padding: 0 24px;
 
-    .excess {
+    .offering-fee {
+      align-items: center;
+      display: flex;
+      flex-direction: column;
       height: 82px;
+      justify-content: center;
+
+      .fee-values {
+        display: flex;
+        flex: 1;
+      }
     }
 
     .price {

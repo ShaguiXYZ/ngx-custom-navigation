@@ -11,11 +11,26 @@
     </h3>
   </quote-header-title>
   <section class="form-container">
-    <div class="excess"></div>
+    <div class="offering-fee">
+      @if(fee.length) {
+      <div nxCopytext="large" class="fee-title nx-margin-bottom-2xs" nxQuoteLiteral="fee-header"></div>
+      <div class="fee-values">
+        <form [formGroup]="form">
+          @for(f of fee; track f) {
+          <nx-radio-group formControlName="feeSelectedIndex">
+            <nx-radio labelSize="small" [value]="$index">
+              <span nxCopytext="large" class="nx-font-weight-bold">{{ fee }} {{ 'currency' | quoteLiteral }}</span>
+            </nx-radio>
+          </nx-radio-group>
+          }
+        </form>
+      </div>
+      }
+    </div>
     <div class="nx-margin-bottom-s">
       <p nxCopytext="large" class="price">
         <span class="price-value">
-          {{ priceInteger }}<span class="price-decimal">,{{ priceDecimal }} €</span>
+          {{ priceInteger }}<span class="price-decimal">,{{ priceDecimal }} {{ 'currency' | quoteLiteral }}</span>
         </span>
         <span
           nxCopytext="medium"
@@ -36,7 +51,6 @@
       <nx-link nxStyle="block icon-right">
         <a routerLink="/documentation" (click)="showCoverages()">
           <div>
-            <em class="fa-regular fa-eye nx-margin-x-xs"></em>
             <span nxQuoteLiteral="view-coverages"></span>
           </div>
         </a>

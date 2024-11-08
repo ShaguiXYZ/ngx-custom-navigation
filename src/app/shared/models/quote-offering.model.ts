@@ -119,7 +119,8 @@ export interface OfferingPriceModel {
   popular?: boolean;
   contractable: string;
   totalPremiumAmount: string;
-  fee: string;
+  fee: string[];
+  feeSelectedIndex?: number;
   receiptData: ReceiptData;
   coverageList: Coverage[];
   configurableCoverageList: Coverage[];
@@ -150,7 +151,7 @@ export namespace OfferingModel {
         paymentTypeDescription: priceGrid.paymentTypeDescription,
         contractable: priceGrid.contractable,
         totalPremiumAmount: priceGrid.totalPremiumAmount,
-        fee: priceGrid.fee,
+        fee: priceGrid.fee ? [priceGrid.fee] : [],
         receiptData: {
           firstReceiptAmount: parseFloat(priceGrid.receiptData.firstReceiptAmount),
           followingReceiptAmount: parseFloat(priceGrid.receiptData.followingReceiptAmount)

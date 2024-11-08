@@ -6,7 +6,13 @@
       <div #carrouselTrack class="track nx-margin-s" (touchstart)="swipeStart($event)" (touchend)="swipeEnd($event)">
         @for(price of prices; track price.modalityId) {
         <div class="carousel__card" [ngClass]="{ selected: selectedPriceIndex === $index }" (click)="selectSteper($index)">
-          <quote-offering-price-card [price]="price" [selected]="selectedPriceIndex === $index" (uiContactUs)="contactUs($event)" />
+          <quote-offering-price-card
+            [price]="price"
+            [selected]="selectedPriceIndex === $index"
+            (uiShowCoverages)="showCoverages($index)"
+            (uiSelectFee)="selectFee($event)"
+            (uiContactUs)="contactUs($event)"
+          />
         </div>
         }
       </div>
@@ -25,3 +31,7 @@
     </div>
   </section>
 </article>
+
+<ng-template #priceCoverages>
+  <quote-offering-coverages [prices]="prices" [selectedPriceIndex]="selectedPriceIndex"></quote-offering-coverages>
+</ng-template>

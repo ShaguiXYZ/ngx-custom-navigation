@@ -1,26 +1,32 @@
 import { CommonModule } from '@angular/common';
-import { Component, ElementRef, inject, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, inject, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { QuoteComponent } from 'src/app/core/models';
 import { RoutingService } from 'src/app/core/services';
 import { OfferingsService } from 'src/app/core/services/offerings.service';
 import { OfferingPriceModel } from 'src/app/shared/models';
 import { QuoteOfferingPriceCardComponent } from './components';
+import { QuoteOfferingCoveragesComponent } from 'src/app/shared/components';
+import { NxDialogService, NxModalRef } from '@aposin/ng-aquila/modal';
 
 @Component({
   selector: 'quote-quote-offerings',
   templateUrl: './quote-offerings.component.html',
   styleUrl: './quote-offerings.component.scss',
   standalone: true,
-  imports: [CommonModule, QuoteOfferingPriceCardComponent]
+  imports: [CommonModule, QuoteOfferingCoveragesComponent, QuoteOfferingPriceCardComponent]
 })
 export class QuoteOfferingsComponent extends QuoteComponent implements OnInit {
   @ViewChild('carrouselInner', { static: true })
   private inner!: ElementRef;
   @ViewChild('carrouselTrack', { static: true })
   private track!: ElementRef;
+  @ViewChild('priceCoverages')
+  private priceCoveragesRef!: TemplateRef<unknown>;
 
   public selectedPriceIndex = 0;
   public prices: OfferingPriceModel[] = [];
+
+  private componentDialogRef?: NxModalRef<unknown>;
 
   private swipeCoord!: [number, number];
   private swipeTime!: number;
@@ -29,6 +35,7 @@ export class QuoteOfferingsComponent extends QuoteComponent implements OnInit {
 
   private readonly offeringsService = inject(OfferingsService);
   private readonly routingService = inject(RoutingService);
+  private readonly dialogService = inject(NxDialogService);
 
   async ngOnInit(): Promise<void> {
     const offering = await this.offeringsService.pricing();
@@ -79,6 +86,18 @@ export class QuoteOfferingsComponent extends QuoteComponent implements OnInit {
     this.populateContextData();
     this.selectedPriceIndex = index;
     this.selectCarrouselCard();
+  }
+
+  public selectFee(event: OfferingPriceModel): void {
+    console.log('selectFee', event);
+  }
+
+  public showCoverages(index: number) {
+    this.selectedPriceIndex = index;
+    this.componentDialogRef = this.dialogService.open(this.priceCoveragesRef, {
+      maxWidth: '98%',
+      showCloseIcon: true
+    });
   }
 
   public contactUs(price: OfferingPriceModel): void {

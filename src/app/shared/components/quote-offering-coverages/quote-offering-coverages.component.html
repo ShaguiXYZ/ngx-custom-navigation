@@ -1,18 +1,17 @@
 <article class="component-container">
-  <quote-header-title
-    ><span class="coverages__title" nxHeadline="subsection-medium">Compara las coberturas de tu seguro</span></quote-header-title
-  >
+  <quote-header-title>
+    <span class="coverages__title" nxHeadline="subsection-medium" nxQuoteLiteral="coverages-modal-header"></span>
+  </quote-header-title>
+
   <section class="form-container">
-    <nx-tab-group [selectedIndex]="selectedPriceIndex" [mobileAccordion]="false" (selectedTabChange)="selectedPriceIndexChange($event)">
+    <nx-tab-group [selectedIndex]="selectedPriceIndex" [mobileAccordion]="false">
       @for(price of prices; track price.modalityId) {
-      <nx-tab [label]="price.modalityDescription || price.modalityId.toString()">
+      <nx-tab class="" [label]="price.modalityDescription">
         <div class="coverages">
-          @for(coverage of coverageList; track coverage.code) {
+          @for(coverage of price.coverageList; track coverage.code) {
           <div class="coverage">
-            <p nxCopytext="normal" class="nx-margin-right-m">
-              <!-- {{ coverage.texto }} -->
-            </p>
-            <nx-icon class="coverage-icon nx-margin-right-xs" name="check" size="s" />
+            <p nxCopytext="normal" class="nx-margin-right-m">{{ coverage.text }}</p>
+            <em class="coverage-icon nx-margin-right-xs fa-solid fa-check"></em>
           </div>
           }
         </div>

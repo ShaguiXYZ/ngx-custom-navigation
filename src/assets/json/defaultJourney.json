@@ -566,6 +566,7 @@
       ],
       "configuration": {
         "literals": {
+          "coverages-modal-header": "Compara las coberturas de tu seguro",
           "footer-next": "LLAMAR AHORA",
           "from-now": "Desde hoy {{value}}",
           "popular": "El más contratado",
@@ -750,6 +751,8 @@
     "contact-us-header": "Información de contacto",
     "contact-us-title": "Nos gustaría poder ayudarte, <br/>¡contactanos!",
     "cubic-capacity": { "value": "Label.CubicCapacity", "type": "translate" },
+    "currency": "€",
+    "fee-header": "Valor de la franquicia",
     "footer-back": { "value": "Label.Back", "type": "translate" },
     "footer-next": { "value": "Label.Next", "type": "translate" },
     "fuel": { "value": "Label.Fuel", "type": "translate" },

@@ -17,13 +17,13 @@ import { QuoteLiteralPipe } from 'src/app/shared/pipes';
   styleUrl: './date-of-issue.component.scss',
   standalone: true,
   imports: [
-    FormsModule,
     HeaderTitleComponent,
     NxDatefieldModule,
     NxFormfieldModule,
     NxInputModule,
     NxMomentDateModule,
     QuoteFooterComponent,
+    FormsModule,
     ReactiveFormsModule,
     QuoteLiteralDirective,
     QuoteLiteralPipe
