@@ -5,11 +5,10 @@ import { NxButtonModule } from '@aposin/ng-aquila/button';
 import { NxCopytextModule } from '@aposin/ng-aquila/copytext';
 import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
 import { NxInputModule } from '@aposin/ng-aquila/input';
-import { QuoteComponent } from 'src/app/core/models';
+import { CubicCapacityModel, FuelModel, QuoteComponent, VehicleClassesModel } from 'src/app/core/models';
 import { RoutingService, VehicleService } from 'src/app/core/services';
 import { HeaderTitleComponent, SelectableOptionComponent } from 'src/app/shared/components';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
-import { CubicCapacityModel, FuelModel, VehicleClassesModel } from 'src/app/shared/models';
 
 @Component({
   selector: 'quote-vehicle-fuel',

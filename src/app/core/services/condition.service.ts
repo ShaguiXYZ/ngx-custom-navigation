@@ -1,8 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { ContextDataService, JsonUtils } from '@shagui/ng-shagui/core';
-import { QuoteModel } from 'src/app/shared/models';
 import { QUOTE_CONTEXT_DATA } from '../constants';
-import { CompareOperations, Condition } from '../models';
+import { CompareOperations, Condition, QuoteModel } from '../models';
 
 @Injectable({ providedIn: 'root' })
 export class ConditionService {

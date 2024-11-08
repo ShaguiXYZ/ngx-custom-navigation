@@ -3,9 +3,9 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { TranslateService } from '@ngx-translate/core';
 import { ContextDataService } from '@shagui/ng-shagui/core';
 import { QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
+import { QuoteModel } from 'src/app/core/models';
 import { RoutingService } from 'src/app/core/services';
 import { ContextDataServiceStub } from 'src/app/core/stub';
-import { QuoteModel } from 'src/app/shared/models';
 import { IsClientComponent } from './is-client.component';
 
 describe('IsClientComponent', () => {

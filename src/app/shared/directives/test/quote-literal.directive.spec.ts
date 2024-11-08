@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Component, DebugElement, Renderer2 } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
+import { By, DomSanitizer } from '@angular/platform-browser';
 import { TranslateService } from '@ngx-translate/core';
 import { ContextDataService } from '@shagui/ng-shagui/core';
 import { Observable, of } from 'rxjs';
@@ -38,6 +38,7 @@ describe('QuoteLiteralDirective', () => {
     const contextDataServiceSpy = jasmine.createSpyObj('ContextDataService', ['get', 'onDataChange']);
     const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate']);
     const rederer2Spy = jasmine.createSpyObj('Renderer2', ['setAttribute', 'setProperty']);
+    const domSanitizerSpy = jasmine.createSpyObj('DomSanitizer', ['bypassSecurityTrustHtml', 'sanitize']);
 
     TestBed.configureTestingModule({
       declarations: [],
@@ -46,13 +47,17 @@ describe('QuoteLiteralDirective', () => {
         QuoteLiteralPipe,
         { provide: ContextDataService, useValue: contextDataServiceSpy },
         { provide: TranslateService, useValue: translateServiceSpy },
-        { provide: Renderer2, useValue: rederer2Spy }
+        { provide: Renderer2, useValue: rederer2Spy },
+        { provide: DomSanitizer, useValue: domSanitizerSpy }
       ]
     });
 
     contextDataServiceSpy.onDataChange.and.callFake((): Observable<any> => {
       return of({ navigation: {}, configuration: { literals: { testQuote: 'testQuote', type: 'value' } } } as unknown as AppContextData);
     });
+
+    domSanitizerSpy.sanitize.and.callFake((context: any, value: any) => value);
+    domSanitizerSpy.bypassSecurityTrustHtml.and.callFake((value: any) => value);
   });
 
   beforeEach(() => {
@@ -68,7 +73,12 @@ describe('QuoteLiteralDirective', () => {
   });
 
   it('should create an instance', () => {
-    const directive = new QuoteLiteralDirective(debugElement, TestBed.inject(Renderer2), TestBed.inject(QuoteLiteralPipe));
+    const directive = new QuoteLiteralDirective(
+      debugElement,
+      TestBed.inject(Renderer2),
+      TestBed.inject(QuoteLiteralPipe),
+      TestBed.inject(DomSanitizer)
+    );
 
     expect(directive).toBeTruthy();
   });

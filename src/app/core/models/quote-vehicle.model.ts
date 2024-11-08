@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-namespace */
 import { IndexedData } from '@shagui/ng-shagui/core';
-import { brandDictionary, BrandKey } from './brand-dictionary';
+import { brandDictionary, BrandKey } from './brand-dictionary.model';
 import { FuelTypes } from './fuel-types.model';
 import { IIconData } from './icon-data.model';
 

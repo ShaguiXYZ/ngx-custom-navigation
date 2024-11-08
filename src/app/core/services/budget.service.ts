@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { ContextDataService, StorageService } from '@shagui/ng-shagui/core';
 import { QUOTE_CONTEXT_DATA } from '../constants';
-import { QuoteModel } from 'src/app/shared/models';
+import { QuoteModel } from '../models';
 
 @Injectable({
   providedIn: 'root'

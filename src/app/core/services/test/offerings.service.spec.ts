@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { TestBed } from '@angular/core/testing';
 import { of } from 'rxjs';
-import { OfferingDTO } from 'src/app/shared/models';
+import { OfferingDTO } from '../../models';
 import { OfferingsService } from '../offerings.service';
 
 describe('OfferingsService', () => {

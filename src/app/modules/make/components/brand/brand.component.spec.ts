@@ -3,8 +3,8 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { NxAvatarModule } from '@aposin/ng-aquila/avatar';
 import { NxCopytextModule } from '@aposin/ng-aquila/copytext';
+import { BrandData, BrandKey, IVehicleDictionaryData } from 'src/app/core/models';
 import { SelectableOptionComponent } from 'src/app/shared/components';
-import { BrandData, BrandKey, IVehicleDictionaryData } from 'src/app/shared/models';
 import { BrandComponent } from './brand.component';
 
 describe('BrandComponent', () => {

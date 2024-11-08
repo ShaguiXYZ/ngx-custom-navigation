@@ -1,11 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { Component, ElementRef, inject, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { NxDialogService, NxModalModule, NxModalRef } from '@aposin/ng-aquila/modal';
-import { QuoteComponent } from 'src/app/core/models';
+import { OfferingPriceModel, QuoteComponent } from 'src/app/core/models';
 import { RoutingService } from 'src/app/core/services';
 import { OfferingsService } from 'src/app/core/services/offerings.service';
 import { QuoteOfferingCoveragesComponent } from 'src/app/shared/components';
-import { OfferingPriceModel } from 'src/app/shared/models';
 import { QuoteOfferingPriceCardComponent } from './components';
 
 @Component({

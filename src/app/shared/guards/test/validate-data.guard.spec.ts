@@ -31,6 +31,7 @@ describe('isValidGuard', () => {
 
   it('should allow deactivation if isPreviousStep returns true', () => {
     const context = {
+      configuration: { errorPageId: 'error-page' },
       navigation: {
         nextPage: { pageId: 'nextPageId' },
         viewedPages: ['nextPageId']
@@ -47,6 +48,7 @@ describe('isValidGuard', () => {
 
   it('should allow deactivation if stepperChange returns true', () => {
     const context = {
+      configuration: { errorPageId: 'error-page' },
       navigation: {
         viewedPages: ['someOtherPageId'],
         nextPage: { stepper: { key: 'stepper1' } },
@@ -65,6 +67,7 @@ describe('isValidGuard', () => {
 
   it('should call component.canDeactivate if isPreviousStep and stepperChange return false', () => {
     const context = {
+      configuration: { errorPageId: 'error-page' },
       navigation: {
         nextPage: { pageId: 'nextPageId', stepper: { key: 'stepper1', stepKey: 'stepKey1' } },
         lastPage: { pageId: 'lastPageId', stepper: { key: 'stepper1', stepKey: 'stepKey2' } },
@@ -86,6 +89,7 @@ describe('isValidGuard', () => {
 
   it('should return true if component.canDeactivate is not defined', () => {
     const context = {
+      configuration: { errorPageId: 'error-page' },
       navigation: {
         nextPage: { pageId: 'nextPageId', stepper: { key: 'stepper1', stepKey: 'stepKey1' } },
         lastPage: { pageId: 'lastPageId', stepper: { key: 'stepper1', stepKey: 'stepKey2' } },

@@ -5,9 +5,9 @@ import { ContextDataService, IndexedData } from '@shagui/ng-shagui/core';
 import { QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
 import { ContextDataServiceStub } from 'src/app/core/stub';
 import { RoutingService } from 'src/app/core/services';
-import { QuoteModel } from 'src/app/shared/models';
 import { VehicleTypes } from './models';
 import { VehicleTypeComponent } from './vehicle-type.component';
+import { QuoteModel } from 'src/app/core/models';
 
 describe('VehicleTypeComponent', () => {
   let component: VehicleTypeComponent;

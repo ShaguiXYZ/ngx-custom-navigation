@@ -4,16 +4,16 @@ import { NxCopytextModule } from '@aposin/ng-aquila/copytext';
 import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
 import { NxIconModule } from '@aposin/ng-aquila/icon';
 import { NxInputModule } from '@aposin/ng-aquila/input';
+import { TranslateService } from '@ngx-translate/core';
 import { ContextDataService } from '@shagui/ng-shagui/core';
+import { QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
+import { ModelVersionModel, QuoteModel } from 'src/app/core/models';
 import { RoutingService, VehicleService } from 'src/app/core/services';
+import { ContextDataServiceStub } from 'src/app/core/stub';
 import { HeaderTitleComponent, IconCardComponent, TextCardComponent } from 'src/app/shared/components';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
-import { ModelVersionModel, QuoteModel } from 'src/app/shared/models';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 import { VehicleModelVersionsComponent } from './vehicle-model-versions.component';
-import { ContextDataServiceStub } from 'src/app/core/stub';
-import { TranslateService } from '@ngx-translate/core';
-import { QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
 
 describe('VehicleModelVersionsComponent', () => {
   let component: VehicleModelVersionsComponent;

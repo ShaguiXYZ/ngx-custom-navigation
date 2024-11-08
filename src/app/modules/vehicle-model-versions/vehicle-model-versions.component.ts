@@ -7,11 +7,10 @@ import { NxIconModule } from '@aposin/ng-aquila/icon';
 import { NxInputModule } from '@aposin/ng-aquila/input';
 import { debounceTime, distinctUntilChanged, fromEvent, map, Subscription } from 'rxjs';
 import { DEBOUNCE_TIME } from 'src/app/core/constants';
-import { QuoteComponent } from 'src/app/core/models';
+import { ModelVersionModel, QuoteComponent } from 'src/app/core/models';
 import { RoutingService, VehicleService } from 'src/app/core/services';
-import { HeaderTitleComponent, IconCardComponent, TextCardComponent } from 'src/app/shared/components';
+import { HeaderTitleComponent, TextCardComponent } from 'src/app/shared/components';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
-import { ModelVersionModel } from 'src/app/shared/models';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 
 @Component({
@@ -20,7 +19,6 @@ import { QuoteLiteralPipe } from 'src/app/shared/pipes';
   imports: [
     CommonModule,
     HeaderTitleComponent,
-    IconCardComponent,
     TextCardComponent,
     NxCopytextModule,
     NxFormfieldModule,

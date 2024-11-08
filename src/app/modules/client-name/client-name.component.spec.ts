@@ -6,8 +6,8 @@ import { NxInputModule } from '@aposin/ng-aquila/input';
 import { TranslateService } from '@ngx-translate/core';
 import { ContextDataService } from '@shagui/ng-shagui/core';
 import { QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
+import { QuoteModel } from 'src/app/core/models';
 import { ContextDataServiceStub } from 'src/app/core/stub';
-import { QuoteModel } from 'src/app/shared/models';
 import { ClientNameComponent } from './client-name.component';
 
 describe('ClientNameComponent', () => {

@@ -2,8 +2,8 @@ import { HttpStatusCode } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { HttpService } from '@shagui/ng-shagui/core';
 import { firstValueFrom, map } from 'rxjs';
-import { OfferingDTO, OfferingModel } from 'src/app/shared/models';
 import { environment } from 'src/environments/environment';
+import { OfferingDTO, OfferingModel } from '../models';
 
 @Injectable({ providedIn: 'root' })
 export class OfferingsService {

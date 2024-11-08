@@ -9,11 +9,11 @@ import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
 import { NxInputModule } from '@aposin/ng-aquila/input';
 import { TranslateService } from '@ngx-translate/core';
 import { ContextDataService } from '@shagui/ng-shagui/core';
+import { CubicCapacityModel, FuelModel, FuelTypes, QuoteModel, VehicleClassesModel } from 'src/app/core/models';
 import { RoutingService, VehicleService } from 'src/app/core/services';
 import { ContextDataServiceStub } from 'src/app/core/stub';
 import { HeaderTitleComponent, SelectableOptionComponent } from 'src/app/shared/components';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
-import { CubicCapacityModel, FuelModel, FuelTypes, QuoteModel, VehicleClassesModel } from 'src/app/shared/models';
 import { VehicleFuelComponent } from './vehicle-fuel.component';
 
 describe('VehicleFuelComponent', () => {

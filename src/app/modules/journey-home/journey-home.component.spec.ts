@@ -41,6 +41,7 @@ describe('JourneyHomeComponent', () => {
     const mockContext: AppContextData = {
       configuration: {
         homePageId: 'home',
+        errorPageId: 'error',
         pageMap: {
           home: {
             pageId: 'home',

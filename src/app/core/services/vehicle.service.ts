@@ -2,6 +2,8 @@ import { HttpStatusCode } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { HttpService, TTL, UniqueIds } from '@shagui/ng-shagui/core';
 import { catchError, firstValueFrom, map } from 'rxjs';
+import { environment } from 'src/environments/environment';
+import { HttpError } from '../errors';
 import {
   BrandKey,
   CubicCapacityDTO,
@@ -12,9 +14,7 @@ import {
   QuoteVehicleModel,
   VehicleClassesDTO,
   VehicleClassesModel
-} from 'src/app/shared/models';
-import { environment } from 'src/environments/environment';
-import { HttpError } from '../errors';
+} from '../models';
 
 @Injectable({ providedIn: 'root' })
 export class VehicleService {

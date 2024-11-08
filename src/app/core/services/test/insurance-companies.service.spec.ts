@@ -1,8 +1,8 @@
-import { TestBed } from '@angular/core/testing';
 import { HttpClient } from '@angular/common/http';
+import { TestBed } from '@angular/core/testing';
 import { of } from 'rxjs';
+import { InsuranceCompany, InsuranceCompanyDTO } from '../../models';
 import { InsuranceCompaniesService } from '../insurance-companies.service';
-import { InsuranceCompany, InsuranceCompanyDTO } from 'src/app/shared/models';
 
 describe('InsuranceCompaniesService', () => {
   let service: InsuranceCompaniesService;

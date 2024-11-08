@@ -3,16 +3,16 @@ import { TestBed } from '@angular/core/testing';
 import { of } from 'rxjs';
 import {
   BrandKey,
+  CubicCapacityDTO,
   CubicCapacityModel,
+  FuelDTO,
   FuelModel,
   FuelTypes,
-  QuoteVehicleModel,
   ModelVersionModel,
-  VehicleClassesModel,
-  CubicCapacityDTO,
-  FuelDTO,
-  VehicleClassesDTO
-} from 'src/app/shared/models';
+  QuoteVehicleModel,
+  VehicleClassesDTO,
+  VehicleClassesModel
+} from '../../models';
 import { VehicleService } from '../vehicle.service';
 
 describe('VehicleService', () => {

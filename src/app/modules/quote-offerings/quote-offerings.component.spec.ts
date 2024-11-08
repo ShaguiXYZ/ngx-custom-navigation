@@ -1,13 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { ElementRef } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { TranslateService } from '@ngx-translate/core';
 import { ContextDataService } from '@shagui/ng-shagui/core';
 import { QUOTE_APP_CONTEXT_DATA, QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
+import { OfferingModel, OfferingPriceModel, QuoteModel } from 'src/app/core/models';
 import { RoutingService } from 'src/app/core/services';
 import { OfferingsService } from 'src/app/core/services/offerings.service';
-import { OfferingModel, OfferingPriceModel, QuoteModel } from 'src/app/shared/models';
 import { QuoteOfferingsComponent } from './quote-offerings.component';
-import { TranslateService } from '@ngx-translate/core';
 
 describe('QuoteOfferingsComponent', () => {
   let component: QuoteOfferingsComponent;

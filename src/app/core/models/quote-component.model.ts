@@ -1,9 +1,9 @@
 import { Component, inject } from '@angular/core';
 import { ActivatedRouteSnapshot, GuardResult, MaybeAsync, RouterStateSnapshot } from '@angular/router';
 import { ContextDataService } from '@shagui/ng-shagui/core';
-import { QuoteModel } from 'src/app/shared/models';
 import { QUOTE_CONTEXT_DATA } from '../constants';
 import { QuoteService } from '../services';
+import { QuoteModel } from './quote.model';
 
 @Component({
   template: ''

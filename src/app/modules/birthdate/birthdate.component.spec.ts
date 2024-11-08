@@ -7,8 +7,8 @@ import { NxMomentDateModule } from '@aposin/ng-aquila/moment-date-adapter';
 import { TranslateService } from '@ngx-translate/core';
 import { ContextDataService } from '@shagui/ng-shagui/core';
 import moment from 'moment';
+import { QuoteModel } from 'src/app/core/models';
 import { ContextDataServiceStub } from 'src/app/core/stub';
-import { QuoteModel } from 'src/app/shared/models';
 import { BirthdateComponent } from './birthdate.component';
 
 describe('BirthdateComponent', () => {

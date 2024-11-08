@@ -2,8 +2,8 @@ import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { NxAvatarModule } from '@aposin/ng-aquila/avatar';
 import { NxCopytextModule } from '@aposin/ng-aquila/copytext';
+import { IIconData } from 'src/app/core/models';
 import { QuoteLiteralDirective } from '../../directives';
-import { IIconData } from '../../models';
 import { SelectableOptionComponent } from '../selectable-option';
 
 @Component({

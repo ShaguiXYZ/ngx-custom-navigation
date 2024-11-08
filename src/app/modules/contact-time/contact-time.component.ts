@@ -1,23 +1,14 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { NxCopytextModule } from '@aposin/ng-aquila/copytext';
-import { QuoteComponent } from 'src/app/core/models';
-import { HeaderTitleComponent, QuoteFooterComponent, SelectableOptionComponent, TextCardComponent } from 'src/app/shared/components';
+import { Hour, QuoteComponent } from 'src/app/core/models';
+import { HeaderTitleComponent, QuoteFooterComponent, TextCardComponent } from 'src/app/shared/components';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
-import { Hour } from 'src/app/shared/models';
 
 @Component({
   selector: 'quote-contact-time',
   standalone: true,
-  imports: [
-    CommonModule,
-    HeaderTitleComponent,
-    QuoteFooterComponent,
-    TextCardComponent,
-    SelectableOptionComponent,
-    NxCopytextModule,
-    QuoteLiteralDirective
-  ],
+  imports: [CommonModule, HeaderTitleComponent, QuoteFooterComponent, TextCardComponent, NxCopytextModule, QuoteLiteralDirective],
   templateUrl: './contact-time.component.html',
   styleUrl: './contact-time.component.scss'
 })

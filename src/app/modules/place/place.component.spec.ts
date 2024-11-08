@@ -2,9 +2,9 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { ContextDataService } from '@shagui/ng-shagui/core';
+import { QuoteModel } from 'src/app/core/models';
 import { LocationService } from 'src/app/core/services';
 import { ContextDataServiceStub } from 'src/app/core/stub';
-import { QuoteModel } from 'src/app/shared/models';
 import { PlaceComponent } from './place.component';
 
 describe('PlaceComponent', () => {

@@ -1,9 +1,9 @@
 import { TestBed } from '@angular/core/testing';
-import { QuoteComponent } from '../quote-component.model';
-import { QuoteService } from '../../services/quote.service';
 import { ContextDataService } from '@shagui/ng-shagui/core';
 import { QUOTE_CONTEXT_DATA } from '../../constants';
-import { QuoteModel } from 'src/app/shared/models';
+import { QuoteService } from '../../services/quote.service';
+import { QuoteComponent } from '../quote-component.model';
+import { QuoteModel } from '../quote.model';
 
 class MockQuoteService {
   loadComponentData = jasmine.createSpy('loadComponentData').and.returnValue(Promise.resolve());

@@ -1,8 +1,7 @@
 import { DataInfo, deepCopy } from '@shagui/ng-shagui/core';
 import { Observable, of } from 'rxjs';
-import { QuoteModel } from 'src/app/shared/models';
 import { QUOTE_APP_CONTEXT_DATA, QUOTE_CONTEXT_DATA } from '../constants';
-import { AppContextData, Page } from '../models';
+import { AppContextData, Page, QuoteModel } from '../models';
 
 const appContextDataMock: AppContextData = {
   navigation: {
@@ -11,6 +10,7 @@ const appContextDataMock: AppContextData = {
   },
   configuration: {
     homePageId: 'page1',
+    errorPageId: 'page2',
     steppers: {
       steppersMap: {
         stepper1: {

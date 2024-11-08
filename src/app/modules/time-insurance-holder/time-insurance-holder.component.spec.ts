@@ -4,11 +4,11 @@ import { NxCopytextModule } from '@aposin/ng-aquila/copytext';
 import { TranslateService } from '@ngx-translate/core';
 import { ContextDataService } from '@shagui/ng-shagui/core';
 import { QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
-import { ContextDataServiceStub } from 'src/app/core/stub';
+import { QuoteModel } from 'src/app/core/models';
 import { RoutingService } from 'src/app/core/services';
+import { ContextDataServiceStub } from 'src/app/core/stub';
 import { HeaderTitleComponent, QuoteFooterComponent, QuoteFooterInfoComponent, SelectableOptionComponent } from 'src/app/shared/components';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
-import { QuoteModel } from 'src/app/shared/models';
 import { TimeInsuranceHolderComponent } from './time-insurance-holder.component';
 
 describe('TimeInsuranceHolderComponent', () => {

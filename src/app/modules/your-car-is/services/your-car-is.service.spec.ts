@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { ContextDataService } from '@shagui/ng-shagui/core';
+import { QuoteModel, QuoteVehicleModel } from 'src/app/core/models';
 import { VehicleService } from 'src/app/core/services';
-import { QuoteModel, QuoteVehicleModel } from 'src/app/shared/models';
 import { YourCarIsService } from './your-car-is.service';
 
 describe('YourCarIsService', () => {

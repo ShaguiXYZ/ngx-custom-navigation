@@ -58,6 +58,7 @@ describe('SettingsService', () => {
     const appContextData: AppContextData = {
       configuration: {
         homePageId: mockConfiguration.homePageId,
+        errorPageId: 'error',
         lastUpdate: mockConfiguration.lastUpdate,
         pageMap: {
           home: {

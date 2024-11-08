@@ -1,11 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
+import { NxAccordionModule } from '@aposin/ng-aquila/accordion';
 import { NxHeadlineModule } from '@aposin/ng-aquila/headline';
 import { NxTabsModule } from '@aposin/ng-aquila/tabs';
-import { OfferingPriceModel } from 'src/app/shared/models';
+import { OfferingPriceModel } from 'src/app/core/models';
 import { QuoteLiteralDirective } from '../../directives';
 import { HeaderTitleComponent } from '../header-title';
-import { NxAccordionModule } from '@aposin/ng-aquila/accordion';
 
 @Component({
   selector: 'quote-offering-coverages',

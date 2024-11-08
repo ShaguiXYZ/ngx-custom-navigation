@@ -1,16 +1,16 @@
 import { CommonModule } from '@angular/common';
+import { ɵDeferBlockState } from '@angular/core';
 import { ComponentFixture, DeferBlockBehavior, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { NxAvatarModule } from '@aposin/ng-aquila/avatar';
 import { NxCopytextModule } from '@aposin/ng-aquila/copytext';
 import { TranslateService } from '@ngx-translate/core';
 import { ContextDataService } from '@shagui/ng-shagui/core';
+import { IIconData } from 'src/app/core/models';
 import { ContextDataServiceStub } from 'src/app/core/stub';
 import { QuoteLiteralDirective } from '../../directives';
-import { IIconData } from '../../models';
 import { SelectableOptionComponent } from '../selectable-option';
 import { IconCardComponent } from './icon-card.component';
-import { ɵDeferBlockState } from '@angular/core';
 
 describe('IconCardComponent', () => {
   const iconData: IIconData = { index: '1', data: 'icon' };

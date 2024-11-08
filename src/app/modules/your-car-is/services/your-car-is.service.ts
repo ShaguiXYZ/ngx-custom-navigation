@@ -1,8 +1,8 @@
 import { inject, Injectable } from '@angular/core';
 import { ContextDataService } from '@shagui/ng-shagui/core';
 import { QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
+import { QuoteModel, QuoteVehicleModel } from 'src/app/core/models';
 import { VehicleService } from 'src/app/core/services';
-import { QuoteModel, QuoteVehicleModel } from 'src/app/shared/models';
 
 @Injectable()
 export class YourCarIsService {

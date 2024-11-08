@@ -3,8 +3,7 @@ import { inject } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivateFn, GuardResult, MaybeAsync, Router, RouterStateSnapshot } from '@angular/router';
 import { ContextDataService } from '@shagui/ng-shagui/core';
 import { QUOTE_APP_CONTEXT_DATA, QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
-import { AppContextData, Page } from 'src/app/core/models';
-import { QuoteModel } from '../models';
+import { AppContextData, Page, QuoteModel } from 'src/app/core/models';
 
 export const journeyGuard: CanActivateFn = (route: ActivatedRouteSnapshot, state: RouterStateSnapshot): MaybeAsync<GuardResult> => {
   const contextDataService = inject(ContextDataService);

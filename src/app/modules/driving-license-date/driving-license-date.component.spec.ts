@@ -9,8 +9,8 @@ import { TranslateService } from '@ngx-translate/core';
 import { ContextDataService } from '@shagui/ng-shagui/core';
 import moment from 'moment';
 import { QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
+import { QuoteModel } from 'src/app/core/models';
 import { ContextDataServiceStub } from 'src/app/core/stub';
-import { QuoteModel } from 'src/app/shared/models';
 import { DrivingLicenseDateComponent } from './driving-license-date.component';
 
 describe('DrivingLicenseDateComponent', () => {

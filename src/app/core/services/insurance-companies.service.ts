@@ -2,9 +2,9 @@ import { HttpStatusCode } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { HttpService, IndexedData, TTL, UniqueIds } from '@shagui/ng-shagui/core';
 import { catchError, firstValueFrom, map } from 'rxjs';
-import { InsuranceCompany, InsuranceCompanyDTO } from 'src/app/shared/models';
 import { environment } from 'src/environments/environment';
 import { HttpError } from '../errors';
+import { InsuranceCompany, InsuranceCompanyDTO } from '../models';
 
 @Injectable({ providedIn: 'root' })
 export class InsuranceCompaniesService {

@@ -6,11 +6,10 @@ import { NxIconModule } from '@aposin/ng-aquila/icon';
 import { NxInputModule } from '@aposin/ng-aquila/input';
 import { debounceTime, distinctUntilChanged, fromEvent, map, Subscription } from 'rxjs';
 import { DEBOUNCE_TIME } from 'src/app/core/constants';
-import { QuoteComponent } from 'src/app/core/models';
+import { BrandData, QuoteComponent } from 'src/app/core/models';
 import { RoutingService, VehicleService } from 'src/app/core/services';
-import { HeaderTitleComponent, IconCardComponent, TextCardComponent } from 'src/app/shared/components';
+import { HeaderTitleComponent, TextCardComponent } from 'src/app/shared/components';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
-import { BrandData } from 'src/app/shared/models';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 import { BrandComponent } from './components';
 
@@ -19,7 +18,6 @@ import { BrandComponent } from './components';
   standalone: true,
   imports: [
     CommonModule,
-    IconCardComponent,
     HeaderTitleComponent,
     BrandComponent,
     TextCardComponent,

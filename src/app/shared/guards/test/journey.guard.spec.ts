@@ -2,8 +2,7 @@ import { TestBed } from '@angular/core/testing';
 import { ActivatedRoute, Router, RouterStateSnapshot } from '@angular/router';
 import { ContextDataService } from '@shagui/ng-shagui/core';
 import { QUOTE_APP_CONTEXT_DATA, QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
-import { AppContextData } from 'src/app/core/models';
-import { QuoteModel } from '../../models';
+import { AppContextData, QuoteModel } from 'src/app/core/models';
 import { journeyGuard } from '../journey.guard';
 
 describe('JourneyGuard', () => {
@@ -40,6 +39,7 @@ describe('JourneyGuard', () => {
       },
       configuration: {
         homePageId: 'home',
+        errorPageId: 'error',
         pageMap: {
           page1: { pageId: 'page1', route: 'page1' }
         }
@@ -67,6 +67,7 @@ describe('JourneyGuard', () => {
       },
       configuration: {
         homePageId: 'home',
+        errorPageId: 'error',
         pageMap: {
           page1: { pageId: 'page1', route: 'page1' },
           page2: { pageId: 'page2', route: 'page2' }
@@ -95,6 +96,7 @@ describe('JourneyGuard', () => {
       },
       configuration: {
         homePageId: 'home',
+        errorPageId: 'error',
         pageMap: {
           page1: { pageId: 'page1', route: 'page1' },
           home: { pageId: 'home', route: 'home' }

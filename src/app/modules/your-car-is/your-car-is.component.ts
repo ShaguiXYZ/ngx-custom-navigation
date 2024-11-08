@@ -6,11 +6,10 @@ import { NxCopytextModule } from '@aposin/ng-aquila/copytext';
 import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
 import { NxInputModule } from '@aposin/ng-aquila/input';
 import { NxMaskModule } from '@aposin/ng-aquila/mask';
-import { QuoteComponent } from 'src/app/core/models';
+import { QuoteComponent, QuoteVehicleModel } from 'src/app/core/models';
 import { RoutingService, VehicleService } from 'src/app/core/services';
-import { HeaderTitleComponent, QuoteFooterComponent, SelectableOptionComponent, TextCardComponent } from 'src/app/shared/components';
+import { HeaderTitleComponent, QuoteFooterComponent, TextCardComponent } from 'src/app/shared/components';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
-import { QuoteVehicleModel } from 'src/app/shared/models';
 import { YourCarIsService } from './services';
 
 @Component({
@@ -23,7 +22,6 @@ import { YourCarIsService } from './services';
     FormsModule,
     HeaderTitleComponent,
     QuoteFooterComponent,
-    SelectableOptionComponent,
     TextCardComponent,
     NxButtonModule,
     NxCopytextModule,
