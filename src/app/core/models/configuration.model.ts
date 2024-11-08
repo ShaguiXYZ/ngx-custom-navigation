@@ -9,6 +9,7 @@ export type Literals = DataInfo<LiteralModel>;
 
 export interface ConfigurationDTO {
   homePageId: string;
+  errorPageId?: string;
   lastUpdate?: Date;
   steppers?: StepperDTO[];
   pageMap: Page[];
@@ -48,6 +49,7 @@ export interface Condition {
 
 export interface Configuration {
   homePageId: string;
+  errorPageId: string;
   lastUpdate?: Date;
   pageMap: DataInfo<Page>;
   steppers?: Steppers;

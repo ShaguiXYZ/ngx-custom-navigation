@@ -7,10 +7,10 @@ import { AppContextData, QuoteComponent } from 'src/app/core/models';
 const isPreviousStep = ({ navigation: { nextPage, viewedPages } }: AppContextData): boolean =>
   !!nextPage && viewedPages.includes(nextPage.pageId);
 
-const stepperChange = (context: AppContextData) =>
-  !!context.navigation.nextPage?.stepper &&
-  !!context.navigation.lastPage?.stepper &&
-  context.navigation.nextPage.stepper.key !== context.navigation.lastPage.stepper.key;
+const stepperChange = ({ navigation: { nextPage, lastPage } }: AppContextData) =>
+  !!nextPage?.stepper && !!lastPage?.stepper && nextPage.stepper.key !== lastPage.stepper.key;
+
+const isErrorPage = ({ navigation: { nextPage }, configuration: { errorPageId } }: AppContextData) => errorPageId === nextPage?.pageId;
 
 export const isValidGuard: CanDeactivateFn<QuoteComponent> = (
   component: QuoteComponent,
@@ -21,5 +21,10 @@ export const isValidGuard: CanDeactivateFn<QuoteComponent> = (
   const contextDataService = inject(ContextDataService);
   const context = contextDataService.get<AppContextData>(QUOTE_APP_CONTEXT_DATA);
 
-  return isPreviousStep(context) || stepperChange(context) || (component.canDeactivate?.bind(component)(currentRoute, state, next) ?? true);
+  return (
+    isErrorPage(context) ||
+    isPreviousStep(context) ||
+    stepperChange(context) ||
+    (component.canDeactivate?.bind(component)(currentRoute, state, next) ?? true)
+  );
 };

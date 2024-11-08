@@ -2,17 +2,27 @@ import { HttpErrorResponse, HttpEvent, HttpHandlerFn, HttpInterceptorFn, HttpReq
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { HttpError } from './http.error';
+import { inject } from '@angular/core';
+import { RoutingService } from '../services';
+import { ContextDataService } from '@shagui/ng-shagui/core';
+import { AppContextData } from '../models';
+import { QUOTE_APP_CONTEXT_DATA } from '../constants';
 
 export const httpErrorInterceptor: HttpInterceptorFn = (req: HttpRequest<unknown>, next: HttpHandlerFn): Observable<HttpEvent<unknown>> => {
+  const contextDataService = inject(ContextDataService);
+  const routingService = inject(RoutingService);
+
   return next(req).pipe(
     catchError((error: HttpErrorResponse) => {
       let errorMessage = 'An unknown error occurred!';
 
       if (error.error instanceof ErrorEvent) {
         // Client-side error
-        return throwError(() => new HttpError(error.status, errorMessage));
+        console.log('Client-side error');
       } else {
         // Server-side error
+        console.log('Server-side error');
+
         switch (error.status) {
           case HttpStatusCode.BadRequest:
             errorMessage = 'Bad Request';
@@ -33,8 +43,14 @@ export const httpErrorInterceptor: HttpInterceptorFn = (req: HttpRequest<unknown
             errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
         }
 
-        return throwError(() => new HttpError(error.status, errorMessage));
+        const {
+          configuration: { errorPageId }
+        } = contextDataService.get<AppContextData>(QUOTE_APP_CONTEXT_DATA);
+
+        routingService.goToPage(errorPageId).catch(console.error);
       }
+
+      return throwError(() => new HttpError(error.status, errorMessage));
     })
   );
 };

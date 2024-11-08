@@ -4,9 +4,17 @@ import { ContextDataService, DataInfo, HttpService, UniqueIds } from '@shagui/ng
 import { firstValueFrom, map } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { QuoteModel, Step, Stepper, StepperDTO } from '../../shared/models';
-import { QUOTE_APP_CONTEXT_DATA, QUOTE_CONTEXT_DATA } from '../constants';
+import { QUOTE_APP_CONTEXT_DATA, QUOTE_CONTEXT_DATA, QUOTE_ERROR_PAGE_ID } from '../constants';
 import { AppContextData, Configuration, ConfigurationDTO, Links, LiteralModel, Literals, Page } from '../models';
 import { LiteralsService } from './literals.service';
+
+// @howto - Generate a random string of a given length.
+const generateRandomString = (length = 16): string => {
+  return Array.from(crypto.getRandomValues(new Uint8Array(length)))
+    .map(byte => byte.toString(36).padStart(2, '0'))
+    .join('')
+    .slice(0, length);
+};
 
 @Injectable({
   providedIn: 'root'
@@ -58,15 +66,41 @@ export class SettingsService {
     return quoteConfiguration;
   };
 
-  private initQuote = (configuration: ConfigurationDTO): Configuration => {
-    return {
-      homePageId: configuration.homePageId,
-      lastUpdate: configuration.lastUpdate,
-      pageMap: configuration.pageMap.reduce((acc, page) => {
+  private initQuote = (dto: ConfigurationDTO): Configuration => {
+    const errorPageId = dto.errorPageId ?? generateRandomString();
+
+    const configuration: Configuration = {
+      homePageId: dto.homePageId,
+      errorPageId,
+      lastUpdate: dto.lastUpdate,
+      pageMap: dto.pageMap.reduce((acc, page) => {
         acc[page.pageId] = page;
         return acc;
-      }, {} as DataInfo<Page>)
+      }, {} as DataInfo<Page>),
+      links: {}
     };
+
+    this.setErrorPage(configuration, errorPageId);
+
+    return configuration;
+  };
+
+  private setErrorPage = (configuration: Configuration, errorPageId: string): void => {
+    if (!configuration.pageMap[errorPageId]) {
+      const errorPage: Page = {
+        pageId: errorPageId,
+        route: QUOTE_ERROR_PAGE_ID,
+        configuration: {
+          literals: {
+            body: 'Lo sentimos, no podemos ofrecerle el seguro que necesitas en esta ocasion.'
+          }
+        }
+      } as Page;
+
+      configuration.pageMap[errorPageId] = errorPage;
+    }
+
+    configuration.links = { ...configuration.links, [errorPageId]: errorPageId };
   };
 
   private initSteppers = (configuration: Configuration, steppers?: StepperDTO[]): void => {
@@ -100,7 +134,7 @@ export class SettingsService {
   };
 
   private initLinks = (configuration: Configuration, links?: Links): void => {
-    configuration.links = links;
+    configuration.links = { ...configuration.links, ...links };
   };
 
   private initLiterals = (configuration: Configuration, literals?: Literals): void => {

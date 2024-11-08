@@ -17,8 +17,7 @@ import { AppContextData, Page } from 'src/app/core/models';
 })
 export class JourneyHomeComponent implements OnInit {
   private readonly contextDataService = inject(ContextDataService);
-
-  constructor(private readonly _router: Router) {}
+  private readonly _router = inject(Router);
 
   ngOnInit(): void {
     const context = this.contextDataService.get<AppContextData>(QUOTE_APP_CONTEXT_DATA);

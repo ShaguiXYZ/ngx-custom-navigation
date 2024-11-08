@@ -21,16 +21,20 @@ export const journeyGuard: CanActivateFn = (route: ActivatedRouteSnapshot, state
     return router.parseUrl(`${Page.routeFrom(context.navigation.nextPage)}`);
   }
 
-  const { homePageId } = context.configuration;
+  const { homePageId, errorPageId } = context.configuration;
   const pageIndex = viewedPages.indexOf(nextPage.pageId);
+
+  let lastPage = nextPage;
 
   if (pageIndex > -1) {
     viewedPages.splice(pageIndex + 1);
-  } else {
+  } else if (nextPage.pageId !== errorPageId) {
     viewedPages.push(nextPage.pageId);
+  } else {
+    lastPage = context.configuration.pageMap[errorPageId];
   }
 
-  context.navigation = { ...context.navigation, viewedPages, lastPage: nextPage, nextPage: undefined };
+  context.navigation = { ...context.navigation, viewedPages, lastPage, nextPage: undefined };
   contextDataService.set(QUOTE_APP_CONTEXT_DATA, context);
 
   homePageId === nextPage.pageId && contextDataService.set(QUOTE_CONTEXT_DATA, QuoteModel.init());
