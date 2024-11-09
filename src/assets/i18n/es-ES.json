@@ -3,7 +3,9 @@
     "FieldRequired": "Campo requerido",
     "FutureDate": "La fecha no puede ser futura",
     "PastDate": "La fecha no puede ser pasada",
-    "OldDate": "La fecha no puede ser anterior a {{value}}"
+    "OldDate": "La fecha no puede ser anterior a {{value}}",
+    "NotBetween": "El valor debe estar entre {{min}} y {{max}}",
+    "NotBetweenDates": "La fecha debe estar entre {{min}} y {{max}}"
   },
   "Label": {
     "AllBrands": "Todas las marcas",

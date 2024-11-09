@@ -768,6 +768,7 @@
     "error-required": { "value": "Errors.FieldRequired", "type": "translate" },
     "error-future-date": { "value": "Errors.FutureDate", "type": "translate" },
     "error-past-date": { "value": "Errors.PastDate", "type": "translate" },
-    "error-old-date": { "value": "Errors.OldDate", "type": "translate" }
+    "error-old-date": { "value": "Errors.OldDate", "type": "translate" },
+    "error-not-between-dates": { "value": "Errors.NotBetweenDates", "type": "translate" }
   }
 }

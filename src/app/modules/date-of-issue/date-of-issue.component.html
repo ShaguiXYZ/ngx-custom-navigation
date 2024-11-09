@@ -7,6 +7,8 @@
           formControlName="dateOfIssue"
           nxDatefield
           nxInput
+          [min]="minDate"
+          [max]="maxDate"
           [datepicker]="myDatepicker"
           [parseFormat]="['DD/MM/YYYY', 'DDMMYYYY', 'DDMMYY']"
           displayFormat="DD/MM/YYYY"
@@ -16,8 +18,13 @@
         <nx-datepicker #myDatepicker></nx-datepicker>
         @if(form.get('dateOfIssue')?.errors?.['required']) {
         <nx-error appearance="text" nxFormfieldError><span nxQuoteLiteral="error-required"></span> </nx-error>
-        } @if(form.get('dateOfIssue')?.errors?.['pastDate']) {
-        <nx-error appearance="text" nxFormfieldError><span nxQuoteLiteral="error-past-date"></span> </nx-error>
+        } @if(form.get('dateOfIssue')?.errors?.['isBetweenDates']) {
+        <nx-error appearance="text" nxFormfieldError
+          ><span
+            nxQuoteLiteral="error-not-between-dates"
+            [uiQuoteLitealParams]="{ min: minDate.format('DD/MM/YYYY'), max: maxDate.format('DD/MM/YYYY') }"
+          ></span>
+        </nx-error>
         }
       </nx-formfield>
     </form>

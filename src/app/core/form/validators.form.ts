@@ -37,3 +37,14 @@ export const minYearsBetweenDates =
 
     return Math.abs(timeBetween) < maxYears ? { minYearsBetweenDates: true } : null;
   };
+
+export const isBetweenDates = (startDate: Date, endDate: Date): ValidatorFn => {
+  return (control: AbstractControl): ValidationErrors | null => {
+    const controlDate = moment(control.value);
+    const start = moment(startDate);
+    const end = moment(endDate);
+
+    // @howto make isBetween inclusive ingnoring time
+    return controlDate.isBetween(start.startOf('day'), end.endOf('day'), undefined, '[)') ? null : { isBetweenDates: true };
+  };
+};
