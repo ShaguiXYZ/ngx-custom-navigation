@@ -2,9 +2,9 @@ import { HttpClient, HttpErrorResponse, HttpStatusCode, provideHttpClient, withI
 import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { ContextDataService } from '@shagui/ng-shagui/core';
+import { HttpError } from '../../errors';
 import { RoutingService } from '../../services';
 import { httpErrorInterceptor } from '../http-error.interceptor';
-import { HttpError } from '../http.error';
 
 describe('HttpErrorInterceptor', () => {
   let httpMock: HttpTestingController;

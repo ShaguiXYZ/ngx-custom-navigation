@@ -6,10 +6,10 @@ import { TranslateModule } from '@ngx-translate/core';
 import { NX_CONTEX_CONFIG } from '@shagui/ng-shagui/core';
 import { routes } from './app.routes';
 import { APP_NAME, SCHEDULER_PERIOD } from './core/constants';
+import { GlobalErrorHandler } from './core/errors';
+import { httpErrorInterceptor, mockInterceptor } from './core/interceptors';
 import { SettingsService } from './core/services';
 import { AppUrls, TRANSLATE_MODULE_CONFIG, urls } from './shared/config';
-import { mockInterceptor } from './shared/interceptor';
-import { GlobalErrorHandler, httpErrorInterceptor } from './core/errors';
 
 const initSettings = (settings: SettingsService) => (): Promise<void> => settings.loadSettings();
 
