@@ -8,14 +8,6 @@ import { QUOTE_APP_CONTEXT_DATA, QUOTE_CONTEXT_DATA, QUOTE_ERROR_PAGE_ID } from 
 import { AppContextData, Configuration, ConfigurationDTO, Links, LiteralModel, Literals, Page, QuoteModel } from '../models';
 import { LiteralsService } from './literals.service';
 
-// @howto - Generate a random string of a given length.
-const generateRandomString = (length = 16): string => {
-  return Array.from(crypto.getRandomValues(new Uint8Array(length)))
-    .map(byte => byte.toString(36).padStart(2, '0'))
-    .join('')
-    .slice(0, length);
-};
-
 @Injectable({
   providedIn: 'root'
 })
@@ -67,7 +59,7 @@ export class SettingsService {
   };
 
   private initQuote = (dto: ConfigurationDTO): Configuration => {
-    const errorPageId = dto.errorPageId ?? generateRandomString();
+    const errorPageId = dto.errorPageId ?? UniqueIds.random();
 
     const configuration: Configuration = {
       homePageId: dto.homePageId,

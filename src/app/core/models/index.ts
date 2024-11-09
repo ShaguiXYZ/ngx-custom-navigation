@@ -1,5 +1,6 @@
 export * from './app-context-data.model';
 export * from './brand-dictionary.model';
+export * from './budget.model';
 export * from './configuration.model';
 export * from './fuel-types.model';
 export * from './icon-data.model';

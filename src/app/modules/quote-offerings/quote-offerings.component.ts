@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, ElementRef, inject, OnInit, TemplateRef, ViewChild } from '@angular/core';
-import { NxDialogService, NxModalModule, NxModalRef } from '@aposin/ng-aquila/modal';
+import { NxDialogService, NxModalModule } from '@aposin/ng-aquila/modal';
 import { OfferingPriceModel, QuoteComponent } from 'src/app/core/models';
 import { RoutingService } from 'src/app/core/services';
 import { OfferingsService } from 'src/app/core/services/offerings.service';
@@ -24,8 +24,6 @@ export class QuoteOfferingsComponent extends QuoteComponent implements OnInit {
 
   public selectedPriceIndex = 0;
   public prices: OfferingPriceModel[] = [];
-
-  private componentDialogRef?: NxModalRef<unknown>;
 
   private swipeCoord!: [number, number];
   private swipeTime!: number;
@@ -93,7 +91,7 @@ export class QuoteOfferingsComponent extends QuoteComponent implements OnInit {
 
   public showCoverages(index: number) {
     this.selectedPriceIndex = index;
-    this.componentDialogRef = this.dialogService.open(this.priceCoveragesRef, {
+    this.dialogService.open(this.priceCoveragesRef, {
       maxWidth: '98%',
       showCloseIcon: false
     });

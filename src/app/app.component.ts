@@ -9,8 +9,8 @@ import { RoutingService } from './core/services';
 import { routeTransitions } from './shared/animations';
 import {
   NotificationComponent,
-  QuoteFooterComponent,
   QuoteHeaderComponent,
+  QuoteKeysComponent,
   QuoteLoadingComponent,
   QuoteStepperComponent
 } from './shared/components';
@@ -28,7 +28,7 @@ import { QuoteLiteralPipe } from './shared/pipes';
     NxGridModule,
     NxLinkModule,
     NotificationComponent,
-    QuoteFooterComponent,
+    QuoteKeysComponent,
     QuoteHeaderComponent,
     QuoteLoadingComponent,
     QuoteStepperComponent
