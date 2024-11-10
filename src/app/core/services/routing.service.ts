@@ -51,6 +51,8 @@ export class RoutingService implements OnDestroy {
     return Promise.resolve(false);
   };
 
+  public resetNavigation = (): Promise<boolean> => this._router.navigate(['/'], { skipLocationChange: true });
+
   public goToPage = (pageId: string): Promise<boolean> => this._goToPage(this.getPage(pageId)!);
 
   public goToStep = (step: Omit<Step, 'label'>): Promise<boolean> => {

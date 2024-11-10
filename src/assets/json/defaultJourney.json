@@ -747,6 +747,13 @@
   },
   "literals": {
     "back": "Volver",
+    "budget-modal-header": "Datos de tu presupuesto",
+    "budget-name": "Nombre del presupuesto",
+    "budget-key": "Clave del presupuesto",
+    "create-budget": "Crear presupuesto",
+    "save-budget": "Guardar presupuesto",
+    "retrieve-budget": "Recuperar presupuesto",
+    "store-budget": "Almacenar presupuesto",
     "contact-us-phone": "+49 55 5555 5555",
     "contact-us-header": "Información de contacto",
     "contact-us-title": "Nos gustaría poder ayudarte, <br/>¡contactanos!",

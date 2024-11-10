@@ -6,7 +6,7 @@
   <section class="form-container">
     <nx-tab-group [selectedIndex]="selectedPriceIndex" [mobileAccordion]="false">
       @for(price of prices; track price.modalityId) {
-      <nx-tab class="" [label]="price.modalityDescription">
+      <nx-tab [label]="price.modalityDescription">
         <div class="coverages">
           <nx-accordion variant="light" [multi]="false">
             @for(coverage of price.coverageList; track coverage.code) {

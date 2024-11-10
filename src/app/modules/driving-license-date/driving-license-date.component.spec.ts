@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { NxDatefieldModule } from '@aposin/ng-aquila/datefield';
 import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
 import { NxInputModule } from '@aposin/ng-aquila/input';
@@ -23,15 +23,7 @@ describe('DrivingLicenseDateComponent', () => {
 
     await TestBed.configureTestingModule({
       declarations: [],
-      imports: [
-        DrivingLicenseDateComponent,
-        ReactiveFormsModule,
-        FormsModule,
-        NxDatefieldModule,
-        NxFormfieldModule,
-        NxInputModule,
-        NxMomentDateModule
-      ],
+      imports: [DrivingLicenseDateComponent, ReactiveFormsModule, NxDatefieldModule, NxFormfieldModule, NxInputModule, NxMomentDateModule],
       providers: [
         { provide: ContextDataService, useClass: ContextDataServiceStub },
         { provide: TranslateService, useValue: translateServiceSpy }

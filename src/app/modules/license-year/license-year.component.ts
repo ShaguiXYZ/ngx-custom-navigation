@@ -5,7 +5,6 @@ import {
   FormBuilder,
   FormControl,
   FormGroup,
-  FormsModule,
   ReactiveFormsModule,
   ValidationErrors,
   ValidatorFn,
@@ -27,7 +26,6 @@ import { QuoteLiteralPipe } from 'src/app/shared/pipes';
   styleUrl: './license-year.component.scss',
   standalone: true,
   imports: [
-    FormsModule,
     HeaderTitleComponent,
     NxFormfieldModule,
     NxInputModule,

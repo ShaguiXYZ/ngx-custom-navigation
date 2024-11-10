@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { NxButtonModule } from '@aposin/ng-aquila/button';
 import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
 import { NxInputModule } from '@aposin/ng-aquila/input';
@@ -22,16 +22,7 @@ describe('LicenseYearComponent', () => {
 
     await TestBed.configureTestingModule({
       declarations: [],
-      imports: [
-        LicenseYearComponent,
-        CommonModule,
-        FormsModule,
-        ReactiveFormsModule,
-        NxFormfieldModule,
-        NxInputModule,
-        NxMaskModule,
-        NxButtonModule
-      ],
+      imports: [LicenseYearComponent, CommonModule, ReactiveFormsModule, NxFormfieldModule, NxInputModule, NxMaskModule, NxButtonModule],
       providers: [
         { provide: ContextDataService, useClass: ContextDataServiceStub },
         { provide: TranslateService, useValue: translateServiceSpy }

@@ -4,7 +4,7 @@ import { NxButtonModule } from '@aposin/ng-aquila/button';
 import { hasValue } from '@shagui/ng-shagui/core';
 import { QuoteComponent } from 'src/app/core/models';
 import { RoutingService } from 'src/app/core/services';
-import { HeaderTitleComponent, SelectableOptionComponent } from 'src/app/shared/components';
+import { HeaderTitleComponent, QuoteBudgetComponent, SelectableOptionComponent } from 'src/app/shared/components';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
 
 @Component({
@@ -12,7 +12,7 @@ import { QuoteLiteralDirective } from 'src/app/shared/directives';
   templateUrl: './is-client.component.html',
   styleUrl: './is-client.component.scss',
   standalone: true,
-  imports: [CommonModule, HeaderTitleComponent, SelectableOptionComponent, NxButtonModule, QuoteLiteralDirective]
+  imports: [CommonModule, HeaderTitleComponent, SelectableOptionComponent, QuoteBudgetComponent, NxButtonModule, QuoteLiteralDirective]
 })
 export class IsClientComponent extends QuoteComponent {
   private readonly routingService = inject(RoutingService);

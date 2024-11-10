@@ -1,5 +1,5 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { NxCopytextModule } from '@aposin/ng-aquila/copytext';
 import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
 import { NxInputModule } from '@aposin/ng-aquila/input';
@@ -16,7 +16,6 @@ import { QuoteLiteralPipe } from 'src/app/shared/pipes';
   styleUrl: './client-email.component.scss',
   standalone: true,
   imports: [
-    FormsModule,
     HeaderTitleComponent,
     NxCopytextModule,
     NxFormfieldModule,

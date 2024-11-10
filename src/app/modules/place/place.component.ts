@@ -5,7 +5,6 @@ import {
   FormBuilder,
   FormControl,
   FormGroup,
-  FormsModule,
   ReactiveFormsModule,
   ValidationErrors,
   Validators
@@ -24,7 +23,6 @@ import { QuoteLiteralDirective, QuoteMaskDirective } from 'src/app/shared/direct
   styleUrl: './place.component.scss',
   standalone: true,
   imports: [
-    FormsModule,
     HeaderTitleComponent,
     QuoteFooterComponent,
     QuoteFooterInfoComponent,

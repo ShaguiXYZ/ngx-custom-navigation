@@ -1,1 +1,29 @@
-<article class="component-container">budget works!!!</article>
+<!-- eslint-disable @angular-eslint/template/elements-content -->
+<article class="component-container">
+  <quote-header-title>
+    <span class="coverages__title" nxHeadline="subsection-medium" nxQuoteLiteral="budget-modal-header"></span>
+  </quote-header-title>
+
+  <section class="form-container">
+    <form [formGroup]="form">
+      <nx-tab-group [mobileAccordion]="false" appearance="expert">
+        <nx-tab [label]="'retrieve-budget' | quoteLiteral">
+          <div class="component-data" formGroupName="retrieveBudget">
+            <nx-formfield [label]="'budget-key' | quoteLiteral">
+              <input type="text" formControlName="storePassKey" nxInput />
+            </nx-formfield>
+          </div>
+          <button nxButton="primary small" type="button" nxQuoteLiteral="create-budget" (click)="retrieveBudget()"></button>
+        </nx-tab>
+        <nx-tab [label]="'save-budget' | quoteLiteral">
+          <div class="component-data" formGroupName="storeBudget">
+            <nx-formfield [label]="'budget-name' | quoteLiteral">
+              <input type="text" formControlName="storeName" nxInput />
+            </nx-formfield>
+            <button nxButton="primary small" type="button" nxQuoteLiteral="store-budget" (click)="storeBudget()"></button>
+          </div>
+        </nx-tab>
+      </nx-tab-group>
+    </form>
+  </section>
+</article>

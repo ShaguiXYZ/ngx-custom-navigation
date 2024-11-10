@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { NxCopytextModule } from '@aposin/ng-aquila/copytext';
 import { NX_DATE_LOCALE } from '@aposin/ng-aquila/datefield';
 import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
@@ -27,7 +27,6 @@ describe('ClientIdentificationNumberComponent', () => {
       declarations: [],
       imports: [
         ClientIdentificationNumberComponent,
-        FormsModule,
         ReactiveFormsModule,
         NxCopytextModule,
         NxFormfieldModule,

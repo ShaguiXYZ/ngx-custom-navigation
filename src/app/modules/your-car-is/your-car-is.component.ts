@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { NxButtonModule } from '@aposin/ng-aquila/button';
 import { NxCopytextModule } from '@aposin/ng-aquila/copytext';
 import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
@@ -19,7 +19,6 @@ import { YourCarIsService } from './services';
   standalone: true,
   imports: [
     CommonModule,
-    FormsModule,
     HeaderTitleComponent,
     QuoteFooterComponent,
     TextCardComponent,

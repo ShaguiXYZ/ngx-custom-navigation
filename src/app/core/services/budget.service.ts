@@ -1,53 +1,65 @@
 import { inject, Injectable } from '@angular/core';
-import { ContextDataService, UniqueIds } from '@shagui/ng-shagui/core';
+import { ContextDataService, IndexedData, UniqueIds } from '@shagui/ng-shagui/core';
 import CryptoJS from 'crypto-js';
+import moment from 'moment';
 import { QUOTE_APP_CONTEXT_DATA, QUOTE_CONTEXT_DATA } from '../constants';
 import { BudgetError } from '../errors';
-import { AppContextData, BudgetModel, QuoteModel, StoredData } from '../models';
-import moment from 'moment';
+import { AppContextData, Budget, QuoteModel, StoredData, StoredDataKey } from '../models';
 
 @Injectable()
 export class BudgetService {
   private readonly contextDataService = inject(ContextDataService);
 
-  public storeBugdet(): string {
-    const contextData: BudgetModel = {
+  public storeBudget(name?: string): string {
+    const budget: Budget = {
       context: this.contextDataService.get<AppContextData>(QUOTE_APP_CONTEXT_DATA),
       quote: this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA)
     };
 
-    const storedData: StoredData = { passKey: UniqueIds.random(16), key: `QUOTE_${moment().format('YYYYMMDD')}_${UniqueIds.random(6)}` };
+    const storedDataKey: StoredDataKey = {
+      passKey: UniqueIds.random(16),
+      key: `QUOTE_${moment().format('YYYYMMDD')}_${UniqueIds.random(6).toUpperCase()}`
+    };
 
-    const encrypted = this.encryptQuote(storedData.passKey, contextData);
-    localStorage.setItem(storedData.key, encrypted);
+    const cipher = this.encryptQuote(storedDataKey.passKey, budget);
+    const storedData: StoredData = { name: name ?? storedDataKey.key, cipher };
 
-    const cypheredStoredData = btoa(JSON.stringify(storedData));
-    return cypheredStoredData;
+    localStorage.setItem(storedDataKey.key, btoa(JSON.stringify(storedData)));
+
+    return btoa(JSON.stringify(storedDataKey));
   }
 
-  public retrieveBudget(key: string): BudgetModel {
-    const storedData = JSON.parse(atob(key)) as StoredData;
+  public retrieveBudget(key: string): Budget {
+    const storedDataKey = JSON.parse(atob(key)) as StoredDataKey;
+    const storedData = localStorage.getItem(storedDataKey.key);
 
-    const budget = localStorage.getItem(storedData.key);
-
-    if (!budget) {
+    if (!storedData) {
       throw new BudgetError('Budget not found');
     }
 
-    const decrypted = this.decryptQuote<BudgetModel>(storedData.passKey, budget);
-
-    localStorage.removeItem(storedData.key);
+    const storedDataModel = JSON.parse(atob(storedData)) as StoredData;
+    const decrypted = this.decryptQuote<Budget>(storedDataKey.passKey, storedDataModel.cipher);
 
     return decrypted;
   }
 
-  public retrieveAllStorageBudgets(): string[] {
+  public retrieveAllStorageBudgets(): IndexedData[] {
     const quoteRegExp = /QUOTE_\d{8}_\w{6}/;
-    const keys = Object.keys(localStorage).filter(key => quoteRegExp.test(key));
+    const entries = Object.entries(localStorage).filter(([key]) => quoteRegExp.test(key));
 
-    console.log(keys);
+    return entries
+      .map(([key, value]) => ({
+        index: key,
+        data: value
+      }))
+      .map(({ index, data }) => {
+        const storedData = JSON.parse(atob(data)) as StoredData;
 
-    return keys.map(key => localStorage.getItem(key) as string);
+        return {
+          index,
+          data: storedData.name
+        };
+      });
   }
 
   private encryptQuote = <T = unknown>(passKey: string, quote: T): string =>

@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, ElementRef, inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { NxCopytextModule } from '@aposin/ng-aquila/copytext';
 import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
 import { NxIconModule } from '@aposin/ng-aquila/icon';
@@ -25,7 +25,6 @@ import { QuoteLiteralPipe } from 'src/app/shared/pipes';
     NxFormfieldModule,
     NxIconModule,
     NxInputModule,
-    FormsModule,
     ReactiveFormsModule,
     QuoteLiteralDirective,
     QuoteLiteralPipe

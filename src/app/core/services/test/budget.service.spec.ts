@@ -3,7 +3,7 @@ import { TestBed } from '@angular/core/testing';
 import { BudgetService } from '../budget.service';
 import { ContextDataService } from '@shagui/ng-shagui/core';
 import { BudgetError } from '../../errors';
-import { AppContextData, BudgetModel, QuoteModel } from '../../models';
+import { AppContextData, Budget, QuoteModel } from '../../models';
 import { QUOTE_APP_CONTEXT_DATA, QUOTE_CONTEXT_DATA } from '../../constants';
 
 describe('BudgetService', () => {
@@ -19,6 +19,7 @@ describe('BudgetService', () => {
 
     service = TestBed.inject(BudgetService);
     contextDataService = TestBed.inject(ContextDataService) as jasmine.SpyObj<ContextDataService>;
+    localStorage.clear();
   });
 
   it('should be created', () => {
@@ -35,19 +36,20 @@ describe('BudgetService', () => {
       return null;
     });
 
-    const cypheredStoredData = service.storeBugdet();
+    const cypheredStoredData = service.storeBudget();
     expect(cypheredStoredData).toBeTruthy();
   });
 
   it('should retrieve budget', () => {
-    const budgetModel: BudgetModel = { context: {}, quote: {} } as BudgetModel;
-    const storedData = { passKey: 'testPassKey', key: 'QUOTE_20230101_ABCDEF' };
-    const encryptedBudget = service['encryptQuote'](storedData.passKey, budgetModel);
+    const budgetModel: Budget = { context: {}, quote: {} } as Budget;
+    const storedKey = { passKey: 'testPassKey1', key: 'QUOTE_20230101_ABCDEF' };
+    const cipher = service['encryptQuote'](storedKey.passKey, budgetModel);
+    const storedData = btoa(JSON.stringify({ name: 'name1', cipher: cipher }));
 
-    localStorage.setItem(storedData.key, encryptedBudget);
-    const cypheredStoredData = btoa(JSON.stringify(storedData));
+    localStorage.setItem(storedKey.key, storedData);
 
-    const retrievedBudget = service.retrieveBudget(cypheredStoredData);
+    const retrievedBudget = service.retrieveBudget(btoa(JSON.stringify(storedKey)));
+
     expect(retrievedBudget).toEqual(budgetModel);
   });
 
@@ -59,12 +61,18 @@ describe('BudgetService', () => {
   });
 
   it('should retrieve all storage budgets', () => {
-    const budgetModel: BudgetModel = { context: {}, quote: {} } as BudgetModel;
-    const storedData1 = { passKey: 'testPassKey1', key: 'QUOTE_20230101_ABCDEF' };
-    const storedData2 = { passKey: 'testPassKey2', key: 'QUOTE_20230102_GHIJKL' };
+    const budgetModel: Budget = { context: {}, quote: {} } as Budget;
+    const storedKey1 = { passKey: 'testPassKey1', key: 'QUOTE_20230101_ABCDEF' };
+    const storedKey2 = { passKey: 'testPassKey2', key: 'QUOTE_20230102_GHIJKL' };
 
-    localStorage.setItem(storedData1.key, service['encryptQuote'](storedData1.passKey, budgetModel));
-    localStorage.setItem(storedData2.key, service['encryptQuote'](storedData2.passKey, budgetModel));
+    const cipher1 = service['encryptQuote'](storedKey1.passKey, budgetModel);
+    const cipher2 = service['encryptQuote'](storedKey2.passKey, budgetModel);
+
+    const storedData1 = btoa(JSON.stringify({ name: 'name1', cipher: cipher1 }));
+    const storedData2 = btoa(JSON.stringify({ name: 'name2', cipher: cipher2 }));
+
+    localStorage.setItem(storedKey1.key, storedData1);
+    localStorage.setItem(storedKey2.key, storedData2);
 
     const allBudgets = service.retrieveAllStorageBudgets();
 

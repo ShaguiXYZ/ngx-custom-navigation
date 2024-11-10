@@ -4,17 +4,16 @@ import { Component, HostListener, inject } from '@angular/core';
 import { NxDialogService, NxModalModule, NxModalRef } from '@aposin/ng-aquila/modal';
 import { ScreenRecorder } from '@shagui/ng-shagui/core';
 import { QuoteBudgetComponent } from '../quote-budget';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'quote-keys',
-  standalone: true,
   imports: [CommonModule, NxModalModule],
   templateUrl: './quote-keys.component.html',
-  styleUrl: './quote-keys.component.scss'
+  styleUrl: './quote-keys.component.scss',
+  standalone: true
 })
 export class QuoteKeysComponent {
-  private componentDialogRef?: NxModalRef<unknown>;
-
   private readonly dialogService = inject(NxDialogService);
 
   @HostListener('document:keydown', ['$event'])
@@ -29,13 +28,13 @@ export class QuoteKeysComponent {
     }
   }
 
-  private openFromComponent(component: ComponentType<unknown>): void {
-    this.componentDialogRef = this.dialogService.open(component, {
+  private openFromComponent<T = unknown>(component: ComponentType<T>): NxModalRef<T> {
+    this.dialogService.closeAll();
+
+    return this.dialogService.open(component, {
       maxWidth: '98%',
       showCloseIcon: false
     });
-
-    console.log(this.componentDialogRef.id);
   }
 
   private handleMacKeyEvents(event: KeyboardEvent) {
@@ -59,10 +58,22 @@ export class QuoteKeysComponent {
         event.preventDefault();
         break;
       case 'P':
-      case 'S':
-        this.openFromComponent(QuoteBudgetComponent);
+      case 'S': {
+        const componentDialogRef = this.openFromComponent(QuoteBudgetComponent);
+        const subscriptions: Subscription[] = [
+          componentDialogRef.componentInstance.budgetStored.subscribe(() => {
+            componentDialogRef.close();
+            subscriptions.forEach(subscription => subscription.unsubscribe());
+          }),
+          componentDialogRef.componentInstance.budgetRestored.subscribe(() => {
+            componentDialogRef.close();
+            subscriptions.forEach(subscription => subscription.unsubscribe());
+          })
+        ];
+
         event.preventDefault();
         break;
+      }
       default:
         break;
     }

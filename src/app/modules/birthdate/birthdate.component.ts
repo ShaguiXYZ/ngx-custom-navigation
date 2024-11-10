@@ -1,5 +1,5 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { NX_DATE_LOCALE, NxDatefieldModule } from '@aposin/ng-aquila/datefield';
 import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
 import { NxInputModule } from '@aposin/ng-aquila/input';
@@ -17,7 +17,6 @@ import { QuoteLiteralPipe } from 'src/app/shared/pipes';
   styleUrl: './birthdate.component.scss',
   standalone: true,
   imports: [
-    FormsModule,
     HeaderTitleComponent,
     NxDatefieldModule,
     NxFormfieldModule,

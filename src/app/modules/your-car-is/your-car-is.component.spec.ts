@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { NxButtonModule } from '@aposin/ng-aquila/button';
 import { NxCopytextModule } from '@aposin/ng-aquila/copytext';
 import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
@@ -32,7 +32,6 @@ describe('YourCarIsComponent', () => {
       declarations: [],
       imports: [
         YourCarIsComponent,
-        FormsModule,
         ReactiveFormsModule,
         NxButtonModule,
         NxCopytextModule,

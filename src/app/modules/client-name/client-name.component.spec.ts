@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { NX_DATE_LOCALE } from '@aposin/ng-aquila/datefield';
 import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
 import { NxInputModule } from '@aposin/ng-aquila/input';
@@ -20,7 +20,7 @@ describe('ClientNameComponent', () => {
 
     await TestBed.configureTestingModule({
       declarations: [],
-      imports: [ClientNameComponent, ReactiveFormsModule, FormsModule, NxFormfieldModule, NxInputModule],
+      imports: [ClientNameComponent, ReactiveFormsModule, NxFormfieldModule, NxInputModule],
       providers: [
         { provide: NX_DATE_LOCALE, useValue: 'es-ES' },
         { provide: ContextDataService, useClass: ContextDataServiceStub },

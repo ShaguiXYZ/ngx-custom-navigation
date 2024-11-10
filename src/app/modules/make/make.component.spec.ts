@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
 import { NxIconModule } from '@aposin/ng-aquila/icon';
 import { NxInputModule } from '@aposin/ng-aquila/input';
@@ -25,7 +25,7 @@ describe('MakeComponent', () => {
 
     await TestBed.configureTestingModule({
       declarations: [],
-      imports: [MakeComponent, ReactiveFormsModule, FormsModule, NxIconModule, NxFormfieldModule, NxInputModule],
+      imports: [MakeComponent, ReactiveFormsModule, NxIconModule, NxFormfieldModule, NxInputModule],
       providers: [
         { provide: ContextDataService, useClass: ContextDataServiceStub },
         { provide: TranslateService, useValue: translateServiceSpy },

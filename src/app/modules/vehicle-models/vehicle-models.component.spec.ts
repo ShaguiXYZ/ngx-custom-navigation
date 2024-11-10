@@ -1,5 +1,5 @@
 import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { TranslateService } from '@ngx-translate/core';
 import { ContextDataService } from '@shagui/ng-shagui/core';
@@ -23,7 +23,7 @@ describe('VehicleModelsComponent', () => {
 
     await TestBed.configureTestingModule({
       declarations: [],
-      imports: [VehicleModelsComponent, ReactiveFormsModule, FormsModule],
+      imports: [VehicleModelsComponent, ReactiveFormsModule],
       providers: [
         { provide: ContextDataService, useClass: ContextDataServiceStub },
         { provide: TranslateService, useValue: translateServiceSpy },

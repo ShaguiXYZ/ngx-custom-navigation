@@ -1,12 +1,17 @@
 import { AppContextData } from './app-context-data.model';
 import { QuoteModel } from './quote.model';
 
-export interface BudgetModel {
+export interface Budget {
   context: AppContextData;
   quote: QuoteModel;
 }
 
-export interface StoredData {
+export interface StoredDataKey {
   key: string;
   passKey: string;
+}
+
+export interface StoredData {
+  name: string;
+  cipher: string;
 }

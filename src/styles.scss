@@ -13,13 +13,7 @@
 
 body {
   background: linear-gradient(121deg, rgba(255, 255, 255, 1) 0%, rgba(197, 197, 197, 1) 100%);
-}
 
-main {
-  background: inherit;
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
   user-select: none;
   -webkit-user-select: none;
 
@@ -27,6 +21,13 @@ main {
     user-select: auto;
     -webkit-user-select: auto;
   }
+}
+
+main {
+  background: inherit;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 
   .component-container {
     display: flex;

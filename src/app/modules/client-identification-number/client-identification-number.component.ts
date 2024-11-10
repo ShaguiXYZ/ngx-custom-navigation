@@ -1,5 +1,5 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { NxCopytextModule } from '@aposin/ng-aquila/copytext';
 import { NX_DATE_LOCALE } from '@aposin/ng-aquila/datefield';
 import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
@@ -15,13 +15,12 @@ import { QuoteLiteralPipe } from 'src/app/shared/pipes';
   styleUrl: './client-identification-number.component.scss',
   standalone: true,
   imports: [
-    FormsModule,
     HeaderTitleComponent,
+    QuoteFooterComponent,
+    QuoteFooterInfoComponent,
     NxCopytextModule,
     NxFormfieldModule,
     NxInputModule,
-    QuoteFooterComponent,
-    QuoteFooterInfoComponent,
     ReactiveFormsModule,
     QuoteLiteralDirective,
     QuoteLiteralPipe
