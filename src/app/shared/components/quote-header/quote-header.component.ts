@@ -10,6 +10,7 @@ import { RoutingService } from 'src/app/core/services';
 import { QuoteLinkDirective, QuoteLiteralDirective } from '../../directives';
 
 interface HeaderConfig {
+  changed?: boolean;
   showBack?: boolean;
   showContactUs?: boolean;
 }

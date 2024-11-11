@@ -8,8 +8,9 @@ export class QuoteService {
   private contextDataService = inject(ContextDataService);
 
   public loadComponentData = <T extends QuoteComponent>(component: T): void => {
-    const contextData = this.contextDataService.get<AppContextData>(QUOTE_APP_CONTEXT_DATA);
-    const lastPage = contextData?.navigation.lastPage;
+    const {
+      navigation: { lastPage }
+    } = this.contextDataService.get<AppContextData>(QUOTE_APP_CONTEXT_DATA);
     const pageData = lastPage?.configuration?.data ?? {};
 
     for (const [key, value] of Object.entries(pageData)) {

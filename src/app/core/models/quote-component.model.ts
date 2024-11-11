@@ -9,6 +9,8 @@ import { QuoteModel } from './quote.model';
   template: ''
 })
 export abstract class QuoteComponent {
+  public ignoreChangeDetection = false;
+
   protected contextData: QuoteModel;
 
   private readonly quoteService = inject(QuoteService);
@@ -16,8 +18,7 @@ export abstract class QuoteComponent {
 
   constructor() {
     this.contextData = this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA);
-
-    this.updateComponentData();
+    this.__updateComponentData();
   }
 
   protected populateContextData = (): void => {
@@ -28,5 +29,5 @@ export abstract class QuoteComponent {
     | ((currentRoute?: ActivatedRouteSnapshot, state?: RouterStateSnapshot, next?: RouterStateSnapshot) => MaybeAsync<GuardResult>)
     | undefined;
 
-  private updateComponentData = (): Promise<void> => Promise.resolve().then(() => this.quoteService.loadComponentData(this));
+  private __updateComponentData = (): Promise<void> => Promise.resolve().then(() => this.quoteService.loadComponentData(this));
 }

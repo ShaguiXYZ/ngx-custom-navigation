@@ -1,3 +1,5 @@
+@import 'core-globals';
+
 .back {
   margin: 20px 0px 0px;
   height: 24px;
@@ -27,4 +29,8 @@
 
 .logo {
   max-height: 25px;
+
+  img {
+    max-height: inherit;
+  }
 }

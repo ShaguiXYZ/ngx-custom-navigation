@@ -4,7 +4,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { TranslateService } from '@ngx-translate/core';
 import { ContextDataService } from '@shagui/ng-shagui/core';
 import { QUOTE_APP_CONTEXT_DATA, QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
-import { OfferingModel, OfferingPriceModel, QuoteModel } from 'src/app/core/models';
+import { OfferingPriceModel, QuoteModel, QuoteOfferingModel } from 'src/app/core/models';
 import { RoutingService } from 'src/app/core/services';
 import { OfferingsService } from 'src/app/core/services/offerings.service';
 import { QuoteOfferingsComponent } from './quote-offerings.component';
@@ -56,12 +56,12 @@ describe('QuoteOfferingsComponent', () => {
 
   it('should initialize context data and prices on init', async () => {
     const mockQuote: QuoteModel = { offering: { price: { modalityId: '1' } } } as unknown as QuoteModel;
-    const mockOffering: OfferingModel = {
+    const mockOffering: QuoteOfferingModel = {
       prices: [
         { modalityId: '1', totalPremiumAmount: '10.1' },
         { modalityId: '2', totalPremiumAmount: '20.1' }
       ]
-    } as unknown as OfferingModel;
+    } as unknown as QuoteOfferingModel;
 
     component['contextData'] = mockQuote;
 

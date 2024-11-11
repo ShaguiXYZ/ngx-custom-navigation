@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, ElementRef, inject, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { NxDialogService, NxModalModule } from '@aposin/ng-aquila/modal';
-import { OfferingPriceModel, QuoteComponent } from 'src/app/core/models';
+import { OfferingPriceModel, QuoteComponent, SignedModel } from 'src/app/core/models';
 import { RoutingService } from 'src/app/core/services';
 import { OfferingsService } from 'src/app/core/services/offerings.service';
 import { QuoteOfferingCoveragesComponent } from 'src/app/shared/components';
@@ -25,6 +25,8 @@ export class QuoteOfferingsComponent extends QuoteComponent implements OnInit {
   public selectedPriceIndex = 0;
   public prices: OfferingPriceModel[] = [];
 
+  public override ignoreChangeDetection = true;
+
   private swipeCoord!: [number, number];
   private swipeTime!: number;
 
@@ -35,11 +37,16 @@ export class QuoteOfferingsComponent extends QuoteComponent implements OnInit {
   private readonly dialogService = inject(NxDialogService);
 
   async ngOnInit(): Promise<void> {
-    const offering = await this.offeringsService.pricing();
+    const offering = await this.offeringsService.pricing(this.contextData);
 
-    this.contextData.offering = { quotationId: offering.quotationId };
-
+    this.contextData.offering = { ...this.contextData.offering, quotationId: offering.quotationId, prices: offering.prices };
     this.prices = offering.prices;
+
+    Promise.resolve().then(() => {
+      SignedModel.init(this.contextData);
+      this.populateContextData();
+      console.log('QuoteOfferingsComponent ngOnInit', this.contextData);
+    });
 
     // this.resizeObserver = new ResizeObserver(entries => {
     //   for (const entry of entries) {

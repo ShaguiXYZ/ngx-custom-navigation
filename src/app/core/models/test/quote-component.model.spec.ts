@@ -45,7 +45,7 @@ describe('QuoteComponent', () => {
   });
 
   it('should call loadComponentData on initialization', async () => {
-    await component['updateComponentData']();
+    await component['__updateComponentData']();
 
     expect(quoteService.loadComponentData).toHaveBeenCalledWith(component);
   });
@@ -64,7 +64,7 @@ describe('QuoteComponent', () => {
       insuranceCompany: {
         /* mock QuoteInsuranceCompanyModel data */
       },
-      offering: { quotationId: 123 /* mock QuoteOfferingModel data */ },
+      offering: { quotationId: 123, prices: [] /* mock QuoteOfferingModel data */ },
       personalData: { name: 'John Doe' /* mock QuotePersonalDataModel data */ },
       place: {
         /* mock QuotePlaceModel data */

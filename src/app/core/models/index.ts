@@ -16,3 +16,4 @@ export * from './quote-personal-data.model';
 export * from './quote-place.model';
 export * from './quote-vehicle.model';
 export * from './quote.model';
+export * from './signed.model';

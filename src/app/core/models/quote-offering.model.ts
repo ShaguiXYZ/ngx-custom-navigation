@@ -126,13 +126,15 @@ export interface OfferingPriceModel {
   configurableCoverageList: Coverage[];
 }
 
-export interface OfferingModel {
+export interface QuoteOfferingModel {
   quotationId: number;
+  price?: OfferingPriceModel;
   prices: OfferingPriceModel[];
 }
 
-export namespace OfferingModel {
-  export const fromDTO = (dto: OfferingDTO): OfferingModel => {
+export namespace QuoteOfferingModel {
+  export const init = (): QuoteOfferingModel => ({} as QuoteOfferingModel);
+  export const fromDTO = (dto: OfferingDTO): QuoteOfferingModel => {
     const prices: OfferingPriceModel[] = dto.operationData.priceGrid.map(priceGrid => {
       const mapCoverage = (coverageDTO: CoverageDTO): Coverage => ({
         code: coverageDTO.code,
@@ -163,13 +165,4 @@ export namespace OfferingModel {
 
     return { quotationId: dto.operationData.quotationId, prices: prices }; // Assuming you want to return the first price object
   };
-}
-
-export interface QuoteOfferingModel {
-  quotationId: number;
-  price?: OfferingPriceModel;
-}
-
-export namespace QuoteOfferingModel {
-  export const init = (): QuoteOfferingModel => ({} as QuoteOfferingModel);
 }

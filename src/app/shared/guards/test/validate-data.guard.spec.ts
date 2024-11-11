@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { ContextDataService } from '@shagui/ng-shagui/core';
-import { AppContextData, QuoteComponent } from 'src/app/core/models';
+import { AppContextData, QuoteComponent, QuoteModel } from 'src/app/core/models';
 import { isValidGuard } from '../validate-data.guard';
 
 describe('isValidGuard', () => {
@@ -27,6 +27,10 @@ describe('isValidGuard', () => {
     currentRoute = new ActivatedRouteSnapshot();
     state = {} as RouterStateSnapshot;
     next = {} as RouterStateSnapshot;
+
+    component['contextData'] = {
+      signature: 'signature'
+    } as QuoteModel;
   });
 
   it('should allow deactivation if isPreviousStep returns true', () => {

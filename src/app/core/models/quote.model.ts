@@ -7,8 +7,9 @@ import { QuoteOfferingModel } from './quote-offering.model';
 import { QuotePersonalDataModel } from './quote-personal-data.model';
 import { QuotePlaceModel } from './quote-place.model';
 import { QuoteVehicleModel } from './quote-vehicle.model';
+import { SignedModel } from './signed.model';
 
-export interface QuoteModel {
+export interface QuoteModel extends SignedModel {
   client: QuoteClientModel;
   contactData: QuoteContactDataModel;
   driven: QuoteDrivenModel;

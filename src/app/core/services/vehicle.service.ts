@@ -56,11 +56,6 @@ export class VehicleService {
           cache: { id: this.cacheBranches(), ttl: TTL.XXL }
         })
         .pipe(
-          catchError(error => {
-            console.log('error', error);
-
-            throw new HttpError(error.status, error.statusText);
-          }),
           map(res => (res as string[]).filter(data => data.toLowerCase().includes(brand.toLowerCase()))),
           map(res => res.sort((a, b) => a.localeCompare(b)))
         )

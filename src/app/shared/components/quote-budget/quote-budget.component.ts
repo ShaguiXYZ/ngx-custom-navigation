@@ -80,7 +80,7 @@ export class QuoteBudgetComponent implements OnInit {
   private async copyToClipboard(value: string): Promise<void> {
     await copyToClipboard(value);
 
-    this.notificationService.info(this.quoteLiteralPipe.transform('Label.CopyToClipboard'), value);
+    this.notificationService.info(this.quoteLiteralPipe.transform('quote-copied-to-clipboard'), value);
   }
 
   private createForm(): void {
