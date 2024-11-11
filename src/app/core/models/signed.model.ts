@@ -1,26 +1,28 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-namespace */
 import CryptoJS from 'crypto-js';
 
-export interface SignedModel {
+export interface SignatureModel {
   changed?: boolean;
-  signature?: string;
+  hash?: string;
+}
+
+export interface SignedModel {
+  signature?: SignatureModel;
 }
 
 export namespace SignedModel {
   export const init = (signedModel: SignedModel): void => {
-    signedModel.changed = false;
+    signedModel.signature = { ...signedModel.signature, changed: false };
   };
   export const signModel = (signedModel: SignedModel, ignoreChangeDetection = false): void => {
-    const { signature, changed, ...modelToSign } = signedModel;
+    const { signature, ...modelToSign } = signedModel;
     const currentQuoteSignature = dataHash(modelToSign);
 
-    if (signedModel.signature !== currentQuoteSignature) {
-      signedModel.signature = currentQuoteSignature;
+    if (signedModel.signature?.hash !== currentQuoteSignature) {
+      const hash = currentQuoteSignature;
+      const changed = !ignoreChangeDetection || signature?.changed;
 
-      if (!ignoreChangeDetection) {
-        signedModel.changed = true;
-      }
+      signedModel.signature = { hash, changed };
     }
   };
 

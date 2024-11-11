@@ -5,6 +5,7 @@
   display: block;
   border: 1px solid var(--card-border-color);
   border-radius: 6px;
+  transition: background-color var(--animation-duration) ease-in-out, opacity var(--animation-duration) ease-in-out;
 
   .option__checked {
     align-items: center;
@@ -60,17 +61,15 @@
     &:hover.selected {
       ::ng-deep .nx-button--tertiary {
         background-color: #e6f4f6 !important;
-        transition: outline-color 0.5s ease-out, background-color 0.5s ease-out;
       }
     }
 
     &:hover:not(.selected) {
-      background-color: var(--selectable-card-background-selected-hover-color) !important;
-      transition: outline-color 0.5s ease-out, background-color 0.5s ease-out;
+      background-color: var(--comparison-table-selected-column-background-color) !important;
+      opacity: 0.7;
 
       ::ng-deep .nx-button--tertiary {
-        background-color: var(--selectable-card-background-selected-hover-color) !important;
-        transition: outline-color 0.5s ease-out, background-color 0.5s ease-out;
+        background-color: var(--comparison-table-selected-column-background-color) !important;
       }
     }
   }

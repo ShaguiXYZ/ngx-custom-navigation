@@ -10,7 +10,7 @@ export class OfferingsService {
   private readonly httpService = inject(HttpService);
 
   public pricing(quote: QuoteModel): Promise<QuoteOfferingModel> {
-    if (quote.changed) {
+    if (quote.signature?.changed) {
       console.log('Quote changed', deepCopy(quote));
 
       return firstValueFrom(
