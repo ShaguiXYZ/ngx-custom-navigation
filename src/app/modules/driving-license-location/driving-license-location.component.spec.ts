@@ -16,7 +16,7 @@ describe('DrivingLicenseLocationComponent', () => {
   let dialogService: jasmine.SpyObj<NxDialogService>;
 
   beforeEach(async () => {
-    const routingServiceSpy = jasmine.createSpyObj('RoutingService', ['nextStep']);
+    const routingServiceSpy = jasmine.createSpyObj('RoutingService', ['next']);
     const dialogServiceSpy = jasmine.createSpyObj('NxDialogService', ['open']);
     const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate']);
 
@@ -68,7 +68,7 @@ describe('DrivingLicenseLocationComponent', () => {
         })
       })
     );
-    expect(routingService.nextStep).toHaveBeenCalled();
+    expect(routingService.next).toHaveBeenCalled();
   });
 
   it('should open modal from template', () => {

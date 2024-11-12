@@ -20,7 +20,7 @@ describe('QuoteOfferingsComponent', () => {
     const contextDataServiceSpy = jasmine.createSpyObj('ContextDataService', ['get', 'set']);
     const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate']);
     const offeringsServiceSpy = jasmine.createSpyObj('OfferingsService', ['pricing']);
-    const routingServiceSpy = jasmine.createSpyObj('RoutingService', ['nextStep']);
+    const routingServiceSpy = jasmine.createSpyObj('RoutingService', ['next']);
 
     await TestBed.configureTestingModule({
       declarations: [],
@@ -32,6 +32,12 @@ describe('QuoteOfferingsComponent', () => {
         { provide: RoutingService, useValue: routingServiceSpy }
       ]
     }).compileComponents();
+
+    TestBed.overrideComponent(QuoteOfferingsComponent, {
+      set: {
+        providers: [{ provide: OfferingsService, useValue: offeringsServiceSpy }]
+      }
+    });
   });
 
   beforeEach(() => {
@@ -135,7 +141,7 @@ describe('QuoteOfferingsComponent', () => {
 
     expect(component['contextData'].offering.price).toEqual(mockPrice);
     expect(contextDataService.set).toHaveBeenCalledWith(QUOTE_CONTEXT_DATA, component['contextData']);
-    expect(routingService.nextStep).toHaveBeenCalled();
+    expect(routingService.next).toHaveBeenCalled();
   });
 
   it('should set the scroll position of the track to the selected price index', () => {

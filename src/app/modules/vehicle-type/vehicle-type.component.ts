@@ -47,7 +47,7 @@ export class VehicleTypeComponent extends QuoteComponent implements OnInit {
 
     this.populateContextData();
 
-    this.routingService.nextStep();
+    this.routingService.next();
   }
 
   private isValidData = (): boolean => {

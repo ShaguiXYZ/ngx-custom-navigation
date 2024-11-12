@@ -19,7 +19,7 @@ describe('NumberAccidentsComponent', () => {
 
   beforeEach(async () => {
     const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['instant', 'translate']);
-    const routingServiceSpy = jasmine.createSpyObj('RoutingService', ['nextStep']);
+    const routingServiceSpy = jasmine.createSpyObj('RoutingService', ['next']);
 
     await TestBed.configureTestingModule({
       declarations: [],
@@ -81,7 +81,7 @@ describe('NumberAccidentsComponent', () => {
 
     expect(component['contextData'].client.accidents).toBe(3);
     expect(setContextDataSpy).toHaveBeenCalledWith(QUOTE_CONTEXT_DATA, component['contextData']);
-    expect(routingService.nextStep).toHaveBeenCalled();
+    expect(routingService.next).toHaveBeenCalled();
   });
 
   it('should return true if accidents value is valid in updateValidData', () => {

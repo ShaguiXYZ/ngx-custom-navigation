@@ -24,7 +24,7 @@ describe('VehicleModelVersionsComponent', () => {
 
   beforeEach(async () => {
     const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate']);
-    const routingServiceSpy = jasmine.createSpyObj('RoutingService', ['nextStep']);
+    const routingServiceSpy = jasmine.createSpyObj('RoutingService', ['next']);
     const vehicleServiceSpy = jasmine.createSpyObj('VehicleService', ['vehicleModelVersions']);
 
     await TestBed.configureTestingModule({
@@ -94,7 +94,7 @@ describe('VehicleModelVersionsComponent', () => {
 
     expect(component.selectedModelVersion).toBe(version);
     expect(setContextDataSpy).toHaveBeenCalledWith(QUOTE_CONTEXT_DATA, jasmine.any(Object));
-    expect(routingService.nextStep).toHaveBeenCalled();
+    expect(routingService.next).toHaveBeenCalled();
   });
 
   it('should return true if vehicle model version is valid', () => {

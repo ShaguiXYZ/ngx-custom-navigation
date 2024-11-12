@@ -21,7 +21,7 @@ describe('MakeComponent', () => {
   beforeEach(async () => {
     const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate']);
     const vehicleServiceSpy = jasmine.createSpyObj('VehicleService', ['getBrands']);
-    const routingServiceSpy = jasmine.createSpyObj('RoutingService', ['nextStep']);
+    const routingServiceSpy = jasmine.createSpyObj('RoutingService', ['next']);
 
     await TestBed.configureTestingModule({
       declarations: [],
@@ -76,7 +76,7 @@ describe('MakeComponent', () => {
 
     expect(component.selectedMake).toBe('Honda');
     expect(setContextDataSpy).toHaveBeenCalledWith(QUOTE_CONTEXT_DATA, jasmine.objectContaining({ vehicle: { make: 'Honda' } }));
-    expect(routingService.nextStep).toHaveBeenCalled();
+    expect(routingService.next).toHaveBeenCalled();
   });
 
   it('should unsubscribe from all subscriptions on destroy', () => {

@@ -59,10 +59,10 @@ export class QuoteFooterComponent implements OnInit, OnDestroy {
   }
 
   public goToNextStep(): void {
-    this.footerService.nextStep(this.config);
+    this.footerService.next(this.config);
   }
 
-  public goToPreviousStep = (): void => this.footerService.previousStep();
+  public goToPreviousStep = (): void => this.footerService.previous();
 
   private footerButtonProperties = (): void => {
     const { navigation } = this.contextDataService.get<AppContextData>(QUOTE_APP_CONTEXT_DATA);

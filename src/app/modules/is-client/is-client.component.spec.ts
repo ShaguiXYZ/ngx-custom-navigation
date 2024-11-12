@@ -15,7 +15,7 @@ describe('IsClientComponent', () => {
   let routingService: jasmine.SpyObj<RoutingService>;
 
   beforeEach(async () => {
-    const routingServiceSpy = jasmine.createSpyObj('RoutingService', ['nextStep']);
+    const routingServiceSpy = jasmine.createSpyObj('RoutingService', ['next']);
     const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate']);
 
     await TestBed.configureTestingModule({
@@ -56,7 +56,7 @@ describe('IsClientComponent', () => {
 
     expect(component['contextData'].client.isClient).toBeFalse();
     expect(setContextDataSpy).toHaveBeenCalledWith(QUOTE_CONTEXT_DATA, component['contextData']);
-    expect(routingService.nextStep).toHaveBeenCalled();
+    expect(routingService.next).toHaveBeenCalled();
   });
 
   it('should return the correct value for isClient getter', () => {

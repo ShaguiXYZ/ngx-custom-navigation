@@ -27,7 +27,7 @@ describe('AppComponent', () => {
 
   beforeEach(async () => {
     const notificationServiceSpy = jasmine.createSpyObj('NotificationService', ['warning', 'onNotification', 'onCloseNotification']);
-    const routingServiceSpy = jasmine.createSpyObj('RoutingService', ['previousStep']);
+    const routingServiceSpy = jasmine.createSpyObj('RoutingService', ['previous']);
     const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate']);
 
     await TestBed.configureTestingModule({
@@ -77,12 +77,12 @@ describe('AppComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should call notificationService.warning and routingService.previousStep on popstate event', () => {
+  it('should call notificationService.warning and routingService.previous on popstate event', () => {
     const event = new PopStateEvent('popstate');
     spyOn(event, 'stopPropagation');
     component.onPopState(event);
 
-    expect(routingService.previousStep).toHaveBeenCalled();
+    expect(routingService.previous).toHaveBeenCalled();
     expect(event.stopPropagation).toHaveBeenCalled();
   });
 

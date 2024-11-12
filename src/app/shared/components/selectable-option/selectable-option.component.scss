@@ -58,25 +58,32 @@
   &:not(.disabled) {
     cursor: pointer;
 
+    ::ng-deep {
+      .nx-button--primary {
+        background-color: rgb(0, 122, 179);
+        background: radial-gradient(circle, rgba(0, 122, 179, 1) 0%, rgba(0, 122, 179, 0.5) 100%);
+      }
+
+      .nx-button--tertiary {
+        background-color: transparent !important;
+        background: radial-gradient(circle, rgba(199, 219, 242, 1) 0%, rgba(230, 244, 246, 1) 100%) Impo !important;
+      }
+    }
+
     &:hover.selected {
       ::ng-deep .nx-button--tertiary {
         background-color: #e6f4f6 !important;
+        background: radial-gradient(circle, rgba(199, 219, 242, 1) 0%, rgba(230, 244, 246, 1) 100%);
       }
     }
 
     &:hover:not(.selected) {
       background-color: var(--comparison-table-selected-column-background-color) !important;
-      opacity: 0.7;
-
-      ::ng-deep .nx-button--tertiary {
-        background-color: var(--comparison-table-selected-column-background-color) !important;
-      }
+      opacity: 1;
     }
   }
 
   &.selected {
-    // background: #e6f4f6;
-    background: rgb(230, 244, 246);
     background: radial-gradient(circle, rgba(230, 244, 246, 1) 0%, rgba(199, 219, 242, 1) 100%);
     border: 1px solid var(--interactive-primary);
   }

@@ -5,7 +5,7 @@ import { firstValueFrom, map } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { OfferingDTO, QuoteModel, QuoteOfferingModel } from '../models';
 
-@Injectable({ providedIn: 'root' })
+@Injectable()
 export class OfferingsService {
   private readonly httpService = inject(HttpService);
 

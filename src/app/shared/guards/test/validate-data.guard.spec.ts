@@ -29,7 +29,7 @@ describe('isValidGuard', () => {
     next = {} as RouterStateSnapshot;
 
     component['contextData'] = {
-      signature: 'signature'
+      signature: { changed: false, hash: 'hash' }
     } as QuoteModel;
   });
 

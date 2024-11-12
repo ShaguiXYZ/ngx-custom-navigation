@@ -25,7 +25,7 @@ describe('YourCarIsComponent', () => {
 
   beforeEach(async () => {
     const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate']);
-    const routingServiceSpy = jasmine.createSpyObj('RoutingService', ['nextStep']);
+    const routingServiceSpy = jasmine.createSpyObj('RoutingService', ['next']);
     const vehicleServiceSpy = jasmine.createSpyObj('VehicleService', ['vehicles']);
 
     await TestBed.configureTestingModule({
@@ -110,7 +110,7 @@ describe('YourCarIsComponent', () => {
     component.selectVehicle(mockVehicle);
 
     expect(setContextDataSpy).toHaveBeenCalledWith(QUOTE_CONTEXT_DATA, { vehicle: mockVehicle });
-    expect(routingService.nextStep).toHaveBeenCalled();
+    expect(routingService.next).toHaveBeenCalled();
   });
 
   it('should update context data and navigate to next step on continue', () => {
@@ -120,6 +120,6 @@ describe('YourCarIsComponent', () => {
     component.continue();
 
     expect(setContextDataSpy).toHaveBeenCalledWith(QUOTE_CONTEXT_DATA, { vehicle: QuoteVehicleModel.init() });
-    expect(routingService.nextStep).toHaveBeenCalled();
+    expect(routingService.next).toHaveBeenCalled();
   });
 });

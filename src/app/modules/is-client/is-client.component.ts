@@ -21,7 +21,7 @@ export class IsClientComponent extends QuoteComponent {
     this.contextData.client.isClient = value;
     this.populateContextData();
 
-    this.routingService.nextStep();
+    this.routingService.next();
   }
 
   public override canDeactivate = (): boolean => this.isValidData();

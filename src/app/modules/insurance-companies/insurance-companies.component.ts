@@ -78,7 +78,7 @@ export class InsuranceCompaniesComponent extends QuoteComponent implements OnIni
 
     this.populateContextData();
 
-    this.routingService.nextStep();
+    this.routingService.next();
   }
 
   private createForm(): void {

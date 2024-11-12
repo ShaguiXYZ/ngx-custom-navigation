@@ -24,7 +24,7 @@ describe('VehicleFuelComponent', () => {
   let vehicleService: jasmine.SpyObj<VehicleService>;
 
   beforeEach(async () => {
-    const routingServiceSpy = jasmine.createSpyObj('RoutingService', ['nextStep']);
+    const routingServiceSpy = jasmine.createSpyObj('RoutingService', ['next']);
     const vehicleServiceSpy = jasmine.createSpyObj('VehicleService', ['getFuelTypes', 'getVehicleClasses', 'cubicCapacities']);
     const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate']);
 
@@ -119,7 +119,7 @@ describe('VehicleFuelComponent', () => {
     component.selectPower(power);
 
     expect(component.selectedPower).toEqual(power);
-    expect(routingService.nextStep).toHaveBeenCalled();
+    expect(routingService.next).toHaveBeenCalled();
   });
 
   it('should return true for canDeactivate if all vehicle data is defined', () => {

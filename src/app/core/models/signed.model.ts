@@ -18,11 +18,8 @@ export namespace SignedModel {
     const { signature, ...modelToSign } = signedModel;
     const currentQuoteSignature = dataHash(modelToSign);
 
-    if (signedModel.signature?.hash !== currentQuoteSignature) {
-      const hash = currentQuoteSignature;
-      const changed = !ignoreChangeDetection || signature?.changed;
-
-      signedModel.signature = { hash, changed };
+    if (signature?.hash !== currentQuoteSignature) {
+      signedModel.signature = { changed: !ignoreChangeDetection || signature?.changed, hash: currentQuoteSignature };
     }
   };
 

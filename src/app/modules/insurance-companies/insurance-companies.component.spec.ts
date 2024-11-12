@@ -20,7 +20,7 @@ describe('InsuranceCompaniesComponent', () => {
   beforeEach(async () => {
     const insuranceCompaniesServiceSpy = jasmine.createSpyObj('InsuranceCompaniesService', ['companies']);
     const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate']);
-    const routingServiceSpy = jasmine.createSpyObj('RoutingService', ['nextStep']);
+    const routingServiceSpy = jasmine.createSpyObj('RoutingService', ['next']);
 
     await TestBed.configureTestingModule({
       declarations: [],
@@ -84,7 +84,7 @@ describe('InsuranceCompaniesComponent', () => {
 
     expect(component.selectedCompany).toEqual(company);
     expect(setContextDataSpy).toHaveBeenCalledWith(QUOTE_CONTEXT_DATA, jasmine.any(Object));
-    expect(routingService.nextStep).toHaveBeenCalled();
+    expect(routingService.next).toHaveBeenCalled();
   });
 
   it('should unsubscribe from all subscriptions on destroy', () => {

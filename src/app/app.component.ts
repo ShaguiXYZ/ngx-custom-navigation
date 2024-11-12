@@ -47,7 +47,7 @@ export class AppComponent {
   // @howto Detect the Browser Back Button
   @HostListener('window:popstate', ['$event'])
   onPopState(event: PopStateEvent): void {
-    this.routingService.previousStep();
+    this.routingService.previous();
 
     event.preventDefault();
     event.stopPropagation();

@@ -15,7 +15,7 @@ describe('QuoteHeaderComponent', () => {
 
   beforeEach(async () => {
     const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate']);
-    const routingServiceSpy = jasmine.createSpyObj('RoutingService', ['previousStep']);
+    const routingServiceSpy = jasmine.createSpyObj('RoutingService', ['previous']);
 
     await TestBed.configureTestingModule({
       imports: [QuoteHeaderComponent],
@@ -68,10 +68,10 @@ describe('QuoteHeaderComponent', () => {
     expect(subscriptionSpy.unsubscribe).toHaveBeenCalled();
   });
 
-  it('should call previousStep on return', () => {
+  it('should call previous on return', () => {
     component.return();
 
-    expect(routingService.previousStep).toHaveBeenCalled();
+    expect(routingService.previous).toHaveBeenCalled();
   });
 
   it('should set showBackButton to true if lastPage is undefined', () => {

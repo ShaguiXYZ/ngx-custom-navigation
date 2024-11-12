@@ -6,15 +6,15 @@ import { QuoteFooterConfig } from '../models';
 export class QuoteFooterService {
   private readonly routingService = inject(RoutingService);
 
-  public nextStep = async (config: QuoteFooterConfig = { showNext: true }): Promise<boolean> => {
+  public next = async (config: QuoteFooterConfig = { showNext: true }): Promise<boolean> => {
     if (config.nextFn?.()) {
       return false;
     }
-    return this.routingService.nextStep();
+    return this.routingService.next();
   };
 
-  public previousStep = (config: QuoteFooterConfig = { showNext: true }): void => {
+  public previous = (config: QuoteFooterConfig = { showNext: true }): void => {
     config.backFn?.();
-    this.routingService.previousStep();
+    this.routingService.previous();
   };
 }

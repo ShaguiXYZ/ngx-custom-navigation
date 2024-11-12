@@ -70,7 +70,7 @@ export class VehicleModelVersionsComponent extends QuoteComponent implements OnI
 
     this.populateContextData();
 
-    this.routingService.nextStep();
+    this.routingService.next();
   }
 
   private updateValidData = (): boolean => {

@@ -35,7 +35,7 @@ describe('OfferingsService', () => {
 
     httpClientSpy.get.and.returnValue(of(mockOfferings));
 
-    service.pricing({ changed: true } as QuoteModel).then(offerings => {
+    service.pricing({ signature: { changed: true, hash: 'hash' } } as QuoteModel).then(offerings => {
       expect(offerings.prices.length).toBe(2);
       expect(offerings.prices[0].modalityId).toBe(1);
       expect(offerings.prices[0].modalityDescription).toBe('Offering 1');
@@ -47,7 +47,7 @@ describe('OfferingsService', () => {
   it('should return cached offerings when quote does not change', async () => {
     service
       .pricing({
-        changed: false,
+        signature: { changed: false, hash: 'hash' },
         offering: {
           prices: [
             { modalityId: 1, modalityDescription: 'Offering 1', totalPremiumAmount: '100' },

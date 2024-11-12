@@ -54,7 +54,7 @@ export class LicensePlateComponent extends QuoteComponent implements OnInit {
 
   public continueWithOutLicensePlate() {
     this.contextData.driven.hasDrivenLicense = false;
-    this.routingService.nextStep();
+    this.routingService.next();
   }
 
   private updateValidData = (): boolean => {

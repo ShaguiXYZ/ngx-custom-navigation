@@ -16,7 +16,7 @@ describe('IsPolicyOwnerComponent', () => {
 
   beforeEach(async () => {
     const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate']);
-    const routingServiceSpy = jasmine.createSpyObj('RoutingService', ['nextStep']);
+    const routingServiceSpy = jasmine.createSpyObj('RoutingService', ['next']);
 
     await TestBed.configureTestingModule({
       declarations: [],
@@ -68,7 +68,7 @@ describe('IsPolicyOwnerComponent', () => {
 
     expect(component['contextData'].client.isPolicyOwner).toBeFalse();
     expect(setContextDataSpy).toHaveBeenCalledWith(QUOTE_CONTEXT_DATA, component['contextData']);
-    expect(routingService.nextStep).toHaveBeenCalled();
+    expect(routingService.next).toHaveBeenCalled();
   });
 
   it('should return isPolicyOwner value from contextData', () => {

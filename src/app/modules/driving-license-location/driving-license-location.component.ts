@@ -51,7 +51,7 @@ export class DrivingLicenseLocationComponent extends QuoteComponent implements O
 
     this.populateContextData();
 
-    this.routingService.nextStep();
+    this.routingService.next();
   }
 
   public openFromTemplate(): void {

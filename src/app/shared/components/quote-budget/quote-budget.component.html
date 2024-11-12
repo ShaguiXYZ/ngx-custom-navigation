@@ -13,14 +13,18 @@
               <input type="text" formControlName="storePassKey" nxInput />
             </nx-formfield>
           </div>
-          <button nxButton="primary small" type="button" nxQuoteLiteral="create-budget" (click)="retrieveBudget()"></button>
+          <quote-selectable-option (uiSelect)="retrieveBudget()">
+            <button nxButton="primary small" type="button" nxQuoteLiteral="create-budget"></button>
+          </quote-selectable-option>
         </nx-tab>
         <nx-tab [label]="'save-budget' | quoteLiteral">
           <div class="component-data" formGroupName="storeBudget">
             <nx-formfield [label]="'budget-name' | quoteLiteral">
               <input type="text" formControlName="storeName" nxInput />
             </nx-formfield>
-            <button nxButton="primary small" type="button" nxQuoteLiteral="store-budget" (click)="storeBudget()"></button>
+            <quote-selectable-option (uiSelect)="storeBudget()">
+              <button nxButton="primary small" type="button" nxQuoteLiteral="store-budget"></button>
+            </quote-selectable-option>
           </div>
         </nx-tab>
       </nx-tab-group>

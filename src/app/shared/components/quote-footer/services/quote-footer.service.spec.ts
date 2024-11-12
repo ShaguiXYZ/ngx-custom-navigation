@@ -8,7 +8,7 @@ describe('QuoteFooterService', () => {
   let routingServiceSpy: jasmine.SpyObj<RoutingService>;
 
   beforeEach(() => {
-    const spy = jasmine.createSpyObj('RoutingService', ['nextStep', 'previousStep']);
+    const spy = jasmine.createSpyObj('RoutingService', ['next', 'previous']);
 
     TestBed.configureTestingModule({
       providers: [QuoteFooterService, { provide: RoutingService, useValue: spy }]
@@ -22,31 +22,31 @@ describe('QuoteFooterService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should call nextStep on RoutingService when nextStep is called', () => {
-    service.nextStep();
-    expect(routingServiceSpy.nextStep).toHaveBeenCalled();
+  it('should call next on RoutingService when next is called', () => {
+    service.next();
+    expect(routingServiceSpy.next).toHaveBeenCalled();
   });
 
-  it('should call previousStep on RoutingService when previousStep is called', () => {
-    service.previousStep();
-    expect(routingServiceSpy.previousStep).toHaveBeenCalled();
+  it('should call previous on RoutingService when previous is called', () => {
+    service.previous();
+    expect(routingServiceSpy.previous).toHaveBeenCalled();
   });
 
   it('should call nextFn if provided in config when nextStep is called', () => {
     const nextFnSpy = jasmine.createSpy('nextFn');
     const config: QuoteFooterConfig = { showNext: true, nextFn: nextFnSpy };
 
-    service.nextStep(config);
+    service.next(config);
     expect(nextFnSpy).toHaveBeenCalled();
-    expect(routingServiceSpy.nextStep).toHaveBeenCalled();
+    expect(routingServiceSpy.next).toHaveBeenCalled();
   });
 
-  it('should call backFn if provided in config when previousStep is called', () => {
+  it('should call backFn if provided in config when previous is called', () => {
     const backFnSpy = jasmine.createSpy('backFn');
     const config: QuoteFooterConfig = { showNext: true, backFn: backFnSpy };
 
-    service.previousStep(config);
+    service.previous(config);
     expect(backFnSpy).toHaveBeenCalled();
-    expect(routingServiceSpy.previousStep).toHaveBeenCalled();
+    expect(routingServiceSpy.previous).toHaveBeenCalled();
   });
 });

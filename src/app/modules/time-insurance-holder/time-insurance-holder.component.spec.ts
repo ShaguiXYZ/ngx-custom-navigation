@@ -19,7 +19,7 @@ describe('TimeInsuranceHolderComponent', () => {
 
   beforeEach(async () => {
     const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['instant', 'translate']);
-    const routingServiceSpy = jasmine.createSpyObj('RoutingService', ['nextStep']);
+    const routingServiceSpy = jasmine.createSpyObj('RoutingService', ['next']);
 
     await TestBed.configureTestingModule({
       declarations: [],
@@ -73,7 +73,7 @@ describe('TimeInsuranceHolderComponent', () => {
 
     expect(component['contextData'].insuranceCompany.yearsAsOwner).toBe(3);
     expect(setContextDataSpy).toHaveBeenCalledWith(QUOTE_CONTEXT_DATA, component['contextData']);
-    expect(routingService.nextStep).toHaveBeenCalled();
+    expect(routingService.next).toHaveBeenCalled();
   });
 
   it('should return true if yearsAsOwner value is valid in updateValidData', () => {

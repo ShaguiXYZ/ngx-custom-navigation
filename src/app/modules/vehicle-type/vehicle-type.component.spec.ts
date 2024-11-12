@@ -17,7 +17,7 @@ describe('VehicleTypeComponent', () => {
 
   beforeEach(async () => {
     const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate']);
-    const routingServiceSpy = jasmine.createSpyObj('RoutingService', ['nextStep']);
+    const routingServiceSpy = jasmine.createSpyObj('RoutingService', ['next']);
 
     await TestBed.configureTestingModule({
       imports: [VehicleTypeComponent],
@@ -61,7 +61,7 @@ describe('VehicleTypeComponent', () => {
     expect(component.selectedType).toEqual(type);
     expect(component['contextData'].vehicle.vehicleTtype).toEqual('old');
     expect(setContextDataSpy).toHaveBeenCalledWith(QUOTE_CONTEXT_DATA, component['contextData']);
-    expect(routingService.nextStep).toHaveBeenCalled();
+    expect(routingService.next).toHaveBeenCalled();
   });
 
   it('should return true if vehicle type is valid', () => {

@@ -12,6 +12,7 @@ import { QuoteOfferingPriceCardComponent } from './components';
   templateUrl: './quote-offerings.component.html',
   styleUrl: './quote-offerings.component.scss',
   standalone: true,
+  providers: [OfferingsService],
   imports: [CommonModule, QuoteOfferingCoveragesComponent, QuoteOfferingPriceCardComponent, NxModalModule]
 })
 export class QuoteOfferingsComponent extends QuoteComponent implements OnInit {
@@ -108,7 +109,7 @@ export class QuoteOfferingsComponent extends QuoteComponent implements OnInit {
     this.contextData.offering.price = { ...this.contextData.offering.price, ...price };
     this.populateContextData();
 
-    this.routingService.nextStep();
+    this.routingService.next();
   }
 
   /**

@@ -16,7 +16,7 @@ describe('QuoteFooterComponent', () => {
 
   beforeEach(async () => {
     const breakpointObserverSpy = jasmine.createSpyObj('BreakpointObserver', ['observe']);
-    const quoteFooterServiceSpy = jasmine.createSpyObj('QuoteFooterService', ['nextStep', 'previousStep']);
+    const quoteFooterServiceSpy = jasmine.createSpyObj('QuoteFooterService', ['next', 'previous']);
     const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate']);
 
     await TestBed.configureTestingModule({
@@ -66,16 +66,16 @@ describe('QuoteFooterComponent', () => {
     expect(component.config).toEqual(newConfig);
   });
 
-  it('should call nextStep on goToNextStep', () => {
+  it('should call next on goToNextStep', () => {
     component.goToNextStep();
 
-    expect(quoteFooterService.nextStep).toHaveBeenCalledWith(component.config);
+    expect(quoteFooterService.next).toHaveBeenCalledWith(component.config);
   });
 
-  it('should call previousStep on goToPreviousStep', () => {
+  it('should call previous on goToPreviousStep', () => {
     component.goToPreviousStep();
 
-    expect(quoteFooterService.previousStep).toHaveBeenCalled();
+    expect(quoteFooterService.previous).toHaveBeenCalled();
   });
 
   it('should observe breakpoints on init', () => {

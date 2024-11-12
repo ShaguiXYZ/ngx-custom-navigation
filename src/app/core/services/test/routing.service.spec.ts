@@ -40,7 +40,7 @@ describe('RoutingService', () => {
     spyOn(service as any, 'getNextRoute').and.returnValue(mockAppContextData.configuration.pageMap['page3']);
     router.navigate.and.returnValue(Promise.resolve(true));
 
-    const result = await service.nextStep();
+    const result = await service.next();
 
     expect(result).toBeTrue();
     expect(router.navigate).toHaveBeenCalledWith(['route3'], { skipLocationChange: true });
@@ -49,7 +49,7 @@ describe('RoutingService', () => {
   it('should navigate to the previous step', async () => {
     router.navigate.and.returnValue(Promise.resolve(true));
 
-    const result = await service.previousStep();
+    const result = await service.previous();
 
     expect(result).toBeTrue();
     expect(router.navigate).toHaveBeenCalledWith(['route1'], { skipLocationChange: true });
@@ -67,7 +67,7 @@ describe('RoutingService', () => {
   it('should not navigate to the previous step if there is only one viewed page', async () => {
     service['appContextData'].navigation.viewedPages = ['page1'];
 
-    const result = await service.previousStep();
+    const result = await service.previous();
 
     expect(result).toBeFalse();
     expect(router.navigate).not.toHaveBeenCalled();

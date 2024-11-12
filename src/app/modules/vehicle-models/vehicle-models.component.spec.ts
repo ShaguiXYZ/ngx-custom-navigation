@@ -18,7 +18,7 @@ describe('VehicleModelsComponent', () => {
 
   beforeEach(async () => {
     const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate']);
-    const routingServiceSpy = jasmine.createSpyObj('RoutingService', ['nextStep']);
+    const routingServiceSpy = jasmine.createSpyObj('RoutingService', ['next']);
     const vehicleServiceSpy = jasmine.createSpyObj('VehicleService', ['getModels']);
 
     await TestBed.configureTestingModule({
@@ -79,7 +79,7 @@ describe('VehicleModelsComponent', () => {
         vehicle: jasmine.objectContaining({ model: 'Corolla' })
       })
     );
-    expect(routingService.nextStep).toHaveBeenCalled();
+    expect(routingService.next).toHaveBeenCalled();
   });
 
   it('should unsubscribe from all subscriptions on destroy', () => {

@@ -24,7 +24,7 @@ describe('LicensePlateComponent', () => {
 
   beforeEach(async () => {
     const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate']);
-    const routingServiceSpy = jasmine.createSpyObj('RoutingService', ['nextStep']);
+    const routingServiceSpy = jasmine.createSpyObj('RoutingService', ['next']);
 
     await TestBed.configureTestingModule({
       declarations: [],
@@ -107,7 +107,7 @@ describe('LicensePlateComponent', () => {
   it('should call nextStep on continueWithOutLicensePlate', () => {
     component.continueWithOutLicensePlate();
 
-    expect(routingService.nextStep).toHaveBeenCalled();
+    expect(routingService.next).toHaveBeenCalled();
   });
 
   it('should save context data on saveContextData', () => {

@@ -43,7 +43,7 @@ export class QuoteHeaderComponent implements OnInit, OnDestroy {
   }
 
   public return(): void {
-    this.routingService.previousStep();
+    this.routingService.previous();
   }
 
   private headerConfig = (lastPage?: Page): HeaderConfig => {

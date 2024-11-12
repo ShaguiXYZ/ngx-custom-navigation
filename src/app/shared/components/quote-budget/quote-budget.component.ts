@@ -13,6 +13,7 @@ import { BudgetService, RoutingService } from 'src/app/core/services';
 import { QuoteLiteralDirective } from '../../directives';
 import { QuoteLiteralPipe } from '../../pipes';
 import { HeaderTitleComponent } from '../header-title';
+import { SelectableOptionComponent } from '../selectable-option';
 
 @Component({
   selector: 'quote-budget',
@@ -22,7 +23,7 @@ import { HeaderTitleComponent } from '../header-title';
   imports: [
     CommonModule,
     HeaderTitleComponent,
-    QuoteLiteralDirective,
+    SelectableOptionComponent,
     NxButtonModule,
     NxCopytextModule,
     NxFormfieldModule,

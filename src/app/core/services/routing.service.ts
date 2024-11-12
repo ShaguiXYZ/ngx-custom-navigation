@@ -31,7 +31,7 @@ export class RoutingService implements OnDestroy {
     this.subscrition$.forEach(sub => sub.unsubscribe());
   }
 
-  public nextStep(): Promise<boolean> {
+  public next(): Promise<boolean> {
     const nextPage = this.getNextRoute();
 
     if (!nextPage) {
@@ -41,7 +41,7 @@ export class RoutingService implements OnDestroy {
     return this._goToPage(nextPage);
   }
 
-  public previousStep = (): Promise<boolean> => {
+  public previous = (): Promise<boolean> => {
     if (this.appContextData.navigation.viewedPages.length > 1) {
       const pageId = this.appContextData.navigation.viewedPages[this.appContextData.navigation.viewedPages.length - 2];
 

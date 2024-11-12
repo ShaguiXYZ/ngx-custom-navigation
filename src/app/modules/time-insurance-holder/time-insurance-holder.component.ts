@@ -30,7 +30,7 @@ export class TimeInsuranceHolderComponent extends QuoteComponent implements OnIn
     this.contextData.insuranceCompany.yearsAsOwner = years;
     this.populateContextData();
 
-    this.routingService.nextStep();
+    this.routingService.next();
   }
 
   private updateValidData = (): boolean => !!this.contextData.insuranceCompany?.yearsAsOwner;
