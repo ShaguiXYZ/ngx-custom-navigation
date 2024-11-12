@@ -1,4 +1,5 @@
 export * from './app-context-data.model';
+export * from './black-list.model';
 export * from './brand-dictionary.model';
 export * from './budget.model';
 export * from './configuration.model';
@@ -7,6 +8,7 @@ export * from './icon-data.model';
 export * from './insurance-company.model';
 export * from './literal.model';
 export * from './location.model';
+export * from './pricing.model';
 export * from './quote-client.model';
 export * from './quote-component.model';
 export * from './quote-contact-data.model';

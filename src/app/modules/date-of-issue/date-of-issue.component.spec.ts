@@ -7,7 +7,7 @@ import { NxMomentDateModule } from '@aposin/ng-aquila/moment-date-adapter';
 import { TranslateService } from '@ngx-translate/core';
 import { ContextDataService } from '@shagui/ng-shagui/core';
 import moment from 'moment';
-import { QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
+import { DEFAULT_DATE_FORMAT, QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
 import { QuoteModel } from 'src/app/core/models';
 import { ContextDataServiceStub } from 'src/app/core/stub';
 import { HeaderTitleComponent, QuoteFooterComponent } from 'src/app/shared/components';
@@ -62,14 +62,15 @@ describe('DateOfIssueComponent', () => {
   });
 
   it('should initialize form with context data', () => {
-    const dateOfIssue = moment(new Date(component.form.controls['dateOfIssue'].value)).format('YYYY-MM-DD');
+    const dateOfIssue = moment(new Date(component.form.controls['dateOfIssue'].value)).format(DEFAULT_DATE_FORMAT);
 
     expect(dateOfIssue).toEqual('2003-01-01');
   });
 
   it('should mark form as touched and update context data on updateValidData', () => {
     const setContextDataSpy = spyOn(contextDataService, 'set');
-    const futureDate = moment().add(1, 'day').format('YYYY-MM-DD');
+    const futureDate = moment().add(1, 'day').format(DEFAULT_DATE_FORMAT);
+    const expiration = moment(futureDate).add(component['expirationInfo'].value, component['expirationInfo'].unit);
 
     component.form.controls['dateOfIssue'].setValue(futureDate);
     const isValid = component['updateValidData']();
@@ -79,13 +80,13 @@ describe('DateOfIssueComponent', () => {
     expect(setContextDataSpy).toHaveBeenCalledWith(
       QUOTE_CONTEXT_DATA,
       jasmine.objectContaining({
-        client: { dateOfIssue: futureDate }
+        client: { dateOfIssue: futureDate, expiration: expiration.format(DEFAULT_DATE_FORMAT) }
       })
     );
   });
 
   it('should return form validity on canDeactivate', done => {
-    const futureDate = moment().add(1, 'day').format('YYYY-MM-DD');
+    const futureDate = moment().add(1, 'day').format(DEFAULT_DATE_FORMAT);
 
     component.form.controls['dateOfIssue'].setValue(futureDate);
     const result = component.canDeactivate();

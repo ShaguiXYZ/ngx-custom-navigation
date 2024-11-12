@@ -4,7 +4,8 @@ import { NX_DATE_LOCALE, NxDatefieldModule } from '@aposin/ng-aquila/datefield';
 import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
 import { NxInputModule } from '@aposin/ng-aquila/input';
 import { NxMomentDateModule } from '@aposin/ng-aquila/moment-date-adapter';
-import moment, { Moment } from 'moment';
+import moment, { DurationInputArg2, Moment } from 'moment';
+import { DEFAULT_DATE_FORMAT } from 'src/app/core/constants';
 import { isBetweenDates } from 'src/app/core/form';
 import { QuoteComponent } from 'src/app/core/models';
 import { HeaderTitleComponent, QuoteFooterComponent } from 'src/app/shared/components';
@@ -31,10 +32,15 @@ import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 })
 export class DateOfIssueComponent extends QuoteComponent implements OnInit {
   public form!: FormGroup;
-  public dateOfIssueFromContext: Moment | undefined;
+  public expirationInfo: { unit: DurationInputArg2; value: number } = {
+    value: 1,
+    unit: 'y'
+  };
   public maxDays = 90;
   public minDate = moment();
   public maxDate = moment().add(this.maxDays, 'days');
+
+  private dateOfIssueFromContext: Moment | undefined;
 
   private readonly fb = inject(FormBuilder);
 
@@ -48,10 +54,14 @@ export class DateOfIssueComponent extends QuoteComponent implements OnInit {
     this.form.markAllAsTouched();
 
     if (this.form.valid) {
+      const dateOfIssue = moment(new Date(this.form.controls['dateOfIssue'].value));
+      const expiration = moment(dateOfIssue).add(this.expirationInfo.value, this.expirationInfo.unit);
+
       this.contextData.client = {
         ...this.contextData.client,
         ...this.form.value,
-        dateOfIssue: moment(new Date(this.form.controls['dateOfIssue'].value)).format('YYYY-MM-DD')
+        dateOfIssue: dateOfIssue.format(DEFAULT_DATE_FORMAT),
+        expiration: expiration.format(DEFAULT_DATE_FORMAT)
       };
 
       this.populateContextData();

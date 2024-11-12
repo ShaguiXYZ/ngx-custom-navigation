@@ -6,7 +6,7 @@
     <form [formGroup]="form">
       <nx-formfield [label]="'license-plate' | quoteLiteral">
         <nx-licence-plate-euro-prefix nxFormfieldPrefix>E</nx-licence-plate-euro-prefix>
-        <input #searchInput type="text" formControlName="plateNumber" nxInput nxMask="0000-SSS" />
+        <input #searchInput type="text" formControlName="plateNumber" nxInput nxMask="0000 SSS" />
         @if(form.get('plateNumber')?.errors?.['required']) {
         <nx-error appearance="text" nxFormfieldError><span nxQuoteLiteral="error-required"></span> </nx-error>
         }

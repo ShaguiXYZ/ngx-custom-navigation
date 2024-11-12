@@ -161,7 +161,10 @@
           "header": "¿Cuándo naciste?",
           "birth-date": "Fecha de nacimiento",
           "error-required": "La fecha de nacimiento es obligatoria para continuar",
-          "error-client-old": "El cliente a de ser mayor de edad"
+          "error-client-old": "El cliente a de ser mayor de {{value}} años"
+        },
+        "data": {
+          "minValue": 25
         }
       }
     },

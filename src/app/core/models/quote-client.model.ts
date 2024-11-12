@@ -7,6 +7,7 @@ export interface QuoteClientModel {
   accepInfo?: boolean;
   acceptPrivacyPolicy?: boolean;
   dateOfIssue?: Date;
+  expiration?: Date;
 }
 
 export namespace QuoteClientModel {

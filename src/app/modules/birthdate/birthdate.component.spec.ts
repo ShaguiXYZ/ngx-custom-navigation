@@ -7,6 +7,7 @@ import { NxMomentDateModule } from '@aposin/ng-aquila/moment-date-adapter';
 import { TranslateService } from '@ngx-translate/core';
 import { ContextDataService } from '@shagui/ng-shagui/core';
 import moment from 'moment';
+import { DEFAULT_DATE_FORMAT } from 'src/app/core/constants';
 import { QuoteModel } from 'src/app/core/models';
 import { ContextDataServiceStub } from 'src/app/core/stub';
 import { BirthdateComponent } from './birthdate.component';
@@ -49,7 +50,7 @@ describe('BirthdateComponent', () => {
   });
 
   it('should initialize form with birthdate from context', () => {
-    const birthdate = moment(new Date(component.form.controls['birthdate'].value)).format('YYYY-MM-DD');
+    const birthdate = moment(new Date(component.form.controls['birthdate'].value)).format(DEFAULT_DATE_FORMAT);
 
     expect(birthdate).toEqual('2000-01-01');
   });
@@ -66,7 +67,7 @@ describe('BirthdateComponent', () => {
   });
 
   it('should invalidate form if birthdate is less than 18 years ago', () => {
-    component.form.controls['birthdate'].setValue(moment().subtract(17, 'years').format('YYYY-MM-DD'));
+    component.form.controls['birthdate'].setValue(moment().subtract(17, 'years').format(DEFAULT_DATE_FORMAT));
     const isValid = component['updateValidData']();
 
     expect(isValid).toBeFalse();
@@ -74,7 +75,7 @@ describe('BirthdateComponent', () => {
   });
 
   it('should validate form if birthdate is 18 years or more ago', () => {
-    component.form.controls['birthdate'].setValue(moment().subtract(18, 'years').format('YYYY-MM-DD'));
+    component.form.controls['birthdate'].setValue(moment().subtract(18, 'years').format(DEFAULT_DATE_FORMAT));
     const isValid = component['updateValidData']();
 
     expect(isValid).toBeTrue();

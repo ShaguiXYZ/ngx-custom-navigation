@@ -64,13 +64,16 @@ export class LicenseYearComponent extends QuoteComponent implements OnInit {
   };
 
   private createForm() {
-    this.form = this.fb.group({
-      yearOfManufacture: new FormControl(this.contextData.vehicle.yearOfManufacture, [
-        Validators.required,
-        this.preventFutureDate(),
-        this.preventMinDate()
-      ])
-    });
+    this.form = this.fb.group(
+      {
+        yearOfManufacture: new FormControl(this.contextData.vehicle.yearOfManufacture, [
+          Validators.required,
+          this.preventFutureDate(),
+          this.preventMinDate()
+        ])
+      },
+      { updateOn: 'blur' }
+    );
   }
 
   private preventFutureDate(): ValidatorFn {

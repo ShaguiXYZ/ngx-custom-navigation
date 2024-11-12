@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { NxButtonModule } from '@aposin/ng-aquila/button';
 import { NxCopytextModule } from '@aposin/ng-aquila/copytext';
@@ -7,6 +7,7 @@ import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
 import { NxInputModule } from '@aposin/ng-aquila/input';
 import { NxLicencePlateModule } from '@aposin/ng-aquila/licence-plate';
 import { NxMaskModule } from '@aposin/ng-aquila/mask';
+import { Subscription } from 'rxjs';
 import { QuoteComponent } from 'src/app/core/models';
 import { RoutingService } from 'src/app/core/services';
 import { HeaderTitleComponent, QuoteFooterComponent, QuoteFooterInfoComponent } from 'src/app/shared/components';
@@ -34,9 +35,10 @@ import { QuoteLiteralPipe } from 'src/app/shared/pipes';
     QuoteLiteralPipe
   ]
 })
-export class LicensePlateComponent extends QuoteComponent implements OnInit {
+export class LicensePlateComponent extends QuoteComponent implements OnInit, OnDestroy {
   public form!: FormGroup;
 
+  private readonly subscription$: Subscription[] = [];
   private readonly routingService = inject(RoutingService);
   private readonly fb = inject(FormBuilder);
 
@@ -48,6 +50,10 @@ export class LicensePlateComponent extends QuoteComponent implements OnInit {
 
   ngOnInit(): void {
     this.createForm();
+  }
+
+  ngOnDestroy(): void {
+    this.subscription$.forEach(subscription => subscription.unsubscribe());
   }
 
   public override canDeactivate = (): boolean => this.updateValidData();
@@ -79,11 +85,16 @@ export class LicensePlateComponent extends QuoteComponent implements OnInit {
   };
 
   private createForm(): void {
-    this.form = this.fb.group(
-      {
-        plateNumber: new FormControl(this.contextData.vehicle.plateNumber, [Validators.required])
-      },
-      { updateOn: 'blur' }
-    );
+    this.form = this.fb.group({
+      plateNumber: new FormControl(this.contextData.vehicle.plateNumber, [Validators.required])
+    });
+
+    const plateNumberSubscription = this.form.get('plateNumber')?.valueChanges.subscribe(value => {
+      this.form.get('plateNumber')?.setValue(value.toUpperCase(), { emitEvent: false });
+    });
+
+    if (plateNumberSubscription) {
+      this.subscription$.push(plateNumberSubscription);
+    }
   }
 }

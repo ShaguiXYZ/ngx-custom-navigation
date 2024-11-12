@@ -3,7 +3,7 @@ import { inject, Injectable } from '@angular/core';
 import { deepCopy, HttpService } from '@shagui/ng-shagui/core';
 import { firstValueFrom, map } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { OfferingDTO, QuoteModel, QuoteOfferingModel } from '../models';
+import { OfferingDTO, PricingDTO, QuoteModel, QuoteOfferingModel } from '../models';
 
 @Injectable()
 export class OfferingsService {
@@ -15,7 +15,7 @@ export class OfferingsService {
 
       return firstValueFrom(
         this.httpService
-          .get<OfferingDTO>(`${environment.baseUrl}/offerings`, {
+          .post<PricingDTO, OfferingDTO>(`${environment.baseUrl}/offerings`, PricingDTO.fromModel(quote), {
             responseStatusMessage: {
               [HttpStatusCode.NotFound]: { text: 'Notifications.ModelsNotFound' }
             },

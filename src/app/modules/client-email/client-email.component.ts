@@ -60,10 +60,13 @@ export class ClientEMailComponent extends QuoteComponent implements OnInit {
   };
 
   private createForm() {
-    this.form = this.fb.group({
-      email: new FormControl(this.contextData.personalData.email, [Validators.required, Validators.email]),
-      accepInfo: new FormControl(this.contextData.client.accepInfo, [Validators.required]),
-      acceptPrivacyPolicy: new FormControl(this.contextData.client.acceptPrivacyPolicy, [Validators.requiredTrue])
-    });
+    this.form = this.fb.group(
+      {
+        email: new FormControl(this.contextData.personalData.email, [Validators.required, Validators.email]),
+        accepInfo: new FormControl(this.contextData.client.accepInfo, [Validators.required]),
+        acceptPrivacyPolicy: new FormControl(this.contextData.client.acceptPrivacyPolicy, [Validators.requiredTrue])
+      },
+      { updateOn: 'blur' }
+    );
   }
 }

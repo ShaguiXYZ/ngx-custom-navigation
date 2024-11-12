@@ -5,6 +5,7 @@ import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
 import { NxInputModule } from '@aposin/ng-aquila/input';
 import { NxMomentDateModule } from '@aposin/ng-aquila/moment-date-adapter';
 import moment, { Moment } from 'moment';
+import { DEFAULT_DATE_FORMAT } from 'src/app/core/constants';
 import { isFutureDate, minYearsBetweenDates } from 'src/app/core/form';
 import { QuoteComponent } from 'src/app/core/models';
 import { HeaderTitleComponent, QuoteFooterComponent } from 'src/app/shared/components';
@@ -49,7 +50,7 @@ export class DrivingLicenseDateComponent extends QuoteComponent implements OnIni
       this.contextData.driven = {
         ...this.contextData.driven,
         ...this.form.value,
-        drivenLicenseDate: moment(new Date(this.form.controls['drivenLicenseDate'].value)).format('YYYY-MM-DD')
+        drivenLicenseDate: moment(new Date(this.form.controls['drivenLicenseDate'].value)).format(DEFAULT_DATE_FORMAT)
       };
 
       this.populateContextData();
@@ -65,12 +66,15 @@ export class DrivingLicenseDateComponent extends QuoteComponent implements OnIni
 
     const birthdate = moment(this.contextData.personalData.birthdate).toDate();
 
-    this.form = this.fb.group({
-      drivenLicenseDate: new FormControl(this.drivingLicenseDateFromContext, [
-        Validators.required,
-        isFutureDate(),
-        minYearsBetweenDates(birthdate, this.minYears)
-      ])
-    });
+    this.form = this.fb.group(
+      {
+        drivenLicenseDate: new FormControl(this.drivingLicenseDateFromContext, [
+          Validators.required,
+          isFutureDate(),
+          minYearsBetweenDates(birthdate, this.minYears)
+        ])
+      },
+      { updateOn: 'blur' }
+    );
   }
 }

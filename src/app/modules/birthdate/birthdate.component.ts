@@ -5,6 +5,7 @@ import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
 import { NxInputModule } from '@aposin/ng-aquila/input';
 import { NxMomentDateModule } from '@aposin/ng-aquila/moment-date-adapter';
 import moment, { Moment } from 'moment';
+import { DEFAULT_DATE_FORMAT } from 'src/app/core/constants';
 import { isOlderThanYears } from 'src/app/core/form';
 import { QuoteComponent } from 'src/app/core/models';
 import { HeaderTitleComponent, QuoteFooterComponent } from 'src/app/shared/components';
@@ -32,7 +33,7 @@ import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 export class BirthdateComponent extends QuoteComponent implements OnInit {
   public form!: FormGroup;
   public birthdateFromContext: Moment | undefined;
-  public minDate = 18;
+  public minValue = 18;
 
   private readonly fb = inject(FormBuilder);
 
@@ -49,7 +50,7 @@ export class BirthdateComponent extends QuoteComponent implements OnInit {
       this.contextData.personalData = {
         ...this.contextData.personalData,
         ...this.form.value,
-        birthdate: moment(new Date(this.form.controls['birthdate'].value)).format('YYYY-MM-DD')
+        birthdate: moment(new Date(this.form.controls['birthdate'].value)).format(DEFAULT_DATE_FORMAT)
       };
 
       this.populateContextData();
@@ -63,8 +64,11 @@ export class BirthdateComponent extends QuoteComponent implements OnInit {
       this.birthdateFromContext = moment(new Date(this.contextData.personalData.birthdate));
     }
 
-    this.form = this.fb.group({
-      birthdate: new FormControl(this.birthdateFromContext, [Validators.required, isOlderThanYears(this.minDate)])
-    });
+    this.form = this.fb.group(
+      {
+        birthdate: new FormControl(this.birthdateFromContext, [Validators.required, isOlderThanYears(this.minValue)])
+      },
+      { updateOn: 'blur' }
+    );
   }
 }

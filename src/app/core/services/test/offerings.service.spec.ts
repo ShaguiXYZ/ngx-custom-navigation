@@ -33,15 +33,27 @@ describe('OfferingsService', () => {
       }
     } as OfferingDTO;
 
-    httpClientSpy.get.and.returnValue(of(mockOfferings));
+    httpClientSpy.post.and.returnValue(of(mockOfferings));
 
-    service.pricing({ signature: { changed: true, hash: 'hash' } } as QuoteModel).then(offerings => {
-      expect(offerings.prices.length).toBe(2);
-      expect(offerings.prices[0].modalityId).toBe(1);
-      expect(offerings.prices[0].modalityDescription).toBe('Offering 1');
-    });
+    service
+      .pricing({
+        client: {},
+        contactData: {},
+        driven: {},
+        insuranceCompany: {},
+        offering: {},
+        personalData: {},
+        place: {},
+        vehicle: {},
+        signature: { changed: true, hash: 'hash' }
+      } as QuoteModel)
+      .then(offerings => {
+        expect(offerings.prices.length).toBe(2);
+        expect(offerings.prices[0].modalityId).toBe(1);
+        expect(offerings.prices[0].modalityDescription).toBe('Offering 1');
+      });
 
-    expect(httpClientSpy.get.calls.count()).withContext('one call').toBe(1);
+    expect(httpClientSpy.post.calls.count()).withContext('one call').toBe(1);
   });
 
   it('should return cached offerings when quote does not change', async () => {

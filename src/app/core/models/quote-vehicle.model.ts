@@ -77,6 +77,7 @@ export interface QuoteVehicleModel extends Partial<VehicleData> {
   make: string;
   yearOfManufacture?: number;
   vehicleTtype?: string;
+  creationDate?: Date;
 }
 
 export namespace QuoteVehicleModel {

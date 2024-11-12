@@ -1,9 +1,10 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { NxCopytextModule } from '@aposin/ng-aquila/copytext';
 import { NX_DATE_LOCALE } from '@aposin/ng-aquila/datefield';
 import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
 import { NxInputModule } from '@aposin/ng-aquila/input';
+import { Subscription } from 'rxjs';
 import { QuoteComponent } from 'src/app/core/models';
 import { HeaderTitleComponent, QuoteFooterComponent, QuoteFooterInfoComponent } from 'src/app/shared/components';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
@@ -27,13 +28,18 @@ import { QuoteLiteralPipe } from 'src/app/shared/pipes';
   ],
   providers: [{ provide: NX_DATE_LOCALE, useValue: 'es-ES' }]
 })
-export class ClientIdentificationNumberComponent extends QuoteComponent implements OnInit {
+export class ClientIdentificationNumberComponent extends QuoteComponent implements OnInit, OnDestroy {
   public form!: FormGroup;
 
+  private readonly subscription$: Subscription[] = [];
   private readonly fb = inject(FormBuilder);
 
   ngOnInit(): void {
     this.createForm();
+  }
+
+  ngOnDestroy(): void {
+    this.subscription$.forEach(subscription => subscription.unsubscribe());
   }
 
   public override canDeactivate = (): boolean => this.updateValidData();
@@ -57,5 +63,13 @@ export class ClientIdentificationNumberComponent extends QuoteComponent implemen
     this.form = this.fb.group({
       identificationNumber: new FormControl(this.contextData.personalData.identificationNumber, [Validators.required])
     });
+
+    const identificationNumberSubscription = this.form.get('identificationNumber')?.valueChanges.subscribe(value => {
+      this.form.get('identificationNumber')?.setValue(value.toUpperCase(), { emitEvent: false });
+    });
+
+    if (identificationNumberSubscription) {
+      this.subscription$.push(identificationNumberSubscription);
+    }
   }
 }
