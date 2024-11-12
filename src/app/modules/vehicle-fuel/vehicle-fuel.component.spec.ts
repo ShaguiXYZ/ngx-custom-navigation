@@ -51,6 +51,12 @@ describe('VehicleFuelComponent', () => {
         { provide: TranslateService, useValue: translateServiceSpy }
       ]
     }).compileComponents();
+
+    TestBed.overrideComponent(VehicleFuelComponent, {
+      set: {
+        providers: [{ provide: VehicleService, useValue: vehicleServiceSpy }]
+      }
+    });
   });
 
   beforeEach(() => {

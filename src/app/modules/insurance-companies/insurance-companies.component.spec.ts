@@ -33,6 +33,12 @@ describe('InsuranceCompaniesComponent', () => {
         { provide: RoutingService, useValue: routingServiceSpy }
       ]
     }).compileComponents();
+
+    TestBed.overrideComponent(InsuranceCompaniesComponent, {
+      set: {
+        providers: [{ provide: InsuranceCompaniesService, useValue: insuranceCompaniesServiceSpy }]
+      }
+    });
   });
 
   beforeEach(() => {

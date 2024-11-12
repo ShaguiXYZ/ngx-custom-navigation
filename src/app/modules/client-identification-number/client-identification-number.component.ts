@@ -14,7 +14,6 @@ import { QuoteLiteralPipe } from 'src/app/shared/pipes';
   selector: 'quote-client-identification-number',
   templateUrl: './client-identification-number.component.html',
   styleUrl: './client-identification-number.component.scss',
-  standalone: true,
   imports: [
     HeaderTitleComponent,
     QuoteFooterComponent,
@@ -26,7 +25,8 @@ import { QuoteLiteralPipe } from 'src/app/shared/pipes';
     QuoteLiteralDirective,
     QuoteLiteralPipe
   ],
-  providers: [{ provide: NX_DATE_LOCALE, useValue: 'es-ES' }]
+  providers: [{ provide: NX_DATE_LOCALE, useValue: 'es-ES' }],
+  standalone: true
 })
 export class ClientIdentificationNumberComponent extends QuoteComponent implements OnInit, OnDestroy {
   public form!: FormGroup;

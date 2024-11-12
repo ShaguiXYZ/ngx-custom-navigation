@@ -6,9 +6,7 @@ import { environment } from 'src/environments/environment';
 import { LocationDTO, LocationModel } from '../models';
 import { HttpError } from '../errors';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class LocationService {
   private readonly _PROVINCES_CACHE_ID_ = `_${UniqueIds.next()}_`;
 

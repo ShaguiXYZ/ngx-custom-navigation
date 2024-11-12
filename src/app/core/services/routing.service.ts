@@ -7,9 +7,7 @@ import { QUOTE_APP_CONTEXT_DATA } from '../constants';
 import { AppContextData, NextOption, Page } from '../models';
 import { ConditionService } from './condition.service';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({ providedIn: 'root' })
 export class RoutingService implements OnDestroy {
   private appContextData: AppContextData;
 

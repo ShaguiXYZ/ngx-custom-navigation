@@ -27,6 +27,12 @@ describe('PlaceComponent', () => {
       ]
     }).compileComponents();
 
+    TestBed.overrideComponent(PlaceComponent, {
+      set: {
+        providers: [{ provide: LocationService, useValue: locationServiceSpy }]
+      }
+    });
+
     contextDataService = TestBed.inject(ContextDataService) as jasmine.SpyObj<ContextDataService>;
     locationService = TestBed.inject(LocationService) as jasmine.SpyObj<LocationService>;
   }));

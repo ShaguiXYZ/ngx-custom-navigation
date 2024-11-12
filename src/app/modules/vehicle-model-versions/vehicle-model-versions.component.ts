@@ -15,7 +15,8 @@ import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 
 @Component({
   selector: 'quote-vehicle-model-versions',
-  standalone: true,
+  templateUrl: './vehicle-model-versions.component.html',
+  styleUrl: './vehicle-model-versions.component.scss',
   imports: [
     CommonModule,
     HeaderTitleComponent,
@@ -28,8 +29,8 @@ import { QuoteLiteralPipe } from 'src/app/shared/pipes';
     QuoteLiteralDirective,
     QuoteLiteralPipe
   ],
-  templateUrl: './vehicle-model-versions.component.html',
-  styleUrl: './vehicle-model-versions.component.scss'
+  providers: [VehicleService],
+  standalone: true
 })
 export class VehicleModelVersionsComponent extends QuoteComponent implements OnInit, OnDestroy {
   @ViewChild('searchInput', { static: true })

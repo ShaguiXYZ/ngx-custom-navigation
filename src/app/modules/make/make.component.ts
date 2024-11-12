@@ -15,7 +15,8 @@ import { BrandComponent } from './components';
 
 @Component({
   selector: 'quote-make',
-  standalone: true,
+  templateUrl: './make.component.html',
+  styleUrl: './make.component.scss',
   imports: [
     CommonModule,
     HeaderTitleComponent,
@@ -28,8 +29,8 @@ import { BrandComponent } from './components';
     QuoteLiteralDirective,
     QuoteLiteralPipe
   ],
-  templateUrl: './make.component.html',
-  styleUrl: './make.component.scss'
+  providers: [VehicleService],
+  standalone: true
 })
 export class MakeComponent extends QuoteComponent implements OnInit, OnDestroy {
   @ViewChild('searchInput', { static: true })

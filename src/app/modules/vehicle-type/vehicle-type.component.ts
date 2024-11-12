@@ -5,7 +5,7 @@ import { IndexedData } from '@shagui/ng-shagui/core';
 import { Observable } from 'rxjs';
 import { QuoteComponent } from 'src/app/core/models';
 import { RoutingService } from 'src/app/core/services';
-import { HeaderTitleComponent, IconCardComponent, TextCardComponent } from 'src/app/shared/components';
+import { HeaderTitleComponent, TextCardComponent } from 'src/app/shared/components';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 import { VehicleTypes } from './models';
@@ -13,15 +13,7 @@ import { VehicleTypes } from './models';
 @Component({
   selector: 'quote-vehicle-type',
   standalone: true,
-  imports: [
-    CommonModule,
-    HeaderTitleComponent,
-    IconCardComponent,
-    TextCardComponent,
-    NxCopytextModule,
-    QuoteLiteralDirective,
-    QuoteLiteralPipe
-  ],
+  imports: [CommonModule, HeaderTitleComponent, TextCardComponent, NxCopytextModule, QuoteLiteralDirective, QuoteLiteralPipe],
   templateUrl: './vehicle-type.component.html',
   styleUrl: './vehicle-type.component.scss'
 })

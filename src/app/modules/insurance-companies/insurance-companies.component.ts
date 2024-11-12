@@ -28,6 +28,7 @@ import { QuoteLiteralPipe } from 'src/app/shared/pipes';
     QuoteLiteralDirective,
     QuoteLiteralPipe
   ],
+  providers: [InsuranceCompaniesService],
   templateUrl: './insurance-companies.component.html',
   styleUrl: './insurance-companies.component.scss'
 })

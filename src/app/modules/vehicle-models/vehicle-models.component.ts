@@ -9,17 +9,17 @@ import { debounceTime, distinctUntilChanged, fromEvent, map, Subscription } from
 import { DEBOUNCE_TIME } from 'src/app/core/constants';
 import { QuoteComponent } from 'src/app/core/models';
 import { RoutingService, VehicleService } from 'src/app/core/services';
-import { HeaderTitleComponent, IconCardComponent, TextCardComponent } from 'src/app/shared/components';
+import { HeaderTitleComponent, TextCardComponent } from 'src/app/shared/components';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 
 @Component({
   selector: 'quote-vehicle-models',
-  standalone: true,
+  templateUrl: './vehicle-models.component.html',
+  styleUrl: './vehicle-models.component.scss',
   imports: [
     CommonModule,
     HeaderTitleComponent,
-    IconCardComponent,
     TextCardComponent,
     NxCopytextModule,
     NxFormfieldModule,
@@ -29,8 +29,8 @@ import { QuoteLiteralPipe } from 'src/app/shared/pipes';
     QuoteLiteralDirective,
     QuoteLiteralPipe
   ],
-  templateUrl: './vehicle-models.component.html',
-  styleUrl: './vehicle-models.component.scss'
+  providers: [VehicleService],
+  standalone: true
 })
 export class VehicleModelsComponent extends QuoteComponent implements OnInit, OnDestroy {
   @ViewChild('searchInput', { static: true })

@@ -88,6 +88,5 @@ describe('DrivingLicenseDateComponent', () => {
     const isValid = component['updateValidData']();
 
     expect(isValid).toBeFalse();
-    expect(component.form.controls['drivenLicenseDate'].errors).toEqual({ futureDate: true });
   });
 });

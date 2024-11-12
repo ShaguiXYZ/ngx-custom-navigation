@@ -21,7 +21,6 @@ import { QuoteLiteralDirective, QuoteMaskDirective } from 'src/app/shared/direct
   selector: 'quote-place',
   templateUrl: './place.component.html',
   styleUrl: './place.component.scss',
-  standalone: true,
   imports: [
     HeaderTitleComponent,
     QuoteFooterComponent,
@@ -32,7 +31,9 @@ import { QuoteLiteralDirective, QuoteMaskDirective } from 'src/app/shared/direct
     ReactiveFormsModule,
     QuoteMaskDirective,
     QuoteLiteralDirective
-  ]
+  ],
+  providers: [LocationService],
+  standalone: true
 })
 export class PlaceComponent extends QuoteComponent implements OnInit {
   public location?: string;

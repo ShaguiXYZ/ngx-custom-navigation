@@ -49,6 +49,12 @@ describe('VehicleModelVersionsComponent', () => {
         { provide: VehicleService, useValue: vehicleServiceSpy }
       ]
     }).compileComponents();
+
+    TestBed.overrideComponent(VehicleModelVersionsComponent, {
+      set: {
+        providers: [{ provide: VehicleService, useValue: vehicleServiceSpy }]
+      }
+    });
   });
 
   beforeEach(() => {

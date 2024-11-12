@@ -8,9 +8,7 @@ import { QUOTE_APP_CONTEXT_DATA, QUOTE_CONTEXT_DATA, QUOTE_ERROR_PAGE_ID } from 
 import { AppContextData, Configuration, ConfigurationDTO, Links, LiteralModel, Literals, Page, QuoteModel } from '../models';
 import { LiteralsService } from './literals.service';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({ providedIn: 'root' })
 export class SettingsService {
   private readonly contextDataService = inject(ContextDataService);
   private readonly httpService = inject(HttpService);

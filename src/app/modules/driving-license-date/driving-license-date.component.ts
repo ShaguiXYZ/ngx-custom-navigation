@@ -16,7 +16,6 @@ import { QuoteLiteralPipe } from 'src/app/shared/pipes';
   selector: 'quote-driving-license-date',
   templateUrl: './driving-license-date.component.html',
   styleUrl: './driving-license-date.component.scss',
-  standalone: true,
   imports: [
     HeaderTitleComponent,
     NxDatefieldModule,
@@ -28,10 +27,12 @@ import { QuoteLiteralPipe } from 'src/app/shared/pipes';
     QuoteLiteralDirective,
     QuoteLiteralPipe
   ],
-  providers: [{ provide: NX_DATE_LOCALE, useValue: 'es-ES' }]
+  providers: [{ provide: NX_DATE_LOCALE, useValue: 'es-ES' }],
+  standalone: true
 })
 export class DrivingLicenseDateComponent extends QuoteComponent implements OnInit {
   public form!: FormGroup;
+  public maxDate = moment();
   public minYears = 18;
 
   private drivingLicenseDateFromContext?: Moment;

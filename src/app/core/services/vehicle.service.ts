@@ -16,7 +16,7 @@ import {
   VehicleClassesModel
 } from '../models';
 
-@Injectable({ providedIn: 'root' })
+@Injectable()
 export class VehicleService {
   private readonly _BRANCHES_CACHE_ID_ = `_${UniqueIds.next()}_`;
   private readonly _MODELS_CACHE_ID_ = `_${UniqueIds.next()}_`;

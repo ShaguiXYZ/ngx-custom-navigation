@@ -6,7 +6,7 @@ import { environment } from 'src/environments/environment';
 import { HttpError } from '../errors';
 import { InsuranceCompany, InsuranceCompanyDTO } from '../models';
 
-@Injectable({ providedIn: 'root' })
+@Injectable()
 export class InsuranceCompaniesService {
   private readonly _COMPANIES_CACHE_ID_ = `_${UniqueIds.next()}_`;
 

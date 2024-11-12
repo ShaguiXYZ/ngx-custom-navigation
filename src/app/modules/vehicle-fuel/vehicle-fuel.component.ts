@@ -12,7 +12,8 @@ import { QuoteLiteralDirective } from 'src/app/shared/directives';
 
 @Component({
   selector: 'quote-vehicle-fuel',
-  standalone: true,
+  templateUrl: './vehicle-fuel.component.html',
+  styleUrl: './vehicle-fuel.component.scss',
   imports: [
     CommonModule,
     HeaderTitleComponent,
@@ -24,8 +25,8 @@ import { QuoteLiteralDirective } from 'src/app/shared/directives';
     NxInputModule,
     QuoteLiteralDirective
   ],
-  templateUrl: './vehicle-fuel.component.html',
-  styleUrl: './vehicle-fuel.component.scss'
+  providers: [VehicleService],
+  standalone: true
 })
 export class VehicleFuelComponent extends QuoteComponent implements OnInit {
   public cubicCapacityNotKnown: CubicCapacityModel = { index: '-1', data: 'nsnc' };

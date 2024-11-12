@@ -10,13 +10,11 @@ import { QuoteComponent, QuoteVehicleModel } from 'src/app/core/models';
 import { RoutingService, VehicleService } from 'src/app/core/services';
 import { HeaderTitleComponent, QuoteFooterComponent, TextCardComponent } from 'src/app/shared/components';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
-import { YourCarIsService } from './services';
 
 @Component({
   selector: 'quote-your-car-is',
   templateUrl: './your-car-is.component.html',
   styleUrl: './your-car-is.component.scss',
-  standalone: true,
   imports: [
     CommonModule,
     HeaderTitleComponent,
@@ -30,7 +28,8 @@ import { YourCarIsService } from './services';
     ReactiveFormsModule,
     QuoteLiteralDirective
   ],
-  providers: [YourCarIsService]
+  providers: [VehicleService],
+  standalone: true
 })
 export class YourCarIsComponent extends QuoteComponent implements OnInit {
   public vehicleOptions: QuoteVehicleModel[] = [];

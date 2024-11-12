@@ -14,7 +14,6 @@ import { QuoteLiteralPipe } from 'src/app/shared/pipes';
   selector: 'quote-client-name',
   templateUrl: './client-name.component.html',
   styleUrl: './client-name.component.scss',
-  standalone: true,
   imports: [
     HeaderTitleComponent,
     NxFormfieldModule,
@@ -24,7 +23,8 @@ import { QuoteLiteralPipe } from 'src/app/shared/pipes';
     QuoteLiteralDirective,
     QuoteLiteralPipe
   ],
-  providers: [TitleCasePipe, { provide: NX_DATE_LOCALE, useValue: 'es-ES' }]
+  providers: [TitleCasePipe, { provide: NX_DATE_LOCALE, useValue: 'es-ES' }],
+  standalone: true
 })
 export class ClientNameComponent extends QuoteComponent implements OnInit {
   public form!: FormGroup;

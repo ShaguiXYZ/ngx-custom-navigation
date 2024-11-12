@@ -33,6 +33,12 @@ describe('MakeComponent', () => {
         { provide: RoutingService, useValue: routingServiceSpy }
       ]
     }).compileComponents();
+
+    TestBed.overrideComponent(MakeComponent, {
+      set: {
+        providers: [{ provide: VehicleService, useValue: vehicleServiceSpy }]
+      }
+    });
   });
 
   beforeEach(() => {
