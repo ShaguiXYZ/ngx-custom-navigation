@@ -5,7 +5,7 @@ import { CompareOperations, Condition, QuoteModel } from '../models';
 
 @Injectable({ providedIn: 'root' })
 export class ConditionService {
-  private contextDataService = inject(ContextDataService);
+  private readonly contextDataService = inject(ContextDataService);
 
   /**
    * Verifica si se cumplen las condiciones

@@ -1,80 +1,90 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { TestBed } from '@angular/core/testing';
 import { ContextDataService } from '@shagui/ng-shagui/core';
-import { QUOTE_CONTEXT_DATA } from '../../constants';
-import { QuoteService } from '../../services/quote.service';
 import { QuoteComponent } from '../quote-component.model';
+import { QUOTE_CONTEXT_DATA, QUOTE_APP_CONTEXT_DATA } from '../../constants';
+import { AppContextData } from '../app-context-data.model';
 import { QuoteModel } from '../quote.model';
 
-class MockQuoteService {
-  loadComponentData = jasmine.createSpy('loadComponentData').and.returnValue(Promise.resolve());
-}
-
-class MockContextDataService {
-  private data: Record<string, unknown> = {};
-
-  get<T>(key: string): T {
-    return this.data[key] as T;
-  }
-
-  set<T>(key: string, value: T): void {
-    this.data[key] = value;
+class TestQuoteComponent extends QuoteComponent {
+  constructor() {
+    super();
   }
 }
 
 describe('QuoteComponent', () => {
-  let component: QuoteComponent;
-  let quoteService: MockQuoteService;
-  let contextDataService: MockContextDataService;
+  let component: TestQuoteComponent;
+  let contextDataService: jasmine.SpyObj<ContextDataService>;
 
   beforeEach(() => {
+    const contextDataServiceSpy = jasmine.createSpyObj('ContextDataService', ['get', 'set']);
+
     TestBed.configureTestingModule({
-      providers: [
-        { provide: QuoteService, useClass: MockQuoteService },
-        { provide: ContextDataService, useClass: MockContextDataService },
-        QuoteComponent
-      ]
+      providers: [TestQuoteComponent, { provide: ContextDataService, useValue: contextDataServiceSpy }]
     });
 
-    component = TestBed.inject(QuoteComponent);
-    quoteService = TestBed.inject(QuoteService) as unknown as MockQuoteService;
-    contextDataService = TestBed.inject(ContextDataService) as unknown as MockContextDataService;
+    component = TestBed.inject(TestQuoteComponent);
+    contextDataService = TestBed.inject(ContextDataService) as jasmine.SpyObj<ContextDataService>;
+
+    contextDataService.get.and.callFake((key: string): any => {
+      if (key === QUOTE_CONTEXT_DATA) {
+        return component['contextData'];
+      } else if (key === QUOTE_APP_CONTEXT_DATA) {
+        return {
+          navigation: {
+            lastPage: {
+              configuration: {
+                data: {}
+              }
+            }
+          }
+        } as AppContextData;
+      }
+      return undefined;
+    });
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should call loadComponentData on initialization', async () => {
-    await component['__updateComponentData']();
-
-    expect(quoteService.loadComponentData).toHaveBeenCalledWith(component);
-  });
-
   it('should populate context data', () => {
-    const mockData: QuoteModel = {
-      client: {
-        /* mock QuoteClientModel data */
-      },
-      contactData: {
-        /* mock QuoteContactDataModel data */
-      },
-      driven: {
-        /* mock QuoteDrivenModel data */
-      },
-      insuranceCompany: {
-        /* mock QuoteInsuranceCompanyModel data */
-      },
-      offering: { quotationId: 123, prices: [] /* mock QuoteOfferingModel data */ },
-      personalData: { name: 'John Doe' /* mock QuotePersonalDataModel data */ },
-      place: {
-        /* mock QuotePlaceModel data */
-      },
-      vehicle: { make: 'Toyota' /* mock QuoteVehicleModel data */ }
-    };
+    const mockQuoteModel: QuoteModel = {
+      /* mock data */
+    } as QuoteModel;
+    component['contextData'] = mockQuoteModel;
 
-    component['contextData'] = mockData;
     component['populateContextData']();
 
-    expect(contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA)).toEqual(mockData);
+    expect(contextDataService.set).toHaveBeenCalledWith(QUOTE_CONTEXT_DATA, mockQuoteModel);
+  });
+
+  it('should update component data', async () => {
+    const mockAppContextData: AppContextData = {
+      navigation: {
+        lastPage: {
+          configuration: {
+            data: {
+              someKey: 'someValue'
+            }
+          }
+        }
+      }
+    } as unknown as AppContextData;
+
+    contextDataService.get.and.returnValue(mockAppContextData);
+
+    await component['__updateComponentData']();
+
+    expect(contextDataService.get).toHaveBeenCalledWith(QUOTE_APP_CONTEXT_DATA);
+  });
+
+  it('should update data recursively', () => {
+    const data: { a: number; b: { c: number; d?: number }; e?: number } = { a: 1, b: { c: 2 } };
+    const newData = { b: { c: 3, d: 4 }, e: 5 };
+
+    component['__updateData'](data, newData);
+
+    expect(data).toEqual({ a: 1, b: { c: 3, d: 4 }, e: 5 });
   });
 });

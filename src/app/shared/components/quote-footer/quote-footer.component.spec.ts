@@ -6,17 +6,17 @@ import { of } from 'rxjs';
 import { ContextDataServiceStub } from 'src/app/core/stub';
 import { QuoteFooterConfig } from './models';
 import { QuoteFooterComponent } from './quote-footer.component';
-import { QuoteFooterService } from './services';
+import { RoutingService } from 'src/app/core/services';
 
 describe('QuoteFooterComponent', () => {
   let component: QuoteFooterComponent;
   let fixture: ComponentFixture<QuoteFooterComponent>;
   let breakpointObserver: jasmine.SpyObj<BreakpointObserver>;
-  let quoteFooterService: jasmine.SpyObj<QuoteFooterService>;
+  let routingService: jasmine.SpyObj<RoutingService>;
 
   beforeEach(async () => {
     const breakpointObserverSpy = jasmine.createSpyObj('BreakpointObserver', ['observe']);
-    const quoteFooterServiceSpy = jasmine.createSpyObj('QuoteFooterService', ['next', 'previous']);
+    const routingServiceSpy = jasmine.createSpyObj('RoutingService', ['next', 'previous']);
     const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate']);
 
     await TestBed.configureTestingModule({
@@ -24,18 +24,11 @@ describe('QuoteFooterComponent', () => {
       imports: [QuoteFooterComponent],
       providers: [
         { provide: BreakpointObserver, useValue: breakpointObserverSpy },
-        { provide: QuoteFooterService, useValue: quoteFooterServiceSpy },
         { provide: ContextDataService, useClass: ContextDataServiceStub },
-        { provide: TranslateService, useValue: translateServiceSpy }
+        { provide: TranslateService, useValue: translateServiceSpy },
+        { provide: RoutingService, useValue: routingServiceSpy }
       ]
     }).compileComponents();
-
-    // @howto - Override component providers in TestBed
-    TestBed.overrideComponent(QuoteFooterComponent, {
-      set: {
-        providers: [{ provide: QuoteFooterService, useValue: quoteFooterServiceSpy }]
-      }
-    });
   });
 
   beforeEach(() => {
@@ -43,7 +36,7 @@ describe('QuoteFooterComponent', () => {
     component = fixture.componentInstance;
 
     breakpointObserver = TestBed.inject(BreakpointObserver) as jasmine.SpyObj<BreakpointObserver>;
-    quoteFooterService = TestBed.inject(QuoteFooterService) as jasmine.SpyObj<QuoteFooterService>;
+    routingService = TestBed.inject(RoutingService) as jasmine.SpyObj<RoutingService>;
 
     const breakpointState = { matches: true, breakpoints: { HandsetPortrait: true } } as BreakpointState;
     breakpointObserver.observe.and.returnValue(of(breakpointState));
@@ -69,13 +62,13 @@ describe('QuoteFooterComponent', () => {
   it('should call next on goToNextStep', () => {
     component.goToNextStep();
 
-    expect(quoteFooterService.next).toHaveBeenCalledWith(component.config);
+    expect(routingService.next).toHaveBeenCalled();
   });
 
   it('should call previous on goToPreviousStep', () => {
     component.goToPreviousStep();
 
-    expect(quoteFooterService.previous).toHaveBeenCalled();
+    expect(routingService.previous).toHaveBeenCalled();
   });
 
   it('should observe breakpoints on init', () => {

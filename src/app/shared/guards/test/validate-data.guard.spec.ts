@@ -2,7 +2,7 @@ import { TestBed } from '@angular/core/testing';
 import { ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { ContextDataService } from '@shagui/ng-shagui/core';
 import { AppContextData, QuoteComponent, QuoteModel } from 'src/app/core/models';
-import { isValidGuard } from '../validate-data.guard';
+import { canDeactivateGuard } from '../can-deactivate.guard';
 
 describe('isValidGuard', () => {
   let contextDataService: jasmine.SpyObj<ContextDataService>;
@@ -44,7 +44,7 @@ describe('isValidGuard', () => {
     contextDataService.get.and.returnValue(context);
 
     const result = TestBed.runInInjectionContext(() => {
-      return isValidGuard(component, currentRoute, state, next);
+      return canDeactivateGuard(component, currentRoute, state, next);
     });
 
     expect(result).toBeTrue();
@@ -63,7 +63,7 @@ describe('isValidGuard', () => {
     contextDataService.get.and.returnValue(context);
 
     const result = TestBed.runInInjectionContext(() => {
-      return isValidGuard(component, currentRoute, state, next);
+      return canDeactivateGuard(component, currentRoute, state, next);
     });
 
     expect(result).toBeTrue();
@@ -82,7 +82,7 @@ describe('isValidGuard', () => {
     contextDataService.get.and.returnValue(context);
 
     const result = TestBed.runInInjectionContext(() => {
-      return isValidGuard(component, currentRoute, state, next);
+      return canDeactivateGuard(component, currentRoute, state, next);
     });
 
     if (component.canDeactivate) {
@@ -105,7 +105,7 @@ describe('isValidGuard', () => {
     component.canDeactivate = undefined;
 
     const result = TestBed.runInInjectionContext(() => {
-      return isValidGuard(component, currentRoute, state, next);
+      return canDeactivateGuard(component, currentRoute, state, next);
     });
 
     expect(result).toBeTrue();

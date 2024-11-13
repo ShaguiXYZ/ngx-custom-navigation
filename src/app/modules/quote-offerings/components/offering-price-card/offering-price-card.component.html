@@ -59,6 +59,13 @@
   </section>
   <footer class="price-footer nx-margin-x-m nx-margin-bottom-xs">
     <quote-footer [config]="footerConfig" [mobileMode]="true">
+      <button class="footer-option nx-margin-y-2xs" nxButton="primary" type="button" (click)="callNow()">
+        <span
+          nxCopytext="medium"
+          class="uppercase nx-font-weight-bold"
+          [nxQuoteLiteral]="mobileMode ? 'footer-next' : 'contact-us-phone'"
+        ></span>
+      </button>
       <button class="footer-option nx-margin-y-2xs" nxButton="secondary" type="button" (click)="contactUs()">
         <span nxCopytext="medium" class="uppercase nx-font-weight-bold" nxQuoteLiteral="we-call-you"></span>
       </button>

@@ -2,6 +2,7 @@
 import { DataInfo } from '@shagui/ng-shagui/core';
 import { StepperDTO, Steppers } from 'src/app/shared/models';
 import { LiteralModel } from './literal.model';
+import { EntryPoint } from './entry-point.model';
 
 export type CompareOperations = 'AND' | 'OR';
 export type Links = DataInfo;
@@ -29,6 +30,7 @@ export interface Page {
   route?: string;
   stepper?: { key: string; stepKey: string };
   routeTree?: string;
+  entryPoints?: EntryPoint[];
 }
 
 export namespace Page {

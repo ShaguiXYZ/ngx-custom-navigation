@@ -4,7 +4,7 @@ import { ContextDataService } from '@shagui/ng-shagui/core';
 import { QUOTE_APP_CONTEXT_DATA } from 'src/app/core/constants';
 import { AppContextData, QuoteComponent, SignedModel } from 'src/app/core/models';
 
-export const isValidGuard: CanDeactivateFn<QuoteComponent> = (
+export const canDeactivateGuard: CanDeactivateFn<QuoteComponent> = (
   component: QuoteComponent,
   currentRoute: ActivatedRouteSnapshot,
   state: RouterStateSnapshot,

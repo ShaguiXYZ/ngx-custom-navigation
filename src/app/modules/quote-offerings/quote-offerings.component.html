@@ -9,8 +9,10 @@
           <quote-offering-price-card
             [price]="price"
             [selected]="selectedPriceIndex === $index"
+            [mobileMode]="isMobile"
             (uiShowCoverages)="showCoverages($index)"
             (uiSelectFee)="selectFee($event)"
+            (uiCallNow)="callNow($event)"
             (uiContactUs)="contactUs($event)"
           />
         </div>

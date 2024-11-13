@@ -7,6 +7,7 @@ import { QUOTE_APP_CONTEXT_DATA, QUOTE_CONTEXT_DATA } from 'src/app/core/constan
 import { OfferingPriceModel, QuoteModel, QuoteOfferingModel } from 'src/app/core/models';
 import { RoutingService } from 'src/app/core/services';
 import { OfferingsService } from 'src/app/core/services/offerings.service';
+import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 import { QuoteOfferingsComponent } from './quote-offerings.component';
 
 describe('QuoteOfferingsComponent', () => {
@@ -26,6 +27,7 @@ describe('QuoteOfferingsComponent', () => {
       declarations: [],
       imports: [QuoteOfferingsComponent],
       providers: [
+        QuoteLiteralPipe,
         { provide: ContextDataService, useValue: contextDataServiceSpy },
         { provide: TranslateService, useValue: translateServiceSpy },
         { provide: OfferingsService, useValue: offeringsServiceSpy },

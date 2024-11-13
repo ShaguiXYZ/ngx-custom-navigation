@@ -1,5 +1,8 @@
 <!-- eslint-disable @angular-eslint/template/elements-content -->
-<div class="footer-options nx-margin-top-l" [ngClass]="{ 'mobile-options': mobileMode }">
+<div
+  class="footer-options nx-margin-top-l"
+  [ngClass]="{ 'mobile-options': mobileMode, 'nx-margin-bottom-xs': config.showBack || config.showNext }"
+>
   @if (config.showBack) {
   <button
     class="footer-option nx-margin-x-2xs nx-margin-y-2xs"

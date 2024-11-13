@@ -72,13 +72,6 @@ describe('QuoteOfferingPriceCardComponent', () => {
     expect(component.uiCallNow.emit).toHaveBeenCalledWith(price);
   });
 
-  it('should have a footerConfig with showNext set to true and nextFn bound to callNow', () => {
-    expect(component.footerConfig.showNext).toBeTrue();
-
-    expect(typeof component.footerConfig.nextFn).toBe('function');
-    expect(component.footerConfig.nextFn?.name).toBe('bound callNow');
-  });
-
   it('should return the current date when now is accessed', () => {
     const now = new Date();
 

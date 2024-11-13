@@ -3,6 +3,7 @@ export * from './black-list.model';
 export * from './brand-dictionary.model';
 export * from './budget.model';
 export * from './configuration.model';
+export * from './entry-point.model';
 export * from './fuel-types.model';
 export * from './icon-data.model';
 export * from './insurance-company.model';

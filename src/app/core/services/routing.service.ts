@@ -6,6 +6,7 @@ import { Step } from '../../shared/models';
 import { QUOTE_APP_CONTEXT_DATA } from '../constants';
 import { AppContextData, NextOption, Page } from '../models';
 import { ConditionService } from './condition.service';
+import { ServiceActivatorService } from './service-activator.service';
 
 @Injectable({ providedIn: 'root' })
 export class RoutingService implements OnDestroy {
@@ -14,8 +15,10 @@ export class RoutingService implements OnDestroy {
   private readonly subscrition$: Subscription[] = [];
   private readonly contextDataService = inject(ContextDataService);
   private readonly conditionService = inject(ConditionService);
+  private readonly serviceActivatorService = inject(ServiceActivatorService);
+  private readonly router = inject(Router);
 
-  constructor(private readonly _router: Router) {
+  constructor() {
     this.appContextData = this.contextDataService.get<AppContextData>(QUOTE_APP_CONTEXT_DATA);
 
     this.subscrition$.push(
@@ -36,6 +39,8 @@ export class RoutingService implements OnDestroy {
       return Promise.resolve(false);
     }
 
+    this.serviceActivatorService.activateService('nextPage');
+
     return this._goToPage(nextPage);
   }
 
@@ -43,13 +48,15 @@ export class RoutingService implements OnDestroy {
     if (this.appContextData.navigation.viewedPages.length > 1) {
       const pageId = this.appContextData.navigation.viewedPages[this.appContextData.navigation.viewedPages.length - 2];
 
+      this.serviceActivatorService.activateService('previousPage');
+
       return this._goToPage(this.appContextData.configuration.pageMap[pageId]);
     }
 
     return Promise.resolve(false);
   };
 
-  public resetNavigation = (): Promise<boolean> => this._router.navigate(['/'], { skipLocationChange: true });
+  public resetNavigation = (): Promise<boolean> => this.router.navigate(['/'], { skipLocationChange: true });
 
   public goToPage = (pageId: string): Promise<boolean> => this._goToPage(this.getPage(pageId)!);
 
@@ -65,7 +72,7 @@ export class RoutingService implements OnDestroy {
     this.appContextData.navigation.nextPage = page;
     this.contextDataService.set(QUOTE_APP_CONTEXT_DATA, this.appContextData);
 
-    return this._router.navigate([Page.routeFrom(page)], { skipLocationChange: true });
+    return this.router.navigate([Page.routeFrom(page)], { skipLocationChange: true });
     // return this._router.navigate([Page.routeFrom(page)]);
   };
 

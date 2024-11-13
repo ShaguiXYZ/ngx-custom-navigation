@@ -29,6 +29,7 @@ describe('QuoteStepperComponent', () => {
       ]
     }).compileComponents();
 
+    // @howto - Override component providers in TestBed
     TestBed.overrideComponent(QuoteStepperComponent, {
       set: {
         providers: [LiteralToStringPipe, { provide: QuoteStepperService, useValue: quoteStepperServiceSpy }]

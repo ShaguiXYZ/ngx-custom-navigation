@@ -36,6 +36,9 @@ export class QuoteOfferingPriceCardComponent implements OnInit, OnDestroy {
   @Input()
   public selected?: boolean;
 
+  @Input()
+  public mobileMode?: boolean;
+
   @Output()
   public uiShowCoverages: EventEmitter<OfferingPriceModel> = new EventEmitter<OfferingPriceModel>();
 
@@ -49,22 +52,18 @@ export class QuoteOfferingPriceCardComponent implements OnInit, OnDestroy {
   public uiSelectFee: EventEmitter<OfferingPriceModel> = new EventEmitter<OfferingPriceModel>();
 
   public form!: FormGroup;
-
   public footerConfig!: QuoteFooterConfig;
 
   private priceSegments: string[] = [];
-
   private _price!: OfferingPriceModel;
-
   private readonly subdcription$: Subscription[] = [];
 
   private readonly fb = inject(FormBuilder);
 
   ngOnInit(): void {
     this.footerConfig = {
-      showNext: true,
-      ignoreQuoteConfig: true,
-      nextFn: this.callNow.bind(this)
+      showNext: false,
+      ignoreQuoteConfig: true
     };
 
     this.createForm();
@@ -109,10 +108,8 @@ export class QuoteOfferingPriceCardComponent implements OnInit, OnDestroy {
     this.uiContactUs.emit(this.price);
   }
 
-  public callNow(): boolean {
+  public callNow(): void {
     this.uiCallNow.emit(this.price);
-
-    return true;
   }
 
   private createForm() {

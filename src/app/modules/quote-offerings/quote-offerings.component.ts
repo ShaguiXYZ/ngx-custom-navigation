@@ -1,21 +1,24 @@
+import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout';
 import { CommonModule } from '@angular/common';
-import { Component, ElementRef, inject, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, inject, OnDestroy, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { NxDialogService, NxModalModule } from '@aposin/ng-aquila/modal';
 import { OfferingPriceModel, QuoteComponent, SignedModel } from 'src/app/core/models';
 import { RoutingService } from 'src/app/core/services';
 import { OfferingsService } from 'src/app/core/services/offerings.service';
 import { QuoteOfferingCoveragesComponent } from 'src/app/shared/components';
+import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 import { QuoteOfferingPriceCardComponent } from './components';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'quote-quote-offerings',
   templateUrl: './quote-offerings.component.html',
   styleUrl: './quote-offerings.component.scss',
-  standalone: true,
+  imports: [CommonModule, QuoteOfferingCoveragesComponent, QuoteOfferingPriceCardComponent, NxModalModule],
   providers: [OfferingsService],
-  imports: [CommonModule, QuoteOfferingCoveragesComponent, QuoteOfferingPriceCardComponent, NxModalModule]
+  standalone: true
 })
-export class QuoteOfferingsComponent extends QuoteComponent implements OnInit {
+export class QuoteOfferingsComponent extends QuoteComponent implements OnInit, OnDestroy {
   @ViewChild('carrouselInner', { static: true })
   private inner!: ElementRef;
   @ViewChild('carrouselTrack', { static: true })
@@ -24,6 +27,7 @@ export class QuoteOfferingsComponent extends QuoteComponent implements OnInit {
   private priceCoveragesRef!: TemplateRef<unknown>;
 
   public selectedPriceIndex = 0;
+  public isMobile = false;
   public prices: OfferingPriceModel[] = [];
 
   public override ignoreChangeDetection = true;
@@ -33,11 +37,21 @@ export class QuoteOfferingsComponent extends QuoteComponent implements OnInit {
 
   // private resizeObserver!: ResizeObserver;
 
+  private readonly subscription$: Subscription[] = [];
+
+  private readonly breakpointObserver = inject(BreakpointObserver);
   private readonly offeringsService = inject(OfferingsService);
   private readonly routingService = inject(RoutingService);
   private readonly dialogService = inject(NxDialogService);
+  private readonly quoteLiteralPipe = inject(QuoteLiteralPipe);
 
   async ngOnInit(): Promise<void> {
+    this.subscription$.push(
+      this.breakpointObserver
+        .observe([Breakpoints.HandsetPortrait, Breakpoints.TabletPortrait, Breakpoints.WebPortrait])
+        .subscribe((state: BreakpointState) => (this.isMobile = state.breakpoints[Breakpoints.HandsetPortrait]))
+    );
+
     const offering = await this.offeringsService.pricing(this.contextData);
 
     this.contextData.offering = { ...this.contextData.offering, quotationId: offering.quotationId, prices: offering.prices };
@@ -57,6 +71,10 @@ export class QuoteOfferingsComponent extends QuoteComponent implements OnInit {
     // });
 
     // this.resizeObserver.observe(this.inner.nativeElement);
+  }
+
+  ngOnDestroy(): void {
+    this.subscription$.forEach(subscription => subscription.unsubscribe());
   }
 
   public swipeStart(event: TouchEvent): void {
@@ -103,6 +121,13 @@ export class QuoteOfferingsComponent extends QuoteComponent implements OnInit {
       maxWidth: '98%',
       showCloseIcon: false
     });
+  }
+
+  public callNow(price: OfferingPriceModel): void {
+    this.contextData.offering.price = { ...this.contextData.offering.price, ...price };
+    this.populateContextData();
+
+    if (this.isMobile) window.location.href = `tel:${this.quoteLiteralPipe.transform('contact-us-phone')}`;
   }
 
   public contactUs(price: OfferingPriceModel): void {

@@ -1,23 +1,22 @@
 import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout';
 import { CommonModule } from '@angular/common';
-import { Component, inject, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, EventEmitter, inject, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { NxButtonModule } from '@aposin/ng-aquila/button';
 import { NxIconModule } from '@aposin/ng-aquila/icon';
 import { ContextDataService } from '@shagui/ng-shagui/core';
 import { Subscription } from 'rxjs';
 import { QUOTE_APP_CONTEXT_DATA } from 'src/app/core/constants';
 import { AppContextData } from 'src/app/core/models';
+import { RoutingService } from 'src/app/core/services';
 import { QuoteLiteralDirective } from '../../directives';
 import { QuoteFooterConfig } from './models';
-import { QuoteFooterService } from './services';
 
 @Component({
   selector: 'quote-footer',
   templateUrl: './quote-footer.component.html',
   styleUrl: './quote-footer.component.scss',
-  standalone: true,
   imports: [CommonModule, NxButtonModule, NxIconModule, QuoteLiteralDirective],
-  providers: [QuoteFooterService]
+  standalone: true
 })
 export class QuoteFooterComponent implements OnInit, OnDestroy {
   @Input()
@@ -26,14 +25,20 @@ export class QuoteFooterComponent implements OnInit, OnDestroy {
     showBack: false
   };
 
+  @Output()
+  public uiOnNext: EventEmitter<void> = new EventEmitter<void>();
+
+  @Output()
+  public uiOnPrevious: EventEmitter<void> = new EventEmitter<void>();
+
   public _mobileMode?: boolean;
   public _observedMobileMode?: boolean;
 
   private readonly subscription$: Subscription[] = [];
 
-  private readonly contextDataService = inject(ContextDataService);
   private readonly breakpointObserver = inject(BreakpointObserver);
-  private readonly footerService = inject(QuoteFooterService);
+  private readonly contextDataService = inject(ContextDataService);
+  private readonly routingService = inject(RoutingService);
 
   ngOnInit(): void {
     this.subscription$.push(
@@ -45,6 +50,10 @@ export class QuoteFooterComponent implements OnInit, OnDestroy {
     !this.config.ignoreQuoteConfig && this.footerButtonProperties();
   }
 
+  ngOnDestroy(): void {
+    this.subscription$.forEach(subscription => subscription.unsubscribe());
+  }
+
   get mobileMode(): boolean | undefined {
     return this._mobileMode ?? this._observedMobileMode;
   }
@@ -54,21 +63,34 @@ export class QuoteFooterComponent implements OnInit, OnDestroy {
     this._mobileMode = value;
   }
 
-  ngOnDestroy(): void {
-    this.subscription$.forEach(subscription => subscription.unsubscribe());
-  }
-
   public goToNextStep(): void {
-    this.footerService.next(this.config);
+    this.uiOnNext.emit();
+    this.next(this.config);
   }
 
-  public goToPreviousStep = (): void => this.footerService.previous();
+  public goToPreviousStep = (): void => {
+    this.uiOnPrevious.emit();
+    this.previous();
+  };
 
   private footerButtonProperties = (): void => {
     const { navigation } = this.contextDataService.get<AppContextData>(QUOTE_APP_CONTEXT_DATA);
     const lastPage = navigation?.lastPage;
-    const config: Omit<QuoteFooterConfig, 'nextFn' | 'backFn'> = lastPage?.configuration?.data?.['footerConfig'] ?? {};
+    const config = (lastPage?.configuration?.data?.['footerConfig'] as Partial<QuoteFooterConfig>) ?? {};
 
     this.config = { ...this.config, ...config };
+  };
+
+  private next = async (config: QuoteFooterConfig = { showNext: true }): Promise<boolean> => {
+    if (config.nextFn?.()) {
+      return false;
+    }
+
+    return this.routingService.next();
+  };
+
+  private previous = (config: QuoteFooterConfig = { showNext: true }): void => {
+    config.backFn?.();
+    this.routingService.previous();
   };
 }
