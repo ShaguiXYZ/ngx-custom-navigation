@@ -1,11 +1,11 @@
 import { Injectable, OnDestroy, inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { ContextDataService } from '@shagui/ng-shagui/core';
+import { ContextDataService, deepCopy } from '@shagui/ng-shagui/core';
 import { Subscription } from 'rxjs';
 import { Step } from '../../shared/models';
 import { QUOTE_APP_CONTEXT_DATA, QUOTE_CONTEXT_DATA } from '../constants';
+import { ConditionEvaluation } from '../lib';
 import { AppContextData, NextOption, Page, QuoteModel } from '../models';
-import { ConditionService } from './condition.service';
 import { ServiceActivatorService } from './service-activator.service';
 
 @Injectable({ providedIn: 'root' })
@@ -14,7 +14,6 @@ export class RoutingService implements OnDestroy {
 
   private readonly subscrition$: Subscription[] = [];
   private readonly contextDataService = inject(ContextDataService);
-  private readonly conditionService = inject(ConditionService);
   private readonly serviceActivatorService = inject(ServiceActivatorService);
   private readonly router = inject(Router);
 
@@ -33,14 +32,16 @@ export class RoutingService implements OnDestroy {
   }
 
   public next(data?: QuoteModel): Promise<boolean> {
+    const toEveluate: QuoteModel = deepCopy(data || this.contextDataService.get(QUOTE_CONTEXT_DATA));
     this.serviceActivatorService.activateService('nextPage');
-    data && this.contextDataService.set(QUOTE_CONTEXT_DATA, data);
 
-    const nextPage = this.getNextRoute();
+    const nextPage = this.getNextRoute(toEveluate);
 
     if (!nextPage) {
       return Promise.resolve(false);
     }
+
+    this.contextDataService.set(QUOTE_CONTEXT_DATA, toEveluate);
 
     return this._goToPage(nextPage);
   }
@@ -78,21 +79,21 @@ export class RoutingService implements OnDestroy {
     // return this._router.navigate([Page.routeFrom(page)]);
   };
 
-  private getNextRoute(): Page | undefined {
+  private getNextRoute(data: QuoteModel): Page | undefined {
     const pageId = this.appContextData.navigation.viewedPages[this.appContextData.navigation.viewedPages.length - 1];
 
     // 1º Recuperamos la pagina del sitemap
     const page = this.getPage(pageId);
 
     // 2º Recuperamos la opción de siguiente
-    const nextPageId = this.testNavigation(page!);
+    const nextPageId = this.testNavigation(data, page!);
 
     return this.appContextData.configuration.pageMap[nextPageId!];
   }
 
-  private testNavigation(page: Page): string | undefined {
+  private testNavigation(data: QuoteModel, page: Page): string | undefined {
     if (page.nextOptionList) {
-      return this.nextPageIdFromNextOptionList(page.nextOptionList);
+      return this.nextPageIdFromNextOptionList(data, page.nextOptionList);
     } else {
       return;
     }
@@ -101,8 +102,8 @@ export class RoutingService implements OnDestroy {
   /**
    * Devuelve el nextPageId que cumpla las condiciones, o en última instancia el nextPageId por defecto (último)
    */
-  private nextPageIdFromNextOptionList(nextOptionList: NextOption[]): string | undefined {
-    const nextOption = nextOptionList.find(nextOption => this.conditionService.checkConditions(nextOption.conditions));
+  private nextPageIdFromNextOptionList(data: QuoteModel, nextOptionList: NextOption[]): string | undefined {
+    const nextOption = nextOptionList.find(nextOption => ConditionEvaluation.checkConditions(data, nextOption.conditions));
 
     return nextOption?.nextPageId;
   }
