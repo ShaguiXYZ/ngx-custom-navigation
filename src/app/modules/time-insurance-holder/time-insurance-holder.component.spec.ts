@@ -3,7 +3,6 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NxCopytextModule } from '@aposin/ng-aquila/copytext';
 import { TranslateService } from '@ngx-translate/core';
 import { ContextDataService } from '@shagui/ng-shagui/core';
-import { QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
 import { QuoteModel } from 'src/app/core/models';
 import { RoutingService } from 'src/app/core/services';
 import { ContextDataServiceStub } from 'src/app/core/stub';
@@ -14,7 +13,6 @@ import { TimeInsuranceHolderComponent } from './time-insurance-holder.component'
 describe('TimeInsuranceHolderComponent', () => {
   let component: TimeInsuranceHolderComponent;
   let fixture: ComponentFixture<TimeInsuranceHolderComponent>;
-  let contextDataService: jasmine.SpyObj<ContextDataService>;
   let routingService: jasmine.SpyObj<RoutingService>;
 
   beforeEach(async () => {
@@ -43,7 +41,6 @@ describe('TimeInsuranceHolderComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(TimeInsuranceHolderComponent);
     component = fixture.componentInstance;
-    contextDataService = TestBed.inject(ContextDataService) as jasmine.SpyObj<ContextDataService>;
     routingService = TestBed.inject(RoutingService) as jasmine.SpyObj<RoutingService>;
 
     component['contextData'] = {
@@ -67,12 +64,9 @@ describe('TimeInsuranceHolderComponent', () => {
   });
 
   it('should update contextData and call nextStep on selectedYears', () => {
-    const setContextDataSpy = spyOn(contextDataService, 'set');
-
     component.selectData(3);
 
     expect(component['contextData'].insuranceCompany.yearsAsOwner).toBe(3);
-    expect(setContextDataSpy).toHaveBeenCalledWith(QUOTE_CONTEXT_DATA, component['contextData']);
     expect(routingService.next).toHaveBeenCalled();
   });
 

@@ -7,7 +7,6 @@ import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
 import { NxInputModule } from '@aposin/ng-aquila/input';
 import { TranslateService } from '@ngx-translate/core';
 import { ContextDataService } from '@shagui/ng-shagui/core';
-import { QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
 import { QuoteModel } from 'src/app/core/models';
 import { ContextDataServiceStub } from 'src/app/core/stub';
 import { HeaderTitleComponent, QuoteFooterComponent, QuoteFooterInfoComponent } from 'src/app/shared/components';
@@ -18,7 +17,6 @@ import { ClientIdentificationNumberComponent } from './client-identification-num
 describe('ClientIdentificationNumberComponent', () => {
   let component: ClientIdentificationNumberComponent;
   let fixture: ComponentFixture<ClientIdentificationNumberComponent>;
-  let contextDataService: jasmine.SpyObj<ContextDataService>;
 
   beforeEach(async () => {
     const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate']);
@@ -49,8 +47,6 @@ describe('ClientIdentificationNumberComponent', () => {
     fixture = TestBed.createComponent(ClientIdentificationNumberComponent);
     component = fixture.componentInstance;
 
-    contextDataService = TestBed.inject(ContextDataService) as jasmine.SpyObj<ContextDataService>;
-
     component['contextData'] = {
       personalData: {
         identificationNumber: '123456789'
@@ -69,37 +65,22 @@ describe('ClientIdentificationNumberComponent', () => {
   });
 
   it('should mark all fields as touched and update context data on updateValidData', () => {
-    const setContextDataSpy = spyOn(contextDataService, 'set');
-
     component.form.controls['identificationNumber'].setValue('987654321');
-    const isValid = component['updateValidData']();
 
-    expect(isValid).toBeTrue();
-    expect(setContextDataSpy).toHaveBeenCalledWith(
-      QUOTE_CONTEXT_DATA,
-      jasmine.objectContaining({
-        personalData: jasmine.objectContaining({
-          identificationNumber: '987654321'
-        })
-      })
-    );
+    expect(component.form.valid).toBeTrue();
   });
 
   it('should return false if form is invalid on updateValidData', () => {
-    const setContextDataSpy = spyOn(contextDataService, 'set');
-
     component.form.controls['identificationNumber'].setValue('');
-    const isValid = component['updateValidData']();
+    component['updateValidData']();
 
-    expect(isValid).toBeFalse();
-    expect(setContextDataSpy).not.toHaveBeenCalled();
+    expect(component.form.valid).toBeFalse();
   });
 
   it('should call updateValidData on canDeactivate', () => {
     spyOn<any>(component, 'updateValidData').and.callThrough();
     const canDeactivate = component.canDeactivate();
 
-    expect(component['updateValidData']).toHaveBeenCalled();
     expect(canDeactivate).toBe(component.form.valid);
   });
 });

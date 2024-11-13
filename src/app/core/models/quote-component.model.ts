@@ -21,10 +21,6 @@ export abstract class QuoteComponent {
     this.__updateComponentData();
   }
 
-  protected populateContextData = (): void => {
-    this.contextDataService.set(QUOTE_CONTEXT_DATA, this.contextData);
-  };
-
   public canDeactivate:
     | ((currentRoute?: ActivatedRouteSnapshot, state?: RouterStateSnapshot, next?: RouterStateSnapshot) => MaybeAsync<GuardResult>)
     | undefined;

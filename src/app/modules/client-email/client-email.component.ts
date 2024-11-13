@@ -37,9 +37,9 @@ export class ClientEMailComponent extends QuoteComponent implements OnInit {
     this.createForm();
   }
 
-  public override canDeactivate = (): boolean => this.updateValidData();
+  public override canDeactivate = (): boolean => this.form.valid;
 
-  private updateValidData = (): boolean => {
+  public updateValidData = (): void => {
     this.form.markAllAsTouched();
 
     if (this.form.valid) {
@@ -52,11 +52,7 @@ export class ClientEMailComponent extends QuoteComponent implements OnInit {
         accepInfo: this.form.value['accepInfo'],
         acceptPrivacyPolicy: this.form.value['acceptPrivacyPolicy']
       };
-
-      this.populateContextData();
     }
-
-    return this.form.valid;
   };
 
   private createForm() {

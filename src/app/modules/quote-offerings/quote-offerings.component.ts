@@ -59,7 +59,6 @@ export class QuoteOfferingsComponent extends QuoteComponent implements OnInit, O
 
     Promise.resolve().then(() => {
       SignedModel.init(this.contextData);
-      this.populateContextData();
       console.log('QuoteOfferingsComponent ngOnInit', this.contextData);
     });
 
@@ -106,7 +105,6 @@ export class QuoteOfferingsComponent extends QuoteComponent implements OnInit, O
 
   public selectSteper(index: number): void {
     this.contextData.offering.price = { ...this.contextData.offering.price, ...this.prices[index] };
-    this.populateContextData();
     this.selectedPriceIndex = index;
     this.selectCarrouselCard();
   }
@@ -125,16 +123,13 @@ export class QuoteOfferingsComponent extends QuoteComponent implements OnInit, O
 
   public callNow(price: OfferingPriceModel): void {
     this.contextData.offering.price = { ...this.contextData.offering.price, ...price };
-    this.populateContextData();
 
     if (this.isMobile) window.location.href = `tel:${this.quoteLiteralPipe.transform('contact-us-phone')}`;
   }
 
   public contactUs(price: OfferingPriceModel): void {
     this.contextData.offering.price = { ...this.contextData.offering.price, ...price };
-    this.populateContextData();
-
-    this.routingService.next();
+    this.routingService.next(this.contextData);
   }
 
   /**

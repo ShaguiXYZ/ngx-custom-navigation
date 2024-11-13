@@ -42,9 +42,9 @@ export class DrivingLicenseDateComponent extends QuoteComponent implements OnIni
     this.createForm();
   }
 
-  public override canDeactivate = (): boolean => this.updateValidData();
+  public override canDeactivate = (): boolean => this.form.valid;
 
-  private updateValidData = (): boolean => {
+  public updateValidData = (): void => {
     this.form.markAllAsTouched();
 
     if (this.form.valid) {
@@ -53,11 +53,7 @@ export class DrivingLicenseDateComponent extends QuoteComponent implements OnIni
         ...this.form.value,
         drivenLicenseDate: moment(new Date(this.form.controls['drivenLicenseDate'].value)).format(DEFAULT_DATE_FORMAT)
       };
-
-      this.populateContextData();
     }
-
-    return this.form.valid;
   };
 
   private createForm() {

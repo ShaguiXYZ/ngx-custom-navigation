@@ -2,7 +2,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { TranslateService } from '@ngx-translate/core';
 import { ContextDataService } from '@shagui/ng-shagui/core';
-import { QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
 import { QuoteModel } from 'src/app/core/models';
 import { RoutingService } from 'src/app/core/services';
 import { ContextDataServiceStub } from 'src/app/core/stub';
@@ -11,7 +10,6 @@ import { IsPolicyOwnerComponent } from './is-policy-owner.component';
 describe('IsPolicyOwnerComponent', () => {
   let component: IsPolicyOwnerComponent;
   let fixture: ComponentFixture<IsPolicyOwnerComponent>;
-  let contextDataService: jasmine.SpyObj<ContextDataService>;
   let routingService: jasmine.SpyObj<RoutingService>;
 
   beforeEach(async () => {
@@ -33,7 +31,6 @@ describe('IsPolicyOwnerComponent', () => {
     fixture = TestBed.createComponent(IsPolicyOwnerComponent);
     component = fixture.componentInstance;
 
-    contextDataService = TestBed.inject(ContextDataService) as jasmine.SpyObj<ContextDataService>;
     routingService = TestBed.inject(RoutingService) as jasmine.SpyObj<RoutingService>;
 
     component['contextData'] = {
@@ -62,12 +59,9 @@ describe('IsPolicyOwnerComponent', () => {
   });
 
   it('should update contextData and call nextStep on onIsPolicyOwnerChange', () => {
-    const setContextDataSpy = spyOn(contextDataService, 'set');
-
     component.onIsPolicyOwnerChange(false);
 
     expect(component['contextData'].client.isPolicyOwner).toBeFalse();
-    expect(setContextDataSpy).toHaveBeenCalledWith(QUOTE_CONTEXT_DATA, component['contextData']);
     expect(routingService.next).toHaveBeenCalled();
   });
 

@@ -2,7 +2,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { TranslateService } from '@ngx-translate/core';
 import { ContextDataService } from '@shagui/ng-shagui/core';
-import { QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
 import { QuoteModel } from 'src/app/core/models';
 import { RoutingService } from 'src/app/core/services';
 import { ContextDataServiceStub } from 'src/app/core/stub';
@@ -11,7 +10,6 @@ import { IsClientComponent } from './is-client.component';
 describe('IsClientComponent', () => {
   let component: IsClientComponent;
   let fixture: ComponentFixture<IsClientComponent>;
-  let contextDataService: jasmine.SpyObj<ContextDataService>;
   let routingService: jasmine.SpyObj<RoutingService>;
 
   beforeEach(async () => {
@@ -33,7 +31,6 @@ describe('IsClientComponent', () => {
     fixture = TestBed.createComponent(IsClientComponent);
     component = fixture.componentInstance;
 
-    contextDataService = TestBed.inject(ContextDataService) as jasmine.SpyObj<ContextDataService>;
     routingService = TestBed.inject(RoutingService) as jasmine.SpyObj<RoutingService>;
 
     component['contextData'] = {
@@ -50,12 +47,9 @@ describe('IsClientComponent', () => {
   });
 
   it('should update contextData and call nextStep on onIsClientChange', () => {
-    const setContextDataSpy = spyOn(contextDataService, 'set');
-
     component.onIsClientChange(false);
 
     expect(component['contextData'].client.isClient).toBeFalse();
-    expect(setContextDataSpy).toHaveBeenCalledWith(QUOTE_CONTEXT_DATA, component['contextData']);
     expect(routingService.next).toHaveBeenCalled();
   });
 

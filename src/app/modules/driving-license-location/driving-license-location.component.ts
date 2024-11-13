@@ -49,9 +49,7 @@ export class DrivingLicenseLocationComponent extends QuoteComponent implements O
       drivenLicenseCountry: this.selectedLocation?.index
     };
 
-    this.populateContextData();
-
-    this.routingService.next();
+    this.routingService.next(this.contextData);
   }
 
   public openFromTemplate(): void {

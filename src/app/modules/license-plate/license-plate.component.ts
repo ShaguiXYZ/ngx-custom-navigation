@@ -60,14 +60,12 @@ export class LicensePlateComponent extends QuoteComponent implements OnInit, OnD
 
   public continueWithOutLicensePlate() {
     this.contextData.driven.hasDrivenLicense = false;
-    this.routingService.next();
+    this.contextData.vehicle.plateNumber = '';
+    this.routingService.next(this.contextData);
   }
 
   private updateValidData = (): boolean => {
     if (this.contextData.driven.hasDrivenLicense === false) {
-      this.contextData.vehicle.plateNumber = '';
-      this.populateContextData();
-
       return true;
     }
 
@@ -78,8 +76,6 @@ export class LicensePlateComponent extends QuoteComponent implements OnInit, OnD
     if (this.form.valid) {
       this.contextData.vehicle.plateNumber = this.form.value.plateNumber;
     }
-
-    this.populateContextData();
 
     return this.form.valid;
   };

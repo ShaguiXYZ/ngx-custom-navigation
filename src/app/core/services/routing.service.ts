@@ -3,8 +3,8 @@ import { Router } from '@angular/router';
 import { ContextDataService } from '@shagui/ng-shagui/core';
 import { Subscription } from 'rxjs';
 import { Step } from '../../shared/models';
-import { QUOTE_APP_CONTEXT_DATA } from '../constants';
-import { AppContextData, NextOption, Page } from '../models';
+import { QUOTE_APP_CONTEXT_DATA, QUOTE_CONTEXT_DATA } from '../constants';
+import { AppContextData, NextOption, Page, QuoteModel } from '../models';
 import { ConditionService } from './condition.service';
 import { ServiceActivatorService } from './service-activator.service';
 
@@ -32,23 +32,25 @@ export class RoutingService implements OnDestroy {
     this.subscrition$.forEach(sub => sub.unsubscribe());
   }
 
-  public next(): Promise<boolean> {
+  public next(data?: QuoteModel): Promise<boolean> {
+    this.serviceActivatorService.activateService('nextPage');
+    data && this.contextDataService.set(QUOTE_CONTEXT_DATA, data);
+
     const nextPage = this.getNextRoute();
 
     if (!nextPage) {
       return Promise.resolve(false);
     }
 
-    this.serviceActivatorService.activateService('nextPage');
-
     return this._goToPage(nextPage);
   }
 
-  public previous = (): Promise<boolean> => {
+  public previous = (data?: QuoteModel): Promise<boolean> => {
     if (this.appContextData.navigation.viewedPages.length > 1) {
       const pageId = this.appContextData.navigation.viewedPages[this.appContextData.navigation.viewedPages.length - 2];
 
       this.serviceActivatorService.activateService('previousPage');
+      data && this.contextDataService.set(QUOTE_CONTEXT_DATA, data);
 
       return this._goToPage(this.appContextData.configuration.pageMap[pageId]);
     }

@@ -2,7 +2,6 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NxDialogService } from '@aposin/ng-aquila/modal';
 import { TranslateService } from '@ngx-translate/core';
 import { ContextDataService } from '@shagui/ng-shagui/core';
-import { QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
 import { QuoteModel } from 'src/app/core/models';
 import { RoutingService } from 'src/app/core/services';
 import { ContextDataServiceStub } from 'src/app/core/stub';
@@ -11,7 +10,6 @@ import { DrivingLicenseLocationComponent } from './driving-license-location.comp
 describe('DrivingLicenseLocationComponent', () => {
   let component: DrivingLicenseLocationComponent;
   let fixture: ComponentFixture<DrivingLicenseLocationComponent>;
-  let contextDataService: jasmine.SpyObj<ContextDataService>;
   let routingService: jasmine.SpyObj<RoutingService>;
   let dialogService: jasmine.SpyObj<NxDialogService>;
 
@@ -36,7 +34,6 @@ describe('DrivingLicenseLocationComponent', () => {
     fixture = TestBed.createComponent(DrivingLicenseLocationComponent);
     component = fixture.componentInstance;
 
-    contextDataService = TestBed.inject(ContextDataService) as jasmine.SpyObj<ContextDataService>;
     routingService = TestBed.inject(RoutingService) as jasmine.SpyObj<RoutingService>;
     dialogService = TestBed.inject(NxDialogService) as jasmine.SpyObj<NxDialogService>;
 
@@ -54,20 +51,10 @@ describe('DrivingLicenseLocationComponent', () => {
   });
 
   it('should select location and update context data', () => {
-    const setContextDataSpy = spyOn(contextDataService, 'set');
-
     const icon = { index: 'eu', data: 'Country 2' };
     component.selectLocation(icon);
 
     expect(component.selectedLocation).toEqual(icon);
-    expect(setContextDataSpy).toHaveBeenCalledWith(
-      QUOTE_CONTEXT_DATA,
-      jasmine.objectContaining({
-        driven: jasmine.objectContaining({
-          drivenLicenseCountry: 'eu'
-        })
-      })
-    );
     expect(routingService.next).toHaveBeenCalled();
   });
 

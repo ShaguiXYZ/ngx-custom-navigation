@@ -15,7 +15,6 @@ import { BirthdateComponent } from './birthdate.component';
 describe('BirthdateComponent', () => {
   let component: BirthdateComponent;
   let fixture: ComponentFixture<BirthdateComponent>;
-  let contextDataService: jasmine.SpyObj<ContextDataService>;
 
   beforeEach(async () => {
     const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate']);
@@ -31,8 +30,6 @@ describe('BirthdateComponent', () => {
   });
 
   beforeEach(() => {
-    contextDataService = TestBed.inject(ContextDataService) as jasmine.SpyObj<ContextDataService>;
-
     fixture = TestBed.createComponent(BirthdateComponent);
     component = fixture.componentInstance;
 
@@ -56,29 +53,25 @@ describe('BirthdateComponent', () => {
   });
 
   it('should mark form as touched and update context data on updateValidData', () => {
-    const setContextDataSpy = spyOn(contextDataService, 'set');
-
     component.form.controls['birthdate'].setValue('2000-01-01');
-    const isValid = component['updateValidData']();
+    component['updateValidData']();
 
     expect(component.form.touched).toBeTrue();
-    expect(isValid).toBeTrue();
-    expect(setContextDataSpy).toHaveBeenCalled();
+    expect(component.form.valid).toBeTrue();
   });
 
   it('should invalidate form if birthdate is less than 18 years ago', () => {
     component.form.controls['birthdate'].setValue(moment().subtract(17, 'years').format(DEFAULT_DATE_FORMAT));
-    const isValid = component['updateValidData']();
 
-    expect(isValid).toBeFalse();
+    expect(component.form.valid).toBeFalse();
     expect(component.form.controls['birthdate'].errors).toEqual({ olderThanYears: true });
   });
 
   it('should validate form if birthdate is 18 years or more ago', () => {
     component.form.controls['birthdate'].setValue(moment().subtract(18, 'years').format(DEFAULT_DATE_FORMAT));
-    const isValid = component['updateValidData']();
+    component['updateValidData']();
 
-    expect(isValid).toBeTrue();
+    expect(component.form.valid).toBeTrue();
     expect(component.form.controls['birthdate'].errors).toBeNull();
   });
 });

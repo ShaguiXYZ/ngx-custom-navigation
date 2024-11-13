@@ -41,9 +41,9 @@ export class BirthdateComponent extends QuoteComponent implements OnInit {
     this.createForm();
   }
 
-  public override canDeactivate = (): boolean => this.updateValidData();
+  public override canDeactivate = (): boolean => this.form.valid;
 
-  private updateValidData = (): boolean => {
+  public updateValidData = (): void => {
     this.form.markAllAsTouched();
 
     if (this.form.valid) {
@@ -52,11 +52,7 @@ export class BirthdateComponent extends QuoteComponent implements OnInit {
         ...this.form.value,
         birthdate: moment(new Date(this.form.controls['birthdate'].value)).format(DEFAULT_DATE_FORMAT)
       };
-
-      this.populateContextData();
     }
-
-    return this.form.valid;
   };
 
   private createForm() {

@@ -4,7 +4,7 @@ import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { TranslateService } from '@ngx-translate/core';
 import { ContextDataService, IndexedData } from '@shagui/ng-shagui/core';
-import { DEBOUNCE_TIME, QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
+import { DEBOUNCE_TIME } from 'src/app/core/constants';
 import { QuoteModel } from 'src/app/core/models';
 import { InsuranceCompaniesService, RoutingService } from 'src/app/core/services';
 import { ContextDataServiceStub } from 'src/app/core/stub';
@@ -14,7 +14,6 @@ describe('InsuranceCompaniesComponent', () => {
   let component: InsuranceCompaniesComponent;
   let fixture: ComponentFixture<InsuranceCompaniesComponent>;
   let insuranceCompaniesService: jasmine.SpyObj<InsuranceCompaniesService>;
-  let contextDataService: jasmine.SpyObj<ContextDataService>;
   let routingService: jasmine.SpyObj<RoutingService>;
 
   beforeEach(async () => {
@@ -45,13 +44,8 @@ describe('InsuranceCompaniesComponent', () => {
     fixture = TestBed.createComponent(InsuranceCompaniesComponent);
     component = fixture.componentInstance;
     insuranceCompaniesService = TestBed.inject(InsuranceCompaniesService) as jasmine.SpyObj<InsuranceCompaniesService>;
-    contextDataService = TestBed.inject(ContextDataService) as jasmine.SpyObj<ContextDataService>;
     routingService = TestBed.inject(RoutingService) as jasmine.SpyObj<RoutingService>;
     insuranceCompaniesService.companies.and.returnValue(Promise.resolve([]));
-
-    contextDataService.set<QuoteModel>(QUOTE_CONTEXT_DATA, {
-      insuranceCompany: {}
-    } as unknown as QuoteModel);
 
     fixture.detectChanges();
   });
@@ -83,13 +77,10 @@ describe('InsuranceCompaniesComponent', () => {
   }));
 
   it('should select a company and update context data', () => {
-    const setContextDataSpy = spyOn(contextDataService, 'set');
-
     const company: IndexedData = { index: 'test', data: 'Test Company' };
     component.selectCompany(company);
 
     expect(component.selectedCompany).toEqual(company);
-    expect(setContextDataSpy).toHaveBeenCalledWith(QUOTE_CONTEXT_DATA, jasmine.any(Object));
     expect(routingService.next).toHaveBeenCalled();
   });
 

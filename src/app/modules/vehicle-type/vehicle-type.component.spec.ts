@@ -2,17 +2,15 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { TranslateService } from '@ngx-translate/core';
 import { ContextDataService, IndexedData } from '@shagui/ng-shagui/core';
-import { QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
-import { ContextDataServiceStub } from 'src/app/core/stub';
+import { QuoteModel } from 'src/app/core/models';
 import { RoutingService } from 'src/app/core/services';
+import { ContextDataServiceStub } from 'src/app/core/stub';
 import { VehicleTypes } from './models';
 import { VehicleTypeComponent } from './vehicle-type.component';
-import { QuoteModel } from 'src/app/core/models';
 
 describe('VehicleTypeComponent', () => {
   let component: VehicleTypeComponent;
   let fixture: ComponentFixture<VehicleTypeComponent>;
-  let contextDataService: jasmine.SpyObj<ContextDataService>;
   let routingService: jasmine.SpyObj<RoutingService>;
 
   beforeEach(async () => {
@@ -33,7 +31,6 @@ describe('VehicleTypeComponent', () => {
     fixture = TestBed.createComponent(VehicleTypeComponent);
     component = fixture.componentInstance;
 
-    contextDataService = TestBed.inject(ContextDataService) as jasmine.SpyObj<ContextDataService>;
     routingService = TestBed.inject(RoutingService) as jasmine.SpyObj<RoutingService>;
 
     component['contextData'] = { vehicle: { vehicleTtype: 'new' } } as QuoteModel;
@@ -53,14 +50,11 @@ describe('VehicleTypeComponent', () => {
   });
 
   it('should select a vehicle type and update context data', () => {
-    const setContextDataSpy = spyOn(contextDataService, 'set');
-
     const type: IndexedData = { index: 'old', data: 'SUV' };
     component.selectType(type);
 
     expect(component.selectedType).toEqual(type);
     expect(component['contextData'].vehicle.vehicleTtype).toEqual('old');
-    expect(setContextDataSpy).toHaveBeenCalledWith(QUOTE_CONTEXT_DATA, component['contextData']);
     expect(routingService.next).toHaveBeenCalled();
   });
 

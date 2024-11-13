@@ -21,9 +21,7 @@ export class IsPolicyOwnerComponent extends QuoteComponent {
 
   public onIsPolicyOwnerChange(value: boolean): void {
     this.contextData.client.isPolicyOwner = value;
-    this.populateContextData();
-
-    this.routingService.next();
+    this.routingService.next(this.contextData);
   }
 
   public get isPolicyOwner(): boolean | undefined {

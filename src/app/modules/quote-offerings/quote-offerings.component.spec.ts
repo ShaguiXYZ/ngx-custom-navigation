@@ -132,7 +132,6 @@ describe('QuoteOfferingsComponent', () => {
 
     expect(component.selectedPriceIndex).toBe(1);
     expect(component['contextData'].offering.price).toEqual(mockPrices[1]);
-    expect(contextDataService.set).toHaveBeenCalledWith(QUOTE_CONTEXT_DATA, component['contextData']);
   });
 
   it('should call routing service next step on contact us', () => {
@@ -142,7 +141,6 @@ describe('QuoteOfferingsComponent', () => {
     component.contactUs(mockPrice);
 
     expect(component['contextData'].offering.price).toEqual(mockPrice);
-    expect(contextDataService.set).toHaveBeenCalledWith(QUOTE_CONTEXT_DATA, component['contextData']);
     expect(routingService.next).toHaveBeenCalled();
   });
 

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NX_DATE_LOCALE, NxDatefieldModule } from '@aposin/ng-aquila/datefield';
@@ -7,7 +8,7 @@ import { NxMomentDateModule } from '@aposin/ng-aquila/moment-date-adapter';
 import { TranslateService } from '@ngx-translate/core';
 import { ContextDataService } from '@shagui/ng-shagui/core';
 import moment from 'moment';
-import { DEFAULT_DATE_FORMAT, QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
+import { DEFAULT_DATE_FORMAT } from 'src/app/core/constants';
 import { QuoteModel } from 'src/app/core/models';
 import { ContextDataServiceStub } from 'src/app/core/stub';
 import { HeaderTitleComponent, QuoteFooterComponent } from 'src/app/shared/components';
@@ -18,7 +19,6 @@ import { DateOfIssueComponent } from './date-of-issue.component';
 describe('DateOfIssueComponent', () => {
   let component: DateOfIssueComponent;
   let fixture: ComponentFixture<DateOfIssueComponent>;
-  let contextDataService: jasmine.SpyObj<ContextDataService>;
 
   beforeEach(async () => {
     const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate']);
@@ -46,7 +46,6 @@ describe('DateOfIssueComponent', () => {
 
     fixture = TestBed.createComponent(DateOfIssueComponent);
     component = fixture.componentInstance;
-    contextDataService = TestBed.inject(ContextDataService) as jasmine.SpyObj<ContextDataService>;
 
     component['contextData'] = {
       client: {
@@ -68,21 +67,16 @@ describe('DateOfIssueComponent', () => {
   });
 
   it('should mark form as touched and update context data on updateValidData', () => {
-    const setContextDataSpy = spyOn(contextDataService, 'set');
     const futureDate = moment().add(1, 'day').format(DEFAULT_DATE_FORMAT);
     const expiration = moment(futureDate).add(component['expirationInfo'].value, component['expirationInfo'].unit);
 
     component.form.controls['dateOfIssue'].setValue(futureDate);
-    const isValid = component['updateValidData']();
+    component['updateValidData']();
 
-    expect(isValid).toBeTrue();
+    expect(component.form.valid).toBeTrue();
     expect(component.form.touched).toBeTrue();
-    expect(setContextDataSpy).toHaveBeenCalledWith(
-      QUOTE_CONTEXT_DATA,
-      jasmine.objectContaining({
-        client: { dateOfIssue: futureDate, expiration: expiration.format(DEFAULT_DATE_FORMAT) }
-      })
-    );
+    expect((component as any).contextData.client.dateOfIssue).toEqual(futureDate);
+    expect((component as any).contextData.client.expiration).toEqual(expiration.format(DEFAULT_DATE_FORMAT));
   });
 
   it('should return form validity on canDeactivate', done => {
@@ -97,9 +91,9 @@ describe('DateOfIssueComponent', () => {
 
   it('should invalidate form if dateOfIssue is empty', () => {
     component.form.controls['dateOfIssue'].setValue(null);
-    const isValid = component['updateValidData']();
+    component['updateValidData']();
 
-    expect(isValid).toBeFalse();
+    expect(component.form.valid).toBeFalse();
     expect(component.form.controls['dateOfIssue'].hasError('required')).toBeTrue();
   });
 });

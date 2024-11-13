@@ -13,5 +13,5 @@
       </nx-formfield>
     </form>
   </section>
-  <quote-footer />
+  <quote-footer [data]="contextData" (uiOnNext)="updateValidData()" />
 </article>

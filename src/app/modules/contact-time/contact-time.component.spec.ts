@@ -1,7 +1,7 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { TranslateService } from '@ngx-translate/core';
 import { ContextDataService } from '@shagui/ng-shagui/core';
-import { QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
 import { QuoteModel } from 'src/app/core/models';
 import { ContextDataServiceStub } from 'src/app/core/stub';
 import { ContactTimeComponent } from './contact-time.component';
@@ -9,7 +9,6 @@ import { ContactTimeComponent } from './contact-time.component';
 describe('ContactTimeComponent', () => {
   let component: ContactTimeComponent;
   let fixture: ComponentFixture<ContactTimeComponent>;
-  let contextDataService: jasmine.SpyObj<ContextDataService>;
 
   beforeEach(async () => {
     const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate']);
@@ -26,7 +25,6 @@ describe('ContactTimeComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(ContactTimeComponent);
     component = fixture.componentInstance;
-    contextDataService = TestBed.inject(ContextDataService) as jasmine.SpyObj<ContextDataService>;
 
     component['contextData'] = {
       contactData: {
@@ -51,15 +49,9 @@ describe('ContactTimeComponent', () => {
   });
 
   it('should update valid data correctly', () => {
-    const setContextDataSpy = spyOn(contextDataService, 'set');
-
     component.selectHour('15:00');
     component['updateValidData']();
-    expect(setContextDataSpy).toHaveBeenCalledWith(QUOTE_CONTEXT_DATA, {
-      contactData: {
-        contactHour: '15:00'
-      }
-    });
+    expect((component as any).contextData.contactData.contactHour).toBe('15:00');
   });
 
   it('should allow deactivation if an hour is selected', () => {

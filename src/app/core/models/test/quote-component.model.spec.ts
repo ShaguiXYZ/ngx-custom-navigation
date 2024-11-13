@@ -1,10 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { TestBed } from '@angular/core/testing';
 import { ContextDataService } from '@shagui/ng-shagui/core';
-import { QuoteComponent } from '../quote-component.model';
-import { QUOTE_CONTEXT_DATA, QUOTE_APP_CONTEXT_DATA } from '../../constants';
+import { QUOTE_APP_CONTEXT_DATA, QUOTE_CONTEXT_DATA } from '../../constants';
 import { AppContextData } from '../app-context-data.model';
-import { QuoteModel } from '../quote.model';
+import { QuoteComponent } from '../quote-component.model';
 
 class TestQuoteComponent extends QuoteComponent {
   constructor() {
@@ -46,17 +45,6 @@ describe('QuoteComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
-  });
-
-  it('should populate context data', () => {
-    const mockQuoteModel: QuoteModel = {
-      /* mock data */
-    } as QuoteModel;
-    component['contextData'] = mockQuoteModel;
-
-    component['populateContextData']();
-
-    expect(contextDataService.set).toHaveBeenCalledWith(QUOTE_CONTEXT_DATA, mockQuoteModel);
   });
 
   it('should update component data', async () => {

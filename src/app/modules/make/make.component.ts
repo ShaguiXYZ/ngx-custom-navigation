@@ -69,9 +69,7 @@ export class MakeComponent extends QuoteComponent implements OnInit, OnDestroy {
       make: this.selectedMake!
     };
 
-    this.populateContextData();
-
-    this.routingService.next();
+    this.routingService.next(this.contextData);
   }
 
   private createForm(): void {

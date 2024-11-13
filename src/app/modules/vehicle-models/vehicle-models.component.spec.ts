@@ -3,7 +3,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { TranslateService } from '@ngx-translate/core';
 import { ContextDataService } from '@shagui/ng-shagui/core';
-import { DEBOUNCE_TIME, QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
+import { DEBOUNCE_TIME } from 'src/app/core/constants';
 import { QuoteModel } from 'src/app/core/models';
 import { RoutingService, VehicleService } from 'src/app/core/services';
 import { ContextDataServiceStub } from 'src/app/core/stub';
@@ -12,7 +12,6 @@ import { VehicleModelsComponent } from './vehicle-models.component';
 describe('VehicleModelsComponent', () => {
   let component: VehicleModelsComponent;
   let fixture: ComponentFixture<VehicleModelsComponent>;
-  let contextDataService: jasmine.SpyObj<ContextDataService>;
   let routingService: jasmine.SpyObj<RoutingService>;
   let vehicleService: jasmine.SpyObj<VehicleService>;
 
@@ -43,7 +42,6 @@ describe('VehicleModelsComponent', () => {
     fixture = TestBed.createComponent(VehicleModelsComponent);
     component = fixture.componentInstance;
 
-    contextDataService = TestBed.inject(ContextDataService) as jasmine.SpyObj<ContextDataService>;
     routingService = TestBed.inject(RoutingService) as jasmine.SpyObj<RoutingService>;
     vehicleService = TestBed.inject(VehicleService) as jasmine.SpyObj<VehicleService>;
 
@@ -74,17 +72,9 @@ describe('VehicleModelsComponent', () => {
   });
 
   it('should update selected model and context data on selectModel', () => {
-    const setContextDataSpy = spyOn(contextDataService, 'set');
-
     component.selectModel('Corolla');
 
     expect(component.selectedModel).toBe('Corolla');
-    expect(setContextDataSpy).toHaveBeenCalledWith(
-      QUOTE_CONTEXT_DATA,
-      jasmine.objectContaining({
-        vehicle: jasmine.objectContaining({ model: 'Corolla' })
-      })
-    );
     expect(routingService.next).toHaveBeenCalled();
   });
 

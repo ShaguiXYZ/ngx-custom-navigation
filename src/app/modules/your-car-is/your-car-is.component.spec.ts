@@ -8,7 +8,6 @@ import { NxMaskModule } from '@aposin/ng-aquila/mask';
 import { TranslateService } from '@ngx-translate/core';
 import { ContextDataService } from '@shagui/ng-shagui/core';
 import { firstValueFrom, of } from 'rxjs';
-import { QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
 import { QuoteModel, QuoteVehicleModel } from 'src/app/core/models';
 import { RoutingService, VehicleService } from 'src/app/core/services';
 import { ContextDataServiceStub } from 'src/app/core/stub';
@@ -19,7 +18,6 @@ import { YourCarIsComponent } from './your-car-is.component';
 describe('YourCarIsComponent', () => {
   let component: YourCarIsComponent;
   let fixture: ComponentFixture<YourCarIsComponent>;
-  let contextDataService: jasmine.SpyObj<ContextDataService>;
   let routingService: jasmine.SpyObj<RoutingService>;
   let vehicleService: jasmine.SpyObj<VehicleService>;
 
@@ -62,13 +60,8 @@ describe('YourCarIsComponent', () => {
     fixture = TestBed.createComponent(YourCarIsComponent);
     component = fixture.componentInstance;
 
-    contextDataService = TestBed.inject(ContextDataService) as jasmine.SpyObj<ContextDataService>;
     routingService = TestBed.inject(RoutingService) as jasmine.SpyObj<RoutingService>;
     vehicleService = TestBed.inject(VehicleService) as jasmine.SpyObj<VehicleService>;
-
-    contextDataService.set<QuoteModel>(QUOTE_CONTEXT_DATA, {
-      vehicle: {}
-    } as QuoteModel);
 
     vehicleService.vehicles.and.returnValue(firstValueFrom(of([])));
   });
@@ -109,23 +102,18 @@ describe('YourCarIsComponent', () => {
   });
 
   it('should update context data and navigate to next step on vehicle selection', () => {
-    const setContextDataSpy = spyOn(contextDataService, 'set');
     const mockVehicle = { make: 'Nissan', vehicleTtype: 'Test Vehicle' } as QuoteVehicleModel;
 
     component['contextData'] = { vehicle: {} } as QuoteModel;
     component.selectVehicle(mockVehicle);
 
-    expect(setContextDataSpy).toHaveBeenCalledWith(QUOTE_CONTEXT_DATA, { vehicle: mockVehicle });
     expect(routingService.next).toHaveBeenCalled();
   });
 
   it('should update context data and navigate to next step on continue', () => {
-    const setContextDataSpy = spyOn(contextDataService, 'set');
-
     component['contextData'] = { vehicle: { make: '' } } as QuoteModel;
     component.continue();
 
-    expect(setContextDataSpy).toHaveBeenCalledWith(QUOTE_CONTEXT_DATA, { vehicle: QuoteVehicleModel.init() });
     expect(routingService.next).toHaveBeenCalled();
   });
 });

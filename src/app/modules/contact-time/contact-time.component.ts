@@ -26,16 +26,13 @@ export class ContactTimeComponent extends QuoteComponent implements OnInit {
     this.selectedHour = this.contextData.contactData.contactHour;
   }
 
-  public override canDeactivate = (): boolean => this.updateValidData();
+  public override canDeactivate = (): boolean => !!this.selectedHour;
 
   public selectHour(hour: Hour): void {
     this.selectedHour = hour;
   }
 
-  private updateValidData = (): boolean => {
+  public updateValidData = (): void => {
     this.contextData.contactData.contactHour = this.selectedHour;
-    this.populateContextData();
-
-    return !!this.selectedHour;
   };
 }

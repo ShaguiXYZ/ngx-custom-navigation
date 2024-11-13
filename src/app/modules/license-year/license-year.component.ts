@@ -50,17 +50,14 @@ export class LicenseYearComponent extends QuoteComponent implements OnInit {
     this.createForm();
   }
 
-  public override canDeactivate = (): boolean => this.updateValidData();
+  public override canDeactivate = (): boolean => this.form.valid;
 
-  private updateValidData = (): boolean => {
+  public updateValidData = (): void => {
     this.form.markAllAsTouched();
 
     if (this.form.valid) {
       this.contextData.vehicle.yearOfManufacture = this.form.value.yearOfManufacture;
-      this.populateContextData();
     }
-
-    return this.form.valid;
   };
 
   private createForm() {

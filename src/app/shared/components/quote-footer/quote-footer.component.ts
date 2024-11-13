@@ -6,7 +6,7 @@ import { NxIconModule } from '@aposin/ng-aquila/icon';
 import { ContextDataService } from '@shagui/ng-shagui/core';
 import { Subscription } from 'rxjs';
 import { QUOTE_APP_CONTEXT_DATA } from 'src/app/core/constants';
-import { AppContextData } from 'src/app/core/models';
+import { AppContextData, QuoteModel } from 'src/app/core/models';
 import { RoutingService } from 'src/app/core/services';
 import { QuoteLiteralDirective } from '../../directives';
 import { QuoteFooterConfig } from './models';
@@ -19,6 +19,9 @@ import { QuoteFooterConfig } from './models';
   standalone: true
 })
 export class QuoteFooterComponent implements OnInit, OnDestroy {
+  @Input()
+  public data?: QuoteModel;
+
   @Input()
   public config: QuoteFooterConfig = {
     showNext: true,
@@ -86,11 +89,11 @@ export class QuoteFooterComponent implements OnInit, OnDestroy {
       return false;
     }
 
-    return this.routingService.next();
+    return this.routingService.next(this.data);
   };
 
   private previous = (config: QuoteFooterConfig = { showNext: true }): void => {
     config.backFn?.();
-    this.routingService.previous();
+    this.routingService.previous(this.data);
   };
 }

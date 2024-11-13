@@ -46,9 +46,9 @@ export class PlaceComponent extends QuoteComponent implements OnInit {
     this.createForm();
   }
 
-  public override canDeactivate = (): boolean => this.updateValidData();
+  public override canDeactivate = (): boolean => this.form.valid;
 
-  private updateValidData = (): boolean => {
+  public updateValidData = (): void => {
     this.form.markAllAsTouched();
 
     if (this.form.valid) {
@@ -56,11 +56,7 @@ export class PlaceComponent extends QuoteComponent implements OnInit {
         ...this.contextData.place,
         ...this.form.value
       };
-
-      this.populateContextData();
     }
-
-    return this.form.valid;
   };
 
   private createForm(): void {

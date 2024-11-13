@@ -42,9 +42,9 @@ export class ClientIdentificationNumberComponent extends QuoteComponent implemen
     this.subscription$.forEach(subscription => subscription.unsubscribe());
   }
 
-  public override canDeactivate = (): boolean => this.updateValidData();
+  public override canDeactivate = (): boolean => this.form.valid;
 
-  private updateValidData = (): boolean => {
+  public updateValidData = (): void => {
     this.form.markAllAsTouched();
 
     if (this.form.valid) {
@@ -52,11 +52,7 @@ export class ClientIdentificationNumberComponent extends QuoteComponent implemen
         ...this.contextData.personalData,
         ...this.form.value
       };
-
-      this.populateContextData();
     }
-
-    return this.form.valid;
   };
 
   private createForm() {

@@ -6,7 +6,6 @@ import { NxIconModule } from '@aposin/ng-aquila/icon';
 import { NxInputModule } from '@aposin/ng-aquila/input';
 import { TranslateService } from '@ngx-translate/core';
 import { ContextDataService } from '@shagui/ng-shagui/core';
-import { QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
 import { ModelVersionModel, QuoteModel } from 'src/app/core/models';
 import { RoutingService, VehicleService } from 'src/app/core/services';
 import { ContextDataServiceStub } from 'src/app/core/stub';
@@ -18,7 +17,6 @@ import { VehicleModelVersionsComponent } from './vehicle-model-versions.componen
 describe('VehicleModelVersionsComponent', () => {
   let component: VehicleModelVersionsComponent;
   let fixture: ComponentFixture<VehicleModelVersionsComponent>;
-  let contextDataService: jasmine.SpyObj<ContextDataService>;
   let routingService: jasmine.SpyObj<RoutingService>;
   let vehicleService: jasmine.SpyObj<VehicleService>;
 
@@ -61,7 +59,6 @@ describe('VehicleModelVersionsComponent', () => {
     fixture = TestBed.createComponent(VehicleModelVersionsComponent);
     component = fixture.componentInstance;
 
-    contextDataService = TestBed.inject(ContextDataService) as jasmine.SpyObj<ContextDataService>;
     routingService = TestBed.inject(RoutingService) as jasmine.SpyObj<RoutingService>;
     vehicleService = TestBed.inject(VehicleService) as jasmine.SpyObj<VehicleService>;
 
@@ -93,13 +90,11 @@ describe('VehicleModelVersionsComponent', () => {
   });
 
   it('should select a model version and update context data', () => {
-    const setContextDataSpy = spyOn(contextDataService, 'set');
     const version = { index: 2, data: 'newVersion' } as ModelVersionModel;
 
     component.selectVersion(version);
 
     expect(component.selectedModelVersion).toBe(version);
-    expect(setContextDataSpy).toHaveBeenCalledWith(QUOTE_CONTEXT_DATA, jasmine.any(Object));
     expect(routingService.next).toHaveBeenCalled();
   });
 

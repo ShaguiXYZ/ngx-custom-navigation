@@ -7,7 +7,6 @@ import { NxInputModule } from '@aposin/ng-aquila/input';
 import { NxMaskModule } from '@aposin/ng-aquila/mask';
 import { TranslateService } from '@ngx-translate/core';
 import { ContextDataService } from '@shagui/ng-shagui/core';
-import { QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
 import { QuoteModel } from 'src/app/core/models';
 import { ContextDataServiceStub } from 'src/app/core/stub';
 import { LicenseYearComponent } from './license-year.component';
@@ -15,7 +14,6 @@ import { LicenseYearComponent } from './license-year.component';
 describe('LicenseYearComponent', () => {
   let component: LicenseYearComponent;
   let fixture: ComponentFixture<LicenseYearComponent>;
-  let contextDataService: jasmine.SpyObj<ContextDataService>;
 
   beforeEach(async () => {
     const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate']);
@@ -33,7 +31,6 @@ describe('LicenseYearComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(LicenseYearComponent);
     component = fixture.componentInstance;
-    contextDataService = TestBed.inject(ContextDataService) as jasmine.SpyObj<ContextDataService>;
 
     component['contextData'] = {
       vehicle: { yearOfManufacture: 2020 },
@@ -52,28 +49,15 @@ describe('LicenseYearComponent', () => {
   });
 
   it('should mark form as touched and update context data on updateValidData', () => {
-    const setContextDataSpy = spyOn(contextDataService, 'set');
-
     component.form.controls['yearOfManufacture'].setValue(2021);
-    const isValid = component['updateValidData']();
 
-    expect(isValid).toBeTrue();
-    expect(setContextDataSpy).toHaveBeenCalledWith(
-      QUOTE_CONTEXT_DATA,
-      jasmine.objectContaining({
-        vehicle: { yearOfManufacture: 2021 }
-      })
-    );
+    expect(component.form.valid).toBeTrue();
   });
 
   it('should not update context data if form is invalid', () => {
-    const setContextDataSpy = spyOn(contextDataService, 'set');
-
     component.form.controls['yearOfManufacture'].setValue('');
-    const isValid = component['updateValidData']();
 
-    expect(isValid).toBeFalse();
-    expect(setContextDataSpy).not.toHaveBeenCalled();
+    expect(component.form.valid).toBeFalse();
   });
 
   it('should allow deactivation if form is valid', () => {

@@ -37,9 +37,7 @@ export class VehicleTypeComponent extends QuoteComponent implements OnInit {
       vehicleTtype: this.selectedType?.index
     };
 
-    this.populateContextData();
-
-    this.routingService.next();
+    this.routingService.next(this.contextData);
   }
 
   private isValidData = (): boolean => {

@@ -19,7 +19,6 @@ import { LicensePlateComponent } from './license-plate.component';
 describe('LicensePlateComponent', () => {
   let component: LicensePlateComponent;
   let fixture: ComponentFixture<LicensePlateComponent>;
-  let contextDataService: jasmine.SpyObj<ContextDataService>;
   let routingService: jasmine.SpyObj<RoutingService>;
 
   beforeEach(async () => {
@@ -55,7 +54,6 @@ describe('LicensePlateComponent', () => {
     fixture = TestBed.createComponent(LicensePlateComponent);
     component = fixture.componentInstance;
 
-    contextDataService = TestBed.inject(ContextDataService) as jasmine.SpyObj<ContextDataService>;
     routingService = TestBed.inject(RoutingService) as jasmine.SpyObj<RoutingService>;
 
     component['contextData'] = {
@@ -88,13 +86,10 @@ describe('LicensePlateComponent', () => {
   });
 
   it('should mark form as touched and update context data on valid form', () => {
-    const setContextDataSpy = spyOn(contextDataService, 'set');
-
     component.form.setValue({ plateNumber: '1234-SSS' });
     const isValid = component['updateValidData']();
 
     expect(isValid).toBeTrue();
-    expect(setContextDataSpy).toHaveBeenCalled();
   });
 
   it('should not update context data on invalid form', () => {
@@ -108,22 +103,6 @@ describe('LicensePlateComponent', () => {
     component.continueWithOutLicensePlate();
 
     expect(routingService.next).toHaveBeenCalled();
-  });
-
-  it('should save context data on saveContextData', () => {
-    const setContextDataSpy = spyOn(contextDataService, 'set');
-
-    component['populateContextData']();
-
-    expect(setContextDataSpy).toHaveBeenCalled();
-  });
-
-  it('clear license plate if not has driven license', () => {
-    component['contextData'].driven.hasDrivenLicense = false;
-    component['updateValidData']();
-
-    expect(component['contextData'].vehicle.plateNumber).toBe('');
-    expect(component['updateValidData']()).toBeTrue();
   });
 
   it('should return true on canDeactivate', () => {

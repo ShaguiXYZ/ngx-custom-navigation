@@ -5,7 +5,6 @@ import { NxIconModule } from '@aposin/ng-aquila/icon';
 import { NxInputModule } from '@aposin/ng-aquila/input';
 import { TranslateService } from '@ngx-translate/core';
 import { ContextDataService } from '@shagui/ng-shagui/core';
-import { QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
 import { QuoteModel } from 'src/app/core/models';
 import { RoutingService, VehicleService } from 'src/app/core/services';
 import { ContextDataServiceStub } from 'src/app/core/stub';
@@ -14,7 +13,6 @@ import { MakeComponent } from './make.component';
 describe('MakeComponent', () => {
   let component: MakeComponent;
   let fixture: ComponentFixture<MakeComponent>;
-  let contextDataService: jasmine.SpyObj<ContextDataService>;
   let vehicleService: jasmine.SpyObj<VehicleService>;
   let routingService: jasmine.SpyObj<RoutingService>;
 
@@ -45,7 +43,6 @@ describe('MakeComponent', () => {
     fixture = TestBed.createComponent(MakeComponent);
     component = fixture.componentInstance;
 
-    contextDataService = TestBed.inject(ContextDataService) as jasmine.SpyObj<ContextDataService>;
     vehicleService = TestBed.inject(VehicleService) as jasmine.SpyObj<VehicleService>;
     routingService = TestBed.inject(RoutingService) as jasmine.SpyObj<RoutingService>;
 
@@ -76,12 +73,9 @@ describe('MakeComponent', () => {
   });
 
   it('should select make and update context data', () => {
-    const setContextDataSpy = spyOn(contextDataService, 'set');
-
     component.selectMake('Honda');
 
     expect(component.selectedMake).toBe('Honda');
-    expect(setContextDataSpy).toHaveBeenCalledWith(QUOTE_CONTEXT_DATA, jasmine.objectContaining({ vehicle: { make: 'Honda' } }));
     expect(routingService.next).toHaveBeenCalled();
   });
 

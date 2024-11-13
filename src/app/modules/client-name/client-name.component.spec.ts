@@ -5,7 +5,6 @@ import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
 import { NxInputModule } from '@aposin/ng-aquila/input';
 import { TranslateService } from '@ngx-translate/core';
 import { ContextDataService } from '@shagui/ng-shagui/core';
-import { QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
 import { QuoteModel } from 'src/app/core/models';
 import { ContextDataServiceStub } from 'src/app/core/stub';
 import { ClientNameComponent } from './client-name.component';
@@ -13,7 +12,6 @@ import { ClientNameComponent } from './client-name.component';
 describe('ClientNameComponent', () => {
   let component: ClientNameComponent;
   let fixture: ComponentFixture<ClientNameComponent>;
-  let contextDataService: jasmine.SpyObj<ContextDataService>;
 
   beforeEach(async () => {
     const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate']);
@@ -32,8 +30,6 @@ describe('ClientNameComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(ClientNameComponent);
     component = fixture.componentInstance;
-
-    contextDataService = TestBed.inject(ContextDataService) as jasmine.SpyObj<ContextDataService>;
 
     component['contextData'] = {
       personalData: {
@@ -57,29 +53,18 @@ describe('ClientNameComponent', () => {
   });
 
   it('should mark all fields as touched and update context data on valid form', () => {
-    const setContextDataSpy = spyOn(contextDataService, 'set');
-
     component.form.setValue({ name: 'Jane', surname: 'Smith' });
-    const isValid = component['updateValidData']();
+    component['updateValidData']();
 
-    expect(isValid).toBeTrue();
+    expect(component.form.valid).toBeTrue();
     expect(component.form.touched).toBeTrue();
-    expect(setContextDataSpy).toHaveBeenCalledWith(QUOTE_CONTEXT_DATA, {
-      personalData: {
-        name: 'Jane',
-        surname: 'Smith'
-      }
-    });
   });
 
   it('should not update context data on invalid form', () => {
-    const setContextDataSpy = spyOn(contextDataService, 'set');
-
     component.form.setValue({ name: '', surname: 'Smith' });
-    const isValid = component['updateValidData']();
+    component['updateValidData']();
 
-    expect(isValid).toBeFalse();
-    expect(setContextDataSpy).not.toHaveBeenCalled();
+    expect(component.form.valid).toBeFalse();
   });
 
   it('should allow deactivation if form is valid', done => {
