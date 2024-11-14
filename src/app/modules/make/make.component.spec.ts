@@ -9,7 +9,7 @@ import { QuoteModel } from 'src/app/core/models';
 import { RoutingService, VehicleService } from 'src/app/core/services';
 import { ContextDataServiceStub } from 'src/app/core/stub';
 import { MakeComponent } from './make.component';
-import { BrandService } from './services';
+import { BrandComponentService } from './services';
 
 describe('MakeComponent', () => {
   let component: MakeComponent;
@@ -27,7 +27,7 @@ describe('MakeComponent', () => {
       declarations: [],
       imports: [MakeComponent, ReactiveFormsModule, NxIconModule, NxFormfieldModule, NxInputModule],
       providers: [
-        { provide: BrandService, useValue: brandServiceSpy },
+        { provide: BrandComponentService, useValue: brandServiceSpy },
         { provide: ContextDataService, useClass: ContextDataServiceStub },
         { provide: TranslateService, useValue: translateServiceSpy },
         { provide: VehicleService, useValue: vehicleServiceSpy },
@@ -38,7 +38,7 @@ describe('MakeComponent', () => {
     TestBed.overrideComponent(MakeComponent, {
       set: {
         providers: [
-          { provide: BrandService, useValue: brandServiceSpy },
+          { provide: BrandComponentService, useValue: brandServiceSpy },
           { provide: VehicleService, useValue: vehicleServiceSpy }
         ]
       }

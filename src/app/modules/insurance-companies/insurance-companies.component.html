@@ -12,7 +12,7 @@
 
     @if(!form.value.searchInput) {
     <div class="icon-cards">
-      @for(icon of insuranceIconList; track icon.index) {
+      @for(icon of iconInsurances; track icon.index) {
       <quote-icon-card
         class="nx-margin-x-3xs nx-margin-y-3xs"
         [data]="icon"

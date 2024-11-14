@@ -5,24 +5,24 @@ import { firstValueFrom, map } from 'rxjs';
 import { IconDictionary } from 'src/app/core/models';
 
 @Injectable()
-export class BrandComponentService {
-  private readonly _ICON_BRANCHES_CACHE_ID_ = `_${UniqueIds.next()}_`;
+export class InsuranceComponentService {
+  private readonly _ICON_INSURANCES_CACHE_ID_ = `_${UniqueIds.next()}_`;
 
   private http = inject(HttpService);
 
-  public iconBrands(): Promise<IconDictionary> {
+  public iconInsurances(): Promise<IconDictionary> {
     return firstValueFrom(
       this.http
-        .get<IconDictionary>('assets/json/mock/icon-brands', {
+        .get<IconDictionary>('assets/json/mock/icon-insurances', {
           responseStatusMessage: {
-            [HttpStatusCode.NotFound]: { text: 'Notifications.IconBrandsNotFound' }
+            [HttpStatusCode.NotFound]: { text: 'Notifications.IconInsurancesNotFound' }
           },
           showLoading: true,
-          cache: { id: this.cacheIconBrands(), ttl: TTL.XXL }
+          cache: { id: this.cacheIconInsurances(), ttl: TTL.XXL }
         })
         .pipe(map(res => res as IconDictionary))
     );
   }
 
-  private cacheIconBrands = (): string => this._ICON_BRANCHES_CACHE_ID_;
+  private cacheIconInsurances = (): string => this._ICON_INSURANCES_CACHE_ID_;
 }

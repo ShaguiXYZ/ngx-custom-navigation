@@ -12,10 +12,12 @@ import { InsuranceCompaniesService, RoutingService } from 'src/app/core/services
 import { HeaderTitleComponent, IconCardComponent, TextCardComponent } from 'src/app/shared/components';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
+import { InsuranceComponentService } from './services';
 
 @Component({
   selector: 'quote-insurance-companies',
-  standalone: true,
+  templateUrl: './insurance-companies.component.html',
+  styleUrl: './insurance-companies.component.scss',
   imports: [
     CommonModule,
     IconCardComponent,
@@ -28,37 +30,36 @@ import { QuoteLiteralPipe } from 'src/app/shared/pipes';
     QuoteLiteralDirective,
     QuoteLiteralPipe
   ],
-  providers: [InsuranceCompaniesService],
-  templateUrl: './insurance-companies.component.html',
-  styleUrl: './insurance-companies.component.scss'
+  providers: [InsuranceComponentService, InsuranceCompaniesService],
+  standalone: true
 })
 export class InsuranceCompaniesComponent extends QuoteComponent implements OnInit, OnDestroy {
   @ViewChild('searchInput', { static: true })
   private searchInput!: ElementRef;
 
-  public insurancesWithIcons: string[] = ['c031', 'c058', 'c468', 'camv', 'caxa', 'cing', 'e189', 'm050'];
-  public searchedInsurances: IndexedData[] = [];
-  public insuranceIconList: IIconData[] = [];
-  public selectedCompany?: IndexedData;
   public form!: FormGroup;
-
-  private readonly uriImages = 'assets/images/wm/insurances/company';
-
-  private readonly insuranceCompaniesService = inject(InsuranceCompaniesService);
-  private readonly routingService = inject(RoutingService);
-  private readonly fb = inject(FormBuilder);
+  public iconInsurances!: IIconData[];
+  public searchedInsurances: IndexedData[] = [];
+  public selectedCompany?: IndexedData;
 
   private subscription$: Subscription[] = [];
 
-  async ngOnInit(): Promise<void> {
-    this.selectedCompany = this.contextData.insuranceCompany?.company;
+  private readonly routingService = inject(RoutingService);
+  private readonly insuranceComponentService = inject(InsuranceComponentService);
+  private readonly insuranceCompaniesService = inject(InsuranceCompaniesService);
+  private readonly fb = inject(FormBuilder);
 
+  async ngOnInit(): Promise<void> {
     this.createForm();
 
-    const insurancesList = await this.insuranceCompaniesService.companies();
-    this.insuranceIconList = insurancesList
-      .filter(insurance => this.insurancesWithIcons.includes(insurance.index.toLowerCase()))
-      .map(data => ({ ...data, icon: `${this.uriImages}/${data.index.toLowerCase()}.png` }));
+    const iconDictionary = await this.insuranceComponentService.iconInsurances();
+    const insuranceList = await this.insuranceCompaniesService.companies();
+
+    this.iconInsurances = insuranceList
+      .filter(insurance => Object.keys(iconDictionary).includes(insurance.index))
+      .map(insurance => ({ ...iconDictionary[insurance.index], index: insurance.index } as IIconData));
+
+    this.selectedCompany = this.contextData.insuranceCompany?.company;
 
     this.searchInsurances();
   }

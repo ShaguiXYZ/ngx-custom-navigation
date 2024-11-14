@@ -11,7 +11,7 @@ import { RoutingService, VehicleService } from 'src/app/core/services';
 import { HeaderTitleComponent, IconCardComponent, TextCardComponent } from 'src/app/shared/components';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
-import { BrandService } from './services';
+import { BrandComponentService } from './services';
 
 @Component({
   selector: 'quote-make',
@@ -29,7 +29,7 @@ import { BrandService } from './services';
     QuoteLiteralDirective,
     QuoteLiteralPipe
   ],
-  providers: [VehicleService, BrandService],
+  providers: [VehicleService, BrandComponentService],
   standalone: true
 })
 export class MakeComponent extends QuoteComponent implements OnInit, OnDestroy {
@@ -44,16 +44,17 @@ export class MakeComponent extends QuoteComponent implements OnInit, OnDestroy {
   private subscription$: Subscription[] = [];
 
   private readonly routingService = inject(RoutingService);
-  private readonly brandService = inject(BrandService);
+  private readonly brandComponentService = inject(BrandComponentService);
   private readonly vehicleService = inject(VehicleService);
   private readonly fb = inject(FormBuilder);
 
   async ngOnInit(): Promise<void> {
     this.createForm();
 
-    const iconDictionary = await this.brandService.iconBrands();
+    const iconDictionary = await this.brandComponentService.iconBrands();
+    const brandList = await this.vehicleService.getBrands();
 
-    this.iconBrands = (await this.vehicleService.getBrands())
+    this.iconBrands = brandList
       .filter(brand => Object.keys(iconDictionary).includes(brand))
       .map(brand => ({ ...iconDictionary[brand], index: brand } as IIconData));
 

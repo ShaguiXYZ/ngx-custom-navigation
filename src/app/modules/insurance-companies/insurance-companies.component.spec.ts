@@ -9,6 +9,7 @@ import { QuoteModel } from 'src/app/core/models';
 import { InsuranceCompaniesService, RoutingService } from 'src/app/core/services';
 import { ContextDataServiceStub } from 'src/app/core/stub';
 import { InsuranceCompaniesComponent } from './insurance-companies.component';
+import { InsuranceComponentService } from './services';
 
 describe('InsuranceCompaniesComponent', () => {
   let component: InsuranceCompaniesComponent;
@@ -17,6 +18,7 @@ describe('InsuranceCompaniesComponent', () => {
   let routingService: jasmine.SpyObj<RoutingService>;
 
   beforeEach(async () => {
+    const insuranceComponentServiceSpy = jasmine.createSpyObj('InsuranceComponentService', ['iconInsurances']);
     const insuranceCompaniesServiceSpy = jasmine.createSpyObj('InsuranceCompaniesService', ['companies']);
     const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate']);
     const routingServiceSpy = jasmine.createSpyObj('RoutingService', ['next']);
@@ -26,6 +28,7 @@ describe('InsuranceCompaniesComponent', () => {
       imports: [InsuranceCompaniesComponent, ReactiveFormsModule],
       providers: [
         FormBuilder,
+        { provide: InsuranceComponentService, useValue: insuranceComponentServiceSpy },
         { provide: ContextDataService, useClass: ContextDataServiceStub },
         { provide: TranslateService, useValue: translateServiceSpy },
         { provide: InsuranceCompaniesService, useValue: insuranceCompaniesServiceSpy },
@@ -35,7 +38,10 @@ describe('InsuranceCompaniesComponent', () => {
 
     TestBed.overrideComponent(InsuranceCompaniesComponent, {
       set: {
-        providers: [{ provide: InsuranceCompaniesService, useValue: insuranceCompaniesServiceSpy }]
+        providers: [
+          { provide: InsuranceComponentService, useValue: insuranceComponentServiceSpy },
+          { provide: InsuranceCompaniesService, useValue: insuranceCompaniesServiceSpy }
+        ]
       }
     });
   });
