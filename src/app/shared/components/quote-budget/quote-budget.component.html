@@ -1,12 +1,12 @@
 <!-- eslint-disable @angular-eslint/template/elements-content -->
 <article class="component-container">
   <quote-header-title>
-    <span class="coverages__title" nxHeadline="subsection-medium" nxQuoteLiteral="budget-modal-header"></span>
+    <span class="header__title" nxHeadline="subsection-medium" nxQuoteLiteral="budget-modal-header"></span>
   </quote-header-title>
 
   <section class="form-container">
     <form [formGroup]="form">
-      <nx-tab-group [mobileAccordion]="false" appearance="expert">
+      <nx-tab-group [mobileAccordion]="false">
         <nx-tab [label]="'retrieve-budget' | quoteLiteral">
           <div class="component-data" formGroupName="retrieveBudget">
             <nx-formfield [label]="'budget-key' | quoteLiteral">

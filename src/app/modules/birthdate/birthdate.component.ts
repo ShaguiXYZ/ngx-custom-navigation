@@ -34,6 +34,7 @@ export class BirthdateComponent extends QuoteComponent implements OnInit {
   public form!: FormGroup;
   public birthdateFromContext: Moment | undefined;
   public minValue = 18;
+  public readonly maxDate = moment();
 
   private readonly fb = inject(FormBuilder);
 

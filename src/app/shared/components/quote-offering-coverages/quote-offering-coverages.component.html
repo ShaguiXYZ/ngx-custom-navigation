@@ -1,10 +1,10 @@
 <article class="component-container">
   <quote-header-title>
-    <span class="coverages__title" nxHeadline="subsection-medium" nxQuoteLiteral="coverages-modal-header"></span>
+    <span class="header__title" nxHeadline="subsection-medium" nxQuoteLiteral="coverages-modal-header"></span>
   </quote-header-title>
 
   <section class="form-container">
-    <nx-tab-group [selectedIndex]="selectedPriceIndex" [mobileAccordion]="false">
+    <nx-tab-group [mobileAccordion]="false">
       @for(price of prices; track price.modalityId) {
       <nx-tab [label]="price.modalityDescription">
         <div class="coverages">

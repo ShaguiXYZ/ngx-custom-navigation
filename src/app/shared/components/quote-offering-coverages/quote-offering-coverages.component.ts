@@ -11,8 +11,8 @@ import { HeaderTitleComponent } from '../header-title';
   selector: 'quote-offering-coverages',
   templateUrl: './quote-offering-coverages.component.html',
   styleUrl: './quote-offering-coverages.component.scss',
-  standalone: true,
-  imports: [CommonModule, HeaderTitleComponent, NxAccordionModule, NxHeadlineModule, NxTabsModule, QuoteLiteralDirective]
+  imports: [CommonModule, HeaderTitleComponent, NxAccordionModule, NxHeadlineModule, NxTabsModule, QuoteLiteralDirective],
+  standalone: true
 })
 export class QuoteOfferingCoveragesComponent {
   @Input()

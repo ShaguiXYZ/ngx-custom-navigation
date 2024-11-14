@@ -14,6 +14,7 @@ import { QuoteLiteralDirective } from '../../directives';
 import { QuoteLiteralPipe } from '../../pipes';
 import { HeaderTitleComponent } from '../header-title';
 import { SelectableOptionComponent } from '../selectable-option';
+import { NxHeadlineModule } from '@aposin/ng-aquila/headline';
 
 @Component({
   selector: 'quote-budget',
@@ -27,6 +28,7 @@ import { SelectableOptionComponent } from '../selectable-option';
     NxButtonModule,
     NxCopytextModule,
     NxFormfieldModule,
+    NxHeadlineModule,
     NxInputModule,
     NxTabsModule,
     ReactiveFormsModule,
