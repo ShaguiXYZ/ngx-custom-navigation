@@ -9,6 +9,7 @@ import { QuoteModel } from 'src/app/core/models';
 import { RoutingService, VehicleService } from 'src/app/core/services';
 import { ContextDataServiceStub } from 'src/app/core/stub';
 import { MakeComponent } from './make.component';
+import { BrandService } from './services';
 
 describe('MakeComponent', () => {
   let component: MakeComponent;
@@ -20,11 +21,13 @@ describe('MakeComponent', () => {
     const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate']);
     const vehicleServiceSpy = jasmine.createSpyObj('VehicleService', ['getBrands']);
     const routingServiceSpy = jasmine.createSpyObj('RoutingService', ['next']);
+    const brandServiceSpy = jasmine.createSpyObj('BrandService', ['iconBrands']);
 
     await TestBed.configureTestingModule({
       declarations: [],
       imports: [MakeComponent, ReactiveFormsModule, NxIconModule, NxFormfieldModule, NxInputModule],
       providers: [
+        { provide: BrandService, useValue: brandServiceSpy },
         { provide: ContextDataService, useClass: ContextDataServiceStub },
         { provide: TranslateService, useValue: translateServiceSpy },
         { provide: VehicleService, useValue: vehicleServiceSpy },
@@ -34,7 +37,10 @@ describe('MakeComponent', () => {
 
     TestBed.overrideComponent(MakeComponent, {
       set: {
-        providers: [{ provide: VehicleService, useValue: vehicleServiceSpy }]
+        providers: [
+          { provide: BrandService, useValue: brandServiceSpy },
+          { provide: VehicleService, useValue: vehicleServiceSpy }
+        ]
       }
     });
   });

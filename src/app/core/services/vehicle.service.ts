@@ -5,7 +5,6 @@ import { catchError, firstValueFrom, map } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { HttpError } from '../errors';
 import {
-  BrandKey,
   CubicCapacityDTO,
   CubicCapacityModel,
   FuelDTO,
@@ -21,8 +20,6 @@ export class VehicleService {
   private readonly _BRANCHES_CACHE_ID_ = `_${UniqueIds.next()}_`;
   private readonly _MODELS_CACHE_ID_ = `_${UniqueIds.next()}_`;
   private readonly _MODEL_VERSIONS_CACHE_ID_ = `_${UniqueIds.next()}_`;
-
-  private years: number[] = [];
 
   private http = inject(HttpService);
 
@@ -50,7 +47,7 @@ export class VehicleService {
       this.http
         .get<string[]>(`${environment.baseUrl}/brand`, {
           responseStatusMessage: {
-            [HttpStatusCode.NotFound]: { text: 'Notifications.ModelsNotFound' }
+            [HttpStatusCode.NotFound]: { text: 'Notifications.BrandsNotFound' }
           },
           showLoading: true,
           cache: { id: this.cacheBrands(), ttl: TTL.XXL }
@@ -63,7 +60,7 @@ export class VehicleService {
     );
   }
 
-  public getModels(brand: BrandKey, search?: string): Promise<string[]> {
+  public getModels(brand: string, search?: string): Promise<string[]> {
     return firstValueFrom(
       this.http
         .get<string[]>(`${environment.baseUrl}/model`, {
@@ -192,6 +189,6 @@ export class VehicleService {
   }
 
   private cacheBrands = (): string => this._BRANCHES_CACHE_ID_;
-  private cacheModelByBranch = (branch: BrandKey): string => `_${this._MODELS_CACHE_ID_}${branch}_`;
+  private cacheModelByBranch = (branch: string): string => `_${this._MODELS_CACHE_ID_}${branch}_`;
   private cacheModelVersionByBranch = (model: string): string => `_${this._MODEL_VERSIONS_CACHE_ID_}${model}_`;
 }

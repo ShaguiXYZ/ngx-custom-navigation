@@ -1,7 +1,12 @@
 /* eslint-disable @typescript-eslint/no-namespace */
 import { IndexedData } from '@shagui/ng-shagui/core';
-import { brandDictionary, BrandKey, IconDictionary } from './brand-dictionary.model';
 import { FuelTypes } from './fuel-types.model';
+
+export declare const enum VehicleTypes {
+  PRIVATE_CAR = 'T',
+  PRIVATE_CAR_MICRO = 'MT',
+  RECREATIONAL_VEHICLE = 'AC'
+}
 
 export interface FuelDTO {
   value: FuelTypes;
@@ -49,9 +54,6 @@ export namespace CubicCapacityModel {
 
 export type ModelVersionModel = IndexedData<string, number>;
 
-export const MAX_ICON_BRANDS = 12;
-export const MAX_BUTTON_MODELS = 10;
-
 interface VehicleData {
   plateNumber: string;
   firstRegistrationDate: Date;
@@ -84,19 +86,4 @@ export namespace QuoteVehicleModel {
     ({
       make: ''
     } as QuoteVehicleModel);
-}
-
-export class BrandData {
-  public static readonly iconBrands = (): string[] =>
-    Object.keys(brandDictionary)
-      .sort((a, b) => a.localeCompare(b))
-      .slice(0, MAX_ICON_BRANDS);
-
-  public static readonly brandIcon = (key: BrandKey): IconDictionary => brandDictionary[key] as unknown as IconDictionary;
-}
-
-export declare const enum VehicleTypes {
-  PRIVATE_CAR = 'T',
-  PRIVATE_CAR_MICRO = 'MT',
-  RECREATIONAL_VEHICLE = 'AC'
 }

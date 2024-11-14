@@ -6,11 +6,12 @@ import { NxIconModule } from '@aposin/ng-aquila/icon';
 import { NxInputModule } from '@aposin/ng-aquila/input';
 import { debounceTime, distinctUntilChanged, fromEvent, map, Subscription } from 'rxjs';
 import { DEBOUNCE_TIME } from 'src/app/core/constants';
-import { BrandData, IIconData, QuoteComponent } from 'src/app/core/models';
+import { IIconData, QuoteComponent } from 'src/app/core/models';
 import { RoutingService, VehicleService } from 'src/app/core/services';
 import { HeaderTitleComponent, IconCardComponent, TextCardComponent } from 'src/app/shared/components';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
+import { BrandService } from './services';
 
 @Component({
   selector: 'quote-make',
@@ -28,7 +29,7 @@ import { QuoteLiteralPipe } from 'src/app/shared/pipes';
     QuoteLiteralDirective,
     QuoteLiteralPipe
   ],
-  providers: [VehicleService],
+  providers: [VehicleService, BrandService],
   standalone: true
 })
 export class MakeComponent extends QuoteComponent implements OnInit, OnDestroy {
@@ -43,15 +44,18 @@ export class MakeComponent extends QuoteComponent implements OnInit, OnDestroy {
   private subscription$: Subscription[] = [];
 
   private readonly routingService = inject(RoutingService);
+  private readonly brandService = inject(BrandService);
   private readonly vehicleService = inject(VehicleService);
   private readonly fb = inject(FormBuilder);
 
   async ngOnInit(): Promise<void> {
     this.createForm();
 
+    const iconDictionary = await this.brandService.iconBrands();
+
     this.iconBrands = (await this.vehicleService.getBrands())
-      .filter(brand => BrandData.iconBrands().includes(brand))
-      .map(brand => ({ ...BrandData.brandIcon(brand), index: brand } as IIconData));
+      .filter(brand => Object.keys(iconDictionary).includes(brand))
+      .map(brand => ({ ...iconDictionary[brand], index: brand } as IIconData));
 
     this.selectedBrand = this.contextData.vehicle.make;
 

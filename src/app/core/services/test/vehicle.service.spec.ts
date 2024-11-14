@@ -2,7 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { TestBed } from '@angular/core/testing';
 import { of } from 'rxjs';
 import {
-  BrandKey,
   CubicCapacityDTO,
   CubicCapacityModel,
   FuelDTO,
@@ -47,7 +46,7 @@ describe('VehicleService', () => {
 
   it('should fetch vehicle models', async () => {
     const mockModels = ['Corolla', 'Civic', 'Mustang'];
-    const brand: BrandKey = 'Toyota';
+    const brand = 'Toyota';
     const search = 'co';
 
     httpClientSpy.get.and.returnValue(of(mockModels));
