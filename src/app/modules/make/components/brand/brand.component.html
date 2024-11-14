@@ -1,9 +1,0 @@
-<quote-selectable-option [selected]="selected" (uiSelect)="selectBrand()">
-  <div class="card-container" [ngClass]="{ selected }">
-    <div nxAvatar size="small" class="quote-avatar color-background-icon nx-margin-bottom-s">
-      <img class="icon-image" [src]="data?.icon" [alt]="data?.data" />
-    </div>
-
-    <p nxCopytext="normal" [ngClass]="{ 'nx-font-weight-bold': selected }">{{ data?.data ?? brand | titlecase }}</p>
-  </div>
-</quote-selectable-option>

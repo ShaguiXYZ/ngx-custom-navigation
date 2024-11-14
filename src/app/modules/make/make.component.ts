@@ -6,12 +6,11 @@ import { NxIconModule } from '@aposin/ng-aquila/icon';
 import { NxInputModule } from '@aposin/ng-aquila/input';
 import { debounceTime, distinctUntilChanged, fromEvent, map, Subscription } from 'rxjs';
 import { DEBOUNCE_TIME } from 'src/app/core/constants';
-import { BrandData, QuoteComponent } from 'src/app/core/models';
+import { BrandData, IIconData, QuoteComponent } from 'src/app/core/models';
 import { RoutingService, VehicleService } from 'src/app/core/services';
-import { HeaderTitleComponent, TextCardComponent } from 'src/app/shared/components';
+import { HeaderTitleComponent, IconCardComponent, TextCardComponent } from 'src/app/shared/components';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
-import { BrandComponent } from './components';
 
 @Component({
   selector: 'quote-make',
@@ -20,7 +19,7 @@ import { BrandComponent } from './components';
   imports: [
     CommonModule,
     HeaderTitleComponent,
-    BrandComponent,
+    IconCardComponent,
     TextCardComponent,
     NxIconModule,
     NxFormfieldModule,
@@ -37,9 +36,9 @@ export class MakeComponent extends QuoteComponent implements OnInit, OnDestroy {
   private searchInput!: ElementRef;
 
   public form!: FormGroup;
-  public makes!: string[];
+  public iconBrands!: IIconData[];
   public searchedMakes: string[] = [];
-  public selectedMake?: string;
+  public selectedBrand?: string;
 
   private subscription$: Subscription[] = [];
 
@@ -47,11 +46,15 @@ export class MakeComponent extends QuoteComponent implements OnInit, OnDestroy {
   private readonly vehicleService = inject(VehicleService);
   private readonly fb = inject(FormBuilder);
 
-  ngOnInit(): void {
-    this.makes = BrandData.iconBrands();
-    this.selectedMake = this.contextData.vehicle.make;
-
+  async ngOnInit(): Promise<void> {
     this.createForm();
+
+    this.iconBrands = (await this.vehicleService.getBrands())
+      .filter(brand => BrandData.iconBrands().includes(brand))
+      .map(brand => ({ ...BrandData.brandIcon(brand), index: brand } as IIconData));
+
+    this.selectedBrand = this.contextData.vehicle.make;
+
     this.searchBrands();
   }
 
@@ -62,11 +65,11 @@ export class MakeComponent extends QuoteComponent implements OnInit, OnDestroy {
   public override canDeactivate = (): boolean => this.updateValidData();
 
   public selectMake(event: string): void {
-    this.selectedMake = event;
+    this.selectedBrand = event;
 
     this.contextData.vehicle = {
       ...this.contextData.vehicle,
-      make: this.selectedMake!
+      make: this.selectedBrand!
     };
 
     this.routingService.next(this.contextData);
@@ -98,6 +101,6 @@ export class MakeComponent extends QuoteComponent implements OnInit, OnDestroy {
    * Actualiza el contexto guardando la marca seleccionada
    */
   private updateValidData = (): boolean => {
-    return this.contextData.vehicle.make === this.selectedMake;
+    return this.contextData.vehicle.make === this.selectedBrand;
   };
 }

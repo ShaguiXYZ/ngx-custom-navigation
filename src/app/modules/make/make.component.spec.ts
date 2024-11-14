@@ -75,7 +75,7 @@ describe('MakeComponent', () => {
   it('should select make and update context data', () => {
     component.selectMake('Honda');
 
-    expect(component.selectedMake).toBe('Honda');
+    expect(component.selectedBrand).toBe('Honda');
     expect(routingService.next).toHaveBeenCalled();
   });
 
@@ -88,13 +88,13 @@ describe('MakeComponent', () => {
   });
 
   it('should return true if selected make matches context data', () => {
-    component.selectedMake = 'Toyota';
+    component.selectedBrand = 'Toyota';
 
     expect(component.canDeactivate()).toBeTrue();
   });
 
   it('should return false if selected make does not match context data', () => {
-    component.selectedMake = 'Honda';
+    component.selectedBrand = 'Honda';
 
     expect(component.canDeactivate()).toBeFalse();
   });

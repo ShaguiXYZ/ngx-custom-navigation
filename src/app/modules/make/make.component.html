@@ -12,12 +12,12 @@
 
     @if(!form.value.searchInput) {
     <div class="icon-cards">
-      @for(make of makes; track make) {
-      <quote-brand
+      @for(brand of iconBrands; track brand) {
+      <quote-icon-card
         class="nx-margin-x-3xs nx-margin-y-3xs"
-        [brand]="make"
-        [selected]="selectedMake === make"
-        (uiSelect)="selectMake($event)"
+        [data]="brand"
+        [selected]="selectedBrand === brand.index"
+        (uiSelect)="selectMake($event.index)"
       />
       }
     </div>
@@ -25,7 +25,7 @@
     <div class="serached-data">
       @for (item of searchedMakes; track item) {
       <div class="selectable-row">
-        <quote-text-card [selected]="selectedMake === item" [data]="item" (uiSelect)="selectMake(item)" />
+        <quote-text-card [selected]="selectedBrand === item" [data]="item" (uiSelect)="selectMake(item)" />
       </div>
       }
     </div>

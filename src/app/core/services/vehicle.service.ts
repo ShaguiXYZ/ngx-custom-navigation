@@ -45,7 +45,7 @@ export class VehicleService {
     );
   }
 
-  public getBrands(brand: string): Promise<string[]> {
+  public getBrands(brand?: string): Promise<string[]> {
     return firstValueFrom(
       this.http
         .get<string[]>(`${environment.baseUrl}/brand`, {
@@ -53,10 +53,11 @@ export class VehicleService {
             [HttpStatusCode.NotFound]: { text: 'Notifications.ModelsNotFound' }
           },
           showLoading: true,
-          cache: { id: this.cacheBranches(), ttl: TTL.XXL }
+          cache: { id: this.cacheBrands(), ttl: TTL.XXL }
         })
         .pipe(
-          map(res => (res as string[]).filter(data => data.toLowerCase().includes(brand.toLowerCase()))),
+          map(res => res as string[]),
+          map(res => (brand ? res.filter(data => data.toLowerCase().includes(brand.toLowerCase())) : res)),
           map(res => res.sort((a, b) => a.localeCompare(b)))
         )
     );
@@ -190,7 +191,7 @@ export class VehicleService {
     );
   }
 
-  private cacheBranches = (): string => this._BRANCHES_CACHE_ID_;
+  private cacheBrands = (): string => this._BRANCHES_CACHE_ID_;
   private cacheModelByBranch = (branch: BrandKey): string => `_${this._MODELS_CACHE_ID_}${branch}_`;
   private cacheModelVersionByBranch = (model: string): string => `_${this._MODEL_VERSIONS_CACHE_ID_}${model}_`;
 }
