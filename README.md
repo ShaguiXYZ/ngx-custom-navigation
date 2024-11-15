@@ -1,5 +1,63 @@
 # ngx-custom-navigation
 
+### Descripción de la Aplicación
+
+`ngx-custom-navigation` es una biblioteca de Angular diseñada para facilitar la creación y gestión de flujos de navegación complejos a través de archivos JSON. Esta herramienta permite definir de manera flexible y dinámica la estructura de navegación de una aplicación, incluyendo pasos, páginas, y configuraciones específicas. 
+
+#### Características Principales:
+- **Configuración Dinámica**: Define la navegación utilizando archivos JSON, permitiendo actualizaciones sin necesidad de modificar el código fuente.
+- **Flujos Condicionales**: Soporta condiciones de navegación basadas en datos del usuario o estados específicos.
+- **Flexibilidad y Personalización**: Permite una configuración detallada de cada página, incluyendo textos, encabezados, y opciones de navegación.
+
+#### Ejemplo de Uso:
+```json
+{
+  "last_update": "2024-06-13 15:00:00",
+  "homePageId": "on-boarding",
+  "steppers": [
+    {
+      "steps": [
+        {
+          "label": "Datos personales",
+          "pages": ["is-client", "place", "birthdate", "driving-license-date", "driving-license-location", "date-of-issue"]
+        },
+        ...
+      ]
+    }
+  ],
+  "pageMap": [
+    {
+      "pageId": "on-boarding",
+      "nextOptionList": [
+        {
+          "nextPageId": "is-client"
+        }
+      ],
+      "configuration": {
+        "literals": {
+          "footer-next": "EMPEZAR",
+          "header": "Calcular mi seguro",
+          "subheader": "Estás a menos de 5 minutos de conseguir el seguro más completo",
+          "coverage-1": "Asistencia en carretera nacional e internacional 24/7",
+          "coverage-2": "Te llevamos el coche de sustitución a tu casa",
+          "coverage-3": "Red de talleres excelentes a tu disposición"
+        },
+        "data": {
+          "headerConfig": {
+            "showBack": false,
+            "showContactUs": false
+          }
+        }
+      }
+    },
+    ...
+  ]
+}
+```
+
+
+Esta aplicación ofrece una solución robusta y escalable para la gestión de flujos de navegación en aplicaciones Angular, haciendo posible la personalización y actualización de la experiencia del usuario de manera eficiente y efectiva.
+
 El archivo JSON proporcionado describe la estructura de navegación de una aplicación, con detalles específicos sobre las páginas, pasos y configuraciones necesarias para guiar al usuario a través de un proceso, probablemente relacionado con la obtención de un seguro. Aquí tienes una interpretación detallada del contenido y funcionamiento del JSON:
 
 ### Estructura General
