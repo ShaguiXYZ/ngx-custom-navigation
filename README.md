@@ -176,3 +176,65 @@ Ejemplo:
 5. De lo contrario, la siguiente página es `date-of-issue`.
 
 Este JSON proporciona una forma flexible y configurable de definir la navegación y flujo de una aplicación, permitiendo actualizar y modificar la experiencia del usuario sin necesidad de cambios en el código fuente.
+
+
+### Descripción del archivo package.json
+
+El archivo `package.json` contiene información esencial sobre el proyecto `ngx-custom-navigation`, incluyendo las dependencias y los scripts necesarios para el desarrollo y despliegue de la aplicación.
+
+#### Estructura del archivo package.json:
+
+- **name**: Nombre del proyecto (`ngx-custom-navigation`).
+- **version**: Versión actual del proyecto (`0.0.0`).
+- **scripts**: Comandos que pueden ejecutarse usando `npm run <script>`:
+  - `ng`: Ejecuta el comando Angular CLI.
+  - `start`: Inicia la aplicación en modo de desarrollo.
+  - `build`: Compila la aplicación para producción.
+  - `watch`: Compila la aplicación en modo observador.
+  - `test`: Ejecuta las pruebas unitarias.
+  - `test:coverage`: Ejecuta las pruebas unitarias con cobertura de código.
+  - `lint`: Ejecuta el linter para verificar el código.
+
+- **private**: Indica que el proyecto es privado.
+- **dependencies**: Lista de dependencias necesarias para que la aplicación funcione:
+  - `@angular/animations`, `@angular/common`, `@angular/compiler`, `@angular/core`, `@angular/forms`, `@angular/platform-browser`, `@angular/platform-browser-dynamic`, `@angular/router`: Paquetes esenciales de Angular.
+  - `@aposin/ng-aquila`: Biblioteca de componentes de UI.
+  - `@fortawesome/fontawesome-free`: Iconos FontAwesome.
+  - `@ngx-translate/core`, `@ngx-translate/http-loader`: Soporte de traducción.
+  - `crypto-js`: Biblioteca de criptografía.
+  - `rxjs`: Biblioteca de programación reactiva.
+  - `tslib`, `zone.js`: Librerías de soporte.
+
+- **devDependencies**: Lista de dependencias necesarias para el desarrollo:
+  - `@angular-devkit/build-angular`, `@angular/cli`, `@angular/compiler-cli`: Herramientas de desarrollo de Angular.
+  - `@types/crypto-js`, `@types/jasmine`: Tipos de TypeScript para bibliotecas.
+  - `angular-eslint`, `eslint`: Herramientas de linting.
+  - `jasmine-core`, `jasmine-spec-reporter`: Herramientas de pruebas unitarias.
+  - `karma`, `karma-chrome-launcher`, `karma-coverage`, `karma-jasmine`, `karma-jasmine-html-reporter`, `karma-mocha-reporter`, `karma-spec-reporter`: Herramientas y reporteros para pruebas con Karma.
+  - `typescript`, `typescript-eslint`: Herramientas relacionadas con TypeScript.
+
+### Proceso de Arranque de la Aplicación
+
+Para iniciar la aplicación en modo de desarrollo, sigue estos pasos:
+
+1. Asegúrate de tener Node.js y npm instalados en tu máquina.
+2. Clona el repositorio y navega al directorio del proyecto:
+   ```bash
+   git clone https://github.com/ShaguiXYZ/ngx-custom-navigation.git
+   cd ngx-custom-navigation
+   ```
+3. Instala las dependencias del proyecto:
+   ```bash
+   npm install
+   ```
+4. Inicia la aplicación en modo de desarrollo:
+   ```bash
+   npm start
+   ```
+   Esto ejecutará el comando `ng serve`, iniciando un servidor de desarrollo y abriendo la aplicación en tu navegador.
+
+### Licencia
+
+Este proyecto está licenciado bajo la Licencia MIT. Consulta el archivo LICENSE para más detalles.
+
+Para más información, visita el [repositorio en GitHub](https://github.com/ShaguiXYZ/ngx-custom-navigation).
