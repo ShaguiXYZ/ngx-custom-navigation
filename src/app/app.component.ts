@@ -15,6 +15,7 @@ import {
   QuoteStepperComponent
 } from './shared/components';
 import { QuoteLiteralPipe } from './shared/pipes';
+import { QuoteTrackService } from './core/tracking';
 
 @Component({
   selector: 'quote-root',
@@ -37,6 +38,11 @@ import { QuoteLiteralPipe } from './shared/pipes';
 export class AppComponent {
   private readonly contextDataService = inject(ContextDataService);
   private readonly routingService = inject(RoutingService);
+  private readonly trackSercice = inject(QuoteTrackService);
+
+  constructor() {
+    console.log('Tracking ID', this.trackSercice.trackID);
+  }
 
   // @howto Detect the Closing of a Browser Tab
   @HostListener('window:beforeunload', ['$event'])

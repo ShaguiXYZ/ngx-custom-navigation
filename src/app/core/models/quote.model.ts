@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-namespace */
+import { QuoteBlackList } from './quote-black-list.model';
 import { QuoteClientModel } from './quote-client.model';
 import { QuoteContactDataModel } from './quote-contact-data.model';
 import { QuoteDrivenModel } from './quote-driven.model';
@@ -10,6 +11,7 @@ import { QuoteVehicleModel } from './quote-vehicle.model';
 import { SignedModel } from './signed.model';
 
 export interface QuoteModel extends SignedModel {
+  blackList: QuoteBlackList;
   client: QuoteClientModel;
   contactData: QuoteContactDataModel;
   driven: QuoteDrivenModel;
@@ -22,6 +24,7 @@ export interface QuoteModel extends SignedModel {
 
 export namespace QuoteModel {
   export const init = (): QuoteModel => ({
+    blackList: QuoteBlackList.init(),
     client: QuoteClientModel.init(),
     contactData: QuoteContactDataModel.init(),
     driven: QuoteDrivenModel.init(),

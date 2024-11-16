@@ -6,6 +6,7 @@ import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
 import { NxInputModule } from '@aposin/ng-aquila/input';
 import { Subscription } from 'rxjs';
 import { QuoteComponent } from 'src/app/core/models';
+import { TrackInfo } from 'src/app/core/tracking';
 import { HeaderTitleComponent, QuoteFooterComponent, QuoteFooterInfoComponent } from 'src/app/shared/components';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
@@ -42,14 +43,23 @@ export class ClientIdentificationNumberComponent extends QuoteComponent implemen
     this.subscription$.forEach(subscription => subscription.unsubscribe());
   }
 
+  public get trackInfo(): Partial<TrackInfo> {
+    return {
+      ...this._trackInfo,
+      label: this.quoteLiteral.transform('footer-next'),
+      title: this.quoteLiteral.transform('header'),
+      identificationNumber: this.form.controls['identificationNumber'].value
+    };
+  }
+
   public override canDeactivate = (): boolean => this.form.valid;
 
   public updateValidData = (): void => {
     this.form.markAllAsTouched();
 
     if (this.form.valid) {
-      this.contextData.personalData = {
-        ...this.contextData.personalData,
+      this._contextData.personalData = {
+        ...this._contextData.personalData,
         ...this.form.value
       };
     }
@@ -57,7 +67,7 @@ export class ClientIdentificationNumberComponent extends QuoteComponent implemen
 
   private createForm() {
     this.form = this.fb.group({
-      identificationNumber: new FormControl(this.contextData.personalData.identificationNumber, [Validators.required])
+      identificationNumber: new FormControl(this._contextData.personalData.identificationNumber, [Validators.required])
     });
 
     const identificationNumberSubscription = this.form.get('identificationNumber')?.valueChanges.subscribe(value => {

@@ -14,6 +14,7 @@ import { NxInputModule } from '@aposin/ng-aquila/input';
 import { NxMaskModule } from '@aposin/ng-aquila/mask';
 import { LocationModel, QuoteComponent } from 'src/app/core/models';
 import { LocationService } from 'src/app/core/services';
+import { TrackInfo } from 'src/app/core/tracking';
 import { HeaderTitleComponent, QuoteFooterComponent, QuoteFooterInfoComponent } from 'src/app/shared/components';
 import { QuoteLiteralDirective, QuoteMaskDirective } from 'src/app/shared/directives';
 
@@ -46,14 +47,23 @@ export class PlaceComponent extends QuoteComponent implements OnInit {
     this.createForm();
   }
 
+  public get trackInfo(): Partial<TrackInfo> {
+    return {
+      ...this._trackInfo,
+      label: this.quoteLiteral.transform('footer-next'),
+      title: this.quoteLiteral.transform('header'),
+      location: this.form.value.postalCode
+    };
+  }
+
   public override canDeactivate = (): boolean => this.form.valid;
 
   public updateValidData = (): void => {
     this.form.markAllAsTouched();
 
     if (this.form.valid) {
-      this.contextData.place = {
-        ...this.contextData.place,
+      this._contextData.place = {
+        ...this._contextData.place,
         ...this.form.value
       };
     }
@@ -62,7 +72,7 @@ export class PlaceComponent extends QuoteComponent implements OnInit {
   private createForm(): void {
     this.form = this.fb.group({
       postalCode: new FormControl(
-        this.contextData.place.postalCode,
+        this._contextData.place.postalCode,
         [Validators.required],
         [this.postalCodeExistsValidator(this.locationService)]
       )
@@ -80,7 +90,7 @@ export class PlaceComponent extends QuoteComponent implements OnInit {
   }
 
   private updateContextData(location?: LocationModel) {
-    this.contextData.place = { ...location };
+    this._contextData.place = { ...location };
     this.location = this.locationFormfieldHint(location);
   }
 

@@ -13,6 +13,7 @@ import { RoutingService, VehicleService } from 'src/app/core/services';
 import { ContextDataServiceStub } from 'src/app/core/stub';
 import { HeaderTitleComponent, QuoteFooterComponent, SelectableOptionComponent } from 'src/app/shared/components';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
+import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 import { YourCarIsComponent } from './your-car-is.component';
 
 describe('YourCarIsComponent', () => {
@@ -22,6 +23,7 @@ describe('YourCarIsComponent', () => {
   let vehicleService: jasmine.SpyObj<VehicleService>;
 
   beforeEach(async () => {
+    const quoteLiteralPipeSpy = jasmine.createSpyObj('QuoteLiteralPipe', ['transform']);
     const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate']);
     const routingServiceSpy = jasmine.createSpyObj('RoutingService', ['next']);
     const vehicleServiceSpy = jasmine.createSpyObj('VehicleService', ['vehicles']);
@@ -45,7 +47,8 @@ describe('YourCarIsComponent', () => {
         { provide: ContextDataService, useClass: ContextDataServiceStub },
         { provide: TranslateService, useValue: translateServiceSpy },
         { provide: RoutingService, useValue: routingServiceSpy },
-        { provide: VehicleService, useValue: vehicleServiceSpy }
+        { provide: VehicleService, useValue: vehicleServiceSpy },
+        { provide: QuoteLiteralPipe, useValue: quoteLiteralPipeSpy }
       ]
     }).compileComponents();
 
@@ -78,9 +81,9 @@ describe('YourCarIsComponent', () => {
   });
 
   it('should set selected vehicle from context data on init', async () => {
-    const mockVehicle = { make: 'Nissan', vehicleTtype: 'Test Vehicle' } as QuoteVehicleModel;
+    const mockVehicle = { make: 'Nissan', vehicleType: 'Test Vehicle' } as QuoteVehicleModel;
 
-    component['contextData'] = {
+    component['_contextData'] = {
       vehicle: mockVehicle
     } as QuoteModel;
 
@@ -90,28 +93,28 @@ describe('YourCarIsComponent', () => {
   });
 
   it('should allow deactivation if a vehicle is selected', () => {
-    component['contextData'].vehicle = { make: 'Nissan', vehicleTtype: 'Test Vehicle' } as QuoteVehicleModel;
+    component['_contextData'].vehicle = { make: 'Nissan', vehicleType: 'Test Vehicle' } as QuoteVehicleModel;
 
     expect(component.canDeactivate()).toBeTrue();
   });
 
   it('should not allow deactivation if no vehicle is selected', () => {
-    component['contextData'].vehicle = QuoteVehicleModel.init();
+    component['_contextData'].vehicle = QuoteVehicleModel.init();
 
     expect(component.canDeactivate()).toBeFalse();
   });
 
   it('should update context data and navigate to next step on vehicle selection', () => {
-    const mockVehicle = { make: 'Nissan', vehicleTtype: 'Test Vehicle' } as QuoteVehicleModel;
+    const mockVehicle = { make: 'Nissan', vehicleType: 'Test Vehicle' } as QuoteVehicleModel;
 
-    component['contextData'] = { vehicle: {} } as QuoteModel;
+    component['_contextData'] = { vehicle: {} } as QuoteModel;
     component.selectVehicle(mockVehicle);
 
     expect(routingService.next).toHaveBeenCalled();
   });
 
   it('should update context data and navigate to next step on continue', () => {
-    component['contextData'] = { vehicle: { make: '' } } as QuoteModel;
+    component['_contextData'] = { vehicle: { make: '' } } as QuoteModel;
     component.continue();
 
     expect(routingService.next).toHaveBeenCalled();

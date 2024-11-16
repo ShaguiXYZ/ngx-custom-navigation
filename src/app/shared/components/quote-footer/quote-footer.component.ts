@@ -8,6 +8,7 @@ import { Subscription } from 'rxjs';
 import { QUOTE_APP_CONTEXT_DATA } from 'src/app/core/constants';
 import { AppContextData, QuoteModel } from 'src/app/core/models';
 import { RoutingService } from 'src/app/core/services';
+import { QuoteTrackDirective, TrackInfo } from 'src/app/core/tracking';
 import { QuoteLiteralDirective } from '../../directives';
 import { QuoteFooterConfig } from './models';
 
@@ -15,7 +16,7 @@ import { QuoteFooterConfig } from './models';
   selector: 'quote-footer',
   templateUrl: './quote-footer.component.html',
   styleUrl: './quote-footer.component.scss',
-  imports: [CommonModule, NxButtonModule, NxIconModule, QuoteLiteralDirective],
+  imports: [CommonModule, NxButtonModule, NxIconModule, QuoteLiteralDirective, QuoteTrackDirective],
   standalone: true
 })
 export class QuoteFooterComponent implements OnInit, OnDestroy {
@@ -27,6 +28,9 @@ export class QuoteFooterComponent implements OnInit, OnDestroy {
     showNext: true,
     showBack: false
   };
+
+  @Input()
+  public trackInfo: Partial<TrackInfo> = {};
 
   @Output()
   public uiOnNext: EventEmitter<void> = new EventEmitter<void>();

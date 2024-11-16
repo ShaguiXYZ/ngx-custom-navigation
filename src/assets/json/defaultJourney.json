@@ -190,7 +190,7 @@
           "nextPageId": "contact-us",
           "conditions": [
             {
-              "expression": "driven.drivenLicenseCountry",
+              "expression": "driven.licenseCountry",
               "value": "other"
             }
           ]
@@ -235,7 +235,7 @@
               "value": "false"
             },
             {
-              "expression": "vehicle.vehicleTtype",
+              "expression": "vehicle.vehicleType",
               "union": "AND",
               "operation": "!==",
               "value": "new"
@@ -250,7 +250,7 @@
               "value": "false"
             },
             {
-              "expression": "vehicle.vehicleTtype",
+              "expression": "vehicle.vehicleType",
               "union": "AND",
               "value": "new"
             }
@@ -308,7 +308,7 @@
           "nextPageId": "make",
           "conditions": [
             {
-              "expression": "vehicle.vehicleTtype",
+              "expression": "vehicle.vehicleType",
               "value": "unregistered"
             }
           ]
@@ -405,7 +405,7 @@
               "value": "false"
             },
             {
-              "expression": "vehicle.vehicleTtype",
+              "expression": "vehicle.vehicleType",
               "union": "AND",
               "value": "new"
             }
@@ -415,11 +415,11 @@
           "nextPageId": "insurance-companies",
           "conditions": [
             {
-              "expression": "vehicle.vehicleTtype",
+              "expression": "vehicle.vehicleType",
               "value": "new"
             },
             {
-              "expression": "vehicle.vehicleTtype",
+              "expression": "vehicle.vehicleType",
               "union": "OR",
               "value": "second_hand"
             },
@@ -438,7 +438,7 @@
               "value": "false"
             },
             {
-              "expression": "vehicle.vehicleTtype",
+              "expression": "vehicle.vehicleType",
               "union": "AND",
               "value": "old"
             }

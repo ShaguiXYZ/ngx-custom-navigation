@@ -21,6 +21,7 @@ describe('VehicleModelVersionsComponent', () => {
   let vehicleService: jasmine.SpyObj<VehicleService>;
 
   beforeEach(async () => {
+    const quoteLiteralPipeSpy = jasmine.createSpyObj('QuoteLiteralPipe', ['transform']);
     const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate']);
     const routingServiceSpy = jasmine.createSpyObj('RoutingService', ['next']);
     const vehicleServiceSpy = jasmine.createSpyObj('VehicleService', ['vehicleModelVersions']);
@@ -44,7 +45,8 @@ describe('VehicleModelVersionsComponent', () => {
         { provide: ContextDataService, useClass: ContextDataServiceStub },
         { provide: TranslateService, useValue: translateServiceSpy },
         { provide: RoutingService, useValue: routingServiceSpy },
-        { provide: VehicleService, useValue: vehicleServiceSpy }
+        { provide: VehicleService, useValue: vehicleServiceSpy },
+        { provide: QuoteLiteralPipe, useValue: quoteLiteralPipeSpy }
       ]
     }).compileComponents();
 
@@ -62,7 +64,7 @@ describe('VehicleModelVersionsComponent', () => {
     routingService = TestBed.inject(RoutingService) as jasmine.SpyObj<RoutingService>;
     vehicleService = TestBed.inject(VehicleService) as jasmine.SpyObj<VehicleService>;
 
-    component['contextData'] = {
+    component['_contextData'] = {
       vehicle: {
         model: 'testModel',
         vehicleModelVersion: { data: 'testVersion' }

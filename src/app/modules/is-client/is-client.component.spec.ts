@@ -5,6 +5,7 @@ import { ContextDataService } from '@shagui/ng-shagui/core';
 import { QuoteModel } from 'src/app/core/models';
 import { RoutingService } from 'src/app/core/services';
 import { ContextDataServiceStub } from 'src/app/core/stub';
+import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 import { IsClientComponent } from './is-client.component';
 
 describe('IsClientComponent', () => {
@@ -13,6 +14,7 @@ describe('IsClientComponent', () => {
   let routingService: jasmine.SpyObj<RoutingService>;
 
   beforeEach(async () => {
+    const quoteLiteralPipeSpy = jasmine.createSpyObj('QuoteLiteralPipe', ['transform']);
     const routingServiceSpy = jasmine.createSpyObj('RoutingService', ['next']);
     const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate']);
 
@@ -22,7 +24,8 @@ describe('IsClientComponent', () => {
       providers: [
         { provide: RoutingService, useValue: routingServiceSpy },
         { provide: ContextDataService, useClass: ContextDataServiceStub },
-        { provide: TranslateService, useValue: translateServiceSpy }
+        { provide: TranslateService, useValue: translateServiceSpy },
+        { provide: QuoteLiteralPipe, useValue: quoteLiteralPipeSpy }
       ]
     }).compileComponents();
   });
@@ -33,7 +36,7 @@ describe('IsClientComponent', () => {
 
     routingService = TestBed.inject(RoutingService) as jasmine.SpyObj<RoutingService>;
 
-    component['contextData'] = {
+    component['_contextData'] = {
       client: {
         isClient: true
       }
@@ -49,7 +52,7 @@ describe('IsClientComponent', () => {
   it('should update contextData and call nextStep on onIsClientChange', () => {
     component.onIsClientChange(false);
 
-    expect(component['contextData'].client.isClient).toBeFalse();
+    expect(component['_contextData'].client.isClient).toBeFalse();
     expect(routingService.next).toHaveBeenCalled();
   });
 

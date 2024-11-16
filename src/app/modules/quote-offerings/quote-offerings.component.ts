@@ -52,14 +52,14 @@ export class QuoteOfferingsComponent extends QuoteComponent implements OnInit, O
         .subscribe((state: BreakpointState) => (this.isMobile = state.breakpoints[Breakpoints.HandsetPortrait]))
     );
 
-    const offering = await this.offeringsService.pricing(this.contextData);
+    const offering = await this.offeringsService.pricing(this._contextData);
 
-    this.contextData.offering = { ...this.contextData.offering, quotationId: offering.quotationId, prices: offering.prices };
+    this._contextData.offering = { ...this._contextData.offering, quotationId: offering.quotationId, prices: offering.prices };
     this.prices = offering.prices;
 
     Promise.resolve().then(() => {
-      SignedModel.init(this.contextData);
-      console.log('QuoteOfferingsComponent ngOnInit', this.contextData);
+      SignedModel.init(this._contextData);
+      console.log('QuoteOfferingsComponent ngOnInit', this._contextData);
     });
 
     // this.resizeObserver = new ResizeObserver(entries => {
@@ -104,7 +104,7 @@ export class QuoteOfferingsComponent extends QuoteComponent implements OnInit, O
   }
 
   public selectSteper(index: number): void {
-    this.contextData.offering.price = { ...this.contextData.offering.price, ...this.prices[index] };
+    this._contextData.offering.price = { ...this._contextData.offering.price, ...this.prices[index] };
     this.selectedPriceIndex = index;
     this.selectCarrouselCard();
   }
@@ -122,14 +122,14 @@ export class QuoteOfferingsComponent extends QuoteComponent implements OnInit, O
   }
 
   public callNow(price: OfferingPriceModel): void {
-    this.contextData.offering.price = { ...this.contextData.offering.price, ...price };
+    this._contextData.offering.price = { ...this._contextData.offering.price, ...price };
 
-    if (this.isMobile) window.location.href = `tel:${this.quoteLiteralPipe.transform('contact-us-phone')}`;
+    if (this.isMobile) globalThis.location.href = `tel:${this.quoteLiteralPipe.transform('contact-us-phone')}`;
   }
 
   public contactUs(price: OfferingPriceModel): void {
-    this.contextData.offering.price = { ...this.contextData.offering.price, ...price };
-    this.routingService.next(this.contextData);
+    this._contextData.offering.price = { ...this._contextData.offering.price, ...price };
+    this.routingService.next(this._contextData);
   }
 
   /**

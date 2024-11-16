@@ -7,9 +7,10 @@ import { NxDialogService } from '@aposin/ng-aquila/modal';
 import { IndexedData } from '@shagui/ng-shagui/core';
 import { QuoteComponent } from 'src/app/core/models';
 import { RoutingService } from 'src/app/core/services';
-import { HeaderTitleComponent, IconCardComponent, QuoteFooterComponent } from 'src/app/shared/components';
+import { HeaderTitleComponent, IconCardComponent } from 'src/app/shared/components';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
 import { DrivingLicenseIcons } from './models';
+import { QuoteTrackDirective, TrackInfo } from 'src/app/core/tracking';
 
 @Component({
   selector: 'quote-driving-license-location',
@@ -18,11 +19,11 @@ import { DrivingLicenseIcons } from './models';
     CommonModule,
     IconCardComponent,
     HeaderTitleComponent,
-    QuoteFooterComponent,
     NxButtonModule,
     NxCopytextModule,
     NxHeadlineModule,
-    QuoteLiteralDirective
+    QuoteLiteralDirective,
+    QuoteTrackDirective
   ],
   templateUrl: './driving-license-location.component.html',
   styleUrl: './driving-license-location.component.scss'
@@ -38,18 +39,27 @@ export class DrivingLicenseLocationComponent extends QuoteComponent implements O
   private readonly dialogService = inject(NxDialogService);
 
   ngOnInit(): void {
-    this.selectedLocation = this.drivenLicenseCountries.find(country => country.index === this.contextData.driven.drivenLicenseCountry);
+    this.selectedLocation = this.drivenLicenseCountries.find(country => country.index === this._contextData.driven.licenseCountry);
+  }
+
+  public get trackInfo(): Partial<TrackInfo> {
+    return {
+      ...this._trackInfo,
+      label: this.quoteLiteral.transform('footer-next'),
+      title: this.quoteLiteral.transform('header'),
+      drivenLicenseCountry: this.selectedLocation?.index
+    };
   }
 
   public selectLocation(icon: IndexedData) {
     this.selectedLocation = icon;
 
-    this.contextData.driven = {
-      ...this.contextData.driven,
-      drivenLicenseCountry: this.selectedLocation?.index
+    this._contextData.driven = {
+      ...this._contextData.driven,
+      licenseCountry: this.selectedLocation?.index
     };
 
-    this.routingService.next(this.contextData);
+    this.routingService.next(this._contextData);
   }
 
   public openFromTemplate(): void {
@@ -62,6 +72,6 @@ export class DrivingLicenseLocationComponent extends QuoteComponent implements O
   public override canDeactivate = (): boolean => this.isValidData();
 
   private isValidData = (): boolean => {
-    return !!this.contextData.driven.drivenLicenseCountry;
+    return !!this._contextData.driven.licenseCountry;
   };
 }

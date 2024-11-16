@@ -10,6 +10,7 @@ import moment from 'moment';
 import { DEFAULT_DATE_FORMAT } from 'src/app/core/constants';
 import { QuoteModel } from 'src/app/core/models';
 import { ContextDataServiceStub } from 'src/app/core/stub';
+import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 import { DrivingLicenseDateComponent } from './driving-license-date.component';
 
 describe('DrivingLicenseDateComponent', () => {
@@ -17,6 +18,7 @@ describe('DrivingLicenseDateComponent', () => {
   let fixture: ComponentFixture<DrivingLicenseDateComponent>;
 
   beforeEach(async () => {
+    const quoteLiteralPipeSpy = jasmine.createSpyObj('QuoteLiteralPipe', ['transform']);
     const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate']);
 
     await TestBed.configureTestingModule({
@@ -24,7 +26,8 @@ describe('DrivingLicenseDateComponent', () => {
       imports: [DrivingLicenseDateComponent, ReactiveFormsModule, NxDatefieldModule, NxFormfieldModule, NxInputModule, NxMomentDateModule],
       providers: [
         { provide: ContextDataService, useClass: ContextDataServiceStub },
-        { provide: TranslateService, useValue: translateServiceSpy }
+        { provide: TranslateService, useValue: translateServiceSpy },
+        { provide: QuoteLiteralPipe, useValue: quoteLiteralPipeSpy }
       ]
     }).compileComponents();
   });
@@ -33,9 +36,9 @@ describe('DrivingLicenseDateComponent', () => {
     fixture = TestBed.createComponent(DrivingLicenseDateComponent);
     component = fixture.componentInstance;
 
-    component['contextData'] = {
+    component['_contextData'] = {
       personalData: { birthdate: '01-01-2000' },
-      driven: { drivenLicenseDate: '01-01-2022' }
+      driven: { licenseDate: '01-01-2022' }
     } as unknown as QuoteModel;
 
     fixture.detectChanges();
@@ -46,19 +49,19 @@ describe('DrivingLicenseDateComponent', () => {
   });
 
   it('should initialize form with context data', () => {
-    const drivenLicenseDate = moment(new Date(component.form.controls['drivenLicenseDate'].value)).format(DEFAULT_DATE_FORMAT);
+    const licenseDate = moment(new Date(component.form.controls['licenseDate'].value)).format(DEFAULT_DATE_FORMAT);
 
-    expect(drivenLicenseDate).toEqual('2022-01-01');
+    expect(licenseDate).toEqual('2022-01-01');
   });
 
   it('should mark all fields as touched and update context data on valid form', () => {
-    component.form.controls['drivenLicenseDate'].setValue('2022-01-01');
+    component.form.controls['licenseDate'].setValue('2022-01-01');
 
     expect(component.form.valid).toBeTrue();
   });
 
   it('should not update context data on invalid form', () => {
-    component.form.controls['drivenLicenseDate'].setValue(null);
+    component.form.controls['licenseDate'].setValue(null);
     component['updateValidData']();
 
     expect(component.form.valid).toBeFalse();
@@ -71,7 +74,7 @@ describe('DrivingLicenseDateComponent', () => {
   });
 
   it('should invalidate form if driving license date is a future date', () => {
-    component.form.controls['drivenLicenseDate'].setValue(moment().add(1, 'years').format(DEFAULT_DATE_FORMAT));
+    component.form.controls['licenseDate'].setValue(moment().add(1, 'years').format(DEFAULT_DATE_FORMAT));
 
     expect(component.form.valid).toBeFalse();
   });

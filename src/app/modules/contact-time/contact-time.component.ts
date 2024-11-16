@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { NxCopytextModule } from '@aposin/ng-aquila/copytext';
 import { Hour, QuoteComponent } from 'src/app/core/models';
+import { TrackInfo } from 'src/app/core/tracking';
 import { HeaderTitleComponent, QuoteFooterComponent, TextCardComponent } from 'src/app/shared/components';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
 
@@ -23,7 +24,16 @@ export class ContactTimeComponent extends QuoteComponent implements OnInit {
   public selectedHour?: Hour;
 
   ngOnInit(): void {
-    this.selectedHour = this.contextData.contactData.contactHour;
+    this.selectedHour = this._contextData.contactData.contactHour;
+  }
+
+  public get trackInfo(): Partial<TrackInfo> {
+    return {
+      ...this._trackInfo,
+      label: this.quoteLiteral.transform('footer-next'),
+      title: this.quoteLiteral.transform('header'),
+      contactHour: this.selectedHour
+    };
   }
 
   public override canDeactivate = (): boolean => !!this.selectedHour;
@@ -33,6 +43,6 @@ export class ContactTimeComponent extends QuoteComponent implements OnInit {
   }
 
   public updateValidData = (): void => {
-    this.contextData.contactData.contactHour = this.selectedHour;
+    this._contextData.contactData.contactHour = this.selectedHour;
   };
 }

@@ -19,6 +19,7 @@ describe('ClientIdentificationNumberComponent', () => {
   let fixture: ComponentFixture<ClientIdentificationNumberComponent>;
 
   beforeEach(async () => {
+    const quoteLiteralPipeSpy = jasmine.createSpyObj('QuoteLiteralPipe', ['transform']);
     const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate']);
 
     await TestBed.configureTestingModule({
@@ -38,7 +39,8 @@ describe('ClientIdentificationNumberComponent', () => {
       providers: [
         { provide: NX_DATE_LOCALE, useValue: 'es-ES' },
         { provide: ContextDataService, useClass: ContextDataServiceStub },
-        { provide: TranslateService, useValue: translateServiceSpy }
+        { provide: TranslateService, useValue: translateServiceSpy },
+        { provide: QuoteLiteralPipe, useValue: quoteLiteralPipeSpy }
       ]
     }).compileComponents();
   });
@@ -47,7 +49,7 @@ describe('ClientIdentificationNumberComponent', () => {
     fixture = TestBed.createComponent(ClientIdentificationNumberComponent);
     component = fixture.componentInstance;
 
-    component['contextData'] = {
+    component['_contextData'] = {
       personalData: {
         identificationNumber: '123456789'
       }

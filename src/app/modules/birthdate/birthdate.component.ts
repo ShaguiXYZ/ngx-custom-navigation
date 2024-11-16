@@ -5,9 +5,10 @@ import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
 import { NxInputModule } from '@aposin/ng-aquila/input';
 import { NxMomentDateModule } from '@aposin/ng-aquila/moment-date-adapter';
 import moment, { Moment } from 'moment';
-import { DEFAULT_DATE_FORMAT } from 'src/app/core/constants';
+import { DEFAULT_DATE_FORMAT, DEFAULT_DATE_FORMATS } from 'src/app/core/constants';
 import { isOlderThanYears } from 'src/app/core/form';
 import { QuoteComponent } from 'src/app/core/models';
+import { TrackInfo } from 'src/app/core/tracking';
 import { HeaderTitleComponent, QuoteFooterComponent } from 'src/app/shared/components';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
@@ -31,6 +32,7 @@ import { QuoteLiteralPipe } from 'src/app/shared/pipes';
   providers: [{ provide: NX_DATE_LOCALE, useValue: 'es-ES' }]
 })
 export class BirthdateComponent extends QuoteComponent implements OnInit {
+  public dateFormats = DEFAULT_DATE_FORMATS;
   public form!: FormGroup;
   public birthdateFromContext: Moment | undefined;
   public minValue = 18;
@@ -42,14 +44,23 @@ export class BirthdateComponent extends QuoteComponent implements OnInit {
     this.createForm();
   }
 
+  public get trackInfo(): Partial<TrackInfo> {
+    return {
+      ...this._trackInfo,
+      label: this.quoteLiteral.transform('footer-next'),
+      title: this.quoteLiteral.transform('header'),
+      birthdate: this.form.controls['birthdate'].value?.format(DEFAULT_DATE_FORMAT)
+    };
+  }
+
   public override canDeactivate = (): boolean => this.form.valid;
 
   public updateValidData = (): void => {
     this.form.markAllAsTouched();
 
     if (this.form.valid) {
-      this.contextData.personalData = {
-        ...this.contextData.personalData,
+      this._contextData.personalData = {
+        ...this._contextData.personalData,
         ...this.form.value,
         birthdate: moment(new Date(this.form.controls['birthdate'].value)).format(DEFAULT_DATE_FORMAT)
       };
@@ -57,8 +68,8 @@ export class BirthdateComponent extends QuoteComponent implements OnInit {
   };
 
   private createForm() {
-    if (this.contextData.personalData.birthdate) {
-      this.birthdateFromContext = moment(new Date(this.contextData.personalData.birthdate));
+    if (this._contextData.personalData.birthdate) {
+      this.birthdateFromContext = moment(new Date(this._contextData.personalData.birthdate));
     }
 
     this.form = this.fb.group(

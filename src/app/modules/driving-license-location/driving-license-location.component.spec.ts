@@ -5,6 +5,7 @@ import { ContextDataService } from '@shagui/ng-shagui/core';
 import { QuoteModel } from 'src/app/core/models';
 import { RoutingService } from 'src/app/core/services';
 import { ContextDataServiceStub } from 'src/app/core/stub';
+import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 import { DrivingLicenseLocationComponent } from './driving-license-location.component';
 
 describe('DrivingLicenseLocationComponent', () => {
@@ -16,6 +17,7 @@ describe('DrivingLicenseLocationComponent', () => {
   beforeEach(async () => {
     const routingServiceSpy = jasmine.createSpyObj('RoutingService', ['next']);
     const dialogServiceSpy = jasmine.createSpyObj('NxDialogService', ['open']);
+    const quoteLiteralPipeSpy = jasmine.createSpyObj('QuoteLiteralPipe', ['transform']);
     const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate']);
 
     await TestBed.configureTestingModule({
@@ -25,7 +27,8 @@ describe('DrivingLicenseLocationComponent', () => {
         { provide: ContextDataService, useClass: ContextDataServiceStub },
         { provide: TranslateService, useValue: translateServiceSpy },
         { provide: RoutingService, useValue: routingServiceSpy },
-        { provide: NxDialogService, useValue: dialogServiceSpy }
+        { provide: NxDialogService, useValue: dialogServiceSpy },
+        { provide: QuoteLiteralPipe, useValue: quoteLiteralPipeSpy }
       ]
     }).compileComponents();
   });
@@ -37,9 +40,9 @@ describe('DrivingLicenseLocationComponent', () => {
     routingService = TestBed.inject(RoutingService) as jasmine.SpyObj<RoutingService>;
     dialogService = TestBed.inject(NxDialogService) as jasmine.SpyObj<NxDialogService>;
 
-    component['contextData'] = {
+    component['_contextData'] = {
       driven: {
-        drivenLicenseCountry: 'eu'
+        licenseCountry: 'eu'
       }
     } as unknown as QuoteModel;
 
@@ -72,7 +75,7 @@ describe('DrivingLicenseLocationComponent', () => {
   });
 
   it('should return false for canDeactivate if data is invalid', () => {
-    component['contextData'].driven.drivenLicenseCountry = undefined;
+    component['_contextData'].driven.licenseCountry = undefined;
 
     expect(component.canDeactivate()).toBeFalse();
   });

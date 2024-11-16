@@ -5,19 +5,22 @@ import { ContextDataService } from '@shagui/ng-shagui/core';
 import { QuoteModel } from 'src/app/core/models';
 import { ContextDataServiceStub } from 'src/app/core/stub';
 import { ContactTimeComponent } from './contact-time.component';
+import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 
 describe('ContactTimeComponent', () => {
   let component: ContactTimeComponent;
   let fixture: ComponentFixture<ContactTimeComponent>;
 
   beforeEach(async () => {
+    const quoteLiteralPipeSpy = jasmine.createSpyObj('QuoteLiteralPipe', ['transform']);
     const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate']);
 
     await TestBed.configureTestingModule({
       imports: [ContactTimeComponent],
       providers: [
         { provide: ContextDataService, useClass: ContextDataServiceStub },
-        { provide: TranslateService, useValue: translateServiceSpy }
+        { provide: TranslateService, useValue: translateServiceSpy },
+        { provide: QuoteLiteralPipe, useValue: quoteLiteralPipeSpy }
       ]
     }).compileComponents();
   });
@@ -26,7 +29,7 @@ describe('ContactTimeComponent', () => {
     fixture = TestBed.createComponent(ContactTimeComponent);
     component = fixture.componentInstance;
 
-    component['contextData'] = {
+    component['_contextData'] = {
       contactData: {
         contactHour: '10:00'
       }
@@ -51,7 +54,7 @@ describe('ContactTimeComponent', () => {
   it('should update valid data correctly', () => {
     component.selectHour('15:00');
     component['updateValidData']();
-    expect((component as any).contextData.contactData.contactHour).toBe('15:00');
+    expect((component as any)._contextData.contactData.contactHour).toBe('15:00');
   });
 
   it('should allow deactivation if an hour is selected', () => {

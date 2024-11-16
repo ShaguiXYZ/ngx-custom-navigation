@@ -5,6 +5,7 @@ import { ContextDataService } from '@shagui/ng-shagui/core';
 import { QuoteModel } from 'src/app/core/models';
 import { LocationService } from 'src/app/core/services';
 import { ContextDataServiceStub } from 'src/app/core/stub';
+import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 import { PlaceComponent } from './place.component';
 
 describe('PlaceComponent', () => {
@@ -16,6 +17,7 @@ describe('PlaceComponent', () => {
   beforeEach(waitForAsync(() => {
     const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate']);
     const locationServiceSpy = jasmine.createSpyObj('LocationService', ['getAddress']);
+    const quoteLiteralPipeSpy = jasmine.createSpyObj('QuoteLiteralPipe', ['transform']);
 
     TestBed.configureTestingModule({
       declarations: [],
@@ -23,7 +25,8 @@ describe('PlaceComponent', () => {
       providers: [
         { provide: ContextDataService, useClass: ContextDataServiceStub },
         { provide: TranslateService, useValue: translateServiceSpy },
-        { provide: LocationService, useValue: locationServiceSpy }
+        { provide: LocationService, useValue: locationServiceSpy },
+        { provide: QuoteLiteralPipe, useValue: quoteLiteralPipeSpy }
       ]
     }).compileComponents();
 
@@ -41,7 +44,7 @@ describe('PlaceComponent', () => {
     fixture = TestBed.createComponent(PlaceComponent);
     component = fixture.componentInstance;
 
-    component['contextData'] = {
+    component['_contextData'] = {
       place: { postalCode: '12345', province: 'TestProvince', location: 'TestLocation' }
     } as QuoteModel;
 

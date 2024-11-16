@@ -14,6 +14,7 @@ import { RoutingService, VehicleService } from 'src/app/core/services';
 import { ContextDataServiceStub } from 'src/app/core/stub';
 import { HeaderTitleComponent, SelectableOptionComponent } from 'src/app/shared/components';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
+import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 import { VehicleFuelComponent } from './vehicle-fuel.component';
 
 describe('VehicleFuelComponent', () => {
@@ -26,6 +27,7 @@ describe('VehicleFuelComponent', () => {
   beforeEach(async () => {
     const routingServiceSpy = jasmine.createSpyObj('RoutingService', ['next']);
     const vehicleServiceSpy = jasmine.createSpyObj('VehicleService', ['getFuelTypes', 'getVehicleClasses', 'cubicCapacities']);
+    const quoteLiteralPipeSpy = jasmine.createSpyObj('QuoteLiteralPipe', ['transform']);
     const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate']);
 
     await TestBed.configureTestingModule({
@@ -48,7 +50,8 @@ describe('VehicleFuelComponent', () => {
         { provide: ContextDataService, useClass: ContextDataServiceStub },
         { provide: RoutingService, useValue: routingServiceSpy },
         { provide: VehicleService, useValue: vehicleServiceSpy },
-        { provide: TranslateService, useValue: translateServiceSpy }
+        { provide: TranslateService, useValue: translateServiceSpy },
+        { provide: QuoteLiteralPipe, useValue: quoteLiteralPipeSpy }
       ]
     }).compileComponents();
 
@@ -66,7 +69,7 @@ describe('VehicleFuelComponent', () => {
     routingService = TestBed.inject(RoutingService) as jasmine.SpyObj<RoutingService>;
     vehicleService = TestBed.inject(VehicleService) as jasmine.SpyObj<VehicleService>;
 
-    component['contextData'] = {
+    component['_contextData'] = {
       vehicle: {
         fuel: { index: '1', data: 'Petrol' },
         cubicCapacity: { index: '1', data: '1000cc' },
@@ -133,7 +136,7 @@ describe('VehicleFuelComponent', () => {
   });
 
   it('should return false for canDeactivate if any vehicle data is undefined', () => {
-    component['contextData'].vehicle.fuel = undefined;
+    component['_contextData'].vehicle.fuel = undefined;
 
     expect(component.canDeactivate()).toBeFalse();
   });

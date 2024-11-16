@@ -11,12 +11,14 @@ import { DEFAULT_DATE_FORMAT } from 'src/app/core/constants';
 import { QuoteModel } from 'src/app/core/models';
 import { ContextDataServiceStub } from 'src/app/core/stub';
 import { BirthdateComponent } from './birthdate.component';
+import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 
 describe('BirthdateComponent', () => {
   let component: BirthdateComponent;
   let fixture: ComponentFixture<BirthdateComponent>;
 
   beforeEach(async () => {
+    const quoteLiteralPipeSpy = jasmine.createSpyObj('QuoteLiteralPipe', ['transform']);
     const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate']);
 
     await TestBed.configureTestingModule({
@@ -24,7 +26,8 @@ describe('BirthdateComponent', () => {
       imports: [BirthdateComponent, ReactiveFormsModule, NxDatefieldModule, NxFormfieldModule, NxInputModule, NxMomentDateModule],
       providers: [
         { provide: ContextDataService, useClass: ContextDataServiceStub },
-        { provide: TranslateService, useValue: translateServiceSpy }
+        { provide: TranslateService, useValue: translateServiceSpy },
+        { provide: QuoteLiteralPipe, useValue: quoteLiteralPipeSpy }
       ]
     }).compileComponents();
   });
@@ -33,7 +36,7 @@ describe('BirthdateComponent', () => {
     fixture = TestBed.createComponent(BirthdateComponent);
     component = fixture.componentInstance;
 
-    component['contextData'] = {
+    component['_contextData'] = {
       personalData: {
         birthdate: '01-01-2000'
       }

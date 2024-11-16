@@ -10,7 +10,13 @@
   </quote-header-title>
   <section class="form-container">
     @for(icon of drivenLicenseCountries; track icon.index) {
-    <quote-icon-card [data]="icon" [selected]="selectedLocation?.index === icon.index" (uiSelect)="selectLocation(icon)" />
+    <quote-icon-card
+      [data]="icon"
+      [selected]="selectedLocation?.index === icon.index"
+      (uiSelect)="selectLocation(icon)"
+      [nxTrack]="trackInfo"
+      [nxTrackEvents]="['click']"
+    />
     }
   </section>
 </article>

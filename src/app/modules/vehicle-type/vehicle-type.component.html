@@ -5,7 +5,13 @@
   <div class="form-container">
     @for(type of vehicleTypes; track type.index) {
     <div class="selectable-row">
-      <quote-text-card [selected]="type.index === selectedType?.index" [data]="type.data | quoteLiteral" (uiSelect)="selectType(type)" />
+      <quote-text-card
+        [selected]="type.index === selectedType?.index"
+        [data]="type.data | quoteLiteral"
+        [nxTrack]="trackInfo"
+        [nxTrackEvents]="['click']"
+        (uiSelect)="selectType(type)"
+      />
     </div>
     }
   </div>

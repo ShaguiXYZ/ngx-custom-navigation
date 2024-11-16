@@ -9,6 +9,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { ContextDataService } from '@shagui/ng-shagui/core';
 import { QuoteModel } from 'src/app/core/models';
 import { ContextDataServiceStub } from 'src/app/core/stub';
+import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 import { ClientPhoneNumberComponent } from './client-phone-number.component';
 
 describe('ClientPhoneNumberComponent', () => {
@@ -16,6 +17,7 @@ describe('ClientPhoneNumberComponent', () => {
   let fixture: ComponentFixture<ClientPhoneNumberComponent>;
 
   beforeEach(async () => {
+    const quoteLiteralPipeSpy = jasmine.createSpyObj('QuoteLiteralPipe', ['transform']);
     const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate']);
 
     await TestBed.configureTestingModule({
@@ -24,7 +26,8 @@ describe('ClientPhoneNumberComponent', () => {
       providers: [
         { provide: NX_DATE_LOCALE, useValue: 'es-ES' },
         { provide: ContextDataService, useClass: ContextDataServiceStub },
-        { provide: TranslateService, useValue: translateServiceSpy }
+        { provide: TranslateService, useValue: translateServiceSpy },
+        { provide: QuoteLiteralPipe, useValue: quoteLiteralPipeSpy }
       ]
     }).compileComponents();
   });
@@ -33,7 +36,7 @@ describe('ClientPhoneNumberComponent', () => {
     fixture = TestBed.createComponent(ClientPhoneNumberComponent);
     component = fixture.componentInstance;
 
-    component['contextData'] = {
+    component['_contextData'] = {
       personalData: {
         phoneNumber: '123456789'
       }

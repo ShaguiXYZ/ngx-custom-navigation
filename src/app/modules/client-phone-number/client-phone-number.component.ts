@@ -6,6 +6,7 @@ import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
 import { NxInputModule } from '@aposin/ng-aquila/input';
 import { NxMaskModule } from '@aposin/ng-aquila/mask';
 import { QuoteComponent } from 'src/app/core/models';
+import { TrackInfo } from 'src/app/core/tracking';
 import { HeaderTitleComponent, QuoteFooterComponent } from 'src/app/shared/components';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
@@ -37,14 +38,23 @@ export class ClientPhoneNumberComponent extends QuoteComponent implements OnInit
     this.createForm();
   }
 
+  public get trackInfo(): Partial<TrackInfo> {
+    return {
+      ...this._trackInfo,
+      label: this.quoteLiteral.transform('footer-next'),
+      title: this.quoteLiteral.transform('header'),
+      phoneNumber: this.form.controls['phoneNumber'].value
+    };
+  }
+
   public override canDeactivate = (): boolean => this.form.valid;
 
   public updateValidData = (): void => {
     this.form.markAllAsTouched();
 
     if (this.form.valid) {
-      this.contextData.personalData = {
-        ...this.contextData.personalData,
+      this._contextData.personalData = {
+        ...this._contextData.personalData,
         ...this.form.value
       };
     }
@@ -53,7 +63,7 @@ export class ClientPhoneNumberComponent extends QuoteComponent implements OnInit
   private createForm() {
     this.form = this.fb.group(
       {
-        phoneNumber: new FormControl(this.contextData.personalData.phoneNumber, [Validators.required])
+        phoneNumber: new FormControl(this._contextData.personalData.phoneNumber, [Validators.required])
       },
       { updateOn: 'blur' }
     );

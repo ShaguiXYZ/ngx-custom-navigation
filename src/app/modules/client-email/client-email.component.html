@@ -35,5 +35,5 @@
       </div>
     </form>
   </section>
-  <quote-footer [data]="contextData" (uiOnNext)="updateValidData()" />
+  <quote-footer [data]="_contextData" [trackInfo]="trackInfo" (uiOnNext)="updateValidData()" />
 </article>

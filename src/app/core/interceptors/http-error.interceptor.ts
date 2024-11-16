@@ -50,7 +50,8 @@ export const httpErrorInterceptor: HttpInterceptorFn = (req: HttpRequest<unknown
         routingService.goToPage(errorPageId).catch(console.error);
       }
 
-      return throwError(() => new HttpError(error.status, errorMessage));
+      const httpError = error as HttpErrorResponse;
+      return throwError(() => new HttpError(httpError.status, errorMessage, httpError.url ?? '', httpError.error?.method ?? ''));
     })
   );
 };

@@ -24,7 +24,7 @@ export class InsuranceCompaniesService {
         })
         .pipe(
           catchError(error => {
-            throw new HttpError(error.status, error.statusText);
+            throw new HttpError(error.status, error.statusText, error.url, error.method);
           }),
           map(res => res as InsuranceCompanyDTO[]),
           map(res => res.map(data => InsuranceCompany.create(data))),

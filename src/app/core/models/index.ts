@@ -10,6 +10,7 @@ export * from './insurance-company.model';
 export * from './literal.model';
 export * from './location.model';
 export * from './pricing.model';
+export * from './quote-black-list.model';
 export * from './quote-client.model';
 export * from './quote-component.model';
 export * from './quote-contact-data.model';

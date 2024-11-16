@@ -4,22 +4,22 @@
     <form [formGroup]="form">
       <nx-formfield [label]="'issue-date' | quoteLiteral">
         <input
-          formControlName="drivenLicenseDate"
+          formControlName="licenseDate"
           nxDatefield
           nxInput
           [max]="maxDate"
           [datepicker]="myDatepicker"
-          [parseFormat]="['DD/MM/YYYY', 'DDMMYYYY', 'DDMMYY']"
+          [parseFormat]="dateFormats"
           displayFormat="DD/MM/YYYY"
         />
         <span nxFormfieldHint nxQuoteLiteral="hint-date-format"></span>
         <nx-datepicker-toggle [for]="myDatepicker" nxFormfieldSuffix></nx-datepicker-toggle>
         <nx-datepicker #myDatepicker></nx-datepicker>
-        @if(form.get('drivenLicenseDate')?.errors?.['required']) {
+        @if(form.get('licenseDate')?.errors?.['required']) {
         <nx-error appearance="text" nxFormfieldError><span nxQuoteLiteral="error-required"></span> </nx-error>
-        } @if(form.get('drivenLicenseDate')?.errors?.['futureDate']) {
+        } @if(form.get('licenseDate')?.errors?.['futureDate']) {
         <nx-error appearance="text" nxFormfieldError><span nxQuoteLiteral="error-future-date"></span> </nx-error>
-        } @if(form.get('drivenLicenseDate')?.errors?.['minYearsBetweenDates']) {
+        } @if(form.get('licenseDate')?.errors?.['minYearsBetweenDates']) {
         <nx-error appearance="text" nxFormfieldError
           ><span nxQuoteLiteral="error-min-years-between" [uiQuoteLitealParams]="{ value: minYears }"></span>
         </nx-error>
@@ -27,5 +27,5 @@
       </nx-formfield>
     </form>
   </section>
-  <quote-footer [data]="contextData" (uiOnNext)="updateValidData()" />
+  <quote-footer [data]="_contextData" [trackInfo]="trackInfo" (uiOnNext)="updateValidData()" />
 </article>

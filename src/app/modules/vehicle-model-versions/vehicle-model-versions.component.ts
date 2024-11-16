@@ -47,7 +47,7 @@ export class VehicleModelVersionsComponent extends QuoteComponent implements OnI
   private readonly fb = inject(FormBuilder);
 
   async ngOnInit(): Promise<void> {
-    this.selectedModelVersion = this.contextData.vehicle.vehicleModelVersion;
+    this.selectedModelVersion = this._contextData.vehicle.vehicleModelVersion;
     this.createForm();
 
     await this.filteredVersions();
@@ -64,16 +64,16 @@ export class VehicleModelVersionsComponent extends QuoteComponent implements OnI
   public selectVersion(version: ModelVersionModel) {
     this.selectedModelVersion = version;
 
-    this.contextData.vehicle = {
-      ...this.contextData.vehicle,
+    this._contextData.vehicle = {
+      ...this._contextData.vehicle,
       vehicleModelVersion: this.selectedModelVersion
     };
 
-    this.routingService.next(this.contextData);
+    this.routingService.next(this._contextData);
   }
 
   private updateValidData = (): boolean => {
-    return !!this.contextData.vehicle.vehicleModelVersion;
+    return !!this._contextData.vehicle.vehicleModelVersion;
   };
 
   private createForm() {
@@ -83,7 +83,7 @@ export class VehicleModelVersionsComponent extends QuoteComponent implements OnI
   }
 
   private filteredVersions = (): Promise<void> =>
-    this.vehicleService.vehicleModelVersions(this.contextData.vehicle.model!).then(versions => {
+    this.vehicleService.vehicleModelVersions(this._contextData.vehicle.model!).then(versions => {
       this.modelVersions = this.form.value.searchInput
         ? versions.filter(data => data.data?.toLocaleLowerCase().includes(this.form.value.searchInput?.toLocaleLowerCase()))
         : versions;

@@ -6,6 +6,7 @@ import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
 import { NxInputModule } from '@aposin/ng-aquila/input';
 import { Subscription } from 'rxjs';
 import { QuoteComponent } from 'src/app/core/models';
+import { TrackInfo } from 'src/app/core/tracking';
 import { HeaderTitleComponent, QuoteFooterComponent } from 'src/app/shared/components';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
@@ -37,14 +38,24 @@ export class ClientNameComponent extends QuoteComponent implements OnInit {
     this.createForm();
   }
 
+  public get trackInfo(): Partial<TrackInfo> {
+    return {
+      ...this._trackInfo,
+      label: this.quoteLiteral.transform('footer-next'),
+      title: this.quoteLiteral.transform('header'),
+      name: this.form.controls['name'].value,
+      surname: this.form.controls['surname'].value
+    };
+  }
+
   public override canDeactivate = (): boolean => this.form.valid;
 
   public updateValidData = (): void => {
     this.form.markAllAsTouched();
 
     if (this.form.valid) {
-      this.contextData.personalData = {
-        ...this.contextData.personalData,
+      this._contextData.personalData = {
+        ...this._contextData.personalData,
         ...this.form.value
       };
     }
@@ -52,8 +63,8 @@ export class ClientNameComponent extends QuoteComponent implements OnInit {
 
   private createForm() {
     this.form = this.fb.group({
-      name: new FormControl(this.contextData.personalData.name, [Validators.required]),
-      surname: new FormControl(this.contextData.personalData.surname, [Validators.required])
+      name: new FormControl(this._contextData.personalData.name, [Validators.required]),
+      surname: new FormControl(this._contextData.personalData.surname, [Validators.required])
     });
 
     let subscription = this.form.get('name')?.valueChanges.subscribe(value => {

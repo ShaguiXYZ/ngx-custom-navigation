@@ -5,9 +5,10 @@ import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
 import { NxInputModule } from '@aposin/ng-aquila/input';
 import { NxMomentDateModule } from '@aposin/ng-aquila/moment-date-adapter';
 import moment, { DurationInputArg2, Moment } from 'moment';
-import { DEFAULT_DATE_FORMAT } from 'src/app/core/constants';
+import { DEFAULT_DATE_FORMAT, DEFAULT_DATE_FORMATS } from 'src/app/core/constants';
 import { isBetweenDates } from 'src/app/core/form';
 import { QuoteComponent } from 'src/app/core/models';
+import { TrackInfo } from 'src/app/core/tracking';
 import { HeaderTitleComponent, QuoteFooterComponent } from 'src/app/shared/components';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
@@ -31,6 +32,7 @@ import { QuoteLiteralPipe } from 'src/app/shared/pipes';
   providers: [{ provide: NX_DATE_LOCALE, useValue: 'es-ES' }]
 })
 export class DateOfIssueComponent extends QuoteComponent implements OnInit {
+  public dateFormats = DEFAULT_DATE_FORMATS;
   public form!: FormGroup;
   public expirationInfo: { unit: DurationInputArg2; value: number } = {
     value: 1,
@@ -48,6 +50,15 @@ export class DateOfIssueComponent extends QuoteComponent implements OnInit {
     this.createForm();
   }
 
+  public get trackInfo(): Partial<TrackInfo> {
+    return {
+      ...this._trackInfo,
+      label: this.quoteLiteral.transform('footer-next'),
+      title: this.quoteLiteral.transform('header'),
+      dateOfIssue: this.form.controls['dateOfIssue'].value?.format(DEFAULT_DATE_FORMAT)
+    };
+  }
+
   public override canDeactivate = (): boolean => this.form.valid;
 
   public updateValidData = (): void => {
@@ -57,8 +68,8 @@ export class DateOfIssueComponent extends QuoteComponent implements OnInit {
       const dateOfIssue = moment(new Date(this.form.controls['dateOfIssue'].value));
       const expiration = moment(dateOfIssue).add(this.expirationInfo.value, this.expirationInfo.unit);
 
-      this.contextData.client = {
-        ...this.contextData.client,
+      this._contextData.client = {
+        ...this._contextData.client,
         ...this.form.value,
         dateOfIssue: dateOfIssue.format(DEFAULT_DATE_FORMAT),
         expiration: expiration.format(DEFAULT_DATE_FORMAT)
@@ -67,8 +78,8 @@ export class DateOfIssueComponent extends QuoteComponent implements OnInit {
   };
 
   private createForm() {
-    if (this.contextData.client.dateOfIssue) {
-      this.dateOfIssueFromContext = moment(new Date(this.contextData.client.dateOfIssue));
+    if (this._contextData.client.dateOfIssue) {
+      this.dateOfIssueFromContext = moment(new Date(this._contextData.client.dateOfIssue));
     }
     this.form = this.fb.group({
       dateOfIssue: new FormControl(this.dateOfIssueFromContext, [
