@@ -13,12 +13,10 @@ import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 export abstract class QuoteComponent {
   public ignoreChangeDetection = false;
 
-  protected _trackInfo: Partial<TrackInfo> = {};
   protected _contextData: QuoteModel;
 
   protected readonly quoteLiteral = inject(QuoteLiteralPipe);
-
-  private readonly contextDataService = inject(ContextDataService);
+  protected readonly contextDataService = inject(ContextDataService);
 
   constructor() {
     this._contextData = this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA);
@@ -37,8 +35,6 @@ export abstract class QuoteComponent {
       navigation: { lastPage }
     } = this.contextDataService.get<AppContextData>(QUOTE_APP_CONTEXT_DATA);
     const pageData = lastPage?.configuration?.data ?? {};
-
-    this._trackInfo = { selected_tab: lastPage?.routeTree };
 
     for (const [key, value] of Object.entries(pageData)) {
       if (key === 'contextData' && typeof component[`_${key}`] === 'object' && typeof value === 'object') {

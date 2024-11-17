@@ -7,25 +7,25 @@ import { RoutingService } from 'src/app/core/services';
 import { QuoteTrackDirective, TrackInfo } from 'src/app/core/tracking';
 import { HeaderTitleComponent, SelectableOptionComponent } from 'src/app/shared/components';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
+import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 
 @Component({
   selector: 'quote-is-policy-owner',
   templateUrl: './is-policy-owner.component.html',
   styleUrl: './is-policy-owner.component.scss',
   standalone: true,
-  imports: [CommonModule, HeaderTitleComponent, SelectableOptionComponent, NxButtonModule, QuoteLiteralDirective, QuoteTrackDirective]
+  imports: [
+    CommonModule,
+    HeaderTitleComponent,
+    SelectableOptionComponent,
+    NxButtonModule,
+    QuoteLiteralDirective,
+    QuoteTrackDirective,
+    QuoteLiteralPipe
+  ]
 })
 export class IsPolicyOwnerComponent extends QuoteComponent {
   private readonly routingService = inject(RoutingService);
-
-  public get trackInfo(): Partial<TrackInfo> {
-    return {
-      ...this._trackInfo,
-      label: this.quoteLiteral.transform('footer-next'),
-      title: this.quoteLiteral.transform('header'),
-      isPolicyOwner: this._contextData.client.isPolicyOwner?.toString() || null
-    };
-  }
 
   public override canDeactivate = (): boolean => this.isValidData();
 

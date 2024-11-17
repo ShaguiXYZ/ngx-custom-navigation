@@ -16,5 +16,13 @@
       </nx-formfield>
     </form>
   </section>
-  <quote-footer [data]="_contextData" [trackInfo]="trackInfo" (uiOnNext)="updateValidData()" />
+  <quote-footer
+    [data]="_contextData"
+    [trackInfo]="{
+      title: 'header' | quoteLiteral,
+      name: form.get('name')?.value,
+      surname: form.get('surname')?.value
+    }"
+    (uiOnNext)="updateValidData()"
+  />
 </article>

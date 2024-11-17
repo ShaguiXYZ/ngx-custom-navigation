@@ -2,6 +2,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { NxCopytextModule } from '@aposin/ng-aquila/copytext';
 import { QuoteComponent } from 'src/app/core/models';
 import { RoutingService } from 'src/app/core/services';
+import { QuoteTrackDirective } from 'src/app/core/tracking';
 import { HeaderTitleComponent, TextCardComponent } from 'src/app/shared/components';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
@@ -11,7 +12,7 @@ import { QuoteLiteralPipe } from 'src/app/shared/pipes';
   templateUrl: './time-insurance-holder.component.html',
   styleUrl: './time-insurance-holder.component.scss',
   standalone: true,
-  imports: [HeaderTitleComponent, TextCardComponent, NxCopytextModule, QuoteLiteralDirective, QuoteLiteralPipe]
+  imports: [HeaderTitleComponent, TextCardComponent, NxCopytextModule, QuoteLiteralDirective, QuoteTrackDirective, QuoteLiteralPipe]
 })
 export class TimeInsuranceHolderComponent extends QuoteComponent implements OnInit {
   public selectedYears?: number;

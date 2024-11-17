@@ -18,7 +18,10 @@
         [data]="icon"
         [showLabel]="false"
         [selected]="selectedCompany?.index === icon.index"
-        [nxTrack]="trackInfo"
+        [nxTrack]="{
+          title: 'header' | quoteLiteral,
+          insuranceCompany: icon.index
+        }"
         [nxTrackEvents]="['click']"
         (uiSelect)="selectCompany(icon)"
       />
@@ -31,7 +34,10 @@
         <quote-text-card
           [data]="item.data"
           [selected]="selectedCompany?.index === item.index"
-          [nxTrack]="trackInfo"
+          [nxTrack]="{
+            title: 'header' | quoteLiteral,
+            insuranceCompany: item.index
+          }"
           [nxTrackEvents]="['click']"
           (uiSelect)="selectCompany(item)"
         />

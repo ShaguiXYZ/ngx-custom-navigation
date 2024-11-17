@@ -10,6 +10,7 @@ import { NxMaskModule } from '@aposin/ng-aquila/mask';
 import { Subscription } from 'rxjs';
 import { QuoteComponent } from 'src/app/core/models';
 import { RoutingService } from 'src/app/core/services';
+import { QuoteTrackDirective } from 'src/app/core/tracking';
 import { HeaderTitleComponent, QuoteFooterComponent, QuoteFooterInfoComponent } from 'src/app/shared/components';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
@@ -32,7 +33,8 @@ import { QuoteLiteralPipe } from 'src/app/shared/pipes';
     QuoteFooterInfoComponent,
     ReactiveFormsModule,
     QuoteLiteralDirective,
-    QuoteLiteralPipe
+    QuoteLiteralPipe,
+    QuoteTrackDirective
   ]
 })
 export class LicensePlateComponent extends QuoteComponent implements OnInit, OnDestroy {

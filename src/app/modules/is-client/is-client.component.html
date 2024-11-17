@@ -7,7 +7,11 @@
         nxButton="tertiary medium"
         type="button"
         nxQuoteLiteral="yes"
-        [nxTrack]="trackInfo"
+        [nxTrack]="{
+          label: 'footer-next' | quoteLiteral,
+          title: 'header' | quoteLiteral,
+          isClient: 'true'
+        }"
         [nxTrackEvents]="['click']"
         (click)="onIsClientChange(true)"
       ></button>
@@ -17,7 +21,11 @@
         nxButton="tertiary medium"
         type="button"
         nxQuoteLiteral="no"
-        [nxTrack]="trackInfo"
+        [nxTrack]="{
+          label: 'footer-next' | quoteLiteral,
+          title: 'header' | quoteLiteral,
+          isClient: 'false'
+        }"
         [nxTrackEvents]="['click']"
         (click)="onIsClientChange(false)"
       ></button>

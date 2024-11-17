@@ -7,10 +7,11 @@ import { NxDialogService } from '@aposin/ng-aquila/modal';
 import { IndexedData } from '@shagui/ng-shagui/core';
 import { QuoteComponent } from 'src/app/core/models';
 import { RoutingService } from 'src/app/core/services';
+import { QuoteTrackDirective } from 'src/app/core/tracking';
 import { HeaderTitleComponent, IconCardComponent } from 'src/app/shared/components';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
+import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 import { DrivingLicenseIcons } from './models';
-import { QuoteTrackDirective, TrackInfo } from 'src/app/core/tracking';
 
 @Component({
   selector: 'quote-driving-license-location',
@@ -23,6 +24,7 @@ import { QuoteTrackDirective, TrackInfo } from 'src/app/core/tracking';
     NxCopytextModule,
     NxHeadlineModule,
     QuoteLiteralDirective,
+    QuoteLiteralPipe,
     QuoteTrackDirective
   ],
   templateUrl: './driving-license-location.component.html',
@@ -40,15 +42,6 @@ export class DrivingLicenseLocationComponent extends QuoteComponent implements O
 
   ngOnInit(): void {
     this.selectedLocation = this.drivenLicenseCountries.find(country => country.index === this._contextData.driven.licenseCountry);
-  }
-
-  public get trackInfo(): Partial<TrackInfo> {
-    return {
-      ...this._trackInfo,
-      label: this.quoteLiteral.transform('footer-next'),
-      title: this.quoteLiteral.transform('header'),
-      drivenLicenseCountry: this.selectedLocation?.index
-    };
   }
 
   public selectLocation(icon: IndexedData) {

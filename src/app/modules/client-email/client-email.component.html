@@ -35,5 +35,12 @@
       </div>
     </form>
   </section>
-  <quote-footer [data]="_contextData" [trackInfo]="trackInfo" (uiOnNext)="updateValidData()" />
+  <quote-footer
+    [data]="_contextData"
+    [trackInfo]="{
+    title: 'header' | quoteLiteral,
+    email: form.get('email')?.value,
+    }"
+    (uiOnNext)="updateValidData()"
+  />
 </article>

@@ -3,6 +3,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { ContextDataService } from '@shagui/ng-shagui/core';
 import { OfferingPriceModel } from 'src/app/core/models';
 import { ContextDataServiceStub } from 'src/app/core/stub';
+import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 import { QuoteOfferingPriceCardComponent } from './offering-price-card.component';
 
 describe('QuoteOfferingPriceCardComponent', () => {
@@ -11,12 +12,14 @@ describe('QuoteOfferingPriceCardComponent', () => {
 
   beforeEach(async () => {
     const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate']);
+    const quoteLiteralPipeSpy = jasmine.createSpyObj('QuoteLiteralPipe', ['transform']);
 
     await TestBed.configureTestingModule({
       imports: [QuoteOfferingPriceCardComponent],
       providers: [
         { provide: ContextDataService, useClass: ContextDataServiceStub },
-        { provide: TranslateService, useValue: translateServiceSpy }
+        { provide: TranslateService, useValue: translateServiceSpy },
+        { provide: QuoteLiteralPipe, useValue: quoteLiteralPipeSpy }
       ]
     }).compileComponents();
   });

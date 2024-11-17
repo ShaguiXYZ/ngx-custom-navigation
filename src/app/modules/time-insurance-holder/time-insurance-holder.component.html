@@ -19,6 +19,11 @@
                       'literal-year': { value: item > 1 ? 'Label.Years' : 'Label.Year', type: 'translate' }
                     })
         "
+        [nxTrack]="{
+          title: 'header' | quoteLiteral,
+          yearsAsOwner: item.toString(),
+        }"
+        [nxTrackEvents]="['click']"
         (uiSelect)="selectData(item)"
       />
     </div>

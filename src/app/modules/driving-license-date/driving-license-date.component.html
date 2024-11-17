@@ -27,5 +27,12 @@
       </nx-formfield>
     </form>
   </section>
-  <quote-footer [data]="_contextData" [trackInfo]="trackInfo" (uiOnNext)="updateValidData()" />
+  <quote-footer
+    [data]="_contextData"
+    [trackInfo]="{
+      title: 'header' | quoteLiteral,
+      drivenLicenseDate: form.get('licenseDate')?.value?.format(dateFormat)
+    }"
+    (uiOnNext)="updateValidData()"
+  />
 </article>

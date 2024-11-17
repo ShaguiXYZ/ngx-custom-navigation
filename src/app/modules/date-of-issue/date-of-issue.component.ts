@@ -8,7 +8,6 @@ import moment, { DurationInputArg2, Moment } from 'moment';
 import { DEFAULT_DATE_FORMAT, DEFAULT_DATE_FORMATS } from 'src/app/core/constants';
 import { isBetweenDates } from 'src/app/core/form';
 import { QuoteComponent } from 'src/app/core/models';
-import { TrackInfo } from 'src/app/core/tracking';
 import { HeaderTitleComponent, QuoteFooterComponent } from 'src/app/shared/components';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
@@ -32,6 +31,7 @@ import { QuoteLiteralPipe } from 'src/app/shared/pipes';
   providers: [{ provide: NX_DATE_LOCALE, useValue: 'es-ES' }]
 })
 export class DateOfIssueComponent extends QuoteComponent implements OnInit {
+  public dateFormat = DEFAULT_DATE_FORMAT;
   public dateFormats = DEFAULT_DATE_FORMATS;
   public form!: FormGroup;
   public expirationInfo: { unit: DurationInputArg2; value: number } = {
@@ -48,15 +48,6 @@ export class DateOfIssueComponent extends QuoteComponent implements OnInit {
 
   ngOnInit(): void {
     this.createForm();
-  }
-
-  public get trackInfo(): Partial<TrackInfo> {
-    return {
-      ...this._trackInfo,
-      label: this.quoteLiteral.transform('footer-next'),
-      title: this.quoteLiteral.transform('header'),
-      dateOfIssue: this.form.controls['dateOfIssue'].value?.format(DEFAULT_DATE_FORMAT)
-    };
   }
 
   public override canDeactivate = (): boolean => this.form.valid;

@@ -7,8 +7,10 @@ import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
 import { NxInputModule } from '@aposin/ng-aquila/input';
 import { CubicCapacityModel, FuelModel, QuoteComponent, VehicleClassesModel } from 'src/app/core/models';
 import { RoutingService, VehicleService } from 'src/app/core/services';
+import { QuoteTrackDirective } from 'src/app/core/tracking';
 import { HeaderTitleComponent, SelectableOptionComponent } from 'src/app/shared/components';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
+import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 
 @Component({
   selector: 'quote-vehicle-fuel',
@@ -23,7 +25,9 @@ import { QuoteLiteralDirective } from 'src/app/shared/directives';
     NxCopytextModule,
     NxFormfieldModule,
     NxInputModule,
-    QuoteLiteralDirective
+    QuoteLiteralDirective,
+    QuoteTrackDirective,
+    QuoteLiteralPipe
   ],
   providers: [VehicleService],
   standalone: true

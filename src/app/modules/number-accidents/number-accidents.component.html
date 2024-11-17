@@ -15,7 +15,16 @@
     @for (item of accidents; track item) {
     <div class="selectable-row">
       @if(item === 0) {
-      <quote-text-card [selected]="selectedAccidents === 0" [data]="'no' | quoteLiteral" (uiSelect)="selectAccidents(0)" />
+      <quote-text-card
+        [selected]="selectedAccidents === 0"
+        [data]="'no' | quoteLiteral"
+        [nxTrack]="{
+          title: 'header' | quoteLiteral,
+          selectedAccidents: item.toString()
+        }"
+        [nxTrackEvents]="['click']"
+        (uiSelect)="selectAccidents(0)"
+      />
       } @else {
       <quote-text-card
         [selected]="selectedAccidents === item"
@@ -24,6 +33,11 @@
             | quoteLiteral
               : ($last ? { value: item.toString(), 'or-more': { value: 'Label.OrMore', type: 'translate' } } : { value: item.toString() })
         "
+        [nxTrack]="{
+          title: 'header' | quoteLiteral,
+          selectedAccidents: item.toString()
+        }"
+        [nxTrackEvents]="['click']"
         (uiSelect)="selectAccidents(item)"
       />
       }

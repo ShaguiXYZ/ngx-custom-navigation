@@ -12,7 +12,16 @@
 
     @for(model of models; track $index) {
     <div class="selectable-row">
-      <quote-text-card [selected]="model === selectedModel" [data]="model" (uiSelect)="selectModel(model)" />
+      <quote-text-card
+        [selected]="model === selectedModel"
+        [data]="model"
+        [nxTrack]="{
+          title: 'header' | quoteLiteral,
+          model
+        }"
+        [nxTrackEvents]="['click']"
+        (uiSelect)="selectModel(model)"
+      />
     </div>
     }
   </div>

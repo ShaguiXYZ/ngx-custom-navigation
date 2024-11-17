@@ -23,5 +23,5 @@ export namespace SignedModel {
     }
   };
 
-  const dataHash = (signedModel: SignedModel): string => CryptoJS.SHA256(JSON.stringify(signedModel)).toString(CryptoJS.enc.Hex);
+  const dataHash = (model: SignedModel): string => CryptoJS.SHA256(JSON.stringify(model)).toString(CryptoJS.enc.Hex);
 }

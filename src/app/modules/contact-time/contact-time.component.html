@@ -28,5 +28,12 @@
       </section>
     </article>
   </section>
-  <quote-footer [data]="_contextData" [trackInfo]="trackInfo" (uiOnNext)="updateValidData()" />
+  <quote-footer
+    [data]="_contextData"
+    [trackInfo]="{
+      title: 'header' | quoteLiteral,
+      contactHour: selectedHour
+    }"
+    (uiOnNext)="updateValidData()"
+  />
 </article>

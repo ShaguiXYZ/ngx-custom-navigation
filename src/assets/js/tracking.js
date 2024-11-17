@@ -3,14 +3,9 @@
 
   _satellite.track = function (event, data) {
     try {
-      var digitalData = globalThis.digitalData ?? {};
+      var digitalData = data ?? globalThis.digitalData ?? {};
 
-      digitalData = data ? Object.assign(digitalData, data) : digitalData;
-
-      console.group('Track event:', event);
-      data && console.log('Track info:', data);
-      console.log('Track digital data:', digitalData);
-      console.groupEnd();
+      console.log('Track digital data:', event, digitalData);
     } catch (error) {
       console.error('TrackError:', error.message);
     }

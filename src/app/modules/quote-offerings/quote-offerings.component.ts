@@ -9,6 +9,7 @@ import { QuoteOfferingCoveragesComponent } from 'src/app/shared/components';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 import { QuoteOfferingPriceCardComponent } from './components';
 import { Subscription } from 'rxjs';
+import { QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
 
 @Component({
   selector: 'quote-quote-offerings',
@@ -59,6 +60,7 @@ export class QuoteOfferingsComponent extends QuoteComponent implements OnInit, O
 
     Promise.resolve().then(() => {
       SignedModel.init(this._contextData);
+      this.contextDataService.set(QUOTE_CONTEXT_DATA, this._contextData);
       console.log('QuoteOfferingsComponent ngOnInit', this._contextData);
     });
 

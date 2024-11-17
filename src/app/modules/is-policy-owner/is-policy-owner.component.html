@@ -9,7 +9,10 @@
         nxButton="tertiary medium"
         type="button"
         nxQuoteLiteral="yes"
-        [nxTrack]="trackInfo"
+        [nxTrack]="{
+          title: 'header' | quoteLiteral,
+          isPolicyOwner: 'true'
+        }"
         [nxTrackEvents]="['click']"
         (click)="onIsPolicyOwnerChange(true)"
       ></button>
@@ -19,7 +22,10 @@
         nxButton="tertiary medium"
         type="button"
         nxQuoteLiteral="no"
-        [nxTrack]="trackInfo"
+        [nxTrack]="{
+          title: 'header' | quoteLiteral,
+          isPolicyOwner: 'false'
+        }"
         [nxTrackEvents]="['click']"
         (click)="onIsPolicyOwnerChange(false)"
       ></button>

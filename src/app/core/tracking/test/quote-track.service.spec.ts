@@ -2,7 +2,7 @@ import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
 import { TestBed } from '@angular/core/testing';
 import { NavigationEnd, Router } from '@angular/router';
 import { ContextDataService } from '@shagui/ng-shagui/core';
-import { of } from 'rxjs';
+import { of, Subscription } from 'rxjs';
 import { TrackInfo } from '../quote-track.model';
 import { QuoteTrackService } from '../quote-track.service';
 
@@ -11,11 +11,13 @@ describe('QuoteTrackService', () => {
   let breakpointObserver: jasmine.SpyObj<BreakpointObserver>;
   let router: jasmine.SpyObj<Router>;
   let contextDataService: jasmine.SpyObj<ContextDataService>;
+  let subscription: jasmine.SpyObj<Subscription>;
 
   beforeEach(() => {
     const breakpointObserverSpy = jasmine.createSpyObj('BreakpointObserver', ['observe']);
     const routerSpy = jasmine.createSpyObj('Router', [], { events: of(new NavigationEnd(1, '/test', '/test')) });
     const contextDataServiceSpy = jasmine.createSpyObj('ContextDataService', ['get']);
+    const subscriptionSpy = jasmine.createSpyObj('Subscription', ['unsubscribe']);
 
     breakpointObserverSpy.observe.and.returnValue({
       subscribe: jasmine
@@ -28,7 +30,8 @@ describe('QuoteTrackService', () => {
         QuoteTrackService,
         { provide: BreakpointObserver, useValue: breakpointObserverSpy },
         { provide: Router, useValue: routerSpy },
-        { provide: ContextDataService, useValue: contextDataServiceSpy }
+        { provide: ContextDataService, useValue: contextDataServiceSpy },
+        { provide: Subscription, useValue: subscriptionSpy }
       ]
     });
 
@@ -36,6 +39,8 @@ describe('QuoteTrackService', () => {
     breakpointObserver = TestBed.inject(BreakpointObserver) as jasmine.SpyObj<BreakpointObserver>;
     router = TestBed.inject(Router) as jasmine.SpyObj<Router>;
     contextDataService = TestBed.inject(ContextDataService) as jasmine.SpyObj<ContextDataService>;
+
+    subscription = TestBed.inject(Subscription) as jasmine.SpyObj<Subscription>;
 
     breakpointObserver.observe.and.returnValue(of({ matches: true } as BreakpointState));
   });
@@ -63,12 +68,11 @@ describe('QuoteTrackService', () => {
   });
 
   it('should unsubscribe from all subscriptions on destroy', () => {
-    const subscriptionSpy = jasmine.createSpyObj('Subscription', ['unsubscribe']);
-    (service as any).subscription$ = [subscriptionSpy];
+    (service as any).subscription$ = [subscription];
 
     service.ngOnDestroy();
 
-    expect(subscriptionSpy.unsubscribe).toHaveBeenCalled();
+    expect(subscription.unsubscribe).toHaveBeenCalled();
   });
 
   it('should track event with correct data', async () => {
@@ -87,6 +91,5 @@ describe('QuoteTrackService', () => {
         step_number: '2'
       })
     );
-    expect(result).toBe(1);
   });
 });

@@ -8,7 +8,6 @@ import moment, { Moment } from 'moment';
 import { DEFAULT_DATE_FORMAT, DEFAULT_DATE_FORMATS } from 'src/app/core/constants';
 import { isOlderThanYears } from 'src/app/core/form';
 import { QuoteComponent } from 'src/app/core/models';
-import { TrackInfo } from 'src/app/core/tracking';
 import { HeaderTitleComponent, QuoteFooterComponent } from 'src/app/shared/components';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
@@ -32,6 +31,7 @@ import { QuoteLiteralPipe } from 'src/app/shared/pipes';
   providers: [{ provide: NX_DATE_LOCALE, useValue: 'es-ES' }]
 })
 export class BirthdateComponent extends QuoteComponent implements OnInit {
+  public dateFormat = DEFAULT_DATE_FORMAT;
   public dateFormats = DEFAULT_DATE_FORMATS;
   public form!: FormGroup;
   public birthdateFromContext: Moment | undefined;
@@ -42,15 +42,6 @@ export class BirthdateComponent extends QuoteComponent implements OnInit {
 
   ngOnInit(): void {
     this.createForm();
-  }
-
-  public get trackInfo(): Partial<TrackInfo> {
-    return {
-      ...this._trackInfo,
-      label: this.quoteLiteral.transform('footer-next'),
-      title: this.quoteLiteral.transform('header'),
-      birthdate: this.form.controls['birthdate'].value?.format(DEFAULT_DATE_FORMAT)
-    };
   }
 
   public override canDeactivate = (): boolean => this.form.valid;
@@ -72,11 +63,8 @@ export class BirthdateComponent extends QuoteComponent implements OnInit {
       this.birthdateFromContext = moment(new Date(this._contextData.personalData.birthdate));
     }
 
-    this.form = this.fb.group(
-      {
-        birthdate: new FormControl(this.birthdateFromContext, [Validators.required, isOlderThanYears(this.minValue)])
-      },
-      { updateOn: 'blur' }
-    );
+    this.form = this.fb.group({
+      birthdate: new FormControl(this.birthdateFromContext, [Validators.required, isOlderThanYears(this.minValue)])
+    });
   }
 }

@@ -10,6 +10,7 @@ import { AppContextData, QuoteModel } from 'src/app/core/models';
 import { RoutingService } from 'src/app/core/services';
 import { QuoteTrackDirective, TrackInfo } from 'src/app/core/tracking';
 import { QuoteLiteralDirective } from '../../directives';
+import { QuoteLiteralPipe } from '../../pipes';
 import { QuoteFooterConfig } from './models';
 
 @Component({
@@ -29,9 +30,6 @@ export class QuoteFooterComponent implements OnInit, OnDestroy {
     showBack: false
   };
 
-  @Input()
-  public trackInfo: Partial<TrackInfo> = {};
-
   @Output()
   public uiOnNext: EventEmitter<void> = new EventEmitter<void>();
 
@@ -41,6 +39,10 @@ export class QuoteFooterComponent implements OnInit, OnDestroy {
   public _mobileMode?: boolean;
   public _observedMobileMode?: boolean;
 
+  private _trackInfo: Partial<TrackInfo> = {};
+  private _trackFooterInfo: Partial<TrackInfo> = {};
+
+  private readonly quoteLiteralPipe = inject(QuoteLiteralPipe);
   private readonly subscription$: Subscription[] = [];
 
   private readonly breakpointObserver = inject(BreakpointObserver);
@@ -54,11 +56,22 @@ export class QuoteFooterComponent implements OnInit, OnDestroy {
         .subscribe((state: BreakpointState) => (this._observedMobileMode = state.breakpoints[Breakpoints.HandsetPortrait]))
     );
 
+    this._trackFooterInfo = { label: this.quoteLiteralPipe.transform('footer-next') };
+
     !this.config.ignoreQuoteConfig && this.footerButtonProperties();
   }
 
   ngOnDestroy(): void {
     this.subscription$.forEach(subscription => subscription.unsubscribe());
+  }
+
+  public get trackInfo(): Partial<TrackInfo> {
+    return { ...this._trackFooterInfo, ...this._trackInfo };
+  }
+
+  @Input()
+  public set trackInfo(value: Partial<TrackInfo>) {
+    this._trackInfo = value;
   }
 
   get mobileMode(): boolean | undefined {

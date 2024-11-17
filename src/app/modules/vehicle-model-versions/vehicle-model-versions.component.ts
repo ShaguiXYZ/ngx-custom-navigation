@@ -9,6 +9,7 @@ import { debounceTime, distinctUntilChanged, fromEvent, map, Subscription } from
 import { DEBOUNCE_TIME } from 'src/app/core/constants';
 import { ModelVersionModel, QuoteComponent } from 'src/app/core/models';
 import { RoutingService, VehicleService } from 'src/app/core/services';
+import { QuoteTrackDirective } from 'src/app/core/tracking';
 import { HeaderTitleComponent, TextCardComponent } from 'src/app/shared/components';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
@@ -27,6 +28,7 @@ import { QuoteLiteralPipe } from 'src/app/shared/pipes';
     NxInputModule,
     ReactiveFormsModule,
     QuoteLiteralDirective,
+    QuoteTrackDirective,
     QuoteLiteralPipe
   ],
   providers: [VehicleService],

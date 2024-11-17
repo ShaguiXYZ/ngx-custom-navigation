@@ -9,6 +9,7 @@ import { ContextDataService } from '@shagui/ng-shagui/core';
 import { ContextDataServiceStub } from 'src/app/core/stub';
 import { HeaderTitleComponent, QuoteFooterComponent } from 'src/app/shared/components';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
+import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 import { ApologyComponent } from './apology-screen.component';
 
 describe('ApologyComponent', () => {
@@ -17,6 +18,7 @@ describe('ApologyComponent', () => {
 
   beforeEach(async () => {
     const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate']);
+    const quoteLiteralPipeSpy = jasmine.createSpyObj('QuoteLiteralPipe', ['transform']);
 
     await TestBed.configureTestingModule({
       declarations: [],
@@ -33,7 +35,8 @@ describe('ApologyComponent', () => {
       ],
       providers: [
         { provide: ContextDataService, useClass: ContextDataServiceStub },
-        { provide: TranslateService, useValue: translateServiceSpy }
+        { provide: TranslateService, useValue: translateServiceSpy },
+        { provide: QuoteLiteralPipe, useValue: quoteLiteralPipeSpy }
       ]
     }).compileComponents();
   });

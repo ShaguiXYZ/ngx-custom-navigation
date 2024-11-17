@@ -9,7 +9,7 @@ import { debounceTime, distinctUntilChanged, fromEvent, Subscription } from 'rxj
 import { DEBOUNCE_TIME } from 'src/app/core/constants';
 import { IIconData, QuoteComponent } from 'src/app/core/models';
 import { InsuranceCompaniesService, RoutingService } from 'src/app/core/services';
-import { QuoteTrackDirective, TrackInfo } from 'src/app/core/tracking';
+import { QuoteTrackDirective } from 'src/app/core/tracking';
 import { HeaderTitleComponent, IconCardComponent, TextCardComponent } from 'src/app/shared/components';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
@@ -29,8 +29,8 @@ import { InsuranceComponentService } from './services';
     NxInputModule,
     ReactiveFormsModule,
     QuoteLiteralDirective,
-    QuoteLiteralPipe,
-    QuoteTrackDirective
+    QuoteTrackDirective,
+    QuoteLiteralPipe
   ],
   providers: [InsuranceComponentService, InsuranceCompaniesService],
   standalone: true
@@ -68,15 +68,6 @@ export class InsuranceCompaniesComponent extends QuoteComponent implements OnIni
 
   ngOnDestroy(): void {
     this.subscription$.forEach(subscription => subscription.unsubscribe());
-  }
-
-  public get trackInfo(): Partial<TrackInfo> {
-    return {
-      ...this._trackInfo,
-      label: this.quoteLiteral.transform('footer-next'),
-      title: this.quoteLiteral.transform('header'),
-      insuranceCompany: this.selectedCompany?.index
-    };
   }
 
   public override canDeactivate = (): boolean => this.isValidData();

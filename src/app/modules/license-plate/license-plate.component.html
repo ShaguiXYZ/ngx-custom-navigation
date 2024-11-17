@@ -13,9 +13,24 @@
       </nx-formfield>
     </form>
   </section>
-  <quote-footer>
+  <quote-footer
+    [trackInfo]="{
+      title: 'header' | quoteLiteral,
+      plateNumber: form.get('plateNumber')?.value
+    }"
+  >
     <div class="extra__footer__options">
-      <button class="nx-margin-y-2xs w-100" nxButton="tertiary small" type="button" (click)="continueWithOutLicensePlate()">
+      <button
+        class="nx-margin-y-2xs w-100"
+        nxButton="tertiary small"
+        type="button"
+        [nxTrack]="{
+          title: 'header' | quoteLiteral,
+          plateNumber: ''
+        }"
+        [nxTrackEvents]="['click']"
+        (click)="continueWithOutLicensePlate()"
+      >
         <span nxCopytext="medium" class="uppercase nx-font-weight-bold" nxQuoteLiteral="continue-without-license-plate"></span>
       </button>
     </div>
