@@ -1,4 +1,4 @@
-import { HttpStatusCode } from '@angular/common/http';
+import { HttpParams, HttpStatusCode } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { HttpService, TTL, UniqueIds } from '@shagui/ng-shagui/core';
 import { catchError, firstValueFrom, map } from 'rxjs';
@@ -28,9 +28,12 @@ export class VehicleService {
       return Promise.resolve({});
     }
 
+    const httpParams = new HttpParams().appendAll({ plate });
+
     return firstValueFrom(
       this.http
         .get<QuoteVehicleModel[]>(`${environment.baseUrl}/plate`, {
+          clientOptions: { params: httpParams },
           responseStatusMessage: {
             [HttpStatusCode.NotFound]: { text: 'Notifications.VehicleNotFound' }
           },
@@ -47,13 +50,16 @@ export class VehicleService {
   }
 
   public getBrands(brand?: string): Promise<string[]> {
-    if (!brand?.trim()) {
-      return Promise.resolve([]);
+    const httpParams = new HttpParams();
+
+    if (brand?.trim()) {
+      httpParams.set('brand', brand);
     }
 
     return firstValueFrom(
       this.http
         .get<string[]>(`${environment.baseUrl}/brand`, {
+          clientOptions: { params: httpParams },
           responseStatusMessage: {
             [HttpStatusCode.NotFound]: { text: 'Notifications.BrandsNotFound' }
           },
@@ -73,9 +79,11 @@ export class VehicleService {
       return Promise.resolve([]);
     }
 
+    const httpParams = new HttpParams().appendAll({ brand });
     return firstValueFrom(
       this.http
         .get<string[]>(`${environment.baseUrl}/model`, {
+          clientOptions: { params: httpParams },
           responseStatusMessage: {
             [HttpStatusCode.NotFound]: { text: 'Notifications.ModelsNotFound' }
           },
@@ -99,9 +107,12 @@ export class VehicleService {
       return Promise.resolve([]);
     }
 
+    const httpParams = new HttpParams().appendAll({ model });
+
     return firstValueFrom(
       this.http
         .get<ModelVersionModel[]>(`${environment.baseUrl}/version`, {
+          clientOptions: { params: httpParams },
           responseStatusMessage: {
             [HttpStatusCode.NotFound]: { text: 'Notifications.ModelVersionsNotFound' }
           },
@@ -121,10 +132,12 @@ export class VehicleService {
 
   public getFuelTypes(vehicle: QuoteVehicleModel): Promise<FuelModel[]> {
     const { make, model } = vehicle;
+    const httpParams = new HttpParams().appendAll({ make: make || '', model: model || '' });
 
     return firstValueFrom(
       this.http
         .get<FuelDTO[]>(`${environment.baseUrl}/fuel`, {
+          clientOptions: { params: httpParams },
           responseStatusMessage: {
             [HttpStatusCode.NotFound]: { text: 'Notifications.FuelsNotFound' }
           },
@@ -143,10 +156,12 @@ export class VehicleService {
 
   public cubicCapacities(vehicle: QuoteVehicleModel): Promise<CubicCapacityModel[]> {
     const { make, model } = vehicle;
+    const httpParams = new HttpParams().appendAll({ make: make || '', model: model || '' });
 
     return firstValueFrom(
       this.http
         .get<CubicCapacityDTO[]>(`${environment.baseUrl}/cubic-capacity`, {
+          clientOptions: { params: httpParams },
           responseStatusMessage: {
             [HttpStatusCode.NotFound]: { text: 'Notifications.CubicCapacitiesNotFound' }
           },
@@ -165,11 +180,12 @@ export class VehicleService {
 
   public getVehicleClasses(vehicle: QuoteVehicleModel): Promise<VehicleClassesModel[]> {
     const { make, model } = vehicle;
+    const httpParams = new HttpParams().appendAll({ make: make || '', model: model || '' });
 
     return firstValueFrom(
       this.http
         .get<VehicleClassesDTO[]>(`${environment.baseUrl}/power`, {
-          // clientOptions: { params },
+          clientOptions: { params: httpParams },
           responseStatusMessage: {
             [HttpStatusCode.NotFound]: { text: 'Notifications.PowersNotFound' }
           },
