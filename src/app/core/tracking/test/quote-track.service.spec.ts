@@ -41,6 +41,7 @@ describe('QuoteTrackService', () => {
     contextDataService = TestBed.inject(ContextDataService) as jasmine.SpyObj<ContextDataService>;
 
     subscription = TestBed.inject(Subscription) as jasmine.SpyObj<Subscription>;
+    subscription.unsubscribe.and.stub();
 
     breakpointObserver.observe.and.returnValue(of({ matches: true } as BreakpointState));
   });

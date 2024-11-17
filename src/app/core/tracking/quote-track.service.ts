@@ -52,7 +52,7 @@ export class QuoteTrackService implements OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.subscription$.forEach(sub => sub?.unsubscribe());
+    this.subscription$.forEach(sub => sub?.unsubscribe?.());
   }
 
   public trackEvent = async (eventType: TrackEventType, data: Partial<TrackInfo>): Promise<number> => {
