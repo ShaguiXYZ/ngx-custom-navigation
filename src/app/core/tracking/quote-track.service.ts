@@ -23,8 +23,6 @@ export class QuoteTrackService implements OnDestroy {
   private readonly contextDataService = inject(ContextDataService);
 
   constructor() {
-    this.headData();
-
     this.subscription$.push(
       this.breakpointObserver
         .observe([Breakpoints.HandsetPortrait, Breakpoints.TabletPortrait, Breakpoints.WebPortrait])
@@ -49,10 +47,12 @@ export class QuoteTrackService implements OnDestroy {
       this.trackFn('view');
       this.referrer = event.url;
     });
+
+    this.headData();
   }
 
   ngOnDestroy(): void {
-    this.subscription$.forEach(sub => sub.unsubscribe());
+    this.subscription$.forEach(sub => sub?.unsubscribe());
   }
 
   public trackEvent = async (eventType: TrackEventType, data: Partial<TrackInfo>): Promise<number> => {
