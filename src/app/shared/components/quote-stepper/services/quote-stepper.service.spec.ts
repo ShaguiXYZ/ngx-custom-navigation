@@ -1,8 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { ContextDataService } from '@shagui/ng-shagui/core';
 import { Subject } from 'rxjs';
-import { AppContextData } from 'src/app/core/models';
-import { Stepper } from 'src/app/shared/models';
+import { AppContextData, Stepper } from 'src/app/core/models';
 import { QuoteStepperService } from './quote-stepper.service';
 
 describe('QuoteStepperService', () => {

@@ -2,10 +2,9 @@ import { Injectable, OnDestroy, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { ContextDataService, deepCopy } from '@shagui/ng-shagui/core';
 import { Subscription } from 'rxjs';
-import { Step } from '../../shared/models';
 import { QUOTE_APP_CONTEXT_DATA, QUOTE_CONTEXT_DATA } from '../constants';
 import { ConditionEvaluation } from '../lib';
-import { AppContextData, NextOption, Page, QuoteModel } from '../models';
+import { AppContextData, NextOption, Page, QuoteModel, Step } from '../models';
 import { ServiceActivatorService } from './service-activator.service';
 
 @Injectable({ providedIn: 'root' })

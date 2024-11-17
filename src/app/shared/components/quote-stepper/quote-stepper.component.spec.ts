@@ -3,12 +3,12 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NxCopytextModule } from '@aposin/ng-aquila/copytext';
 import { NxIconModule } from '@aposin/ng-aquila/icon';
 import { NxTooltipModule } from '@aposin/ng-aquila/tooltip';
+import { ContextDataService } from '@shagui/ng-shagui/core';
 import { of } from 'rxjs';
-import { Step, Stepper } from '../../models/stepper.model';
+import { Step, Stepper } from 'src/app/core/models';
 import { LiteralToStringPipe } from '../../pipes';
 import { QuoteStepperComponent } from './quote-stepper.component';
 import { QuoteStepperService } from './services';
-import { ContextDataService } from '@shagui/ng-shagui/core';
 
 describe('QuoteStepperComponent', () => {
   let component: QuoteStepperComponent;

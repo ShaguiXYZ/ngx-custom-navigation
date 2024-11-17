@@ -3,9 +3,20 @@ import { TranslateService } from '@ngx-translate/core';
 import { ContextDataService, DataInfo, HttpService, UniqueIds } from '@shagui/ng-shagui/core';
 import { firstValueFrom, map } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { Step, Stepper, StepperDTO } from '../../shared/models';
 import { QUOTE_APP_CONTEXT_DATA, QUOTE_CONTEXT_DATA, QUOTE_ERROR_PAGE_ID } from '../constants';
-import { AppContextData, Configuration, ConfigurationDTO, Links, LiteralModel, Literals, Page, QuoteModel } from '../models';
+import {
+  AppContextData,
+  Configuration,
+  ConfigurationDTO,
+  Links,
+  LiteralModel,
+  Literals,
+  Page,
+  QuoteModel,
+  Step,
+  Stepper,
+  StepperDTO
+} from '../models';
 import { LiteralsService } from './literals.service';
 
 @Injectable({ providedIn: 'root' })

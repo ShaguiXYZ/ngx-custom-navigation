@@ -6,8 +6,7 @@ import { NxTooltipModule } from '@aposin/ng-aquila/tooltip';
 import { ContextDataService } from '@shagui/ng-shagui/core';
 import { Subscription } from 'rxjs';
 import { QUOTE_APP_CONTEXT_DATA } from 'src/app/core/constants';
-import { AppContextData } from 'src/app/core/models';
-import { Step, Stepper } from '../../models/stepper.model';
+import { AppContextData, Step, Stepper } from 'src/app/core/models';
 import { QuoteLiteralPipe } from '../../pipes';
 import { QuoteStepperService } from './services';
 

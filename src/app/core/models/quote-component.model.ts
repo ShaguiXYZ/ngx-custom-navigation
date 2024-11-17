@@ -4,8 +4,6 @@ import { ContextDataService, deepCopy } from '@shagui/ng-shagui/core';
 import { QUOTE_APP_CONTEXT_DATA, QUOTE_CONTEXT_DATA } from '../constants';
 import { AppContextData } from './app-context-data.model';
 import { QuoteModel } from './quote.model';
-import { TrackInfo } from '../tracking';
-import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 
 @Component({
   template: ''
@@ -15,7 +13,6 @@ export abstract class QuoteComponent {
 
   protected _contextData: QuoteModel;
 
-  protected readonly quoteLiteral = inject(QuoteLiteralPipe);
   protected readonly contextDataService = inject(ContextDataService);
 
   constructor() {

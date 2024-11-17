@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-namespace */
 import { DataInfo } from '@shagui/ng-shagui/core';
-import { StepperDTO, Steppers } from 'src/app/shared/models';
-import { LiteralModel } from './literal.model';
 import { EntryPoint } from './entry-point.model';
+import { LiteralModel } from './literal.model';
+import { StepperDTO, Steppers } from './stepper.model';
 
 export type CompareOperations = 'AND' | 'OR';
 export type Links = DataInfo;

@@ -2,9 +2,8 @@ import { inject, Injectable, OnDestroy } from '@angular/core';
 import { ContextDataService } from '@shagui/ng-shagui/core';
 import { Observable, Subject, Subscription } from 'rxjs';
 import { QUOTE_APP_CONTEXT_DATA } from 'src/app/core/constants';
-import { AppContextData } from 'src/app/core/models';
+import { AppContextData, Step, Stepper } from 'src/app/core/models';
 import { RoutingService } from 'src/app/core/services';
-import { Step, Stepper } from 'src/app/shared/models';
 
 @Injectable()
 export class QuoteStepperService implements OnDestroy {
