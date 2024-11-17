@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { TestBed } from '@angular/core/testing';
 import { ContextDataService } from '@shagui/ng-shagui/core';
+import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 import { QUOTE_APP_CONTEXT_DATA, QUOTE_CONTEXT_DATA } from '../../constants';
 import { AppContextData } from '../app-context-data.model';
 import { QuoteComponent } from '../quote-component.model';
@@ -16,10 +17,15 @@ describe('QuoteComponent', () => {
   let contextDataService: jasmine.SpyObj<ContextDataService>;
 
   beforeEach(() => {
+    const quoteLiteralPipeSpy = jasmine.createSpyObj('QuoteLiteralPipe', ['transform']);
     const contextDataServiceSpy = jasmine.createSpyObj('ContextDataService', ['get', 'set']);
 
     TestBed.configureTestingModule({
-      providers: [TestQuoteComponent, { provide: ContextDataService, useValue: contextDataServiceSpy }]
+      providers: [
+        TestQuoteComponent,
+        { provide: ContextDataService, useValue: contextDataServiceSpy },
+        { provide: QuoteLiteralPipe, useValue: quoteLiteralPipeSpy }
+      ]
     });
 
     component = TestBed.inject(TestQuoteComponent);
@@ -27,7 +33,7 @@ describe('QuoteComponent', () => {
 
     contextDataService.get.and.callFake((key: string): any => {
       if (key === QUOTE_CONTEXT_DATA) {
-        return component['contextData'];
+        return component['_contextData'];
       } else if (key === QUOTE_APP_CONTEXT_DATA) {
         return {
           navigation: {

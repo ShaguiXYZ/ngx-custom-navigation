@@ -18,7 +18,7 @@
     "cubicCapacity": "1500",
     "vehicleModelVersion": "2020",
     "yearOfManufacture": 2019,
-    "vehicleTtype": "Passenger"
+    "vehicleType": "Passenger"
   },
   {
     "plateNumber": "5678FGH",
@@ -39,7 +39,7 @@
     "cubicCapacity": "2000",
     "vehicleModelVersion": "2019",
     "yearOfManufacture": 2018,
-    "vehicleTtype": "Passenger"
+    "vehicleType": "Passenger"
   },
   {
     "plateNumber": "9101IJK",
@@ -60,7 +60,7 @@
     "cubicCapacity": "1600",
     "vehicleModelVersion": "2021",
     "yearOfManufacture": 2020,
-    "vehicleTtype": "Passenger"
+    "vehicleType": "Passenger"
   },
   {
     "plateNumber": "1213LMN",
@@ -81,7 +81,7 @@
     "cubicCapacity": "1800",
     "vehicleModelVersion": "2018",
     "yearOfManufacture": 2017,
-    "vehicleTtype": "Passenger"
+    "vehicleType": "Passenger"
   },
   {
     "plateNumber": "1415OPQ",
@@ -102,7 +102,7 @@
     "cubicCapacity": "2500",
     "vehicleModelVersion": "2017",
     "yearOfManufacture": 2016,
-    "vehicleTtype": "Passenger"
+    "vehicleType": "Passenger"
   },
   {
     "plateNumber": "1617RST",
@@ -123,7 +123,7 @@
     "cubicCapacity": "2200",
     "vehicleModelVersion": "2016",
     "yearOfManufacture": 2015,
-    "vehicleTtype": "Passenger"
+    "vehicleType": "Passenger"
   },
   {
     "plateNumber": "1819UVW",
@@ -144,7 +144,7 @@
     "cubicCapacity": "1800",
     "vehicleModelVersion": "2015",
     "yearOfManufacture": 2014,
-    "vehicleTtype": "Passenger"
+    "vehicleType": "Passenger"
   },
   {
     "plateNumber": "2021XYZ",
@@ -165,7 +165,7 @@
     "cubicCapacity": "2400",
     "vehicleModelVersion": "2014",
     "yearOfManufacture": 2013,
-    "vehicleTtype": "Passenger"
+    "vehicleType": "Passenger"
   },
   {
     "plateNumber": "2223ABC",
@@ -186,7 +186,7 @@
     "cubicCapacity": "1400",
     "vehicleModelVersion": "2013",
     "yearOfManufacture": 2012,
-    "vehicleTtype": "Passenger"
+    "vehicleType": "Passenger"
   },
   {
     "plateNumber": "2425DEF",
@@ -207,7 +207,7 @@
     "cubicCapacity": "2000",
     "vehicleModelVersion": "2012",
     "yearOfManufacture": 2011,
-    "vehicleTtype": "Passenger"
+    "vehicleType": "Passenger"
   },
   {
     "plateNumber": "2627GHI",
@@ -228,7 +228,7 @@
     "cubicCapacity": "3000",
     "vehicleModelVersion": "2011",
     "yearOfManufacture": 2010,
-    "vehicleTtype": "Passenger"
+    "vehicleType": "Passenger"
   },
   {
     "plateNumber": "2829JKL",
@@ -249,7 +249,7 @@
     "cubicCapacity": "2500",
     "vehicleModelVersion": "2010",
     "yearOfManufacture": 2009,
-    "vehicleTtype": "Passenger"
+    "vehicleType": "Passenger"
   },
   {
     "plateNumber": "3031MNO",
@@ -270,7 +270,7 @@
     "cubicCapacity": "2000",
     "vehicleModelVersion": "2009",
     "yearOfManufacture": 2008,
-    "vehicleTtype": "Passenger"
+    "vehicleType": "Passenger"
   },
   {
     "plateNumber": "3233PQR",
@@ -291,6 +291,6 @@
     "cubicCapacity": "2500",
     "vehicleModelVersion": "2008",
     "yearOfManufacture": 2007,
-    "vehicleTtype": "Passenger"
+    "vehicleType": "Passenger"
   }
 ]

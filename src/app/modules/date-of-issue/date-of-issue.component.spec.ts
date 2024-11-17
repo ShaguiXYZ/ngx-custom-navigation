@@ -21,6 +21,7 @@ describe('DateOfIssueComponent', () => {
   let fixture: ComponentFixture<DateOfIssueComponent>;
 
   beforeEach(async () => {
+    const quoteLiteralPipeSpy = jasmine.createSpyObj('QuoteLiteralPipe', ['transform']);
     const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate']);
 
     await TestBed.configureTestingModule({
@@ -40,14 +41,15 @@ describe('DateOfIssueComponent', () => {
       providers: [
         { provide: NX_DATE_LOCALE, useValue: 'es-ES' },
         { provide: ContextDataService, useClass: ContextDataServiceStub },
-        { provide: TranslateService, useValue: translateServiceSpy }
+        { provide: TranslateService, useValue: translateServiceSpy },
+        { provide: QuoteLiteralPipe, useValue: quoteLiteralPipeSpy }
       ]
     }).compileComponents();
 
     fixture = TestBed.createComponent(DateOfIssueComponent);
     component = fixture.componentInstance;
 
-    component['contextData'] = {
+    component['_contextData'] = {
       client: {
         dateOfIssue: '01-01-2003'
       }
@@ -75,8 +77,8 @@ describe('DateOfIssueComponent', () => {
 
     expect(component.form.valid).toBeTrue();
     expect(component.form.touched).toBeTrue();
-    expect((component as any).contextData.client.dateOfIssue).toEqual(futureDate);
-    expect((component as any).contextData.client.expiration).toEqual(expiration.format(DEFAULT_DATE_FORMAT));
+    expect((component as any)._contextData.client.dateOfIssue).toEqual(futureDate);
+    expect((component as any)._contextData.client.expiration).toEqual(expiration.format(DEFAULT_DATE_FORMAT));
   });
 
   it('should return form validity on canDeactivate', done => {

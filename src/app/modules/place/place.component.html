@@ -17,7 +17,7 @@
       </nx-formfield>
     </form>
   </section>
-  <quote-footer [data]="contextData" (uiOnNext)="updateValidData()">
+  <quote-footer [data]="_contextData" [trackInfo]="trackInfo" (uiOnNext)="updateValidData()">
     <div class="extra__footer__info">
       <quote-footer-info icon="fa-hand-holding-heart">
         <span nxQuoteLiteral="footer-info"></span>

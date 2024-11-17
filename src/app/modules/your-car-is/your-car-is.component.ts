@@ -41,7 +41,7 @@ export class YourCarIsComponent extends QuoteComponent implements OnInit {
   private readonly vehicleService = inject(VehicleService);
 
   async ngOnInit(): Promise<void> {
-    this.selectedVehicle = this.contextData.vehicle;
+    this.selectedVehicle = this._contextData.vehicle;
 
     this.vehicleOptions = await this.vehicleService.vehicles();
   }
@@ -49,15 +49,15 @@ export class YourCarIsComponent extends QuoteComponent implements OnInit {
   public override canDeactivate = (): boolean => this.isValidData();
 
   public selectVehicle(vehicle: QuoteVehicleModel) {
-    this.contextData.vehicle = { ...this.contextData.vehicle, ...vehicle };
-    this.routingService.next(this.contextData);
+    this._contextData.vehicle = { ...this._contextData.vehicle, ...vehicle };
+    this.routingService.next(this._contextData);
   }
 
   public continue() {
     this.continueWithSelectedVehicle = false;
-    this.contextData.vehicle = QuoteVehicleModel.init();
-    this.routingService.next(this.contextData);
+    this._contextData.vehicle = QuoteVehicleModel.init();
+    this.routingService.next(this._contextData);
   }
 
-  private isValidData = (): boolean => !this.continueWithSelectedVehicle || !!this.contextData.vehicle?.make;
+  private isValidData = (): boolean => !this.continueWithSelectedVehicle || !!this._contextData.vehicle?.make;
 }

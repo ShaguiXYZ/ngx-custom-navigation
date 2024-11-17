@@ -45,7 +45,7 @@ export class LicensePlateComponent extends QuoteComponent implements OnInit, OnD
   constructor() {
     super();
 
-    this.contextData = { ...this.contextData, driven: { ...this.contextData.driven, hasDrivenLicense: true } };
+    this._contextData = { ...this._contextData, driven: { ...this._contextData.driven, hasDrivenLicense: true } };
   }
 
   ngOnInit(): void {
@@ -59,22 +59,22 @@ export class LicensePlateComponent extends QuoteComponent implements OnInit, OnD
   public override canDeactivate = (): boolean => this.updateValidData();
 
   public continueWithOutLicensePlate() {
-    this.contextData.driven.hasDrivenLicense = false;
-    this.contextData.vehicle.plateNumber = '';
-    this.routingService.next(this.contextData);
+    this._contextData.driven.hasDrivenLicense = false;
+    this._contextData.vehicle.plateNumber = '';
+    this.routingService.next(this._contextData);
   }
 
   private updateValidData = (): boolean => {
-    if (this.contextData.driven.hasDrivenLicense === false) {
+    if (this._contextData.driven.hasDrivenLicense === false) {
       return true;
     }
 
-    this.contextData.driven.hasDrivenLicense = true;
+    this._contextData.driven.hasDrivenLicense = true;
 
     this.form.markAllAsTouched();
 
     if (this.form.valid) {
-      this.contextData.vehicle.plateNumber = this.form.value.plateNumber;
+      this._contextData.vehicle.plateNumber = this.form.value.plateNumber;
     }
 
     return this.form.valid;
@@ -82,7 +82,7 @@ export class LicensePlateComponent extends QuoteComponent implements OnInit, OnD
 
   private createForm(): void {
     this.form = this.fb.group({
-      plateNumber: new FormControl(this.contextData.vehicle.plateNumber, [Validators.required])
+      plateNumber: new FormControl(this._contextData.vehicle.plateNumber, [Validators.required])
     });
 
     const plateNumberSubscription = this.form.get('plateNumber')?.valueChanges.subscribe(value => {

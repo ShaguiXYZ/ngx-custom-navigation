@@ -1,5 +1,6 @@
 import { JsonUtils } from '@shagui/ng-shagui/core';
 import { CompareOperations, Condition } from '../models';
+import { ConditionError } from '../errors';
 
 export class ConditionEvaluation {
   /**
@@ -19,13 +20,8 @@ export class ConditionEvaluation {
       return typeof contextExp === 'string'
         ? (0, eval)(`'${this.dataItemValue(data, condition.expression)}'${condition.operation ?? '==='}'${condition.value}'`)
         : (0, eval)(`${this.dataItemValue(data, condition.expression)}${condition.operation ?? '==='}${condition.value}`);
-    } catch (error) {
-      console.group('ConditionService');
-      console.error(`Error evaluating condition: ${error}`);
-      console.error(`Condition: ${JSON.stringify(condition)}`);
-      console.groupEnd();
-
-      return false;
+    } catch {
+      throw new ConditionError('Error evaluating condition', condition);
     }
   };
 

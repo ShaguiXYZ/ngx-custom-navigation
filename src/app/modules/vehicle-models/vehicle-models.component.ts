@@ -47,9 +47,9 @@ export class VehicleModelsComponent extends QuoteComponent implements OnInit, On
   private readonly fb = inject(FormBuilder);
 
   ngOnInit(): void {
-    this.selectedModel = this.contextData.vehicle.model;
+    this.selectedModel = this._contextData.vehicle.model;
 
-    this.vehicleService.getModels(this.contextData.vehicle.make, this.contextData.vehicle.model).then(models => {
+    this.vehicleService.getModels(this._contextData.vehicle.make!, this._contextData.vehicle.model).then(models => {
       this.models = models;
     });
 
@@ -67,21 +67,21 @@ export class VehicleModelsComponent extends QuoteComponent implements OnInit, On
   public selectModel(model: string) {
     this.selectedModel = model;
 
-    this.contextData.vehicle = {
-      ...this.contextData.vehicle,
+    this._contextData.vehicle = {
+      ...this._contextData.vehicle,
       model: this.selectedModel
     };
 
-    this.routingService.next(this.contextData);
+    this.routingService.next(this._contextData);
   }
 
   private updateValidData = (): boolean => {
-    return !!this.contextData.vehicle.model;
+    return !!this._contextData.vehicle.model;
   };
 
   private createForm() {
     this.form = this.fb.group({
-      searchInput: new FormControl(this.contextData.vehicle.model)
+      searchInput: new FormControl(this._contextData.vehicle.model)
     });
   }
 
@@ -93,7 +93,7 @@ export class VehicleModelsComponent extends QuoteComponent implements OnInit, On
         distinctUntilChanged()
       )
       .subscribe(
-        async () => (this.models = await this.vehicleService.getModels(this.contextData.vehicle.make, this.form.value.searchInput))
+        async () => (this.models = await this.vehicleService.getModels(this._contextData.vehicle.make!, this.form.value.searchInput))
       );
   }
 }

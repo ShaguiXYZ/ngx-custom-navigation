@@ -3,6 +3,7 @@ import { NxCopytextModule } from '@aposin/ng-aquila/copytext';
 import { hasValue } from '@shagui/ng-shagui/core';
 import { QuoteComponent } from 'src/app/core/models';
 import { RoutingService } from 'src/app/core/services';
+import { TrackInfo } from 'src/app/core/tracking';
 import { HeaderTitleComponent, QuoteFooterComponent, QuoteFooterInfoComponent, TextCardComponent } from 'src/app/shared/components';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
@@ -30,20 +31,29 @@ export class NumberAccidentsComponent extends QuoteComponent implements OnInit {
   private readonly routingService = inject(RoutingService);
 
   ngOnInit(): void {
-    this.yearsAsOwner = this.contextData.insuranceCompany.yearsAsOwner || this.yearsAsOwner;
-    this.selectedAccidents = this.contextData.client.accidents;
+    this.yearsAsOwner = this._contextData.insuranceCompany.yearsAsOwner || this.yearsAsOwner;
+    this.selectedAccidents = this._contextData.client.accidents;
 
     // @howto - Remove duplicates and sort the accidents array
     this.accidents = this.accidents.filter((value, index) => this.accidents.indexOf(value) === index).sort((a, b) => a - b);
   }
 
+  public get trackInfo(): Partial<TrackInfo> {
+    return {
+      ...this._trackInfo,
+      label: this.quoteLiteral.transform('footer-next'),
+      title: this.quoteLiteral.transform('header'),
+      accidents: this.selectedAccidents?.toString()
+    };
+  }
+
   public override canDeactivate = (): boolean => this.updateValidData();
 
   public selectAccidents(accidents: number): void {
-    this.contextData.client.accidents = accidents;
+    this._contextData.client.accidents = accidents;
 
-    this.routingService.next(this.contextData);
+    this.routingService.next(this._contextData);
   }
 
-  private updateValidData = (): boolean => hasValue(this.contextData.client.accidents);
+  private updateValidData = (): boolean => hasValue(this._contextData.client.accidents);
 }

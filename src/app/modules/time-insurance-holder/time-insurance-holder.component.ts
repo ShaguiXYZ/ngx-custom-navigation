@@ -20,16 +20,16 @@ export class TimeInsuranceHolderComponent extends QuoteComponent implements OnIn
   private readonly routingService = inject(RoutingService);
 
   ngOnInit(): void {
-    this.selectedYears = this.contextData.insuranceCompany?.yearsAsOwner;
+    this.selectedYears = this._contextData.insuranceCompany?.yearsAsOwner;
     this.yearsAsOwner = this.yearsAsOwner.filter((value, index) => this.yearsAsOwner.indexOf(value) === index).sort((a, b) => a - b);
   }
 
   public override canDeactivate = (): boolean => this.updateValidData();
 
   public selectData(years: number): void {
-    this.contextData.insuranceCompany.yearsAsOwner = years;
-    this.routingService.next(this.contextData);
+    this._contextData.insuranceCompany.yearsAsOwner = years;
+    this.routingService.next(this._contextData);
   }
 
-  private updateValidData = (): boolean => !!this.contextData.insuranceCompany?.yearsAsOwner;
+  private updateValidData = (): boolean => !!this._contextData.insuranceCompany?.yearsAsOwner;
 }

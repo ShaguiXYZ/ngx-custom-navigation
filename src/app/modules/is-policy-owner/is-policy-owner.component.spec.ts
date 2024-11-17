@@ -5,6 +5,7 @@ import { ContextDataService } from '@shagui/ng-shagui/core';
 import { QuoteModel } from 'src/app/core/models';
 import { RoutingService } from 'src/app/core/services';
 import { ContextDataServiceStub } from 'src/app/core/stub';
+import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 import { IsPolicyOwnerComponent } from './is-policy-owner.component';
 
 describe('IsPolicyOwnerComponent', () => {
@@ -13,8 +14,9 @@ describe('IsPolicyOwnerComponent', () => {
   let routingService: jasmine.SpyObj<RoutingService>;
 
   beforeEach(async () => {
-    const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate']);
+    const quoteLiteralPipeSpy = jasmine.createSpyObj('QuoteLiteralPipe', ['transform']);
     const routingServiceSpy = jasmine.createSpyObj('RoutingService', ['next']);
+    const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate']);
 
     await TestBed.configureTestingModule({
       declarations: [],
@@ -22,7 +24,8 @@ describe('IsPolicyOwnerComponent', () => {
       providers: [
         { provide: RoutingService, useValue: routingServiceSpy },
         { provide: ContextDataService, useClass: ContextDataServiceStub },
-        { provide: TranslateService, useValue: translateServiceSpy }
+        { provide: TranslateService, useValue: translateServiceSpy },
+        { provide: QuoteLiteralPipe, useValue: quoteLiteralPipeSpy }
       ]
     }).compileComponents();
   });
@@ -33,7 +36,7 @@ describe('IsPolicyOwnerComponent', () => {
 
     routingService = TestBed.inject(RoutingService) as jasmine.SpyObj<RoutingService>;
 
-    component['contextData'] = {
+    component['_contextData'] = {
       client: {
         isPolicyOwner: true
       }
@@ -61,18 +64,18 @@ describe('IsPolicyOwnerComponent', () => {
   it('should update contextData and call nextStep on onIsPolicyOwnerChange', () => {
     component.onIsPolicyOwnerChange(false);
 
-    expect(component['contextData'].client.isPolicyOwner).toBeFalse();
+    expect(component['_contextData'].client.isPolicyOwner).toBeFalse();
     expect(routingService.next).toHaveBeenCalled();
   });
 
   it('should return isPolicyOwner value from contextData', () => {
-    component['contextData'].client.isPolicyOwner = true;
+    component['_contextData'].client.isPolicyOwner = true;
 
     expect(component.isPolicyOwner).toBeTrue();
   });
 
   it('should validate data correctly in isValidData', () => {
-    component['contextData'].client.isPolicyOwner = true;
+    component['_contextData'].client.isPolicyOwner = true;
 
     expect(component['isValidData']()).toBeTrue();
 

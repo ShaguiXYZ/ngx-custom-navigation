@@ -75,15 +75,12 @@ interface VehicleData {
 }
 
 export interface QuoteVehicleModel extends Partial<VehicleData> {
-  make: string;
+  make?: string;
   yearOfManufacture?: number;
-  vehicleTtype?: string;
+  vehicleType?: string;
   creationDate?: Date;
 }
 
 export namespace QuoteVehicleModel {
-  export const init = (): QuoteVehicleModel =>
-    ({
-      make: ''
-    } as QuoteVehicleModel);
+  export const init = (): QuoteVehicleModel => ({});
 }

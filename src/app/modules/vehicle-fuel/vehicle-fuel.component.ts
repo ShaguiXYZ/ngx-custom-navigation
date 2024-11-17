@@ -43,21 +43,21 @@ export class VehicleFuelComponent extends QuoteComponent implements OnInit {
   private readonly vehicleService = inject(VehicleService);
 
   async ngOnInit(): Promise<void> {
-    this.selectedFuel = this.contextData.vehicle.fuel;
-    this.selectedCubicCapacity = this.contextData.vehicle.cubicCapacity;
-    this.selectedPower = this.contextData.vehicle.powerRange;
+    this.selectedFuel = this._contextData.vehicle.fuel;
+    this.selectedCubicCapacity = this._contextData.vehicle.cubicCapacity;
+    this.selectedPower = this._contextData.vehicle.powerRange;
 
     [this.fuels, this.cubicCapacities, this.powers] = await Promise.all([
-      this.vehicleService.getFuelTypes(this.contextData.vehicle),
-      this.vehicleService.cubicCapacities(this.contextData.vehicle),
-      this.vehicleService.getVehicleClasses(this.contextData.vehicle)
+      this.vehicleService.getFuelTypes(this._contextData.vehicle),
+      this.vehicleService.cubicCapacities(this._contextData.vehicle),
+      this.vehicleService.getVehicleClasses(this._contextData.vehicle)
     ]);
   }
 
   public override canDeactivate = (): boolean =>
-    this.contextData.vehicle.fuel !== undefined &&
-    this.contextData.vehicle.powerRange !== undefined &&
-    this.contextData.vehicle.cubicCapacity !== undefined;
+    this._contextData.vehicle.fuel !== undefined &&
+    this._contextData.vehicle.powerRange !== undefined &&
+    this._contextData.vehicle.cubicCapacity !== undefined;
 
   public async selectFuel(fuel: FuelModel) {
     this.selectedFuel = fuel;
@@ -67,8 +67,8 @@ export class VehicleFuelComponent extends QuoteComponent implements OnInit {
     this.populateData();
 
     [this.cubicCapacities, this.powers] = await Promise.all([
-      this.vehicleService.cubicCapacities(this.contextData.vehicle),
-      this.vehicleService.getVehicleClasses(this.contextData.vehicle)
+      this.vehicleService.cubicCapacities(this._contextData.vehicle),
+      this.vehicleService.getVehicleClasses(this._contextData.vehicle)
     ]);
   }
 
@@ -78,7 +78,7 @@ export class VehicleFuelComponent extends QuoteComponent implements OnInit {
 
     this.populateData();
 
-    this.powers = await this.vehicleService.getVehicleClasses(this.contextData.vehicle);
+    this.powers = await this.vehicleService.getVehicleClasses(this._contextData.vehicle);
   }
 
   public selectPower(power: VehicleClassesModel) {
@@ -90,12 +90,12 @@ export class VehicleFuelComponent extends QuoteComponent implements OnInit {
   }
 
   private navigateToNextPage() {
-    this.routingService.next(this.contextData);
+    this.routingService.next(this._contextData);
   }
 
   private populateData() {
-    this.contextData.vehicle = {
-      ...this.contextData.vehicle,
+    this._contextData.vehicle = {
+      ...this._contextData.vehicle,
       fuel: this.selectedFuel,
       cubicCapacity: this.selectedCubicCapacity,
       powerRange: this.selectedPower

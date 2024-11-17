@@ -7,6 +7,7 @@ import { RoutingService } from 'src/app/core/services';
 import { ContextDataServiceStub } from 'src/app/core/stub';
 import { VehicleTypes } from './models';
 import { VehicleTypeComponent } from './vehicle-type.component';
+import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 
 describe('VehicleTypeComponent', () => {
   let component: VehicleTypeComponent;
@@ -14,6 +15,7 @@ describe('VehicleTypeComponent', () => {
   let routingService: jasmine.SpyObj<RoutingService>;
 
   beforeEach(async () => {
+    const quoteLiteralPipeSpy = jasmine.createSpyObj('QuoteLiteralPipe', ['transform']);
     const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate']);
     const routingServiceSpy = jasmine.createSpyObj('RoutingService', ['next']);
 
@@ -22,7 +24,8 @@ describe('VehicleTypeComponent', () => {
       providers: [
         { provide: ContextDataService, useClass: ContextDataServiceStub },
         { provide: TranslateService, useValue: translateServiceSpy },
-        { provide: RoutingService, useValue: routingServiceSpy }
+        { provide: RoutingService, useValue: routingServiceSpy },
+        { provide: QuoteLiteralPipe, useValue: quoteLiteralPipeSpy }
       ]
     }).compileComponents();
   });
@@ -33,7 +36,7 @@ describe('VehicleTypeComponent', () => {
 
     routingService = TestBed.inject(RoutingService) as jasmine.SpyObj<RoutingService>;
 
-    component['contextData'] = { vehicle: { vehicleTtype: 'new' } } as QuoteModel;
+    component['_contextData'] = { vehicle: { vehicleType: 'new' } } as QuoteModel;
 
     fixture.detectChanges();
   });
@@ -45,7 +48,7 @@ describe('VehicleTypeComponent', () => {
   it('should initialize contextData and selectedType on ngOnInit', () => {
     component.ngOnInit();
 
-    expect(component['contextData']).toEqual({ vehicle: { vehicleTtype: 'new' } } as QuoteModel);
+    expect(component['_contextData']).toEqual({ vehicle: { vehicleType: 'new' } } as QuoteModel);
     expect(component.selectedType).toEqual(VehicleTypes.find(type => type.index === 'new'));
   });
 
@@ -54,18 +57,18 @@ describe('VehicleTypeComponent', () => {
     component.selectType(type);
 
     expect(component.selectedType).toEqual(type);
-    expect(component['contextData'].vehicle.vehicleTtype).toEqual('old');
+    expect(component['_contextData'].vehicle.vehicleType).toEqual('old');
     expect(routingService.next).toHaveBeenCalled();
   });
 
   it('should return true if vehicle type is valid', () => {
-    component['contextData'] = { vehicle: { vehicleTtype: 'new' } } as QuoteModel;
+    component['_contextData'] = { vehicle: { vehicleType: 'new' } } as QuoteModel;
 
     expect(component['isValidData']()).toBeTrue();
   });
 
   it('should return false if vehicle type is not valid', () => {
-    component['contextData'] = { vehicle: { vehicleTtype: undefined } } as QuoteModel;
+    component['_contextData'] = { vehicle: { vehicleType: undefined } } as QuoteModel;
 
     expect(component['isValidData']()).toBeFalse();
   });

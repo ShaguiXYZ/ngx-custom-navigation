@@ -156,13 +156,13 @@ export namespace PricingDTO {
           document: { documentType: 'N', documentNumber: model.personalData.identificationNumber },
           address: { city: model.place.location, postalCode: model.place.postalCode },
           birthDate: model.personalData.birthdate && moment(model.personalData.birthdate).format(DEFAULT_DATE_FORMAT),
-          licenseDate: model.driven.drivenLicenseDate && moment(model.driven.drivenLicenseDate).format(DEFAULT_DATE_FORMAT)
+          licenseDate: model.driven.licenseDate && moment(model.driven.licenseDate).format(DEFAULT_DATE_FORMAT)
         },
         owner: {
           document: { documentType: 'N', documentNumber: model.personalData.identificationNumber },
           address: { city: model.place.location, postalCode: model.place.postalCode },
           birthDate: model.personalData.birthdate && moment(model.personalData.birthdate).format(DEFAULT_DATE_FORMAT),
-          licenseDate: model.driven.drivenLicenseDate && moment(model.driven.drivenLicenseDate).format(DEFAULT_DATE_FORMAT)
+          licenseDate: model.driven.licenseDate && moment(model.driven.licenseDate).format(DEFAULT_DATE_FORMAT)
         },
         driver: null,
         secondDriver: null,

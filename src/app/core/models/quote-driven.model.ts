@@ -2,9 +2,9 @@
 
 export interface QuoteDrivenModel {
   hasDrivenLicense?: boolean;
-  drivenLicense?: string;
-  drivenLicenseDate?: Date;
-  drivenLicenseCountry?: string;
+  license?: string;
+  licenseDate?: Date;
+  licenseCountry?: string;
 }
 
 export namespace QuoteDrivenModel {

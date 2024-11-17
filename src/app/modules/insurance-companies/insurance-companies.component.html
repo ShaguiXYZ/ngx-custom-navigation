@@ -18,6 +18,8 @@
         [data]="icon"
         [showLabel]="false"
         [selected]="selectedCompany?.index === icon.index"
+        [nxTrack]="trackInfo"
+        [nxTrackEvents]="['click']"
         (uiSelect)="selectCompany(icon)"
       />
       }
@@ -26,7 +28,13 @@
     <div class="serached-data">
       @for (item of searchedInsurances; track item.index) {
       <div class="selectable-row">
-        <quote-text-card [selected]="selectedCompany?.index === item.index" [data]="item.data" (uiSelect)="selectCompany(item)" />
+        <quote-text-card
+          [data]="item.data"
+          [selected]="selectedCompany?.index === item.index"
+          [nxTrack]="trackInfo"
+          [nxTrackEvents]="['click']"
+          (uiSelect)="selectCompany(item)"
+        />
       </div>
       }
     </div>

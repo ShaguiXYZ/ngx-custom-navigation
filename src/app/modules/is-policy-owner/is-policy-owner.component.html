@@ -5,10 +5,24 @@
   </quote-header-title>
   <section class="form-container">
     <quote-selectable-option [selected]="isPolicyOwner">
-      <button nxButton="tertiary medium" type="button" (click)="onIsPolicyOwnerChange(true)" nxQuoteLiteral="yes"></button>
+      <button
+        nxButton="tertiary medium"
+        type="button"
+        nxQuoteLiteral="yes"
+        [nxTrack]="trackInfo"
+        [nxTrackEvents]="['click']"
+        (click)="onIsPolicyOwnerChange(true)"
+      ></button>
     </quote-selectable-option>
     <quote-selectable-option [selected]="isPolicyOwner === false">
-      <button nxButton="tertiary medium" type="button" (click)="onIsPolicyOwnerChange(false)" nxQuoteLiteral="no"></button>
+      <button
+        nxButton="tertiary medium"
+        type="button"
+        nxQuoteLiteral="no"
+        [nxTrack]="trackInfo"
+        [nxTrackEvents]="['click']"
+        (click)="onIsPolicyOwnerChange(false)"
+      ></button>
     </quote-selectable-option>
   </section>
 </article>

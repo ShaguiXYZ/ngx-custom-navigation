@@ -8,6 +8,7 @@ import { DEBOUNCE_TIME } from 'src/app/core/constants';
 import { QuoteModel } from 'src/app/core/models';
 import { InsuranceCompaniesService, RoutingService } from 'src/app/core/services';
 import { ContextDataServiceStub } from 'src/app/core/stub';
+import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 import { InsuranceCompaniesComponent } from './insurance-companies.component';
 import { InsuranceComponentService } from './services';
 
@@ -20,8 +21,9 @@ describe('InsuranceCompaniesComponent', () => {
   beforeEach(async () => {
     const insuranceComponentServiceSpy = jasmine.createSpyObj('InsuranceComponentService', ['iconInsurances']);
     const insuranceCompaniesServiceSpy = jasmine.createSpyObj('InsuranceCompaniesService', ['companies']);
-    const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate']);
+    const quoteLiteralPipeSpy = jasmine.createSpyObj('QuoteLiteralPipe', ['transform']);
     const routingServiceSpy = jasmine.createSpyObj('RoutingService', ['next']);
+    const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate']);
 
     await TestBed.configureTestingModule({
       declarations: [],
@@ -32,7 +34,8 @@ describe('InsuranceCompaniesComponent', () => {
         { provide: ContextDataService, useClass: ContextDataServiceStub },
         { provide: TranslateService, useValue: translateServiceSpy },
         { provide: InsuranceCompaniesService, useValue: insuranceCompaniesServiceSpy },
-        { provide: RoutingService, useValue: routingServiceSpy }
+        { provide: RoutingService, useValue: routingServiceSpy },
+        { provide: QuoteLiteralPipe, useValue: quoteLiteralPipeSpy }
       ]
     }).compileComponents();
 
@@ -64,7 +67,7 @@ describe('InsuranceCompaniesComponent', () => {
     await component.ngOnInit();
 
     expect(component.form).toBeDefined();
-    expect(component['contextData']).toBeDefined();
+    expect(component['_contextData']).toBeDefined();
   });
 
   it('should call searchInsurances on search input keyup', fakeAsync(async () => {
@@ -99,13 +102,13 @@ describe('InsuranceCompaniesComponent', () => {
   });
 
   it('should return true if context data has a selected company', () => {
-    component['contextData'] = { insuranceCompany: { company: { index: 'test', data: 'Test Company' } } } as QuoteModel;
+    component['_contextData'] = { insuranceCompany: { company: { index: 'test', data: 'Test Company' } } } as QuoteModel;
 
     expect(component.canDeactivate()).toBeTrue();
   });
 
   it('should return false if context data does not have a selected company', () => {
-    component['contextData'] = { insuranceCompany: { company: undefined } } as QuoteModel;
+    component['_contextData'] = { insuranceCompany: { company: undefined } } as QuoteModel;
 
     expect(component.canDeactivate()).toBeFalse();
   });

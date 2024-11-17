@@ -58,7 +58,7 @@ export class MakeComponent extends QuoteComponent implements OnInit, OnDestroy {
       .filter(brand => Object.keys(iconDictionary).includes(brand))
       .map(brand => ({ ...iconDictionary[brand], index: brand } as IIconData));
 
-    this.selectedBrand = this.contextData.vehicle.make;
+    this.selectedBrand = this._contextData.vehicle.make;
 
     this.searchBrands();
   }
@@ -72,17 +72,17 @@ export class MakeComponent extends QuoteComponent implements OnInit, OnDestroy {
   public selectMake(event: string): void {
     this.selectedBrand = event;
 
-    this.contextData.vehicle = {
-      ...this.contextData.vehicle,
+    this._contextData.vehicle = {
+      ...this._contextData.vehicle,
       make: this.selectedBrand!
     };
 
-    this.routingService.next(this.contextData);
+    this.routingService.next(this._contextData);
   }
 
   private createForm(): void {
     this.form = this.fb.group({
-      searchInput: new FormControl(this.contextData.vehicle.make)
+      searchInput: new FormControl(this._contextData.vehicle.make)
     });
 
     this.subscription$.push(this.searchBoxConfig());
@@ -106,6 +106,6 @@ export class MakeComponent extends QuoteComponent implements OnInit, OnDestroy {
    * Actualiza el contexto guardando la marca seleccionada
    */
   private updateValidData = (): boolean => {
-    return this.contextData.vehicle.make === this.selectedBrand;
+    return this._contextData.vehicle.make === this.selectedBrand;
   };
 }

@@ -32,7 +32,7 @@ export class RoutingService implements OnDestroy {
   }
 
   public next(data?: QuoteModel): Promise<boolean> {
-    const toEveluate: QuoteModel = deepCopy(data || this.contextDataService.get(QUOTE_CONTEXT_DATA));
+    const toEveluate: QuoteModel = deepCopy(data ?? this.contextDataService.get(QUOTE_CONTEXT_DATA));
     this.serviceActivatorService.activateService('nextPage');
 
     const nextPage = this.getNextRoute(toEveluate);

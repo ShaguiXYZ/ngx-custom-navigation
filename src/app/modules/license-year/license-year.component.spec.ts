@@ -9,6 +9,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { ContextDataService } from '@shagui/ng-shagui/core';
 import { QuoteModel } from 'src/app/core/models';
 import { ContextDataServiceStub } from 'src/app/core/stub';
+import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 import { LicenseYearComponent } from './license-year.component';
 
 describe('LicenseYearComponent', () => {
@@ -16,6 +17,7 @@ describe('LicenseYearComponent', () => {
   let fixture: ComponentFixture<LicenseYearComponent>;
 
   beforeEach(async () => {
+    const quoteLiteralPipeSpy = jasmine.createSpyObj('QuoteLiteralPipe', ['transform']);
     const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate']);
 
     await TestBed.configureTestingModule({
@@ -23,7 +25,8 @@ describe('LicenseYearComponent', () => {
       imports: [LicenseYearComponent, CommonModule, ReactiveFormsModule, NxFormfieldModule, NxInputModule, NxMaskModule, NxButtonModule],
       providers: [
         { provide: ContextDataService, useClass: ContextDataServiceStub },
-        { provide: TranslateService, useValue: translateServiceSpy }
+        { provide: TranslateService, useValue: translateServiceSpy },
+        { provide: QuoteLiteralPipe, useValue: quoteLiteralPipeSpy }
       ]
     }).compileComponents();
   });
@@ -32,7 +35,7 @@ describe('LicenseYearComponent', () => {
     fixture = TestBed.createComponent(LicenseYearComponent);
     component = fixture.componentInstance;
 
-    component['contextData'] = {
+    component['_contextData'] = {
       vehicle: { yearOfManufacture: 2020 },
       driven: { hasDrivenLicense: true }
     } as QuoteModel;

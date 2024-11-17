@@ -22,8 +22,9 @@ describe('LicensePlateComponent', () => {
   let routingService: jasmine.SpyObj<RoutingService>;
 
   beforeEach(async () => {
-    const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate']);
+    const quoteLiteralPipeSpy = jasmine.createSpyObj('QuoteLiteralPipe', ['transform']);
     const routingServiceSpy = jasmine.createSpyObj('RoutingService', ['next']);
+    const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate']);
 
     await TestBed.configureTestingModule({
       declarations: [],
@@ -45,7 +46,8 @@ describe('LicensePlateComponent', () => {
       providers: [
         { provide: RoutingService, useValue: routingServiceSpy },
         { provide: ContextDataService, useClass: ContextDataServiceStub },
-        { provide: TranslateService, useValue: translateServiceSpy }
+        { provide: TranslateService, useValue: translateServiceSpy },
+        { provide: QuoteLiteralPipe, useValue: quoteLiteralPipeSpy }
       ]
     }).compileComponents();
   });
@@ -56,7 +58,7 @@ describe('LicensePlateComponent', () => {
 
     routingService = TestBed.inject(RoutingService) as jasmine.SpyObj<RoutingService>;
 
-    component['contextData'] = {
+    component['_contextData'] = {
       driven: {
         hasDrivenLicense: true
       },
@@ -69,7 +71,7 @@ describe('LicensePlateComponent', () => {
   });
 
   it('should create', () => {
-    component['contextData'] = {
+    component['_contextData'] = {
       driven: {
         hasDrivenLicense: true
       },

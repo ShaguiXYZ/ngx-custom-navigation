@@ -9,6 +9,7 @@ import { debounceTime, distinctUntilChanged, fromEvent, Subscription } from 'rxj
 import { DEBOUNCE_TIME } from 'src/app/core/constants';
 import { IIconData, QuoteComponent } from 'src/app/core/models';
 import { InsuranceCompaniesService, RoutingService } from 'src/app/core/services';
+import { QuoteTrackDirective, TrackInfo } from 'src/app/core/tracking';
 import { HeaderTitleComponent, IconCardComponent, TextCardComponent } from 'src/app/shared/components';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
@@ -28,7 +29,8 @@ import { InsuranceComponentService } from './services';
     NxInputModule,
     ReactiveFormsModule,
     QuoteLiteralDirective,
-    QuoteLiteralPipe
+    QuoteLiteralPipe,
+    QuoteTrackDirective
   ],
   providers: [InsuranceComponentService, InsuranceCompaniesService],
   standalone: true
@@ -59,7 +61,7 @@ export class InsuranceCompaniesComponent extends QuoteComponent implements OnIni
       .filter(insurance => Object.keys(iconDictionary).includes(insurance.index))
       .map(insurance => ({ ...iconDictionary[insurance.index], index: insurance.index } as IIconData));
 
-    this.selectedCompany = this.contextData.insuranceCompany?.company;
+    this.selectedCompany = this._contextData.insuranceCompany?.company;
 
     this.searchInsurances();
   }
@@ -68,22 +70,31 @@ export class InsuranceCompaniesComponent extends QuoteComponent implements OnIni
     this.subscription$.forEach(subscription => subscription.unsubscribe());
   }
 
+  public get trackInfo(): Partial<TrackInfo> {
+    return {
+      ...this._trackInfo,
+      label: this.quoteLiteral.transform('footer-next'),
+      title: this.quoteLiteral.transform('header'),
+      insuranceCompany: this.selectedCompany?.index
+    };
+  }
+
   public override canDeactivate = (): boolean => this.isValidData();
 
   public selectCompany(insurance: IndexedData) {
     this.selectedCompany = insurance;
 
-    this.contextData.insuranceCompany = {
-      ...this.contextData.insuranceCompany,
+    this._contextData.insuranceCompany = {
+      ...this._contextData.insuranceCompany,
       company: this.selectedCompany
     };
 
-    this.routingService.next(this.contextData);
+    this.routingService.next(this._contextData);
   }
 
   private createForm(): void {
     this.form = this.fb.group({
-      searchInput: new FormControl(this.contextData.insuranceCompany?.company?.data)
+      searchInput: new FormControl(this._contextData.insuranceCompany?.company?.data)
     });
 
     this.subscription$.push(this.searchBoxConfig());
@@ -102,6 +113,6 @@ export class InsuranceCompaniesComponent extends QuoteComponent implements OnIni
   }
 
   private isValidData = (): boolean => {
-    return !!this.contextData.insuranceCompany?.company;
+    return !!this._contextData.insuranceCompany?.company;
   };
 }

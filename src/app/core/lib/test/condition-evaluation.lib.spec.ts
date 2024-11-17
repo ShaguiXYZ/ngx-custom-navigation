@@ -45,10 +45,9 @@ describe('ConditionEvaluation', () => {
     expect(result).toBe(false);
   });
 
-  it('should handle invalid expressions gracefully', () => {
-    const conditions: Condition[] = [{ expression: 'invalidKey', operation: '===', value: 'someValue' }];
-    const data = { validKey: 'someValue' };
-    const result = ConditionEvaluation.checkConditions(data, conditions);
-    expect(result).toBe(false);
+  it('should throw a ConditionError if an error occurs while evaluating a condition', () => {
+    const conditions: Condition[] = [{ expression: 'age', operation: '><', value: 18 }];
+    const data = { age: 'twenty' };
+    expect(() => ConditionEvaluation.checkConditions(data, conditions)).toThrowError();
   });
 });

@@ -24,6 +24,10 @@ export class VehicleService {
   private http = inject(HttpService);
 
   public findByPlate(plate: string): Promise<QuoteVehicleModel | undefined> {
+    if (!plate?.trim()) {
+      return Promise.resolve({});
+    }
+
     return firstValueFrom(
       this.http
         .get<QuoteVehicleModel[]>(`${environment.baseUrl}/plate`, {
@@ -34,7 +38,7 @@ export class VehicleService {
         })
         .pipe(
           catchError(error => {
-            throw new HttpError(error.status, error.statusText);
+            throw new HttpError(error.status, error.statusText, error.url, error.method);
           }),
           map(res => res as QuoteVehicleModel[]),
           map(res => res.find(data => data.plateNumber === plate.toLocaleUpperCase().replace(/[^A-Z0-9]/g, '')))
@@ -43,6 +47,10 @@ export class VehicleService {
   }
 
   public getBrands(brand?: string): Promise<string[]> {
+    if (!brand?.trim()) {
+      return Promise.resolve([]);
+    }
+
     return firstValueFrom(
       this.http
         .get<string[]>(`${environment.baseUrl}/brand`, {
@@ -61,6 +69,10 @@ export class VehicleService {
   }
 
   public getModels(brand: string, search?: string): Promise<string[]> {
+    if (!brand?.trim()) {
+      return Promise.resolve([]);
+    }
+
     return firstValueFrom(
       this.http
         .get<string[]>(`${environment.baseUrl}/model`, {
@@ -72,7 +84,7 @@ export class VehicleService {
         })
         .pipe(
           catchError(error => {
-            throw new HttpError(error.status, error.statusText);
+            throw new HttpError(error.status, error.statusText, error.url, error.method);
           }),
           map(res => res as string[]),
           map(res => (!brand ? [] : res)),
@@ -83,6 +95,10 @@ export class VehicleService {
   }
 
   public vehicleModelVersions(model: string): Promise<ModelVersionModel[]> {
+    if (!model?.trim()) {
+      return Promise.resolve([]);
+    }
+
     return firstValueFrom(
       this.http
         .get<ModelVersionModel[]>(`${environment.baseUrl}/version`, {
@@ -94,7 +110,7 @@ export class VehicleService {
         })
         .pipe(
           catchError(error => {
-            throw new HttpError(error.status, error.statusText);
+            throw new HttpError(error.status, error.statusText, error.url, error.method);
           }),
           map(res => (!model ? [] : res)),
           map(res => (res as ModelVersionModel[]).filter(data => !!data.data)),
@@ -116,7 +132,7 @@ export class VehicleService {
         })
         .pipe(
           catchError(error => {
-            throw new HttpError(error.status, error.statusText);
+            throw new HttpError(error.status, error.statusText, error.url, error.method);
           }),
           map(res => res as FuelDTO[]),
           map(res => res.map(FuelModel.fromDTO)),
@@ -138,7 +154,7 @@ export class VehicleService {
         })
         .pipe(
           catchError(error => {
-            throw new HttpError(error.status, error.statusText);
+            throw new HttpError(error.status, error.statusText, error.url, error.method);
           }),
           map(res => res as CubicCapacityDTO[]),
           map(res => res.map(CubicCapacityModel.fromDTO)),
@@ -161,7 +177,7 @@ export class VehicleService {
         })
         .pipe(
           catchError(error => {
-            throw new HttpError(error.status, error.statusText);
+            throw new HttpError(error.status, error.statusText, error.url, error.method);
           }),
           map(res => res as VehicleClassesDTO[]),
           map(res => res.map(VehicleClassesModel.fromDTO)),
@@ -181,7 +197,7 @@ export class VehicleService {
         })
         .pipe(
           catchError(error => {
-            throw new HttpError(error.status, error.statusText);
+            throw new HttpError(error.status, error.statusText, error.url, error.method);
           }),
           map(res => res as QuoteVehicleModel[])
         )

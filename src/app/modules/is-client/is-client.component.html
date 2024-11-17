@@ -3,10 +3,24 @@
   <quote-header-title><span nxQuoteLiteral="header"></span></quote-header-title>
   <section class="form-container">
     <quote-selectable-option [selected]="isClient">
-      <button nxButton="tertiary medium" type="button" nxQuoteLiteral="yes" (click)="onIsClientChange(true)"></button>
+      <button
+        nxButton="tertiary medium"
+        type="button"
+        nxQuoteLiteral="yes"
+        [nxTrack]="trackInfo"
+        [nxTrackEvents]="['click']"
+        (click)="onIsClientChange(true)"
+      ></button>
     </quote-selectable-option>
     <quote-selectable-option [selected]="isClient === false">
-      <button nxButton="tertiary medium" type="button" nxQuoteLiteral="no" (click)="onIsClientChange(false)"></button>
+      <button
+        nxButton="tertiary medium"
+        type="button"
+        nxQuoteLiteral="no"
+        [nxTrack]="trackInfo"
+        [nxTrackEvents]="['click']"
+        (click)="onIsClientChange(false)"
+      ></button>
     </quote-selectable-option>
   </section>
 </article>

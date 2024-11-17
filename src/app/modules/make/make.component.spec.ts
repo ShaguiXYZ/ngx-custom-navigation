@@ -8,6 +8,7 @@ import { ContextDataService } from '@shagui/ng-shagui/core';
 import { QuoteModel } from 'src/app/core/models';
 import { RoutingService, VehicleService } from 'src/app/core/services';
 import { ContextDataServiceStub } from 'src/app/core/stub';
+import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 import { MakeComponent } from './make.component';
 import { BrandComponentService } from './services';
 
@@ -18,6 +19,7 @@ describe('MakeComponent', () => {
   let routingService: jasmine.SpyObj<RoutingService>;
 
   beforeEach(async () => {
+    const quoteLiteralPipeSpy = jasmine.createSpyObj('QuoteLiteralPipe', ['transform']);
     const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate']);
     const vehicleServiceSpy = jasmine.createSpyObj('VehicleService', ['getBrands']);
     const routingServiceSpy = jasmine.createSpyObj('RoutingService', ['next']);
@@ -31,7 +33,8 @@ describe('MakeComponent', () => {
         { provide: ContextDataService, useClass: ContextDataServiceStub },
         { provide: TranslateService, useValue: translateServiceSpy },
         { provide: VehicleService, useValue: vehicleServiceSpy },
-        { provide: RoutingService, useValue: routingServiceSpy }
+        { provide: RoutingService, useValue: routingServiceSpy },
+        { provide: QuoteLiteralPipe, useValue: quoteLiteralPipeSpy }
       ]
     }).compileComponents();
 
@@ -54,7 +57,7 @@ describe('MakeComponent', () => {
 
     vehicleService.getBrands.and.returnValue(Promise.resolve(['Toyota', 'Honda']));
 
-    component['contextData'] = {
+    component['_contextData'] = {
       vehicle: {
         make: 'Toyota'
       }

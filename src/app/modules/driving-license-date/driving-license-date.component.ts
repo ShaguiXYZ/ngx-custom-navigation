@@ -5,9 +5,10 @@ import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
 import { NxInputModule } from '@aposin/ng-aquila/input';
 import { NxMomentDateModule } from '@aposin/ng-aquila/moment-date-adapter';
 import moment, { Moment } from 'moment';
-import { DEFAULT_DATE_FORMAT } from 'src/app/core/constants';
+import { DEFAULT_DATE_FORMAT, DEFAULT_DATE_FORMATS } from 'src/app/core/constants';
 import { isFutureDate, minYearsBetweenDates } from 'src/app/core/form';
 import { QuoteComponent } from 'src/app/core/models';
+import { TrackInfo } from 'src/app/core/tracking';
 import { HeaderTitleComponent, QuoteFooterComponent } from 'src/app/shared/components';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
@@ -31,15 +32,26 @@ import { QuoteLiteralPipe } from 'src/app/shared/pipes';
   standalone: true
 })
 export class DrivingLicenseDateComponent extends QuoteComponent implements OnInit {
+  public dateFormats = DEFAULT_DATE_FORMATS;
   public form!: FormGroup;
   public maxDate = moment();
   public minYears = 18;
 
   private drivingLicenseDateFromContext?: Moment;
+
   private readonly fb = inject(FormBuilder);
 
   ngOnInit(): void {
     this.createForm();
+  }
+
+  public get trackInfo(): Partial<TrackInfo> {
+    return {
+      ...this._trackInfo,
+      label: this.quoteLiteral.transform('footer-next'),
+      title: this.quoteLiteral.transform('header'),
+      drivenLicenseDate: this.form.controls['licenseDate'].value?.format(DEFAULT_DATE_FORMAT)
+    };
   }
 
   public override canDeactivate = (): boolean => this.form.valid;
@@ -48,24 +60,24 @@ export class DrivingLicenseDateComponent extends QuoteComponent implements OnIni
     this.form.markAllAsTouched();
 
     if (this.form.valid) {
-      this.contextData.driven = {
-        ...this.contextData.driven,
+      this._contextData.driven = {
+        ...this._contextData.driven,
         ...this.form.value,
-        drivenLicenseDate: moment(new Date(this.form.controls['drivenLicenseDate'].value)).format(DEFAULT_DATE_FORMAT)
+        licenseDate: moment(new Date(this.form.controls['licenseDate'].value)).format(DEFAULT_DATE_FORMAT)
       };
     }
   };
 
   private createForm() {
-    if (this.contextData.driven.drivenLicenseDate) {
-      this.drivingLicenseDateFromContext = moment(new Date(this.contextData.driven.drivenLicenseDate));
+    if (this._contextData.driven.licenseDate) {
+      this.drivingLicenseDateFromContext = moment(new Date(this._contextData.driven.licenseDate));
     }
 
-    const birthdate = moment(this.contextData.personalData.birthdate).toDate();
+    const birthdate = moment(this._contextData.personalData.birthdate).toDate();
 
     this.form = this.fb.group(
       {
-        drivenLicenseDate: new FormControl(this.drivingLicenseDateFromContext, [
+        licenseDate: new FormControl(this.drivingLicenseDateFromContext, [
           Validators.required,
           isFutureDate(),
           minYearsBetweenDates(birthdate, this.minYears)

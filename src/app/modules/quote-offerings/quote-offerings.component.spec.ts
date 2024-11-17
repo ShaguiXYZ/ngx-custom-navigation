@@ -19,6 +19,7 @@ describe('QuoteOfferingsComponent', () => {
 
   beforeEach(async () => {
     const contextDataServiceSpy = jasmine.createSpyObj('ContextDataService', ['get', 'set']);
+    const quoteLiteralPipeSpy = jasmine.createSpyObj('QuoteLiteralPipe', ['transform']);
     const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate']);
     const offeringsServiceSpy = jasmine.createSpyObj('OfferingsService', ['pricing']);
     const routingServiceSpy = jasmine.createSpyObj('RoutingService', ['next']);
@@ -31,7 +32,8 @@ describe('QuoteOfferingsComponent', () => {
         { provide: ContextDataService, useValue: contextDataServiceSpy },
         { provide: TranslateService, useValue: translateServiceSpy },
         { provide: OfferingsService, useValue: offeringsServiceSpy },
-        { provide: RoutingService, useValue: routingServiceSpy }
+        { provide: RoutingService, useValue: routingServiceSpy },
+        { provide: QuoteLiteralPipe, useValue: quoteLiteralPipeSpy }
       ]
     }).compileComponents();
 
@@ -71,7 +73,7 @@ describe('QuoteOfferingsComponent', () => {
       ]
     } as unknown as QuoteOfferingModel;
 
-    component['contextData'] = mockQuote;
+    component['_contextData'] = mockQuote;
 
     contextDataService.get.and.callFake((contextDataKey: string): any => {
       if (contextDataKey === QUOTE_APP_CONTEXT_DATA) {
@@ -90,7 +92,7 @@ describe('QuoteOfferingsComponent', () => {
     fixture.detectChanges();
 
     fixture.whenStable().then(() => {
-      expect(component['contextData']).toEqual(mockQuote);
+      expect(component['_contextData']).toEqual(mockQuote);
       expect(component.prices).toEqual(mockOffering.prices);
     });
   });
@@ -126,21 +128,21 @@ describe('QuoteOfferingsComponent', () => {
   it('should select steper and update context data', () => {
     const mockPrices: OfferingPriceModel[] = [{ modalityId: '1' }, { modalityId: '2' }] as unknown as OfferingPriceModel[];
     component.prices = mockPrices;
-    component['contextData'] = { offering: { price: {} } } as QuoteModel;
+    component['_contextData'] = { offering: { price: {} } } as QuoteModel;
 
     component.selectSteper(1);
 
     expect(component.selectedPriceIndex).toBe(1);
-    expect(component['contextData'].offering.price).toEqual(mockPrices[1]);
+    expect(component['_contextData'].offering.price).toEqual(mockPrices[1]);
   });
 
   it('should call routing service next step on contact us', () => {
     const mockPrice: OfferingPriceModel = { modalityId: '1' } as unknown as OfferingPriceModel;
-    component['contextData'] = { offering: { price: {} } } as QuoteModel;
+    component['_contextData'] = { offering: { price: {} } } as QuoteModel;
 
     component.contactUs(mockPrice);
 
-    expect(component['contextData'].offering.price).toEqual(mockPrice);
+    expect(component['_contextData'].offering.price).toEqual(mockPrice);
     expect(routingService.next).toHaveBeenCalled();
   });
 

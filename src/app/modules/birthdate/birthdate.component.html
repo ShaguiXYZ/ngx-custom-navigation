@@ -9,7 +9,7 @@
           nxInput
           [max]="maxDate"
           [datepicker]="myDatepicker"
-          [parseFormat]="['DD/MM/YYYY', 'DDMMYYYY', 'DDMMYY']"
+          [parseFormat]="dateFormats"
           displayFormat="DD/MM/YYYY"
         />
         <span nxFormfieldHint nxQuoteLiteral="hint-date-format"></span>
@@ -25,5 +25,5 @@
       </nx-formfield>
     </form>
   </section>
-  <quote-footer [data]="contextData" (uiOnNext)="updateValidData()" />
+  <quote-footer [data]="_contextData" [trackInfo]="trackInfo" (uiOnNext)="updateValidData()" />
 </article>

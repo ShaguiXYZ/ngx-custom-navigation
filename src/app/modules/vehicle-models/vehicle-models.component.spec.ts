@@ -7,6 +7,7 @@ import { DEBOUNCE_TIME } from 'src/app/core/constants';
 import { QuoteModel } from 'src/app/core/models';
 import { RoutingService, VehicleService } from 'src/app/core/services';
 import { ContextDataServiceStub } from 'src/app/core/stub';
+import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 import { VehicleModelsComponent } from './vehicle-models.component';
 
 describe('VehicleModelsComponent', () => {
@@ -16,6 +17,7 @@ describe('VehicleModelsComponent', () => {
   let vehicleService: jasmine.SpyObj<VehicleService>;
 
   beforeEach(async () => {
+    const quoteLiteralPipeSpy = jasmine.createSpyObj('QuoteLiteralPipe', ['transform']);
     const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate']);
     const routingServiceSpy = jasmine.createSpyObj('RoutingService', ['next']);
     const vehicleServiceSpy = jasmine.createSpyObj('VehicleService', ['getModels']);
@@ -27,7 +29,8 @@ describe('VehicleModelsComponent', () => {
         { provide: ContextDataService, useClass: ContextDataServiceStub },
         { provide: TranslateService, useValue: translateServiceSpy },
         { provide: RoutingService, useValue: routingServiceSpy },
-        { provide: VehicleService, useValue: vehicleServiceSpy }
+        { provide: VehicleService, useValue: vehicleServiceSpy },
+        { provide: QuoteLiteralPipe, useValue: quoteLiteralPipeSpy }
       ]
     }).compileComponents();
 
@@ -45,7 +48,7 @@ describe('VehicleModelsComponent', () => {
     routingService = TestBed.inject(RoutingService) as jasmine.SpyObj<RoutingService>;
     vehicleService = TestBed.inject(VehicleService) as jasmine.SpyObj<VehicleService>;
 
-    component['contextData'] = {
+    component['_contextData'] = {
       vehicle: {
         make: 'Toyota',
         model: 'Camry'
@@ -108,7 +111,7 @@ describe('VehicleModelsComponent', () => {
   });
 
   it('should return false for canDeactivate if no model is selected', () => {
-    component['contextData'].vehicle.model = undefined;
+    component['_contextData'].vehicle.model = undefined;
 
     expect(component.canDeactivate()).toBeFalse();
   });

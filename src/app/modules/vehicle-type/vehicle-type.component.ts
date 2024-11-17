@@ -9,11 +9,20 @@ import { HeaderTitleComponent, TextCardComponent } from 'src/app/shared/componen
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 import { VehicleTypes } from './models';
+import { QuoteTrackDirective, TrackInfo } from 'src/app/core/tracking';
 
 @Component({
   selector: 'quote-vehicle-type',
   standalone: true,
-  imports: [CommonModule, HeaderTitleComponent, TextCardComponent, NxCopytextModule, QuoteLiteralDirective, QuoteLiteralPipe],
+  imports: [
+    CommonModule,
+    HeaderTitleComponent,
+    TextCardComponent,
+    NxCopytextModule,
+    QuoteLiteralDirective,
+    QuoteLiteralPipe,
+    QuoteTrackDirective
+  ],
   templateUrl: './vehicle-type.component.html',
   styleUrl: './vehicle-type.component.scss'
 })
@@ -24,7 +33,16 @@ export class VehicleTypeComponent extends QuoteComponent implements OnInit {
   private readonly routingService = inject(RoutingService);
 
   ngOnInit(): void {
-    this.selectedType = this.vehicleTypes.find(type => type.index === this.contextData.vehicle.vehicleTtype);
+    this.selectedType = this.vehicleTypes.find(type => type.index === this._contextData.vehicle.vehicleType);
+  }
+
+  public get trackInfo(): Partial<TrackInfo> {
+    return {
+      ...this._trackInfo,
+      label: this.quoteLiteral.transform('footer-next'),
+      title: this.quoteLiteral.transform('header'),
+      vehicleType: this.selectedType?.index || null
+    };
   }
 
   public override canDeactivate = (): boolean | Observable<boolean> | Promise<boolean> => this.isValidData();
@@ -32,15 +50,15 @@ export class VehicleTypeComponent extends QuoteComponent implements OnInit {
   public selectType(type: IndexedData) {
     this.selectedType = type;
 
-    this.contextData.vehicle = {
-      ...this.contextData.vehicle,
-      vehicleTtype: this.selectedType?.index
+    this._contextData.vehicle = {
+      ...this._contextData.vehicle,
+      vehicleType: this.selectedType?.index
     };
 
-    this.routingService.next(this.contextData);
+    this.routingService.next(this._contextData);
   }
 
   private isValidData = (): boolean => {
-    return !!this.contextData.vehicle.vehicleTtype;
+    return !!this._contextData.vehicle.vehicleType;
   };
 }

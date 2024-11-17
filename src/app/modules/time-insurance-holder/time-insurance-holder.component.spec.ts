@@ -8,6 +8,7 @@ import { RoutingService } from 'src/app/core/services';
 import { ContextDataServiceStub } from 'src/app/core/stub';
 import { HeaderTitleComponent, QuoteFooterComponent, QuoteFooterInfoComponent, SelectableOptionComponent } from 'src/app/shared/components';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
+import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 import { TimeInsuranceHolderComponent } from './time-insurance-holder.component';
 
 describe('TimeInsuranceHolderComponent', () => {
@@ -16,6 +17,7 @@ describe('TimeInsuranceHolderComponent', () => {
   let routingService: jasmine.SpyObj<RoutingService>;
 
   beforeEach(async () => {
+    const quoteLiteralPipeSpy = jasmine.createSpyObj('QuoteLiteralPipe', ['transform']);
     const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['instant', 'translate']);
     const routingServiceSpy = jasmine.createSpyObj('RoutingService', ['next']);
 
@@ -33,7 +35,8 @@ describe('TimeInsuranceHolderComponent', () => {
       providers: [
         { provide: ContextDataService, useClass: ContextDataServiceStub },
         { provide: TranslateService, useValue: translateServiceSpy },
-        { provide: RoutingService, useValue: routingServiceSpy }
+        { provide: RoutingService, useValue: routingServiceSpy },
+        { provide: QuoteLiteralPipe, useValue: quoteLiteralPipeSpy }
       ]
     }).compileComponents();
   });
@@ -43,7 +46,7 @@ describe('TimeInsuranceHolderComponent', () => {
     component = fixture.componentInstance;
     routingService = TestBed.inject(RoutingService) as jasmine.SpyObj<RoutingService>;
 
-    component['contextData'] = {
+    component['_contextData'] = {
       insuranceCompany: {
         yearsAsOwner: 2
       }
@@ -59,25 +62,25 @@ describe('TimeInsuranceHolderComponent', () => {
   it('should initialize contextData and selectedYears on ngOnInit', () => {
     component.ngOnInit();
 
-    expect(component['contextData']).toEqual({ insuranceCompany: { yearsAsOwner: 2 } } as QuoteModel);
+    expect(component['_contextData']).toEqual({ insuranceCompany: { yearsAsOwner: 2 } } as QuoteModel);
     expect(component.selectedYears).toBe(2);
   });
 
   it('should update contextData and call nextStep on selectedYears', () => {
     component.selectData(3);
 
-    expect(component['contextData'].insuranceCompany.yearsAsOwner).toBe(3);
+    expect(component['_contextData'].insuranceCompany.yearsAsOwner).toBe(3);
     expect(routingService.next).toHaveBeenCalled();
   });
 
   it('should return true if yearsAsOwner value is valid in updateValidData', () => {
-    component['contextData'] = { insuranceCompany: { yearsAsOwner: 1 } } as QuoteModel;
+    component['_contextData'] = { insuranceCompany: { yearsAsOwner: 1 } } as QuoteModel;
 
     expect(component['updateValidData']()).toBeTrue();
   });
 
   it('should return false if yearsAsOwner value is invalid in updateValidData', () => {
-    component['contextData'] = { insuranceCompany: { YearsAsOwner: null } } as unknown as QuoteModel;
+    component['_contextData'] = { insuranceCompany: { YearsAsOwner: null } } as unknown as QuoteModel;
 
     expect(component['updateValidData']()).toBeFalse();
   });
