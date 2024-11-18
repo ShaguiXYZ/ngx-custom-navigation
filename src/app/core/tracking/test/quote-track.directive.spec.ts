@@ -18,15 +18,16 @@ describe('QuoteTrackDirective', () => {
   let trackService: jasmine.SpyObj<QuoteTrackService>;
 
   beforeEach(() => {
-    trackService = jasmine.createSpyObj('QuoteTrackService', ['trackEvent']);
+    const trackServiceSpy = jasmine.createSpyObj('QuoteTrackService', ['trackEvent']);
 
     TestBed.configureTestingModule({
       declarations: [TestComponent],
       imports: [QuoteTrackDirective],
-      providers: [{ provide: QuoteTrackService, useValue: trackService }]
+      providers: [{ provide: QuoteTrackService, useValue: trackServiceSpy }]
     }).compileComponents();
 
     fixture = TestBed.createComponent(TestComponent);
+    trackService = TestBed.inject(QuoteTrackService) as jasmine.SpyObj<QuoteTrackService>;
     fixture.detectChanges();
   });
 
@@ -35,7 +36,10 @@ describe('QuoteTrackDirective', () => {
     expect(directiveEl).toBeTruthy();
   });
 
-  it('should listen to specified events and call trackEvent', () => {
+  it('should listen to specified events and call trackEvent', async () => {
+    fixture.detectChanges();
+    await fixture.whenStable();
+
     const directiveEl = fixture.debugElement.query(By.directive(QuoteTrackDirective));
     const divEl = directiveEl.nativeElement;
 
@@ -52,7 +56,10 @@ describe('QuoteTrackDirective', () => {
     );
   });
 
-  it('should not call trackEvent for unspecified events', () => {
+  it('should not call trackEvent for unspecified events', async () => {
+    fixture.detectChanges();
+    await fixture.whenStable();
+
     const directiveEl = fixture.debugElement.query(By.directive(QuoteTrackDirective));
     const divEl = directiveEl.nativeElement;
 

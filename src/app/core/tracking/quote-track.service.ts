@@ -30,11 +30,12 @@ export class QuoteTrackService implements OnDestroy {
     );
 
     this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe(event => {
-      const page = event.url.split('?')[0].split('/').pop();
+      const fullUrl = `${window.location.protocol}//${window.location.host}${event.urlAfterRedirects}`;
+      const page = fullUrl.split('?')[0].split('/').pop();
 
       const infoPag: TrackInfoPageModel = {
         pagina: `car quote:${page}`,
-        URL: event.url,
+        URL: fullUrl,
         pagina_previa: this.referrer,
         tipo_usuario: 'web',
         tipo_dispositivo: this.isMobile ? 'mobile' : 'desktop'
@@ -45,7 +46,7 @@ export class QuoteTrackService implements OnDestroy {
       _window.digitalData = { infoPag };
 
       this.trackFn('view');
-      this.referrer = event.url;
+      this.referrer = fullUrl;
     });
 
     this.headData();
@@ -55,7 +56,7 @@ export class QuoteTrackService implements OnDestroy {
     this.subscription$.forEach(sub => sub?.unsubscribe?.());
   }
 
-  public trackEvent = async (eventType: TrackEventType, data: Partial<TrackInfo>): Promise<number> => {
+  public trackEvent = async (eventType: TrackEventType, data: TrackInfo): Promise<number> => {
     const appContextData = this.contextDataService.get<AppContextData>(QUOTE_APP_CONTEXT_DATA);
     const {
       navigation: { viewedPages }
@@ -82,7 +83,7 @@ export class QuoteTrackService implements OnDestroy {
     document.head.appendChild(digitalData);
   };
 
-  private loadManifest = (): Partial<TrackInfo> => {
+  private loadManifest = (): TrackInfo => {
     const quote = this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA);
 
     return Object.entries(TRACKING_QUOTE_MANIFEST).reduce((acc, [key, value]) => {
@@ -90,10 +91,10 @@ export class QuoteTrackService implements OnDestroy {
       if (hasValue(val)) acc[key as keyof typeof TRACKING_QUOTE_MANIFEST] = val;
 
       return acc;
-    }, {} as Partial<TrackInfo>);
+    }, {} as TrackInfo);
   };
 
-  private trackFn = (eventType: TrackEventType | 'view', trackInfo?: Partial<TrackInfo>): number =>
+  private trackFn = (eventType: TrackEventType | 'view', trackInfo?: TrackInfo): number =>
     // @howto implemants requestIdleCallback for track event
     requestIdleCallback(() => {
       if (!_window._satellite) {

@@ -44,6 +44,12 @@ export const routes: Routes = configContextRoutes([
     canDeactivate: [canDeactivateGuard]
   },
   {
+    path: AppUrls.confirmation,
+    loadComponent: () => import('./modules/confirmation/confirmation.component').then(c => c.ConfirmationComponent),
+    canActivate: [journeyGuard],
+    canDeactivate: [canDeactivateGuard]
+  },
+  {
     path: AppUrls.contactUs,
     loadComponent: () => import('./modules/contact-us/contact-us.component').then(c => c.ContactUsComponent),
     canActivate: [journeyGuard],

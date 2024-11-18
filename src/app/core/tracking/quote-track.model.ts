@@ -7,7 +7,7 @@ export const TRACKING_QUOTE_MANIFEST = {
   contactHour: 'contactData.contactHour',
   drivenLicenseCountry: 'driven.licenseCountry',
   drivenLicenseDate: 'driven.licenseDate',
-  insuranceCompany: 'insuranceCompany.company',
+  insuranceCompany: 'insuranceCompany.company.index',
   yearsAsOwner: 'insuranceCompany.yearsAsOwner',
   birthdate: 'personalData.birthdate',
   email: 'personalData.email',
@@ -55,7 +55,7 @@ export type TrackKey =
   | 'yearOfManufacture'
   | 'URL'
   | keyof typeof TRACKING_QUOTE_MANIFEST;
-export type TrackInfo = Record<TrackKey, string | null | undefined>;
+export type TrackInfo = Partial<Record<TrackKey, string | null | undefined>>;
 
 export const quoteTrackInfo = {
   category: 'car quote',

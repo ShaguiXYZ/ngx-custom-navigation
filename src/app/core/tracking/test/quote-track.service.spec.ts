@@ -65,7 +65,9 @@ describe('QuoteTrackService', () => {
 
     service = TestBed.inject(QuoteTrackService);
 
-    expect(service['infoPage']?.URL).toBe('/test');
+    const fullUrl = `${window.location.protocol}//${window.location.host}/test`;
+
+    expect(service['infoPage']?.URL).toBe(fullUrl);
   });
 
   it('should unsubscribe from all subscriptions on destroy', () => {
@@ -80,7 +82,7 @@ describe('QuoteTrackService', () => {
     const appContextData = { navigation: { viewedPages: ['page1', 'page2'] } };
     contextDataService.get.and.returnValue(appContextData);
 
-    const trackInfo: Partial<TrackInfo> = { brand: 'test' };
+    const trackInfo: TrackInfo = { brand: 'test' };
     const trackFnSpy = spyOn(service as any, 'trackFn').and.returnValue(1);
 
     const result = await service.trackEvent('click', trackInfo);

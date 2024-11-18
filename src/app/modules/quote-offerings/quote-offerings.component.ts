@@ -2,14 +2,14 @@ import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/l
 import { CommonModule } from '@angular/common';
 import { Component, ElementRef, inject, OnDestroy, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { NxDialogService, NxModalModule } from '@aposin/ng-aquila/modal';
-import { OfferingPriceModel, QuoteComponent, SignedModel } from 'src/app/core/models';
+import { Subscription } from 'rxjs';
+import { QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
+import { OfferingPriceModel, QuoteComponent } from 'src/app/core/models';
 import { RoutingService } from 'src/app/core/services';
 import { OfferingsService } from 'src/app/core/services/offerings.service';
 import { QuoteOfferingCoveragesComponent } from 'src/app/shared/components';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 import { QuoteOfferingPriceCardComponent } from './components';
-import { Subscription } from 'rxjs';
-import { QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
 
 @Component({
   selector: 'quote-quote-offerings',
@@ -58,11 +58,7 @@ export class QuoteOfferingsComponent extends QuoteComponent implements OnInit, O
     this._contextData.offering = { ...this._contextData.offering, quotationId: offering.quotationId, prices: offering.prices };
     this.prices = offering.prices;
 
-    Promise.resolve().then(() => {
-      SignedModel.init(this._contextData);
-      this.contextDataService.set(QUOTE_CONTEXT_DATA, this._contextData);
-      console.log('QuoteOfferingsComponent ngOnInit', this._contextData);
-    });
+    this.contextDataService.set(QUOTE_CONTEXT_DATA, this._contextData);
 
     // this.resizeObserver = new ResizeObserver(entries => {
     //   for (const entry of entries) {

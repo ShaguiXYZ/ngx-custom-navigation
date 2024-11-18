@@ -12,7 +12,7 @@ describe('isValidGuard', () => {
   let next: RouterStateSnapshot;
 
   beforeEach(() => {
-    const contextDataServiceSpy = jasmine.createSpyObj('ContextDataService', ['get']);
+    const contextDataServiceSpy = jasmine.createSpyObj('ContextDataService', ['get', 'set']);
     const quoteComponentSpy = jasmine.createSpyObj('QuoteComponent', ['canDeactivate']);
 
     TestBed.configureTestingModule({

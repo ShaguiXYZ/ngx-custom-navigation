@@ -39,8 +39,8 @@ export class QuoteFooterComponent implements OnInit, OnDestroy {
   public _mobileMode?: boolean;
   public _observedMobileMode?: boolean;
 
-  private _trackInfo: Partial<TrackInfo> = {};
-  private _trackFooterInfo: Partial<TrackInfo> = {};
+  private _trackInfo: TrackInfo = {};
+  private _trackFooterInfo: TrackInfo = {};
 
   private readonly quoteLiteralPipe = inject(QuoteLiteralPipe);
   private readonly subscription$: Subscription[] = [];
@@ -65,12 +65,12 @@ export class QuoteFooterComponent implements OnInit, OnDestroy {
     this.subscription$.forEach(subscription => subscription.unsubscribe());
   }
 
-  public get trackInfo(): Partial<TrackInfo> {
+  public get trackInfo(): TrackInfo {
     return { ...this._trackFooterInfo, ...this._trackInfo };
   }
 
   @Input()
-  public set trackInfo(value: Partial<TrackInfo>) {
+  public set trackInfo(value: TrackInfo) {
     this._trackInfo = value;
   }
 

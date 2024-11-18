@@ -578,10 +578,32 @@
       }
     },
     {
-      "pageId": "contact-time",
+      "pageId": "confirmation",
       "nextOptionList": [
         {
           "nextPageId": "on-boarding"
+        }
+      ],
+      "configuration": {
+        "literals": {
+          "header": "¡Muchas gracias {{ name }}!",
+          "subheader": "Uno de nuestros agentes te llamará a la hora que has solicitado para darte toda la información que necesites.",
+          "body": "",
+          "footer-next": "FINALIZAR"
+        },
+        "data": {
+          "headerConfig": {
+            "showBack": false,
+            "showContactUs": false
+          }
+        }
+      }
+    },
+    {
+      "pageId": "contact-time",
+      "nextOptionList": [
+        {
+          "nextPageId": "confirmation"
         }
       ],
       "configuration": {

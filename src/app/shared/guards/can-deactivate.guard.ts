@@ -1,7 +1,7 @@
 import { inject } from '@angular/core';
 import { ActivatedRouteSnapshot, CanDeactivateFn, GuardResult, MaybeAsync, RouterStateSnapshot } from '@angular/router';
 import { ContextDataService } from '@shagui/ng-shagui/core';
-import { QUOTE_APP_CONTEXT_DATA } from 'src/app/core/constants';
+import { QUOTE_APP_CONTEXT_DATA, QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
 import { AppContextData, QuoteComponent, SignedModel } from 'src/app/core/models';
 
 export const canDeactivateGuard: CanDeactivateFn<QuoteComponent> = (
@@ -21,13 +21,12 @@ export const canDeactivateGuard: CanDeactivateFn<QuoteComponent> = (
   const canDeactivate = (): boolean => {
     const canDeactivate = (component.canDeactivate?.bind(component)(currentRoute, state, next) ?? true) as boolean;
 
-    SignedModel.signModel(component['_contextData'], component.ignoreChangeDetection);
+    contextDataService.set(QUOTE_CONTEXT_DATA, SignedModel.signModel(component['_contextData'], component.ignoreChangeDetection));
 
     return canDeactivate;
   };
 
   const contextDataService = inject(ContextDataService);
-
   const context = contextDataService.get<AppContextData>(QUOTE_APP_CONTEXT_DATA);
 
   return isErrorPage(context) || isPreviousStep(context) || stepperChange(context) || canDeactivate();

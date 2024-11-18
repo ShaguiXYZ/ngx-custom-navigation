@@ -8,7 +8,7 @@ import { QuoteTrackService } from './quote-track.service';
 })
 export class QuoteTrackDirective implements OnInit {
   @Input('nxTrack')
-  public nxTrackInfo: Partial<TrackInfo> = {};
+  public nxTrackInfo: TrackInfo = {};
 
   @Input()
   public nxTrackEvents!: Set<TrackEventType> | TrackEventType[];

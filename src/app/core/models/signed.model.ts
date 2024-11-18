@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-namespace */
+import { deepCopy } from '@shagui/ng-shagui/core';
 import CryptoJS from 'crypto-js';
 
 export interface SignatureModel {
@@ -11,16 +12,20 @@ export interface SignedModel {
 }
 
 export namespace SignedModel {
-  export const init = (signedModel: SignedModel): void => {
+  export const reset = (signedModel: SignedModel): void => {
     signedModel.signature = { ...signedModel.signature, changed: false };
   };
-  export const signModel = (signedModel: SignedModel, ignoreChangeDetection = false): void => {
-    const { signature, ...modelToSign } = signedModel;
+  export const signModel = (model: SignedModel, ignoreChangeDetection = false): SignedModel => {
+    const { signature, ...modelToSign } = deepCopy(model);
     const currentQuoteSignature = dataHash(modelToSign);
 
-    if (signature?.hash !== currentQuoteSignature) {
-      signedModel.signature = { changed: !ignoreChangeDetection || signature?.changed, hash: currentQuoteSignature };
-    }
+    return {
+      ...modelToSign,
+      signature: {
+        hash: currentQuoteSignature,
+        changed: !ignoreChangeDetection && (signature?.changed || signature?.hash !== currentQuoteSignature)
+      }
+    };
   };
 
   const dataHash = (model: SignedModel): string => CryptoJS.SHA256(JSON.stringify(model)).toString(CryptoJS.enc.Hex);
