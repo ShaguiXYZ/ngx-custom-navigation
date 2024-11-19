@@ -21,7 +21,7 @@
         <nx-error appearance="text" nxFormfieldError><span nxQuoteLiteral="error-future-date"></span> </nx-error>
         } @if(form.get('licenseDate')?.errors?.['minYearsBetweenDates']) {
         <nx-error appearance="text" nxFormfieldError
-          ><span nxQuoteLiteral="error-min-years-between" [uiQuoteLitealParams]="{ value: minYears }"></span>
+          ><span nxQuoteLiteral="error-min-years-between" [nxQuoteLitealParams]="{ value: minYears }"></span>
         </nx-error>
         }
       </nx-formfield>

@@ -8,6 +8,7 @@ export interface QuoteClientModel {
   acceptPrivacyPolicy?: boolean;
   dateOfIssue?: Date;
   expiration?: Date;
+  isCurrentlyInsured?: boolean;
 }
 
 export namespace QuoteClientModel {

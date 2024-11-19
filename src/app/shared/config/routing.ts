@@ -10,6 +10,7 @@ export enum AppUrls {
   confirmation = 'confirmation',
   contactUs = 'contact-us',
   contactTime = 'contact-time',
+  currentlyInsured = 'currently-insured',
   dateOfIssue = 'date-of-issue',
   drivingLicenseDate = 'driving-license-date',
   drivingLicenseLocation = 'driving-license-location',

@@ -12,10 +12,10 @@ import { QuoteLiteralDirective } from '../quote-literal.directive';
 @Component({
   template: `<div
     [nxQuoteLiteral]="quote"
-    [uiQuoteLitealParams]="params"
-    [uiQuoteDefaultLiteral]="defaultLiteral"
-    [uiAttribute]="attribute"
-    [uiProperty]="property"
+    [nxQuoteLitealParams]="params"
+    [nxQuoteDefaultLiteral]="defaultLiteral"
+    [nxAttribute]="attribute"
+    [nxProperty]="property"
   ></div>`,
   standalone: true,
   imports: [QuoteLiteralDirective]
@@ -83,21 +83,21 @@ describe('QuoteLiteralDirective', () => {
     expect(directive).toBeTruthy();
   });
 
-  it('should set attribute when uiAttribute is provided', () => {
+  it('should set attribute when nxAttribute is provided', () => {
     component.attribute = 'title';
     fixture.detectChanges();
 
     expect(debugElement.nativeElement.getAttribute('title')).toBe('testQuote');
   });
 
-  it('should set innerText when uiProperty is innerText', () => {
+  it('should set innerText when nxProperty is innerText', () => {
     component.property = 'innerText';
     fixture.detectChanges();
 
     expect(debugElement.nativeElement.innerText).toContain('testQuote');
   });
 
-  it('should set innerHTML when uiProperty is innerHTML', () => {
+  it('should set innerHTML when nxProperty is innerHTML', () => {
     component.property = 'innerHTML';
     fixture.detectChanges();
 

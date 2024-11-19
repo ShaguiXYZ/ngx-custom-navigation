@@ -71,7 +71,7 @@ interface VehicleData {
   releaseDate: Date;
   powerRange?: VehicleClassesModel;
   cubicCapacity?: CubicCapacityModel;
-  vehicleModelVersion?: ModelVersionModel;
+  modelVersion?: ModelVersionModel;
 }
 
 export interface QuoteVehicleModel extends Partial<VehicleData> {

@@ -67,7 +67,7 @@ describe('VehicleModelVersionsComponent', () => {
     component['_contextData'] = {
       vehicle: {
         model: 'testModel',
-        vehicleModelVersion: { data: 'testVersion' }
+        modelVersion: { data: 'testVersion' }
       }
     } as QuoteModel;
 

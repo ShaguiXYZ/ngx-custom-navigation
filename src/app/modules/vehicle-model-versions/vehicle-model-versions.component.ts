@@ -49,7 +49,7 @@ export class VehicleModelVersionsComponent extends QuoteComponent implements OnI
   private readonly fb = inject(FormBuilder);
 
   async ngOnInit(): Promise<void> {
-    this.selectedModelVersion = this._contextData.vehicle.vehicleModelVersion;
+    this.selectedModelVersion = this._contextData.vehicle.modelVersion;
     this.createForm();
 
     await this.filteredVersions();
@@ -68,14 +68,14 @@ export class VehicleModelVersionsComponent extends QuoteComponent implements OnI
 
     this._contextData.vehicle = {
       ...this._contextData.vehicle,
-      vehicleModelVersion: this.selectedModelVersion
+      modelVersion: this.selectedModelVersion
     };
 
     this.routingService.next(this._contextData);
   }
 
   private updateValidData = (): boolean => {
-    return !!this._contextData.vehicle.vehicleModelVersion;
+    return !!this._contextData.vehicle.modelVersion;
   };
 
   private createForm() {

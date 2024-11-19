@@ -10,7 +10,7 @@ export class QuoteMaskDirective {
   public value!: string;
 
   @Output()
-  public uiValueMatch: EventEmitter<boolean> = new EventEmitter<boolean>();
+  public nxValueMatch: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   public _mask!: QuoteMaskType;
 
@@ -36,7 +36,7 @@ export class QuoteMaskDirective {
     const maskRegex = QUOTE_MASK[this._mask];
     const valueMatch = !!maskRegex.match(next);
 
-    this.uiValueMatch.emit(valueMatch);
+    this.nxValueMatch.emit(valueMatch);
 
     if (maskRegex.preventEdition() && !valueMatch) {
       event.preventDefault();

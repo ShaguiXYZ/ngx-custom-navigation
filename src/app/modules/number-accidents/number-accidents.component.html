@@ -4,7 +4,7 @@
   <quote-header-title
     ><span
       nxQuoteLiteral="header"
-      [uiQuoteLitealParams]="{
+      [nxQuoteLitealParams]="{
         years: years === 1 ? '' : years.toString(),
         'literal-last': years > 1 ? 'los últimos' : 'el último',
         'literal-year': { value: years > 1 ? 'Label.Years' : 'Label.Year', type: 'translate' }
@@ -20,7 +20,7 @@
         [data]="'no' | quoteLiteral"
         [nxTrack]="{
           title: 'header' | quoteLiteral,
-          selectedAccidents: item.toString()
+          accidents: item
         }"
         [nxTrackEvents]="['click']"
         (uiSelect)="selectAccidents(0)"
@@ -35,7 +35,7 @@
         "
         [nxTrack]="{
           title: 'header' | quoteLiteral,
-          selectedAccidents: item.toString()
+          accidents: item
         }"
         [nxTrackEvents]="['click']"
         (uiSelect)="selectAccidents(item)"

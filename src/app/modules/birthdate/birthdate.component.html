@@ -19,7 +19,7 @@
         <nx-error appearance="text" nxFormfieldError><span nxQuoteLiteral="error-required"></span> </nx-error>
         } @if(form.get('birthdate')?.errors?.['olderThanYears']) {
         <nx-error appearance="text" nxFormfieldError
-          ><span nxQuoteLiteral="error-client-old" [uiQuoteLitealParams]="{ value: minValue }"></span>
+          ><span nxQuoteLiteral="error-client-old" [nxQuoteLitealParams]="{ value: minValue }"></span>
         </nx-error>
         }
       </nx-formfield>

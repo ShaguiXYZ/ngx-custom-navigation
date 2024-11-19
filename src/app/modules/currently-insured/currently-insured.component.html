@@ -2,30 +2,30 @@
 <article class="component-container">
   <quote-header-title><span nxQuoteLiteral="header"></span></quote-header-title>
   <section class="form-container">
-    <quote-selectable-option [selected]="isClient">
+    <quote-selectable-option [selected]="isCurrentlyInsured">
       <button
         nxButton="tertiary medium"
         type="button"
         nxQuoteLiteral="yes"
         [nxTrack]="{
           title: 'header' | quoteLiteral,
-          client: true
+          insurance: true
         }"
         [nxTrackEvents]="['click']"
-        (click)="onIsClientChange(true)"
+        (click)="onCurrentlyInsuredChange(true)"
       ></button>
     </quote-selectable-option>
-    <quote-selectable-option [selected]="isClient === false">
+    <quote-selectable-option [selected]="isCurrentlyInsured === false">
       <button
         nxButton="tertiary medium"
         type="button"
         nxQuoteLiteral="no"
         [nxTrack]="{
           title: 'header' | quoteLiteral,
-          client: false
+          insurance: false
         }"
         [nxTrackEvents]="['click']"
-        (click)="onIsClientChange(false)"
+        (click)="onCurrentlyInsuredChange(false)"
       ></button>
     </quote-selectable-option>
   </section>

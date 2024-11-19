@@ -15,7 +15,7 @@
               [selected]="_selectedFuel"
               [nxTrack]="{
                 title: 'header' | quoteLiteral,
-                cubicCapacity: selectedCubicCapacity?.index,
+                displayment: selectedCubicCapacity?.index,
                 fuel: fuel.index,
                 power: selectedPower?.index
               }"
@@ -45,7 +45,7 @@
               [selected]="_selectedCubicCapacityselected"
               [nxTrack]="{
                 title: 'header' | quoteLiteral,
-                cubicCapacity: cubicCapacity.index,
+                displayment: cubicCapacity.index,
                 fuel: selectedFuel?.index,
                 power: selectedPower?.index
               }"
@@ -70,7 +70,7 @@
               type="button"
               [nxTrack]="{
                 title: 'header' | quoteLiteral,
-                cubicCapacity: cubicCapacityNotKnown.index,
+                displayment: cubicCapacityNotKnown.index,
                 fuel: cubicCapacityNotKnown.index,
                 power: selectedPower?.index
               }"
@@ -99,7 +99,7 @@
               [selected]="_selectedPower"
               [nxTrack]="{
                 title: 'header' | quoteLiteral,
-                cubicCapacity: selectedCubicCapacity?.index,
+                displayment: selectedCubicCapacity?.index,
                 fuel: selectedFuel?.index,
                 power: power.index
               }"
@@ -122,7 +122,7 @@
               type="button"
               [nxTrack]="{
                 title: 'header' | quoteLiteral,
-                cubicCapacity: selectedCubicCapacity?.index,
+                displayment: selectedCubicCapacity?.index,
                 fuel: selectedFuel?.index,
                 power: powerNotKnown.index
               }"

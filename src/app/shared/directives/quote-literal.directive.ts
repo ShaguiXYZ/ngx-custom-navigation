@@ -13,16 +13,16 @@ export class QuoteLiteralDirective implements AfterViewInit {
   public nxQuoteLiteral!: string;
 
   @Input()
-  public uiQuoteLitealParams?: LiteralParam;
+  public nxQuoteLitealParams?: LiteralParam;
 
   @Input()
-  public uiQuoteDefaultLiteral = '';
+  public nxQuoteDefaultLiteral = '';
 
   @Input()
-  public uiAttribute?: string;
+  public nxAttribute?: string;
 
   @Input()
-  public uiProperty = 'innerHTML';
+  public nxProperty = 'innerHTML';
 
   constructor(
     private readonly el: ElementRef<HTMLElement>,
@@ -36,20 +36,20 @@ export class QuoteLiteralDirective implements AfterViewInit {
   }
 
   private updateElement(): void {
-    const value = this.literalPipe.transform(this.nxQuoteLiteral, this.uiQuoteLitealParams) || this.uiQuoteDefaultLiteral;
+    const value = this.literalPipe.transform(this.nxQuoteLiteral, this.nxQuoteLitealParams) || this.nxQuoteDefaultLiteral;
 
-    if (this.uiAttribute) {
-      this.renderer.setAttribute(this.el.nativeElement, this.uiAttribute, value);
+    if (this.nxAttribute) {
+      this.renderer.setAttribute(this.el.nativeElement, this.nxAttribute, value);
       return;
     }
 
-    if (this.uiProperty === 'innerHTML' || this.uiProperty === 'innerText') {
-      const soureceLiteral = this.el.nativeElement[this.uiProperty];
+    if (this.nxProperty === 'innerHTML' || this.nxProperty === 'innerText') {
+      const soureceLiteral = this.el.nativeElement[this.nxProperty];
       const safeHtml = this.domSanitizer.bypassSecurityTrustHtml(`${value} ${soureceLiteral}`);
 
-      this.el.nativeElement[this.uiProperty] = this.domSanitizer.sanitize(1, safeHtml) || '';
+      this.el.nativeElement[this.nxProperty] = this.domSanitizer.sanitize(1, safeHtml) || '';
     } else {
-      this.renderer.setProperty(this.el.nativeElement, this.uiProperty, value);
+      this.renderer.setProperty(this.el.nativeElement, this.nxProperty, value);
     }
   }
 }

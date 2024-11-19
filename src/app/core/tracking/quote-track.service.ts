@@ -5,7 +5,7 @@ import { ContextDataService, deepCopy, hasValue, JsonUtils, UniqueIds } from '@s
 import { filter, Subscription } from 'rxjs';
 import { QUOTE_APP_CONTEXT_DATA, QUOTE_CONTEXT_DATA } from '../constants';
 import { TrackError } from '../errors';
-import { AppContextData, QuoteModel } from '../models';
+import { AppContextData, Page, QuoteModel } from '../models';
 import { TrackEventType, TrackInfo, TrackInfoPageModel, TRACKING_QUOTE_MANIFEST } from './quote-track.model';
 import { _window } from './window-tracker.model';
 
@@ -30,11 +30,14 @@ export class QuoteTrackService implements OnDestroy {
     );
 
     this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe(event => {
-      const fullUrl = `${window.location.protocol}//${window.location.host}${event.urlAfterRedirects}`;
-      const page = fullUrl.split('?')[0].split('/').pop();
+      const {
+        navigation: { lastPage }
+      } = this.contextDataService.get<AppContextData>(QUOTE_APP_CONTEXT_DATA);
+      const page = Page.routeFrom(lastPage!);
+      const fullUrl = `${window.location.protocol}//${window.location.host}/${page}`;
 
       const infoPag: TrackInfoPageModel = {
-        pagina: `car quote:${page}`,
+        pagina: lastPage?.pageId!,
         URL: fullUrl,
         pagina_previa: this.referrer,
         tipo_usuario: 'web',
@@ -88,7 +91,7 @@ export class QuoteTrackService implements OnDestroy {
 
     return Object.entries(TRACKING_QUOTE_MANIFEST).reduce((acc, [key, value]) => {
       const val = JsonUtils.valueOf(quote, value);
-      if (hasValue(val)) acc[key as keyof typeof TRACKING_QUOTE_MANIFEST] = val;
+      if (hasValue(val)) acc[key as keyof typeof TRACKING_QUOTE_MANIFEST] = `${val}`;
 
       return acc;
     }, {} as TrackInfo);

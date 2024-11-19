@@ -5,7 +5,7 @@ import { QuoteMaskType } from '../../models';
 import { QuoteMaskDirective } from '../quote-mask.directive';
 
 @Component({
-  template: `<input type="text" [nxQuoteMask]="mask" (uiValueMatch)="onValueMatch($event)" />`,
+  template: `<input type="text" [nxQuoteMask]="mask" (nxValueMatch)="onValueMatch($event)" />`,
   standalone: true,
   imports: [QuoteMaskDirective]
 })
@@ -47,7 +47,7 @@ describe('QuoteMaskDirective', () => {
     expect(event.defaultPrevented).toBe(false);
   });
 
-  it('should emit uiValueMatch event on valid input', () => {
+  it('should emit nxValueMatch event on valid input', () => {
     component.mask = 'alphanumeric';
     fixture.detectChanges();
 

@@ -5,6 +5,8 @@ import { ContextDataService } from '@shagui/ng-shagui/core';
 import { of, Subscription } from 'rxjs';
 import { TrackInfo } from '../quote-track.model';
 import { QuoteTrackService } from '../quote-track.service';
+import { AppContextData } from '../../models';
+import { QUOTE_APP_CONTEXT_DATA, QUOTE_CONTEXT_DATA } from '../../constants';
 
 describe('QuoteTrackService', () => {
   let service: QuoteTrackService;
@@ -23,6 +25,16 @@ describe('QuoteTrackService', () => {
       subscribe: jasmine
         .createSpy('subscribe')
         .and.callFake((callback: any) => callback({ matches: true, breakpoints: { HandsetPortrait: true } }))
+    });
+
+    contextDataServiceSpy.get.and.callFake((contextDataKey: string): any => {
+      if (contextDataKey === QUOTE_APP_CONTEXT_DATA) {
+        return { navigation: { lastPage: { pageId: 'test' }, viewedPages: ['page1', 'page2'] } } as AppContextData;
+      } else if (contextDataKey === QUOTE_CONTEXT_DATA) {
+        return {};
+      }
+
+      return null;
     });
 
     TestBed.configureTestingModule({

@@ -640,6 +640,12 @@
         "literals": {
           "body": "Lo sentimos, no podemos ofrecerte el seguro que necesitas en esta ocasión.",
           "footer-next": "FINALIZAR"
+        },
+        "data": {
+          "headerConfig": {
+            "showBack": true,
+            "showContactUs": false
+          }
         }
       }
     },
@@ -771,11 +777,11 @@
     "contact-us": "external-contact-us"
   },
   "literals": {
-    "back": "Volver",
     "budget-modal-header": "Datos de tu presupuesto",
     "budget-name": "Nombre del presupuesto",
     "budget-key": "Clave del presupuesto",
     "create-budget": "Crear presupuesto",
+    "header-back": "Volver",
     "save-budget": "Guardar presupuesto",
     "retrieve-budget": "Recuperar presupuesto",
     "store-budget": "Almacenar presupuesto",

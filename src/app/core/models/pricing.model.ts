@@ -177,9 +177,9 @@ export namespace PricingDTO {
           plateNumber: model.vehicle.plateNumber?.toUpperCase() ?? '',
           vehicleTrademark: model.vehicle.make,
           vehicleModel: model.vehicle.model,
-          vehicleCode: model.vehicle.vehicleModelVersion?.index,
+          vehicleCode: model.vehicle.modelVersion?.index,
           vehicleClass: '',
-          vehicleVersion: model.vehicle.vehicleModelVersion?.index,
+          vehicleVersion: model.vehicle.modelVersion?.index,
           creationDate: model.vehicle.creationDate && moment(model.vehicle.creationDate).format(DEFAULT_DATE_FORMAT),
           vehicleBaseCode: model.vehicle.base7
         }

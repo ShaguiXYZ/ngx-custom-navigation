@@ -2,12 +2,13 @@ export const TRACKING_QUOTE_MANIFEST = {
   accidents: 'client.accidents',
   dateOfIssue: 'client.dateOfIssue',
   expiration: 'client.expiration',
-  isClient: 'client.isClient',
-  isPolicyOwner: 'client.isPolicyOwner',
+  client: 'client.isClient',
+  insurance: 'client.isPolicyOwner',
+  isCurrentlyInsured: 'client.isCurrentlyInsured',
   contactHour: 'contactData.contactHour',
-  drivenLicenseCountry: 'driven.licenseCountry',
+  location: 'driven.licenseCountry',
   drivenLicenseDate: 'driven.licenseDate',
-  insuranceCompany: 'insuranceCompany.company.index',
+  company: 'insuranceCompany.company.index',
   yearsAsOwner: 'insuranceCompany.yearsAsOwner',
   birthdate: 'personalData.birthdate',
   email: 'personalData.email',
@@ -15,13 +16,14 @@ export const TRACKING_QUOTE_MANIFEST = {
   name: 'personalData.name',
   surname: 'personalData.surname',
   phoneNumber: 'personalData.phoneNumber',
-  location: 'place.postalCode',
-  cubicCapacity: 'vehicle.cubicCapacity.index',
+  postalCode: 'place.postalCode',
+  brand: 'vehicle.make',
+  displayment: 'vehicle.cubicCapacity.index',
   fuel: 'vehicle.fuel.index',
-  make: 'vehicle.make',
   model: 'vehicle.model',
+  modelVersion: 'vehicle.modelVersion.index',
   plateNumber: 'vehicle.plateNumber',
-  powerRange: 'vehicle.powerRange.index',
+  power: 'vehicle.powerRange.index',
   vehicleType: 'vehicle.vehicleType',
   yearOfManufacture: 'vehicle.yearOfManufacture'
 };
@@ -29,33 +31,19 @@ export const TRACKING_QUOTE_MANIFEST = {
 export type TrackEventType = 'click' | 'keydown' | 'keyup' | 'focus' | 'blur' | 'change' | 'input' | 'submit';
 export type TrackKey =
   | 'action'
-  | 'brand'
   | 'category'
-  | 'client'
-  | 'company'
-  | 'cubicCapacity'
-  | 'displayment'
   | 'event'
-  | 'fuel'
   | 'infoPag'
-  | 'insurance'
   | 'label'
-  | 'location'
-  | 'model'
-  | 'modelVersion'
   | 'new'
   | 'pagina'
-  | 'power'
-  | 'selectedAccidents'
   | 'selected_tab'
   | 'step_number'
   | 'title'
   | 'typologyfranquicia'
-  | 'yearsAsOwner'
-  | 'yearOfManufacture'
   | 'URL'
   | keyof typeof TRACKING_QUOTE_MANIFEST;
-export type TrackInfo = Partial<Record<TrackKey, string | null | undefined>>;
+export type TrackInfo = Partial<Record<TrackKey, string | number | boolean | null | undefined>>;
 
 export const quoteTrackInfo = {
   category: 'car quote',

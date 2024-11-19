@@ -1,0 +1,17 @@
+.form-container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-end;
+
+  quote-selectable-option + quote-selectable-option {
+    margin-left: 10px;
+  }
+
+  quote-selectable-option {
+    width: 100%;
+
+    button {
+      width: 100%;
+    }
+  }
+}

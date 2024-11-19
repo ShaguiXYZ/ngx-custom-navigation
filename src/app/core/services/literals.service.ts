@@ -39,13 +39,11 @@ export class LiteralsService {
   private isQuoteLiteral = (literal?: QuoteLiteral): literal is QuoteLiteral => typeof literal === 'object' && 'value' in literal;
 
   private getValue = (literal: string, params?: DataInfo): string => {
-    const keys = Object.keys(params || {});
-
-    if (keys.length === 0) {
+    if (!params) {
       return literal;
     }
 
-    return keys.reduce((acc, key) => acc.replaceAll(new RegExp(`{{\\s*${key}\\s*}}`, 'g'), params?.[key] ?? ''), literal);
+    return Object.entries(params).reduce((acc, [key, value]) => acc.replaceAll(new RegExp(`{{\\s*${key}\\s*}}`, 'g'), value), literal);
   };
 
   private getLiteral = (literal: QuoteLiteral, params?: DataInfo): string =>

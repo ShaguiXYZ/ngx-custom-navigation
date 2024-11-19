@@ -62,6 +62,12 @@ export const routes: Routes = configContextRoutes([
     canDeactivate: [canDeactivateGuard]
   },
   {
+    path: AppUrls.currentlyInsured,
+    loadComponent: () => import('./modules/currently-insured/currently-insured.component').then(c => c.CurrentlyInsuredComponent),
+    canActivate: [journeyGuard],
+    canDeactivate: [canDeactivateGuard]
+  },
+  {
     path: AppUrls.dateOfIssue,
     loadComponent: () => import('./modules/date-of-issue/date-of-issue.component').then(c => c.DateOfIssueComponent),
     canActivate: [journeyGuard],

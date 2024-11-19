@@ -20,7 +20,7 @@
         [selected]="selectedCompany?.index === icon.index"
         [nxTrack]="{
           title: 'header' | quoteLiteral,
-          insuranceCompany: icon.index
+          company: icon.index
         }"
         [nxTrackEvents]="['click']"
         (uiSelect)="selectCompany(icon)"
@@ -36,7 +36,7 @@
           [selected]="selectedCompany?.index === item.index"
           [nxTrack]="{
             title: 'header' | quoteLiteral,
-            insuranceCompany: item.index
+            company: item.index
           }"
           [nxTrackEvents]="['click']"
           (uiSelect)="selectCompany(item)"

@@ -21,7 +21,7 @@
     [data]="_contextData"
     [trackInfo]="{
       title: 'header' | quoteLiteral,
-      location: form.get('postalCode')?.value
+      postalCode: form.get('postalCode')?.value
     }"
     (uiOnNext)="updateValidData()"
   >

@@ -1,7 +1,7 @@
 <!-- eslint-disable @angular-eslint/template/elements-content -->
 <article class="component-container">
   <quote-header-title>
-    <span nxQuoteLiteral="header" [uiQuoteLitealParams]="{ days: '60' }"></span>
+    <span nxQuoteLiteral="header" [nxQuoteLitealParams]="{ days: '60' }"></span>
   </quote-header-title>
   <section class="form-container">
     <quote-selectable-option [selected]="isPolicyOwner">
@@ -11,7 +11,7 @@
         nxQuoteLiteral="yes"
         [nxTrack]="{
           title: 'header' | quoteLiteral,
-          isPolicyOwner: 'true'
+          insurance: true
         }"
         [nxTrackEvents]="['click']"
         (click)="onIsPolicyOwnerChange(true)"
@@ -24,7 +24,7 @@
         nxQuoteLiteral="no"
         [nxTrack]="{
           title: 'header' | quoteLiteral,
-          isPolicyOwner: 'false'
+          insurance: false
         }"
         [nxTrackEvents]="['click']"
         (click)="onIsPolicyOwnerChange(false)"
