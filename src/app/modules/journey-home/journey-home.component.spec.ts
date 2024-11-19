@@ -38,7 +38,8 @@ describe('JourneyHomeComponent', () => {
   });
 
   it('should navigate to homePageId route on init', () => {
-    const mockContext: AppContextData = {
+    const mockContext = {
+      settings: {},
       configuration: {
         homePageId: 'home',
         errorPageId: 'error',

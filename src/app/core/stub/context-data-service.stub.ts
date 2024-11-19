@@ -3,7 +3,10 @@ import { Observable, of } from 'rxjs';
 import { QUOTE_APP_CONTEXT_DATA, QUOTE_CONTEXT_DATA } from '../constants';
 import { AppContextData, Page, QuoteModel } from '../models';
 
-const appContextDataMock: AppContextData = {
+const appContextDataMock = {
+  settings: {
+    agent: 'agent'
+  },
   navigation: {
     viewedPages: ['page1', 'page2'],
     nextPage: {} as Page
@@ -45,8 +48,8 @@ const appContextDataMock: AppContextData = {
 
 export class ContextDataServiceStub {
   private _contextData: DataInfo<unknown> = {
-    [QUOTE_APP_CONTEXT_DATA]: deepCopy(appContextDataMock) as AppContextData,
-    [QUOTE_CONTEXT_DATA]: deepCopy({}) as QuoteModel
+    [QUOTE_APP_CONTEXT_DATA]: deepCopy(appContextDataMock),
+    [QUOTE_CONTEXT_DATA]: deepCopy({})
   };
 
   set<T = unknown>(key: string, data: T) {

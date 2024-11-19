@@ -31,7 +31,8 @@ describe('JourneyGuard', () => {
   });
 
   it('should navigate to the next page if nextPage is not defined', () => {
-    const mockContext: AppContextData = {
+    const mockContext = {
+      settings: {},
       navigation: {
         nextPage: undefined,
         viewedPages: ['page1'],
@@ -59,7 +60,8 @@ describe('JourneyGuard', () => {
   });
 
   it('should update viewedPages and navigate to the next page', () => {
-    const mockContext: AppContextData = {
+    const mockContext = {
+      settings: {},
       navigation: {
         nextPage: { pageId: 'page2', route: 'page2' },
         viewedPages: ['page1'],
@@ -88,7 +90,8 @@ describe('JourneyGuard', () => {
   });
 
   it('should reset quote context data if navigating to home page', () => {
-    const mockContext: AppContextData = {
+    const mockContext = {
+      settings: {},
       navigation: {
         nextPage: { pageId: 'home', route: 'home' },
         viewedPages: ['page1'],

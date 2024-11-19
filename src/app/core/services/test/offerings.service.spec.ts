@@ -3,17 +3,26 @@ import { TestBed } from '@angular/core/testing';
 import { of } from 'rxjs';
 import { OfferingDTO, QuoteModel } from '../../models';
 import { OfferingsService } from '../offerings.service';
+import { ContextDataService } from '@shagui/ng-shagui/core';
 
 describe('OfferingsService', () => {
   let service: OfferingsService;
+  let contextDataServiceSpy: jasmine.SpyObj<ContextDataService>;
   let httpClientSpy: jasmine.SpyObj<HttpClient>;
 
   beforeEach(() => {
+    contextDataServiceSpy = jasmine.createSpyObj('ContextDataService', ['get']);
     httpClientSpy = jasmine.createSpyObj('HttpClient', ['get', 'post', 'put', 'delete']);
+
+    contextDataServiceSpy.get.and.returnValue({ settings: { agent: '1234' } });
 
     TestBed.configureTestingModule({
       imports: [],
-      providers: [OfferingsService, { provide: HttpClient, useValue: httpClientSpy }]
+      providers: [
+        OfferingsService,
+        { provide: ContextDataService, useValue: contextDataServiceSpy },
+        { provide: HttpClient, useValue: httpClientSpy }
+      ]
     });
 
     service = TestBed.inject(OfferingsService);

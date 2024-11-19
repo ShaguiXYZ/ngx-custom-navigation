@@ -36,6 +36,8 @@ describe('SettingsService', () => {
   });
 
   it('should load settings and update context data', async () => {
+    const settings = {};
+
     const mockConfiguration: ConfigurationDTO = {
       homePageId: 'home',
       lastUpdate: new Date('2023-10-01'),
@@ -55,7 +57,8 @@ describe('SettingsService', () => {
       literals: {}
     };
 
-    const appContextData: AppContextData = {
+    const appContextData = {
+      settings: {},
       configuration: {
         homePageId: mockConfiguration.homePageId,
         errorPageId: 'error',
@@ -95,11 +98,11 @@ describe('SettingsService', () => {
       return null;
     });
 
-    httpClientSpy.get.and.returnValue(of(mockConfiguration));
+    httpClientSpy.get.and.returnValues(of(settings), of(mockConfiguration));
 
     await service.loadSettings();
 
-    expect(httpClientSpy.get.calls.count()).withContext('one call').toBe(1);
+    expect(httpClientSpy.get.calls.count()).withContext('two calls').toBe(2);
     expect(contextDataServiceSpy.set).toHaveBeenCalled();
   });
 

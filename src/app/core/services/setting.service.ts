@@ -13,6 +13,7 @@ import {
   Literals,
   Page,
   QuoteModel,
+  QuoteSettingsModel,
   Step,
   Stepper,
   StepperDTO
@@ -27,6 +28,7 @@ export class SettingsService {
   private readonly translateService = inject(TranslateService);
 
   public async loadSettings(): Promise<void> {
+    const settings = await this.quoteSettings();
     const quoteData = this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA);
 
     this.translateService.setDefaultLang('es-ES');
@@ -47,15 +49,22 @@ export class SettingsService {
     );
     const appContextData = this.contextDataService.get<AppContextData>(QUOTE_APP_CONTEXT_DATA);
 
-    this.contextDataService.set(QUOTE_APP_CONTEXT_DATA, AppContextData.init(configuration, appContextData?.navigation.viewedPages ?? []), {
-      persistent: true
-    });
+    this.contextDataService.set(
+      QUOTE_APP_CONTEXT_DATA,
+      AppContextData.init(settings, configuration, appContextData?.navigation.viewedPages ?? []),
+      {
+        persistent: true
+      }
+    );
 
     console.group('SettingsService');
     console.log('Quote data', QUOTE_CONTEXT_DATA, this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA));
     console.log('Quote app context data', QUOTE_APP_CONTEXT_DATA, this.contextDataService.get<AppContextData>(QUOTE_APP_CONTEXT_DATA));
     console.groupEnd();
   }
+
+  private quoteSettings = (): Promise<QuoteSettingsModel> =>
+    firstValueFrom(this.httpService.get<QuoteSettingsModel>(`${environment.baseUrl}/settings`).pipe(map(res => res as QuoteSettingsModel)));
 
   private init = (configuration: ConfigurationDTO): Configuration => {
     const quoteConfiguration: Configuration = this.initQuote(configuration);
@@ -74,10 +83,10 @@ export class SettingsService {
       homePageId: dto.homePageId,
       errorPageId,
       lastUpdate: dto.lastUpdate,
-      pageMap: dto.pageMap.reduce((acc, page) => {
+      pageMap: dto.pageMap.reduce<DataInfo<Page>>((acc, page) => {
         acc[page.pageId] = page;
         return acc;
-      }, {} as DataInfo<Page>),
+      }, {}),
       links: {}
     };
 

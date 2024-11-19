@@ -33,7 +33,7 @@ export class QuoteTrackService implements OnDestroy {
       const {
         navigation: { lastPage }
       } = this.contextDataService.get<AppContextData>(QUOTE_APP_CONTEXT_DATA);
-      const page = Page.routeFrom(lastPage!);
+      const page = lastPage && Page.routeFrom(lastPage);
       const fullUrl = `${window.location.protocol}//${window.location.host}/${page}`;
 
       const infoPag: TrackInfoPageModel = {
@@ -67,7 +67,11 @@ export class QuoteTrackService implements OnDestroy {
 
     const trackInfo = {
       ...this.loadManifest(),
-      ...data,
+      ...Object.fromEntries(
+        Object.entries(data)
+          .filter(([, value]) => hasValue(value))
+          .map(([key, value]) => [key, `${value}`])
+      ),
       category: 'tarificador',
       pagina: this.infoPage?.pagina,
       URL: this.infoPage?.URL,
@@ -89,12 +93,12 @@ export class QuoteTrackService implements OnDestroy {
   private loadManifest = (): TrackInfo => {
     const quote = this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA);
 
-    return Object.entries(TRACKING_QUOTE_MANIFEST).reduce((acc, [key, value]) => {
+    return Object.entries(TRACKING_QUOTE_MANIFEST).reduce<TrackInfo>((acc, [key, value]) => {
       const val = JsonUtils.valueOf(quote, value);
       if (hasValue(val)) acc[key as keyof typeof TRACKING_QUOTE_MANIFEST] = `${val}`;
 
       return acc;
-    }, {} as TrackInfo);
+    }, {});
   };
 
   private trackFn = (eventType: TrackEventType | 'view', trackInfo?: TrackInfo): number =>

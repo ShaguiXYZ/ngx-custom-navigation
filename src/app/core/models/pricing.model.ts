@@ -2,6 +2,7 @@
 import moment from 'moment';
 import { DEFAULT_DATE_FORMAT } from '../constants';
 import { QuoteModel } from './quote.model';
+import { QuoteSettingsModel } from './quote-settings.model';
 
 export interface Authentication {
   company?: string;
@@ -120,17 +121,8 @@ export interface PricingDTO {
 }
 
 export namespace PricingDTO {
-  export const fromModel = (model: QuoteModel): PricingDTO => ({
-    authentication: {
-      company: 'CIA',
-      channel: 'CHANEL',
-      partnerId: 'PARTNER',
-      agentId: 'AGENT',
-      agentCode: 0,
-      agentHelperCode: 0,
-      office: 0,
-      groupings: [0]
-    },
+  export const fromModel = (model: QuoteModel, settings: QuoteSettingsModel): PricingDTO => ({
+    authentication: { ...settings },
     operationHeaders: { operationTypeCode: '', productCode: 0, operationAllianzId: 0, operative: 0, profile: '' },
     operationDataT1: {
       generalData: {

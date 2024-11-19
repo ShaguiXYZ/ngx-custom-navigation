@@ -1,0 +1,10 @@
+{
+  "company": "cia",
+  "channel": "chanel",
+  "partnerid": "partner",
+  "agentid": "12345",
+  "agentcode": 0,
+  "agenthelpercode": 0,
+  "office": 10,
+  "groupings": [1, 3, 4, 5]
+}
