@@ -4,7 +4,7 @@ import { TestBed } from '@angular/core/testing';
 import { DataInfo } from '@shagui/ng-shagui/core';
 import { of } from 'rxjs';
 import { LocationDTO, LocationModel } from '../../models';
-import { LocationService } from '../localtion.service';
+import { LocationService } from '../location.service';
 
 describe('LocationService', () => {
   let service: LocationService;

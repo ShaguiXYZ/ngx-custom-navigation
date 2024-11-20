@@ -5,6 +5,7 @@ import CryptoJS from 'crypto-js';
 export interface SignatureModel {
   changed?: boolean;
   hash?: string;
+  budget?: string;
 }
 
 export interface SignedModel {

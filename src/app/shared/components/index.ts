@@ -2,7 +2,6 @@ export * from './header-title';
 export * from './icon-card';
 export * from './loading';
 export * from './notification';
-export * from './quote-budget';
 export * from './quote-footer';
 export * from './quote-footer-info';
 export * from './quote-header';

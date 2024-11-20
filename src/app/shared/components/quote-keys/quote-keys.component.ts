@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { Component, HostListener, inject } from '@angular/core';
 import { NxDialogService, NxModalModule, NxModalRef } from '@aposin/ng-aquila/modal';
 import { ScreenRecorder } from '@shagui/ng-shagui/core';
-import { QuoteBudgetComponent } from '../quote-budget';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -59,18 +58,6 @@ export class QuoteKeysComponent {
         break;
       case 'P':
       case 'S': {
-        const componentDialogRef = this.openFromComponent(QuoteBudgetComponent);
-        const subscriptions: Subscription[] = [
-          componentDialogRef.componentInstance.budgetStored.subscribe(() => {
-            componentDialogRef.close();
-            subscriptions.forEach(subscription => subscription.unsubscribe());
-          }),
-          componentDialogRef.componentInstance.budgetRestored.subscribe(() => {
-            componentDialogRef.close();
-            subscriptions.forEach(subscription => subscription.unsubscribe());
-          })
-        ];
-
         event.preventDefault();
         break;
       }

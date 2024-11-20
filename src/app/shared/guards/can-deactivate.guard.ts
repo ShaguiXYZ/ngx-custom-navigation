@@ -10,6 +10,9 @@ export const canDeactivateGuard: CanDeactivateFn<QuoteComponent> = (
   state: RouterStateSnapshot,
   next?: RouterStateSnapshot
 ): MaybeAsync<GuardResult> => {
+  const contextDataService = inject(ContextDataService);
+  const context = contextDataService.get<AppContextData>(QUOTE_APP_CONTEXT_DATA);
+
   const isPreviousStep = ({ navigation: { nextPage, viewedPages } }: AppContextData): boolean =>
     !!nextPage && viewedPages.includes(nextPage.pageId);
 
@@ -25,9 +28,6 @@ export const canDeactivateGuard: CanDeactivateFn<QuoteComponent> = (
 
     return canDeactivate;
   };
-
-  const contextDataService = inject(ContextDataService);
-  const context = contextDataService.get<AppContextData>(QUOTE_APP_CONTEXT_DATA);
 
   return isErrorPage(context) || isPreviousStep(context) || stepperChange(context) || canDeactivate();
 };

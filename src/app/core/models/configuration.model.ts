@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-namespace */
 import { DataInfo } from '@shagui/ng-shagui/core';
-import { EntryPoint } from './entry-point.model';
+import { EntryPoint } from '../service-activators';
 import { LiteralModel } from './literal.model';
 import { StepperDTO, Steppers } from './stepper.model';
 

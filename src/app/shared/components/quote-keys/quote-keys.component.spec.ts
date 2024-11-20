@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NxDialogService, NxModalModule } from '@aposin/ng-aquila/modal';
 import { ScreenRecorder } from '@shagui/ng-shagui/core';
-import { QuoteBudgetComponent } from '../quote-budget';
 import { QuoteKeysComponent } from './quote-keys.component';
 
 describe('QuoteKeysComponent', () => {
@@ -24,17 +23,6 @@ describe('QuoteKeysComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
-  });
-
-  it('should open QuoteBudgetComponent on Ctrl+P or Ctrl+S', () => {
-    spyOn(component as any, 'openFromComponent');
-    const eventP = new KeyboardEvent('keydown', { key: 'P', ctrlKey: true });
-    const eventS = new KeyboardEvent('keydown', { key: 'S', ctrlKey: true });
-
-    document.dispatchEvent(eventP);
-    document.dispatchEvent(eventS);
-
-    expect((component as any).openFromComponent).toHaveBeenCalledWith(QuoteBudgetComponent);
   });
 
   it('should start screen recording on Ctrl+R', () => {

@@ -5,7 +5,7 @@ import { Subscription } from 'rxjs';
 import { QUOTE_APP_CONTEXT_DATA, QUOTE_CONTEXT_DATA } from '../constants';
 import { ConditionEvaluation } from '../lib';
 import { AppContextData, NextOption, Page, QuoteModel, Step } from '../models';
-import { ServiceActivatorService } from './service-activator.service';
+import { ServiceActivatorService } from '../service-activators';
 
 @Injectable({ providedIn: 'root' })
 export class RoutingService implements OnDestroy {
@@ -30,9 +30,10 @@ export class RoutingService implements OnDestroy {
     this.subscrition$.forEach(sub => sub.unsubscribe());
   }
 
-  public next(data?: QuoteModel): Promise<boolean> {
+  public next = async (data?: QuoteModel): Promise<boolean> => {
+    await this.serviceActivatorService.activateService('next-page');
+
     const toEveluate: QuoteModel = deepCopy(data ?? this.contextDataService.get(QUOTE_CONTEXT_DATA));
-    this.serviceActivatorService.activateService('nextPage');
 
     const nextPage = this.getNextRoute(toEveluate);
 
@@ -43,14 +44,15 @@ export class RoutingService implements OnDestroy {
     this.contextDataService.set(QUOTE_CONTEXT_DATA, toEveluate);
 
     return this._goToPage(nextPage);
-  }
+  };
 
-  public previous = (data?: QuoteModel): Promise<boolean> => {
+  public previous = async (data?: QuoteModel): Promise<boolean> => {
     if (this.appContextData.navigation.viewedPages.length > 1) {
       const pageId = this.appContextData.navigation.viewedPages[this.appContextData.navigation.viewedPages.length - 2];
 
-      this.serviceActivatorService.activateService('previousPage');
       data && this.contextDataService.set(QUOTE_CONTEXT_DATA, data);
+
+      await this.serviceActivatorService.activateService('previous-page');
 
       return this._goToPage(this.appContextData.configuration.pageMap[pageId]);
     }

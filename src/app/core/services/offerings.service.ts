@@ -5,10 +5,12 @@ import { firstValueFrom, map, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { AppContextData, OfferingDTO, PricingDTO, QuoteModel, QuoteOfferingModel, SignedModel } from '../models';
 import { QUOTE_APP_CONTEXT_DATA } from '../constants';
+import { ServiceActivatorService } from '../service-activators';
 
 @Injectable()
 export class OfferingsService {
   private readonly contextDataService = inject(ContextDataService);
+  private readonly serviceActivatorService = inject(ServiceActivatorService);
   private readonly httpService = inject(HttpService);
 
   public pricing(quote: QuoteModel): Promise<QuoteOfferingModel> {
@@ -25,7 +27,8 @@ export class OfferingsService {
             showLoading: true
           })
           .pipe(
-            tap(() => {
+            tap(async () => {
+              await this.serviceActivatorService.activateService('on-pricing');
               SignedModel.reset(quote);
             }),
             map(res => QuoteOfferingModel.fromDTO(res as OfferingDTO))

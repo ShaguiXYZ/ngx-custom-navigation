@@ -228,6 +228,15 @@
       "pageId": "license-plate",
       "nextOptionList": [
         {
+          "nextPageId": "apology-screen",
+          "conditions": [
+            {
+              "expression": "blackList.plateNumber",
+              "value": "true"
+            }
+          ]
+        },
+        {
           "nextPageId": "license-year",
           "conditions": [
             {
@@ -268,7 +277,14 @@
           "license-plate": "Matrícula",
           "error-length": "El formato de la matrícula no es correcto ({{value}})"
         }
-      }
+      },
+      "entryPoints": [
+        {
+          "id": "next-page",
+          "activator": "black-list-plate",
+          "params": { "percent": 0.7 }
+        }
+      ]
     },
     {
       "pageId": "your-car-is",
@@ -576,7 +592,13 @@
           "popular": "El más contratado",
           "view-coverages": "Ver coberturas"
         }
-      }
+      },
+      "entryPoints": [
+        {
+          "id": "on-pricing",
+          "activator": "store-budget"
+        }
+      ]
     },
     {
       "pageId": "confirmation",

@@ -3,6 +3,7 @@ export interface QuoteBlackList {
   email?: boolean;
   identificationNumber?: boolean;
   phoneNumber?: boolean;
+  plateNumber?: boolean;
 }
 
 export namespace QuoteBlackList {
