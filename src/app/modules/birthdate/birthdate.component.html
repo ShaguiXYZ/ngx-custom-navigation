@@ -16,10 +16,12 @@
         <nx-datepicker-toggle [for]="myDatepicker" nxFormfieldSuffix></nx-datepicker-toggle>
         <nx-datepicker #myDatepicker></nx-datepicker>
         @if(form.get('birthdate')?.errors?.['required']) {
-        <nx-error appearance="text" nxFormfieldError><span nxQuoteLiteral="error-required"></span> </nx-error>
+        <nx-error appearance="text" nxFormfieldError>
+          <span nxQuoteLiteral="error-required"></span>
+        </nx-error>
         } @if(form.get('birthdate')?.errors?.['olderThanYears']) {
-        <nx-error appearance="text" nxFormfieldError
-          ><span nxQuoteLiteral="error-client-old" [nxQuoteLitealParams]="{ value: minValue }"></span>
+        <nx-error appearance="text" nxFormfieldError>
+          <span nxQuoteLiteral="error-client-old" [nxQuoteLitealParams]="{ value: minValue }"></span>
         </nx-error>
         }
       </nx-formfield>

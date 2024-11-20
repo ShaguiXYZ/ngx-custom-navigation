@@ -265,7 +265,8 @@
           "continue-without-license-plate": "Continuar sin matrícula",
           "footer-info": "Facilitando tu matrícula obtendrás tu cotización mucho más rápido",
           "header": "¿Cuál es la matrícula de tu coche?",
-          "license-plate": "Matrícula"
+          "license-plate": "Matrícula",
+          "error-length": "El formato de la matrícula no es correcto ({{value}})"
         }
       }
     },
