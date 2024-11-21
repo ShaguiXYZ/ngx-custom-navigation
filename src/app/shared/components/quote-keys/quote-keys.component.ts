@@ -1,9 +1,7 @@
-import { ComponentType } from '@angular/cdk/portal';
 import { CommonModule } from '@angular/common';
-import { Component, HostListener, inject } from '@angular/core';
-import { NxDialogService, NxModalModule, NxModalRef } from '@aposin/ng-aquila/modal';
+import { Component, HostListener } from '@angular/core';
+import { NxModalModule } from '@aposin/ng-aquila/modal';
 import { ScreenRecorder } from '@shagui/ng-shagui/core';
-import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'quote-keys',
@@ -13,8 +11,6 @@ import { Subscription } from 'rxjs';
   standalone: true
 })
 export class QuoteKeysComponent {
-  private readonly dialogService = inject(NxDialogService);
-
   @HostListener('document:keydown', ['$event'])
   onKeyDown(event: KeyboardEvent) {
     this.eventKeyActions(event);
@@ -25,15 +21,6 @@ export class QuoteKeysComponent {
     } else {
       this.handleMacKeyEvents(event);
     }
-  }
-
-  private openFromComponent<T = unknown>(component: ComponentType<T>): NxModalRef<T> {
-    this.dialogService.closeAll();
-
-    return this.dialogService.open(component, {
-      maxWidth: '98%',
-      showCloseIcon: false
-    });
   }
 
   private handleMacKeyEvents(event: KeyboardEvent) {

@@ -1,4 +1,4 @@
-import { ActivatorConfig, ActivatorFnType, EntryPoints } from '.';
+import { ActivatorFnType, EntryPoints } from '.';
 import { Condition } from '../models';
 
 export interface EntryPoint {

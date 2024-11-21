@@ -43,6 +43,24 @@ describe('QuoteKeysComponent', () => {
     expect(event.preventDefault).toHaveBeenCalled();
   });
 
+  it('should prevent default action for ctrl + S key', () => {
+    const event = new KeyboardEvent('keydown', { key: 'P', ctrlKey: true });
+    spyOn(event, 'preventDefault');
+
+    document.dispatchEvent(event);
+
+    expect(event.preventDefault).toHaveBeenCalled();
+  });
+
+  it('should prevent default action for ctrl + P key', () => {
+    const event = new KeyboardEvent('keydown', { key: 'P', ctrlKey: true });
+    spyOn(event, 'preventDefault');
+
+    document.dispatchEvent(event);
+
+    expect(event.preventDefault).toHaveBeenCalled();
+  });
+
   it('should handle Mac key events', () => {
     spyOnProperty(navigator, 'userAgent', 'get').and.returnValue('Macintosh');
     spyOn(component as any, 'eventCtrlKeyActions');
@@ -78,5 +96,23 @@ describe('QuoteKeysComponent', () => {
     document.dispatchEvent(event);
 
     expect(event.preventDefault).toHaveBeenCalled();
+  });
+
+  it('should continue with default action if no specific (Ctrl) handler is defined', () => {
+    const event = new KeyboardEvent('keydown', { key: 'A', ctrlKey: true });
+    spyOn(event, 'preventDefault');
+
+    document.dispatchEvent(event);
+
+    expect(event.preventDefault).not.toHaveBeenCalled();
+  });
+
+  it('should continue with default action if no specific handler is defined', () => {
+    const event = new KeyboardEvent('keydown', { key: 'A' });
+    spyOn(event, 'preventDefault');
+
+    document.dispatchEvent(event);
+
+    expect(event.preventDefault).not.toHaveBeenCalled();
   });
 });

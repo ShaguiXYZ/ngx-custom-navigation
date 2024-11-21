@@ -10,9 +10,9 @@ export class BudgetActivator {
   public static storeBudget =
     (services: ActivatorServices): (() => Promise<boolean>) =>
     async (): Promise<boolean> => {
-      const quote = services.contextDataService!.get<QuoteModel>(QUOTE_CONTEXT_DATA);
+      const quote = services.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA);
       const budget: Budget = {
-        context: services.contextDataService!.get<AppContextData>(QUOTE_APP_CONTEXT_DATA),
+        context: services.contextDataService.get<AppContextData>(QUOTE_APP_CONTEXT_DATA),
         quote
       };
 
@@ -21,13 +21,13 @@ export class BudgetActivator {
         key: `QUOTE_${moment().format('YYYYMMDD')}_${UniqueIds.random(6).toUpperCase()}`
       };
 
-      const cipher = this.encryptQuote(storedDataKey.passKey, budget);
+      const cipher = BudgetActivator.encryptQuote(storedDataKey.passKey, budget);
       const storedData: StoredData = { name: storedDataKey.key, cipher };
 
       localStorage.setItem(storedDataKey.key, btoa(JSON.stringify(storedData)));
 
       quote.signature = { ...quote.signature, budget: btoa(JSON.stringify(storedDataKey)) };
-      services.contextDataService!.set<QuoteModel>(QUOTE_CONTEXT_DATA, quote);
+      services.contextDataService.set<QuoteModel>(QUOTE_CONTEXT_DATA, quote);
 
       await Promise.resolve();
       return true;
@@ -35,8 +35,8 @@ export class BudgetActivator {
 
   public static retrieveBudget =
     (services: ActivatorServices): (() => Promise<boolean>) =>
-    (): Promise<boolean> => {
-      const { signature } = services.contextDataService!.get<QuoteModel>(QUOTE_CONTEXT_DATA);
+    async (): Promise<boolean> => {
+      const { signature } = services.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA);
       const budget = signature?.budget;
 
       if (!budget) {
@@ -44,17 +44,21 @@ export class BudgetActivator {
       }
 
       const storedDataKey = JSON.parse(atob(budget)) as StoredDataKey;
-      const storedData = this.retrieveAllStorageBudgets().find(({ index }) => index === storedDataKey.key)?.data;
+
+      console.log('storedDataKey', storedDataKey);
+
+      const storedData = BudgetActivator.retrieveAllStorageBudgets().find(({ index }) => index === storedDataKey.key)?.data;
 
       if (!storedData) {
         throw new BudgetError('Budget not found');
       }
 
       const storedDataModel = JSON.parse(atob(storedData)) as StoredData;
-      const decrypted = this.decryptQuote<Budget>(storedDataKey.passKey, storedDataModel.cipher);
+      console.log('storedData', storedDataModel);
+      const decrypted = BudgetActivator.decryptQuote<Budget>(storedDataKey.passKey, storedDataModel.cipher);
 
-      services.contextDataService!.set<AppContextData>(QUOTE_APP_CONTEXT_DATA, decrypted.context);
-      services.contextDataService!.set<QuoteModel>(QUOTE_CONTEXT_DATA, decrypted.quote);
+      services.contextDataService.set<AppContextData>(QUOTE_APP_CONTEXT_DATA, decrypted.context);
+      services.contextDataService.set<QuoteModel>(QUOTE_CONTEXT_DATA, decrypted.quote);
 
       return Promise.resolve(true);
     };

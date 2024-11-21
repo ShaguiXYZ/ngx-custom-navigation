@@ -3,10 +3,7 @@ import { ContextDataService } from '@shagui/ng-shagui/core';
 import { QUOTE_APP_CONTEXT_DATA, QUOTE_CONTEXT_DATA } from '../constants';
 import { ConditionEvaluation } from '../lib';
 import { AppContextData, QuoteModel } from '../models';
-import { BlackListActivator } from './black-list.activator';
-import { BudgetActivator } from './budget.activator';
-import { ActivatorFn, ActivatorFnType, EntryPoints } from './quote-activator.model';
-import { QuoteActivator } from './quote.activator';
+import { ActivatorFn, ActivatorFnType, EntryPoints, ServiceActivators } from './quote-activator.model';
 
 @Injectable({ providedIn: 'root' })
 export class ServiceActivatorService {
@@ -15,25 +12,9 @@ export class ServiceActivatorService {
   private readonly contextDataService = inject(ContextDataService);
 
   constructor() {
-    this.registerActivator('store-budget', BudgetActivator.storeBudget.bind(this)({ contextDataService: this.contextDataService }));
-    this.registerActivator('retrieve-budget', BudgetActivator.retrieveBudget.bind(this)({ contextDataService: this.contextDataService }));
-    this.registerActivator(
-      'black-list-identification-number',
-      BlackListActivator.checkIdentificationNumberBlackList.bind(this)({ contextDataService: this.contextDataService })
+    Object.entries(ServiceActivators).forEach(([name, activator]) =>
+      this.registerActivator(name as ActivatorFnType, activator({ contextDataService: this.contextDataService }))
     );
-    this.registerActivator(
-      'black-list-plate',
-      BlackListActivator.checkPlateBlackList.bind(this)({ contextDataService: this.contextDataService })
-    );
-    this.registerActivator(
-      'black-list-phone',
-      BlackListActivator.checkPhoneBlackList.bind(this)({ contextDataService: this.contextDataService })
-    );
-    this.registerActivator(
-      'black-list-email',
-      BlackListActivator.checkEmailBlackList.bind(this)({ contextDataService: this.contextDataService })
-    );
-    this.registerActivator('patch-quote', QuoteActivator.quotePatch.bind(this)({ contextDataService: this.contextDataService }));
   }
 
   public activateService = async (name: EntryPoints): Promise<void> => {
