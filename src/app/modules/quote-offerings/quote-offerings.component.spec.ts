@@ -24,6 +24,16 @@ describe('QuoteOfferingsComponent', () => {
     const offeringsServiceSpy = jasmine.createSpyObj('OfferingsService', ['pricing']);
     const routingServiceSpy = jasmine.createSpyObj('RoutingService', ['next']);
 
+    contextDataServiceSpy.get.and.callFake((contextDataKey: string): any => {
+      if (contextDataKey === QUOTE_APP_CONTEXT_DATA) {
+        return { navigation: { lastPage: 'page' }, configuration: { literals: {} } };
+      } else if (contextDataKey === QUOTE_CONTEXT_DATA) {
+        return { offering: { price: {} } } as QuoteModel;
+      }
+
+      return null;
+    });
+
     await TestBed.configureTestingModule({
       declarations: [],
       imports: [QuoteOfferingsComponent],

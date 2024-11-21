@@ -1,11 +1,12 @@
 import { inject, Injectable } from '@angular/core';
 import { ContextDataService } from '@shagui/ng-shagui/core';
 import { QUOTE_APP_CONTEXT_DATA, QUOTE_CONTEXT_DATA } from '../constants';
+import { ConditionEvaluation } from '../lib';
 import { AppContextData, QuoteModel } from '../models';
 import { BlackListActivator } from './black-list.activator';
 import { BudgetActivator } from './budget.activator';
 import { ActivatorFn, ActivatorFnType, EntryPoints } from './quote-activator.model';
-import { ConditionEvaluation } from '../lib';
+import { QuoteActivator } from './quote.activator';
 
 @Injectable({ providedIn: 'root' })
 export class ServiceActivatorService {
@@ -32,6 +33,7 @@ export class ServiceActivatorService {
       'black-list-email',
       BlackListActivator.checkEmailBlackList.bind(this)({ contextDataService: this.contextDataService })
     );
+    this.registerActivator('patch-quote', QuoteActivator.quotePatch.bind(this)({ contextDataService: this.contextDataService }));
   }
 
   public activateService = async (name: EntryPoints): Promise<void> => {

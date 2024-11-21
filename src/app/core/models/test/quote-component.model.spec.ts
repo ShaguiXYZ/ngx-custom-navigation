@@ -7,6 +7,8 @@ import { AppContextData } from '../app-context-data.model';
 import { QuoteComponent } from '../quote-component.model';
 
 class TestQuoteComponent extends QuoteComponent {
+  public someKey = 'someValue';
+
   constructor() {
     super();
   }
@@ -20,20 +22,11 @@ describe('QuoteComponent', () => {
     const quoteLiteralPipeSpy = jasmine.createSpyObj('QuoteLiteralPipe', ['transform']);
     const contextDataServiceSpy = jasmine.createSpyObj('ContextDataService', ['get', 'set']);
 
-    TestBed.configureTestingModule({
-      providers: [
-        TestQuoteComponent,
-        { provide: ContextDataService, useValue: contextDataServiceSpy },
-        { provide: QuoteLiteralPipe, useValue: quoteLiteralPipeSpy }
-      ]
-    });
-
-    component = TestBed.inject(TestQuoteComponent);
-    contextDataService = TestBed.inject(ContextDataService) as jasmine.SpyObj<ContextDataService>;
-
-    contextDataService.get.and.callFake((key: string): any => {
+    contextDataServiceSpy.get.and.callFake((key: string): any => {
       if (key === QUOTE_CONTEXT_DATA) {
-        return component['_contextData'];
+        return {
+          someKey: 'someValue'
+        };
       } else if (key === QUOTE_APP_CONTEXT_DATA) {
         return {
           navigation: {
@@ -45,8 +38,20 @@ describe('QuoteComponent', () => {
           }
         } as AppContextData;
       }
+
       return undefined;
     });
+
+    TestBed.configureTestingModule({
+      providers: [
+        TestQuoteComponent,
+        { provide: ContextDataService, useValue: contextDataServiceSpy },
+        { provide: QuoteLiteralPipe, useValue: quoteLiteralPipeSpy }
+      ]
+    });
+
+    component = TestBed.inject(TestQuoteComponent);
+    contextDataService = TestBed.inject(ContextDataService) as jasmine.SpyObj<ContextDataService>;
   });
 
   it('should create', () => {
@@ -54,31 +59,56 @@ describe('QuoteComponent', () => {
   });
 
   it('should update component data', async () => {
-    const mockAppContextData: AppContextData = {
-      navigation: {
-        lastPage: {
-          configuration: {
-            data: {
-              someKey: 'someValue'
-            }
-          }
-        }
-      }
-    } as unknown as AppContextData;
-
-    contextDataService.get.and.returnValue(mockAppContextData);
-
     await component['__updateComponentData']();
 
+    expect(contextDataService.get).toHaveBeenCalledTimes(3);
+    expect(contextDataService.get).toHaveBeenCalledWith(QUOTE_CONTEXT_DATA);
     expect(contextDataService.get).toHaveBeenCalledWith(QUOTE_APP_CONTEXT_DATA);
   });
 
-  it('should update data recursively', () => {
-    const data: { a: number; b: { c: number; d?: number }; e?: number } = { a: 1, b: { c: 2 } };
-    const newData = { b: { c: 3, d: 4 }, e: 5 };
+  it('should load component data', () => {
+    component['__loadComponentData'](component);
 
-    component['__updateData'](data, newData);
+    expect(contextDataService.get).toHaveBeenCalledTimes(3);
+    expect(contextDataService.get).toHaveBeenCalledWith(QUOTE_CONTEXT_DATA);
+    expect(contextDataService.get).toHaveBeenCalledWith(QUOTE_APP_CONTEXT_DATA);
+  });
 
-    expect(data).toEqual({ a: 1, b: { c: 3, d: 4 }, e: 5 });
+  it('should load component data with context data', () => {
+    contextDataService.get.and.callFake((key: string): any => {
+      if (key === QUOTE_CONTEXT_DATA) {
+        return {
+          someKey: 'someValue',
+          contextData: {
+            someKey: 'someValue'
+          } as Record<string, unknown>
+        };
+      } else if (key === QUOTE_APP_CONTEXT_DATA) {
+        return {
+          navigation: {
+            lastPage: {
+              configuration: {
+                data: {
+                  someKey: 'updateValue',
+                  contextData: {
+                    someKey: 'updateContextValue'
+                  }
+                }
+              }
+            }
+          }
+        } as unknown as AppContextData;
+      }
+    });
+
+    component['__loadComponentData'](component);
+
+    expect(contextDataService.get).toHaveBeenCalledTimes(3);
+    expect(contextDataService.get).toHaveBeenCalledWith(QUOTE_CONTEXT_DATA);
+    expect(contextDataService.get).toHaveBeenCalledWith(QUOTE_APP_CONTEXT_DATA);
+    expect(component['_contextData']).toEqual({
+      someKey: 'updateContextValue'
+    } as any);
+    expect(component['someKey']).toEqual('updateValue');
   });
 });

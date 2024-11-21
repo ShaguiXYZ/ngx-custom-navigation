@@ -6,7 +6,8 @@ export type ActivatorFnType =
   | 'black-list-identification-number'
   | 'black-list-plate'
   | 'black-list-phone'
-  | 'black-list-email';
+  | 'black-list-email'
+  | 'patch-quote';
 
 export type EntryPoints = 'next-page' | 'previous-page' | 'on-pricing' | ActivatorFnType;
 
