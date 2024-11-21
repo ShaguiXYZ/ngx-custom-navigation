@@ -4,9 +4,9 @@
   </quote-header-title>
 
   <section class="form-container">
-    <nx-tab-group [mobileAccordion]="false">
+    <nx-tab-group [mobileAccordion]="false" [disabled]="false">
       @for(price of prices; track price.modalityId) {
-      <nx-tab [label]="price.modalityDescription">
+      <nx-tab [label]="price.modalityDescription" [tabIndex]="$index">
         <div class="coverages">
           <nx-accordion variant="light" [multi]="false">
             @for(coverage of price.coverageList; track coverage.code) {

@@ -1,3 +1,4 @@
+<!-- eslint-disable @angular-eslint/template/elements-content -->
 <article class="price-container" [ngClass]="{ selected }">
   <quote-header-title>
     <div class="popular-header" [ngClass]="{ 'popular-price': price.popular }">
@@ -60,11 +61,16 @@
   <footer class="price-footer nx-margin-x-m nx-margin-bottom-xs">
     <quote-footer [config]="footerConfig" [mobileMode]="true">
       <button class="footer-option nx-margin-y-2xs" nxButton="primary" type="button" (click)="callNow()">
-        <span
+        @if (isMobile) {
+        <a
+          href="tel:{{ 'contact-us-phone' | quoteLiteral }}"
           nxCopytext="medium"
           class="uppercase nx-font-weight-bold"
-          [nxQuoteLiteral]="mobileMode ? 'footer-next' : 'contact-us-phone'"
-        ></span>
+          nxQuoteLiteral="footer-next"
+        ></a>
+        } @else {
+        <span nxCopytext="medium" class="uppercase nx-font-weight-bold" [nxQuoteLiteral]="'contact-us-phone'"> </span>
+        }
       </button>
       <button class="footer-option nx-margin-y-2xs" nxButton="secondary" type="button" (click)="contactUs()">
         <span nxCopytext="medium" class="uppercase nx-font-weight-bold" nxQuoteLiteral="we-call-you"></span>

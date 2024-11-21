@@ -12,6 +12,7 @@ import { HeaderTitleComponent, QuoteFooterComponent } from 'src/app/shared/compo
 import { QuoteFooterConfig } from 'src/app/shared/components/quote-footer/models';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
+import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout';
 
 @Component({
   selector: 'quote-offering-price-card',
@@ -36,9 +37,6 @@ export class QuoteOfferingPriceCardComponent implements OnInit, OnDestroy {
   @Input()
   public selected?: boolean;
 
-  @Input()
-  public mobileMode?: boolean;
-
   @Output()
   public uiShowCoverages: EventEmitter<OfferingPriceModel> = new EventEmitter<OfferingPriceModel>();
 
@@ -51,16 +49,26 @@ export class QuoteOfferingPriceCardComponent implements OnInit, OnDestroy {
   @Output()
   public uiSelectFee: EventEmitter<OfferingPriceModel> = new EventEmitter<OfferingPriceModel>();
 
+  public isMobile = false;
+
   public form!: FormGroup;
   public footerConfig!: QuoteFooterConfig;
 
   private priceSegments: string[] = [];
   private _price!: OfferingPriceModel;
-  private readonly subdcription$: Subscription[] = [];
+
+  private readonly subscription$: Subscription[] = [];
+  private readonly breakpointObserver = inject(BreakpointObserver);
 
   private readonly fb = inject(FormBuilder);
 
   ngOnInit(): void {
+    this.subscription$.push(
+      this.breakpointObserver
+        .observe([Breakpoints.HandsetPortrait, Breakpoints.TabletPortrait, Breakpoints.WebPortrait])
+        .subscribe((state: BreakpointState) => (this.isMobile = state.breakpoints[Breakpoints.HandsetPortrait]))
+    );
+
     this.footerConfig = {
       showNext: false,
       ignoreQuoteConfig: true
@@ -70,7 +78,7 @@ export class QuoteOfferingPriceCardComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.subdcription$.forEach(sub => sub.unsubscribe());
+    this.subscription$.forEach(sub => sub.unsubscribe());
   }
 
   @Input()
@@ -117,7 +125,7 @@ export class QuoteOfferingPriceCardComponent implements OnInit, OnDestroy {
       feeSelectedIndex: new FormControl(this.price.feeSelectedIndex)
     });
 
-    this.subdcription$.push(
+    this.subscription$.push(
       this.form.valueChanges.subscribe(value => {
         this.price.feeSelectedIndex = value.feeSelectedIndex;
 

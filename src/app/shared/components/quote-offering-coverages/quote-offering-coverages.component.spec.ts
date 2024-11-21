@@ -1,20 +1,48 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { CommonModule } from '@angular/common';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ReactiveFormsModule } from '@angular/forms';
 import { NxAccordionModule } from '@aposin/ng-aquila/accordion';
+import { NxButtonModule } from '@aposin/ng-aquila/button';
+import { NxCopytextModule } from '@aposin/ng-aquila/copytext';
+import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
 import { NxHeadlineModule } from '@aposin/ng-aquila/headline';
+import { NxInputModule } from '@aposin/ng-aquila/input';
 import { NxTabsModule } from '@aposin/ng-aquila/tabs';
-import { QuoteOfferingCoveragesComponent } from './quote-offering-coverages.component';
-import { OfferingPriceModel } from 'src/app/core/models';
+import { ContextDataService } from '@shagui/ng-shagui/core';
+import { of } from 'rxjs';
+import { QuoteModel } from 'src/app/core/models';
 import { QuoteLiteralDirective } from '../../directives';
 import { HeaderTitleComponent } from '../header-title';
+import { QuoteOfferingCoveragesComponent } from './quote-offering-coverages.component';
 import { TranslateService } from '@ngx-translate/core';
+import { QUOTE_APP_CONTEXT_DATA, QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
 
-xdescribe('QuoteOfferingCoveragesComponent', () => {
+describe('QuoteOfferingCoveragesComponent', () => {
   let component: QuoteOfferingCoveragesComponent;
   let fixture: ComponentFixture<QuoteOfferingCoveragesComponent>;
+  let contextDataServiceStub: Partial<ContextDataService>;
 
   beforeEach(async () => {
+    const contextDataServiceSpy = jasmine.createSpyObj('ContextDataService', ['get']);
     const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate']);
+
+    contextDataServiceSpy.get.and.callFake((contextDataKey: string): any => {
+      if (contextDataKey === QUOTE_APP_CONTEXT_DATA) {
+        return { navigation: { lastPage: 'page' }, configuration: { literals: {} } };
+      } else if (contextDataKey === QUOTE_CONTEXT_DATA) {
+        return {
+          offering: {
+            price: {},
+            prices: [
+              { modalityId: 1, totalPremiumAmount: '100' },
+              { modalityId: 2, totalPremiumAmount: '200' }
+            ]
+          }
+        } as QuoteModel;
+      }
+
+      return null;
+    });
 
     await TestBed.configureTestingModule({
       declarations: [],
@@ -23,11 +51,19 @@ xdescribe('QuoteOfferingCoveragesComponent', () => {
         CommonModule,
         HeaderTitleComponent,
         NxAccordionModule,
+        NxButtonModule,
+        NxCopytextModule,
+        NxFormfieldModule,
         NxHeadlineModule,
+        NxInputModule,
         NxTabsModule,
+        ReactiveFormsModule,
         QuoteLiteralDirective
       ],
-      providers: [{ provide: TranslateService, useValue: translateServiceSpy }]
+      providers: [
+        { provide: ContextDataService, useValue: contextDataServiceSpy },
+        { provide: TranslateService, useValue: translateServiceSpy }
+      ]
     }).compileComponents();
   });
 
@@ -41,32 +77,20 @@ xdescribe('QuoteOfferingCoveragesComponent', () => {
     expect(component).toBeTruthy();
   });
 
+  it('should initialize prices on init', () => {
+    component.ngOnInit();
+    expect(component.prices.length).toBe(2);
+    expect(component.prices[0].totalPremiumAmount).toBe('100');
+    expect(component.prices[1].totalPremiumAmount).toBe('200');
+  });
+
   it('should have default selectedPriceIndex as 0', () => {
     expect(component.selectedPriceIndex).toBe(0);
   });
 
-  it('should have empty prices array by default', () => {
-    expect(component.prices).toEqual([]);
-  });
-
-  it('should render header title component', () => {
-    const compiled = fixture.nativeElement;
-    expect(compiled.querySelector('header-title')).toBeTruthy();
-  });
-
   it('should update selectedPriceIndex when input changes', () => {
-    component.selectedPriceIndex = 2;
+    component.selectedPriceIndex = 1;
     fixture.detectChanges();
-    expect(component.selectedPriceIndex).toBe(2);
-  });
-
-  it('should update prices when input changes', () => {
-    const prices: OfferingPriceModel[] = [
-      { modalityId: 1, totalPremiumAmount: '100' },
-      { modalityId: 2, totalPremiumAmount: '200' }
-    ] as OfferingPriceModel[];
-    component.prices = prices;
-    fixture.detectChanges();
-    expect(component.prices).toEqual(prices);
+    expect(component.selectedPriceIndex).toBe(1);
   });
 });

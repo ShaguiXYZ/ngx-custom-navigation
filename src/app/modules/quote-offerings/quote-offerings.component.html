@@ -9,7 +9,6 @@
           <quote-offering-price-card
             [price]="price"
             [selected]="selectedPriceIndex === $index"
-            [mobileMode]="isMobile"
             (uiShowCoverages)="showCoverages($index)"
             (uiSelectFee)="selectFee($event)"
             (uiCallNow)="callNow($event)"
@@ -34,8 +33,8 @@
   </section>
 </article>
 
-<ng-template #priceCoverages>
+<!-- <ng-template #priceCoverages>
   <div class="modal-container" nxModalContent tabindex="0">
     <quote-offering-coverages [prices]="prices" [selectedPriceIndex]="selectedPriceIndex"></quote-offering-coverages>
   </div>
-</ng-template>
+</ng-template> -->
