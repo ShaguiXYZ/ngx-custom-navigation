@@ -161,6 +161,33 @@ Ejemplo:
 - **subheader**: Texto del subencabezado de la página.
 - **coverage-1**, **coverage-2**, **coverage-3**: Textos que describen las coberturas del seguro.
 
+### Entry Points
+Define los puntos de entrada para determinadas acciones o eventos. También se pueden configurar condiciones para la ejecución del activador.
+
+Ejemplo:
+```json
+{
+  "entryPoints": [
+    {
+      "id": "next-page",
+      "activator": "black-list-plate",
+      "params": { "percent": 0.7 },
+      "conditions": [
+        {
+          "expression": "user.isLoggedIn",
+          "value": "true"
+        }
+      ]
+    }
+  ]
+}
+```
+- **id**: Identificador del punto de entrada.
+- **activator**: Activador que inicia el punto de entrada.
+- **params**: Parámetros adicionales necesarios para el punto de entrada.
+- **conditions**: Lista de condiciones que deben cumplirse para que se ejecute el activador.
+- **expression**: Expresión lógica que debe evaluarse.
+- **value**: Valor esperado para que la condición sea verdadera.
 ### Funcionamiento General
 1. **Inicio**: La navegación comienza en la página identificada por `homePageId`.
 2. **Pasos**: El usuario sigue los pasos definidos en `steppers`. Cada paso puede contener varias páginas.
