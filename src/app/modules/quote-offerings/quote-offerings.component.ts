@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { Component, ElementRef, inject, OnInit, ViewChild } from '@angular/core';
 import { NxDialogService, NxModalModule, NxModalRef } from '@aposin/ng-aquila/modal';
 import { Subscription } from 'rxjs';
-import { QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
 import { OfferingPriceModel, QuoteComponent } from 'src/app/core/models';
 import { RoutingService } from 'src/app/core/services';
 import { OfferingsService } from 'src/app/core/services/offerings.service';
@@ -41,10 +40,7 @@ export class QuoteOfferingsComponent extends QuoteComponent implements OnInit {
   async ngOnInit(): Promise<void> {
     const offering = await this.offeringsService.pricing(this._contextData);
 
-    this._contextData.offering = { ...this._contextData.offering, quotationId: offering.quotationId, prices: offering.prices };
     this.prices = offering.prices;
-
-    this.contextDataService.set(QUOTE_CONTEXT_DATA, this._contextData);
 
     // this.resizeObserver = new ResizeObserver(entries => {
     //   for (const entry of entries) {

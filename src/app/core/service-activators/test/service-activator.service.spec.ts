@@ -32,7 +32,7 @@ describe('ServiceActivatorService', () => {
   it('should not activate service if lastPage is not present', async () => {
     contextDataService.get.and.returnValue({ navigation: {} } as AppContextData);
 
-    await service.activateService('SomeEntryPoint' as EntryPoints);
+    await service.activateEntryPoint('SomeEntryPoint' as EntryPoints);
 
     expect(contextDataService.get).toHaveBeenCalledWith(QUOTE_APP_CONTEXT_DATA);
   });
@@ -56,7 +56,7 @@ describe('ServiceActivatorService', () => {
     spyOn(ConditionEvaluation, 'checkConditions').and.returnValue(true);
     spyOn(service as any, 'runActivator').and.returnValue(Promise.resolve());
 
-    await service.activateService('SomeEntryPoint' as EntryPoints);
+    await service.activateEntryPoint('SomeEntryPoint' as EntryPoints);
 
     expect(ConditionEvaluation.checkConditions).toHaveBeenCalled();
     expect(service['runActivator']).toHaveBeenCalledWith('someActivator' as ActivatorFnType, {});
@@ -81,7 +81,7 @@ describe('ServiceActivatorService', () => {
     spyOn(ConditionEvaluation, 'checkConditions').and.returnValue(false);
     spyOn(service as any, 'runActivator');
 
-    await service.activateService('SomeEntryPoint' as EntryPoints);
+    await service.activateEntryPoint('SomeEntryPoint' as EntryPoints);
 
     expect(ConditionEvaluation.checkConditions).toHaveBeenCalled();
     expect(service['runActivator']).not.toHaveBeenCalled();

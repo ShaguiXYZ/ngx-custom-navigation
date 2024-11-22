@@ -17,7 +17,7 @@ export class ServiceActivatorService {
     );
   }
 
-  public activateService = async (name: EntryPoints): Promise<void> => {
+  public activateEntryPoint = async (name: EntryPoints): Promise<void> => {
     const {
       navigation: { lastPage }
     } = this.contextDataService.get<AppContextData>(QUOTE_APP_CONTEXT_DATA);
@@ -40,5 +40,5 @@ export class ServiceActivatorService {
   };
 
   private runActivator = (name: ActivatorFnType, params?: unknown): Promise<unknown> =>
-    this.activators[name]?.(params).then(value => value && this.activateService(name));
+    this.activators[name]?.(params).then(value => value && this.activateEntryPoint(name));
 }
