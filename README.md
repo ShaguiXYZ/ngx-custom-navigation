@@ -123,6 +123,7 @@ Ejemplo:
 - **pageId**: Identificador único de la página.
 - **nextOptionList**: Lista de opciones de navegación para determinar la siguiente página, basada en condiciones específicas.
 - **configuration**: Configuración específica de la página, incluyendo literales y datos.
+- **entryPoints**: Puntos de ejecución de funcionalidades.
 
 #### Condiciones de Navegación
 Las condiciones de navegación determinan la siguiente página basada en expresiones lógicas.
@@ -161,7 +162,7 @@ Ejemplo:
 - **subheader**: Texto del subencabezado de la página.
 - **coverage-1**, **coverage-2**, **coverage-3**: Textos que describen las coberturas del seguro.
 
-### Entry Points
+#### Entry Points
 Define los puntos de entrada para determinadas acciones o eventos. También se pueden configurar condiciones para la ejecución del activador.
 
 Ejemplo:
