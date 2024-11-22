@@ -1,5 +1,6 @@
+import { ComponentType } from '@angular/cdk/portal';
 import { CommonModule } from '@angular/common';
-import { Component, ElementRef, inject, OnDestroy, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, inject, OnInit, ViewChild } from '@angular/core';
 import { NxDialogService, NxModalModule, NxModalRef } from '@aposin/ng-aquila/modal';
 import { Subscription } from 'rxjs';
 import { QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
@@ -7,9 +8,7 @@ import { OfferingPriceModel, QuoteComponent } from 'src/app/core/models';
 import { RoutingService } from 'src/app/core/services';
 import { OfferingsService } from 'src/app/core/services/offerings.service';
 import { QuoteOfferingCoveragesComponent } from 'src/app/shared/components';
-import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 import { QuoteOfferingPriceCardComponent } from './components';
-import { ComponentType } from '@angular/cdk/portal';
 
 @Component({
   selector: 'quote-quote-offerings',
@@ -38,7 +37,6 @@ export class QuoteOfferingsComponent extends QuoteComponent implements OnInit {
   private readonly offeringsService = inject(OfferingsService);
   private readonly routingService = inject(RoutingService);
   private readonly dialogService = inject(NxDialogService);
-  private readonly quoteLiteralPipe = inject(QuoteLiteralPipe);
 
   async ngOnInit(): Promise<void> {
     const offering = await this.offeringsService.pricing(this._contextData);

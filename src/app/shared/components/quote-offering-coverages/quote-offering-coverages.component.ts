@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, Input, OnInit } from '@angular/core';
+import { Component, Inject, inject, Input, OnInit } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NxAccordionModule } from '@aposin/ng-aquila/accordion';
 import { NxButtonModule } from '@aposin/ng-aquila/button';
@@ -13,6 +13,7 @@ import { QuoteLiteralDirective } from '../../directives';
 import { HeaderTitleComponent } from '../header-title';
 import { ContextDataService } from '@shagui/ng-shagui/core';
 import { QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
+import { NX_MODAL_DATA } from '@aposin/ng-aquila/modal';
 
 @Component({
   selector: 'quote-offering-coverages',
@@ -34,20 +35,25 @@ import { QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
   standalone: true
 })
 export class QuoteOfferingCoveragesComponent implements OnInit {
-  @Input()
-  public selectedPriceIndex = 0;
-
-  public data: { selectedPriceIndex: number } = { selectedPriceIndex: 0 };
-
+  public selectedPriceIndex!: number;
   public prices: OfferingPriceModel[] = [];
 
   private readonly contextDataService = inject(ContextDataService);
+
+  constructor(
+    @Inject(NX_MODAL_DATA)
+    public data: {
+      selectedPriceIndex: number;
+    }
+  ) {}
 
   ngOnInit(): void {
     const {
       offering: { prices }
     } = this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA);
     this.prices = prices ?? [];
+
+    this.selectedPriceIndex = this.data.selectedPriceIndex ?? 0;
 
     console.log('this.prices', this.data);
   }
