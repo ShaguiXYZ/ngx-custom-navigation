@@ -1,5 +1,32 @@
 # ngx-custom-navigation
 
+# Índice
+
+1. [Descripción de la Aplicación](#descripción-de-la-aplicación)
+2. [Características Principales](#características-principales)
+3. [Ejemplo de Uso](#ejemplo-de-uso)
+4. [Estructura General](#estructura-general)
+   - [last_update](#last_update)
+   - [homePageId](#homepageid)
+   - [steppers](#steppers)
+   - [pageMap](#pagemap)
+   - [links](#links)
+   - [literals](#literals)
+5. [Detalle de las Secciones](#detalle-de-las-secciones)
+   - [Steppers](#steppers-1)
+   - [PageMap](#pagemap-1)
+   - [Condiciones de Navegación](#condiciones-de-navegación)
+   - [Literals](#literals-1)
+   - [Entry Points](#entry-points)
+6. [Funcionamiento General](#funcionamiento-general)
+7. [Ejemplo de Flujo de Navegación](#ejemplo-de-flujo-de-navegación)
+8. [Literales en `ngx-custom-navigation`](#literales-en-ngx-custom-navigation)
+   - [Tipos de Literales](#tipos-de-literales)
+9. [Ejemplos de Uso](#ejemplos-de-uso)
+10. [Descripción del archivo package.json](#descripción-del-archivo-packagejson)
+11. [Proceso de Arranque de la Aplicación](#proceso-de-arranque-de-la-aplicación)
+12. [Licencia](#licencia)
+
 ### Descripción de la Aplicación
 
 `ngx-custom-navigation` es una biblioteca de Angular diseñada para facilitar la creación y gestión de flujos de navegación complejos a través de archivos JSON. Esta herramienta permite definir de manera flexible y dinámica la estructura de navegación de una aplicación, incluyendo pasos, páginas, y configuraciones específicas. 
