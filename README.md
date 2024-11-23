@@ -206,6 +206,81 @@ Ejemplo:
 Este JSON proporciona una forma flexible y configurable de definir la navegación y flujo de una aplicación, permitiendo actualizar y modificar la experiencia del usuario sin necesidad de cambios en el código fuente.
 
 
+### Literales en `ngx-custom-navigation`
+
+En el proyecto `ngx-custom-navigation`, los literales se utilizan para definir textos estáticos y dinámicos que se muestran en la interfaz de usuario. A continuación, se describen detalladamente los tipos de literales y sus usos.
+
+#### Tipos de Literales
+
+1. **LiteralType**
+   - **Descripción**: Define el tipo de literal.
+   - **Valores posibles**:
+     - `value`: Indica que el literal es un valor estático.
+     - `translate`: Indica que el literal es una clave que debe ser traducida.
+
+2. **QuoteLiteral**
+   - **Descripción**: Representa un literal con un valor y un tipo opcional.
+   - **Propiedades**:
+     - `value` (string): El valor del literal.
+     - `type` (LiteralType, opcional): El tipo del literal (`value` o `translate`).
+
+3. **LiteralParam**
+   - **Descripción**: Utiliza el tipo `DataInfo` de `@shagui/ng-shagui/core` para definir parámetros literales.
+   - **Tipo**: `DataInfo<LiteralModel>`
+
+4. **LiteralModel**
+   - **Descripción**: Define el modelo de un literal, que puede ser un string, un número o un `QuoteLiteral`.
+   - **Valores posibles**:
+     - String: Un texto estático.
+     - Number: Un número.
+     - `QuoteLiteral`: Un objeto que incluye un valor y un tipo opcional.
+
+```typescript
+import { DataInfo } from '@shagui/ng-shagui/core';
+
+export type LiteralType = 'value' | 'translate';
+
+export interface QuoteLiteral {
+  value: string;
+  type?: LiteralType;
+}
+
+export type LiteralParam = DataInfo<LiteralModel>;
+
+export type LiteralModel = string | number | QuoteLiteral;
+```
+
+### Ejemplos de Uso
+
+1. **Literal Estático (value)**
+   ```typescript
+   const staticLiteral: QuoteLiteral = {
+     value: "Bienvenido",
+     type: 'value'
+   };
+   ```
+
+2. **Literal para Traducción (translate)**
+   ```typescript
+   const translatedLiteral: QuoteLiteral = {
+     value: "welcome_message",
+     type: 'translate'
+   };
+   ```
+
+3. **Literal de Tipo String**
+   ```typescript
+   const stringLiteral: LiteralModel = "Texto estático";
+   ```
+
+4. **Literal de Tipo Número**
+   ```typescript
+   const numberLiteral: LiteralModel = 42;
+   ```
+
+Estos literales permiten una mayor flexibilidad y personalización en los textos mostrados en la aplicación, facilitando tanto la localización como la actualización de contenidos.
+
+
 ### Descripción del archivo package.json
 
 El archivo `package.json` contiene información esencial sobre el proyecto `ngx-custom-navigation`, incluyendo las dependencias y los scripts necesarios para el desarrollo y despliegue de la aplicación.
