@@ -151,10 +151,7 @@ Ejemplo:
 {
   "footer-next": "EMPEZAR",
   "header": "Calcular mi seguro",
-  "subheader": "Estás a menos de 5 minutos de conseguir el seguro más completo",
-  "coverage-1": "Asistencia en carretera nacional e internacional 24/7",
-  "coverage-2": "Te llevamos el coche de sustitución a tu casa",
-  "coverage-3": "Red de talleres excelentes a tu disposición"
+  "subheader": "Estás a menos de 5 minutos de conseguir el seguro más completo"
 }
 ```
 - **footer-next**: Texto para el botón de siguiente en el pie de página.
