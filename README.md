@@ -151,7 +151,8 @@ Ejemplo:
 {
   "footer-next": "EMPEZAR",
   "header": "Calcular mi seguro",
-  "subheader": "Estás a menos de 5 minutos de conseguir el seguro más completo"
+  "subheader": "Estás a menos de 5 minutos de conseguir el seguro más completo",
+  "or-more": { "value": "Label.OrMore", "type": "translate" },
 }
 ```
 - **footer-next**: Texto para el botón de siguiente en el pie de página.
