@@ -158,7 +158,7 @@ Ejemplo:
 - **footer-next**: Texto para el botón de siguiente en el pie de página.
 - **header**: Texto del encabezado de la página.
 - **subheader**: Texto del subencabezado de la página.
-- **coverage-1**, **coverage-2**, **coverage-3**: Textos que describen las coberturas del seguro.
+- **or-more**: value representa una clave a ser traducida.
 
 #### Entry Points
 Define los puntos de entrada para determinadas acciones o eventos. También se pueden configurar condiciones para la ejecución del activador.
