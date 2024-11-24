@@ -8,7 +8,7 @@
         <nx-error appearance="text" nxFormfieldError><span nxQuoteLiteral="error-required"></span> </nx-error>
         } @if(form.get('yearOfManufacture')?.errors?.['futureDate']) {
         <nx-error appearance="text" nxFormfieldError><span nxQuoteLiteral="error-future-date"></span> </nx-error>
-        } @if(form.get('yearOfManufacture')?.errors?.['oldDate']) {
+        } @if(form.get('yearOfManufacture')?.errors?.['minValue']) {
         <nx-error appearance="text" nxFormfieldError
           ><span nxQuoteLiteral="error-old-date" [nxQuoteLitealParams]="{ value: minYear }"></span>
         </nx-error>

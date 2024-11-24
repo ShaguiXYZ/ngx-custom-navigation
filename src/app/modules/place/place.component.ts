@@ -12,7 +12,8 @@ import {
 import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
 import { NxInputModule } from '@aposin/ng-aquila/input';
 import { NxMaskModule } from '@aposin/ng-aquila/mask';
-import { LocationModel, QuoteComponent } from 'src/app/core/models';
+import { QuoteFormValidarors } from 'src/app/core/form';
+import { QuoteComponent } from 'src/app/core/models';
 import { LocationService } from 'src/app/core/services';
 import { HeaderTitleComponent, QuoteFooterComponent, QuoteFooterInfoComponent } from 'src/app/shared/components';
 import { QuoteLiteralDirective, QuoteMaskDirective } from 'src/app/shared/directives';
@@ -34,7 +35,7 @@ import { QuoteLiteralPipe } from 'src/app/shared/pipes';
     QuoteLiteralDirective,
     QuoteLiteralPipe
   ],
-  providers: [LocationService],
+  providers: [LocationService, QuoteFormValidarors],
   standalone: true
 })
 export class PlaceComponent extends QuoteComponent implements OnInit {
@@ -42,6 +43,7 @@ export class PlaceComponent extends QuoteComponent implements OnInit {
   public form!: FormGroup;
 
   private readonly locationService = inject(LocationService);
+  private readonly quoteFormValidarors = inject(QuoteFormValidarors);
   private readonly fb = inject(FormBuilder);
 
   ngOnInit(): void {
@@ -63,29 +65,18 @@ export class PlaceComponent extends QuoteComponent implements OnInit {
 
   private createForm(): void {
     this.form = this.fb.group({
-      postalCode: new FormControl(
-        this._contextData.place.postalCode,
-        [Validators.required],
-        [this.postalCodeExistsValidator(this.locationService)]
-      )
+      postalCode: new FormControl(this._contextData.place.postalCode, [Validators.required], [this.postalCodeExistsValidator()])
     });
   }
 
-  private postalCodeExistsValidator(locationService: LocationService): AsyncValidatorFn {
+  private postalCodeExistsValidator(): AsyncValidatorFn {
     return async (control: AbstractControl): Promise<ValidationErrors | null> => {
-      const location = await locationService.getAddress(control.value);
+      const location = await this.locationService.getAddress(control.value);
 
-      this.updateContextData(location);
+      this._contextData.place = { ...location };
+      this.location = location?.postalCode ? `${location?.location}, ${location?.province}` : '';
 
-      return location?.postalCode ? null : { postalCodeNotRecognized: true };
+      return this.quoteFormValidarors.activateEntryPoint(control, 'notFound', !location?.postalCode);
     };
   }
-
-  private updateContextData(location?: LocationModel) {
-    this._contextData.place = { ...location };
-    this.location = this.locationFormfieldHint(location);
-  }
-
-  private locationFormfieldHint = (location?: LocationModel) =>
-    location?.postalCode ? `${location?.location}, ${location?.province}` : '';
 }

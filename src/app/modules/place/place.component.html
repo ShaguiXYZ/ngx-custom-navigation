@@ -3,15 +3,15 @@
   <section class="form-container">
     <form [formGroup]="form">
       <nx-formfield label="Código postal">
-        <input #searchInput type="text" formControlName="postalCode" required nxInput maxlength="5" nxQuoteMask="numeric" />
+        <input type="text" formControlName="postalCode" required nxInput maxlength="5" nxQuoteMask="numeric" />
         <span nxFormfieldHint> {{ location }} </span>
-        @if(form.get('postalCode')?.errors?.['postalCodeNotRecognized']) {
-        <nx-error appearance="text" nxFormfieldError>
-          <span nxQuoteLiteral="error-unknown"></span>
-        </nx-error>
-        } @if(form.get('postalCode')?.hasError('required')) {
+        @if(form.get('postalCode')?.hasError('required')) {
         <nx-error appearance="text" nxFormfieldError>
           <span nxQuoteLiteral="error-required"></span>
+        </nx-error>
+        } @if(form.get('postalCode')?.hasError('notFound')) {
+        <nx-error appearance="text" nxFormfieldError>
+          <span nxQuoteLiteral="error-not-found"></span>
         </nx-error>
         }
       </nx-formfield>

@@ -143,7 +143,7 @@
       "configuration": {
         "literals": {
           "error-required": "El código postal es obligatorio para continuar",
-          "error-unknown": "El código postal no existe",
+          "error-not-found": "El código postal no existe",
           "header": "¿Cuál es tu código postal?",
           "footer-info": "¿Sabías que ser cliente de Shagui tiene muchas ventajas exclusivas?"
         }

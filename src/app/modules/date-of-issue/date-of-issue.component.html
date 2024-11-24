@@ -18,7 +18,7 @@
         <nx-datepicker #myDatepicker></nx-datepicker>
         @if(form.get('dateOfIssue')?.errors?.['required']) {
         <nx-error appearance="text" nxFormfieldError><span nxQuoteLiteral="error-required"></span> </nx-error>
-        } @if(form.get('dateOfIssue')?.errors?.['isBetweenDates']) {
+        } @if(form.get('dateOfIssue')?.errors?.['betweenDates']) {
         <nx-error appearance="text" nxFormfieldError
           ><span
             nxQuoteLiteral="error-not-between-dates"
