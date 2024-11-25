@@ -5,6 +5,7 @@ import { NX_DATE_LOCALE } from '@aposin/ng-aquila/datefield';
 import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
 import { NxInputModule } from '@aposin/ng-aquila/input';
 import { Subscription } from 'rxjs';
+import { QuoteFormValidarors } from 'src/app/core/form';
 import { QuoteComponent } from 'src/app/core/models';
 import { HeaderTitleComponent, QuoteFooterComponent, QuoteFooterInfoComponent } from 'src/app/shared/components';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
@@ -25,12 +26,13 @@ import { QuoteLiteralPipe } from 'src/app/shared/pipes';
     QuoteLiteralDirective,
     QuoteLiteralPipe
   ],
-  providers: [{ provide: NX_DATE_LOCALE, useValue: 'es-ES' }],
+  providers: [{ provide: NX_DATE_LOCALE, useValue: 'es-ES' }, QuoteFormValidarors],
   standalone: true
 })
 export class ClientIdentificationNumberComponent extends QuoteComponent implements OnInit, OnDestroy {
   public form!: FormGroup;
 
+  private readonly quoteFormValidarors = inject(QuoteFormValidarors);
   private readonly subscription$: Subscription[] = [];
   private readonly fb = inject(FormBuilder);
 

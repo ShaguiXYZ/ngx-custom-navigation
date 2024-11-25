@@ -6,7 +6,7 @@ import { NxInputModule } from '@aposin/ng-aquila/input';
 import { NxMomentDateModule } from '@aposin/ng-aquila/moment-date-adapter';
 import moment, { DurationInputArg2, Moment } from 'moment';
 import { DEFAULT_DATE_FORMAT, DEFAULT_DATE_FORMATS } from 'src/app/core/constants';
-import { isBetweenDates } from 'src/app/core/form';
+import { QuoteFormValidarors } from 'src/app/core/form';
 import { QuoteComponent } from 'src/app/core/models';
 import { HeaderTitleComponent, QuoteFooterComponent } from 'src/app/shared/components';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
@@ -28,7 +28,7 @@ import { QuoteLiteralPipe } from 'src/app/shared/pipes';
     QuoteLiteralDirective,
     QuoteLiteralPipe
   ],
-  providers: [{ provide: NX_DATE_LOCALE, useValue: 'es-ES' }]
+  providers: [{ provide: NX_DATE_LOCALE, useValue: 'es-ES' }, QuoteFormValidarors]
 })
 export class DateOfIssueComponent extends QuoteComponent implements OnInit {
   public dateFormat = DEFAULT_DATE_FORMAT;
@@ -44,6 +44,7 @@ export class DateOfIssueComponent extends QuoteComponent implements OnInit {
 
   private dateOfIssueFromContext: Moment | undefined;
 
+  private readonly quoteFormValidarors = inject(QuoteFormValidarors);
   private readonly fb = inject(FormBuilder);
 
   ngOnInit(): void {
@@ -75,7 +76,7 @@ export class DateOfIssueComponent extends QuoteComponent implements OnInit {
     this.form = this.fb.group({
       dateOfIssue: new FormControl(this.dateOfIssueFromContext, [
         Validators.required,
-        isBetweenDates(this.minDate.toDate(), this.maxDate.toDate())
+        this.quoteFormValidarors.betweenDates(this.minDate.toDate(), this.maxDate.toDate())
       ])
     });
   }

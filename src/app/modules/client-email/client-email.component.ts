@@ -5,6 +5,7 @@ import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
 import { NxInputModule } from '@aposin/ng-aquila/input';
 import { NxLinkModule } from '@aposin/ng-aquila/link';
 import { NxSwitcherModule } from '@aposin/ng-aquila/switcher';
+import { QuoteFormValidarors } from 'src/app/core/form';
 import { QuoteComponent } from 'src/app/core/models';
 import { HeaderTitleComponent, QuoteFooterComponent } from 'src/app/shared/components';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
@@ -26,11 +27,13 @@ import { QuoteLiteralPipe } from 'src/app/shared/pipes';
     QuoteLiteralDirective,
     QuoteLiteralPipe,
     ReactiveFormsModule
-  ]
+  ],
+  providers: [QuoteFormValidarors]
 })
 export class ClientEMailComponent extends QuoteComponent implements OnInit {
   public form!: FormGroup;
 
+  private readonly quoteFormValidarors = inject(QuoteFormValidarors);
   private readonly fb = inject(FormBuilder);
 
   ngOnInit(): void {
@@ -57,7 +60,7 @@ export class ClientEMailComponent extends QuoteComponent implements OnInit {
 
   private createForm() {
     this.form = this.fb.group({
-      email: new FormControl(this._contextData.personalData.email, [Validators.required, Validators.email]),
+      email: new FormControl(this._contextData.personalData.email, [Validators.required, this.quoteFormValidarors.email]),
       accepInfo: new FormControl(this._contextData.client.accepInfo, [Validators.required]),
       acceptPrivacyPolicy: new FormControl(this._contextData.client.acceptPrivacyPolicy, [Validators.requiredTrue])
     });

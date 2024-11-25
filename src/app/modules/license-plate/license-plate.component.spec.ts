@@ -91,6 +91,7 @@ describe('LicensePlateComponent', () => {
     component.form.setValue({ plateNumber: '1234-SSS' });
     const isValid = component['updateValidData']();
 
+    expect(component.form.touched).toBeTrue();
     expect(isValid).toBeTrue();
   });
 

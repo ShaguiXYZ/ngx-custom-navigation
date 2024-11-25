@@ -53,8 +53,16 @@ describe('LicenseYearComponent', () => {
 
   it('should mark form as touched and update context data on updateValidData', () => {
     component.form.controls['yearOfManufacture'].setValue(2021);
+    const markAllAsTouchedSpy = spyOn(component.form, 'markAllAsTouched');
 
-    expect(component.form.valid).toBeTrue();
+    component.updateValidData();
+
+    fixture.detectChanges();
+
+    fixture.whenStable().then(() => {
+      expect(markAllAsTouchedSpy).toHaveBeenCalled();
+      expect(component.form.valid).toBeTrue();
+    });
   });
 
   it('should not update context data if form is invalid', () => {

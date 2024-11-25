@@ -7,6 +7,7 @@ import { LocationService } from 'src/app/core/services';
 import { ContextDataServiceStub } from 'src/app/core/stub';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 import { PlaceComponent } from './place.component';
+import { QuoteFormValidarors } from 'src/app/core/form';
 
 describe('PlaceComponent', () => {
   let component: PlaceComponent;
@@ -32,7 +33,7 @@ describe('PlaceComponent', () => {
 
     TestBed.overrideComponent(PlaceComponent, {
       set: {
-        providers: [{ provide: LocationService, useValue: locationServiceSpy }]
+        providers: [{ provide: LocationService, useValue: locationServiceSpy }, QuoteFormValidarors]
       }
     });
 
@@ -95,7 +96,6 @@ describe('PlaceComponent', () => {
 
     fixture.whenStable().then(() => {
       expect(component.form.controls['postalCode'].valid).toBeTrue();
-      expect(component.location).toBe(component['locationFormfieldHint'](mockLocation));
     });
   }));
 

@@ -56,8 +56,6 @@ export class VehicleModelsComponent extends QuoteComponent implements OnInit, On
     });
 
     this.createForm();
-
-    this.subscription$.push(this.searchBoxConfig());
   }
 
   ngOnDestroy(): void {
@@ -85,6 +83,8 @@ export class VehicleModelsComponent extends QuoteComponent implements OnInit, On
     this.form = this.fb.group({
       searchInput: new FormControl(this._contextData.vehicle.model)
     });
+
+    this.subscription$.push(this.searchBoxConfig());
   }
 
   private searchBoxConfig(): Subscription {

@@ -4,7 +4,7 @@ import { ServiceActivatorService } from '../service-activator.service';
 import { QUOTE_APP_CONTEXT_DATA, QUOTE_CONTEXT_DATA } from '../../constants';
 import { AppContextData, QuoteModel } from '../../models';
 import { ConditionEvaluation } from '../../lib';
-import { ActivatorFnType, EntryPoints } from '../quote-activator.model';
+import { ActivatorFnType, EntryPoint } from '../quote-activator.model';
 
 describe('ServiceActivatorService', () => {
   let service: ServiceActivatorService;
@@ -32,21 +32,21 @@ describe('ServiceActivatorService', () => {
   it('should not activate service if lastPage is not present', async () => {
     contextDataService.get.and.returnValue({ navigation: {} } as AppContextData);
 
-    await service.activateEntryPoint('SomeEntryPoint' as EntryPoints);
+    await service.activateEntryPoint('SomeEntryPoint' as EntryPoint);
 
     expect(contextDataService.get).toHaveBeenCalledWith(QUOTE_APP_CONTEXT_DATA);
   });
 
   it('should activate service if conditions are met', async () => {
     const mockEntryPoint = {
-      id: 'SomeEntryPoint',
+      entryPoint: 'SomeEntryPoint',
       conditions: [],
       activator: 'someActivator',
       params: {}
     };
     contextDataService.get.and.callFake((key: string): any => {
       if (key === QUOTE_APP_CONTEXT_DATA) {
-        return { navigation: { lastPage: { entryPoints: [mockEntryPoint] } } } as unknown as AppContextData;
+        return { navigation: { lastPage: { serviceActivators: [mockEntryPoint] } } } as unknown as AppContextData;
       }
       if (key === QUOTE_CONTEXT_DATA) {
         return {} as QuoteModel;
@@ -56,7 +56,7 @@ describe('ServiceActivatorService', () => {
     spyOn(ConditionEvaluation, 'checkConditions').and.returnValue(true);
     spyOn(service as any, 'runActivator').and.returnValue(Promise.resolve());
 
-    await service.activateEntryPoint('SomeEntryPoint' as EntryPoints);
+    await service.activateEntryPoint('SomeEntryPoint' as EntryPoint);
 
     expect(ConditionEvaluation.checkConditions).toHaveBeenCalled();
     expect(service['runActivator']).toHaveBeenCalledWith('someActivator' as ActivatorFnType, {});
@@ -64,14 +64,14 @@ describe('ServiceActivatorService', () => {
 
   it('should not activate service if conditions are not met', async () => {
     const mockEntryPoint = {
-      id: 'SomeEntryPoint',
+      entryPoint: 'SomeEntryPoint',
       conditions: [],
       activator: 'someActivator',
       params: {}
     };
     contextDataService.get.and.callFake((key: string): any => {
       if (key === QUOTE_APP_CONTEXT_DATA) {
-        return { navigation: { lastPage: { entryPoints: [mockEntryPoint] } } } as unknown as AppContextData;
+        return { navigation: { lastPage: { serviceActivators: [mockEntryPoint] } } } as unknown as AppContextData;
       }
       if (key === QUOTE_CONTEXT_DATA) {
         return {} as QuoteModel;
@@ -81,7 +81,7 @@ describe('ServiceActivatorService', () => {
     spyOn(ConditionEvaluation, 'checkConditions').and.returnValue(false);
     spyOn(service as any, 'runActivator');
 
-    await service.activateEntryPoint('SomeEntryPoint' as EntryPoints);
+    await service.activateEntryPoint('SomeEntryPoint' as EntryPoint);
 
     expect(ConditionEvaluation.checkConditions).toHaveBeenCalled();
     expect(service['runActivator']).not.toHaveBeenCalled();

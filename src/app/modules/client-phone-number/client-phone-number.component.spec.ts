@@ -57,6 +57,7 @@ describe('ClientPhoneNumberComponent', () => {
     component.form.get('phoneNumber')?.setValue('987654321');
     component['updateValidData']();
 
+    expect(component.form.touched).toBeTrue();
     expect(component.form.valid).toBeTrue();
   });
 

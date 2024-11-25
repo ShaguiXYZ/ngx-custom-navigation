@@ -3,7 +3,7 @@ import { ContextDataService } from '@shagui/ng-shagui/core';
 import { QUOTE_APP_CONTEXT_DATA, QUOTE_CONTEXT_DATA } from '../constants';
 import { ConditionEvaluation } from '../lib';
 import { AppContextData, QuoteModel } from '../models';
-import { ActivatorFn, ActivatorFnType, EntryPoints, ServiceActivators } from './quote-activator.model';
+import { ActivatorFn, ActivatorFnType, Activators, EntryPoint } from './quote-activator.model';
 
 @Injectable({ providedIn: 'root' })
 export class ServiceActivatorService {
@@ -12,12 +12,12 @@ export class ServiceActivatorService {
   private readonly contextDataService = inject(ContextDataService);
 
   constructor() {
-    Object.entries(ServiceActivators).forEach(([name, activator]) =>
-      this.registerActivator(name as ActivatorFnType, activator({ contextDataService: this.contextDataService }))
+    Object.entries(Activators).forEach(([name, activatorFn]) =>
+      this.registerActivator(name as ActivatorFnType, activatorFn({ contextDataService: this.contextDataService }))
     );
   }
 
-  public activateEntryPoint = async (name: EntryPoints): Promise<void> => {
+  public activateEntryPoint = async (name: EntryPoint): Promise<void> => {
     const {
       navigation: { lastPage }
     } = this.contextDataService.get<AppContextData>(QUOTE_APP_CONTEXT_DATA);
@@ -26,7 +26,9 @@ export class ServiceActivatorService {
       return;
     }
 
-    const entryPoints = lastPage.entryPoints?.filter(entryPoint => entryPoint.id === name);
+    console.log('Activating entry point:', name);
+
+    const entryPoints = lastPage.serviceActivators?.filter(entryPoint => entryPoint.entryPoint === name);
 
     entryPoints?.forEach(async entryPoint => {
       if (ConditionEvaluation.checkConditions(this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA), entryPoint.conditions)) {

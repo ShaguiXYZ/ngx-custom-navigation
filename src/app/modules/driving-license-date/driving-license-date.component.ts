@@ -6,7 +6,7 @@ import { NxInputModule } from '@aposin/ng-aquila/input';
 import { NxMomentDateModule } from '@aposin/ng-aquila/moment-date-adapter';
 import moment, { Moment } from 'moment';
 import { DEFAULT_DATE_FORMAT, DEFAULT_DATE_FORMATS } from 'src/app/core/constants';
-import { isFutureDate, minYearsBetweenDates } from 'src/app/core/form';
+import { QuoteFormValidarors } from 'src/app/core/form';
 import { QuoteComponent } from 'src/app/core/models';
 import { HeaderTitleComponent, QuoteFooterComponent } from 'src/app/shared/components';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
@@ -27,7 +27,7 @@ import { QuoteLiteralPipe } from 'src/app/shared/pipes';
     QuoteLiteralDirective,
     QuoteLiteralPipe
   ],
-  providers: [{ provide: NX_DATE_LOCALE, useValue: 'es-ES' }],
+  providers: [{ provide: NX_DATE_LOCALE, useValue: 'es-ES' }, QuoteFormValidarors],
   standalone: true
 })
 export class DrivingLicenseDateComponent extends QuoteComponent implements OnInit {
@@ -39,6 +39,7 @@ export class DrivingLicenseDateComponent extends QuoteComponent implements OnIni
 
   private drivingLicenseDateFromContext?: Moment;
 
+  private readonly quoteFormValidarors = inject(QuoteFormValidarors);
   private readonly fb = inject(FormBuilder);
 
   ngOnInit(): void {
@@ -69,8 +70,8 @@ export class DrivingLicenseDateComponent extends QuoteComponent implements OnIni
     this.form = this.fb.group({
       licenseDate: new FormControl(this.drivingLicenseDateFromContext, [
         Validators.required,
-        isFutureDate(),
-        minYearsBetweenDates(birthdate, this.minYears)
+        this.quoteFormValidarors.isFutureDate(),
+        this.quoteFormValidarors.minYearsBetweenDates(birthdate, this.minYears)
       ])
     });
   }
