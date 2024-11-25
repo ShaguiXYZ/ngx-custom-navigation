@@ -26,8 +26,6 @@ export class ServiceActivatorService {
       return;
     }
 
-    console.log('Activating entry point:', name);
-
     const entryPoints = lastPage.serviceActivators?.filter(entryPoint => entryPoint.entryPoint === name);
 
     entryPoints?.forEach(async entryPoint => {

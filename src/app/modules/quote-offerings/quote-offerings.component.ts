@@ -26,8 +26,6 @@ export class QuoteOfferingsComponent extends QuoteComponent implements OnInit {
   public selectedPriceIndex = 0;
   public prices: OfferingPriceModel[] = [];
 
-  public override ignoreChangeDetection = true;
-
   private swipeCoord!: [number, number];
   private swipeTime!: number;
 
@@ -91,12 +89,8 @@ export class QuoteOfferingsComponent extends QuoteComponent implements OnInit {
 
   public showCoverages(index: number) {
     this.selectedPriceIndex = index;
-    // this.dialogService.open(this.priceCoveragesRef, {
-    //   maxWidth: '98%',
-    //   showCloseIcon: false
-    // });
 
-    const componentDialogRef = this.openFromComponent(QuoteOfferingCoveragesComponent);
+    const componentDialogRef = this.openFromComponent(QuoteOfferingCoveragesComponent, index);
 
     const subscriptions: Subscription[] = [
       // componentDialogRef.componentInstance.budgetStored.subscribe(() => {
@@ -110,14 +104,14 @@ export class QuoteOfferingsComponent extends QuoteComponent implements OnInit {
     ];
   }
 
-  private openFromComponent<T = unknown>(component: ComponentType<T>): NxModalRef<T> {
+  private openFromComponent<T = unknown>(component: ComponentType<T>, selectedPriceIndex: number): NxModalRef<T> {
     this.dialogService.closeAll();
 
     return this.dialogService.open(component, {
       maxWidth: '98%',
       showCloseIcon: false,
       data: {
-        selectedPriceIndex: this.selectedPriceIndex
+        selectedPriceIndex
       }
     });
   }

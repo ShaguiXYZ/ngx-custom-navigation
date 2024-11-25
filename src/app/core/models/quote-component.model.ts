@@ -10,8 +10,6 @@ import { QuoteModel } from './quote.model';
   template: ''
 })
 export abstract class QuoteComponent {
-  public ignoreChangeDetection = false;
-
   protected _contextData: QuoteModel;
 
   protected readonly contextDataService = inject(ContextDataService);

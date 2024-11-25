@@ -30,10 +30,9 @@ export class OfferingsService {
             map(res => QuoteOfferingModel.fromDTO(res as OfferingDTO)),
             tap(async offering => {
               quote.offering = { ...quote.offering, quotationId: offering.quotationId, prices: offering.prices };
-              this.contextDataService.set(QUOTE_CONTEXT_DATA, quote);
+              this.contextDataService.set(QUOTE_CONTEXT_DATA, SignedModel.signModel(quote, true));
 
               await this.serviceActivatorService.activateEntryPoint('on-pricing');
-              SignedModel.reset(quote);
             })
           )
       );

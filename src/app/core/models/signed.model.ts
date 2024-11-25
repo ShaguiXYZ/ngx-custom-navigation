@@ -13,9 +13,6 @@ export interface SignedModel {
 }
 
 export namespace SignedModel {
-  export const reset = (signedModel: SignedModel): void => {
-    signedModel.signature = { ...signedModel.signature, changed: false };
-  };
   export const signModel = (model: SignedModel, ignoreChangeDetection = false): SignedModel => {
     const { signature, ...modelToSign } = deepCopy(model);
     const currentQuoteSignature = dataHash(modelToSign);

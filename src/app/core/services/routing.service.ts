@@ -82,11 +82,7 @@ export class RoutingService implements OnDestroy {
 
   private getNextRoute(data: QuoteModel): Page | undefined {
     const pageId = this.appContextData.navigation.viewedPages[this.appContextData.navigation.viewedPages.length - 1];
-
-    // 1º Recuperamos la pagina del sitemap
     const page = this.getPage(pageId);
-
-    // 2º Recuperamos la opción de siguiente
     const nextPageId = this.testNavigation(data, page!);
 
     return this.appContextData.configuration.pageMap[nextPageId!];

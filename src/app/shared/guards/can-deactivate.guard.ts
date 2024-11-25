@@ -24,7 +24,7 @@ export const canDeactivateGuard: CanDeactivateFn<QuoteComponent> = (
   const canDeactivate = (): boolean => {
     const canDeactivate = (component.canDeactivate?.bind(component)(currentRoute, state, next) ?? true) as boolean;
 
-    contextDataService.set(QUOTE_CONTEXT_DATA, SignedModel.signModel(component['_contextData'], component.ignoreChangeDetection));
+    contextDataService.set(QUOTE_CONTEXT_DATA, SignedModel.signModel(component['_contextData']));
 
     return canDeactivate;
   };
