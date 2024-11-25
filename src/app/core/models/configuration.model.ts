@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-namespace */
 import { DataInfo } from '@shagui/ng-shagui/core';
-import { EntryPoint } from '../service-activators';
+import { ServiceActivator } from '../service-activators';
 import { LiteralModel } from './literal.model';
 import { StepperDTO, Steppers } from './stepper.model';
 
@@ -30,7 +30,7 @@ export interface Page {
   route?: string;
   stepper?: { key: string; stepKey: string };
   routeTree?: string;
-  entryPoints?: EntryPoint[];
+  serviceActivators?: ServiceActivator[];
 }
 
 export namespace Page {

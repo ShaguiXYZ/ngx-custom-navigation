@@ -15,9 +15,9 @@ export type ActivatorFnType =
   | 'black-list-email'
   | 'patch-quote';
 
-export type EntryPoints = 'next-page' | 'previous-page' | 'on-pricing' | ActivatorFnType | `form-${string}-${QuoteFormValidations}`;
+export type EntryPoint = 'next-page' | 'previous-page' | 'on-pricing' | ActivatorFnType | `form-${string}-${QuoteFormValidations}`;
 
-export const ServiceActivators: Record<ActivatorFnType, (services: ActivatorServices) => ActivatorFn> = {
+export const Activators: Record<ActivatorFnType, (services: ActivatorServices) => ActivatorFn> = {
   'store-budget': BudgetActivator.storeBudget,
   'retrieve-budget': BudgetActivator.retrieveBudget,
   'black-list-identification-number': BlackListActivator.checkIdentificationNumberBlackList,

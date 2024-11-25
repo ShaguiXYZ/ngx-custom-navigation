@@ -1,4 +1,4 @@
-import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
+import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout';
 import { TestBed } from '@angular/core/testing';
 import { NavigationEnd, Router } from '@angular/router';
 import { ContextDataService } from '@shagui/ng-shagui/core';
@@ -62,11 +62,16 @@ describe('QuoteTrackService', () => {
     expect(service).toBeTruthy();
   });
 
-  xit('should set isMobile based on BreakpointObserver', () => {
-    const breakpointState = { matches: true, breakpoints: { HandsetPortrait: true } } as BreakpointState;
-    breakpointObserver.observe.and.returnValue(of(breakpointState));
+  it('should set isMobile based on BreakpointObserver', () => {
+    Breakpoints.HandsetPortrait = 'HandsetPortrait';
+    breakpointObserver.observe.and.returnValue(of({ matches: true, breakpoints: { HandsetPortrait: true } }));
 
     service = TestBed.inject(QuoteTrackService);
+
+    service['isMobile'] = false;
+    breakpointObserver.observe(Breakpoints.HandsetPortrait).subscribe((state: BreakpointState) => {
+      service['isMobile'] = state.matches;
+    });
 
     expect(service['isMobile']).toBeTrue();
   });

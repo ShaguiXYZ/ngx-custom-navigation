@@ -278,9 +278,9 @@
           "error-length": "El formato de la matrícula no es correcto ({{value}})"
         }
       },
-      "entryPoints": [
+      "serviceActivators": [
         {
-          "id": "next-page",
+          "entryPoint": "next-page",
           "activator": "black-list-plate",
           "params": { "percent": 0.7 }
         }
@@ -593,9 +593,9 @@
           "view-coverages": "Ver coberturas"
         }
       },
-      "entryPoints": [
+      "serviceActivators": [
         {
-          "id": "on-pricing",
+          "entryPoint": "on-pricing",
           "activator": "store-budget"
         }
       ]
