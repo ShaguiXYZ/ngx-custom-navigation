@@ -8,6 +8,7 @@ export * from './icon-dictionary.model';
 export * from './insurance-company.model';
 export * from './literal.model';
 export * from './location.model';
+export * from './page-form.model';
 export * from './pricing.model';
 export * from './quote-black-list.model';
 export * from './quote-client.model';

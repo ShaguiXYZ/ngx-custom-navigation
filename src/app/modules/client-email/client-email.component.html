@@ -29,7 +29,7 @@
         </div>
         <nx-switcher formControlName="acceptPrivacyPolicy" />
       </div>
-      @if(form.get('acceptPrivacyPolicy')?.touched && form.get('acceptPrivacyPolicy')?.errors?.['required']) {
+      @if(form.get('acceptPrivacyPolicy')?.touched && form.get('acceptPrivacyPolicy')?.errors?.['requiredTrue']) {
       <nx-error class="align-right" appearance="text" nxFormfieldError><span nxQuoteLiteral="error-required"></span></nx-error>
       }
       <div class="legal-text nx-margin-top-s" nxCopytext="normal" nxQuoteLiteral="legal-text">

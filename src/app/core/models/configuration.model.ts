@@ -3,6 +3,7 @@ import { DataInfo } from '@shagui/ng-shagui/core';
 import { ServiceActivator } from '../service-activators';
 import { LiteralModel } from './literal.model';
 import { StepperDTO, Steppers } from './stepper.model';
+import { PageFormValidationSettings } from './page-form.model';
 
 export type CompareOperations = 'AND' | 'OR';
 export type Links = DataInfo;
@@ -21,6 +22,8 @@ export interface ConfigurationDTO {
 export interface PageConfiguration {
   literals?: Literals;
   data?: DataInfo<unknown>;
+  validationSettings?: PageFormValidationSettings;
+  serviceActivators?: ServiceActivator[];
 }
 
 export interface Page {
@@ -30,7 +33,6 @@ export interface Page {
   route?: string;
   stepper?: { key: string; stepKey: string };
   routeTree?: string;
-  serviceActivators?: ServiceActivator[];
 }
 
 export namespace Page {

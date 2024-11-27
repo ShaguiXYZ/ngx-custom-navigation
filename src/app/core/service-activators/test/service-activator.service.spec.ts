@@ -46,7 +46,7 @@ describe('ServiceActivatorService', () => {
     };
     contextDataService.get.and.callFake((key: string): any => {
       if (key === QUOTE_APP_CONTEXT_DATA) {
-        return { navigation: { lastPage: { serviceActivators: [mockEntryPoint] } } } as unknown as AppContextData;
+        return { navigation: { lastPage: { configuration: { serviceActivators: [mockEntryPoint] } } } } as unknown as AppContextData;
       }
       if (key === QUOTE_CONTEXT_DATA) {
         return {} as QuoteModel;
@@ -71,7 +71,7 @@ describe('ServiceActivatorService', () => {
     };
     contextDataService.get.and.callFake((key: string): any => {
       if (key === QUOTE_APP_CONTEXT_DATA) {
-        return { navigation: { lastPage: { serviceActivators: [mockEntryPoint] } } } as unknown as AppContextData;
+        return { navigation: { lastPage: { configuration: { serviceActivators: [mockEntryPoint] } } } } as unknown as AppContextData;
       }
       if (key === QUOTE_CONTEXT_DATA) {
         return {} as QuoteModel;

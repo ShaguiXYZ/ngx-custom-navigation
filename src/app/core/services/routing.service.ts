@@ -31,9 +31,11 @@ export class RoutingService implements OnDestroy {
   }
 
   public next = async (data?: QuoteModel): Promise<boolean> => {
+    data && this.contextDataService.set(QUOTE_CONTEXT_DATA, data);
+
     await this.serviceActivatorService.activateEntryPoint('next-page');
 
-    const toEveluate: QuoteModel = deepCopy(data ?? this.contextDataService.get(QUOTE_CONTEXT_DATA));
+    const toEveluate: QuoteModel = this.contextDataService.get(QUOTE_CONTEXT_DATA);
 
     const nextPage = this.getNextRoute(toEveluate);
 
@@ -48,11 +50,11 @@ export class RoutingService implements OnDestroy {
 
   public previous = async (data?: QuoteModel): Promise<boolean> => {
     if (this.appContextData.navigation.viewedPages.length > 1) {
-      const pageId = this.appContextData.navigation.viewedPages[this.appContextData.navigation.viewedPages.length - 2];
-
       data && this.contextDataService.set(QUOTE_CONTEXT_DATA, data);
 
       await this.serviceActivatorService.activateEntryPoint('previous-page');
+
+      const pageId = this.appContextData.navigation.viewedPages[this.appContextData.navigation.viewedPages.length - 2];
 
       return this._goToPage(this.appContextData.configuration.pageMap[pageId]);
     }

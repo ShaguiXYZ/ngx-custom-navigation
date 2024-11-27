@@ -98,7 +98,7 @@
           "conditions": [
             {
               "expression": "client.isClient",
-              "value": "true"
+              "value": true
             }
           ]
         },
@@ -232,7 +232,7 @@
           "conditions": [
             {
               "expression": "blackList.plateNumber.blacklisted",
-              "value": "true"
+              "value": true
             }
           ]
         },
@@ -241,7 +241,7 @@
           "conditions": [
             {
               "expression": "driven.hasDrivenLicense",
-              "value": "false"
+              "value": false
             },
             {
               "expression": "vehicle.vehicleType",
@@ -256,7 +256,7 @@
           "conditions": [
             {
               "expression": "driven.hasDrivenLicense",
-              "value": "false"
+              "value": false
             },
             {
               "expression": "vehicle.vehicleType",
@@ -276,15 +276,15 @@
           "header": "¿Cuál es la matrícula de tu coche?",
           "license-plate": "Matrícula",
           "bad-format": "El formato de la matrícula no es correcto ({{value}})"
-        }
-      },
-      "serviceActivators": [
-        {
-          "entryPoint": "next-page",
-          "activator": "black-list-plate",
-          "params": { "percent": 0.7 }
-        }
-      ]
+        },
+        "serviceActivators": [
+          {
+            "entryPoint": "next-page",
+            "activator": "black-list-plate",
+            "params": { "percentBlacklisted": 0.7 }
+          }
+        ]
+      }
     },
     {
       "pageId": "your-car-is",
@@ -393,7 +393,7 @@
           "conditions": [
             {
               "expression": "driven.hasDrivenLicense",
-              "value": "false"
+              "value": false
             }
           ]
         },
@@ -419,7 +419,7 @@
           "conditions": [
             {
               "expression": "client.isPolicyOwner",
-              "value": "false"
+              "value": false
             },
             {
               "expression": "vehicle.vehicleType",
@@ -443,7 +443,7 @@
             {
               "expression": "client.isPolicyOwner",
               "union": "AND",
-              "value": "true"
+              "value": true
             }
           ]
         },
@@ -452,7 +452,7 @@
           "conditions": [
             {
               "expression": "client.isPolicyOwner",
-              "value": "false"
+              "value": false
             },
             {
               "expression": "vehicle.vehicleType",
@@ -565,6 +565,24 @@
       "pageId": "client-identification-number",
       "nextOptionList": [
         {
+          "nextPageId": "apology-screen",
+          "conditions": [
+            {
+              "expression": "blackList.identificationNumber.blacklisted",
+              "value": true
+            }
+          ]
+        },
+        {
+          "nextPageId": "is-client-contact-us",
+          "conditions": [
+            {
+              "expression": "blackList.identificationNumber.isClient",
+              "value": true
+            }
+          ]
+        },
+        {
           "nextPageId": "offerings"
         }
       ],
@@ -574,7 +592,14 @@
           "identification-number": "Número de DNI o NIE",
           "subheader": "Solo utilizaremos este dato para darte un presupuesto totalmente personalizado",
           "footer-info": "Para ofrecerte el mejor seguro es importante verificar tu identidad."
-        }
+        },
+        "serviceActivators": [
+          {
+            "entryPoint": "next-page",
+            "activator": "black-list-identification-number",
+            "params": { "percentIsClient": 0.5 }
+          }
+        ]
       }
     },
     {
@@ -591,14 +616,14 @@
           "from-now": "Desde hoy {{value}}",
           "popular": "El más contratado",
           "view-coverages": "Ver coberturas"
-        }
-      },
-      "serviceActivators": [
-        {
-          "entryPoint": "on-pricing",
-          "activator": "store-budget"
-        }
-      ]
+        },
+        "serviceActivators": [
+          {
+            "entryPoint": "on-pricing",
+            "activator": "store-budget"
+          }
+        ]
+      }
     },
     {
       "pageId": "confirmation",
@@ -684,6 +709,9 @@
         "literals": {
           "header": "¿Como te llamas?",
           "name": "Nombre"
+        },
+        "validationSettings": {
+          "surname": { "required": { "disabled": true } }
         }
       }
     },
@@ -718,6 +746,9 @@
           "privacy-policy": "política de privacidad",
           "text-01": "He leído y acepto la",
           "text-02": "de Shagui"
+        },
+        "validationSettings": {
+          "acceptPrivacyPolicy": { "requiredTrue": { "disabled": true } }
         }
       }
     },
@@ -735,6 +766,9 @@
           "identification-number": "Número de documento de identidad",
           "subheader": "Solo utilizaremos este dato para darte un presupuesto totalmente personalizado",
           "footer-info": "Para ofrecerte el mejor seguro es importante verificar tu identidad. "
+        },
+        "validationSettings": {
+          "identificationNumber": { "required": { "disabled": true } }
         }
       }
     },

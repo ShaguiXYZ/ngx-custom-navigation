@@ -45,8 +45,6 @@ export class ClientEMailComponent extends QuoteComponent implements OnInit {
   public updateValidData = (): void => {
     this.form.markAllAsTouched();
 
-    console.log(this.form.valid);
-
     if (this.form.valid) {
       this._contextData.personalData = {
         ...this._contextData.personalData,

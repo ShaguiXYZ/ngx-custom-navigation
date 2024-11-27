@@ -26,10 +26,12 @@ export class ServiceActivatorService {
       return;
     }
 
-    const entryPoints = lastPage.serviceActivators?.filter(entryPoint => entryPoint.entryPoint === name);
+    const entryPoints = lastPage.configuration?.serviceActivators?.filter(entryPoint => entryPoint.entryPoint === name);
 
     entryPoints?.forEach(async entryPoint => {
       if (ConditionEvaluation.checkConditions(this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA), entryPoint.conditions)) {
+        console.log('Activating', entryPoint.activator);
+
         await this.runActivator(entryPoint.activator, entryPoint.params);
       }
     });
