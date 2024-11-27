@@ -7,4 +7,8 @@ export interface QuoteSettingsModel {
   agenthelpercode: number;
   office: number;
   groupings: [number];
+  commercialExceptions: {
+    enableWorkFlow: boolean;
+    enableTracking: boolean;
+  };
 }

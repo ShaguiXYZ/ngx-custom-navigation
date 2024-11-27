@@ -29,33 +29,28 @@ export class SettingsService {
 
   public async loadSettings(): Promise<void> {
     const settings = await this.quoteSettings();
-    const quoteData = this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA);
-
-    this.translateService.setDefaultLang('es-ES');
-
-    this.contextDataService.set(
-      QUOTE_CONTEXT_DATA,
-      { ...QuoteModel.init(), ...quoteData },
-      {
-        persistent: true
-      }
-    );
-
+    const appContextData = this.contextDataService.get<AppContextData>(QUOTE_APP_CONTEXT_DATA);
+    const journeyUrl = settings.commercialExceptions.enableWorkFlow
+      ? `${environment.baseUrl}/${environment.journey}`
+      : `${environment.baseUrl}/journey/not-journey`;
     const configuration = await firstValueFrom(
-      this.httpService.get<ConfigurationDTO>(environment.journeyUrl).pipe(
+      this.httpService.get<ConfigurationDTO>(journeyUrl).pipe(
         map(res => res as ConfigurationDTO),
         map(this.init)
       )
     );
-    const appContextData = this.contextDataService.get<AppContextData>(QUOTE_APP_CONTEXT_DATA);
+    const quoteData = settings.commercialExceptions.enableWorkFlow
+      ? { ...QuoteModel.init(), ...this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA) }
+      : QuoteModel.init();
+    const viewedPages = settings.commercialExceptions.enableWorkFlow ? appContextData?.navigation.viewedPages ?? [] : [];
 
-    this.contextDataService.set(
-      QUOTE_APP_CONTEXT_DATA,
-      AppContextData.init(settings, configuration, appContextData?.navigation.viewedPages ?? []),
-      {
-        persistent: true
-      }
-    );
+    this.translateService.setDefaultLang('es-ES');
+
+    this.contextDataService.set(QUOTE_APP_CONTEXT_DATA, AppContextData.init(settings, configuration, viewedPages), {
+      persistent: true
+    });
+
+    this.contextDataService.set(QUOTE_CONTEXT_DATA, quoteData, { persistent: true });
 
     console.group('SettingsService');
     console.log('Quote data', QUOTE_CONTEXT_DATA, this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA));

@@ -1,7 +1,8 @@
 export const environment = {
   production: false,
   appName: 'ngx-custom-navigation',
-  baseUrl: './assets/json/mock', // url bff local server
-  domain: 'localhost:8080', // domain localhost
-  journeyUrl: './assets/json/defaultJourney.json'
+  baseUrl: './assets/json/mock', // url bff mock server
+  domain: 'localhost:3000', // domain localhost
+  journey: 'journey/defaultJourney',
+  scripts: []
 };

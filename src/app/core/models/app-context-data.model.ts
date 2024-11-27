@@ -19,6 +19,10 @@ export namespace AppContextData {
     const homePage = configuration.pageMap[configuration.homePageId];
     const updatedViewedPages = viewedPages.length ? viewedPages : [homePage.pageId];
 
+    if (updatedViewedPages[0] !== homePage.pageId) {
+      updatedViewedPages.unshift(homePage.pageId);
+    }
+
     return {
       settings,
       configuration,
