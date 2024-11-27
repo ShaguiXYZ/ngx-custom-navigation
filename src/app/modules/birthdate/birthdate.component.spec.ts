@@ -18,10 +18,10 @@ describe('BirthdateComponent', () => {
   let fixture: ComponentFixture<BirthdateComponent>;
 
   beforeEach(async () => {
+    const contextDataSubject = new Subject<any>();
+    const contextDataServiceSpy = jasmine.createSpyObj('ContextDataService', ['get', 'set', 'onDataChange']);
     const quoteLiteralPipeSpy = jasmine.createSpyObj('QuoteLiteralPipe', ['transform']);
     const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate']);
-    const contextDataServiceSpy = jasmine.createSpyObj('ContextDataService', ['get', 'set', 'onDataChange']);
-    const contextDataSubject = new Subject<AppContextData>();
 
     contextDataServiceSpy.get.and.callFake((contextDataKey: string): any => {
       if (contextDataKey === QUOTE_APP_CONTEXT_DATA) {

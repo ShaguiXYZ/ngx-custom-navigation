@@ -9,6 +9,7 @@ import { RoutingService } from 'src/app/core/services';
 import { OfferingsService } from 'src/app/core/services/offerings.service';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 import { QuoteOfferingsComponent } from './quote-offerings.component';
+import { Subject } from 'rxjs';
 
 describe('QuoteOfferingsComponent', () => {
   let component: QuoteOfferingsComponent;
@@ -18,7 +19,8 @@ describe('QuoteOfferingsComponent', () => {
   let routingService: jasmine.SpyObj<RoutingService>;
 
   beforeEach(async () => {
-    const contextDataServiceSpy = jasmine.createSpyObj('ContextDataService', ['get', 'set']);
+    const contextDataSubject = new Subject<any>();
+    const contextDataServiceSpy = jasmine.createSpyObj('ContextDataService', ['get', 'set', 'onDataChange']);
     const quoteLiteralPipeSpy = jasmine.createSpyObj('QuoteLiteralPipe', ['transform']);
     const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate']);
     const offeringsServiceSpy = jasmine.createSpyObj('OfferingsService', ['pricing']);
@@ -33,6 +35,8 @@ describe('QuoteOfferingsComponent', () => {
 
       return null;
     });
+
+    contextDataServiceSpy.onDataChange.and.returnValue(contextDataSubject.asObservable());
 
     await TestBed.configureTestingModule({
       declarations: [],

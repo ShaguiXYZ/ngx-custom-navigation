@@ -54,7 +54,7 @@ export class ClientPhoneNumberComponent extends QuoteComponent implements OnInit
 
   private createForm() {
     this.form = this.fb.group({
-      phoneNumber: new FormControl(this._contextData.personalData.phoneNumber, [Validators.required])
+      phoneNumber: new FormControl(this._contextData.personalData.phoneNumber, [this.quoteFormValidarors.required()])
     });
   }
 }

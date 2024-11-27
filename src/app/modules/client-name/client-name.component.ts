@@ -1,10 +1,9 @@
 import { TitleCasePipe } from '@angular/common';
 import { Component, OnInit, inject } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { NX_DATE_LOCALE } from '@aposin/ng-aquila/datefield';
 import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
 import { NxInputModule } from '@aposin/ng-aquila/input';
-import { Subscription } from 'rxjs';
 import { QuoteFormValidarors } from 'src/app/core/form';
 import { QuoteComponent } from 'src/app/core/models';
 import { HeaderTitleComponent, QuoteFooterComponent } from 'src/app/shared/components';
@@ -30,8 +29,8 @@ import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 export class ClientNameComponent extends QuoteComponent implements OnInit {
   public form!: FormGroup;
 
+  private readonly quoteFormValidarors = inject(QuoteFormValidarors);
   private readonly titleCasePipe = inject(TitleCasePipe);
-  private readonly subscription$: Subscription[] = [];
   private readonly fb = inject(FormBuilder);
 
   ngOnInit(): void {
@@ -53,8 +52,8 @@ export class ClientNameComponent extends QuoteComponent implements OnInit {
 
   private createForm() {
     this.form = this.fb.group({
-      name: new FormControl(this._contextData.personalData.name, [Validators.required]),
-      surname: new FormControl(this._contextData.personalData.surname, [Validators.required])
+      name: new FormControl(this._contextData.personalData.name, [this.quoteFormValidarors.required()]),
+      surname: new FormControl(this._contextData.personalData.surname, [this.quoteFormValidarors.required()])
     });
 
     let subscription = this.form.get('name')?.valueChanges.subscribe(value => {

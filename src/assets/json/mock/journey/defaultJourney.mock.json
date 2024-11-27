@@ -275,7 +275,7 @@
           "footer-info": "Facilitando tu matrícula obtendrás tu cotización mucho más rápido",
           "header": "¿Cuál es la matrícula de tu coche?",
           "license-plate": "Matrícula",
-          "error-length": "El formato de la matrícula no es correcto ({{value}})"
+          "bad-format": "El formato de la matrícula no es correcto ({{value}})"
         }
       },
       "serviceActivators": [
@@ -800,6 +800,7 @@
     "contact-us": "external-contact-us"
   },
   "literals": {
+    "bad-format": "Formato incorrecto",
     "budget-modal-header": "Datos de tu presupuesto",
     "budget-name": "Nombre del presupuesto",
     "budget-key": "Clave del presupuesto",

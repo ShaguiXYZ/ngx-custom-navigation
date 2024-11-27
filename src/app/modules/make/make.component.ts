@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, ElementRef, inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, inject, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
 import { NxIconModule } from '@aposin/ng-aquila/icon';
@@ -34,7 +34,7 @@ import { BrandComponentService } from './services';
   providers: [VehicleService, BrandComponentService],
   standalone: true
 })
-export class MakeComponent extends QuoteComponent implements OnInit, OnDestroy {
+export class MakeComponent extends QuoteComponent implements OnInit {
   @ViewChild('searchInput', { static: true })
   private searchInput!: ElementRef;
 
@@ -42,8 +42,6 @@ export class MakeComponent extends QuoteComponent implements OnInit, OnDestroy {
   public iconBrands!: IIconData[];
   public searchedMakes: string[] = [];
   public selectedBrand?: string;
-
-  private subscription$: Subscription[] = [];
 
   private readonly routingService = inject(RoutingService);
   private readonly brandComponentService = inject(BrandComponentService);
@@ -63,10 +61,6 @@ export class MakeComponent extends QuoteComponent implements OnInit, OnDestroy {
     this.selectedBrand = this._contextData.vehicle.make;
 
     this.searchBrands();
-  }
-
-  ngOnDestroy(): void {
-    this.subscription$.forEach(subscription => subscription.unsubscribe());
   }
 
   public override canDeactivate = (): boolean => this.updateValidData();

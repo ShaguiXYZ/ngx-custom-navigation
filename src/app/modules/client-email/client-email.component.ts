@@ -45,6 +45,8 @@ export class ClientEMailComponent extends QuoteComponent implements OnInit {
   public updateValidData = (): void => {
     this.form.markAllAsTouched();
 
+    console.log(this.form.valid);
+
     if (this.form.valid) {
       this._contextData.personalData = {
         ...this._contextData.personalData,
@@ -60,9 +62,9 @@ export class ClientEMailComponent extends QuoteComponent implements OnInit {
 
   private createForm() {
     this.form = this.fb.group({
-      email: new FormControl(this._contextData.personalData.email, [Validators.required, this.quoteFormValidarors.email]),
-      accepInfo: new FormControl(this._contextData.client.accepInfo, [Validators.required]),
-      acceptPrivacyPolicy: new FormControl(this._contextData.client.acceptPrivacyPolicy, [Validators.requiredTrue])
+      email: new FormControl(this._contextData.personalData.email, [this.quoteFormValidarors.required(), this.quoteFormValidarors.email()]),
+      accepInfo: new FormControl(this._contextData.client.accepInfo, [this.quoteFormValidarors.informed()]),
+      acceptPrivacyPolicy: new FormControl(this._contextData.client.acceptPrivacyPolicy, [this.quoteFormValidarors.requiredTrue()])
     });
   }
 }

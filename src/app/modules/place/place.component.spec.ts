@@ -17,11 +17,11 @@ describe('PlaceComponent', () => {
   let locationService: jasmine.SpyObj<LocationService>;
 
   beforeEach(waitForAsync(() => {
+    const contextDataSubject = new Subject<any>();
+    const contextDataServiceSpy = jasmine.createSpyObj('ContextDataService', ['get', 'set', 'onDataChange']);
     const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate']);
     const locationServiceSpy = jasmine.createSpyObj('LocationService', ['getAddress']);
     const quoteLiteralPipeSpy = jasmine.createSpyObj('QuoteLiteralPipe', ['transform']);
-    const contextDataServiceSpy = jasmine.createSpyObj('ContextDataService', ['get', 'set', 'onDataChange']);
-    const contextDataSubject = new Subject<AppContextData>();
 
     contextDataServiceSpy.get.and.callFake((contextDataKey: string): any => {
       if (contextDataKey === QUOTE_APP_CONTEXT_DATA) {
@@ -100,7 +100,7 @@ describe('PlaceComponent', () => {
     component.form.setValue({ postalCode: '' });
     component['updateValidData']();
 
-    expect(contextDataService.set).not.toHaveBeenCalled();
+    expect(component.form.valid).toBeFalse();
   });
 
   it('should validate postal code asynchronously', waitForAsync(() => {

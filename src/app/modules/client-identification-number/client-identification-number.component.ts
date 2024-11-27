@@ -1,10 +1,9 @@
-import { Component, OnDestroy, OnInit, inject } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Component, OnInit, inject } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { NxCopytextModule } from '@aposin/ng-aquila/copytext';
 import { NX_DATE_LOCALE } from '@aposin/ng-aquila/datefield';
 import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
 import { NxInputModule } from '@aposin/ng-aquila/input';
-import { Subscription } from 'rxjs';
 import { QuoteFormValidarors } from 'src/app/core/form';
 import { QuoteComponent } from 'src/app/core/models';
 import { HeaderTitleComponent, QuoteFooterComponent, QuoteFooterInfoComponent } from 'src/app/shared/components';
@@ -29,19 +28,14 @@ import { QuoteLiteralPipe } from 'src/app/shared/pipes';
   providers: [{ provide: NX_DATE_LOCALE, useValue: 'es-ES' }, QuoteFormValidarors],
   standalone: true
 })
-export class ClientIdentificationNumberComponent extends QuoteComponent implements OnInit, OnDestroy {
+export class ClientIdentificationNumberComponent extends QuoteComponent implements OnInit {
   public form!: FormGroup;
 
   private readonly quoteFormValidarors = inject(QuoteFormValidarors);
-  private readonly subscription$: Subscription[] = [];
   private readonly fb = inject(FormBuilder);
 
   ngOnInit(): void {
     this.createForm();
-  }
-
-  ngOnDestroy(): void {
-    this.subscription$.forEach(subscription => subscription.unsubscribe());
   }
 
   public override canDeactivate = (): boolean => this.form.valid;
@@ -59,7 +53,7 @@ export class ClientIdentificationNumberComponent extends QuoteComponent implemen
 
   private createForm() {
     this.form = this.fb.group({
-      identificationNumber: new FormControl(this._contextData.personalData.identificationNumber, [Validators.required])
+      identificationNumber: new FormControl(this._contextData.personalData.identificationNumber, [this.quoteFormValidarors.required()])
     });
 
     const identificationNumberSubscription = this.form.get('identificationNumber')?.valueChanges.subscribe(value => {

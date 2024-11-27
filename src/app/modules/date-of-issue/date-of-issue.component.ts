@@ -75,7 +75,7 @@ export class DateOfIssueComponent extends QuoteComponent implements OnInit {
     }
     this.form = this.fb.group({
       dateOfIssue: new FormControl(this.dateOfIssueFromContext, [
-        Validators.required,
+        this.quoteFormValidarors.required(),
         this.quoteFormValidarors.betweenDates(this.minDate.toDate(), this.maxDate.toDate())
       ])
     });

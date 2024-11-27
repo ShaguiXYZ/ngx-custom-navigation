@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, ElementRef, inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, inject, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
 import { NxIconModule } from '@aposin/ng-aquila/icon';
@@ -35,7 +35,7 @@ import { InsuranceComponentService } from './services';
   providers: [InsuranceComponentService, InsuranceCompaniesService],
   standalone: true
 })
-export class InsuranceCompaniesComponent extends QuoteComponent implements OnInit, OnDestroy {
+export class InsuranceCompaniesComponent extends QuoteComponent implements OnInit {
   @ViewChild('searchInput', { static: true })
   private searchInput!: ElementRef;
 
@@ -43,8 +43,6 @@ export class InsuranceCompaniesComponent extends QuoteComponent implements OnIni
   public iconInsurances!: IIconData[];
   public searchedInsurances: IndexedData[] = [];
   public selectedCompany?: IndexedData;
-
-  private subscription$: Subscription[] = [];
 
   private readonly routingService = inject(RoutingService);
   private readonly insuranceComponentService = inject(InsuranceComponentService);
@@ -64,10 +62,6 @@ export class InsuranceCompaniesComponent extends QuoteComponent implements OnIni
     this.selectedCompany = this._contextData.insuranceCompany?.company;
 
     this.searchInsurances();
-  }
-
-  ngOnDestroy(): void {
-    this.subscription$.forEach(subscription => subscription.unsubscribe());
   }
 
   public override canDeactivate = (): boolean => this.isValidData();

@@ -65,7 +65,11 @@ export class PlaceComponent extends QuoteComponent implements OnInit {
 
   private createForm(): void {
     this.form = this.fb.group({
-      postalCode: new FormControl(this._contextData.place.postalCode, [Validators.required], [this.postalCodeExistsValidator()])
+      postalCode: new FormControl(
+        this._contextData.place.postalCode,
+        [this.quoteFormValidarors.required()],
+        [this.postalCodeExistsValidator()]
+      )
     });
   }
 

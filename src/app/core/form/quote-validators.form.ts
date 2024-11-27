@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
-import { ContextDataService } from '@shagui/ng-shagui/core';
+import { ContextDataService, hasValue } from '@shagui/ng-shagui/core';
 import moment from 'moment';
 import { QUOTE_APP_CONTEXT_DATA, QUOTE_CONTEXT_DATA } from '../constants';
 import { AppContextData, QuoteModel } from '../models';
@@ -79,6 +79,21 @@ export class QuoteFormValidarors {
       return this.activateEntryPoint(control, 'email', !emailPattern.test(control.value));
     };
   };
+
+  public required =
+    (): ValidatorFn =>
+    (control: AbstractControl): ValidationErrors | null =>
+      this.activateEntryPoint(control, 'required', !control.value);
+
+  public informed =
+    (): ValidatorFn =>
+    (control: AbstractControl): ValidationErrors | null =>
+      this.activateEntryPoint(control, 'required', !hasValue(control.value));
+
+  public requiredTrue =
+    (): ValidatorFn =>
+    (control: AbstractControl): ValidationErrors | null =>
+      this.activateEntryPoint(control, 'requiredTrue', !control.value);
 
   /**
    * Activates an entry point for a form control and updates the form validations in the context data.

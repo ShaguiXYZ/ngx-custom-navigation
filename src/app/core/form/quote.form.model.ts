@@ -10,6 +10,8 @@ export type QuoteFormValidations =
   | 'minValues'
   | 'notFound'
   | 'olderThanYears'
-  | 'pastDate';
+  | 'pastDate'
+  | 'required'
+  | 'requiredTrue';
 
 export type FormValidations = { [controlName: string]: ValidationErrors };

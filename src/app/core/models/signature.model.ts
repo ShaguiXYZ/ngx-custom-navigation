@@ -12,7 +12,7 @@ export interface SignatureModel {
 export namespace SignatureModel {
   export const signModel = (model: QuoteControlModel, ignoreChangeDetection = false): QuoteControlModel => {
     const copy = deepCopy(model);
-    const { signature, forms: formValidations, ...modelToSign } = copy;
+    const { signature, forms, ...modelToSign } = copy;
     const currentQuoteSignature = dataHash(modelToSign);
     const signModel = {
       hash: currentQuoteSignature,

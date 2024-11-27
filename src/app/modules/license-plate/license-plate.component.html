@@ -11,7 +11,7 @@
         <nx-error appearance="text" nxFormfieldError><span nxQuoteLiteral="error-required"></span> </nx-error>
         } @if(form.get('plateNumber')?.errors?.['nxMaskLengthError']) {
         <nx-error appearance="text" nxFormfieldError>
-          <span nxQuoteLiteral="error-length" [nxQuoteLitealParams]="{ value: '0000 SSS' }"></span
+          <span nxQuoteLiteral="bad-format" [nxQuoteLitealParams]="{ value: '0000 SSS' }"></span
         ></nx-error>
         }
       </nx-formfield>

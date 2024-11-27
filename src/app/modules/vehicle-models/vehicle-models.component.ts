@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, ElementRef, inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, inject, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { NxCopytextModule } from '@aposin/ng-aquila/copytext';
 import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
@@ -34,15 +34,13 @@ import { QuoteLiteralPipe } from 'src/app/shared/pipes';
   providers: [VehicleService],
   standalone: true
 })
-export class VehicleModelsComponent extends QuoteComponent implements OnInit, OnDestroy {
+export class VehicleModelsComponent extends QuoteComponent implements OnInit {
   @ViewChild('searchInput', { static: true })
   private searchInput!: ElementRef;
 
   public form!: FormGroup;
   public models: string[] = [];
   public selectedModel?: string;
-
-  private subscription$: Subscription[] = [];
 
   private readonly routingService = inject(RoutingService);
   private readonly vehicleService = inject(VehicleService);
@@ -56,10 +54,6 @@ export class VehicleModelsComponent extends QuoteComponent implements OnInit, On
     });
 
     this.createForm();
-  }
-
-  ngOnDestroy(): void {
-    this.subscription$.forEach(subscription => subscription.unsubscribe());
   }
 
   public override canDeactivate = (): boolean => this.updateValidData();

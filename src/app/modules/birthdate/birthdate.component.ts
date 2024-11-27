@@ -1,5 +1,5 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { NX_DATE_LOCALE, NxDatefieldModule } from '@aposin/ng-aquila/datefield';
 import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
 import { NxInputModule } from '@aposin/ng-aquila/input';
@@ -65,7 +65,10 @@ export class BirthdateComponent extends QuoteComponent implements OnInit {
     }
 
     this.form = this.fb.group({
-      birthdate: new FormControl(this.birthdateFromContext, [Validators.required, this.quoteFormValidarors.isOlderThanYears(this.minValue)])
+      birthdate: new FormControl(this.birthdateFromContext, [
+        this.quoteFormValidarors.required(),
+        this.quoteFormValidarors.isOlderThanYears(this.minValue)
+      ])
     });
   }
 }

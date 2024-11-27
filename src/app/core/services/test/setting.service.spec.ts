@@ -36,7 +36,11 @@ describe('SettingsService', () => {
   });
 
   it('should load settings and update context data', async () => {
-    const settings = {};
+    const settings = {
+      commercialExceptions: {
+        enableWorkFlow: true
+      }
+    };
 
     const mockConfiguration: ConfigurationDTO = {
       homePageId: 'home',

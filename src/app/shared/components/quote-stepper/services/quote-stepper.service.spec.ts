@@ -6,8 +6,8 @@ import { QuoteStepperService } from './quote-stepper.service';
 
 describe('QuoteStepperService', () => {
   let service: QuoteStepperService;
+  let contextDataSubject: Subject<any>;
   let contextDataServiceSpy: jasmine.SpyObj<ContextDataService>;
-  let contextDataSubject: Subject<AppContextData>;
 
   beforeEach(() => {
     contextDataServiceSpy = jasmine.createSpyObj('ContextDataService', ['get', 'set', 'onDataChange']);

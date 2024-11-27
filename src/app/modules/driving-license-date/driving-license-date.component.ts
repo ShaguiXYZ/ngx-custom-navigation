@@ -69,7 +69,7 @@ export class DrivingLicenseDateComponent extends QuoteComponent implements OnIni
 
     this.form = this.fb.group({
       licenseDate: new FormControl(this.drivingLicenseDateFromContext, [
-        Validators.required,
+        this.quoteFormValidarors.required(),
         this.quoteFormValidarors.isFutureDate(),
         this.quoteFormValidarors.minYearsBetweenDates(birthdate, this.minYears)
       ])

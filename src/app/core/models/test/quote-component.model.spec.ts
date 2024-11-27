@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { TestBed } from '@angular/core/testing';
 import { ContextDataService } from '@shagui/ng-shagui/core';
+import { Subject } from 'rxjs';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 import { QUOTE_APP_CONTEXT_DATA, QUOTE_CONTEXT_DATA } from '../../constants';
 import { AppContextData } from '../app-context-data.model';
@@ -19,8 +20,9 @@ describe('QuoteComponent', () => {
   let contextDataService: jasmine.SpyObj<ContextDataService>;
 
   beforeEach(() => {
+    const contextDataSubject = new Subject<any>();
+    const contextDataServiceSpy = jasmine.createSpyObj('ContextDataService', ['get', 'set', 'onDataChange']);
     const quoteLiteralPipeSpy = jasmine.createSpyObj('QuoteLiteralPipe', ['transform']);
-    const contextDataServiceSpy = jasmine.createSpyObj('ContextDataService', ['get', 'set']);
 
     contextDataServiceSpy.get.and.callFake((key: string): any => {
       if (key === QUOTE_CONTEXT_DATA) {
@@ -41,6 +43,8 @@ describe('QuoteComponent', () => {
 
       return undefined;
     });
+
+    contextDataServiceSpy.onDataChange.and.returnValue(contextDataSubject.asObservable());
 
     TestBed.configureTestingModule({
       providers: [
