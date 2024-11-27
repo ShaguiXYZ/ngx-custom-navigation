@@ -1,14 +1,16 @@
 import { inject, Injectable } from '@angular/core';
-import { AbstractControl, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
+import { ContextDataService } from '@shagui/ng-shagui/core';
 import moment from 'moment';
+import { QUOTE_APP_CONTEXT_DATA, QUOTE_CONTEXT_DATA } from '../constants';
+import { AppContextData, QuoteModel } from '../models';
 import { ServiceActivatorService } from '../service-activators';
-import { QuoteFormValidations } from './quote.form.model';
+import { FormValidations, QuoteFormValidations } from './quote.form.model';
 
 @Injectable()
 export class QuoteFormValidarors {
+  private readonly contextDataService = inject(ContextDataService);
   private readonly serviceActivatorService = inject(ServiceActivatorService);
-
-  private validations: { [controlName: string]: ValidationErrors } = {};
 
   public betweenDates = (startDate: Date, endDate: Date): ValidatorFn => {
     return (control: AbstractControl): ValidationErrors | null => {
@@ -78,6 +80,14 @@ export class QuoteFormValidarors {
     };
   };
 
+  /**
+   * Activates an entry point for a form control and updates the form validations in the context data.
+   *
+   * @param control - The form control to validate.
+   * @param validationKey - The key representing the type of validation.
+   * @param validationValue - A boolean indicating whether the validation is active.
+   * @returns A validation error object if validation fails, otherwise null.
+   */
   public activateEntryPoint = (
     control: AbstractControl,
     validationKey: QuoteFormValidations,
@@ -90,14 +100,22 @@ export class QuoteFormValidarors {
     );
 
     if (controlName) {
-      if (validationValue && !this.validations[controlName]?.[validationKey]) {
+      if (validationValue) {
         this.serviceActivatorService.activateEntryPoint(`form-${controlName}-${validationKey}`);
       }
 
-      this.validations[controlName] = {
-        ...this.validations[controlName],
-        [validationKey]: validationValue
-      };
+      const {
+        navigation: { lastPage }
+      } = this.contextDataService.get<AppContextData>(QUOTE_APP_CONTEXT_DATA);
+      const lastPageId = lastPage?.pageId;
+
+      if (lastPageId) {
+        const quote = this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA);
+        const controlValidation: FormValidations = { [controlName]: { [validationKey]: validationValue } };
+        const pageValidations = { ...(quote.forms?.[lastPageId] ?? {}), ...controlValidation };
+        quote.forms = { ...quote.forms, [lastPageId]: pageValidations };
+        this.contextDataService.set(QUOTE_CONTEXT_DATA, quote);
+      }
     }
 
     return validation;

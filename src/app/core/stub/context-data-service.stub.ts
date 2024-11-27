@@ -1,15 +1,16 @@
 import { DataInfo, deepCopy } from '@shagui/ng-shagui/core';
-import { Observable, of } from 'rxjs';
+import { last, Observable, of } from 'rxjs';
 import { QUOTE_APP_CONTEXT_DATA, QUOTE_CONTEXT_DATA } from '../constants';
-import { AppContextData, Page, QuoteModel } from '../models';
+import { AppContextData, Page } from '../models';
 
 const appContextDataMock = {
   settings: {
     agent: 'agent'
   },
   navigation: {
-    viewedPages: ['page1', 'page2'],
-    nextPage: {} as Page
+    lastPage: {} as Page,
+    nextPage: {} as Page,
+    viewedPages: ['page1', 'page2']
   },
   configuration: {
     homePageId: 'page1',
@@ -44,7 +45,7 @@ const appContextDataMock = {
       key2: 'value2'
     }
   }
-};
+} as unknown as AppContextData;
 
 export class ContextDataServiceStub {
   private _contextData: DataInfo<unknown> = {

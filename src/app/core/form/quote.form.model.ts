@@ -1,3 +1,5 @@
+import { ValidationErrors } from '@angular/forms';
+
 export type QuoteFormValidations =
   | 'betweenDates'
   | 'email'
@@ -9,3 +11,5 @@ export type QuoteFormValidations =
   | 'notFound'
   | 'olderThanYears'
   | 'pastDate';
+
+export type FormValidations = { [controlName: string]: ValidationErrors };

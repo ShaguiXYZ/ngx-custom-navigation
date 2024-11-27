@@ -8,9 +8,9 @@ import { QuoteOfferingModel } from './quote-offering.model';
 import { QuotePersonalDataModel } from './quote-personal-data.model';
 import { QuotePlaceModel } from './quote-place.model';
 import { QuoteVehicleModel } from './quote-vehicle.model';
-import { SignedModel } from './signed.model';
+import { QuoteControlModel } from './quote-control.model';
 
-export interface QuoteModel extends SignedModel {
+export interface QuoteModel extends QuoteControlModel {
   blackList: QuoteBlackList;
   client: QuoteClientModel;
   contactData: QuoteContactDataModel;

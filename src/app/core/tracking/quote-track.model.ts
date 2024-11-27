@@ -57,9 +57,9 @@ export const quoteTrackInfo = {
 };
 
 export interface TrackInfoPageModel {
-  pagina: string;
+  page: string;
   URL: string;
-  pagina_previa?: string;
-  tipo_usuario: string;
-  tipo_dispositivo: string;
+  referrer?: string;
+  user_type: string;
+  device_type: string;
 }

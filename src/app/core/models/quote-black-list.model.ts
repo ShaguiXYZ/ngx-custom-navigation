@@ -1,9 +1,11 @@
+import { BlackListResponse } from './black-list.model';
+
 /* eslint-disable @typescript-eslint/no-namespace */
 export interface QuoteBlackList {
-  email?: boolean;
-  identificationNumber?: boolean;
-  phoneNumber?: boolean;
-  plateNumber?: boolean;
+  email?: BlackListResponse;
+  identificationNumber?: BlackListResponse;
+  phoneNumber?: BlackListResponse;
+  plateNumber?: BlackListResponse;
 }
 
 export namespace QuoteBlackList {

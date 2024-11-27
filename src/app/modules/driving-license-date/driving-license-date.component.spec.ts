@@ -7,9 +7,9 @@ import { NxMomentDateModule } from '@aposin/ng-aquila/moment-date-adapter';
 import { TranslateService } from '@ngx-translate/core';
 import { ContextDataService } from '@shagui/ng-shagui/core';
 import moment from 'moment';
-import { DEFAULT_DATE_FORMAT } from 'src/app/core/constants';
-import { QuoteModel } from 'src/app/core/models';
-import { ContextDataServiceStub } from 'src/app/core/stub';
+import { Subject } from 'rxjs';
+import { DEFAULT_DATE_FORMAT, QUOTE_APP_CONTEXT_DATA, QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
+import { AppContextData, QuoteModel } from 'src/app/core/models';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 import { DrivingLicenseDateComponent } from './driving-license-date.component';
 
@@ -20,12 +20,29 @@ describe('DrivingLicenseDateComponent', () => {
   beforeEach(async () => {
     const quoteLiteralPipeSpy = jasmine.createSpyObj('QuoteLiteralPipe', ['transform']);
     const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate']);
+    const contextDataServiceSpy = jasmine.createSpyObj('ContextDataService', ['get', 'set', 'onDataChange']);
+    const contextDataSubject = new Subject<AppContextData>();
+
+    contextDataServiceSpy.get.and.callFake((contextDataKey: string): any => {
+      if (contextDataKey === QUOTE_APP_CONTEXT_DATA) {
+        return {
+          configuration: { literals: {} },
+          navigation: { lastPage: { pageId: 'page1' }, viewedPages: ['page1', 'page2'] }
+        } as AppContextData;
+      } else if (contextDataKey === QUOTE_CONTEXT_DATA) {
+        return {};
+      }
+
+      return null;
+    });
+
+    contextDataServiceSpy.onDataChange.and.returnValue(contextDataSubject.asObservable());
 
     await TestBed.configureTestingModule({
       declarations: [],
       imports: [DrivingLicenseDateComponent, ReactiveFormsModule, NxDatefieldModule, NxFormfieldModule, NxInputModule, NxMomentDateModule],
       providers: [
-        { provide: ContextDataService, useClass: ContextDataServiceStub },
+        { provide: ContextDataService, useValue: contextDataServiceSpy },
         { provide: TranslateService, useValue: translateServiceSpy },
         { provide: QuoteLiteralPipe, useValue: quoteLiteralPipeSpy }
       ]

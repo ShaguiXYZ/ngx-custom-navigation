@@ -2,12 +2,13 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { ContextDataService } from '@shagui/ng-shagui/core';
-import { QuoteModel } from 'src/app/core/models';
+import { Subject } from 'rxjs';
+import { QUOTE_APP_CONTEXT_DATA, QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
+import { QuoteFormValidarors } from 'src/app/core/form';
+import { AppContextData, QuoteModel } from 'src/app/core/models';
 import { LocationService } from 'src/app/core/services';
-import { ContextDataServiceStub } from 'src/app/core/stub';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 import { PlaceComponent } from './place.component';
-import { QuoteFormValidarors } from 'src/app/core/form';
 
 describe('PlaceComponent', () => {
   let component: PlaceComponent;
@@ -19,12 +20,29 @@ describe('PlaceComponent', () => {
     const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate']);
     const locationServiceSpy = jasmine.createSpyObj('LocationService', ['getAddress']);
     const quoteLiteralPipeSpy = jasmine.createSpyObj('QuoteLiteralPipe', ['transform']);
+    const contextDataServiceSpy = jasmine.createSpyObj('ContextDataService', ['get', 'set', 'onDataChange']);
+    const contextDataSubject = new Subject<AppContextData>();
+
+    contextDataServiceSpy.get.and.callFake((contextDataKey: string): any => {
+      if (contextDataKey === QUOTE_APP_CONTEXT_DATA) {
+        return {
+          configuration: { literals: {} },
+          navigation: { lastPage: { pageId: 'page1' }, viewedPages: ['page1', 'page2'] }
+        } as AppContextData;
+      } else if (contextDataKey === QUOTE_CONTEXT_DATA) {
+        return {};
+      }
+
+      return null;
+    });
+
+    contextDataServiceSpy.onDataChange.and.returnValue(contextDataSubject.asObservable());
 
     TestBed.configureTestingModule({
       declarations: [],
       imports: [PlaceComponent, ReactiveFormsModule],
       providers: [
-        { provide: ContextDataService, useClass: ContextDataServiceStub },
+        { provide: ContextDataService, useValue: contextDataServiceSpy },
         { provide: TranslateService, useValue: translateServiceSpy },
         { provide: LocationService, useValue: locationServiceSpy },
         { provide: QuoteLiteralPipe, useValue: quoteLiteralPipeSpy }
@@ -79,12 +97,10 @@ describe('PlaceComponent', () => {
   });
 
   it('should not update context data on invalid form', () => {
-    const setContextDataSpy = spyOn(contextDataService, 'set');
-
     component.form.setValue({ postalCode: '' });
     component['updateValidData']();
 
-    expect(setContextDataSpy).not.toHaveBeenCalled();
+    expect(contextDataService.set).not.toHaveBeenCalled();
   });
 
   it('should validate postal code asynchronously', waitForAsync(() => {

@@ -37,11 +37,11 @@ export class QuoteTrackService implements OnDestroy {
       const fullUrl = `${window.location.protocol}//${window.location.host}/${page}`;
 
       const infoPag: TrackInfoPageModel = {
-        pagina: lastPage?.pageId!,
+        page: lastPage?.pageId!,
         URL: fullUrl,
-        pagina_previa: this.referrer,
-        tipo_usuario: 'web',
-        tipo_dispositivo: this.isMobile ? 'mobile' : 'desktop'
+        referrer: this.referrer,
+        user_type: 'web',
+        device_type: this.isMobile ? 'mobile' : 'desktop'
       };
 
       this.infoPage = deepCopy(infoPag);
@@ -73,7 +73,7 @@ export class QuoteTrackService implements OnDestroy {
           .map(([key, value]) => [key, `${value}`])
       ),
       category: 'tarificador',
-      pagina: this.infoPage?.pagina,
+      pagina: this.infoPage?.page,
       URL: this.infoPage?.URL,
       step_number: `${viewedPages.length}`
     };

@@ -5,7 +5,7 @@
     try {
       var digitalData = data ?? globalThis.digitalData ?? {};
 
-      console.log('Track digital data:', event, digitalData);
+      localStorage.setItem('QUOTE_DIGITALDATA', JSON.stringify(digitalData));
     } catch (error) {
       console.error('TrackError:', error.message);
     }

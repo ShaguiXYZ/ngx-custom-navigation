@@ -4,7 +4,7 @@ import { ContextDataService } from '@shagui/ng-shagui/core';
 import { AppContextData, QuoteComponent, QuoteModel } from 'src/app/core/models';
 import { canDeactivateGuard } from '../can-deactivate.guard';
 
-describe('isValidGuard', () => {
+describe('canDeactivateGuard', () => {
   let contextDataService: jasmine.SpyObj<ContextDataService>;
   let component: jasmine.SpyObj<QuoteComponent>;
   let currentRoute: ActivatedRouteSnapshot;

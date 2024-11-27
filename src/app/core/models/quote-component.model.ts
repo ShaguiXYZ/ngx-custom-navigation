@@ -24,7 +24,7 @@ export abstract class QuoteComponent {
     | ((currentRoute?: ActivatedRouteSnapshot, state?: RouterStateSnapshot, next?: RouterStateSnapshot) => MaybeAsync<GuardResult>)
     | undefined;
 
-  private __updateComponentData = (): Promise<void> => Promise.resolve(this.__loadComponentData(this));
+  private __updateComponentData = (): void => this.__loadComponentData(this);
 
   private __loadComponentData = <T extends QuoteComponent>(component: T): void => {
     const {

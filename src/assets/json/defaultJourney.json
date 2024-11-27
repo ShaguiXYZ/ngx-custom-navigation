@@ -231,7 +231,7 @@
           "nextPageId": "apology-screen",
           "conditions": [
             {
-              "expression": "blackList.plateNumber",
+              "expression": "blackList.plateNumber.blacklisted",
               "value": "true"
             }
           ]

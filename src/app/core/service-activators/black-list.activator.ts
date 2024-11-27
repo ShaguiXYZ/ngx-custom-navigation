@@ -1,12 +1,12 @@
 import { firstValueFrom, of } from 'rxjs';
-import { BlackListModel, BlackListType, QuoteModel } from '../models';
+import { BlackListModel, BlackListResponse, BlackListType, QuoteModel } from '../models';
 import { ActivatorServices } from './quote-activator.model';
 import { QUOTE_CONTEXT_DATA } from '../constants';
 
 export class BlackListActivator {
   public static checkIdentificationNumberBlackList =
-    (services: ActivatorServices): (() => Promise<boolean>) =>
-    async (params: { percent: number } = { percent: 0.8 }): Promise<boolean> => {
+    (services: ActivatorServices): (() => Promise<BlackListResponse>) =>
+    async (params: { percent: number } = { percent: 0.8 }): Promise<BlackListResponse> => {
       const blackList = await BlackListActivator.isBlackListed('IDENTIFICATION_NUMBER', params.percent);
 
       const quote = services.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA);
@@ -17,8 +17,8 @@ export class BlackListActivator {
     };
 
   public static checkPlateBlackList =
-    (services: ActivatorServices): (() => Promise<boolean>) =>
-    async (params: { percent: number } = { percent: 0.8 }): Promise<boolean> => {
+    (services: ActivatorServices): (() => Promise<BlackListResponse>) =>
+    async (params: { percent: number } = { percent: 0.8 }): Promise<BlackListResponse> => {
       const blackList = await BlackListActivator.isBlackListed('PLATE_NUMBER', params.percent);
 
       const quote = services.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA);
@@ -30,8 +30,8 @@ export class BlackListActivator {
     };
 
   public static checkPhoneBlackList =
-    (services: ActivatorServices): (() => Promise<boolean>) =>
-    async (params: { percent: number } = { percent: 0.8 }): Promise<boolean> => {
+    (services: ActivatorServices): (() => Promise<BlackListResponse>) =>
+    async (params: { percent: number } = { percent: 0.8 }): Promise<BlackListResponse> => {
       const blackList = await BlackListActivator.isBlackListed('PHONE_NUMBER', params.percent);
 
       const quote = services.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA);
@@ -42,8 +42,8 @@ export class BlackListActivator {
     };
 
   public static checkEmailBlackList =
-    (services: ActivatorServices): (() => Promise<boolean>) =>
-    async (params: { percent: number } = { percent: 0.8 }): Promise<boolean> => {
+    (services: ActivatorServices): (() => Promise<BlackListResponse>) =>
+    async (params: { percent: number } = { percent: 0.8 }): Promise<BlackListResponse> => {
       const blackList = await BlackListActivator.isBlackListed('EMAIL', params.percent);
 
       const quote = services.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA);
@@ -54,7 +54,11 @@ export class BlackListActivator {
     };
 
   private static isBlackListed(type: BlackListType, percent = 0.8): Promise<BlackListModel> {
-    return firstValueFrom(of({ type, value: BlackListActivator.ramdomBoolean(percent) }));
+    const response: BlackListResponse = {
+      blacklisted: BlackListActivator.ramdomBoolean(percent),
+      isClient: BlackListActivator.ramdomBoolean(percent)
+    };
+    return firstValueFrom(of({ type, value: response }));
   }
 
   private static ramdomBoolean = (percent = 0.8): boolean => Math.random() >= percent;

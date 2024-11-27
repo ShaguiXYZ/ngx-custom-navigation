@@ -69,14 +69,14 @@ export class PlaceComponent extends QuoteComponent implements OnInit {
     });
   }
 
-  private postalCodeExistsValidator(): AsyncValidatorFn {
+  private postalCodeExistsValidator = (): AsyncValidatorFn => {
     return async (control: AbstractControl): Promise<ValidationErrors | null> => {
       const location = await this.locationService.getAddress(control.value);
 
       this._contextData.place = { ...location };
       this.location = location?.postalCode ? `${location?.location}, ${location?.province}` : '';
 
-      return this.quoteFormValidarors.activateEntryPoint(control, 'notFound', !location?.postalCode);
+      return this.quoteFormValidarors.activateEntryPoint.bind(this)(control, 'notFound', !location?.postalCode);
     };
-  }
+  };
 }

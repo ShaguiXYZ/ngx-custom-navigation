@@ -13,11 +13,11 @@ describe('QuoteStepperService', () => {
     contextDataServiceSpy = jasmine.createSpyObj('ContextDataService', ['get', 'set', 'onDataChange']);
     contextDataSubject = new Subject<AppContextData>();
 
+    contextDataServiceSpy.onDataChange.and.returnValue(contextDataSubject.asObservable());
+
     TestBed.configureTestingModule({
       providers: [QuoteStepperService, { provide: ContextDataService, useValue: contextDataServiceSpy }]
     });
-
-    contextDataServiceSpy.onDataChange.and.returnValue(contextDataSubject.asObservable());
   });
 
   beforeEach(() => {
