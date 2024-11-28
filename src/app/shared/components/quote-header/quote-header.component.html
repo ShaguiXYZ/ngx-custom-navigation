@@ -4,7 +4,13 @@
       <img src="favicon.ico" alt="Logo" />
     </div>
     @if(config.showContactUs) {
-    <nx-link>
+    <nx-link
+      [nxTrack]="{
+        title: 'header' | quoteLiteral,
+        label: 'we-call-you' | quoteLiteral
+      }"
+      [nxTrackEvents]="['click']"
+    >
       <a class="contact-us" tabindex="0" nxQuoteLink="contact-us" nxQuoteLiteral="we-call-you"> </a>
     </nx-link>
     }

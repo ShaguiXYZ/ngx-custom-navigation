@@ -13,6 +13,7 @@ import { QuoteFooterConfig } from 'src/app/shared/components/quote-footer/models
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout';
+import { QuoteTrackDirective } from 'src/app/core/tracking';
 
 @Component({
   selector: 'quote-offering-price-card',
@@ -28,7 +29,8 @@ import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/l
     NxRadioModule,
     QuoteFooterComponent,
     QuoteLiteralDirective,
-    QuoteLiteralPipe
+    QuoteLiteralPipe,
+    QuoteTrackDirective
   ],
   templateUrl: './offering-price-card.component.html',
   styleUrl: './offering-price-card.component.scss'

@@ -60,7 +60,18 @@
   </section>
   <footer class="price-footer nx-margin-x-m nx-margin-bottom-xs">
     <quote-footer [config]="footerConfig" [mobileMode]="true">
-      <button class="footer-option nx-margin-y-2xs" nxButton="primary" type="button" (click)="callNow()">
+      <button
+        class="footer-option nx-margin-y-2xs"
+        nxButton="primary"
+        type="button"
+        [nxTrack]="{
+          title: 'header' | quoteLiteral,
+          label: 'footer-next' | quoteLiteral,
+          typology: price.modalityDescription,
+        }"
+        [nxTrackEvents]="['click']"
+        (click)="callNow()"
+      >
         @if (isMobile) {
         <a
           href="tel:{{ 'contact-us-phone' | quoteLiteral }}"
@@ -72,7 +83,18 @@
         <span nxCopytext="medium" class="uppercase nx-font-weight-bold" [nxQuoteLiteral]="'contact-us-phone'"> </span>
         }
       </button>
-      <button class="footer-option nx-margin-y-2xs" nxButton="secondary" type="button" (click)="contactUs()">
+      <button
+        class="footer-option nx-margin-y-2xs"
+        nxButton="secondary"
+        type="button"
+        [nxTrack]="{
+        title: 'header' | quoteLiteral,
+        label: 'we-call-you' | quoteLiteral,
+        typology: price.modalityDescription,
+      }"
+        [nxTrackEvents]="['click']"
+        (click)="contactUs()"
+      >
         <span nxCopytext="medium" class="uppercase nx-font-weight-bold" nxQuoteLiteral="we-call-you"></span>
       </button>
     </quote-footer>

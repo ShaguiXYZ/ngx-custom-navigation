@@ -16,6 +16,7 @@
       (uiSelect)="selectLocation(icon)"
       [nxTrack]="{
         title: 'header' | quoteLiteral,
+        label: icon.data,
         location: icon.index
       }"
       [nxTrackEvents]="['click']"

@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { NxCopytextModule } from '@aposin/ng-aquila/copytext';
 import { Hour, QuoteComponent } from 'src/app/core/models';
+import { QuoteTrackDirective } from 'src/app/core/tracking';
 import { HeaderTitleComponent, QuoteFooterComponent, TextCardComponent } from 'src/app/shared/components';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
@@ -16,7 +17,8 @@ import { QuoteLiteralPipe } from 'src/app/shared/pipes';
     TextCardComponent,
     NxCopytextModule,
     QuoteLiteralDirective,
-    QuoteLiteralPipe
+    QuoteLiteralPipe,
+    QuoteTrackDirective
   ],
   templateUrl: './contact-time.component.html',
   styleUrl: './contact-time.component.scss'

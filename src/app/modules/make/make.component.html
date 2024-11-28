@@ -17,7 +17,7 @@
         class="nx-margin-x-3xs nx-margin-y-3xs"
         [data]="brand"
         [selected]="selectedBrand === brand.index"
-        [nxTrack]="{ title: 'header' | quoteLiteral, brand: brand.index }"
+        [nxTrack]="{ title: 'header' | quoteLiteral, brand: brand.index, label: brand.index }"
         [nxTrackEvents]="['click']"
         (uiSelect)="selectMake($event.index)"
       />
@@ -30,7 +30,7 @@
         <quote-text-card
           [selected]="selectedBrand === item"
           [data]="item"
-          [nxTrack]="{ title: 'header' | quoteLiteral, brand: item }"
+          [nxTrack]="{ title: 'header' | quoteLiteral, brand: item, label: item }"
           [nxTrackEvents]="['click']"
           (uiSelect)="selectMake(item)"
         />

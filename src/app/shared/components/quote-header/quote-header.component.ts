@@ -8,6 +8,8 @@ import { QUOTE_APP_CONTEXT_DATA } from 'src/app/core/constants';
 import { AppContextData, Page } from 'src/app/core/models';
 import { RoutingService } from 'src/app/core/services';
 import { QuoteLinkDirective, QuoteLiteralDirective } from '../../directives';
+import { QuoteTrackDirective } from 'src/app/core/tracking';
+import { QuoteLiteralPipe } from '../../pipes';
 
 interface HeaderConfig {
   changed?: boolean;
@@ -17,10 +19,10 @@ interface HeaderConfig {
 
 @Component({
   selector: 'quote-header',
-  standalone: true,
-  imports: [CommonModule, NxLinkModule, NxIconModule, QuoteLinkDirective, QuoteLiteralDirective],
   templateUrl: './quote-header.component.html',
-  styleUrl: './quote-header.component.scss'
+  styleUrl: './quote-header.component.scss',
+  imports: [CommonModule, NxLinkModule, NxIconModule, QuoteLinkDirective, QuoteLiteralDirective, QuoteLiteralPipe, QuoteTrackDirective],
+  standalone: true
 })
 export class QuoteHeaderComponent implements OnInit, OnDestroy {
   public config: HeaderConfig = {};

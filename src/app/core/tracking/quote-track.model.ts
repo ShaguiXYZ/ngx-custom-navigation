@@ -1,31 +1,36 @@
-export const TRACKING_QUOTE_MANIFEST = {
-  accidents: 'client.accidents',
-  dateOfIssue: 'client.dateOfIssue',
-  expiration: 'client.expiration',
-  client: 'client.isClient',
-  insurance: 'client.isPolicyOwner',
-  isCurrentlyInsured: 'client.isCurrentlyInsured',
-  contactHour: 'contactData.contactHour',
-  location: 'driven.licenseCountry',
-  drivenLicenseDate: 'driven.licenseDate',
-  company: 'insuranceCompany.company.index',
-  yearsAsOwner: 'insuranceCompany.yearsAsOwner',
-  birthdate: 'personalData.birthdate',
-  email: 'personalData.email',
-  identificationNumber: 'personalData.identificationNumber',
-  name: 'personalData.name',
-  surname: 'personalData.surname',
-  phoneNumber: 'personalData.phoneNumber',
-  postalCode: 'place.postalCode',
-  brand: 'vehicle.make',
-  displayment: 'vehicle.cubicCapacity.index',
-  fuel: 'vehicle.fuel.index',
-  model: 'vehicle.model',
-  modelVersion: 'vehicle.modelVersion.index',
-  plateNumber: 'vehicle.plateNumber',
-  power: 'vehicle.powerRange.index',
-  vehicleType: 'vehicle.vehicleType',
-  yearOfManufacture: 'vehicle.yearOfManufacture'
+export interface TrackedData {
+  value: string;
+  tracked: boolean;
+}
+
+export const TRACKING_QUOTE_MANIFEST: Record<string, TrackedData> = {
+  accidents: { value: 'client.accidents', tracked: false },
+  dateOfIssue: { value: 'client.dateOfIssue', tracked: false },
+  expiration: { value: 'client.expiration', tracked: false },
+  client: { value: 'client.isClient', tracked: true },
+  insurance: { value: 'client.isPolicyOwner', tracked: true },
+  isCurrentlyInsured: { value: 'client.isCurrentlyInsured', tracked: false },
+  contactHour: { value: 'contactData.contactHour', tracked: false },
+  location: { value: 'driven.licenseCountry', tracked: true },
+  drivenLicenseDate: { value: 'driven.licenseDate', tracked: false },
+  company: { value: 'insuranceCompany.company.index', tracked: true },
+  yearsAsOwner: { value: 'insuranceCompany.yearsAsOwner', tracked: false },
+  birthdate: { value: 'personalData.birthdate', tracked: false },
+  email: { value: 'personalData.email', tracked: false },
+  identificationNumber: { value: 'personalData.identificationNumber', tracked: false },
+  name: { value: 'personalData.name', tracked: false },
+  surname: { value: 'personalData.surname', tracked: false },
+  phoneNumber: { value: 'personalData.phoneNumber', tracked: false },
+  postalCode: { value: 'place.postalCode', tracked: false },
+  brand: { value: 'vehicle.make', tracked: true },
+  displayment: { value: 'vehicle.cubicCapacity.index', tracked: true },
+  fuel: { value: 'vehicle.fuel.index', tracked: true },
+  model: { value: 'vehicle.model', tracked: true },
+  modelVersion: { value: 'vehicle.modelVersion.index', tracked: false },
+  plateNumber: { value: 'vehicle.plateNumber', tracked: false },
+  power: { value: 'vehicle.powerRange.index', tracked: false },
+  new: { value: 'vehicle.vehicleType', tracked: true },
+  yearOfManufacture: { value: 'vehicle.yearOfManufacture', tracked: false }
 };
 
 export type TrackEventType = 'click' | 'keydown' | 'keyup' | 'focus' | 'blur' | 'change' | 'input' | 'submit';
@@ -40,7 +45,7 @@ export type TrackKey =
   | 'selected_tab'
   | 'step_number'
   | 'title'
-  | 'typologyfranquicia'
+  | 'typology'
   | 'URL'
   | keyof typeof TRACKING_QUOTE_MANIFEST;
 export type TrackInfo = Partial<Record<TrackKey, string | number | boolean | null | undefined>>;

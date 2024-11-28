@@ -24,12 +24,6 @@ export class QuoteTrackDirective implements OnInit {
     });
   }
 
-  // private applyCustomProperties(): void {
-  //   Object.entries(this.nxTrackInfo).forEach(([key, value]) => {
-  //     this.renderer.setAttribute(this.el.nativeElement, key, value);
-  //   });
-  // }
-
   private trackEvent =
     (eventType: TrackEventType): ((event: Event) => void) =>
     async (): Promise<void> => {

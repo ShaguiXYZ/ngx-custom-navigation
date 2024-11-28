@@ -5,7 +5,7 @@
     try {
       var digitalData = data ?? globalThis.digitalData ?? {};
 
-      localStorage.setItem('QUOTE_DIGITALDATA', JSON.stringify(digitalData));
+      localStorage.setItem(`QUOTE_DIGITALDATA_${event.toUpperCase()}`, JSON.stringify(digitalData));
     } catch (error) {
       console.error('TrackError:', error.message);
     }

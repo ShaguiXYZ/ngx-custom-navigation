@@ -29,7 +29,7 @@ export class QuoteTrackService implements OnDestroy {
         .subscribe((state: BreakpointState) => (this.isMobile = state.breakpoints[Breakpoints.HandsetPortrait]))
     );
 
-    this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe(event => {
+    this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe(() => {
       const {
         navigation: { lastPage }
       } = this.contextDataService.get<AppContextData>(QUOTE_APP_CONTEXT_DATA);
@@ -65,13 +65,16 @@ export class QuoteTrackService implements OnDestroy {
       navigation: { viewedPages }
     } = appContextData;
 
-    const trackInfo = {
+    const trackInfo: TrackInfo = {
       ...this.loadManifest(),
-      ...Object.fromEntries(
-        Object.entries(data)
-          .filter(([, value]) => hasValue(value))
-          .map(([key, value]) => [key, `${value}`])
-      ),
+      ...Object.entries(data)
+        .filter(([, value]) => hasValue(value))
+        .reduce((acc, [key, value]) => {
+          if (!(key in TRACKING_QUOTE_MANIFEST) || TRACKING_QUOTE_MANIFEST[key as keyof typeof TRACKING_QUOTE_MANIFEST].tracked) {
+            acc[key] = `${value}`;
+          }
+          return acc;
+        }, {} as TrackInfo),
       category: 'tarificador',
       pagina: this.infoPage?.page,
       URL: this.infoPage?.URL,
@@ -93,9 +96,11 @@ export class QuoteTrackService implements OnDestroy {
   private loadManifest = (): TrackInfo => {
     const quote = this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA);
 
-    return Object.entries(TRACKING_QUOTE_MANIFEST).reduce<TrackInfo>((acc, [key, value]) => {
-      const val = JsonUtils.valueOf(quote, value);
-      if (hasValue(val)) acc[key as keyof typeof TRACKING_QUOTE_MANIFEST] = `${val}`;
+    return Object.entries(TRACKING_QUOTE_MANIFEST).reduce<TrackInfo>((acc, [key, data]) => {
+      if (!data.tracked) return acc;
+
+      const value = JsonUtils.valueOf(quote, data.value);
+      if (hasValue(value)) acc[key as keyof typeof TRACKING_QUOTE_MANIFEST] = `${value}`;
 
       return acc;
     }, {});
