@@ -18,7 +18,6 @@ export class OfferingsService {
 
     if (!signature?.hash || signature?.changed) {
       const { settings } = this.contextDataService.get<AppContextData>(QUOTE_APP_CONTEXT_DATA);
-      console.log('Quote changed', deepCopy(quote));
 
       return firstValueFrom(
         this.httpService

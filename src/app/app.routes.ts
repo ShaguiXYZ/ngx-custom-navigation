@@ -195,6 +195,10 @@ export const routes: Routes = configContextRoutes([
     loadComponent: () => import('./modules/journey-home/journey-home.component').then(c => c.JourneyHomeComponent)
   },
   {
+    path: `${AppUrls.stored}/:stored`,
+    loadComponent: () => import('./modules/journey-home/journey-home.component').then(c => c.JourneyHomeComponent)
+  },
+  {
     path: AppUrls.root,
     pathMatch: 'full',
     redirectTo: AppUrls.journeyHome

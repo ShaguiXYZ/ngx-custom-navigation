@@ -1,5 +1,6 @@
 import { QUOTE_APP_CONTEXT_DATA, QUOTE_CONTEXT_DATA } from '../../constants';
 import { BudgetError } from '../../errors';
+import { BudgetUtils } from '../../lib';
 import { AppContextData, QuoteModel, StoredDataKey } from '../../models';
 import { BudgetActivator } from '../budget.activator';
 import { ActivatorServices } from '../quote-activator.model';
@@ -38,10 +39,9 @@ describe('BudgetActivator', () => {
       const storedDataKey: StoredDataKey = { passKey: 'testPassKey', key: 'testKey' };
       const budgetKey = btoa(JSON.stringify(storedDataKey));
       const quote: QuoteModel = { signature: { budget: budgetKey } } as QuoteModel;
-      const cipher = BudgetActivator['encryptQuote'](storedDataKey.passKey, { context: {}, quote });
-      const storedData = btoa(JSON.stringify({ name: 'testName', cipher }));
+      const cipher = BudgetUtils.encrypt(storedDataKey.passKey, { context: {}, quote });
 
-      spyOn(BudgetActivator as any, 'retrieveAllStorageBudgets').and.returnValue([{ index: 'testKey', data: storedData }]);
+      spyOn(BudgetActivator as any, 'retrieveAll').and.returnValue([{ index: 'testKey', data: cipher }]);
 
       (services.contextDataService.get as jasmine.Spy).and.returnValue(quote);
 

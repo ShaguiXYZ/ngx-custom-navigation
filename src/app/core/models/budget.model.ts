@@ -10,8 +10,3 @@ export interface StoredDataKey {
   key: string;
   passKey: string;
 }
-
-export interface StoredData {
-  name: string;
-  cipher: string;
-}

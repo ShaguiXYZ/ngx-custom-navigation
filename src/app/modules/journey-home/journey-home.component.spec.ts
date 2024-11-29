@@ -1,7 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { Router } from '@angular/router';
+import { ActivatedRoute, ActivatedRouteSnapshot, Router } from '@angular/router';
 import { ContextDataService } from '@shagui/ng-shagui/core';
 import { AppContextData } from 'src/app/core/models';
+import { BudgetActivator } from 'src/app/core/service-activators/budget.activator';
 import { RoutingService } from 'src/app/core/services';
 import { JourneyHomeComponent } from './journey-home.component';
 
@@ -9,19 +10,41 @@ describe('JourneyHomeComponent', () => {
   let component: JourneyHomeComponent;
   let fixture: ComponentFixture<JourneyHomeComponent>;
   let mockRouter: jasmine.SpyObj<Router>;
+  let mockActivatedRoute: jasmine.SpyObj<ActivatedRoute>;
   let mockContextDataService: jasmine.SpyObj<ContextDataService>;
   let mockRoutingService: jasmine.SpyObj<RoutingService>;
 
   beforeEach(async () => {
     mockRouter = jasmine.createSpyObj('Router', ['navigate']);
+    mockActivatedRoute = jasmine.createSpyObj('ActivatedRoute', ['snapshot']);
     mockContextDataService = jasmine.createSpyObj('ContextDataService', ['get', 'set']);
     mockRoutingService = jasmine.createSpyObj('RoutingService', ['someMethod']);
+
+    mockActivatedRoute.snapshot = {
+      params: {},
+      url: [],
+      queryParams: {},
+      fragment: '',
+      data: {},
+      outlet: 'primary',
+      component: null,
+      routeConfig: null,
+      root: {} as ActivatedRouteSnapshot,
+      parent: null,
+      firstChild: null,
+      children: [],
+      pathFromRoot: [],
+      paramMap: jasmine.createSpyObj('ParamMap', ['get']),
+      queryParamMap: jasmine.createSpyObj('ParamMap', ['get']),
+      title: ''
+    };
 
     await TestBed.configureTestingModule({
       declarations: [],
       imports: [JourneyHomeComponent],
       providers: [
         { provide: Router, useValue: mockRouter },
+        { provide: ActivatedRoute, useValue: mockActivatedRoute },
         { provide: ContextDataService, useValue: mockContextDataService },
         { provide: RoutingService, useValue: mockRoutingService }
       ]
@@ -37,7 +60,7 @@ describe('JourneyHomeComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should navigate to homePageId route on init', () => {
+  it('should navigate to homePageId route on init', async () => {
     const mockContext = {
       settings: {},
       configuration: {
@@ -57,12 +80,12 @@ describe('JourneyHomeComponent', () => {
 
     mockContextDataService.get.and.returnValue(mockContext);
 
-    component.ngOnInit();
+    await component.ngOnInit();
 
     expect(mockRouter.navigate).toHaveBeenCalledWith(['home-route'], { skipLocationChange: true });
   });
 
-  it('should throw error if homePageId is not found', () => {
+  it('should throw error if homePageId is not found', async () => {
     const mockContext: AppContextData = {
       configuration: {
         pageMap: {
@@ -79,6 +102,34 @@ describe('JourneyHomeComponent', () => {
 
     mockContextDataService.get.and.returnValue(mockContext);
 
-    expect(() => component.ngOnInit()).toThrowError('Home page not found in configuration');
+    await expectAsync(component.ngOnInit()).toBeRejectedWithError('Home page not found in configuration');
+  });
+
+  it('should call BudgetActivator if stored param exists', async () => {
+    const mockContext = {
+      settings: {},
+      configuration: {
+        homePageId: 'home',
+        errorPageId: 'error',
+        pageMap: {
+          home: {
+            pageId: 'home',
+            route: 'home-route'
+          }
+        }
+      },
+      navigation: {
+        viewedPages: []
+      }
+    };
+
+    mockContextDataService.get.and.returnValue(mockContext);
+    mockActivatedRoute.snapshot.params = { stored: 'some-budget' };
+
+    spyOn(BudgetActivator, 'retrieveBudget').and.returnValue(async () => true);
+
+    await component.ngOnInit();
+
+    expect(BudgetActivator.retrieveBudget).toHaveBeenCalledWith({ contextDataService: mockContextDataService });
   });
 });
