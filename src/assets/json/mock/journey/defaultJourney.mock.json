@@ -9,7 +9,7 @@
           "pages": ["is-client", "place", "birthdate", "driving-license-date", "driving-license-location", "date-of-issue"]
         },
         {
-          "label": "Datos del coche",
+          "label": "Datos del vehículo",
           "pages": [
             "vehicle-type",
             "license-plate",
@@ -33,7 +33,8 @@
           "label": "Presupuesto",
           "pages": ["offerings"]
         }
-      ]
+      ],
+      "stateless": true
     },
     {
       "steps": [
@@ -50,7 +51,10 @@
           "label": "Te llamamos",
           "pages": ["is-client-contact-us"]
         }
-      ]
+      ],
+      "stateless": {
+        "inherited": false
+      }
     },
     {
       "steps": [

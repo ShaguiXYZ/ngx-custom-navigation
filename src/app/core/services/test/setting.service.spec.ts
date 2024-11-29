@@ -48,7 +48,6 @@ describe('SettingsService', () => {
       pageMap: [{ pageId: 'home' }],
       steppers: [
         {
-          title: 'Stepper 1',
           steps: [
             {
               label: 'Step 1',

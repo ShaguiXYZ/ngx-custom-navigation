@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { inject } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivateFn, GuardResult, MaybeAsync, Router, RouterStateSnapshot } from '@angular/router';
+import { ActivatedRouteSnapshot, CanActivateFn, GuardResult, MaybeAsync, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { ContextDataService } from '@shagui/ng-shagui/core';
 import { QUOTE_APP_CONTEXT_DATA, QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
 import { AppContextData, Page, QuoteModel } from 'src/app/core/models';
@@ -33,13 +33,45 @@ export const journeyGuard: CanActivateFn = (route: ActivatedRouteSnapshot, state
   const context = contextDataService.get<AppContextData>(QUOTE_APP_CONTEXT_DATA);
   const { nextPage, viewedPages } = context.navigation;
 
-  if (!nextPage?.pageId) {
+  const statelessControl = ({ configuration: { steppers }, navigation: { nextPage, lastPage } }: AppContextData): void => {
+    const nextStepperKey = nextPage?.stepper?.key;
+    const lastStepperKey = lastPage?.stepper?.key;
+
+    if (lastStepperKey && nextStepperKey !== lastStepperKey) {
+      const nextStepper = nextStepperKey && steppers?.steppersMap[nextStepperKey];
+      const lastStepper = steppers?.steppersMap[lastStepperKey];
+
+      if (lastStepper?.stateless) {
+        lastStepper.stateless.data = contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA);
+        contextDataService.set(QUOTE_CONTEXT_DATA, lastStepper.stateless.inData);
+      }
+
+      if (nextStepper && nextStepper?.stateless) {
+        const lastQuote = contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA);
+        nextStepper.stateless.inData = lastQuote;
+
+        if (!nextStepper.stateless.data) {
+          nextStepper.stateless.data = nextStepper.stateless.inherited ? lastQuote ?? QuoteModel.init() : QuoteModel.init();
+        }
+
+        contextDataService.set(QUOTE_CONTEXT_DATA, nextStepper.stateless.data);
+      }
+    }
+  };
+
+  const resetContext = (context: AppContextData): UrlTree => {
+    const nextPage = context.configuration.pageMap[viewedPages[viewedPages.length - 1]];
+
     context.navigation.lastPage = undefined;
-    context.navigation.nextPage = context.configuration.pageMap[viewedPages[viewedPages.length - 1]];
+    context.navigation.nextPage = nextPage;
     contextDataService.set(QUOTE_APP_CONTEXT_DATA, context);
 
     return router.parseUrl(`${Page.routeFrom(context.navigation.nextPage)}`);
-  }
+  };
+
+  if (!nextPage?.pageId) return resetContext(context);
+
+  statelessControl(context);
 
   const { homePageId, errorPageId } = context.configuration;
   const pageIndex = viewedPages.indexOf(nextPage.pageId);

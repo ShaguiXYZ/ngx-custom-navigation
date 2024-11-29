@@ -1,4 +1,11 @@
 import { DataInfo } from '@shagui/ng-shagui/core';
+import { QuoteModel } from './quote.model';
+
+export interface Stateless {
+  inherited?: boolean;
+  data?: QuoteModel;
+  inData?: QuoteModel;
+}
 
 export interface StepDTO {
   label: string;
@@ -6,8 +13,8 @@ export interface StepDTO {
 }
 
 export interface StepperDTO {
-  title: string;
   steps: StepDTO[];
+  stateless?: boolean | Stateless;
 }
 
 export interface Step {
@@ -18,6 +25,7 @@ export interface Step {
 
 export interface Stepper {
   steps: Step[];
+  stateless?: Stateless;
 }
 
 export interface Steppers {

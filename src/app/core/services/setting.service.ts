@@ -14,6 +14,7 @@ import {
   Page,
   QuoteModel,
   QuoteSettingsModel,
+  Stateless,
   Step,
   Stepper,
   StepperDTO
@@ -131,7 +132,8 @@ export class SettingsService {
             });
 
             return { key: stepKey, label: step.label, pages: step.pages } as Step;
-          })
+          }),
+        stateless: this.statelessInheritFrom(stepper.stateless)
       };
     });
 
@@ -144,6 +146,12 @@ export class SettingsService {
 
   private initLiterals = (configuration: Configuration, literals?: Literals): void => {
     configuration.literals = literals;
+  };
+
+  private statelessInheritFrom = (stateless?: Stateless | boolean): Stateless | undefined => {
+    if (typeof stateless === 'boolean') return { inherited: stateless };
+
+    return stateless;
   };
 
   private normalizeTextForUri = (text: LiteralModel): string => this.literalService.toString(text).toLowerCase().replace(/\s/g, '-');
