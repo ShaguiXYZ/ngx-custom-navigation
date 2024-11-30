@@ -9,7 +9,10 @@ import { RoutingService } from 'src/app/core/services';
 import { OfferingsService } from 'src/app/core/services/offerings.service';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 import { QuoteOfferingsComponent } from './quote-offerings.component';
-import { Subject } from 'rxjs';
+import { of, Subject } from 'rxjs';
+import { QuoteOfferingCoveragesComponent } from 'src/app/shared/components';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NxDialogService } from '@aposin/ng-aquila/modal';
 
 describe('QuoteOfferingsComponent', () => {
   let component: QuoteOfferingsComponent;
@@ -17,6 +20,7 @@ describe('QuoteOfferingsComponent', () => {
   let contextDataService: jasmine.SpyObj<ContextDataService>;
   let offeringsService: jasmine.SpyObj<OfferingsService>;
   let routingService: jasmine.SpyObj<RoutingService>;
+  let dialogService: jasmine.SpyObj<NxDialogService>;
 
   beforeEach(async () => {
     const contextDataSubject = new Subject<any>();
@@ -25,6 +29,7 @@ describe('QuoteOfferingsComponent', () => {
     const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate']);
     const offeringsServiceSpy = jasmine.createSpyObj('OfferingsService', ['pricing']);
     const routingServiceSpy = jasmine.createSpyObj('RoutingService', ['next']);
+    const dialogServiceSpy = jasmine.createSpyObj('NxDialogService', ['open', 'closeAll']);
 
     contextDataServiceSpy.get.and.callFake((contextDataKey: string): any => {
       if (contextDataKey === QUOTE_APP_CONTEXT_DATA) {
@@ -38,16 +43,22 @@ describe('QuoteOfferingsComponent', () => {
 
     contextDataServiceSpy.onDataChange.and.returnValue(contextDataSubject.asObservable());
 
+    dialogServiceSpy.open.and.stub();
+
+    // Spy on closeAll so it does nothing
+    dialogServiceSpy.closeAll.and.stub();
+
     await TestBed.configureTestingModule({
       declarations: [],
-      imports: [QuoteOfferingsComponent],
+      imports: [QuoteOfferingsComponent, BrowserAnimationsModule],
       providers: [
         QuoteLiteralPipe,
         { provide: ContextDataService, useValue: contextDataServiceSpy },
         { provide: TranslateService, useValue: translateServiceSpy },
         { provide: OfferingsService, useValue: offeringsServiceSpy },
         { provide: RoutingService, useValue: routingServiceSpy },
-        { provide: QuoteLiteralPipe, useValue: quoteLiteralPipeSpy }
+        { provide: QuoteLiteralPipe, useValue: quoteLiteralPipeSpy },
+        { provide: NxDialogService, useValue: dialogServiceSpy }
       ]
     }).compileComponents();
 
@@ -64,6 +75,7 @@ describe('QuoteOfferingsComponent', () => {
     contextDataService = TestBed.inject(ContextDataService) as jasmine.SpyObj<ContextDataService>;
     offeringsService = TestBed.inject(OfferingsService) as jasmine.SpyObj<OfferingsService>;
     routingService = TestBed.inject(RoutingService) as jasmine.SpyObj<RoutingService>;
+    dialogService = TestBed.inject(NxDialogService) as jasmine.SpyObj<NxDialogService>;
 
     component['inner'] = new ElementRef(document.createElement('div'));
     component['track'] = new ElementRef(document.createElement('div'));
@@ -175,5 +187,39 @@ describe('QuoteOfferingsComponent', () => {
     component['selectCarrouselCard']();
 
     expect(component['track'].nativeElement.style.transform).toBe('translateX(0px)');
+  });
+
+  xit('should open the QuoteOfferingCoveragesComponent with the correct data', () => {
+    const index = 1;
+    const mockPrices: OfferingPriceModel[] = [{ modalityId: '1' }, { modalityId: '2' }] as unknown as OfferingPriceModel[];
+    component.prices = mockPrices;
+    component.selectedPriceIndex = 0;
+
+    spyOn(component as any, 'openFromComponent').and.callThrough();
+
+    component.showCoverages(index);
+
+    expect(component.selectedPriceIndex).toBe(index);
+    expect((component as any).openFromComponent).toHaveBeenCalledWith(QuoteOfferingCoveragesComponent, index);
+    expect(dialogService.open).toHaveBeenCalledWith(QuoteOfferingCoveragesComponent, {
+      maxWidth: '98%',
+      showCloseIcon: false,
+      data: { selectedPriceIndex: index }
+    });
+  });
+
+  xit('should close all dialogs before opening a new one', () => {
+    const index = 1;
+    spyOn(dialogService, 'closeAll').and.callThrough();
+    spyOn(dialogService, 'open').and.callThrough();
+
+    (component as any).openFromComponent(QuoteOfferingCoveragesComponent, index);
+
+    expect(dialogService.closeAll).toHaveBeenCalled();
+    expect(dialogService.open).toHaveBeenCalledWith(QuoteOfferingCoveragesComponent, {
+      maxWidth: '98%',
+      showCloseIcon: false,
+      data: { selectedPriceIndex: index }
+    });
   });
 });

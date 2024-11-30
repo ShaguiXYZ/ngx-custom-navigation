@@ -105,7 +105,7 @@ export class QuoteOfferingsComponent extends QuoteComponent implements OnInit {
   }
 
   private openFromComponent<T = unknown>(component: ComponentType<T>, selectedPriceIndex: number): NxModalRef<T> {
-    this.dialogService.closeAll();
+    // this.dialogService.closeAll();
 
     return this.dialogService.open(component, {
       maxWidth: '98%',

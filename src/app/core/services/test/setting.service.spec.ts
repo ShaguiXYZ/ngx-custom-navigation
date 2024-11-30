@@ -5,7 +5,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { ContextDataService } from '@shagui/ng-shagui/core';
 import { of } from 'rxjs';
 import { QUOTE_APP_CONTEXT_DATA, QUOTE_CONTEXT_DATA } from '../../constants';
-import { AppContextData, ConfigurationDTO } from '../../models';
+import { ConfigurationDTO } from '../../models';
 import { LiteralsService } from '../literals.service';
 import { SettingsService } from '../setting.service';
 
@@ -35,7 +35,7 @@ describe('SettingsService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should load settings and update context data', async () => {
+  it('should load settings and update context data whith previous context data', async () => {
     const settings = {
       commercialExceptions: {
         enableWorkFlow: true
@@ -48,7 +48,6 @@ describe('SettingsService', () => {
       pageMap: [{ pageId: 'home' }],
       steppers: [
         {
-          title: 'Stepper 1',
           steps: [
             {
               label: 'Step 1',
@@ -106,6 +105,50 @@ describe('SettingsService', () => {
 
     await service.loadSettings();
 
+    expect(httpClientSpy.get.calls.count()).withContext('two calls').toBe(1);
+    expect(contextDataServiceSpy.set).toHaveBeenCalled();
+  });
+
+  it('should load settings and update context data without previous context data', async () => {
+    const settings = {
+      commercialExceptions: {
+        enableWorkFlow: true
+      }
+    };
+
+    const mockConfiguration: ConfigurationDTO = {
+      homePageId: 'home',
+      lastUpdate: new Date('2023-10-01'),
+      pageMap: [{ pageId: 'home' }],
+      steppers: [
+        {
+          steps: [
+            {
+              label: 'Step 1',
+              pages: ['home']
+            }
+          ]
+        }
+      ],
+      links: {},
+      literals: {}
+    };
+
+    const appContextData = undefined;
+
+    contextDataServiceSpy.get.and.callFake((contextDataKey: string): any => {
+      if (contextDataKey === QUOTE_APP_CONTEXT_DATA) {
+        return appContextData;
+      } else if (contextDataKey === QUOTE_CONTEXT_DATA) {
+        return {};
+      }
+      return null;
+    });
+
+    httpClientSpy.get.and.returnValues(of(settings), of(mockConfiguration));
+
+    await service.loadSettings();
+
     expect(httpClientSpy.get.calls.count()).withContext('two calls').toBe(2);
     expect(contextDataServiceSpy.set).toHaveBeenCalled();
   });
@@ -132,5 +175,46 @@ describe('SettingsService', () => {
     const normalizedText = service['normalizeTextForUri'](text);
 
     expect(normalizedText).toBe('hello-world');
+  });
+
+  it('should disable workflow and set context data', async () => {
+    const settings = {
+      commercialExceptions: {
+        enableWorkFlow: false
+      }
+    };
+
+    const mockConfiguration: ConfigurationDTO = {
+      homePageId: 'home',
+      lastUpdate: new Date('2023-10-01'),
+      pageMap: [{ pageId: 'home' }],
+      steppers: [],
+      links: {},
+      literals: {}
+    };
+
+    httpClientSpy.get.and.returnValue(of(mockConfiguration));
+
+    await service['disableWorkFlow'](settings as any);
+
+    expect(contextDataServiceSpy.set).toHaveBeenCalledWith(QUOTE_APP_CONTEXT_DATA, jasmine.any(Object), { persistent: true });
+    expect(contextDataServiceSpy.set).toHaveBeenCalledWith(QUOTE_CONTEXT_DATA, jasmine.any(Object), { persistent: true });
+  });
+
+  it('should fetch configuration', async () => {
+    const mockConfiguration: ConfigurationDTO = {
+      homePageId: 'home',
+      lastUpdate: new Date('2023-10-01'),
+      pageMap: [{ pageId: 'home' }],
+      steppers: [],
+      links: {},
+      literals: {}
+    };
+
+    httpClientSpy.get.and.returnValue(of(mockConfiguration));
+
+    const configuration = await service['fetchConfiguration']('some-url');
+
+    expect(configuration.homePageId).toBe(mockConfiguration.homePageId);
   });
 });

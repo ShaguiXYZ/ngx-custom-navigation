@@ -1,13 +1,17 @@
 import { DataInfo } from '@shagui/ng-shagui/core';
 
+export interface StateInfo {
+  inherited?: boolean;
+}
+
 export interface StepDTO {
   label: string;
   pages: string[];
 }
 
 export interface StepperDTO {
-  title: string;
   steps: StepDTO[];
+  stateInfo?: boolean | StateInfo;
 }
 
 export interface Step {
@@ -18,6 +22,7 @@ export interface Step {
 
 export interface Stepper {
   steps: Step[];
+  stateInfo?: StateInfo;
 }
 
 export interface Steppers {

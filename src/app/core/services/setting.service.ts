@@ -14,6 +14,7 @@ import {
   Page,
   QuoteModel,
   QuoteSettingsModel,
+  StateInfo,
   Step,
   Stepper,
   StepperDTO
@@ -29,37 +30,65 @@ export class SettingsService {
 
   public async loadSettings(): Promise<void> {
     const settings = await this.quoteSettings();
-    const appContextData = this.contextDataService.get<AppContextData>(QUOTE_APP_CONTEXT_DATA);
-    const journeyUrl = settings.commercialExceptions.enableWorkFlow
-      ? `${environment.baseUrl}/${environment.journey}`
-      : `${environment.baseUrl}/journey/not-journey`;
-    const configuration = await firstValueFrom(
-      this.httpService.get<ConfigurationDTO>(journeyUrl).pipe(
-        map(res => res as ConfigurationDTO),
-        map(this.init)
-      )
-    );
-    const quoteData = settings.commercialExceptions.enableWorkFlow
-      ? { ...QuoteModel.init(), ...this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA) }
-      : QuoteModel.init();
-    const viewedPages = settings.commercialExceptions.enableWorkFlow ? appContextData?.navigation.viewedPages ?? [] : [];
 
     this.translateService.setDefaultLang('es-ES');
+
+    if (!settings.commercialExceptions.enableWorkFlow) {
+      return this.disableWorkFlow(settings);
+    }
+
+    return this.loadContext(settings);
+  }
+
+  private quoteSettings = (): Promise<QuoteSettingsModel> =>
+    firstValueFrom(this.httpService.get<QuoteSettingsModel>(`${environment.baseUrl}/settings`).pipe(map(res => res as QuoteSettingsModel)));
+
+  private disableWorkFlow = async (settings: QuoteSettingsModel): Promise<void> => {
+    const configuration = await this.fetchConfiguration(`${environment.baseUrl}/journey/not-journey`);
+    const viewedPages: string[] = [];
 
     this.contextDataService.set(QUOTE_APP_CONTEXT_DATA, AppContextData.init(settings, configuration, viewedPages), {
       persistent: true
     });
 
+    const quoteData = QuoteModel.init();
     this.contextDataService.set(QUOTE_CONTEXT_DATA, quoteData, { persistent: true });
+  };
 
-    console.group('SettingsService');
-    console.log('Quote data', QUOTE_CONTEXT_DATA, this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA));
-    console.log('Quote app context data', QUOTE_APP_CONTEXT_DATA, this.contextDataService.get<AppContextData>(QUOTE_APP_CONTEXT_DATA));
-    console.groupEnd();
-  }
+  private fetchConfiguration = (url: string): Promise<Configuration> =>
+    firstValueFrom(
+      this.httpService.get<ConfigurationDTO>(url).pipe(
+        map(res => res as ConfigurationDTO),
+        map(this.init)
+      )
+    );
 
-  private quoteSettings = (): Promise<QuoteSettingsModel> =>
-    firstValueFrom(this.httpService.get<QuoteSettingsModel>(`${environment.baseUrl}/settings`).pipe(map(res => res as QuoteSettingsModel)));
+  private loadContext = async (settings: QuoteSettingsModel): Promise<void> => {
+    const appContextData = this.contextDataService.get<AppContextData>(QUOTE_APP_CONTEXT_DATA);
+
+    if (appContextData) {
+      const quote = { ...QuoteModel.init(), ...this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA) };
+      this.contextDataService.set(QUOTE_CONTEXT_DATA, quote, { persistent: true });
+
+      console.group('SettingsService');
+      console.log('Quote data', QUOTE_CONTEXT_DATA, quote);
+      console.log('Quote app context data', QUOTE_APP_CONTEXT_DATA, appContextData);
+      console.groupEnd();
+
+      return;
+    }
+
+    const configuration = await firstValueFrom(
+      this.httpService.get<ConfigurationDTO>(`${environment.baseUrl}/${environment.journey}`).pipe(
+        map(res => res as ConfigurationDTO),
+        map(this.init)
+      )
+    );
+
+    this.contextDataService.set(QUOTE_APP_CONTEXT_DATA, AppContextData.init(settings, configuration, []), {
+      persistent: true
+    });
+  };
 
   private init = (configuration: ConfigurationDTO): Configuration => {
     const quoteConfiguration: Configuration = this.initQuote(configuration);
@@ -109,14 +138,12 @@ export class SettingsService {
   };
 
   private initSteppers = (configuration: Configuration, steppers?: StepperDTO[]): void => {
-    const steppersMap: DataInfo<Stepper> = {};
-
     if (!steppers) return;
 
-    steppers.forEach(stepper => {
+    const steppersMap: DataInfo<Stepper> = steppers.reduce((acc, stepper) => {
       const stepperKey = UniqueIds._next_();
 
-      steppersMap[stepperKey] = {
+      acc[stepperKey] = {
         steps: stepper.steps
           .filter(step => step.pages?.length)
           .map(step => {
@@ -131,9 +158,12 @@ export class SettingsService {
             });
 
             return { key: stepKey, label: step.label, pages: step.pages } as Step;
-          })
+          }),
+        stateInfo: this.statelessInheritFrom(stepper.stateInfo)
       };
-    });
+
+      return acc;
+    }, {} as DataInfo<Stepper>);
 
     configuration.steppers = { steppersMap };
   };
@@ -144,6 +174,12 @@ export class SettingsService {
 
   private initLiterals = (configuration: Configuration, literals?: Literals): void => {
     configuration.literals = literals;
+  };
+
+  private statelessInheritFrom = (stateless?: StateInfo | boolean): StateInfo | undefined => {
+    if (typeof stateless === 'boolean') return { inherited: stateless };
+
+    return stateless;
   };
 
   private normalizeTextForUri = (text: LiteralModel): string => this.literalService.toString(text).toLowerCase().replace(/\s/g, '-');

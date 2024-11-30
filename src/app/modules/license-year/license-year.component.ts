@@ -1,11 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { NxButtonModule } from '@aposin/ng-aquila/button';
 import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
 import { NxInputModule } from '@aposin/ng-aquila/input';
 import { NxMaskModule } from '@aposin/ng-aquila/mask';
 import { NxDate } from '@shagui/ng-shagui/core';
+import moment from 'moment';
 import { QuoteFormValidarors } from 'src/app/core/form';
 import { QuoteComponent } from 'src/app/core/models';
 import { HeaderTitleComponent, QuoteFooterComponent } from 'src/app/shared/components';
@@ -58,7 +59,8 @@ export class LicenseYearComponent extends QuoteComponent implements OnInit {
     this.form = this.fb.group({
       yearOfManufacture: new FormControl(this._contextData.vehicle.yearOfManufacture, [
         this.quoteFormValidarors.required(),
-        this.quoteFormValidarors.minValues(this.minYear)
+        this.quoteFormValidarors.minValues(this.minYear),
+        this.quoteFormValidarors.maxValues(moment().year())
       ])
     });
   }
