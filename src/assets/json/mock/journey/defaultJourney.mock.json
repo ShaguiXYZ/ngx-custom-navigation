@@ -34,7 +34,7 @@
           "pages": ["offerings"]
         }
       ],
-      "stateless": true
+      "stateInfo": true
     },
     {
       "steps": [
@@ -52,7 +52,7 @@
           "pages": ["is-client-contact-us"]
         }
       ],
-      "stateless": {
+      "stateInfo": {
         "inherited": false
       }
     },

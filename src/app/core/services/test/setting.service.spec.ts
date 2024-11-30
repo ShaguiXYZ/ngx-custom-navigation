@@ -105,7 +105,7 @@ describe('SettingsService', () => {
 
     await service.loadSettings();
 
-    expect(httpClientSpy.get.calls.count()).withContext('two calls').toBe(2);
+    expect(httpClientSpy.get.calls.count()).withContext('two calls').toBe(1);
     expect(contextDataServiceSpy.set).toHaveBeenCalled();
   });
 

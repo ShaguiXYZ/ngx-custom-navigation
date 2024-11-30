@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { inject } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivateFn, GuardResult, MaybeAsync, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
-import { ContextDataService } from '@shagui/ng-shagui/core';
+import { ContextDataService, deepCopy } from '@shagui/ng-shagui/core';
 import { QUOTE_APP_CONTEXT_DATA, QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
-import { AppContextData, Page, QuoteModel } from 'src/app/core/models';
+import { AppContextData, Page, QuoteModel, Track, TrackData } from 'src/app/core/models';
 
 /**
  * Guard function to control navigation flow based on the application's context data.
@@ -33,30 +33,37 @@ export const journeyGuard: CanActivateFn = (route: ActivatedRouteSnapshot, state
   const context = contextDataService.get<AppContextData>(QUOTE_APP_CONTEXT_DATA);
   const { nextPage, viewedPages } = context.navigation;
 
-  const statelessControl = ({ configuration: { steppers }, navigation: { nextPage, lastPage } }: AppContextData): void => {
+  const stateInfoControl = ({
+    configuration: { steppers },
+    navigation: { nextPage, lastPage, track }
+  }: AppContextData): Track | undefined => {
     const nextStepperKey = nextPage?.stepper?.key;
     const lastStepperKey = lastPage?.stepper?.key;
+    let _track = deepCopy(track);
 
     if (lastStepperKey && nextStepperKey !== lastStepperKey) {
-      const nextStepper = nextStepperKey && steppers?.steppersMap[nextStepperKey];
       const lastStepper = steppers?.steppersMap[lastStepperKey];
 
-      if (lastStepper?.stateless) {
-        lastStepper.stateless.data = contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA);
-        contextDataService.set(QUOTE_CONTEXT_DATA, lastStepper.stateless.inData);
+      if (lastStepper?.stateInfo) {
+        const quote = contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA);
+        const inData = _track?.[lastStepperKey]?.inData;
+        _track = { ...(_track ?? {}), [lastStepperKey]: { data: quote } };
+
+        inData && contextDataService.set(QUOTE_CONTEXT_DATA, inData);
       }
 
-      if (nextStepper && nextStepper?.stateless) {
-        const lastQuote = contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA);
-        nextStepper.stateless.inData = lastQuote;
+      const nextStepper = nextStepperKey && steppers?.steppersMap[nextStepperKey];
 
-        if (!nextStepper.stateless.data) {
-          nextStepper.stateless.data = nextStepper.stateless.inherited ? lastQuote ?? QuoteModel.init() : QuoteModel.init();
-        }
-
-        contextDataService.set(QUOTE_CONTEXT_DATA, nextStepper.stateless.data);
+      if (nextStepper && nextStepper?.stateInfo) {
+        const quote = contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA);
+        const nextStepperData =
+          _track?.[nextStepperKey]?.data ?? (nextStepper.stateInfo.inherited ? quote ?? QuoteModel.init() : QuoteModel.init());
+        _track = { ...(_track ?? {}), [nextStepperKey]: { inData: quote, data: nextStepperData } };
+        contextDataService.set(QUOTE_CONTEXT_DATA, nextStepperData);
       }
     }
+
+    return _track;
   };
 
   const resetContext = (context: AppContextData): UrlTree => {
@@ -71,7 +78,7 @@ export const journeyGuard: CanActivateFn = (route: ActivatedRouteSnapshot, state
 
   if (!nextPage?.pageId) return resetContext(context);
 
-  statelessControl(context);
+  const track = stateInfoControl(context);
 
   const { homePageId, errorPageId } = context.configuration;
   const pageIndex = viewedPages.indexOf(nextPage.pageId);
@@ -86,7 +93,7 @@ export const journeyGuard: CanActivateFn = (route: ActivatedRouteSnapshot, state
     lastPage = context.configuration.pageMap[errorPageId];
   }
 
-  context.navigation = { ...context.navigation, viewedPages, lastPage, nextPage: undefined };
+  context.navigation = { ...context.navigation, viewedPages, lastPage, nextPage: undefined, track };
   contextDataService.set(QUOTE_APP_CONTEXT_DATA, context);
 
   homePageId === nextPage.pageId && contextDataService.set(QUOTE_CONTEXT_DATA, QuoteModel.init());
