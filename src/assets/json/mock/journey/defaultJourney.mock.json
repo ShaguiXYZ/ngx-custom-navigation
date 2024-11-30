@@ -668,6 +668,10 @@
           "hours": {
             "am": ["08:00", "09:00", "10:00", "11:00", "12:00", "13:00"],
             "pm": ["15:00", "16:00", "17:00", "18:00"]
+          },
+          "headerConfig": {
+            "showBack": true,
+            "showContactUs": false
           }
         }
       }
@@ -680,6 +684,10 @@
         },
         "data": {
           "contactUsTexts": ["Horario comercial", "Lunes a Jueves de 9h a 19h", "Viernes de 9h a 18h"],
+          "headerConfig": {
+            "showBack": true,
+            "showContactUs": false
+          },
           "stepperConfig": {
             "label": { "value": "contact-us-header", "type": "translate" }
           }
@@ -791,6 +799,10 @@
             "Lunes a Jueves de 9h a 19h",
             "Viernes de 9h a 18h"
           ],
+          "headerConfig": {
+            "showBack": true,
+            "showContactUs": false
+          },
           "stepperConfig": {
             "label": "stepper-header",
             "showSteps": false
@@ -812,8 +824,14 @@
           "contact-us-title": "Podemos ayudarte, <br/>¿Quieres que te llamemos?",
           "body": "Podemos llamarte y ayudarte a encontrar el mejor seguro para ti, con las mejores coberturas."
         },
-        "stepperConfig": {
-          "label": { "value": "contact-us-header", "type": "translate" }
+        "data": {
+          "headerConfig": {
+            "showBack": true,
+            "showContactUs": false
+          },
+          "stepperConfig": {
+            "label": { "value": "contact-us-header", "type": "translate" }
+          }
         }
       }
     },

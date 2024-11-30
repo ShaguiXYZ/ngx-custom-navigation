@@ -1,4 +1,3 @@
-export * from './client.service';
 export * from './date.service';
 export * from './insurance-companies.service';
 export * from './literals.service';

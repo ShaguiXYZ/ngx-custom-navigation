@@ -127,4 +127,15 @@ describe('VehicleService', () => {
       expect(vehicles).toEqual(mockVehicles);
     });
   });
+
+  it('should find vehicle by plate', async () => {
+    const plate = 'ABC123';
+    const mockVehicle: QuoteVehicleModel = { make: 'Toyota', model: 'Corolla' };
+
+    httpClientSpy.get.and.returnValue(of(mockVehicle));
+
+    service.findByPlate(plate).then(vehicle => {
+      expect(vehicle).toEqual(mockVehicle);
+    });
+  });
 });

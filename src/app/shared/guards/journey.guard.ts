@@ -33,6 +33,16 @@ export const journeyGuard: CanActivateFn = (route: ActivatedRouteSnapshot, state
   const context = contextDataService.get<AppContextData>(QUOTE_APP_CONTEXT_DATA);
   const { nextPage, viewedPages } = context.navigation;
 
+  const resetContext = (context: AppContextData): UrlTree => {
+    const nextPage = context.configuration.pageMap[viewedPages[viewedPages.length - 1]];
+
+    context.navigation.lastPage = undefined;
+    context.navigation.nextPage = nextPage;
+    contextDataService.set(QUOTE_APP_CONTEXT_DATA, context);
+
+    return router.parseUrl(`${Page.routeFrom(context.navigation.nextPage)}`);
+  };
+
   const stateInfoControl = ({
     configuration: { steppers },
     navigation: { nextPage, lastPage, track }
@@ -64,16 +74,6 @@ export const journeyGuard: CanActivateFn = (route: ActivatedRouteSnapshot, state
     }
 
     return _track;
-  };
-
-  const resetContext = (context: AppContextData): UrlTree => {
-    const nextPage = context.configuration.pageMap[viewedPages[viewedPages.length - 1]];
-
-    context.navigation.lastPage = undefined;
-    context.navigation.nextPage = nextPage;
-    contextDataService.set(QUOTE_APP_CONTEXT_DATA, context);
-
-    return router.parseUrl(`${Page.routeFrom(context.navigation.nextPage)}`);
   };
 
   if (!nextPage?.pageId) return resetContext(context);
