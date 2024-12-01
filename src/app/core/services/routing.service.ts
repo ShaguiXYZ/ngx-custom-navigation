@@ -6,6 +6,7 @@ import { QUOTE_APP_CONTEXT_DATA, QUOTE_CONTEXT_DATA } from '../constants';
 import { ConditionEvaluation } from '../lib';
 import { AppContextData, NextOption, Page, QuoteModel, Step } from '../models';
 import { ServiceActivatorService } from '../service-activators';
+import { AppUrls } from 'src/app/shared/config';
 
 @Injectable({ providedIn: 'root' })
 export class RoutingService implements OnDestroy {
@@ -78,8 +79,7 @@ export class RoutingService implements OnDestroy {
     this.appContextData.navigation.nextPage = page;
     this.contextDataService.set(QUOTE_APP_CONTEXT_DATA, this.appContextData);
 
-    return this.router.navigate([Page.routeFrom(page)], { skipLocationChange: true });
-    // return this._router.navigate([Page.routeFrom(page)]);
+    return this.router.navigate([AppUrls._dispatcher, Page.routeFrom(page)], { skipLocationChange: true });
   };
 
   private getNextRoute(data: QuoteModel): Page | undefined {

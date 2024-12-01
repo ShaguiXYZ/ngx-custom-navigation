@@ -88,6 +88,8 @@ export class SettingsService {
     this.contextDataService.set(QUOTE_APP_CONTEXT_DATA, AppContextData.init(settings, configuration, []), {
       persistent: true
     });
+
+    this.contextDataService.set(QUOTE_CONTEXT_DATA, QuoteModel.init(), { persistent: true });
   };
 
   private init = (configuration: ConfigurationDTO): Configuration => {

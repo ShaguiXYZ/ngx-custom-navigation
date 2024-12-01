@@ -4,11 +4,11 @@ import { ContextDataService } from '@shagui/ng-shagui/core';
 import { AppContextData } from 'src/app/core/models';
 import { BudgetActivator } from 'src/app/core/service-activators/budget.activator';
 import { RoutingService } from 'src/app/core/services';
-import { JourneyHomeComponent } from './journey-home.component';
+import { QuoteDispatcherComponent } from './quote-dispatcher.component';
 
-describe('JourneyHomeComponent', () => {
-  let component: JourneyHomeComponent;
-  let fixture: ComponentFixture<JourneyHomeComponent>;
+describe('QuoteDispatcherComponent', () => {
+  let component: QuoteDispatcherComponent;
+  let fixture: ComponentFixture<QuoteDispatcherComponent>;
   let mockRouter: jasmine.SpyObj<Router>;
   let mockActivatedRoute: jasmine.SpyObj<ActivatedRoute>;
   let mockContextDataService: jasmine.SpyObj<ContextDataService>;
@@ -41,7 +41,7 @@ describe('JourneyHomeComponent', () => {
 
     await TestBed.configureTestingModule({
       declarations: [],
-      imports: [JourneyHomeComponent],
+      imports: [QuoteDispatcherComponent],
       providers: [
         { provide: Router, useValue: mockRouter },
         { provide: ActivatedRoute, useValue: mockActivatedRoute },
@@ -52,7 +52,7 @@ describe('JourneyHomeComponent', () => {
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(JourneyHomeComponent);
+    fixture = TestBed.createComponent(QuoteDispatcherComponent);
     component = fixture.componentInstance;
   });
 

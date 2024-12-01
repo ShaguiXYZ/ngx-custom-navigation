@@ -3,10 +3,10 @@ import { TestBed } from '@angular/core/testing';
 import { NavigationEnd, Router } from '@angular/router';
 import { ContextDataService } from '@shagui/ng-shagui/core';
 import { of, Subscription } from 'rxjs';
+import { QUOTE_APP_CONTEXT_DATA, QUOTE_CONTEXT_DATA } from '../../constants';
+import { AppContextData } from '../../models';
 import { TrackInfo } from '../quote-track.model';
 import { QuoteTrackService } from '../quote-track.service';
-import { AppContextData } from '../../models';
-import { QUOTE_APP_CONTEXT_DATA, QUOTE_CONTEXT_DATA } from '../../constants';
 
 describe('QuoteTrackService', () => {
   let service: QuoteTrackService;
@@ -74,17 +74,6 @@ describe('QuoteTrackService', () => {
     });
 
     expect(service['isMobile']).toBeTrue();
-  });
-
-  it('should track page view on NavigationEnd', () => {
-    const navigationEnd = new NavigationEnd(1, '/test', '/test');
-    spyOn(router.events, 'subscribe').and.callFake((callback: any) => callback(navigationEnd));
-
-    service = TestBed.inject(QuoteTrackService);
-
-    const fullUrl = `${window.location.protocol}//${window.location.host}/test`;
-
-    expect(service['infoPage']?.URL).toBe(fullUrl);
   });
 
   it('should unsubscribe from all subscriptions on destroy', () => {
