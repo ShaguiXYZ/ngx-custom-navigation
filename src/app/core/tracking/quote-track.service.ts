@@ -1,11 +1,10 @@
 import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout';
 import { inject, Injectable, OnDestroy } from '@angular/core';
-import { NavigationEnd, Router } from '@angular/router';
 import { ContextDataService, deepCopy, hasValue, JsonUtils, UniqueIds } from '@shagui/ng-shagui/core';
-import { filter, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { QUOTE_APP_CONTEXT_DATA, QUOTE_CONTEXT_DATA } from '../constants';
 import { TrackError } from '../errors';
-import { AppContextData, Page, QuoteModel } from '../models';
+import { AppContextData, QuoteModel } from '../models';
 import { TrackEventType, TrackInfo, TrackInfoPageModel, TRACKING_QUOTE_MANIFEST } from './quote-track.model';
 import { _window } from './window-tracker.model';
 
@@ -19,7 +18,6 @@ export class QuoteTrackService implements OnDestroy {
 
   private readonly subscription$: Subscription[] = [];
   private readonly breakpointObserver = inject(BreakpointObserver);
-  private readonly router = inject(Router);
   private readonly contextDataService = inject(ContextDataService);
 
   constructor() {
@@ -29,35 +27,31 @@ export class QuoteTrackService implements OnDestroy {
         .subscribe((state: BreakpointState) => (this.isMobile = state.breakpoints[Breakpoints.HandsetPortrait]))
     );
 
-    this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe(() => {
-      const {
-        navigation: { lastPage }
-      } = this.contextDataService.get<AppContextData>(QUOTE_APP_CONTEXT_DATA);
-      const page = lastPage && Page.routeFrom(lastPage);
-      const fullUrl = `${window.location.protocol}//${window.location.host}/${page}`;
-
-      const infoPag: TrackInfoPageModel = {
-        page: lastPage?.pageId!,
-        URL: fullUrl,
-        referrer: this.referrer,
-        user_type: 'web',
-        device_type: this.isMobile ? 'mobile' : 'desktop'
-      };
-
-      this.infoPage = deepCopy(infoPag);
-
-      _window.digitalData = { infoPag };
-
-      this.trackFn('view');
-      this.referrer = fullUrl;
-    });
-
     this.headData();
   }
 
   ngOnDestroy(): void {
     this.subscription$.forEach(sub => sub?.unsubscribe?.());
   }
+
+  public trackView = async (inPage: string): Promise<number> => {
+    const fullUrl = `${window.location.protocol}//${window.location.host}/${inPage}`;
+
+    const infoPag: TrackInfoPageModel = {
+      page: inPage,
+      URL: fullUrl,
+      referrer: this.referrer,
+      user_type: 'web',
+      device_type: this.isMobile ? 'mobile' : 'desktop'
+    };
+
+    this.infoPage = deepCopy(infoPag);
+    _window.digitalData = { infoPag };
+    this.referrer = fullUrl;
+
+    await Promise.resolve();
+    return this.trackFn('view');
+  };
 
   public trackEvent = async (eventType: TrackEventType, data: TrackInfo): Promise<number> => {
     const appContextData = this.contextDataService.get<AppContextData>(QUOTE_APP_CONTEXT_DATA);

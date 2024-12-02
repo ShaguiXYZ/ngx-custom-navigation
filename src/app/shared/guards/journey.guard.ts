@@ -55,7 +55,7 @@ export const journeyGuard: CanActivateFn = (route: ActivatedRouteSnapshot, state
       const lastStepper = steppers?.steppersMap[lastStepperKey];
 
       if (lastStepper?.stateInfo) {
-        const quote = contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA);
+        const quote = deepCopy(contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA));
         const inData = _track?.[lastStepperKey]?.inData;
         _track = { ...(_track ?? {}), [lastStepperKey]: { data: quote } };
 
@@ -65,11 +65,13 @@ export const journeyGuard: CanActivateFn = (route: ActivatedRouteSnapshot, state
       const nextStepper = nextStepperKey && steppers?.steppersMap[nextStepperKey];
 
       if (nextStepper && nextStepper?.stateInfo) {
-        const quote = contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA);
-        const nextStepperData =
-          _track?.[nextStepperKey]?.data ?? (nextStepper.stateInfo.inherited ? quote ?? QuoteModel.init() : QuoteModel.init());
-        _track = { ...(_track ?? {}), [nextStepperKey]: { inData: quote, data: nextStepperData } };
-        contextDataService.set(QUOTE_CONTEXT_DATA, nextStepperData);
+        const quote = deepCopy(contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA));
+        const tracked = _track?.[nextStepperKey]?.data ?? (nextStepper.stateInfo.inherited ? quote : QuoteModel.init());
+        _track = { ...(_track ?? {}), [nextStepperKey]: { inData: quote, data: tracked } };
+
+        console.log('stateInfoControl -> set context', tracked);
+
+        contextDataService.set(QUOTE_CONTEXT_DATA, tracked);
       }
     }
 

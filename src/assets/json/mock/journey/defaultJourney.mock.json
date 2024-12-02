@@ -285,7 +285,13 @@
           {
             "entryPoint": "next-page",
             "activator": "black-list-plate",
-            "params": { "percentBlacklisted": 0.7 }
+            "params": { "percentBlacklisted": 0.7 },
+            "conditions": [
+              {
+                "expression": "driven.hasDrivenLicense",
+                "value": true
+              }
+            ]
           }
         ]
       }
@@ -601,7 +607,7 @@
           {
             "entryPoint": "next-page",
             "activator": "black-list-identification-number",
-            "params": { "percentIsClient": 0.5 }
+            "params": { "percentIsClient": 0.7 }
           }
         ]
       }

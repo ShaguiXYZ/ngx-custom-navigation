@@ -89,7 +89,9 @@ describe('LicensePlateComponent', () => {
 
   it('should mark form as touched and update context data on valid form', () => {
     component.form.setValue({ plateNumber: '1234-SSS' });
-    const isValid = component['updateValidData']();
+    component['updateValidData']();
+
+    const isValid = component.form.valid;
 
     expect(component.form.touched).toBeTrue();
     expect(isValid).toBeTrue();
@@ -97,7 +99,9 @@ describe('LicensePlateComponent', () => {
 
   it('should not update context data on invalid form', () => {
     component.form.setValue({ plateNumber: '' });
-    const isValid = component['updateValidData']();
+    component['updateValidData']();
+
+    const isValid = component.form.valid;
 
     expect(isValid).toBeFalse();
   });

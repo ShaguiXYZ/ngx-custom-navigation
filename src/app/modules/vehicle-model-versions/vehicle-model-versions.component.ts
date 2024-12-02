@@ -65,7 +65,7 @@ export class VehicleModelVersionsComponent extends QuoteComponent implements OnI
       modelVersion: this.selectedModelVersion
     };
 
-    this.routingService.next(this._contextData);
+    this.routingService.next();
   }
 
   private updateValidData = (): boolean => {

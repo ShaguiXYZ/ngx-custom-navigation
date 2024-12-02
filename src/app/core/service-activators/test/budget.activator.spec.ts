@@ -30,7 +30,6 @@ describe('BudgetActivator', () => {
 
       expect(result).toBeTrue();
       expect(localStorage.setItem).toHaveBeenCalled();
-      expect(services.contextDataService.set).toHaveBeenCalledWith(QUOTE_CONTEXT_DATA, jasmine.any(Object));
     });
   });
 

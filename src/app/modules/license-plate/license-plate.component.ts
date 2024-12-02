@@ -45,38 +45,26 @@ export class LicensePlateComponent extends QuoteComponent implements OnInit {
   private readonly routingService = inject(RoutingService);
   private readonly fb = inject(FormBuilder);
 
-  constructor() {
-    super();
-
-    this._contextData = { ...this._contextData, driven: { ...this._contextData.driven, hasDrivenLicense: true } };
-  }
-
   ngOnInit(): void {
     this.createForm();
-  }
-
-  public override canDeactivate = (): boolean => this.updateValidData();
-
-  public continueWithOutLicensePlate() {
-    this._contextData.driven.hasDrivenLicense = false;
-    this._contextData.vehicle.plateNumber = '';
-    this.routingService.next(this._contextData);
-  }
-
-  private updateValidData = (): boolean => {
-    if (this._contextData.driven.hasDrivenLicense === false) {
-      return true;
-    }
-
     this._contextData.driven.hasDrivenLicense = true;
+  }
 
+  public override canDeactivate = (): boolean => this._contextData.driven.hasDrivenLicense === false || this.form.valid;
+
+  public continueWithOutLicensePlate = (): void => {
+    this._contextData.vehicle.plateNumber = '';
+    this._contextData.driven.hasDrivenLicense = false;
+
+    this.routingService.next();
+  };
+
+  public updateValidData = (): void => {
     this.form.markAllAsTouched();
 
     if (this.form.valid) {
       this._contextData.vehicle.plateNumber = this.form.value.plateNumber;
     }
-
-    return this.form.valid;
   };
 
   private createForm(): void {

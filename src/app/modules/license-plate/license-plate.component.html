@@ -22,6 +22,7 @@
       title: 'header' | quoteLiteral,
       plateNumber: form.get('plateNumber')?.value
     }"
+    (uiOnNext)="updateValidData()"
   >
     <div class="extra__footer__options">
       <button

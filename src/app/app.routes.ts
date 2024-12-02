@@ -191,16 +191,20 @@ export const routes: Routes = configContextRoutes([
     canDeactivate: [canDeactivateGuard]
   },
   {
-    path: AppUrls.journeyHome,
-    loadComponent: () => import('./modules/journey-home/journey-home.component').then(c => c.JourneyHomeComponent)
+    path: AppUrls.home,
+    loadComponent: () => import('./modules/quote-dispatcher/quote-dispatcher.component').then(c => c.QuoteDispatcherComponent)
+  },
+  {
+    path: `${AppUrls._dispatcher}/:dispatcher`,
+    loadComponent: () => import('./modules/quote-dispatcher/quote-dispatcher.component').then(c => c.QuoteDispatcherComponent)
   },
   {
     path: `${AppUrls.stored}/:stored`,
-    loadComponent: () => import('./modules/journey-home/journey-home.component').then(c => c.JourneyHomeComponent)
+    loadComponent: () => import('./modules/quote-dispatcher/quote-dispatcher.component').then(c => c.QuoteDispatcherComponent)
   },
   {
     path: AppUrls.root,
     pathMatch: 'full',
-    redirectTo: AppUrls.journeyHome
+    redirectTo: AppUrls.home
   }
 ]);

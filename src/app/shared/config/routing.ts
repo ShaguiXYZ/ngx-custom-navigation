@@ -1,6 +1,7 @@
 import { RouteConfig } from '@shagui/ng-shagui/core';
 
 export enum AppUrls {
+  _dispatcher = 'dispatcher',
   apology = 'apology-screen',
   birthdate = 'birthdate',
   clientEMail = 'client-email',
@@ -14,10 +15,10 @@ export enum AppUrls {
   dateOfIssue = 'date-of-issue',
   drivingLicenseDate = 'driving-license-date',
   drivingLicenseLocation = 'driving-license-location',
+  home = 'home',
   insuranceCompanies = 'insurance-companies',
   isClient = 'is-client',
   isPolicyOwner = 'is-policy-owner',
-  journeyHome = 'journey',
   licensePlate = 'license-plate',
   licenseYear = 'license-year',
   make = 'make',
@@ -50,7 +51,7 @@ export const urls: RouteConfig = {
   [AppUrls.insuranceCompanies]: { resetContext: false },
   [AppUrls.isClient]: { resetContext: false },
   [AppUrls.isPolicyOwner]: { resetContext: false },
-  [AppUrls.journeyHome]: { resetContext: true },
+  [AppUrls._dispatcher]: { resetContext: true },
   [AppUrls.licensePlate]: { resetContext: false },
   [AppUrls.licenseYear]: { resetContext: false },
   [AppUrls.make]: { resetContext: false },

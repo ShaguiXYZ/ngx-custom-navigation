@@ -122,7 +122,7 @@ export class QuoteOfferingsComponent extends QuoteComponent implements OnInit {
 
   public contactUs(price: OfferingPriceModel): void {
     this._contextData.offering.price = { ...this._contextData.offering.price, ...price };
-    this.routingService.next(this._contextData);
+    this.routingService.next();
   }
 
   /**

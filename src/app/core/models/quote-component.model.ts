@@ -17,7 +17,13 @@ export abstract class QuoteComponent implements OnDestroy {
   protected readonly contextDataService = inject(ContextDataService);
 
   constructor() {
-    this.contextDataService.onDataChange<QuoteModel>(QUOTE_CONTEXT_DATA).subscribe(data => (this._contextData = data));
+    this.subscription$.push(
+      this.contextDataService.onDataChange<QuoteModel>(QUOTE_CONTEXT_DATA).subscribe(data => {
+        console.log('QuoteComponent -> constructor -> data', data);
+
+        this._contextData = data;
+      })
+    );
     this._contextData = this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA);
     this.__updateComponentData();
   }
@@ -39,8 +45,12 @@ export abstract class QuoteComponent implements OnDestroy {
     const pageData = lastPage?.configuration?.data ?? {};
 
     for (const [key, value] of Object.entries(pageData)) {
-      if (key === 'contextData' && typeof component[`_${key}`] === 'object' && typeof value === 'object') {
-        component[`_${key}`] = patch(component[`_${key}`], value as Record<string, unknown>);
+      if (key === 'contextData' && typeof component['_contextData'] === 'object' && typeof value === 'object') {
+        component['_contextData'] = patch(component['_contextData'], value as Record<string, unknown>);
+
+        console.log('QuoteComponent -> __loadComponentData -> component');
+
+        this.contextDataService.set(QUOTE_CONTEXT_DATA, component['_contextData']);
       } else if (key in component) {
         component[key as keyof T] = deepCopy(value) as T[keyof T];
       }

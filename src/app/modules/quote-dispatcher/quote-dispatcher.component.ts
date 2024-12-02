@@ -6,6 +6,7 @@ import { JourneyError } from 'src/app/core/errors';
 import { AppContextData, Page } from 'src/app/core/models';
 import { ActivatorFn } from 'src/app/core/service-activators';
 import { BudgetActivator } from 'src/app/core/service-activators/budget.activator';
+import { QuoteTrackService } from 'src/app/core/tracking';
 
 /**
  * This component is used to load the routing module dynamically.
@@ -17,8 +18,9 @@ import { BudgetActivator } from 'src/app/core/service-activators/budget.activato
   template: '',
   standalone: true
 })
-export class JourneyHomeComponent implements OnInit {
+export class QuoteDispatcherComponent implements OnInit {
   private readonly contextDataService = inject(ContextDataService);
+  private readonly trackService = inject(QuoteTrackService);
   private readonly _router = inject(Router);
   private readonly _route = inject(ActivatedRoute);
 
@@ -28,8 +30,15 @@ export class JourneyHomeComponent implements OnInit {
     } = this.contextDataService.get<AppContextData>(QUOTE_APP_CONTEXT_DATA);
 
     const {
-      params: { stored }
+      params: { stored, dispatcher }
     } = this._route.snapshot;
+
+    if (dispatcher) {
+      this.trackService.trackView(dispatcher);
+      this._router.navigate([Page.routeFrom(pageMap[dispatcher])], { skipLocationChange: true });
+
+      return;
+    }
 
     if (stored) {
       await (BudgetActivator.retrieveBudget({ contextDataService: this.contextDataService }) as ActivatorFn)({
@@ -40,8 +49,6 @@ export class JourneyHomeComponent implements OnInit {
     if (homePageId) {
       this._router.navigate([Page.routeFrom(pageMap[homePageId])], { skipLocationChange: true });
     } else {
-      console.log('Home page not found in configuration');
-
       throw new JourneyError('Home page not found in configuration');
     }
   }

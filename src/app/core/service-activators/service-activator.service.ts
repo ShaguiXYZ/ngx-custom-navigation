@@ -28,13 +28,15 @@ export class ServiceActivatorService {
 
     const entryPoints = lastPage.configuration?.serviceActivators?.filter(entryPoint => entryPoint.entryPoint === name);
 
-    entryPoints?.forEach(async entryPoint => {
-      if (ConditionEvaluation.checkConditions(this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA), entryPoint.conditions)) {
-        console.log('Activating', entryPoint.activator);
+    await Promise.all(
+      (entryPoints ?? []).map(async entryPoint => {
+        if (ConditionEvaluation.checkConditions(this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA), entryPoint.conditions)) {
+          console.log('Activating', entryPoint.activator);
 
-        await this.runActivator(entryPoint.activator, entryPoint.params);
-      }
-    });
+          await this.runActivator(entryPoint.activator, entryPoint.params);
+        }
+      })
+    );
   };
 
   private registerActivator = (name: ActivatorFnType, activator: ActivatorFn): void => {

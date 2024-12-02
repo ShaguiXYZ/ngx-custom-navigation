@@ -6,6 +6,7 @@ import { QUOTE_APP_CONTEXT_DATA, QUOTE_CONTEXT_DATA } from '../constants';
 import { ConditionEvaluation } from '../lib';
 import { AppContextData, NextOption, Page, QuoteModel, Step } from '../models';
 import { ServiceActivatorService } from '../service-activators';
+import { AppUrls } from 'src/app/shared/config';
 
 @Injectable({ providedIn: 'root' })
 export class RoutingService implements OnDestroy {
@@ -30,28 +31,21 @@ export class RoutingService implements OnDestroy {
     this.subscrition$.forEach(sub => sub.unsubscribe());
   }
 
-  public next = async (data?: QuoteModel): Promise<boolean> => {
-    data && this.contextDataService.set(QUOTE_CONTEXT_DATA, data);
-
+  public next = async (): Promise<boolean> => {
     await this.serviceActivatorService.activateEntryPoint('next-page');
 
     const toEveluate: QuoteModel = this.contextDataService.get(QUOTE_CONTEXT_DATA);
-
     const nextPage = this.getNextRoute(toEveluate);
 
     if (!nextPage) {
       return Promise.resolve(false);
     }
 
-    this.contextDataService.set(QUOTE_CONTEXT_DATA, toEveluate);
-
     return this._goToPage(nextPage);
   };
 
-  public previous = async (data?: QuoteModel): Promise<boolean> => {
+  public previous = async (): Promise<boolean> => {
     if (this.appContextData.navigation.viewedPages.length > 1) {
-      data && this.contextDataService.set(QUOTE_CONTEXT_DATA, data);
-
       await this.serviceActivatorService.activateEntryPoint('previous-page');
 
       const pageId = this.appContextData.navigation.viewedPages[this.appContextData.navigation.viewedPages.length - 2];
@@ -78,8 +72,7 @@ export class RoutingService implements OnDestroy {
     this.appContextData.navigation.nextPage = page;
     this.contextDataService.set(QUOTE_APP_CONTEXT_DATA, this.appContextData);
 
-    return this.router.navigate([Page.routeFrom(page)], { skipLocationChange: true });
-    // return this._router.navigate([Page.routeFrom(page)]);
+    return this.router.navigate([AppUrls._dispatcher, Page.routeFrom(page)], { skipLocationChange: true });
   };
 
   private getNextRoute(data: QuoteModel): Page | undefined {

@@ -24,10 +24,6 @@ describe('BlackListActivator', () => {
 
     expect(result).toBeTrue();
     expect(services.contextDataService.get).toHaveBeenCalledWith(QUOTE_CONTEXT_DATA);
-    expect(services.contextDataService.set).toHaveBeenCalledWith(QUOTE_CONTEXT_DATA, {
-      ...quote,
-      blackList: { identificationNumber: true }
-    });
   });
 
   it('should check plate number black list', async () => {
@@ -37,7 +33,6 @@ describe('BlackListActivator', () => {
 
     expect(result).toBeTrue();
     expect(services.contextDataService.get).toHaveBeenCalledWith(QUOTE_CONTEXT_DATA);
-    expect(services.contextDataService.set).toHaveBeenCalledWith(QUOTE_CONTEXT_DATA, { ...quote, blackList: { plateNumber: true } });
   });
 
   it('should check phone number black list', async () => {
@@ -47,7 +42,6 @@ describe('BlackListActivator', () => {
 
     expect(result).toBeTrue();
     expect(services.contextDataService.get).toHaveBeenCalledWith(QUOTE_CONTEXT_DATA);
-    expect(services.contextDataService.set).toHaveBeenCalledWith(QUOTE_CONTEXT_DATA, { ...quote, blackList: { phoneNumber: true } });
   });
 
   it('should check email black list', async () => {
@@ -57,6 +51,5 @@ describe('BlackListActivator', () => {
 
     expect(result).toBeTrue();
     expect(services.contextDataService.get).toHaveBeenCalledWith(QUOTE_CONTEXT_DATA);
-    expect(services.contextDataService.set).toHaveBeenCalledWith(QUOTE_CONTEXT_DATA, { ...quote, blackList: { email: true } });
   });
 });

@@ -22,9 +22,6 @@ import { QuoteFooterConfig } from './models';
 })
 export class QuoteFooterComponent implements OnInit, OnDestroy {
   @Input()
-  public data?: QuoteModel;
-
-  @Input()
   public config: QuoteFooterConfig = {
     showNext: true,
     showBack: false
@@ -106,11 +103,11 @@ export class QuoteFooterComponent implements OnInit, OnDestroy {
       return false;
     }
 
-    return this.routingService.next(this.data);
+    return this.routingService.next();
   };
 
   private previous = (config: QuoteFooterConfig = { showNext: true }): void => {
     config.backFn?.();
-    this.routingService.previous(this.data);
+    this.routingService.previous();
   };
 }

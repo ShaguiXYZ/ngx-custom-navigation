@@ -26,9 +26,6 @@ export class BudgetActivator {
       localStorage.setItem(storedDataKey.key, cipher);
 
       quote.signature = { ...quote.signature, budget: btoa(JSON.stringify(storedDataKey)) };
-      services.contextDataService.set<QuoteModel>(QUOTE_CONTEXT_DATA, quote);
-
-      console.log('stored quote', quote);
 
       await Promise.resolve();
       return true;
@@ -55,6 +52,9 @@ export class BudgetActivator {
       const decrypted = BudgetUtils.decrypt<Budget>(storedDataKey.passKey, cipher);
 
       services.contextDataService.set<AppContextData>(QUOTE_APP_CONTEXT_DATA, decrypted.context);
+
+      console.log('retrieved quote', decrypted.quote);
+
       services.contextDataService.set<QuoteModel>(QUOTE_CONTEXT_DATA, decrypted.quote);
 
       return Promise.resolve(true);
