@@ -6,7 +6,6 @@ import { NxCopytextModule } from '@aposin/ng-aquila/copytext';
 import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
 import { NxInputModule } from '@aposin/ng-aquila/input';
 import { NxLicencePlateModule } from '@aposin/ng-aquila/licence-plate';
-import { NxMaskModule } from '@aposin/ng-aquila/mask';
 import { QuoteFormValidarors } from 'src/app/core/form';
 import { QuoteComponent } from 'src/app/core/models';
 import { RoutingService } from 'src/app/core/services';
@@ -27,7 +26,6 @@ import { QuoteLiteralPipe } from 'src/app/shared/pipes';
     NxFormfieldModule,
     NxInputModule,
     NxLicencePlateModule,
-    NxMaskModule,
     NxButtonModule,
     QuoteFooterComponent,
     QuoteFooterInfoComponent,
@@ -40,6 +38,12 @@ import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 })
 export class LicensePlateComponent extends QuoteComponent implements OnInit {
   public form!: FormGroup;
+
+  private readonly platePatterns = [
+    '^[0-9]{4}[ -]?[A-Z]{3}$', // 0000SSS
+    '^[A-Z]{1,2}[ -]?[0-9]{4}[ -]?[A-Z]{2}$', // S 0000 SS
+    '^[A-Z]{2}[ -]?[0-9]{5}$' // SS-00000
+  ];
 
   private readonly quoteFormValidarors = inject(QuoteFormValidarors);
   private readonly routingService = inject(RoutingService);
@@ -69,11 +73,14 @@ export class LicensePlateComponent extends QuoteComponent implements OnInit {
 
   private createForm(): void {
     this.form = this.fb.group({
-      plateNumber: new FormControl(this._contextData.vehicle.plateNumber, [this.quoteFormValidarors.required()])
+      plateNumber: new FormControl(this._contextData.vehicle.plateNumber, [
+        this.quoteFormValidarors.required(),
+        this.quoteFormValidarors.matches(this.platePatterns)
+      ])
     });
 
     const plateNumberSubscription = this.form.get('plateNumber')?.valueChanges.subscribe(value => {
-      this.form.get('plateNumber')?.setValue(value.toUpperCase(), { emitEvent: false });
+      this.form.get('plateNumber')?.setValue(value.trim().toUpperCase(), { emitEvent: false });
     });
 
     if (plateNumberSubscription) {

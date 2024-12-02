@@ -95,6 +95,14 @@ export class QuoteFormValidarors {
     (control: AbstractControl): ValidationErrors | null =>
       this.activateEntryPoint(control, 'requiredTrue', !control.value);
 
+  public matches = (masks: (string | RegExp)[]): ValidatorFn => {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const mask = masks.find(mask => new RegExp(mask).test(control.value));
+
+      return this.activateEntryPoint(control, 'matches', !mask);
+    };
+  };
+
   /**
    * Activates an entry point for a form control and updates the form validations in the context data.
    *

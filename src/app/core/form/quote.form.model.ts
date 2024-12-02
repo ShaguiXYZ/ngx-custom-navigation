@@ -4,6 +4,7 @@ export type QuoteFormValidations =
   | 'betweenDates'
   | 'email'
   | 'futureDate'
+  | 'matches'
   | 'maxYearsBetweenDates'
   | 'maxValues'
   | 'minYearsBetweenDates'
