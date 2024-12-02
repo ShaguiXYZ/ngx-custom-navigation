@@ -18,10 +18,12 @@
     </form>
   </section>
   <quote-footer
+    [data]="_contextData"
     [trackInfo]="{
       title: 'header' | quoteLiteral,
       plateNumber: form.get('plateNumber')?.value
     }"
+    (uiOnNext)="updateValidData()"
   >
     <div class="extra__footer__options">
       <button
