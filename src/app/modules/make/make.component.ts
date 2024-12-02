@@ -73,7 +73,7 @@ export class MakeComponent extends QuoteComponent implements OnInit {
       make: this.selectedBrand!
     };
 
-    this.routingService.next(this._contextData);
+    this.routingService.next();
   }
 
   private createForm(): void {

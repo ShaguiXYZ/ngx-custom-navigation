@@ -29,7 +29,8 @@ export class IsClientComponent extends QuoteComponent {
 
   public onIsClientChange(value: boolean): void {
     this._contextData.client.isClient = value;
-    this.routingService.next(this._contextData);
+
+    this.routingService.next();
   }
 
   public override canDeactivate = (): boolean => this.isValidData();

@@ -17,7 +17,6 @@
     </form>
   </section>
   <quote-footer
-    [data]="_contextData"
     [trackInfo]="{ title: 'header' | quoteLiteral, yearOfManufacture: form.get('yearOfManufacture')?.value }"
     (uiOnNext)="updateValidData()"
   />

@@ -607,7 +607,7 @@
           {
             "entryPoint": "next-page",
             "activator": "black-list-identification-number",
-            "params": { "percentIsClient": 0.5 }
+            "params": { "percentIsClient": 0.7 }
           }
         ]
       }

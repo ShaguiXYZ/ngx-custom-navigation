@@ -31,28 +31,21 @@ export class RoutingService implements OnDestroy {
     this.subscrition$.forEach(sub => sub.unsubscribe());
   }
 
-  public next = async (data?: QuoteModel): Promise<boolean> => {
-    data && this.contextDataService.set(QUOTE_CONTEXT_DATA, data);
-
+  public next = async (): Promise<boolean> => {
     await this.serviceActivatorService.activateEntryPoint('next-page');
 
     const toEveluate: QuoteModel = this.contextDataService.get(QUOTE_CONTEXT_DATA);
-
     const nextPage = this.getNextRoute(toEveluate);
 
     if (!nextPage) {
       return Promise.resolve(false);
     }
 
-    this.contextDataService.set(QUOTE_CONTEXT_DATA, toEveluate);
-
     return this._goToPage(nextPage);
   };
 
-  public previous = async (data?: QuoteModel): Promise<boolean> => {
+  public previous = async (): Promise<boolean> => {
     if (this.appContextData.navigation.viewedPages.length > 1) {
-      data && this.contextDataService.set(QUOTE_CONTEXT_DATA, data);
-
       await this.serviceActivatorService.activateEntryPoint('previous-page');
 
       const pageId = this.appContextData.navigation.viewedPages[this.appContextData.navigation.viewedPages.length - 2];

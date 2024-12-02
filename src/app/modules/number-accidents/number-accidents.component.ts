@@ -44,7 +44,7 @@ export class NumberAccidentsComponent extends QuoteComponent implements OnInit {
   public selectAccidents(accidents: number): void {
     this._contextData.client.accidents = accidents;
 
-    this.routingService.next(this._contextData);
+    this.routingService.next();
   }
 
   private updateValidData = (): boolean => hasValue(this._contextData.client.accidents);

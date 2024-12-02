@@ -8,7 +8,10 @@ export class QuoteActivator {
     (services: ActivatorServices): ((params: unknown) => Promise<boolean>) =>
     async (params: unknown): Promise<boolean> => {
       const quote = services.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA);
-      services.contextDataService.set<QuoteModel>(QUOTE_CONTEXT_DATA, patch(quote, params));
+
+      console.log('QuoteActivator -> quotePatch -> quote', quote);
+
+      services.contextDataService.set(QUOTE_CONTEXT_DATA, patch(quote, params));
 
       return Promise.resolve(true);
     };

@@ -56,7 +56,7 @@ export class LicensePlateComponent extends QuoteComponent implements OnInit {
     this._contextData.vehicle.plateNumber = '';
     this._contextData.driven.hasDrivenLicense = false;
 
-    this.routingService.next(this._contextData);
+    this.routingService.next();
   };
 
   public updateValidData = (): void => {

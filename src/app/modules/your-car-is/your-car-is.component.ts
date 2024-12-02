@@ -50,13 +50,13 @@ export class YourCarIsComponent extends QuoteComponent implements OnInit {
 
   public selectVehicle(vehicle: QuoteVehicleModel) {
     this._contextData.vehicle = { ...this._contextData.vehicle, ...vehicle };
-    this.routingService.next(this._contextData);
+    this.routingService.next();
   }
 
   public continue() {
     this.continueWithSelectedVehicle = false;
     this._contextData.vehicle = QuoteVehicleModel.init();
-    this.routingService.next(this._contextData);
+    this.routingService.next();
   }
 
   private isValidData = (): boolean => !this.continueWithSelectedVehicle || !!this._contextData.vehicle?.make;

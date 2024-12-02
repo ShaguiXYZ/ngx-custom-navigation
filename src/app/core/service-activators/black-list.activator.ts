@@ -11,7 +11,6 @@ export class BlackListActivator {
 
       const quote = services.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA);
       quote.blackList = { ...quote.blackList, identificationNumber: blackList.value };
-      services.contextDataService.set<QuoteModel>(QUOTE_CONTEXT_DATA, quote);
 
       return blackList.value;
     };
@@ -23,7 +22,6 @@ export class BlackListActivator {
 
       const quote = services.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA);
       quote.blackList = { ...quote.blackList, plateNumber: blackList.value };
-      services.contextDataService.set<QuoteModel>(QUOTE_CONTEXT_DATA, quote);
 
       return blackList.value;
     };
@@ -35,7 +33,6 @@ export class BlackListActivator {
 
       const quote = services.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA);
       quote.blackList = { ...quote.blackList, phoneNumber: blackList.value };
-      services.contextDataService.set<QuoteModel>(QUOTE_CONTEXT_DATA, quote);
 
       return blackList.value;
     };
@@ -47,7 +44,6 @@ export class BlackListActivator {
 
       const quote = services.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA);
       quote.blackList = { ...quote.blackList, email: blackList.value };
-      services.contextDataService.set<QuoteModel>(QUOTE_CONTEXT_DATA, quote);
 
       return blackList.value;
     };

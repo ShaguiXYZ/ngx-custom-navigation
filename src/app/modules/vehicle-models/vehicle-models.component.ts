@@ -66,7 +66,7 @@ export class VehicleModelsComponent extends QuoteComponent implements OnInit {
       model: this.selectedModel
     };
 
-    this.routingService.next(this._contextData);
+    this.routingService.next();
   }
 
   private updateValidData = (): boolean => {

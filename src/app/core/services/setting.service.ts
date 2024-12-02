@@ -68,7 +68,7 @@ export class SettingsService {
 
     if (appContextData) {
       const quote = { ...QuoteModel.init(), ...this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA) };
-      this.contextDataService.set(QUOTE_CONTEXT_DATA, quote, { persistent: true });
+      this.contextDataService.set(QUOTE_CONTEXT_DATA, quote, { persistent: true, referenced: true });
 
       console.group('SettingsService');
       console.log('Quote data', QUOTE_CONTEXT_DATA, quote);
@@ -89,7 +89,7 @@ export class SettingsService {
       persistent: true
     });
 
-    this.contextDataService.set(QUOTE_CONTEXT_DATA, QuoteModel.init(), { persistent: true });
+    this.contextDataService.set(QUOTE_CONTEXT_DATA, QuoteModel.init(), { persistent: true, referenced: true });
   };
 
   private init = (configuration: ConfigurationDTO): Configuration => {

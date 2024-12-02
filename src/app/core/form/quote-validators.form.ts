@@ -109,7 +109,6 @@ export class QuoteFormValidarors {
     validationValue: boolean
   ): ValidationErrors | null => {
     const validation = validationValue ? { [validationKey]: true } : null;
-
     const controlName = Object.keys(control.parent?.controls || {}).find(
       key => (control.parent?.controls as { [key: string]: AbstractControl })[key] === control
     );
@@ -131,7 +130,6 @@ export class QuoteFormValidarors {
         const validationSettings = lastPage.configuration?.validationSettings?.[controlName]?.[validationKey];
 
         quote.forms = { ...quote.forms, [lastPageId]: pageValidations };
-        this.contextDataService.set(QUOTE_CONTEXT_DATA, quote);
 
         if (validationSettings?.disabled) {
           return null;
