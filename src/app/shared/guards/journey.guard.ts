@@ -51,13 +51,16 @@ export const journeyGuard: CanActivateFn = (route: ActivatedRouteSnapshot, state
     const lastStepperKey = lastPage?.stepper?.key;
     let _track = deepCopy(track);
 
+    console.log(`lastStepperKey: ${lastStepperKey}, nextStepperKey: ${nextStepperKey}`, track);
+
     if (lastStepperKey && nextStepperKey !== lastStepperKey) {
       const lastStepper = steppers?.steppersMap[lastStepperKey];
 
       if (lastStepper?.stateInfo) {
-        const quote = deepCopy(contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA));
         const inData = _track?.[lastStepperKey]?.inData;
-        _track = { ...(_track ?? {}), [lastStepperKey]: { data: quote } };
+        _track = { ...(_track ?? {}), [lastStepperKey]: { data: deepCopy(contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA)) } };
+
+        console.log('stateInfoControl -> get context -> inData', inData);
 
         inData && contextDataService.set(QUOTE_CONTEXT_DATA, inData);
       }
@@ -69,7 +72,7 @@ export const journeyGuard: CanActivateFn = (route: ActivatedRouteSnapshot, state
         const tracked = _track?.[nextStepperKey]?.data ?? (nextStepper.stateInfo.inherited ? quote : QuoteModel.init());
         _track = { ...(_track ?? {}), [nextStepperKey]: { inData: quote, data: tracked } };
 
-        console.log('stateInfoControl -> set context', tracked);
+        console.log('stateInfoControl -> set context -> tracked', tracked);
 
         contextDataService.set(QUOTE_CONTEXT_DATA, tracked);
       }

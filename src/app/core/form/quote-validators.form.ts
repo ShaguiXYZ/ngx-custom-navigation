@@ -95,8 +95,12 @@ export class QuoteFormValidarors {
     (control: AbstractControl): ValidationErrors | null =>
       this.activateEntryPoint(control, 'requiredTrue', !control.value);
 
-  public matches = (masks: (string | RegExp)[]): ValidatorFn => {
+  public matches = (masks?: (string | RegExp)[]): ValidatorFn => {
     return (control: AbstractControl): ValidationErrors | null => {
+      if (!masks?.length) {
+        return null;
+      }
+
       const mask = masks.find(mask => new RegExp(mask).test(control.value));
 
       return this.activateEntryPoint(control, 'matches', !mask);

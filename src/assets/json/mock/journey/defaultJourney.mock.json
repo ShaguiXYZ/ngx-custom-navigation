@@ -33,8 +33,7 @@
           "label": "Presupuesto",
           "pages": ["offerings"]
         }
-      ],
-      "stateInfo": true
+      ]
     },
     {
       "steps": [
@@ -274,6 +273,9 @@
         }
       ],
       "configuration": {
+        "data": {
+          "contextData": { "blackList": { "plateNumber": { "blacklisted": false } } }
+        },
         "literals": {
           "continue-without-license-plate": "Continuar sin matrícula",
           "footer-info": "Facilitando tu matrícula obtendrás tu cotización mucho más rápido",

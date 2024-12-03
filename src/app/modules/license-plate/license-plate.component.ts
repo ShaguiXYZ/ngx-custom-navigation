@@ -13,6 +13,7 @@ import { QuoteTrackDirective } from 'src/app/core/tracking';
 import { HeaderTitleComponent, QuoteFooterComponent, QuoteFooterInfoComponent } from 'src/app/shared/components';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
+import { CountryCodes, PatternsByCountry } from './models';
 
 @Component({
   selector: 'quote-license-plate',
@@ -38,12 +39,8 @@ import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 })
 export class LicensePlateComponent extends QuoteComponent implements OnInit {
   public form!: FormGroup;
-
-  private readonly platePatterns = [
-    '^[0-9]{4}[ -]?[A-Z]{3}$', // 0000SSS
-    '^[A-Z]{1,2}[ -]?[0-9]{4}[ -]?[A-Z]{2}$', // S 0000 SS
-    '^[A-Z]{2}[ -]?[0-9]{5}$' // SS-00000
-  ];
+  public countryCode: CountryCodes = 'E';
+  public masks!: string;
 
   private readonly quoteFormValidarors = inject(QuoteFormValidarors);
   private readonly routingService = inject(RoutingService);
@@ -51,6 +48,7 @@ export class LicensePlateComponent extends QuoteComponent implements OnInit {
 
   ngOnInit(): void {
     this.createForm();
+    this.masks = PatternsByCountry[this.countryCode]?.mask ?? '';
     this._contextData.driven.hasDrivenLicense = true;
   }
 
@@ -75,7 +73,7 @@ export class LicensePlateComponent extends QuoteComponent implements OnInit {
     this.form = this.fb.group({
       plateNumber: new FormControl(this._contextData.vehicle.plateNumber, [
         this.quoteFormValidarors.required(),
-        this.quoteFormValidarors.matches(this.platePatterns)
+        this.quoteFormValidarors.matches(PatternsByCountry[this.countryCode]?.patterns)
       ])
     });
 
