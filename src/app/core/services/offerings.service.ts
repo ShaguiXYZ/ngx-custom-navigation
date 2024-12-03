@@ -3,7 +3,7 @@ import { inject, Injectable } from '@angular/core';
 import { ContextDataService, deepCopy, HttpService } from '@shagui/ng-shagui/core';
 import { firstValueFrom, map, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { QUOTE_APP_CONTEXT_DATA, QUOTE_CONTEXT_DATA } from '../constants';
+import { QUOTE_APP_CONTEXT_DATA } from '../constants';
 import { AppContextData, OfferingDTO, PricingDTO, QuoteModel, QuoteOfferingModel, SignatureModel } from '../models';
 import { ServiceActivatorService } from '../service-activators';
 
@@ -33,14 +33,14 @@ export class OfferingsService {
               quote.offering = { ...quote.offering, quotationId: offering.quotationId, prices: offering.prices };
               await this.serviceActivatorService.activateEntryPoint('on-pricing');
 
-              console.log('Quote changed', deepCopy(this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA)));
-
               quote.signature = { ...quote.signature, ...SignatureModel.signModel(quote, true) };
+
+              console.log('Quote changed');
             })
           )
       );
     } else {
-      console.log('Quote not changed', deepCopy(quote));
+      console.log('Quote not changed');
 
       return Promise.resolve(quote.offering);
     }

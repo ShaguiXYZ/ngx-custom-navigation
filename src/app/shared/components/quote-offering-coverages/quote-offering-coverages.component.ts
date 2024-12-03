@@ -54,7 +54,5 @@ export class QuoteOfferingCoveragesComponent implements OnInit {
     this.prices = prices ?? [];
 
     this.selectedPriceIndex = this.data.selectedPriceIndex ?? 0;
-
-    console.log('this.prices', this.data);
   }
 }

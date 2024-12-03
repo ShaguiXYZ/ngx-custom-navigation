@@ -40,10 +40,6 @@ export class AppComponent {
   private readonly routingService = inject(RoutingService);
   private readonly trackSercice = inject(QuoteTrackService);
 
-  constructor() {
-    console.log('Tracking ID', this.trackSercice.trackID);
-  }
-
   // @howto Detect the Closing of a Browser Tab
   @HostListener('window:beforeunload', ['$event'])
   beforeunloadHandler(event: BeforeUnloadEvent): void {

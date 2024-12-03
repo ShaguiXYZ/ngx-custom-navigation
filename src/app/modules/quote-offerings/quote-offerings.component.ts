@@ -3,11 +3,13 @@ import { CommonModule } from '@angular/common';
 import { Component, ElementRef, inject, OnInit, ViewChild } from '@angular/core';
 import { NxDialogService, NxModalModule, NxModalRef } from '@aposin/ng-aquila/modal';
 import { Subscription } from 'rxjs';
-import { OfferingPriceModel, QuoteComponent } from 'src/app/core/models';
+import { OfferingPriceModel, QuoteComponent, QuoteModel } from 'src/app/core/models';
 import { RoutingService } from 'src/app/core/services';
 import { OfferingsService } from 'src/app/core/services/offerings.service';
 import { QuoteOfferingCoveragesComponent } from 'src/app/shared/components';
 import { QuoteOfferingPriceCardComponent } from './components';
+import { deepCopy } from '@shagui/ng-shagui/core';
+import { QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
 
 @Component({
   selector: 'quote-quote-offerings',
@@ -36,7 +38,12 @@ export class QuoteOfferingsComponent extends QuoteComponent implements OnInit {
   private readonly dialogService = inject(NxDialogService);
 
   async ngOnInit(): Promise<void> {
+    console.group('QuoteOfferingsComponent.ngOnInit');
+
     const offering = await this.offeringsService.pricing(this._contextData);
+
+    console.log('Quote pricing', deepCopy(this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA)));
+    console.groupEnd();
 
     this.prices = offering.prices;
 
