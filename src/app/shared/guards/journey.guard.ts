@@ -3,7 +3,7 @@ import { inject } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivateFn, GuardResult, MaybeAsync, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { ContextDataService, deepCopy } from '@shagui/ng-shagui/core';
 import { QUOTE_APP_CONTEXT_DATA, QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
-import { AppContextData, Page, QuoteModel, Track, TrackData } from 'src/app/core/models';
+import { AppContextData, Page, QuoteModel, Track } from 'src/app/core/models';
 
 /**
  * Guard function to control navigation flow based on the application's context data.
@@ -51,17 +51,13 @@ export const journeyGuard: CanActivateFn = (route: ActivatedRouteSnapshot, state
     const lastStepperKey = lastPage?.stepper?.key;
     let _track = deepCopy(track);
 
-    console.log(`lastStepperKey: ${lastStepperKey}, nextStepperKey: ${nextStepperKey}`, track);
-
     if (lastStepperKey && nextStepperKey !== lastStepperKey) {
       const lastStepper = steppers?.steppersMap[lastStepperKey];
 
       if (lastStepper?.stateInfo) {
         const inData = _track?.[lastStepperKey]?.inData;
+
         _track = { ...(_track ?? {}), [lastStepperKey]: { data: deepCopy(contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA)) } };
-
-        console.log('stateInfoControl -> get context -> inData', inData);
-
         inData && contextDataService.set(QUOTE_CONTEXT_DATA, inData);
       }
 
@@ -70,10 +66,8 @@ export const journeyGuard: CanActivateFn = (route: ActivatedRouteSnapshot, state
       if (nextStepper && nextStepper?.stateInfo) {
         const quote = deepCopy(contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA));
         const tracked = _track?.[nextStepperKey]?.data ?? (nextStepper.stateInfo.inherited ? quote : QuoteModel.init());
+
         _track = { ...(_track ?? {}), [nextStepperKey]: { inData: quote, data: tracked } };
-
-        console.log('stateInfoControl -> set context -> tracked', tracked);
-
         contextDataService.set(QUOTE_CONTEXT_DATA, tracked);
       }
     }
@@ -84,7 +78,6 @@ export const journeyGuard: CanActivateFn = (route: ActivatedRouteSnapshot, state
   if (!nextPage?.pageId) return resetContext(context);
 
   const track = stateInfoControl(context);
-
   const { homePageId, errorPageId } = context.configuration;
   const pageIndex = viewedPages.indexOf(nextPage.pageId);
 

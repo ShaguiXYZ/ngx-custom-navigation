@@ -7,7 +7,7 @@ import { NxLinkModule } from '@aposin/ng-aquila/link';
 import { NxSwitcherModule } from '@aposin/ng-aquila/switcher';
 import { QuoteFormValidarors } from 'src/app/core/form';
 import { QuoteComponent } from 'src/app/core/models';
-import { HeaderTitleComponent, QuoteFooterComponent } from 'src/app/shared/components';
+import { HeaderTitleComponent, QuoteFooterComponent, QuoteZoneComponent } from 'src/app/shared/components';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 
@@ -24,6 +24,7 @@ import { QuoteLiteralPipe } from 'src/app/shared/pipes';
     NxLinkModule,
     NxSwitcherModule,
     QuoteFooterComponent,
+    QuoteZoneComponent,
     QuoteLiteralDirective,
     QuoteLiteralPipe,
     ReactiveFormsModule

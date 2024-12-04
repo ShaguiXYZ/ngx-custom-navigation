@@ -3,8 +3,9 @@ import { ActivatedRouteSnapshot, GuardResult, MaybeAsync, RouterStateSnapshot } 
 import { ContextDataService, deepCopy } from '@shagui/ng-shagui/core';
 import { Subscription } from 'rxjs';
 import { QUOTE_APP_CONTEXT_DATA, QUOTE_CONTEXT_DATA } from '../constants';
-import { patch } from '../lib';
+import { ConditionEvaluation, patch } from '../lib';
 import { AppContextData } from './app-context-data.model';
+import { Page } from './configuration.model';
 import { QuoteModel } from './quote.model';
 
 @Component({
@@ -48,5 +49,23 @@ export abstract class QuoteComponent implements OnDestroy {
         component[key as keyof T] = deepCopy(value) as T[keyof T];
       }
     }
+
+    Promise.resolve().then(() => lastPage && this.__zones(lastPage, component));
+  };
+
+  private __zones = (page: Page, component: QuoteComponent): void => {
+    if (!page.configuration?.zones) {
+      return;
+    }
+
+    const sections = Array.from(document.getElementsByTagName('quote-zone'));
+
+    Object.entries(page.configuration.zones).forEach(([key, value]) => {
+      const index = Number(key);
+
+      if (value.skipLoad && sections[index] && ConditionEvaluation.checkConditions(component['_contextData'], value.conditions)) {
+        sections[index].innerHTML = '';
+      }
+    });
   };
 }

@@ -1,34 +1,36 @@
 <!-- eslint-disable @angular-eslint/template/elements-content -->
-<div
-  class="footer-options nx-margin-top-l"
-  [ngClass]="{ 'mobile-options': mobileMode, 'nx-margin-bottom-xs': config.showBack || config.showNext }"
->
-  @if (config.showBack) {
-  <button
-    class="footer-option nx-margin-x-2xs nx-margin-y-2xs"
-    [ngClass]="{ 'mobile-option-back': mobileMode }"
-    nxButton="secondary medium"
-    type="button"
-    (click)="goToPreviousStep()"
+<quote-zone>
+  <div
+    class="footer-options nx-margin-top-l"
+    [ngClass]="{ 'mobile-options': mobileMode, 'nx-margin-bottom-xs': config.showBack || config.showNext }"
   >
-    @if(mobileMode) {
-    <nx-icon name="chevron-left" size="s" aria-hidden="true" />
-    }@else {
-    <span unxQuoteLiteral="footer-back"></span>
+    @if (config.showBack) {
+    <button
+      class="footer-option nx-margin-x-2xs nx-margin-y-2xs"
+      [ngClass]="{ 'mobile-option-back': mobileMode }"
+      nxButton="secondary medium"
+      type="button"
+      (click)="goToPreviousStep()"
+    >
+      @if(mobileMode) {
+      <nx-icon name="chevron-left" size="s" aria-hidden="true" />
+      }@else {
+      <span unxQuoteLiteral="footer-back"></span>
+      }
+    </button>
+    } @if (config.showNext) {
+    <button
+      class="footer-option"
+      nxButton="primary medium"
+      nxQuoteLiteral="footer-next"
+      type="button"
+      [nxTrack]="trackInfo"
+      [nxTrackEvents]="['click']"
+      (click)="goToNextStep()"
+    ></button>
     }
-  </button>
-  } @if (config.showNext) {
-  <button
-    class="footer-option"
-    nxButton="primary medium"
-    nxQuoteLiteral="footer-next"
-    type="button"
-    [nxTrack]="trackInfo"
-    [nxTrackEvents]="['click']"
-    (click)="goToNextStep()"
-  ></button>
-  }
-</div>
-<div class="footer-extras" [ngClass]="{ 'mobile-options': mobileMode }">
-  <ng-content></ng-content>
-</div>
+  </div>
+  <div class="footer-extras" [ngClass]="{ 'mobile-options': mobileMode }">
+    <ng-content></ng-content>
+  </div>
+</quote-zone>

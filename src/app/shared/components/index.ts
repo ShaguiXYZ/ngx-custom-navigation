@@ -8,5 +8,6 @@ export * from './quote-header';
 export * from './quote-keys';
 export * from './quote-offering-coverages';
 export * from './quote-stepper';
+export * from './quote-zone';
 export * from './selectable-option';
 export * from './text-card';

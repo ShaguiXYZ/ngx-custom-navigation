@@ -5,7 +5,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { ContextDataService } from '@shagui/ng-shagui/core';
 import { of } from 'rxjs';
 import { QUOTE_APP_CONTEXT_DATA, QUOTE_CONTEXT_DATA } from '../../constants';
-import { ConfigurationDTO } from '../../models';
+import { ConfigurationDTO, dataHash, QuoteModel } from '../../models';
 import { LiteralsService } from '../literals.service';
 import { SettingsService } from '../setting.service';
 
@@ -63,6 +63,7 @@ describe('SettingsService', () => {
     const appContextData = {
       settings: {},
       configuration: {
+        hash: dataHash(mockConfiguration),
         homePageId: mockConfiguration.homePageId,
         errorPageId: 'error',
         lastUpdate: mockConfiguration.lastUpdate,
@@ -92,11 +93,13 @@ describe('SettingsService', () => {
       }
     };
 
+    const quote = {};
+
     contextDataServiceSpy.get.and.callFake((contextDataKey: string): any => {
       if (contextDataKey === QUOTE_APP_CONTEXT_DATA) {
         return appContextData;
       } else if (contextDataKey === QUOTE_CONTEXT_DATA) {
-        return {};
+        return quote;
       }
       return null;
     });
@@ -105,8 +108,12 @@ describe('SettingsService', () => {
 
     await service.loadSettings();
 
-    expect(httpClientSpy.get.calls.count()).withContext('two calls').toBe(1);
-    expect(contextDataServiceSpy.set).toHaveBeenCalled();
+    expect(httpClientSpy.get.calls.count()).withContext('two calls').toBe(2);
+    expect(contextDataServiceSpy.set).toHaveBeenCalledWith(
+      QUOTE_CONTEXT_DATA,
+      { ...QuoteModel.init(), ...quote },
+      { persistent: true, referenced: true }
+    );
   });
 
   it('should load settings and update context data without previous context data', async () => {

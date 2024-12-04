@@ -4,7 +4,7 @@ import { NxCardModule } from '@aposin/ng-aquila/card';
 import { NxCopytextModule } from '@aposin/ng-aquila/copytext';
 import { NxHeadlineModule } from '@aposin/ng-aquila/headline';
 import { QuoteComponent } from 'src/app/core/models';
-import { HeaderTitleComponent, QuoteFooterComponent } from 'src/app/shared/components';
+import { HeaderTitleComponent, QuoteFooterComponent, QuoteZoneComponent } from 'src/app/shared/components';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
 
 @Component({
@@ -15,6 +15,7 @@ import { QuoteLiteralDirective } from 'src/app/shared/directives';
   imports: [
     HeaderTitleComponent,
     QuoteFooterComponent,
+    QuoteZoneComponent,
     NxButtonModule,
     NxCardModule,
     NxCopytextModule,
