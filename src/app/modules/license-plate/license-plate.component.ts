@@ -10,7 +10,7 @@ import { QuoteFormValidarors } from 'src/app/core/form';
 import { QuoteComponent } from 'src/app/core/models';
 import { RoutingService } from 'src/app/core/services';
 import { QuoteTrackDirective } from 'src/app/core/tracking';
-import { HeaderTitleComponent, QuoteFooterComponent, QuoteFooterInfoComponent } from 'src/app/shared/components';
+import { HeaderTitleComponent, QuoteFooterComponent, QuoteFooterInfoComponent, QuoteZoneComponent } from 'src/app/shared/components';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 import { CountryCodes, PatternsByCountry } from './models';
@@ -30,6 +30,7 @@ import { CountryCodes, PatternsByCountry } from './models';
     NxButtonModule,
     QuoteFooterComponent,
     QuoteFooterInfoComponent,
+    QuoteZoneComponent,
     ReactiveFormsModule,
     QuoteLiteralDirective,
     QuoteLiteralPipe,

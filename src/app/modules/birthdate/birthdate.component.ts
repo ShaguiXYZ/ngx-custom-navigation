@@ -8,7 +8,7 @@ import moment, { Moment } from 'moment';
 import { DEFAULT_DATE_FORMAT, DEFAULT_DATE_FORMATS } from 'src/app/core/constants';
 import { QuoteFormValidarors } from 'src/app/core/form';
 import { QuoteComponent } from 'src/app/core/models';
-import { HeaderTitleComponent, QuoteFooterComponent } from 'src/app/shared/components';
+import { HeaderTitleComponent, QuoteFooterComponent, QuoteZoneComponent } from 'src/app/shared/components';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 
@@ -19,11 +19,11 @@ import { QuoteLiteralPipe } from 'src/app/shared/pipes';
   standalone: true,
   imports: [
     HeaderTitleComponent,
+    QuoteFooterComponent,
     NxDatefieldModule,
     NxFormfieldModule,
     NxInputModule,
     NxMomentDateModule,
-    QuoteFooterComponent,
     ReactiveFormsModule,
     QuoteLiteralDirective,
     QuoteLiteralPipe

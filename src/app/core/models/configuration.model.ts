@@ -9,6 +9,11 @@ export type CompareOperations = 'AND' | 'OR';
 export type Links = DataInfo;
 export type Literals = DataInfo<LiteralModel>;
 
+export interface ZoneConfig {
+  skipLoad?: boolean;
+  conditions?: Condition[];
+}
+
 export interface ConfigurationDTO {
   homePageId: string;
   errorPageId?: string;
@@ -24,6 +29,7 @@ export interface PageConfiguration {
   data?: DataInfo<unknown>;
   validationSettings?: PageFormValidationSettings;
   serviceActivators?: ServiceActivator[];
+  zones?: Record<number, ZoneConfig>;
 }
 
 export interface Page {
@@ -52,6 +58,7 @@ export interface Condition {
 }
 
 export interface Configuration {
+  hash?: string;
   homePageId: string;
   errorPageId: string;
   lastUpdate?: Date;

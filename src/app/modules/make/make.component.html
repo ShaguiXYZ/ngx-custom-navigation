@@ -2,12 +2,14 @@
   <quote-header-title><span nxQuoteLiteral="header"></span></quote-header-title>
   <section class="form-container">
     <form [formGroup]="form">
-      <nx-formfield [label]="'search' | quoteLiteral" appearance="outline">
-        <input #searchInput type="text" formControlName="searchInput" nxInput />
-        <span nxFormfieldSuffix>
-          <nx-icon name="search" size="s"></nx-icon>
-        </span>
-      </nx-formfield>
+      <quote-zone>
+        <nx-formfield [label]="'search' | quoteLiteral" appearance="outline">
+          <input #searchInput type="text" formControlName="searchInput" nxInput />
+          <span nxFormfieldSuffix>
+            <nx-icon name="search" size="s"></nx-icon>
+          </span>
+        </nx-formfield>
+      </quote-zone>
     </form>
 
     @if(!form.value.searchInput) {

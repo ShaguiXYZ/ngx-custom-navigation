@@ -2,30 +2,25 @@
 
 # Índice
 
-1. [Descripción de la Aplicación](#descripción-de-la-aplicación)
-2. [Características Principales](#características-principales)
-3. [Ejemplo de Uso](#ejemplo-de-uso)
-4. [Estructura General](#estructura-general)
-   - [last_update](#last_update)
-   - [homePageId](#homepageid)
-   - [steppers](#steppers)
-   - [pageMap](#pagemap)
-   - [links](#links)
-   - [literals](#literals)
-5. [Detalle de las Secciones](#detalle-de-las-secciones)
-   - [Steppers](#steppers-1)
-   - [PageMap](#pagemap-1)
-   - [Condiciones de Navegación](#condiciones-de-navegación)
-   - [Literals](#literals-1)
-   - [Entry Points](#entry-points)
-6. [Funcionamiento General](#funcionamiento-general)
-7. [Ejemplo de Flujo de Navegación](#ejemplo-de-flujo-de-navegación)
-8. [Literales en `ngx-custom-navigation`](#literales-en-ngx-custom-navigation)
-   - [Tipos de Literales](#tipos-de-literales)
-9. [Ejemplos de Uso](#ejemplos-de-uso)
-10. [Descripción del archivo package.json](#descripción-del-archivo-packagejson)
-11. [Proceso de Arranque de la Aplicación](#proceso-de-arranque-de-la-aplicación)
-12. [Licencia](#licencia)
+- [ngx-custom-navigation](#ngx-custom-navigation)
+- [Índice](#índice)
+    - [Descripción de la Aplicación](#descripción-de-la-aplicación)
+      - [Características Principales:](#características-principales)
+      - [Ejemplo de Uso:](#ejemplo-de-uso)
+    - [Estructura General](#estructura-general)
+    - [Detalle de las Secciones](#detalle-de-las-secciones)
+      - [Steppers](#steppers)
+      - [PageMap](#pagemap)
+      - [Condiciones de Navegación](#condiciones-de-navegación)
+      - [Literals](#literals)
+      - [Service Activators](#service-activators)
+      - [Zones](#zones)
+    - [Funcionamiento General](#funcionamiento-general)
+    - [Ejemplo de Flujo de Navegación](#ejemplo-de-flujo-de-navegación)
+    - [Descripción del archivo package.json](#descripción-del-archivo-packagejson)
+      - [Estructura del archivo package.json:](#estructura-del-archivo-packagejson)
+    - [Proceso de Arranque de la Aplicación](#proceso-de-arranque-de-la-aplicación)
+    - [Licencia](#licencia)
 
 ### Descripción de la Aplicación
 
@@ -142,15 +137,21 @@ Ejemplo:
         "showBack": false,
         "showContactUs": false
       }
-    }
+    },
+    "serviceActivators": [
+      {
+        "entryPoint": "on-pricing",
+        "activator": "store-budget"
+      }
+    ],
+    "zones": { "3": { "skipLoad": true } }
   }
 }
 ```
 
 - **pageId**: Identificador único de la página.
 - **nextOptionList**: Lista de opciones de navegación para determinar la siguiente página, basada en condiciones específicas.
-- **configuration**: Configuración específica de la página, incluyendo literales y datos.
-- **entryPoints**: Puntos de ejecución de funcionalidades.
+- **configuration**: Configuración específica de la página, incluyendo literales, datos y zonas de pantalla.
 
 #### Condiciones de Navegación
 Las condiciones de navegación determinan la siguiente página basada en expresiones lógicas.
@@ -159,19 +160,27 @@ Ejemplo:
 ```json
 {
   "nextPageId": "is-client-client-name",
-  "conditions": [
+  "nextOptionList": [
     {
       "expression": "client.isClient",
       "value": "true"
+    },
+    {
+      "expression": "place.provinceCode",
+      "union": "OR",
+      "value": "52"
     }
   ]
 }
 ```
 - **expression**: Expresión lógica que debe evaluarse.
+- **union**: operación a aplicar a las condiciones anteriores (AND | OR)
 - **value**: Valor esperado para que la condición sea verdadera.
 
 #### Literals
-Define los textos y etiquetas que se utilizan en la interfaz de usuario.
+En el proyecto `ngx-custom-navigation`, los literales se utilizan para definir textos estáticos y dinámicos que se muestran en la interfaz de usuario.
+
+Estos literales permiten una mayor flexibilidad y personalización en los textos mostrados en la aplicación, facilitando tanto la localización como la actualización de contenidos.
 
 Ejemplo:
 ```json
@@ -187,16 +196,16 @@ Ejemplo:
 - **subheader**: Texto del subencabezado de la página.
 - **or-more**: value representa una clave a ser traducida.
 
-#### Entry Points
+#### Service Activators
 Define los puntos de entrada para determinadas acciones o eventos. También se pueden configurar condiciones para la ejecución del activador.
 
 Ejemplo:
 ```json
 {
-  "entryPoints": [
+  "serviceActivators": [
     {
-      "id": "next-page",
-      "activator": "black-list-plate",
+      "entryPoint": "next-page",
+      "service": "black-list-plate",
       "params": { "percent": 0.7 },
       "conditions": [
         {
@@ -208,18 +217,37 @@ Ejemplo:
   ]
 }
 ```
-- **id**: Identificador del punto de entrada.
-- **activator**: Activador que inicia el punto de entrada.
+- **entryPoint**: Identificador del punto de entrada.
+- **service**: Activador que inicia el punto de entrada.
 - **params**: Parámetros adicionales necesarios para el punto de entrada.
 - **conditions**: Lista de condiciones que deben cumplirse para que se ejecute el activador.
 - **expression**: Expresión lógica que debe evaluarse.
 - **value**: Valor esperado para que la condición sea verdadera.
+
+
+#### Zones
+Las página de `ngx-custom-navigation` pueden estar devididas en zonas, estas zonas pudene ser configuradas indevidualmente.
+
+Ejemplo:
+```json
+{
+  "zones": { 
+    "0": { "skipLoad": true },
+    "3": { "skipLoad": true } 
+  }
+}
+```
+- **key (0,1,2...)**: Posición de la zona en la página.
+- **skipLoad**: indica si la zona ha de ser cargada o no.
+
+
 ### Funcionamiento General
 1. **Inicio**: La navegación comienza en la página identificada por `homePageId`.
 2. **Pasos**: El usuario sigue los pasos definidos en `steppers`. Cada paso puede contener varias páginas.
 3. **Páginas**: Cada página tiene configuraciones específicas y puede determinar la siguiente página basada en las condiciones definidas en `nextOptionList`.
 4. **Condiciones**: Las condiciones de navegación permiten decisiones dinámicas basadas en los datos del usuario o el estado actual.
 5. **Literales**: Los textos y etiquetas se configuran dinámicamente utilizando los literales definidos.
+
 
 ### Ejemplo de Flujo de Navegación
 1. El usuario comienza en la página `on-boarding`.
@@ -229,81 +257,6 @@ Ejemplo:
 5. De lo contrario, la siguiente página es `date-of-issue`.
 
 Este JSON proporciona una forma flexible y configurable de definir la navegación y flujo de una aplicación, permitiendo actualizar y modificar la experiencia del usuario sin necesidad de cambios en el código fuente.
-
-
-### Literales en `ngx-custom-navigation`
-
-En el proyecto `ngx-custom-navigation`, los literales se utilizan para definir textos estáticos y dinámicos que se muestran en la interfaz de usuario. A continuación, se describen detalladamente los tipos de literales y sus usos.
-
-#### Tipos de Literales
-
-1. **LiteralType**
-   - **Descripción**: Define el tipo de literal.
-   - **Valores posibles**:
-     - `value`: Indica que el literal es un valor estático.
-     - `translate`: Indica que el literal es una clave que debe ser traducida.
-
-2. **QuoteLiteral**
-   - **Descripción**: Representa un literal con un valor y un tipo opcional.
-   - **Propiedades**:
-     - `value` (string): El valor del literal.
-     - `type` (LiteralType, opcional): El tipo del literal (`value` o `translate`).
-
-3. **LiteralParam**
-   - **Descripción**: Utiliza el tipo `DataInfo` de `@shagui/ng-shagui/core` para definir parámetros literales.
-   - **Tipo**: `DataInfo<LiteralModel>`
-
-4. **LiteralModel**
-   - **Descripción**: Define el modelo de un literal, que puede ser un string, un número o un `QuoteLiteral`.
-   - **Valores posibles**:
-     - String: Un texto estático.
-     - Number: Un número.
-     - `QuoteLiteral`: Un objeto que incluye un valor y un tipo opcional.
-
-```typescript
-import { DataInfo } from '@shagui/ng-shagui/core';
-
-export type LiteralType = 'value' | 'translate';
-
-export interface QuoteLiteral {
-  value: string;
-  type?: LiteralType;
-}
-
-export type LiteralParam = DataInfo<LiteralModel>;
-
-export type LiteralModel = string | number | QuoteLiteral;
-```
-
-### Ejemplos de Uso
-
-1. **Literal Estático (value)**
-   ```typescript
-   const staticLiteral: QuoteLiteral = {
-     value: "Bienvenido",
-     type: 'value'
-   };
-   ```
-
-2. **Literal para Traducción (translate)**
-   ```typescript
-   const translatedLiteral: QuoteLiteral = {
-     value: "welcome_message",
-     type: 'translate'
-   };
-   ```
-
-3. **Literal de Tipo String**
-   ```typescript
-   const stringLiteral: LiteralModel = "Texto estático";
-   ```
-
-4. **Literal de Tipo Número**
-   ```typescript
-   const numberLiteral: LiteralModel = 42;
-   ```
-
-Estos literales permiten una mayor flexibilidad y personalización en los textos mostrados en la aplicación, facilitando tanto la localización como la actualización de contenidos.
 
 
 ### Descripción del archivo package.json

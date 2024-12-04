@@ -17,6 +17,8 @@ export interface SignatureModel {
   budget?: string;
 }
 
+export const dataHash = (model: unknown): string => CryptoJS.SHA256(JSON.stringify(model)).toString(CryptoJS.enc.Hex);
+
 export namespace SignatureModel {
   export const signModel = (model: QuoteModel, ignoreChangeDetection = false): SignatureModel => {
     const { signature } = model;
@@ -26,6 +28,4 @@ export namespace SignatureModel {
       changed: !ignoreChangeDetection && (signature?.changed || signature?.hash !== currentQuoteSignature)
     };
   };
-
-  const dataHash = (model: unknown): string => CryptoJS.SHA256(JSON.stringify(model)).toString(CryptoJS.enc.Hex);
 }

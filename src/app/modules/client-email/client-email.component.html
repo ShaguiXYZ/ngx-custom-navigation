@@ -13,28 +13,32 @@
         <nx-error appearance="text" nxFormfieldError><span nxQuoteLiteral="bad-format"></span> </nx-error>
         }
       </nx-formfield>
-      <div class="products-info nx-margin-top-s">
-        <div class="products-info-literal nx-margin-right-xs" nxCopytext="normal">
-          <span nxQuoteLiteral="more-info"></span>
+      <quote-zone>
+        <div class="products-info nx-margin-top-s">
+          <div class="products-info-literal nx-margin-right-xs" nxCopytext="normal">
+            <span nxQuoteLiteral="more-info"></span>
+          </div>
+          <nx-switcher formControlName="accepInfo" />
         </div>
-        <nx-switcher formControlName="accepInfo" />
-      </div>
-      <div class="products-info nx-margin-top-s">
-        <div class="privatity products-info-literal nx-margin-right-xs" nxCopytext="normal">
-          <span nxQuoteLiteral="text-01"></span>
-          <nx-link nxStyle="text">
-            <a routerLink="/documentation" nxQuoteLiteral="privacy-policy"></a>
-          </nx-link>
-          <span nxQuoteLiteral="text-02"></span>
+      </quote-zone>
+      <quote-zone>
+        <div class="products-info nx-margin-top-s">
+          <div class="privatity products-info-literal nx-margin-right-xs" nxCopytext="normal">
+            <span nxQuoteLiteral="text-01"></span>
+            <nx-link nxStyle="text">
+              <a routerLink="/documentation" nxQuoteLiteral="privacy-policy"></a>
+            </nx-link>
+            <span nxQuoteLiteral="text-02"></span>
+          </div>
+          <nx-switcher formControlName="acceptPrivacyPolicy" />
         </div>
-        <nx-switcher formControlName="acceptPrivacyPolicy" />
-      </div>
-      @if(form.get('acceptPrivacyPolicy')?.touched && form.get('acceptPrivacyPolicy')?.errors?.['requiredTrue']) {
-      <nx-error class="align-right" appearance="text" nxFormfieldError><span nxQuoteLiteral="error-required"></span></nx-error>
-      }
-      <div class="legal-text nx-margin-top-s" nxCopytext="normal" nxQuoteLiteral="legal-text">
-        <span class="products-info-literal nx-margin-y-s"></span>
-      </div>
+        @if(form.get('acceptPrivacyPolicy')?.touched && form.get('acceptPrivacyPolicy')?.errors?.['requiredTrue']) {
+        <nx-error class="align-right" appearance="text" nxFormfieldError><span nxQuoteLiteral="error-required"></span></nx-error>
+        }
+        <div class="legal-text nx-margin-top-s" nxCopytext="normal" nxQuoteLiteral="legal-text">
+          <span class="products-info-literal nx-margin-y-s"></span>
+        </div>
+      </quote-zone>
     </form>
   </section>
   <quote-footer

@@ -9,8 +9,6 @@ export class QuoteActivator {
     async (params: unknown): Promise<boolean> => {
       const quote = services.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA);
 
-      console.log('QuoteActivator -> quotePatch -> quote', quote);
-
       services.contextDataService.set(QUOTE_CONTEXT_DATA, patch(quote, params));
 
       return Promise.resolve(true);

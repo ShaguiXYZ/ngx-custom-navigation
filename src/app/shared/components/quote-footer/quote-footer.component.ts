@@ -12,12 +12,13 @@ import { QuoteTrackDirective, TrackInfo } from 'src/app/core/tracking';
 import { QuoteLiteralDirective } from '../../directives';
 import { QuoteLiteralPipe } from '../../pipes';
 import { QuoteFooterConfig } from './models';
+import { QuoteZoneComponent } from '../quote-zone';
 
 @Component({
   selector: 'quote-footer',
   templateUrl: './quote-footer.component.html',
   styleUrl: './quote-footer.component.scss',
-  imports: [CommonModule, NxButtonModule, NxIconModule, QuoteLiteralDirective, QuoteTrackDirective],
+  imports: [QuoteZoneComponent, CommonModule, NxButtonModule, NxIconModule, QuoteLiteralDirective, QuoteTrackDirective],
   standalone: true
 })
 export class QuoteFooterComponent implements OnInit, OnDestroy {

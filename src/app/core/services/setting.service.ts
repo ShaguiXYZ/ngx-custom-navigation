@@ -8,6 +8,7 @@ import {
   AppContextData,
   Configuration,
   ConfigurationDTO,
+  dataHash,
   Links,
   LiteralModel,
   Literals,
@@ -65,8 +66,12 @@ export class SettingsService {
 
   private loadContext = async (settings: QuoteSettingsModel): Promise<void> => {
     const appContextData = this.contextDataService.get<AppContextData>(QUOTE_APP_CONTEXT_DATA);
+    const configurationDTO = await firstValueFrom(
+      this.httpService.get<ConfigurationDTO>(`${environment.baseUrl}/${environment.journey}`).pipe(map(res => res as ConfigurationDTO))
+    );
+    const hash = dataHash(configurationDTO);
 
-    if (appContextData) {
+    if (appContextData && appContextData.configuration.hash === hash) {
       const quote = { ...QuoteModel.init(), ...this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA) };
       this.contextDataService.set(QUOTE_CONTEXT_DATA, quote, { persistent: true, referenced: true });
 
@@ -78,12 +83,9 @@ export class SettingsService {
       return;
     }
 
-    const configuration = await firstValueFrom(
-      this.httpService.get<ConfigurationDTO>(`${environment.baseUrl}/${environment.journey}`).pipe(
-        map(res => res as ConfigurationDTO),
-        map(this.init)
-      )
-    );
+    const configuration = this.init(configurationDTO);
+
+    configuration.hash = hash;
 
     this.contextDataService.set(QUOTE_APP_CONTEXT_DATA, AppContextData.init(settings, configuration, []), {
       persistent: true

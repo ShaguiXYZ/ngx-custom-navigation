@@ -1,5 +1,5 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { NxCopytextModule } from '@aposin/ng-aquila/copytext';
 import { NX_DATE_LOCALE } from '@aposin/ng-aquila/datefield';
 import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
@@ -18,11 +18,11 @@ import { QuoteLiteralPipe } from 'src/app/shared/pipes';
   standalone: true,
   imports: [
     HeaderTitleComponent,
+    QuoteFooterComponent,
     NxCopytextModule,
     NxFormfieldModule,
     NxMaskModule,
     NxInputModule,
-    QuoteFooterComponent,
     ReactiveFormsModule,
     QuoteLiteralDirective,
     QuoteLiteralPipe
