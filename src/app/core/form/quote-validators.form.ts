@@ -72,14 +72,6 @@ export class QuoteFormValidarors {
     return (control: AbstractControl): ValidationErrors | null => this.activateEntryPoint(control, 'minValues', control.value < minValue);
   };
 
-  public email = (): ValidatorFn => {
-    return (control: AbstractControl): ValidationErrors | null => {
-      const emailPattern = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/;
-
-      return this.activateEntryPoint(control, 'email', !emailPattern.test(control.value));
-    };
-  };
-
   public required =
     (): ValidatorFn =>
     (control: AbstractControl): ValidationErrors | null =>
@@ -95,13 +87,13 @@ export class QuoteFormValidarors {
     (control: AbstractControl): ValidationErrors | null =>
       this.activateEntryPoint(control, 'requiredTrue', !control.value);
 
-  public matches = (masks?: (string | RegExp)[]): ValidatorFn => {
+  public matches = (masks?: (string | RegExp)[], flags?: string): ValidatorFn => {
     return (control: AbstractControl): ValidationErrors | null => {
       if (!masks?.length) {
         return null;
       }
 
-      const mask = masks.find(mask => new RegExp(mask).test(control.value));
+      const mask = masks.find(mask => new RegExp(mask, flags).test(control.value));
 
       return this.activateEntryPoint(control, 'matches', !mask);
     };

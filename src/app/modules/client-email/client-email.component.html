@@ -9,7 +9,7 @@
         <input type="email" formControlName="email" nxInput email />
         @if(form.get('email')?.errors?.['required']) {
         <nx-error appearance="text" nxFormfieldError><span nxQuoteLiteral="error-required"></span> </nx-error>
-        } @if(form.get('email')?.errors?.['email']) {
+        } @if(form.get('email')?.errors?.['matches']) {
         <nx-error appearance="text" nxFormfieldError><span nxQuoteLiteral="bad-format"></span> </nx-error>
         }
       </nx-formfield>

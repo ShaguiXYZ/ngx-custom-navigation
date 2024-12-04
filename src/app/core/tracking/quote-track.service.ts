@@ -70,7 +70,7 @@ export class QuoteTrackService implements OnDestroy {
           return acc;
         }, {} as TrackInfo),
       category: 'tarificador',
-      pagina: this.infoPage?.page,
+      page: this.infoPage?.page,
       URL: this.infoPage?.URL,
       step_number: `${viewedPages.length}`
     };

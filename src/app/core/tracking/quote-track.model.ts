@@ -41,7 +41,7 @@ export type TrackKey =
   | 'infoPag'
   | 'label'
   | 'new'
-  | 'pagina'
+  | 'page'
   | 'selected_tab'
   | 'step_number'
   | 'title'
