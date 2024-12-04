@@ -563,7 +563,6 @@
       ],
       "configuration": {
         "literals": {
-          "e-mail": "Correo electrónico",
           "header": "Déjanos tu email y recibe tu presupuesto al instante",
           "legal-text": { "value": "Texto legal pendiente definir...", "type": "value" },
           "more-info": "Quiero recibir información sobre productos y ofertas de Shagui",
@@ -770,7 +769,7 @@
         "validationSettings": {
           "acceptPrivacyPolicy": { "requiredTrue": { "disabled": true } }
         },
-        "zones": { "3": { "skipLoad": true } }
+        "zones": { "2": { "skipLoad": true } }
       }
     },
     {
@@ -870,6 +869,7 @@
     "budget-name": "Nombre del presupuesto",
     "budget-key": "Clave del presupuesto",
     "create-budget": "Crear presupuesto",
+    "e-mail": "Correo electrónico",
     "header-back": "Volver",
     "save-budget": "Guardar presupuesto",
     "retrieve-budget": "Recuperar presupuesto",
