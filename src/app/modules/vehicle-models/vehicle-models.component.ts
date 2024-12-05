@@ -49,7 +49,7 @@ export class VehicleModelsComponent extends QuoteComponent implements OnInit {
   ngOnInit(): void {
     this.selectedModel = this._contextData.vehicle.model;
 
-    this.vehicleService.getModels(this._contextData.vehicle.make!, this._contextData.vehicle.model).then(models => {
+    this.vehicleService.getModels(this._contextData.vehicle.brand!, this._contextData.vehicle.model).then(models => {
       this.models = models;
     });
 
@@ -89,7 +89,7 @@ export class VehicleModelsComponent extends QuoteComponent implements OnInit {
         distinctUntilChanged()
       )
       .subscribe(
-        async () => (this.models = await this.vehicleService.getModels(this._contextData.vehicle.make!, this.form.value.searchInput))
+        async () => (this.models = await this.vehicleService.getModels(this._contextData.vehicle.brand!, this.form.value.searchInput))
       );
   }
 }

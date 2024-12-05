@@ -117,12 +117,6 @@ export const routes: Routes = configContextRoutes([
     canDeactivate: [canDeactivateGuard]
   },
   {
-    path: AppUrls.make,
-    loadComponent: () => import('./modules/make/make.component').then(c => c.MakeComponent),
-    canActivate: [journeyGuard],
-    canDeactivate: [canDeactivateGuard]
-  },
-  {
     path: AppUrls.numberAccidents,
     loadComponent: () => import('./modules/number-accidents/number-accidents.component').then(c => c.NumberAccidentsComponent),
     canActivate: [journeyGuard],
@@ -136,13 +130,13 @@ export const routes: Routes = configContextRoutes([
   },
   {
     path: AppUrls.onBoarding,
-    loadComponent: () => import('./modules/onboarding/onboarding.component').then(c => c.OnboardingComponent),
+    loadComponent: () => import('./modules/on-boarding/on-boarding.component').then(c => c.OnBoardingComponent),
     canActivate: [journeyGuard],
     canDeactivate: [canDeactivateGuard]
   },
   {
     path: AppUrls.pageNotFound,
-    loadComponent: () => import('./modules/pagenotfound/pagenotfound.component').then(c => c.PagenotfoundComponent),
+    loadComponent: () => import('./modules/pagenotfound/pagenotfound.component').then(c => c.PageNotfoundComponent),
     canActivate: [journeyGuard],
     canDeactivate: [canDeactivateGuard]
   },
@@ -156,6 +150,12 @@ export const routes: Routes = configContextRoutes([
     path: AppUrls.timeInsuranceHolder,
     loadComponent: () =>
       import('./modules/time-insurance-holder/time-insurance-holder.component').then(c => c.TimeInsuranceHolderComponent),
+    canActivate: [journeyGuard],
+    canDeactivate: [canDeactivateGuard]
+  },
+  {
+    path: AppUrls.vehicleBrand,
+    loadComponent: () => import('./modules/vehicle-brand/vehicle-brand.component').then(c => c.VehicleBrandComponent),
     canActivate: [journeyGuard],
     canDeactivate: [canDeactivateGuard]
   },

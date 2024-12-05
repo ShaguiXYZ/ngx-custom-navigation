@@ -14,21 +14,19 @@ export interface FuelDTO {
   additionalText?: string;
 }
 
-export type FuelModel = IndexedData<string, FuelTypes>;
-
-export namespace FuelModel {
-  export const fromDTO = (dto: FuelDTO): FuelModel => ({
+export namespace FuelDTO {
+  export const toModel = (dto: FuelDTO): FuelModel => ({
     index: dto.value,
     data: dto.label
   });
 }
 
+export type FuelModel = IndexedData<string, FuelTypes>;
+
 export type VehicleClassesDTO<K extends string = string, T extends string = string> = `${K}.${T}`;
 
-export type VehicleClassesModel = IndexedData;
-
-export namespace VehicleClassesModel {
-  export const fromDTO = (dto: VehicleClassesDTO): VehicleClassesModel => {
+export namespace VehicleClassesDTO {
+  export const toModel = (dto: VehicleClassesDTO): VehicleClassesModel => {
     const [K, T] = dto.split('.') as [string, string];
 
     return {
@@ -38,19 +36,21 @@ export namespace VehicleClassesModel {
   };
 }
 
+export type VehicleClassesModel = IndexedData;
+
 export interface CubicCapacityDTO {
   value: string;
   label: string;
 }
 
-export type CubicCapacityModel = IndexedData;
-
-export namespace CubicCapacityModel {
-  export const fromDTO = (dto: CubicCapacityDTO): CubicCapacityModel => ({
+export namespace CubicCapacityDTO {
+  export const toModel = (dto: CubicCapacityDTO): CubicCapacityModel => ({
     index: dto.value,
     data: dto.label
   });
 }
+
+export type CubicCapacityModel = IndexedData;
 
 export type ModelVersionModel = IndexedData<string, number>;
 
@@ -58,7 +58,6 @@ interface VehicleData {
   plateNumber: string;
   firstRegistrationDate: Date;
   ineCode: string;
-  make: string;
   model: string;
   postalCode: string;
   vehicleCode: string;
@@ -74,11 +73,29 @@ interface VehicleData {
   modelVersion?: ModelVersionModel;
 }
 
+export interface VehicleDTO extends Partial<VehicleData> {
+  make: string;
+}
+
+export namespace VehicleDTO {
+  export const toModel = (dto: VehicleDTO): QuoteVehicleModel => {
+    const { make, ...data } = dto;
+
+    return {
+      ...data,
+      brand: make,
+      model: dto.model,
+      creationDate: dto.releaseDate
+    };
+  };
+}
+
 export interface QuoteVehicleModel extends Partial<VehicleData> {
-  make?: string;
+  brand?: string;
   yearOfManufacture?: number;
   vehicleType?: string;
   creationDate?: Date;
+  notFound?: boolean;
 }
 
 export namespace QuoteVehicleModel {

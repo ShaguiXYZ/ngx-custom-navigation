@@ -8,10 +8,10 @@ import { SelectableOptionComponent } from '../selectable-option';
 
 @Component({
   selector: 'quote-icon-card',
-  standalone: true,
-  imports: [CommonModule, SelectableOptionComponent, NxAvatarModule, NxCopytextModule, QuoteLiteralDirective],
   templateUrl: './icon-card.component.html',
-  styleUrl: './icon-card.component.scss'
+  styleUrl: './icon-card.component.scss',
+  imports: [CommonModule, SelectableOptionComponent, NxAvatarModule, NxCopytextModule, QuoteLiteralDirective],
+  standalone: true
 })
 export class IconCardComponent {
   @Input()

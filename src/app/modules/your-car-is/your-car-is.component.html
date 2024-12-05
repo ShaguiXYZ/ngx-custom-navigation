@@ -12,13 +12,12 @@
         (uiSelect)="selectVehicle(vehicle)"
       >
         <div class="card-container">
-          <span nxCopytext="medium" class="card-text nx-margin-top-s nx-font-weight-bold"> {{ vehicle.make }} {{ vehicle.model }}</span>
+          <span nxCopytext="medium" class="card-text nx-margin-top-s nx-font-weight-bold"> {{ vehicle.brand }} {{ vehicle.model }}</span>
           <span nxCopytext="medium" class="card-text nx-margin-bottom-s">
             {{ vehicle.fuel?.data }} - {{ vehicle.power }} CV - {{ vehicle.yearOfManufacture }}
           </span>
         </div>
       </quote-text-card>
-
       } @placeholder {
       <div class="card-placeholder"></div>
       }

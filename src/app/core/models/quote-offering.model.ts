@@ -95,6 +95,40 @@ export interface OfferingDTO {
   agentCluster: number;
 }
 
+export namespace OfferingDTO {
+  export const toModel = (dto: OfferingDTO): QuoteOfferingModel => {
+    const prices: OfferingPriceModel[] = dto.operationData.priceGrid.map(priceGrid => {
+      const mapCoverage = (coverageDTO: CoverageDTO): Coverage => ({
+        code: coverageDTO.code,
+        text: coverageDTO.texto,
+        description: coverageDTO.description,
+        isContracted: coverageDTO.isContracted,
+        value: coverageDTO.value,
+        subcoverages: Array.isArray(coverageDTO.subcoverages) ? (coverageDTO.subcoverages as CoverageDTO[]).map(mapCoverage) : null
+      });
+
+      return {
+        modalityId: priceGrid.modalityId,
+        modalityDescription: priceGrid.modalityDescription,
+        modalityFullDescription: priceGrid.modalityFullDescription,
+        paymentType: priceGrid.paymentType,
+        paymentTypeDescription: priceGrid.paymentTypeDescription,
+        contractable: priceGrid.contractable,
+        totalPremiumAmount: priceGrid.totalPremiumAmount,
+        fee: priceGrid.fee ? [priceGrid.fee] : [],
+        receiptData: {
+          firstReceiptAmount: parseFloat(priceGrid.receiptData.firstReceiptAmount),
+          followingReceiptAmount: parseFloat(priceGrid.receiptData.followingReceiptAmount)
+        },
+        coverageList: priceGrid.coverageList.map(mapCoverage),
+        configurableCoverageList: priceGrid.configurableCoverageList.map(mapCoverage)
+      };
+    });
+
+    return { quotationId: dto.operationData.quotationId, prices: prices }; // Assuming you want to return the first price object
+  };
+}
+
 export interface ReceiptData {
   firstReceiptAmount: number;
   followingReceiptAmount: number;
@@ -134,35 +168,4 @@ export interface QuoteOfferingModel {
 
 export namespace QuoteOfferingModel {
   export const init = (): QuoteOfferingModel => ({} as QuoteOfferingModel);
-  export const fromDTO = (dto: OfferingDTO): QuoteOfferingModel => {
-    const prices: OfferingPriceModel[] = dto.operationData.priceGrid.map(priceGrid => {
-      const mapCoverage = (coverageDTO: CoverageDTO): Coverage => ({
-        code: coverageDTO.code,
-        text: coverageDTO.texto,
-        description: coverageDTO.description,
-        isContracted: coverageDTO.isContracted,
-        value: coverageDTO.value,
-        subcoverages: Array.isArray(coverageDTO.subcoverages) ? (coverageDTO.subcoverages as CoverageDTO[]).map(mapCoverage) : null
-      });
-
-      return {
-        modalityId: priceGrid.modalityId,
-        modalityDescription: priceGrid.modalityDescription,
-        modalityFullDescription: priceGrid.modalityFullDescription,
-        paymentType: priceGrid.paymentType,
-        paymentTypeDescription: priceGrid.paymentTypeDescription,
-        contractable: priceGrid.contractable,
-        totalPremiumAmount: priceGrid.totalPremiumAmount,
-        fee: priceGrid.fee ? [priceGrid.fee] : [],
-        receiptData: {
-          firstReceiptAmount: parseFloat(priceGrid.receiptData.firstReceiptAmount),
-          followingReceiptAmount: parseFloat(priceGrid.receiptData.followingReceiptAmount)
-        },
-        coverageList: priceGrid.coverageList.map(mapCoverage),
-        configurableCoverageList: priceGrid.configurableCoverageList.map(mapCoverage)
-      };
-    });
-
-    return { quotationId: dto.operationData.quotationId, prices: prices }; // Assuming you want to return the first price object
-  };
 }

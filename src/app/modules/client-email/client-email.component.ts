@@ -61,12 +61,12 @@ export class ClientEMailComponent extends QuoteComponent implements OnInit {
 
   private createForm() {
     const emailRegex =
-      /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)])/;
+      /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
 
     this.form = this.fb.group({
       email: new FormControl(this._contextData.personalData.email, [
         this.quoteFormValidarors.required(),
-        this.quoteFormValidarors.matches([emailRegex], 'i') // @howto use regex to validate email ignoring case
+        this.quoteFormValidarors.matches([emailRegex]) // @howto use regex to validate email ignoring case
       ]),
       accepInfo: new FormControl(this._contextData.client.accepInfo, [this.quoteFormValidarors.informed()]),
       acceptPrivacyPolicy: new FormControl(this._contextData.client.acceptPrivacyPolicy, [this.quoteFormValidarors.requiredTrue()])

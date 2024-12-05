@@ -57,7 +57,7 @@ export class InsuranceCompaniesComponent extends QuoteComponent implements OnIni
 
     this.iconInsurances = insuranceList
       .filter(insurance => Object.keys(iconDictionary).includes(insurance.index))
-      .map(insurance => ({ ...iconDictionary[insurance.index], index: insurance.index } as IIconData));
+      .map(insurance => ({ ...iconDictionary[insurance.index], index: insurance.index, data: insurance.data } as IIconData));
 
     this.selectedCompany = this._contextData.insuranceCompany?.company;
 

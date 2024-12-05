@@ -21,6 +21,7 @@ import { QuoteStepperService } from './services';
 export class QuoteStepperComponent implements OnInit, OnDestroy {
   public stepperData?: { stepper: Stepper; stepKey: string };
   public stepperIndex = 0;
+  public visible = true;
   public showLabel = true;
   public showSteps = true;
 
@@ -49,14 +50,17 @@ export class QuoteStepperComponent implements OnInit, OnDestroy {
   }
 
   private stepperProperties = (): void => {
-    const { navigation } = this.contextDataService.get<AppContextData>(QUOTE_APP_CONTEXT_DATA);
-    const lastPage = navigation?.lastPage;
-    const config: { label?: string; showLabel?: boolean; showSteps?: boolean } = lastPage?.configuration?.data?.['stepperConfig'] ?? {};
+    const {
+      navigation: { lastPage }
+    } = this.contextDataService.get<AppContextData>(QUOTE_APP_CONTEXT_DATA);
+    const config: { visible?: boolean; label?: string; showLabel?: boolean; showSteps?: boolean } =
+      lastPage?.configuration?.data?.['stepperConfig'] ?? {};
 
     if (this.stepperData && this.stepperData.stepper && config.label) {
       this.stepperData.stepper.steps[this.stepperIndex].label = config.label;
     }
 
+    this.visible = config.visible ?? true;
     this.showLabel = config.showLabel ?? true;
     this.showSteps = config.showSteps ?? true;
   };

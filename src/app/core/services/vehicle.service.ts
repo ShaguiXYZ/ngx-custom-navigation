@@ -12,7 +12,8 @@ import {
   ModelVersionModel,
   QuoteVehicleModel,
   VehicleClassesDTO,
-  VehicleClassesModel
+  VehicleClassesModel,
+  VehicleDTO
 } from '../models';
 
 @Injectable()
@@ -32,7 +33,7 @@ export class VehicleService {
 
     return firstValueFrom(
       this.http
-        .get<QuoteVehicleModel[]>(`${environment.baseUrl}/plate`, {
+        .get<VehicleDTO[]>(`${environment.baseUrl}/plate`, {
           clientOptions: { params: httpParams },
           responseStatusMessage: {
             [HttpStatusCode.NotFound]: { text: 'Notifications.VehicleNotFound' }
@@ -43,8 +44,28 @@ export class VehicleService {
           catchError(error => {
             throw new HttpError(error.status, error.statusText, error.url, error.method);
           }),
-          map(res => res as QuoteVehicleModel[]),
-          map(res => res.find(data => data.plateNumber === plate.toLocaleUpperCase().replace(/[^A-Z0-9]/g, '')))
+          map(res => res as VehicleDTO[]),
+          map(res => res.find(data => data.plateNumber === plate.toLocaleUpperCase().replace(/[^A-Z0-9]/g, ''))),
+          map(res => res && VehicleDTO.toModel(res))
+        )
+    );
+  }
+
+  public vehicles(): Promise<QuoteVehicleModel[]> {
+    return firstValueFrom(
+      this.http
+        .get<VehicleDTO[]>(`${environment.baseUrl}/vehicle`, {
+          responseStatusMessage: {
+            [HttpStatusCode.NotFound]: { text: 'Notifications.VehiclesNotFound' }
+          },
+          showLoading: true
+        })
+        .pipe(
+          catchError(error => {
+            throw new HttpError(error.status, error.statusText, error.url, error.method);
+          }),
+          map(res => res as VehicleDTO[]),
+          map(res => res.map(VehicleDTO.toModel))
         )
     );
   }
@@ -131,8 +152,8 @@ export class VehicleService {
   }
 
   public getFuelTypes(vehicle: QuoteVehicleModel): Promise<FuelModel[]> {
-    const { make, model } = vehicle;
-    const httpParams = new HttpParams().appendAll({ make: make || '', model: model || '' });
+    const { brand, model } = vehicle;
+    const httpParams = new HttpParams().appendAll({ brand: brand || '', model: model || '' });
 
     return firstValueFrom(
       this.http
@@ -148,15 +169,15 @@ export class VehicleService {
             throw new HttpError(error.status, error.statusText, error.url, error.method);
           }),
           map(res => res as FuelDTO[]),
-          map(res => res.map(FuelModel.fromDTO)),
-          map(res => (!make || !model ? [] : res))
+          map(res => res.map(FuelDTO.toModel)),
+          map(res => (!brand || !model ? [] : res))
         )
     );
   }
 
   public cubicCapacities(vehicle: QuoteVehicleModel): Promise<CubicCapacityModel[]> {
-    const { make, model } = vehicle;
-    const httpParams = new HttpParams().appendAll({ make: make || '', model: model || '' });
+    const { brand, model } = vehicle;
+    const httpParams = new HttpParams().appendAll({ brand: brand || '', model: model || '' });
 
     return firstValueFrom(
       this.http
@@ -172,15 +193,15 @@ export class VehicleService {
             throw new HttpError(error.status, error.statusText, error.url, error.method);
           }),
           map(res => res as CubicCapacityDTO[]),
-          map(res => res.map(CubicCapacityModel.fromDTO)),
-          map(res => (!make || !model ? [] : res))
+          map(res => res.map(CubicCapacityDTO.toModel)),
+          map(res => (!brand || !model ? [] : res))
         )
     );
   }
 
   public getVehicleClasses(vehicle: QuoteVehicleModel): Promise<VehicleClassesModel[]> {
-    const { make, model } = vehicle;
-    const httpParams = new HttpParams().appendAll({ make: make || '', model: model || '' });
+    const { brand, model } = vehicle;
+    const httpParams = new HttpParams().appendAll({ brand: brand || '', model: model || '' });
 
     return firstValueFrom(
       this.http
@@ -196,26 +217,8 @@ export class VehicleService {
             throw new HttpError(error.status, error.statusText, error.url, error.method);
           }),
           map(res => res as VehicleClassesDTO[]),
-          map(res => res.map(VehicleClassesModel.fromDTO)),
-          map(res => (!make || !model ? [] : res))
-        )
-    );
-  }
-
-  public vehicles(): Promise<QuoteVehicleModel[]> {
-    return firstValueFrom(
-      this.http
-        .get<QuoteVehicleModel[]>(`${environment.baseUrl}/vehicle`, {
-          responseStatusMessage: {
-            [HttpStatusCode.NotFound]: { text: 'Notifications.VehiclesNotFound' }
-          },
-          showLoading: true
-        })
-        .pipe(
-          catchError(error => {
-            throw new HttpError(error.status, error.statusText, error.url, error.method);
-          }),
-          map(res => res as QuoteVehicleModel[])
+          map(res => res.map(VehicleClassesDTO.toModel)),
+          map(res => (!brand || !model ? [] : res))
         )
     );
   }

@@ -28,7 +28,8 @@ export class OfferingsService {
             showLoading: true
           })
           .pipe(
-            map(res => QuoteOfferingModel.fromDTO(res as OfferingDTO)),
+            map(res => res as OfferingDTO),
+            map(OfferingDTO.toModel),
             tap(async offering => {
               quote.offering = { ...quote.offering, quotationId: offering.quotationId, prices: offering.prices };
               await this.serviceActivatorService.activateEntryPoint('on-pricing');

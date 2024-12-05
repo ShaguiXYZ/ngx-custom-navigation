@@ -10,11 +10,11 @@ import { ContextDataServiceStub } from 'src/app/core/stub';
 import { HeaderTitleComponent, QuoteFooterComponent } from 'src/app/shared/components';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
-import { OnboardingComponent } from './onboarding.component';
+import { OnBoardingComponent } from './on-boarding.component';
 
 describe('OnboardingComponent', () => {
-  let component: OnboardingComponent;
-  let fixture: ComponentFixture<OnboardingComponent>;
+  let component: OnBoardingComponent;
+  let fixture: ComponentFixture<OnBoardingComponent>;
 
   beforeEach(async () => {
     const quoteLiteralPipeSpy = jasmine.createSpyObj('QuoteLiteralPipe', ['transform']);
@@ -23,7 +23,7 @@ describe('OnboardingComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [],
       imports: [
-        OnboardingComponent,
+        OnBoardingComponent,
         HeaderTitleComponent,
         QuoteFooterComponent,
         NxButtonModule,
@@ -41,7 +41,7 @@ describe('OnboardingComponent', () => {
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(OnboardingComponent);
+    fixture = TestBed.createComponent(OnBoardingComponent);
     component = fixture.componentInstance;
 
     fixture.detectChanges();

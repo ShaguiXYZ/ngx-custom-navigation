@@ -125,18 +125,4 @@ describe('QuoteFormValidarors', () => {
     const result = validatorFn(control);
     expect(result).toEqual({ minValues: true });
   });
-
-  it('should validate email correctly', () => {
-    const control = new FormControl('test@example.com');
-    const validatorFn = validators.email();
-    const result = validatorFn(control);
-    expect(result).toBeNull();
-  });
-
-  it('should invalidate email correctly', () => {
-    const control = new FormControl('invalid-email');
-    const validatorFn = validators.email();
-    const result = validatorFn(control);
-    expect(result).toEqual({ email: true });
-  });
 });

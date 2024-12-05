@@ -10,7 +10,8 @@ import {
   ModelVersionModel,
   QuoteVehicleModel,
   VehicleClassesDTO,
-  VehicleClassesModel
+  VehicleClassesModel,
+  VehicleDTO
 } from '../../models';
 import { VehicleService } from '../vehicle.service';
 
@@ -75,12 +76,12 @@ describe('VehicleService', () => {
       { value: FuelTypes.GASOLINE, label: 'Petrol' },
       { value: FuelTypes.DIESEL, label: 'Diesel' }
     ];
-    const vehicle: QuoteVehicleModel = { make: 'Toyota', model: 'Corolla' };
+    const vehicle: QuoteVehicleModel = { brand: 'Toyota', model: 'Corolla' };
 
     httpClientSpy.get.and.returnValue(of(mockFuels));
 
     service.getFuelTypes(vehicle).then(fuels => {
-      const expectedFuels: FuelModel[] = mockFuels.map(fuel => FuelModel.fromDTO(fuel));
+      const expectedFuels: FuelModel[] = mockFuels.map(fuel => FuelDTO.toModel(fuel));
 
       expect(fuels).toEqual(expectedFuels);
     });
@@ -88,12 +89,12 @@ describe('VehicleService', () => {
 
   it('should fetch vehicle powers', async () => {
     const mockPowers: VehicleClassesDTO[] = ['range-1.100-200', 'range-2.200-300'];
-    const vehicle: QuoteVehicleModel = { make: 'Toyota', model: 'Corolla' };
+    const vehicle: QuoteVehicleModel = { brand: 'Toyota', model: 'Corolla' };
 
     httpClientSpy.get.and.returnValue(of(mockPowers));
 
     service.getVehicleClasses(vehicle).then(powers => {
-      const expectedPowers: VehicleClassesModel[] = mockPowers.map(power => VehicleClassesModel.fromDTO(power));
+      const expectedPowers: VehicleClassesModel[] = mockPowers.map(power => VehicleClassesDTO.toModel(power));
 
       expect(powers).toEqual(expectedPowers);
     });
@@ -104,19 +105,19 @@ describe('VehicleService', () => {
       { value: '1', label: '1.5L' },
       { value: '2', label: '2.0L' }
     ];
-    const vehicle: QuoteVehicleModel = { make: 'Toyota', model: 'Corolla' };
+    const vehicle: QuoteVehicleModel = { brand: 'Toyota', model: 'Corolla' };
 
     httpClientSpy.get.and.returnValue(of(mockCapacities));
 
     service.cubicCapacities(vehicle).then(capacities => {
-      const expectedCapacities: CubicCapacityModel[] = mockCapacities.map(capacity => CubicCapacityModel.fromDTO(capacity));
+      const expectedCapacities: CubicCapacityModel[] = mockCapacities.map(capacity => CubicCapacityDTO.toModel(capacity));
 
       expect(capacities).toEqual(expectedCapacities);
     });
   });
 
   it('should fetch vehicles', async () => {
-    const mockVehicles: QuoteVehicleModel[] = [
+    const mockVehicles: VehicleDTO[] = [
       { make: 'Toyota', model: 'Corolla' },
       { make: 'Honda', model: 'Civic' }
     ];
@@ -124,13 +125,13 @@ describe('VehicleService', () => {
     httpClientSpy.get.and.returnValue(of(mockVehicles));
 
     service.vehicles().then(vehicles => {
-      expect(vehicles).toEqual(mockVehicles);
+      expect(vehicles).toEqual(mockVehicles.map(vehicle => VehicleDTO.toModel(vehicle)));
     });
   });
 
   it('should find vehicle by plate', async () => {
     const plate = 'ABC123';
-    const mockVehicle: QuoteVehicleModel = { make: 'Toyota', model: 'Corolla' };
+    const mockVehicle: QuoteVehicleModel = { brand: 'Toyota', model: 'Corolla' };
 
     httpClientSpy.get.and.returnValue(of(mockVehicle));
 

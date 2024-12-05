@@ -15,9 +15,9 @@ import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 import { BrandComponentService } from './services';
 
 @Component({
-  selector: 'quote-make',
-  templateUrl: './make.component.html',
-  styleUrl: './make.component.scss',
+  selector: 'quote-vehicle-brand',
+  templateUrl: './vehicle-brand.component.html',
+  styleUrl: './vehicle-brand.component.scss',
   imports: [
     CommonModule,
     HeaderTitleComponent,
@@ -35,13 +35,13 @@ import { BrandComponentService } from './services';
   providers: [VehicleService, BrandComponentService],
   standalone: true
 })
-export class MakeComponent extends QuoteComponent implements OnInit {
+export class VehicleBrandComponent extends QuoteComponent implements OnInit {
   @ViewChild('searchInput', { static: true })
   private searchInput!: ElementRef;
 
   public form!: FormGroup;
   public iconBrands!: IIconData[];
-  public searchedMakes: string[] = [];
+  public searchedBrands: string[] = [];
   public selectedBrand?: string;
 
   private readonly routingService = inject(RoutingService);
@@ -57,21 +57,21 @@ export class MakeComponent extends QuoteComponent implements OnInit {
 
     this.iconBrands = brandList
       .filter(brand => Object.keys(iconDictionary).includes(brand))
-      .map(brand => ({ ...iconDictionary[brand], index: brand } as IIconData));
+      .map(brand => ({ ...iconDictionary[brand], index: brand, data: brand } as IIconData));
 
-    this.selectedBrand = this._contextData.vehicle.make;
+    this.selectedBrand = this._contextData.vehicle.brand;
 
     this.searchBrands();
   }
 
   public override canDeactivate = (): boolean => this.updateValidData();
 
-  public selectMake(event: string): void {
+  public selectBrand(event: string): void {
     this.selectedBrand = event;
 
     this._contextData.vehicle = {
       ...this._contextData.vehicle,
-      make: this.selectedBrand!
+      brand: this.selectedBrand!
     };
 
     this.routingService.next();
@@ -79,7 +79,7 @@ export class MakeComponent extends QuoteComponent implements OnInit {
 
   private createForm(): void {
     this.form = this.fb.group({
-      searchInput: new FormControl(this._contextData.vehicle.make)
+      searchInput: new FormControl(this._contextData.vehicle.brand)
     });
 
     this.subscription$.push(this.searchBoxConfig());
@@ -96,13 +96,13 @@ export class MakeComponent extends QuoteComponent implements OnInit {
   }
 
   private async searchBrands(): Promise<void> {
-    this.searchedMakes = this.form.value.searchInput ? await this.vehicleService.getBrands(this.form.value.searchInput) : [];
+    this.searchedBrands = this.form.value.searchInput ? await this.vehicleService.getBrands(this.form.value.searchInput) : [];
   }
 
   /**
    * Actualiza el contexto guardando la marca seleccionada
    */
   private updateValidData = (): boolean => {
-    return this._contextData.vehicle.make === this.selectedBrand;
+    return this._contextData.vehicle.brand === this.selectedBrand;
   };
 }

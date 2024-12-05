@@ -22,7 +22,7 @@ export const TRACKING_QUOTE_MANIFEST: Record<string, TrackedData> = {
   surname: { value: 'personalData.surname', tracked: false },
   phoneNumber: { value: 'personalData.phoneNumber', tracked: false },
   postalCode: { value: 'place.postalCode', tracked: false },
-  brand: { value: 'vehicle.make', tracked: true },
+  brand: { value: 'vehicle.brand', tracked: true },
   displayment: { value: 'vehicle.cubicCapacity.index', tracked: true },
   fuel: { value: 'vehicle.fuel.index', tracked: true },
   model: { value: 'vehicle.model', tracked: true },

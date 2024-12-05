@@ -74,6 +74,8 @@ describe('YourCarIsComponent', () => {
   });
 
   it('should initialize vehicle options on init', async () => {
+    component['_contextData'] = { vehicle: {} } as QuoteModel;
+
     await component.ngOnInit();
 
     expect(vehicleService.vehicles).toHaveBeenCalled();
@@ -81,7 +83,7 @@ describe('YourCarIsComponent', () => {
   });
 
   it('should set selected vehicle from context data on init', async () => {
-    const mockVehicle = { make: 'Nissan', vehicleType: 'Test Vehicle' } as QuoteVehicleModel;
+    const mockVehicle = { brand: 'Nissan', vehicleType: 'Test Vehicle' } as QuoteVehicleModel;
 
     component['_contextData'] = {
       vehicle: mockVehicle
@@ -93,7 +95,7 @@ describe('YourCarIsComponent', () => {
   });
 
   it('should allow deactivation if a vehicle is selected', () => {
-    component['_contextData'].vehicle = { make: 'Nissan', vehicleType: 'Test Vehicle' } as QuoteVehicleModel;
+    component['_contextData'].vehicle = { brand: 'Nissan', vehicleType: 'Test Vehicle' } as QuoteVehicleModel;
 
     expect(component.canDeactivate()).toBeTrue();
   });
@@ -105,7 +107,7 @@ describe('YourCarIsComponent', () => {
   });
 
   it('should update context data and navigate to next step on vehicle selection', () => {
-    const mockVehicle = { make: 'Nissan', vehicleType: 'Test Vehicle' } as QuoteVehicleModel;
+    const mockVehicle = { brand: 'Nissan', vehicleType: 'Test Vehicle' } as QuoteVehicleModel;
 
     component['_contextData'] = { vehicle: {} } as QuoteModel;
     component.selectVehicle(mockVehicle);
@@ -114,7 +116,7 @@ describe('YourCarIsComponent', () => {
   });
 
   it('should update context data and navigate to next step on continue', () => {
-    component['_contextData'] = { vehicle: { make: '' } } as QuoteModel;
+    component['_contextData'] = { vehicle: { brand: '' } } as QuoteModel;
     component.continue();
 
     expect(routingService.next).toHaveBeenCalled();

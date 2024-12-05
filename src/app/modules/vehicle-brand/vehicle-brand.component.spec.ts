@@ -9,12 +9,12 @@ import { QuoteModel } from 'src/app/core/models';
 import { RoutingService, VehicleService } from 'src/app/core/services';
 import { ContextDataServiceStub } from 'src/app/core/stub';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
-import { MakeComponent } from './make.component';
 import { BrandComponentService } from './services';
+import { VehicleBrandComponent } from './vehicle-brand.component';
 
-describe('MakeComponent', () => {
-  let component: MakeComponent;
-  let fixture: ComponentFixture<MakeComponent>;
+describe('VehicleBrandComponent', () => {
+  let component: VehicleBrandComponent;
+  let fixture: ComponentFixture<VehicleBrandComponent>;
   let vehicleService: jasmine.SpyObj<VehicleService>;
   let routingService: jasmine.SpyObj<RoutingService>;
 
@@ -27,7 +27,7 @@ describe('MakeComponent', () => {
 
     await TestBed.configureTestingModule({
       declarations: [],
-      imports: [MakeComponent, ReactiveFormsModule, NxIconModule, NxFormfieldModule, NxInputModule],
+      imports: [VehicleBrandComponent, ReactiveFormsModule, NxIconModule, NxFormfieldModule, NxInputModule],
       providers: [
         { provide: BrandComponentService, useValue: brandServiceSpy },
         { provide: ContextDataService, useClass: ContextDataServiceStub },
@@ -38,7 +38,7 @@ describe('MakeComponent', () => {
       ]
     }).compileComponents();
 
-    TestBed.overrideComponent(MakeComponent, {
+    TestBed.overrideComponent(VehicleBrandComponent, {
       set: {
         providers: [
           { provide: BrandComponentService, useValue: brandServiceSpy },
@@ -49,7 +49,7 @@ describe('MakeComponent', () => {
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(MakeComponent);
+    fixture = TestBed.createComponent(VehicleBrandComponent);
     component = fixture.componentInstance;
 
     vehicleService = TestBed.inject(VehicleService) as jasmine.SpyObj<VehicleService>;
@@ -59,7 +59,7 @@ describe('MakeComponent', () => {
 
     component['_contextData'] = {
       vehicle: {
-        make: 'Toyota'
+        brand: 'Toyota'
       }
     } as QuoteModel;
 
@@ -74,15 +74,15 @@ describe('MakeComponent', () => {
     expect(component.form.value.searchInput).toBe('Toyota');
   });
 
-  it('should update searchedMakes on searchPlace', async () => {
+  it('should update searchBrands on searchPlace', async () => {
     component.form.controls['searchInput'].setValue('Toy');
     await component['searchBrands']();
 
-    expect(component.searchedMakes).toEqual(['Toyota', 'Honda']);
+    expect(component.searchedBrands).toEqual(['Toyota', 'Honda']);
   });
 
-  it('should select make and update context data', () => {
-    component.selectMake('Honda');
+  it('should select brand and update context data', () => {
+    component.selectBrand('Honda');
 
     expect(component.selectedBrand).toBe('Honda');
     expect(routingService.next).toHaveBeenCalled();
@@ -96,13 +96,13 @@ describe('MakeComponent', () => {
     expect(subscriptionSpy.unsubscribe).toHaveBeenCalled();
   });
 
-  it('should return true if selected make matches context data', () => {
+  it('should return true if selected brand matches context data', () => {
     component.selectedBrand = 'Toyota';
 
     expect(component.canDeactivate()).toBeTrue();
   });
 
-  it('should return false if selected make does not match context data', () => {
+  it('should return false if selected brand does not match context data', () => {
     component.selectedBrand = 'Honda';
 
     expect(component.canDeactivate()).toBeFalse();

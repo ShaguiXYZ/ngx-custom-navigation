@@ -14,7 +14,7 @@
             "vehicle-type",
             "license-plate",
             "your-car-is",
-            "make",
+            "vehicle-brand",
             "vehicle-models",
             "vehicle-fuel",
             "vehicle-model-versions",
@@ -89,6 +89,9 @@
           "headerConfig": {
             "showBack": false,
             "showContactUs": false
+          },
+          "stepperConfig": {
+            "visible": false
           }
         }
       }
@@ -255,7 +258,7 @@
           ]
         },
         {
-          "nextPageId": "make",
+          "nextPageId": "vehicle-brand",
           "conditions": [
             {
               "expression": "driven.hasDrivenLicense",
@@ -318,7 +321,7 @@
       }
     },
     {
-      "pageId": "make",
+      "pageId": "vehicle-brand",
       "nextOptionList": [
         {
           "nextPageId": "vehicle-models"
@@ -334,7 +337,7 @@
       "pageId": "vehicle-type",
       "nextOptionList": [
         {
-          "nextPageId": "make",
+          "nextPageId": "vehicle-brand",
           "conditions": [
             {
               "expression": "vehicle.vehicleType",
@@ -401,7 +404,7 @@
       "pageId": "license-year",
       "nextOptionList": [
         {
-          "nextPageId": "make",
+          "nextPageId": "vehicle-brand",
           "conditions": [
             {
               "expression": "driven.hasDrivenLicense",

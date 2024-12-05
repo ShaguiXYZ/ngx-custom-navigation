@@ -21,20 +21,20 @@
         [selected]="selectedBrand === brand.index"
         [nxTrack]="{ title: 'header' | quoteLiteral, brand: brand.index, label: brand.index }"
         [nxTrackEvents]="['click']"
-        (uiSelect)="selectMake($event.index)"
+        (uiSelect)="selectBrand($event.index)"
       />
       }
     </div>
     } @else {
     <div class="serached-data">
-      @for (item of searchedMakes; track item) {
+      @for (item of searchedBrands; track item) {
       <div class="selectable-row">
         <quote-text-card
           [selected]="selectedBrand === item"
           [data]="item"
           [nxTrack]="{ title: 'header' | quoteLiteral, brand: item, label: item }"
           [nxTrackEvents]="['click']"
-          (uiSelect)="selectMake(item)"
+          (uiSelect)="selectBrand(item)"
         />
       </div>
       }

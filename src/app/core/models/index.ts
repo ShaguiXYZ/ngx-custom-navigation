@@ -4,7 +4,6 @@ export * from './budget.model';
 export * from './configuration.model';
 export * from './fuel-types.model';
 export * from './icon-data.model';
-export * from './icon-dictionary.model';
 export * from './insurance-company.model';
 export * from './literal.model';
 export * from './location.model';
@@ -24,3 +23,4 @@ export * from './quote-vehicle.model';
 export * from './quote.model';
 export * from './signature.model';
 export * from './stepper.model';
+

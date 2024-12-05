@@ -50,7 +50,7 @@ describe('VehicleModelsComponent', () => {
 
     component['_contextData'] = {
       vehicle: {
-        make: 'Toyota',
+        brand: 'Toyota',
         model: 'Camry'
       }
     } as QuoteModel;

@@ -35,13 +35,12 @@ export class YourCarIsComponent extends QuoteComponent implements OnInit {
   public vehicleOptions: QuoteVehicleModel[] = [];
   public selectedVehicle?: QuoteVehicleModel;
 
-  private continueWithSelectedVehicle = true;
-
   private readonly routingService = inject(RoutingService);
   private readonly vehicleService = inject(VehicleService);
 
   async ngOnInit(): Promise<void> {
-    this.selectedVehicle = this._contextData.vehicle;
+    this.selectedVehicle = !this._contextData.vehicle.notFound ? this._contextData.vehicle : {};
+    this._contextData.vehicle.notFound = false;
 
     this.vehicleOptions = await this.vehicleService.vehicles();
   }
@@ -50,14 +49,18 @@ export class YourCarIsComponent extends QuoteComponent implements OnInit {
 
   public selectVehicle(vehicle: QuoteVehicleModel) {
     this._contextData.vehicle = { ...this._contextData.vehicle, ...vehicle };
+
     this.routingService.next();
   }
 
   public continue() {
-    this.continueWithSelectedVehicle = false;
-    this._contextData.vehicle = QuoteVehicleModel.init();
+    this._contextData.vehicle.notFound = true;
     this.routingService.next();
   }
 
-  private isValidData = (): boolean => !this.continueWithSelectedVehicle || !!this._contextData.vehicle?.make;
+  private isValidData = (): boolean => {
+    console.log(this._contextData.vehicle);
+
+    return this._contextData.vehicle.notFound || !!this._contextData.vehicle?.brand;
+  };
 }

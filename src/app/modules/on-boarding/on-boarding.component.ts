@@ -8,9 +8,9 @@ import { HeaderTitleComponent, QuoteFooterComponent, QuoteZoneComponent } from '
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
 
 @Component({
-  selector: 'quote-onboarding',
-  templateUrl: './onboarding.component.html',
-  styleUrl: './onboarding.component.scss',
+  selector: 'quote-on-boarding',
+  templateUrl: './on-boarding.component.html',
+  styleUrl: './on-boarding.component.scss',
   standalone: true,
   imports: [
     HeaderTitleComponent,
@@ -23,4 +23,4 @@ import { QuoteLiteralDirective } from 'src/app/shared/directives';
     QuoteLiteralDirective
   ]
 })
-export class OnboardingComponent extends QuoteComponent {}
+export class OnBoardingComponent extends QuoteComponent {}

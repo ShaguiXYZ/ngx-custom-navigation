@@ -3,7 +3,7 @@ import { HttpTestingController, provideHttpClientTesting } from '@angular/common
 import { TestBed } from '@angular/core/testing';
 import { HttpService } from '@shagui/ng-shagui/core';
 import { IconDictionary } from 'src/app/core/models';
-import { BrandComponentService } from './brand.service';
+import { BrandComponentService } from './vehicle-brand.service';
 
 describe('BrandComponentService', () => {
   let service: BrandComponentService;

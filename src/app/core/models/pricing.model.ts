@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-namespace */
 import moment from 'moment';
 import { DEFAULT_DATE_FORMAT } from '../constants';
-import { QuoteModel } from './quote.model';
 import { QuoteSettingsModel } from './quote-settings.model';
+import { QuoteModel } from './quote.model';
 
 export interface Authentication {
   company?: string;
@@ -167,7 +167,7 @@ export namespace PricingDTO {
         province: model.place.provinceCode,
         vehicleInfo: {
           plateNumber: model.vehicle.plateNumber?.toUpperCase() ?? '',
-          vehicleTrademark: model.vehicle.make,
+          vehicleTrademark: model.vehicle.brand,
           vehicleModel: model.vehicle.model,
           vehicleCode: model.vehicle.modelVersion?.index,
           vehicleClass: '',

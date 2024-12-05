@@ -64,7 +64,7 @@ export abstract class QuoteComponent implements OnDestroy {
       const index = Number(key);
 
       if (value.skipLoad && sections[index] && ConditionEvaluation.checkConditions(component['_contextData'], value.conditions)) {
-        sections[index].innerHTML = '';
+        sections[index].remove();
       }
     });
   };
