@@ -58,9 +58,5 @@ export class YourCarIsComponent extends QuoteComponent implements OnInit {
     this.routingService.next();
   }
 
-  private isValidData = (): boolean => {
-    console.log(this._contextData.vehicle);
-
-    return this._contextData.vehicle.notFound || !!this._contextData.vehicle?.brand;
-  };
+  private isValidData = (): boolean => this._contextData.vehicle.notFound || !!this._contextData.vehicle?.brand;
 }

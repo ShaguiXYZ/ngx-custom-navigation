@@ -1,5 +1,6 @@
 export * from './date.service';
 export * from './insurance-companies.service';
+export * from './journey.service';
 export * from './literals.service';
 export * from './location.service';
 export * from './offerings.service';

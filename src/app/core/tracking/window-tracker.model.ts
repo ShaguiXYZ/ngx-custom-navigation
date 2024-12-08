@@ -9,7 +9,7 @@ import { TrackInfo } from '.';
  */
 interface WindowTracker extends Window {
   _satellite: {
-    track: (event: string, data?: TrackInfo) => void;
+    track: (event: string, data?: TrackInfo) => Promise<void>;
   };
   digitalData: Record<string, unknown>;
 }

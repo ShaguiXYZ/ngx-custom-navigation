@@ -34,50 +34,58 @@ export class QuoteTrackService implements OnDestroy {
     this.subscription$.forEach(sub => sub?.unsubscribe?.());
   }
 
-  public trackView = async (inPage: string): Promise<number> => {
-    const fullUrl = `${window.location.protocol}//${window.location.host}/${inPage}`;
+  public trackView = async (inPage: string): Promise<number> =>
+    // @howto implemants requestIdleCallback for track event
+    requestIdleCallback(async () => {
+      {
+        const fullUrl = `${window.location.protocol}//${window.location.host}/${inPage}`;
 
-    const infoPag: TrackInfoPageModel = {
-      page: inPage,
-      URL: fullUrl,
-      referrer: this.referrer,
-      user_type: 'web',
-      device_type: this.isMobile ? 'mobile' : 'desktop'
-    };
+        const infoPage: TrackInfoPageModel = {
+          page: inPage,
+          URL: fullUrl,
+          referrer: this.referrer,
+          user_type: 'web',
+          device_type: this.isMobile ? 'mobile' : 'desktop'
+        };
 
-    this.infoPage = deepCopy(infoPag);
-    _window.digitalData = { infoPag };
-    this.referrer = fullUrl;
+        this.infoPage = deepCopy(infoPage);
+        _window.digitalData = { infoPag: infoPage };
+        this.referrer = fullUrl;
 
-    await Promise.resolve();
-    return this.trackFn('view');
-  };
+        await Promise.resolve();
+        return this.trackFn('view');
+      }
+    });
 
-  public trackEvent = async (eventType: TrackEventType, data: TrackInfo): Promise<number> => {
-    const appContextData = this.contextDataService.get<AppContextData>(QUOTE_APP_CONTEXT_DATA);
-    const {
-      navigation: { viewedPages }
-    } = appContextData;
+  public trackEvent = async (eventType: TrackEventType, data: TrackInfo): Promise<number> =>
+    requestIdleCallback(async () => {
+      {
+        const appContextData = this.contextDataService.get<AppContextData>(QUOTE_APP_CONTEXT_DATA);
+        const {
+          settings: { journey },
+          navigation: { viewedPages }
+        } = appContextData;
 
-    const trackInfo: TrackInfo = {
-      ...this.loadManifest(),
-      ...Object.entries(data)
-        .filter(([, value]) => hasValue(value))
-        .reduce((acc, [key, value]) => {
-          if (!(key in TRACKING_QUOTE_MANIFEST) || TRACKING_QUOTE_MANIFEST[key as keyof typeof TRACKING_QUOTE_MANIFEST].tracked) {
-            acc[key] = `${value}`;
-          }
-          return acc;
-        }, {} as TrackInfo),
-      category: 'tarificador',
-      page: this.infoPage?.page,
-      URL: this.infoPage?.URL,
-      step_number: `${viewedPages.length}`
-    };
+        const trackInfo: TrackInfo = {
+          ...this.loadManifest(),
+          ...Object.entries(data)
+            .filter(([, value]) => hasValue(value))
+            .reduce((acc, [key, value]) => {
+              if (!(key in TRACKING_QUOTE_MANIFEST) || TRACKING_QUOTE_MANIFEST[key as keyof typeof TRACKING_QUOTE_MANIFEST].tracked) {
+                acc[key] = `${value}`;
+              }
+              return acc;
+            }, {} as TrackInfo),
+          category: `tarificador ${journey}`,
+          page: this.infoPage?.page,
+          URL: this.infoPage?.URL,
+          step_number: `${viewedPages.length}`
+        };
 
-    await Promise.resolve();
-    return this.trackFn(eventType, trackInfo);
-  };
+        await Promise.resolve();
+        return this.trackFn(eventType, trackInfo);
+      }
+    });
 
   private headData = (): void => {
     const digitalData = document.createElement('script');
@@ -100,13 +108,11 @@ export class QuoteTrackService implements OnDestroy {
     }, {});
   };
 
-  private trackFn = (eventType: TrackEventType | 'view', trackInfo?: TrackInfo): number =>
-    // @howto implemants requestIdleCallback for track event
-    requestIdleCallback(() => {
-      if (!_window._satellite) {
-        throw new TrackError('Adobe Launch not found', eventType, trackInfo);
-      }
+  private trackFn = async (eventType: TrackEventType | 'view', trackInfo?: TrackInfo): Promise<void> => {
+    if (!_window._satellite) {
+      throw new TrackError('Adobe Launch not found', eventType, trackInfo);
+    }
 
-      _window._satellite.track(eventType, trackInfo);
-    });
+    await _window._satellite.track(eventType, trackInfo);
+  };
 }

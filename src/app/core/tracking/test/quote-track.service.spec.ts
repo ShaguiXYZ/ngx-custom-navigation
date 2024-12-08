@@ -7,11 +7,11 @@ import { QUOTE_APP_CONTEXT_DATA, QUOTE_CONTEXT_DATA } from '../../constants';
 import { AppContextData } from '../../models';
 import { TrackInfo } from '../quote-track.model';
 import { QuoteTrackService } from '../quote-track.service';
+import { _window } from '../window-tracker.model';
 
 describe('QuoteTrackService', () => {
   let service: QuoteTrackService;
   let breakpointObserver: jasmine.SpyObj<BreakpointObserver>;
-  let router: jasmine.SpyObj<Router>;
   let contextDataService: jasmine.SpyObj<ContextDataService>;
   let subscription: jasmine.SpyObj<Subscription>;
 
@@ -49,7 +49,6 @@ describe('QuoteTrackService', () => {
 
     service = TestBed.inject(QuoteTrackService);
     breakpointObserver = TestBed.inject(BreakpointObserver) as jasmine.SpyObj<BreakpointObserver>;
-    router = TestBed.inject(Router) as jasmine.SpyObj<Router>;
     contextDataService = TestBed.inject(ContextDataService) as jasmine.SpyObj<ContextDataService>;
 
     subscription = TestBed.inject(Subscription) as jasmine.SpyObj<Subscription>;
@@ -84,21 +83,42 @@ describe('QuoteTrackService', () => {
     expect(subscription.unsubscribe).toHaveBeenCalled();
   });
 
-  it('should track event with correct data', async () => {
-    const appContextData = { navigation: { viewedPages: ['page1', 'page2'] } };
+  it('should track view with correct data', done => {
+    const trackFnSpy = spyOn(service as any, 'trackFn').and.returnValue(1);
+
+    spyOn(window, 'requestIdleCallback').and.callFake((callback: Function) => callback());
+
+    service.trackView('test').then(() => {
+      expect(_window.digitalData?.['infoPag']).toEqual(
+        jasmine.objectContaining({
+          page: 'test',
+          URL: `${window.location.protocol}//${window.location.host}/test`,
+          user_type: 'web'
+        })
+      );
+      expect(trackFnSpy).toHaveBeenCalledWith('view');
+      done();
+    });
+  });
+
+  it('should track event with correct data', done => {
+    const appContextData = { navigation: { viewedPages: ['page1', 'page2'] }, settings: { journey: 'journey' } } as AppContextData;
     contextDataService.get.and.returnValue(appContextData);
 
     const trackInfo: TrackInfo = { brand: 'test' };
     const trackFnSpy = spyOn(service as any, 'trackFn').and.returnValue(1);
 
-    const result = await service.trackEvent('click', trackInfo);
+    spyOn(window, 'requestIdleCallback').and.callFake((callback: Function) => callback());
 
-    expect(trackFnSpy).toHaveBeenCalledWith(
-      'click',
-      jasmine.objectContaining({
-        category: 'tarificador',
-        step_number: '2'
-      })
-    );
+    service.trackEvent('click', trackInfo).then(() => {
+      expect(trackFnSpy).toHaveBeenCalledWith(
+        'click',
+        jasmine.objectContaining({
+          category: `tarificador ${appContextData.settings.journey}`,
+          step_number: '2'
+        })
+      );
+      done();
+    });
   });
 });

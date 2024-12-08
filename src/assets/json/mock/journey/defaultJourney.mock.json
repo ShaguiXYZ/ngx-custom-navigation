@@ -657,6 +657,9 @@
           "headerConfig": {
             "showBack": false,
             "showContactUs": false
+          },
+          "stepperConfig": {
+            "visible": false
           }
         }
       }
