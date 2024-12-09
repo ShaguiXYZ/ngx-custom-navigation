@@ -15,6 +15,7 @@ import {
   QuoteStepperComponent
 } from './shared/components';
 import { QuoteLiteralPipe } from './shared/pipes';
+import { QuoteLiteralDirective } from './shared/directives';
 
 @Component({
   selector: 'quote-root',
@@ -31,7 +32,8 @@ import { QuoteLiteralPipe } from './shared/pipes';
     QuoteKeysComponent,
     QuoteHeaderComponent,
     QuoteLoadingComponent,
-    QuoteStepperComponent
+    QuoteStepperComponent,
+    QuoteLiteralDirective
   ]
 })
 export class AppComponent {

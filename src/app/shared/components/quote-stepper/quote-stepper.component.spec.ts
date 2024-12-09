@@ -6,7 +6,6 @@ import { NxTooltipModule } from '@aposin/ng-aquila/tooltip';
 import { ContextDataService } from '@shagui/ng-shagui/core';
 import { of } from 'rxjs';
 import { Step, Stepper } from 'src/app/core/models';
-import { LiteralToStringPipe } from '../../pipes';
 import { QuoteStepperComponent } from './quote-stepper.component';
 import { QuoteStepperService } from './services';
 
@@ -22,7 +21,7 @@ describe('QuoteStepperComponent', () => {
 
     await TestBed.configureTestingModule({
       declarations: [],
-      imports: [QuoteStepperComponent, CommonModule, NxCopytextModule, NxIconModule, NxTooltipModule, LiteralToStringPipe],
+      imports: [QuoteStepperComponent, CommonModule, NxCopytextModule, NxIconModule, NxTooltipModule],
       providers: [
         { provide: ContextDataService, useValue: contextDataServiceSpy },
         { provide: QuoteStepperService, useValue: quoteStepperServiceSpy }
@@ -32,7 +31,7 @@ describe('QuoteStepperComponent', () => {
     // @howto - Override component providers in TestBed
     TestBed.overrideComponent(QuoteStepperComponent, {
       set: {
-        providers: [LiteralToStringPipe, { provide: QuoteStepperService, useValue: quoteStepperServiceSpy }]
+        providers: [{ provide: QuoteStepperService, useValue: quoteStepperServiceSpy }]
       }
     });
   });

@@ -41,7 +41,7 @@ describe('TranslateUtils', () => {
     const translateServiceMock = jasmine.createSpyObj('TranslateService', ['get']);
     const result = handler.handle({ key: 'missing.key', translateService: translateServiceMock });
 
-    expect(result).toBe('');
+    expect(result).toBe(undefined);
   });
 
   it('should log a warning for missing translations', () => {

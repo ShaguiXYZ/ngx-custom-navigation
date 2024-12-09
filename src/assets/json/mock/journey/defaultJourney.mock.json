@@ -5,11 +5,11 @@
     {
       "steps": [
         {
-          "label": "Datos personales",
+          "label": { "value": "Datos personales" },
           "pages": ["is-client", "place", "birthdate", "driving-license-date", "driving-license-location", "date-of-issue"]
         },
         {
-          "label": "Datos del vehículo",
+          "label": { "value": "Datos del vehículo" },
           "pages": [
             "vehicle-type",
             "license-plate",
@@ -22,15 +22,15 @@
           ]
         },
         {
-          "label": "Datos del Seguro",
+          "label": { "value": "Datos del Seguro" },
           "pages": ["is-policy-owner", "insurance-companies", "time-insurance-holder", "number-accidents"]
         },
         {
-          "label": "Datos del Contacto",
+          "label": { "value": "Datos del Contacto" },
           "pages": ["client-name", "client-phone-number", "client-email", "client-identification-number"]
         },
         {
-          "label": "Presupuesto",
+          "label": { "value": "Presupuesto" },
           "pages": ["offerings"]
         }
       ]
@@ -38,7 +38,7 @@
     {
       "steps": [
         {
-          "label": "Datos del Cliente",
+          "label": { "value": "Datos del Cliente" },
           "pages": [
             "is-client-client-name",
             "is-client-client-phone-number",
@@ -47,7 +47,7 @@
           ]
         },
         {
-          "label": "Te llamamos",
+          "label": { "value": "Te llamamos" },
           "pages": ["is-client-contact-us"]
         }
       ],
@@ -58,14 +58,17 @@
     {
       "steps": [
         {
-          "label": "Como podemos contactarte",
+          "label": { "value": "Como podemos contactarte" },
           "pages": ["external-contact-us"]
         },
         {
-          "label": "Cuando podemos contactarte",
+          "label": { "value": "Cuando podemos contactarte" },
           "pages": ["external-contact-time"]
         }
-      ]
+      ],
+      "stateInfo": {
+        "inherited": false
+      }
     }
   ],
   "pageMap": [
@@ -546,6 +549,15 @@
       "pageId": "client-phone-number",
       "nextOptionList": [
         {
+          "nextPageId": "is-client-client-name",
+          "conditions": [
+            {
+              "expression": "blackList.phoneNumber.isClient",
+              "value": true
+            }
+          ]
+        },
+        {
           "nextPageId": "client-email"
         }
       ],
@@ -554,7 +566,14 @@
           "header": "¿Cuál es tu número de teléfono?",
           "phone-number": "Número de teléfono",
           "subheader": "Sabemos que los seguros a veces son complejos. Por eso, solo te llamaremos para darte asistencia personalizada."
-        }
+        },
+        "serviceActivators": [
+          {
+            "entryPoint": "next-page",
+            "activator": "black-list-phone",
+            "params": { "percentIsClient": 0.7 }
+          }
+        ]
       }
     },
     {
@@ -569,9 +588,10 @@
           "header": "Déjanos tu email y recibe tu presupuesto al instante",
           "legal-text": { "value": "Texto legal pendiente definir...", "type": "value" },
           "more-info": "Quiero recibir información sobre productos y ofertas de Shagui",
-          "privacy-policy": "política de privacidad",
-          "text-01": "He leído y acepto la",
-          "text-02": "de Shagui"
+          "privacy-policy-text": "He leído y acepto la {{private-policy-a}} de Shagui.",
+          "privacy-policy-tag": "<a class='link nx-font-weight-bold' href='{{link}}' target='_blank'>{{link-text}}</a>",
+          "privacy-policy-link": "https://www.shagui.com/privacidad",
+          "privacy-policy-link-text": "política de privacidad"
         }
       }
     },
@@ -588,7 +608,7 @@
           ]
         },
         {
-          "nextPageId": "is-client-contact-us",
+          "nextPageId": "is-client-client-name",
           "conditions": [
             {
               "expression": "blackList.identificationNumber.isClient",
@@ -768,9 +788,7 @@
           "header": "Déjanos tu email y recibe tu presupuesto al instante",
           "legal-text": { "value": "Texto legal pendiente definir...", "type": "value" },
           "more-info": "Quiero recibir información sobre productos y ofertas de Shagui",
-          "privacy-policy": "política de privacidad",
-          "text-01": "He leído y acepto la",
-          "text-02": "de Shagui"
+          "privacy-policy": "política de privacidad"
         },
         "validationSettings": {
           "acceptPrivacyPolicy": { "requiredTrue": { "disabled": true } }
@@ -903,6 +921,10 @@
     "error-future-date": { "value": "Errors.FutureDate", "type": "translate" },
     "error-past-date": { "value": "Errors.PastDate", "type": "translate" },
     "error-old-date": { "value": "Errors.OldDate", "type": "translate" },
-    "error-not-between-dates": { "value": "Errors.NotBetweenDates", "type": "translate" }
+    "error-not-between-dates": { "value": "Errors.NotBetweenDates", "type": "translate" },
+    "terms-and-conditions": "Términos y condiciones",
+    "privacy-policy": "Política de privacidad",
+    "legal-notice": "Aviso legal y privacidad",
+    "cookies-policy": "Política de cookies"
   }
 }

@@ -40,15 +40,13 @@ export class YourCarIsComponent extends QuoteComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     this.selectedVehicle = !this._contextData.vehicle.notFound ? this._contextData.vehicle : {};
-    this._contextData.vehicle.notFound = false;
-
     this.vehicleOptions = await this.vehicleService.vehicles();
   }
 
   public override canDeactivate = (): boolean => this.isValidData();
 
   public selectVehicle(vehicle: QuoteVehicleModel) {
-    this._contextData.vehicle = { ...this._contextData.vehicle, ...vehicle };
+    this._contextData.vehicle = { ...this._contextData.vehicle, ...vehicle, notFound: false };
 
     this.routingService.next();
   }

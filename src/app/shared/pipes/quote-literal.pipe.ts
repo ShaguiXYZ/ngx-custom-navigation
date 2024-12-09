@@ -1,7 +1,5 @@
 import { inject, Input, Pipe, PipeTransform } from '@angular/core';
-import { ContextDataService } from '@shagui/ng-shagui/core';
-import { QUOTE_APP_CONTEXT_DATA } from 'src/app/core/constants';
-import { AppContextData, LiteralParam } from 'src/app/core/models';
+import { LiteralModel, LiteralParam } from 'src/app/core/models';
 import { LiteralsService } from 'src/app/core/services';
 
 @Pipe({
@@ -12,15 +10,13 @@ export class QuoteLiteralPipe implements PipeTransform {
   @Input()
   public nxQuoteLiteral!: string;
 
-  private readonly contextDataService = inject(ContextDataService);
   private readonly literalsService = inject(LiteralsService);
 
-  public transform = (literal: string, params?: LiteralParam): string => {
-    const appContextData = this.contextDataService.get<AppContextData>(QUOTE_APP_CONTEXT_DATA);
-    const lastPage = appContextData.navigation.lastPage;
-    const literals = { ...appContextData.configuration.literals, ...lastPage?.configuration?.literals };
-    const value = literals[literal];
+  public transform = (literal: LiteralModel, params?: LiteralParam): string => {
+    if (typeof literal === 'string') {
+      return this.literalsService.toString({ value: `${literal}`, params, type: 'literal' });
+    }
 
-    return value ? this.literalsService.toString(value, params) : '';
+    return this.literalsService.toString(literal, params);
   };
 }

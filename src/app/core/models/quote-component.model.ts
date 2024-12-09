@@ -22,7 +22,7 @@ export abstract class QuoteComponent implements OnDestroy {
       this.contextDataService.onDataChange<QuoteModel>(QUOTE_CONTEXT_DATA).subscribe(data => (this._contextData = data))
     );
     this._contextData = this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA);
-    this.__updateComponentData();
+    this.__updateComponentData(this);
   }
 
   ngOnDestroy(): void {
@@ -33,9 +33,7 @@ export abstract class QuoteComponent implements OnDestroy {
     | ((currentRoute?: ActivatedRouteSnapshot, state?: RouterStateSnapshot, next?: RouterStateSnapshot) => MaybeAsync<GuardResult>)
     | undefined;
 
-  private __updateComponentData = (): void => this.__loadComponentData(this);
-
-  private __loadComponentData = <T extends QuoteComponent>(component: T): void => {
+  private __updateComponentData = <T extends QuoteComponent>(component: T): void => {
     const {
       navigation: { lastPage }
     } = this.contextDataService.get<AppContextData>(QUOTE_APP_CONTEXT_DATA);

@@ -1,122 +1,85 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import { Component, DebugElement, Renderer2 } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { By, DomSanitizer } from '@angular/platform-browser';
-import { TranslateService } from '@ngx-translate/core';
-import { ContextDataService } from '@shagui/ng-shagui/core';
-import { Observable, of } from 'rxjs';
-import { AppContextData } from 'src/app/core/models';
-import { QuoteLiteralPipe } from '../../pipes';
+import { Component, ElementRef } from '@angular/core';
 import { QuoteLiteralDirective } from '../quote-literal.directive';
+import { LiteralsService } from 'src/app/core/services';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
-  template: `<div
-    [nxQuoteLiteral]="quote"
-    [nxQuoteLitealParams]="params"
-    [nxQuoteDefaultLiteral]="defaultLiteral"
-    [nxAttribute]="attribute"
-    [nxProperty]="property"
-  ></div>`,
-  standalone: true,
-  imports: [QuoteLiteralDirective]
+  template: `<div [nxQuoteLiteral]="literal" [nxQuoteLitealParams]="params" [nxQuoteDefaultLiteral]="defaultLiteral"></div>`
 })
 class TestComponent {
-  quote = 'testQuote';
-  params = {};
-  defaultLiteral?: string;
-  attribute?: string;
-  property?: string;
+  literal = 'testLiteral';
+  params = { key: 'value' };
+  defaultLiteral = 'defaultLiteral';
 }
 
 describe('QuoteLiteralDirective', () => {
   let component: TestComponent;
   let fixture: ComponentFixture<TestComponent>;
-  let contextDataService: jasmine.SpyObj<ContextDataService>;
-  let debugElement: DebugElement;
+  let element: HTMLElement;
+  let literalsService: jasmine.SpyObj<LiteralsService>;
+  let domSanitizer: jasmine.SpyObj<DomSanitizer>;
 
   beforeEach(() => {
-    const contextDataServiceSpy = jasmine.createSpyObj('ContextDataService', ['get', 'onDataChange']);
-    const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate']);
-    const rederer2Spy = jasmine.createSpyObj('Renderer2', ['setAttribute', 'setProperty']);
-    const domSanitizerSpy = jasmine.createSpyObj('DomSanitizer', ['bypassSecurityTrustHtml', 'sanitize']);
+    literalsService = jasmine.createSpyObj('LiteralsService', ['transformLiteral']);
+    domSanitizer = jasmine.createSpyObj('DomSanitizer', ['bypassSecurityTrustHtml', 'sanitize']);
 
     TestBed.configureTestingModule({
-      declarations: [],
-      imports: [QuoteLiteralDirective, TestComponent],
+      declarations: [TestComponent],
+      imports: [QuoteLiteralDirective],
       providers: [
-        QuoteLiteralPipe,
-        { provide: ContextDataService, useValue: contextDataServiceSpy },
-        { provide: TranslateService, useValue: translateServiceSpy },
-        { provide: Renderer2, useValue: rederer2Spy },
-        { provide: DomSanitizer, useValue: domSanitizerSpy }
+        { provide: LiteralsService, useValue: literalsService },
+        { provide: DomSanitizer, useValue: domSanitizer }
       ]
     });
 
-    contextDataServiceSpy.onDataChange.and.callFake((): Observable<any> => {
-      return of({ navigation: {}, configuration: { literals: { testQuote: 'testQuote', type: 'value' } } } as unknown as AppContextData);
-    });
-
-    domSanitizerSpy.sanitize.and.callFake((context: any, value: any) => value);
-    domSanitizerSpy.bypassSecurityTrustHtml.and.callFake((value: any) => value);
-  });
-
-  beforeEach(() => {
     fixture = TestBed.createComponent(TestComponent);
     component = fixture.componentInstance;
-    debugElement = fixture.debugElement.query(By.directive(QuoteLiteralDirective));
-
-    contextDataService = TestBed.inject(ContextDataService) as jasmine.SpyObj<ContextDataService>;
-    contextDataService.get.and.returnValue({
-      navigation: {},
-      configuration: { literals: { testQuote: 'testQuote', type: 'value' } }
-    } as unknown as AppContextData);
+    element = fixture.nativeElement.querySelector('div') as HTMLElement;
   });
 
   it('should create an instance', () => {
-    const directive = new QuoteLiteralDirective(
-      debugElement,
-      TestBed.inject(Renderer2),
-      TestBed.inject(QuoteLiteralPipe),
-      TestBed.inject(DomSanitizer)
-    );
-
+    const directive = new QuoteLiteralDirective(literalsService, new ElementRef(element), domSanitizer);
     expect(directive).toBeTruthy();
   });
 
-  it('should set attribute when nxAttribute is provided', () => {
-    component.attribute = 'title';
+  it('should update element innerHTML with transformed literal', () => {
+    literalsService.transformLiteral.and.returnValue('transformedLiteral');
+    domSanitizer.bypassSecurityTrustHtml.and.returnValue('safeHtml');
+    domSanitizer.sanitize.and.returnValue('sanitizedHtml');
+
     fixture.detectChanges();
 
-    expect(debugElement.nativeElement.getAttribute('title')).toBe('testQuote');
+    expect(element.innerHTML).toBe('sanitizedHtml');
+    expect(literalsService.transformLiteral).toHaveBeenCalledWith('testLiteral', { key: 'value' });
+    expect(domSanitizer.bypassSecurityTrustHtml).toHaveBeenCalledWith('transformedLiteral');
+    expect(domSanitizer.sanitize).toHaveBeenCalledWith(1, 'safeHtml');
   });
 
-  it('should set innerText when nxProperty is innerText', () => {
-    component.property = 'innerText';
+  it('should update element innerHTML with default literal if transformed literal is empty', () => {
+    literalsService.transformLiteral.and.returnValue('');
+    domSanitizer.bypassSecurityTrustHtml.and.returnValue('safeHtml');
+    domSanitizer.sanitize.and.returnValue('sanitizedHtml');
+
     fixture.detectChanges();
 
-    expect(debugElement.nativeElement.innerText).toContain('testQuote');
+    expect(element.innerHTML).toBe('sanitizedHtml');
+    expect(literalsService.transformLiteral).toHaveBeenCalledWith('testLiteral', { key: 'value' });
+    expect(domSanitizer.bypassSecurityTrustHtml).toHaveBeenCalledWith('defaultLiteral');
+    expect(domSanitizer.sanitize).toHaveBeenCalledWith(1, 'safeHtml');
   });
 
-  it('should set innerHTML when nxProperty is innerHTML', () => {
-    component.property = 'innerHTML';
+  it('should update element innerHTML with source literal if both transformed and default literals are empty', () => {
+    literalsService.transformLiteral.and.returnValue('');
+    domSanitizer.bypassSecurityTrustHtml.and.returnValue('safeHtml');
+    domSanitizer.sanitize.and.returnValue('sanitizedHtml');
+
+    component.defaultLiteral = '';
     fixture.detectChanges();
 
-    expect(debugElement.nativeElement.innerHTML).toContain('testQuote');
-  });
-
-  it('should use default literal when quote is not provided', () => {
-    component.quote = '';
-    component.defaultLiteral = 'defaultLiteral';
-    component.property = 'innerText';
-    fixture.detectChanges();
-
-    expect(debugElement.nativeElement.innerText).toContain('defaultLiteral');
-  });
-
-  it('should update element after view init', () => {
-    spyOn(debugElement.injector.get(QuoteLiteralDirective as any), 'updateElement');
-    fixture.detectChanges();
-
-    expect(debugElement.injector.get(QuoteLiteralDirective)['updateElement']).toHaveBeenCalled();
+    expect(element.innerHTML).toBe('sanitizedHtml');
+    expect(literalsService.transformLiteral).toHaveBeenCalledWith('testLiteral', { key: 'value' });
+    expect(domSanitizer.bypassSecurityTrustHtml).toHaveBeenCalledWith('');
+    expect(domSanitizer.sanitize).toHaveBeenCalledWith(1, 'safeHtml');
   });
 });

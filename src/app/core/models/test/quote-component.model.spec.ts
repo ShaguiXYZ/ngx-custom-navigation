@@ -63,7 +63,7 @@ describe('QuoteComponent', () => {
   });
 
   it('should update component data', async () => {
-    await component['__updateComponentData']();
+    await component['__updateComponentData'](component);
 
     expect(contextDataService.get).toHaveBeenCalledTimes(3);
     expect(contextDataService.get).toHaveBeenCalledWith(QUOTE_CONTEXT_DATA);
@@ -71,7 +71,7 @@ describe('QuoteComponent', () => {
   });
 
   it('should load component data', () => {
-    component['__loadComponentData'](component);
+    component['__updateComponentData'](component);
 
     expect(contextDataService.get).toHaveBeenCalledTimes(3);
     expect(contextDataService.get).toHaveBeenCalledWith(QUOTE_CONTEXT_DATA);
@@ -105,7 +105,7 @@ describe('QuoteComponent', () => {
       }
     });
 
-    component['__loadComponentData'](component);
+    component['__updateComponentData'](component);
 
     expect(contextDataService.get).toHaveBeenCalledTimes(3);
     expect(contextDataService.get).toHaveBeenCalledWith(QUOTE_CONTEXT_DATA);

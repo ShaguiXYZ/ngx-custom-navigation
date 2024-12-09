@@ -66,7 +66,7 @@ describe('DrivingLicenseLocationComponent', () => {
 
     expect(dialogService.open).toHaveBeenCalledWith(component['infoModal'], {
       maxWidth: '350px',
-      showCloseIcon: true
+      showCloseIcon: false
     });
   });
 

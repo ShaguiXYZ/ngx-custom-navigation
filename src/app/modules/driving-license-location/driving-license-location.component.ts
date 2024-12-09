@@ -58,7 +58,7 @@ export class DrivingLicenseLocationComponent extends QuoteComponent implements O
   public openFromTemplate(): void {
     this.dialogService.open(this.infoModal, {
       maxWidth: '350px',
-      showCloseIcon: true
+      showCloseIcon: false
     });
   }
 

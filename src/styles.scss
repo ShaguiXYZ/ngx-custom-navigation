@@ -44,6 +44,16 @@ main {
         text-transform: capitalize;
       }
 
+      .link {
+        color: var(--link-color);
+        cursor: pointer;
+        text-decoration: underline;
+
+        &:hover {
+          color: var(--hover-link);
+        }
+      }
+
       // .selectable-row {
       //   // @howto: render the card-container when element is viewed
       //   content-visibility: auto;
