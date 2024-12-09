@@ -16,6 +16,7 @@ export interface ZoneConfig {
 
 export interface ConfigurationDTO {
   homePageId: string;
+  title?: LiteralModel;
   errorPageId?: string;
   lastUpdate?: Date;
   steppers?: StepperDTO[];
@@ -60,6 +61,7 @@ export interface Condition {
 export interface Configuration {
   hash?: string;
   homePageId: string;
+  title?: LiteralModel;
   errorPageId: string;
   lastUpdate?: Date;
   pageMap: DataInfo<Page>;

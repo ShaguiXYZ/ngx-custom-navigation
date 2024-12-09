@@ -57,6 +57,7 @@ export class JourneyService {
 
     const configuration: Configuration = {
       homePageId: dto.homePageId,
+      title: dto.title,
       errorPageId,
       lastUpdate: dto.lastUpdate,
       pageMap: dto.pageMap.reduce<DataInfo<Page>>((acc, page) => {

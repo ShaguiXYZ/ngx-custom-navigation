@@ -5,5 +5,5 @@ export interface FormValidationSettings {
 }
 
 export interface PageFormValidationSettings {
-  [controlName: string]: Record<QuoteFormValidations, FormValidationSettings>;
+  [controlName: string]: Partial<Record<QuoteFormValidations, FormValidationSettings>>;
 }

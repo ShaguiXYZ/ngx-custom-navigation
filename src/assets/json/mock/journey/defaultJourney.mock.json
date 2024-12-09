@@ -1,6 +1,7 @@
 {
   "last_update": "2024-12-05 15:00:00",
   "homePageId": "on-boarding",
+  "title": { "value": "Calcula tu seguro" },
   "steppers": [
     {
       "steps": [
@@ -713,6 +714,9 @@
       "pageId": "contact-us",
       "configuration": {
         "literals": {
+          "header": "Información de contacto",
+          "phone": "+49 55 5555 5555",
+          "title": "Nos gustaría poder ayudarte, <br/>¡contactanos!",
           "footer-next": "FINALIZAR"
         },
         "data": {
@@ -722,7 +726,7 @@
             "showContactUs": false
           },
           "stepperConfig": {
-            "label": { "value": "contact-us-header", "type": "translate" }
+            "label": { "value": "header", "type": "literal" }
           }
         }
       }
@@ -821,9 +825,9 @@
       "route": "contact-us",
       "configuration": {
         "literals": {
-          "contact-us-header": "",
-          "stepper-header": "Información de contacto",
-          "footer-next": "LLAMAR AHORA"
+          "header": "Información de contacto",
+          "phone": "+49 55 5555 5555",
+          "title": "Nos gustaría poder ayudarte, <br/>¡contactanos!"
         },
         "data": {
           "contactUsTexts": [
@@ -831,6 +835,9 @@
             "Lunes a Jueves de 9h a 19h",
             "Viernes de 9h a 18h"
           ],
+          "footerConfig": {
+            "showNext": false
+          },
           "headerConfig": {
             "showBack": true,
             "showContactUs": false
@@ -852,8 +859,8 @@
       ],
       "configuration": {
         "literals": {
-          "contact-us-header": { "value": "Dinos cómo podemos contactarte", "type": "value" },
-          "contact-us-title": "Podemos ayudarte, <br/>¿Quieres que te llamemos?",
+          "header": { "value": "Dinos cómo podemos contactarte", "type": "value" },
+          "title": "Podemos ayudarte, <br/>¿Quieres que te llamemos?",
           "body": "Podemos llamarte y ayudarte a encontrar el mejor seguro para ti, con las mejores coberturas."
         },
         "data": {
@@ -862,7 +869,7 @@
             "showContactUs": false
           },
           "stepperConfig": {
-            "label": { "value": "contact-us-header", "type": "translate" }
+            "label": { "value": "header", "type": "literal" }
           }
         }
       }
@@ -888,6 +895,7 @@
     "contact-us": "external-contact-us"
   },
   "literals": {
+    "journey-title": "Calcula tu seguro",
     "bad-format": "Formato incorrecto",
     "budget-modal-header": "Datos de tu presupuesto",
     "budget-name": "Nombre del presupuesto",
@@ -899,9 +907,6 @@
     "retrieve-budget": "Recuperar presupuesto",
     "store-budget": "Almacenar presupuesto",
     "quote-copied-to-clipboard": "Presupuesto copiado al portapapeles, guardalo en un lugar seguro para poder acceder al mismo en otro momento.",
-    "contact-us-phone": "+49 55 5555 5555",
-    "contact-us-header": "Información de contacto",
-    "contact-us-title": "Nos gustaría poder ayudarte, <br/>¡contactanos!",
     "cubic-capacity": { "value": "Label.CubicCapacity", "type": "translate" },
     "currency": "€",
     "fee-header": "Valor de la franquicia",

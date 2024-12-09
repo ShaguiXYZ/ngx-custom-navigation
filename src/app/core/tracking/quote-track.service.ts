@@ -7,6 +7,7 @@ import { TrackError } from '../errors';
 import { AppContextData, QuoteModel } from '../models';
 import { TrackEventType, TrackInfo, TrackInfoPageModel, TRACKING_QUOTE_MANIFEST } from './quote-track.model';
 import { _window } from './window-tracker.model';
+import { LiteralsService } from '../services';
 
 @Injectable({ providedIn: 'root' })
 export class QuoteTrackService implements OnDestroy {
@@ -19,6 +20,7 @@ export class QuoteTrackService implements OnDestroy {
   private readonly subscription$: Subscription[] = [];
   private readonly breakpointObserver = inject(BreakpointObserver);
   private readonly contextDataService = inject(ContextDataService);
+  private readonly literalService = inject(LiteralsService);
 
   constructor() {
     this.subscription$.push(
@@ -63,7 +65,8 @@ export class QuoteTrackService implements OnDestroy {
         const appContextData = this.contextDataService.get<AppContextData>(QUOTE_APP_CONTEXT_DATA);
         const {
           settings: { journey },
-          navigation: { viewedPages }
+          navigation: { lastPage, viewedPages },
+          configuration: { steppers }
         } = appContextData;
 
         const trackInfo: TrackInfo = {
@@ -78,9 +81,18 @@ export class QuoteTrackService implements OnDestroy {
             }, {} as TrackInfo),
           category: `tarificador ${journey}`,
           page: this.infoPage?.page,
-          URL: this.infoPage?.URL,
-          step_number: `${viewedPages.length}`
+          URL: this.infoPage?.URL
         };
+
+        if (lastPage?.stepper) {
+          const stepper = steppers?.steppersMap?.[lastPage.stepper.key];
+          const stepperPages = stepper?.steps?.flatMap(step => step.pages) ?? [];
+          const stepperPagesViewed = viewedPages.filter(page => stepperPages.includes(page));
+          const step = stepper?.steps?.find(step => step.key === lastPage.stepper?.stepKey);
+
+          trackInfo['step_name'] = step?.label ? this.literalService.toString(step?.label) : '';
+          trackInfo['step_number'] = `${stepperPagesViewed.length}`;
+        }
 
         await Promise.resolve();
         return this.trackFn(eventType, trackInfo);

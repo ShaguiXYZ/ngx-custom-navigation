@@ -1,11 +1,12 @@
 import { DataInfo } from '@shagui/ng-shagui/core';
+import { LiteralModel } from './literal.model';
 
 export interface StateInfo {
   inherited?: boolean;
 }
 
 export interface StepDTO {
-  label: string;
+  label: LiteralModel;
   pages: string[];
 }
 
@@ -16,7 +17,7 @@ export interface StepperDTO {
 
 export interface Step {
   key: string;
-  label: string;
+  label: LiteralModel;
   pages: string[];
 }
 

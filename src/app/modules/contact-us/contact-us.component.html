@@ -2,12 +2,12 @@
 <article class="center__info">
   <header class="nx-margin-bottom-3m">
     <div class="info__header nx-margin-bottom-xl">
-      <h4 nxHeadline="subsection-xsmall" class="nx-font-weight-bold" nxQuoteLiteral="contact-us-header"></h4>
+      <h4 nxHeadline="subsection-xsmall" class="nx-font-weight-bold" nxQuoteLiteral="header"></h4>
     </div>
-    <h3 nxHeadline="subsection-xsmall" nxQuoteLiteral="contact-us-title"></h3>
+    <h3 nxHeadline="subsection-xsmall" nxQuoteLiteral="title"></h3>
     <section class="form-container">
       <div class="info-row info-phone nx-margin-y-s">
-        <a href="tel: {{ 'contact-us-phone' | quoteLiteral }}" nxQuoteLiteral="contact-us-phone"></a>
+        <a href="tel: {{ 'phone' | quoteLiteral }}" nxQuoteLiteral="phone"></a>
       </div>
       @for(text of contactUsTexts; track $index) {
       <div nxCopytext="medium" class="info-row" [nxQuoteLiteral]="text"></div>

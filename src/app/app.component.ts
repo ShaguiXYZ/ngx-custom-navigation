@@ -14,8 +14,8 @@ import {
   QuoteLoadingComponent,
   QuoteStepperComponent
 } from './shared/components';
-import { QuoteLiteralPipe } from './shared/pipes';
 import { QuoteLiteralDirective } from './shared/directives';
+import { QuoteLiteralPipe } from './shared/pipes';
 
 @Component({
   selector: 'quote-root',
@@ -58,8 +58,10 @@ export class AppComponent {
   public prepareRoute = (outlet?: RouterOutlet): number => (outlet?.isActivated ? this.slideTo() : -1);
 
   private slideTo(): number {
-    const contextData = this.contextDataService.get<AppContextData>(QUOTE_APP_CONTEXT_DATA);
+    const {
+      navigation: { viewedPages }
+    } = this.contextDataService.get<AppContextData>(QUOTE_APP_CONTEXT_DATA);
 
-    return contextData.navigation.viewedPages.length;
+    return viewedPages.length;
   }
 }

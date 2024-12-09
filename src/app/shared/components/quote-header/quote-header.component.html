@@ -17,7 +17,14 @@
   </div>
   <div class="back">
     @if (config.showBack) {
-    <nx-link nxStyle="block icon-left">
+    <nx-link
+      nxStyle="block icon-left"
+      [nxTrack]="{
+        title: 'header' | quoteLiteral,
+        label: 'header-back' | quoteLiteral
+      }"
+      [nxTrackEvents]="['click']"
+    >
       <a (click)="return()" (keydown.enter)="return()" tabindex="0">
         <nx-icon name="arrow-left" aria-hidden="true"></nx-icon> <span nxQuoteLiteral="header-back"></span
       ></a>

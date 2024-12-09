@@ -40,9 +40,9 @@ export class QuoteFooterComponent implements OnInit, OnDestroy {
   private _trackInfo: TrackInfo = {};
   private _trackFooterInfo: TrackInfo = {};
 
-  private readonly quoteLiteralPipe = inject(QuoteLiteralPipe);
   private readonly subscription$: Subscription[] = [];
 
+  private readonly quoteLiteralPipe = inject(QuoteLiteralPipe);
   private readonly breakpointObserver = inject(BreakpointObserver);
   private readonly contextDataService = inject(ContextDataService);
   private readonly routingService = inject(RoutingService);
