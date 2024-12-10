@@ -14,6 +14,10 @@
     "Brand": "Marca",
     "CubicCapacity": "Cilindrada",
     "DateFormat": "Formato: DD/MM/AAAA",
+    "Datepicker": {
+      "SwitchToMonthView": "Elige fecha",
+      "SwitchToMultiYearViewLabel": "Elige mes y año"
+    },
     "Fuel": "Combustible",
     "Model": "Modelo",
     "Next": "Continuar",

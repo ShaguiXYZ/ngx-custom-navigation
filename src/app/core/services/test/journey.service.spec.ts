@@ -51,6 +51,7 @@ describe('JourneyService', () => {
     const lastUpdate = new Date('2023-10-01');
     const mockConfigurationDTO: ConfigurationDTO = {
       homePageId: 'home',
+      title: 'home',
       lastUpdate,
       errorPageId: 'error',
       pageMap: [
@@ -67,6 +68,7 @@ describe('JourneyService', () => {
 
     const mockConfiguration: Configuration = {
       homePageId: 'home',
+      title: 'home',
       errorPageId: 'error',
       lastUpdate,
       pageMap: {

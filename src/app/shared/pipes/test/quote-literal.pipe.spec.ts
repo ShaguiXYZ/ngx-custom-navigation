@@ -30,7 +30,7 @@ describe('QuoteLiteralPipe', () => {
     const result = pipe.transform(literal, params);
 
     expect(result).toBe('transformedLiteral');
-    expect(literalsService.toString).toHaveBeenCalledWith({ value: 'testLiteral', params, type: 'literal' });
+    expect(literalsService.toString).toHaveBeenCalledWith({ value: 'testLiteral', params, type: 'literal' }, { key: 'value' });
   });
 
   it('should transform object literal', () => {
@@ -51,6 +51,6 @@ describe('QuoteLiteralPipe', () => {
     const result = pipe.transform(literal);
 
     expect(result).toBe('transformedLiteral');
-    expect(literalsService.toString).toHaveBeenCalledWith({ value: 'testLiteral', params: undefined, type: 'literal' });
+    expect(literalsService.toString).toHaveBeenCalledWith({ value: 'testLiteral', params: undefined, type: 'literal' }, undefined);
   });
 });

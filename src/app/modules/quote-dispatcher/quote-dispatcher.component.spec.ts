@@ -5,6 +5,7 @@ import { AppContextData } from 'src/app/core/models';
 import { BudgetActivator } from 'src/app/core/service-activators/budget.activator';
 import { RoutingService } from 'src/app/core/services';
 import { QuoteDispatcherComponent } from './quote-dispatcher.component';
+import { TranslateService } from '@ngx-translate/core';
 
 describe('QuoteDispatcherComponent', () => {
   let component: QuoteDispatcherComponent;
@@ -15,6 +16,7 @@ describe('QuoteDispatcherComponent', () => {
   let mockRoutingService: jasmine.SpyObj<RoutingService>;
 
   beforeEach(async () => {
+    const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate']);
     mockRouter = jasmine.createSpyObj('Router', ['navigate']);
     mockActivatedRoute = jasmine.createSpyObj('ActivatedRoute', ['snapshot']);
     mockContextDataService = jasmine.createSpyObj('ContextDataService', ['get', 'set']);
@@ -46,7 +48,8 @@ describe('QuoteDispatcherComponent', () => {
         { provide: Router, useValue: mockRouter },
         { provide: ActivatedRoute, useValue: mockActivatedRoute },
         { provide: ContextDataService, useValue: mockContextDataService },
-        { provide: RoutingService, useValue: mockRoutingService }
+        { provide: RoutingService, useValue: mockRoutingService },
+        { provide: TranslateService, useValue: translateServiceSpy }
       ]
     }).compileComponents();
   });

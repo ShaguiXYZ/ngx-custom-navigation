@@ -8,9 +8,10 @@
     <h3 nxCopytext="normal" class="nx-font-weight-semibold" [innerHTML]="stepperData.stepper.steps[stepperIndex].label | quoteLiteral"></h3>
     }
   </header>
+  @if(showSteps) {
   <section class="stepper__list">
-    @if(showSteps) { @for(step of stepperData.stepper.steps; track step.key) { @let _active=step.key === stepperData.stepKey; @let
-    _complete=stepperIndex > $index; @let _disabled=stepperIndex < $index;
+    @for(step of stepperData.stepper.steps; track step.key) { @let _active=step.key === stepperData.stepKey; @let _complete=stepperIndex >
+    $index; @let _disabled=stepperIndex < $index;
     <div
       class="stepper__item"
       [ngClass]="{ active: _active, complete: _complete, disabled: _disabled }"
@@ -26,8 +27,8 @@
       <div class="stepper__item__line__solid"></div>
       <div class="stepper__item__line__dotted"></div>
     </div>
-    } } }
+    } }
   </section>
-  }
+  }}
 </article>
 }

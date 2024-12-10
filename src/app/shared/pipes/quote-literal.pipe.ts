@@ -1,5 +1,5 @@
 import { inject, Input, Pipe, PipeTransform } from '@angular/core';
-import { LiteralModel, LiteralParam } from 'src/app/core/models';
+import { LiteralModel, LiteralParam, QuoteLiteral } from 'src/app/core/models';
 import { LiteralsService } from 'src/app/core/services';
 
 @Pipe({
@@ -12,11 +12,8 @@ export class QuoteLiteralPipe implements PipeTransform {
 
   private readonly literalsService = inject(LiteralsService);
 
-  public transform = (literal: LiteralModel, params?: LiteralParam): string => {
-    if (typeof literal === 'string') {
-      return this.literalsService.toString({ value: `${literal}`, params, type: 'literal' });
-    }
-
-    return this.literalsService.toString(literal, params);
-  };
+  public transform(literal: LiteralModel, params?: LiteralParam): string {
+    const literalValue = typeof literal === 'string' ? ({ value: `${literal}`, params, type: 'literal' } as QuoteLiteral) : literal;
+    return this.literalsService.toString(literalValue, params);
+  }
 }

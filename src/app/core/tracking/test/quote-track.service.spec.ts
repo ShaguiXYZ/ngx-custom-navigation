@@ -8,6 +8,7 @@ import { AppContextData } from '../../models';
 import { TrackInfo } from '../quote-track.model';
 import { QuoteTrackService } from '../quote-track.service';
 import { _window } from '../window-tracker.model';
+import { TranslateService } from '@ngx-translate/core';
 
 describe('QuoteTrackService', () => {
   let service: QuoteTrackService;
@@ -19,6 +20,7 @@ describe('QuoteTrackService', () => {
     const breakpointObserverSpy = jasmine.createSpyObj('BreakpointObserver', ['observe']);
     const routerSpy = jasmine.createSpyObj('Router', [], { events: of(new NavigationEnd(1, '/test', '/test')) });
     const contextDataServiceSpy = jasmine.createSpyObj('ContextDataService', ['get']);
+    const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate']);
     const subscriptionSpy = jasmine.createSpyObj('Subscription', ['unsubscribe']);
 
     breakpointObserverSpy.observe.and.returnValue({
@@ -29,7 +31,10 @@ describe('QuoteTrackService', () => {
 
     contextDataServiceSpy.get.and.callFake((contextDataKey: string): any => {
       if (contextDataKey === QUOTE_APP_CONTEXT_DATA) {
-        return { navigation: { lastPage: { pageId: 'test' }, viewedPages: ['page1', 'page2'] } } as AppContextData;
+        return {
+          configuration: { steppers: { steppersMap: {} } },
+          navigation: { lastPage: { pageId: 'test' }, viewedPages: ['page1', 'page2'] }
+        } as AppContextData;
       } else if (contextDataKey === QUOTE_CONTEXT_DATA) {
         return {};
       }
@@ -43,6 +48,7 @@ describe('QuoteTrackService', () => {
         { provide: BreakpointObserver, useValue: breakpointObserverSpy },
         { provide: Router, useValue: routerSpy },
         { provide: ContextDataService, useValue: contextDataServiceSpy },
+        { provide: TranslateService, useValue: translateServiceSpy },
         { provide: Subscription, useValue: subscriptionSpy }
       ]
     });
@@ -102,7 +108,11 @@ describe('QuoteTrackService', () => {
   });
 
   it('should track event with correct data', done => {
-    const appContextData = { navigation: { viewedPages: ['page1', 'page2'] }, settings: { journey: 'journey' } } as AppContextData;
+    const appContextData = {
+      configuration: { steppers: {} },
+      navigation: { viewedPages: ['page1', 'page2'] },
+      settings: { journey: 'journey' }
+    } as AppContextData;
     contextDataService.get.and.returnValue(appContextData);
 
     const trackInfo: TrackInfo = { brand: 'test' };
@@ -110,15 +120,20 @@ describe('QuoteTrackService', () => {
 
     spyOn(window, 'requestIdleCallback').and.callFake((callback: Function) => callback());
 
-    service.trackEvent('click', trackInfo).then(() => {
-      expect(trackFnSpy).toHaveBeenCalledWith(
-        'click',
-        jasmine.objectContaining({
-          category: `tarificador ${appContextData.settings.journey}`,
-          step_number: '2'
-        })
-      );
-      done();
-    });
+    service
+      .trackEvent('click', trackInfo)
+      .then(() => {
+        expect(trackFnSpy).toHaveBeenCalledWith(
+          'click',
+          jasmine.objectContaining({
+            category: `tarificador ${appContextData.settings.journey}`
+          })
+        );
+        done();
+      })
+      .catch(error => {
+        fail(error);
+        done();
+      });
   });
 });

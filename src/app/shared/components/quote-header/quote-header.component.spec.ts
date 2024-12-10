@@ -2,9 +2,9 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { TranslateService } from '@ngx-translate/core';
 import { ContextDataService } from '@shagui/ng-shagui/core';
 import { QUOTE_APP_CONTEXT_DATA } from 'src/app/core/constants';
-import { ContextDataServiceStub } from 'src/app/core/stub';
 import { AppContextData } from 'src/app/core/models';
 import { RoutingService } from 'src/app/core/services';
+import { ContextDataServiceStub } from 'src/app/core/stub';
 import { QuoteHeaderComponent } from './quote-header.component';
 
 describe('QuoteHeaderComponent', () => {
@@ -40,6 +40,9 @@ describe('QuoteHeaderComponent', () => {
 
   it('should set showBackButton based on context data', () => {
     const mockData: AppContextData = {
+      configuration: {
+        title: 'test'
+      },
       navigation: {
         lastPage: {
           pageId: 'show-back',
@@ -76,6 +79,9 @@ describe('QuoteHeaderComponent', () => {
 
   it('should set showBackButton to true if lastPage is undefined', () => {
     const mockData: AppContextData = {
+      configuration: {
+        title: 'test'
+      },
       navigation: {
         lastPage: undefined
       }
@@ -90,6 +96,9 @@ describe('QuoteHeaderComponent', () => {
 
   it('should set showBackButton to true if showBack is not defined in lastPage', () => {
     const mockData: AppContextData = {
+      configuration: {
+        title: 'test'
+      },
       navigation: {
         lastPage: {
           configuration: {

@@ -29,10 +29,6 @@
         {
           "label": { "value": "Datos del Contacto" },
           "pages": ["client-name", "client-phone-number", "client-email", "client-identification-number"]
-        },
-        {
-          "label": { "value": "Presupuesto" },
-          "pages": ["offerings"]
         }
       ]
     },
@@ -646,6 +642,7 @@
       ],
       "configuration": {
         "literals": {
+          "header": "Estos son los seguros que mejor se adaptan a ti",
           "coverages-modal-header": "Compara las coberturas de tu seguro",
           "footer-next": "LLAMAR AHORA",
           "from-now": "Desde hoy {{value}}",

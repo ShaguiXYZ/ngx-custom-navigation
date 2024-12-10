@@ -4,7 +4,7 @@ import { NxCopytextModule } from '@aposin/ng-aquila/copytext';
 import { NxIconModule } from '@aposin/ng-aquila/icon';
 import { NxTooltipModule } from '@aposin/ng-aquila/tooltip';
 import { ContextDataService } from '@shagui/ng-shagui/core';
-import { Subscription } from 'rxjs';
+import { last, Subscription } from 'rxjs';
 import { QUOTE_APP_CONTEXT_DATA } from 'src/app/core/constants';
 import { AppContextData, Step, Stepper } from 'src/app/core/models';
 import { QuoteLiteralPipe } from '../../pipes';
@@ -60,7 +60,7 @@ export class QuoteStepperComponent implements OnInit, OnDestroy {
       this.stepperData.stepper.steps[this.stepperIndex].label = config.label;
     }
 
-    this.visible = config.visible ?? true;
+    this.visible = config.visible ?? !!this.stepperData;
     this.showLabel = config.showLabel ?? true;
     this.showSteps = config.showSteps ?? true;
   };

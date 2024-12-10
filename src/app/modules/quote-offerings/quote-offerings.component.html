@@ -1,6 +1,7 @@
 <!-- eslint-disable @angular-eslint/template/interactive-supports-focus -->
 <!-- eslint-disable @angular-eslint/template/click-events-have-key-events -->
 <article class="component-container">
+  <quote-header-title><span nxQuoteLiteral="header"></span></quote-header-title>
   <section class="form-container">
     <div #carrouselInner class="inner__carrousel">
       <div #carrouselTrack class="track nx-margin-s" (touchstart)="swipeStart($event)" (touchend)="swipeEnd($event)">
@@ -32,9 +33,3 @@
     </div>
   </section>
 </article>
-
-<!-- <ng-template #priceCoverages>
-  <div class="modal-container" nxModalContent tabindex="0">
-    <quote-offering-coverages [prices]="prices" [selectedPriceIndex]="selectedPriceIndex"></quote-offering-coverages>
-  </div>
-</ng-template> -->

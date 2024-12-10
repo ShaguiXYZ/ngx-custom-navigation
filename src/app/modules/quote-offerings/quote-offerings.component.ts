@@ -2,20 +2,21 @@ import { ComponentType } from '@angular/cdk/portal';
 import { CommonModule } from '@angular/common';
 import { Component, ElementRef, inject, OnInit, ViewChild } from '@angular/core';
 import { NxDialogService, NxModalModule, NxModalRef } from '@aposin/ng-aquila/modal';
+import { deepCopy } from '@shagui/ng-shagui/core';
 import { Subscription } from 'rxjs';
+import { QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
 import { OfferingPriceModel, QuoteComponent, QuoteModel } from 'src/app/core/models';
 import { RoutingService } from 'src/app/core/services';
 import { OfferingsService } from 'src/app/core/services/offerings.service';
-import { QuoteOfferingCoveragesComponent } from 'src/app/shared/components';
+import { HeaderTitleComponent, QuoteOfferingCoveragesComponent } from 'src/app/shared/components';
+import { QuoteLiteralDirective } from 'src/app/shared/directives';
 import { QuoteOfferingPriceCardComponent } from './components';
-import { deepCopy } from '@shagui/ng-shagui/core';
-import { QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
 
 @Component({
   selector: 'quote-quote-offerings',
   templateUrl: './quote-offerings.component.html',
   styleUrl: './quote-offerings.component.scss',
-  imports: [CommonModule, QuoteOfferingPriceCardComponent, NxModalModule],
+  imports: [CommonModule, HeaderTitleComponent, QuoteOfferingPriceCardComponent, NxModalModule, QuoteLiteralDirective],
   providers: [OfferingsService],
   standalone: true
 })

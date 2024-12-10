@@ -14,6 +14,7 @@ const appContextDataMock = {
   },
   configuration: {
     homePageId: 'page1',
+    title: 'title',
     errorPageId: 'page2',
     steppers: {
       steppersMap: {
