@@ -585,10 +585,22 @@
           "header": "Déjanos tu email y recibe tu presupuesto al instante",
           "legal-text": { "value": "Texto legal pendiente definir...", "type": "value" },
           "more-info": "Quiero recibir información sobre productos y ofertas de Shagui",
-          "privacy-policy-text": "He leído y acepto la {{private-policy-a}} de Shagui.",
+          "privacy-policy-text": {
+            "value": "He leído y acepto la {{private-policy-a}} de Shagui.",
+            "type": "value",
+            "params": {
+              "private-policy-a": {
+                "value": "privacy-policy-tag",
+                "params": {
+                  "link": { "value": "privacy-policy-link", "type": "literal" },
+                  "link-text": { "value": "política de privacidad", "type": "value" }
+                },
+                "type": "literal"
+              }
+            }
+          },
           "privacy-policy-tag": "<a class='link nx-font-weight-bold' href='{{link}}' target='_blank'>{{link-text}}</a>",
-          "privacy-policy-link": "https://www.shagui.com/privacidad",
-          "privacy-policy-link-text": "política de privacidad"
+          "privacy-policy-link": "https://www.shagui.com/privacidad"
         }
       }
     },
