@@ -9,7 +9,10 @@
       <quote-text-card
         [selected]="type.index === selectedType?.index"
         [data]="label"
-        [nxTrack]="{ title: 'header' | quoteLiteral, label, vehicleType: type?.index || null }"
+        [nxTrack]="{
+          label,
+          vehicleType: type?.index || null
+        }"
         [nxTrackEvents]="['click']"
         (uiSelect)="selectType(type)"
       />

@@ -4,7 +4,7 @@ import { ContextDataService, deepCopy, hasValue, JsonUtils, UniqueIds } from '@s
 import { Subscription } from 'rxjs';
 import { QUOTE_APP_CONTEXT_DATA, QUOTE_CONTEXT_DATA } from '../constants';
 import { TrackError } from '../errors';
-import { AppContextData, QuoteModel } from '../models';
+import { AppContextData, Page, QuoteModel } from '../models';
 import { TrackEventType, TrackInfo, TrackInfoPageModel, TRACKING_QUOTE_MANIFEST } from './quote-track.model';
 import { _window } from './window-tracker.model';
 import { LiteralsService } from '../services';
@@ -14,7 +14,6 @@ export class QuoteTrackService implements OnDestroy {
   public trackID = UniqueIds._next_();
 
   private isMobile?: boolean;
-  private infoPage?: TrackInfoPageModel;
   private referrer?: string;
 
   private readonly subscription$: Subscription[] = [];
@@ -50,7 +49,6 @@ export class QuoteTrackService implements OnDestroy {
           device_type: this.isMobile ? 'mobile' : 'desktop'
         };
 
-        this.infoPage = deepCopy(infoPage);
         _window.digitalData = { infoPag: infoPage };
         this.referrer = fullUrl;
 
@@ -59,16 +57,18 @@ export class QuoteTrackService implements OnDestroy {
       }
     });
 
-  public trackEvent = async (eventType: TrackEventType, data: TrackInfo): Promise<number> =>
-    requestIdleCallback(async () => {
-      {
-        const appContextData = this.contextDataService.get<AppContextData>(QUOTE_APP_CONTEXT_DATA);
-        const {
-          settings: { journey },
-          navigation: { lastPage, viewedPages },
-          configuration: { steppers }
-        } = appContextData;
+  public trackEvent = async (eventType: TrackEventType, data: TrackInfo): Promise<number> => {
+    const appContextData = this.contextDataService.get<AppContextData>(QUOTE_APP_CONTEXT_DATA);
+    const {
+      settings: { journey },
+      navigation: { lastPage, viewedPages },
+      configuration: { steppers }
+    } = appContextData;
+    const fullUrl = lastPage && `${window.location.protocol}//${window.location.host}/${Page.routeFrom(lastPage)}`;
+    const title = this.literalService.toString({ value: 'header', type: 'literal' });
 
+    return requestIdleCallback(async () => {
+      {
         const trackInfo: TrackInfo = {
           ...this.loadManifest(),
           ...Object.entries(data)
@@ -80,8 +80,9 @@ export class QuoteTrackService implements OnDestroy {
               return acc;
             }, {} as TrackInfo),
           category: `tarificador ${journey}`,
-          page: this.infoPage?.page,
-          URL: this.infoPage?.URL
+          page: lastPage?.pageId,
+          title: title,
+          URL: fullUrl
         };
 
         if (lastPage?.stepper) {
@@ -98,6 +99,7 @@ export class QuoteTrackService implements OnDestroy {
         return this.trackFn(eventType, trackInfo);
       }
     });
+  };
 
   private headData = (): void => {
     const digitalData = document.createElement('script');

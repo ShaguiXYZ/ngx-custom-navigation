@@ -16,7 +16,6 @@
               [selected]="hour === selectedHour"
               data="{{ hour }} h"
               [nxTrack]="{
-                title: 'header' | quoteLiteral,
                 label: hour,
 
               }"
@@ -41,7 +40,6 @@
               [selected]="hour === selectedHour"
               data="{{ hour }} h"
               [nxTrack]="{
-                title: 'header' | quoteLiteral,
                 label: hour
               }"
               [nxTrackEvents]="['click']"
@@ -55,7 +53,6 @@
   </section>
   <quote-footer
     [trackInfo]="{
-      title: 'header' | quoteLiteral,
       contactHour: selectedHour
     }"
     (uiOnNext)="updateValidData()"

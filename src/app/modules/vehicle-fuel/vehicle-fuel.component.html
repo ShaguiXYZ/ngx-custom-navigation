@@ -14,7 +14,6 @@
             <quote-selectable-option
               [selected]="_selectedFuel"
               [nxTrack]="{
-                title: 'header' | quoteLiteral,
                 displayment: selectedCubicCapacity?.index,
                 fuel: fuel.index,
                 power: selectedPower?.index
@@ -44,7 +43,6 @@
             <quote-selectable-option
               [selected]="_selectedCubicCapacityselected"
               [nxTrack]="{
-                title: 'header' | quoteLiteral,
                 displayment: cubicCapacity.index,
                 fuel: selectedFuel?.index,
                 power: selectedPower?.index
@@ -69,7 +67,6 @@
               nxButton="tertiary small"
               type="button"
               [nxTrack]="{
-                title: 'header' | quoteLiteral,
                 displayment: cubicCapacityNotKnown.index,
                 fuel: cubicCapacityNotKnown.index,
                 power: selectedPower?.index
@@ -98,7 +95,6 @@
             <quote-selectable-option
               [selected]="_selectedPower"
               [nxTrack]="{
-                title: 'header' | quoteLiteral,
                 displayment: selectedCubicCapacity?.index,
                 fuel: selectedFuel?.index,
                 power: power.index
@@ -121,7 +117,6 @@
               nxButton="tertiary small"
               type="button"
               [nxTrack]="{
-                title: 'header' | quoteLiteral,
                 displayment: selectedCubicCapacity?.index,
                 fuel: selectedFuel?.index,
                 power: powerNotKnown.index

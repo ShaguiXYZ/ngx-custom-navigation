@@ -19,7 +19,10 @@
         class="nx-margin-x-3xs nx-margin-y-3xs"
         [data]="brand"
         [selected]="selectedBrand === brand.index"
-        [nxTrack]="{ title: 'header' | quoteLiteral, brand: brand.index, label: brand.index }"
+        [nxTrack]="{
+          brand: brand.index,
+          label: brand.index
+        }"
         [nxTrackEvents]="['click']"
         (uiSelect)="selectBrand($event.index)"
       />
@@ -32,7 +35,10 @@
         <quote-text-card
           [selected]="selectedBrand === item"
           [data]="item"
-          [nxTrack]="{ title: 'header' | quoteLiteral, brand: item, label: item }"
+          [nxTrack]="{
+            brand: item,
+            label: item
+          }"
           [nxTrackEvents]="['click']"
           (uiSelect)="selectBrand(item)"
         />

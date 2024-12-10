@@ -19,7 +19,6 @@
   </section>
   <quote-footer
     [trackInfo]="{
-      title: 'header' | quoteLiteral,
       plateNumber: form.get('plateNumber')?.value
     }"
     (uiOnNext)="updateValidData()"
@@ -32,7 +31,6 @@
           type="button"
           [nxTrack]="{
             label: 'continue-without-license-plate' | quoteLiteral,
-            title: 'header' | quoteLiteral,
             plateNumber: ''
           }"
           [nxTrackEvents]="['click']"

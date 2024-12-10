@@ -19,7 +19,6 @@
         [selected]="selectedAccidents === 0"
         [data]="'no' | quoteLiteral"
         [nxTrack]="{
-          title: 'header' | quoteLiteral,
           accidents: item
         }"
         [nxTrackEvents]="['click']"
@@ -34,7 +33,6 @@
               : ($last ? { value: item.toString(), 'or-more': { value: 'Label.OrMore', type: 'translate' } } : { value: item.toString() })
         "
         [nxTrack]="{
-          title: 'header' | quoteLiteral,
           accidents: item
         }"
         [nxTrackEvents]="['click']"

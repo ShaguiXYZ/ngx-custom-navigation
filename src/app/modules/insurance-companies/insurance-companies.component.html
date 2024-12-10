@@ -19,7 +19,6 @@
         [showLabel]="false"
         [selected]="selectedCompany?.index === icon.index"
         [nxTrack]="{
-          title: 'header' | quoteLiteral,
           company: icon.index
         }"
         [nxTrackEvents]="['click']"
@@ -35,7 +34,6 @@
           [data]="item.data"
           [selected]="selectedCompany?.index === item.index"
           [nxTrack]="{
-            title: 'header' | quoteLiteral,
             company: item.index
           }"
           [nxTrackEvents]="['click']"
