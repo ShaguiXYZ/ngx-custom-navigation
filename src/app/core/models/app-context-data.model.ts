@@ -25,11 +25,11 @@ export interface AppContextData {
 
 export namespace AppContextData {
   export const init = (settings: QuoteSettingsModel, configuration: Configuration, viewedPages: string[] = []): AppContextData => {
-    const homePage = configuration.pageMap[configuration.homePageId];
-    const updatedViewedPages = viewedPages.length ? viewedPages : [homePage.pageId];
+    const homePageId = configuration.homePageId;
+    const updatedViewedPages = viewedPages.length ? viewedPages : [homePageId];
 
-    if (updatedViewedPages[0] !== homePage.pageId) {
-      updatedViewedPages.unshift(homePage.pageId);
+    if (updatedViewedPages[0] !== homePageId) {
+      updatedViewedPages.unshift(homePageId);
     }
 
     return {

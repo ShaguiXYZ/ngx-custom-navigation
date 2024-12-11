@@ -1,4 +1,8 @@
 import { inject, Injectable } from '@angular/core';
+import { ContextDataService, DataInfo, HttpService, UniqueIds } from '@shagui/ng-shagui/core';
+import { firstValueFrom, map } from 'rxjs';
+import { environment } from 'src/environments/environment';
+import { QUOTE_APP_CONTEXT_DATA, QUOTE_ERROR_PAGE_ID } from '../constants';
 import {
   AppContextData,
   Configuration,
@@ -11,13 +15,10 @@ import {
   StateInfo,
   Step,
   Stepper,
-  StepperDTO
+  StepperDTO,
+  VersionInfo
 } from '../models';
-import { ContextDataService, DataInfo, HttpService, UniqueIds } from '@shagui/ng-shagui/core';
-import { firstValueFrom, map } from 'rxjs';
-import { environment } from 'src/environments/environment';
 import { LiteralsService } from './literals.service';
-import { QUOTE_APP_CONTEXT_DATA, QUOTE_ERROR_PAGE_ID } from '../constants';
 
 @Injectable({ providedIn: 'root' })
 export class JourneyService {
@@ -25,21 +26,30 @@ export class JourneyService {
   private readonly httpService = inject(HttpService);
   private readonly literalService = inject(LiteralsService);
 
-  public fetchConfiguration = async (name: string): Promise<Configuration | undefined> => {
+  public fetchConfiguration = async (
+    name: string
+  ): Promise<{
+    configuration: Configuration;
+    properties?: {
+      breakingchange: boolean;
+    };
+  }> => {
     const configurationDTO = await firstValueFrom(
       this.httpService.get<ConfigurationDTO>(`${environment.baseUrl}/journey/${name}`).pipe(map(res => res as ConfigurationDTO))
     );
     const hash = dataHash(configurationDTO);
+    const configuration = { ...this.init(configurationDTO), hash };
     const appContextData = this.contextDataService.get<AppContextData>(QUOTE_APP_CONTEXT_DATA);
+    const contextConfiguration = appContextData?.configuration;
 
-    if (appContextData?.configuration?.hash === hash) {
-      return undefined;
-    }
-
-    const configuration = this.init(configurationDTO);
-    configuration.hash = hash;
-
-    return configuration;
+    return {
+      configuration,
+      properties: {
+        breakingchange: contextConfiguration?.version
+          ? VersionInfo.isBreakingChange([{ value: contextConfiguration.version }], configurationDTO.version)
+          : contextConfiguration?.hash !== hash
+      }
+    };
   };
 
   private init = (configuration: ConfigurationDTO): Configuration => {
@@ -56,6 +66,7 @@ export class JourneyService {
     const errorPageId = dto.errorPageId ?? UniqueIds.random();
 
     const configuration: Configuration = {
+      version: VersionInfo.last(dto.version).value,
       homePageId: dto.homePageId,
       title: dto.title,
       errorPageId,

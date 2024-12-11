@@ -23,4 +23,4 @@ export * from './quote-vehicle.model';
 export * from './quote.model';
 export * from './signature.model';
 export * from './stepper.model';
-
+export * from './quote-version.model';

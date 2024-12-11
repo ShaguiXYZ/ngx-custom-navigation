@@ -73,13 +73,13 @@
       >
         @if (isMobile) {
         <a
-          href="tel:{{ 'contact-us-phone' | quoteLiteral }}"
+          href="tel:{{ 'phone' | quoteLiteral }}"
           nxCopytext="medium"
           class="uppercase nx-font-weight-bold"
           nxQuoteLiteral="footer-next"
         ></a>
         } @else {
-        <span nxCopytext="medium" class="uppercase nx-font-weight-bold" [nxQuoteLiteral]="'contact-us-phone'"> </span>
+        <span nxCopytext="medium" class="uppercase nx-font-weight-bold" nxQuoteLiteral="phone"> </span>
         }
       </button>
       <button

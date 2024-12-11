@@ -30,7 +30,7 @@ export class SettingsService {
     firstValueFrom(this.httpService.get<QuoteSettingsModel>(`${environment.baseUrl}/settings`).pipe(map(res => res as QuoteSettingsModel)));
 
   private disableWorkFlow = async (settings: QuoteSettingsModel): Promise<void> => {
-    const configuration = await this.journeyService.fetchConfiguration('not-journey');
+    const { configuration } = await this.journeyService.fetchConfiguration('not-journey');
 
     if (configuration) {
       const viewedPages: string[] = [];
@@ -46,26 +46,26 @@ export class SettingsService {
 
   private loadContext = async (settings: QuoteSettingsModel): Promise<void> => {
     console.group('SettingsService');
-    const configuration = await this.journeyService.fetchConfiguration(settings.journey);
+    const { configuration, properties } = await this.journeyService.fetchConfiguration(settings.journey);
 
-    if (!configuration) {
-      const quote = { ...QuoteModel.init(), ...this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA) };
-      this.contextDataService.set(QUOTE_CONTEXT_DATA, quote, { persistent: true, referenced: true });
+    if (properties?.breakingchange) {
+      this.contextDataService.set(QUOTE_APP_CONTEXT_DATA, AppContextData.init(settings, configuration), {
+        persistent: true
+      });
 
-      console.log('Quote data', QUOTE_CONTEXT_DATA, quote);
+      this.contextDataService.set(QUOTE_CONTEXT_DATA, QuoteModel.init(), { persistent: true, referenced: true });
+
+      console.log('Quote data init', QUOTE_CONTEXT_DATA, QuoteModel.init());
+      console.log('Quote configuration', QUOTE_APP_CONTEXT_DATA, configuration);
       console.groupEnd();
 
       return;
     }
 
-    this.contextDataService.set(QUOTE_APP_CONTEXT_DATA, AppContextData.init(settings, configuration, []), {
-      persistent: true
-    });
+    const quote = { ...QuoteModel.init(), ...this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA) };
+    this.contextDataService.set(QUOTE_CONTEXT_DATA, quote, { persistent: true, referenced: true });
 
-    this.contextDataService.set(QUOTE_CONTEXT_DATA, QuoteModel.init(), { persistent: true, referenced: true });
-
-    console.log('Quote data init', QUOTE_CONTEXT_DATA, QuoteModel.init());
-    console.log('Quote configuration', QUOTE_APP_CONTEXT_DATA, configuration);
+    console.log('Quote data', QUOTE_CONTEXT_DATA, quote);
     console.groupEnd();
   };
 }

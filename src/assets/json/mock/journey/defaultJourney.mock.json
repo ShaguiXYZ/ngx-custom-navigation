@@ -1,7 +1,8 @@
 {
-  "last_update": "2024-12-05 15:00:00",
+  "last_update": "2024-12-05 15:00:02",
   "homePageId": "on-boarding",
   "title": { "value": "Calcula tu seguro" },
+  "version": [{ "value": "v1.1", "breakingchange": true }],
   "steppers": [
     {
       "steps": [
@@ -593,7 +594,7 @@
                 "value": "privacy-policy-tag",
                 "params": {
                   "link": { "value": "privacy-policy-link", "type": "literal" },
-                  "link-text": { "value": "política de privacidad", "type": "value" }
+                  "link-text": "política de privacidad"
                 },
                 "type": "literal"
               }
@@ -724,7 +725,6 @@
       "configuration": {
         "literals": {
           "header": "Información de contacto",
-          "phone": "+49 55 5555 5555",
           "title": "Nos gustaría poder ayudarte, <br/>¡contactanos!",
           "footer-next": "FINALIZAR"
         },
@@ -835,7 +835,6 @@
       "configuration": {
         "literals": {
           "header": "Información de contacto",
-          "phone": "+49 55 5555 5555",
           "title": "Nos gustaría poder ayudarte, <br/>¡contactanos!"
         },
         "data": {
@@ -925,6 +924,7 @@
     "hint-date-format": { "value": "Label.DateFormat", "type": "translate" },
     "no": { "value": "Label.No", "type": "translate" },
     "or-more": { "value": "Label.OrMore", "type": "translate" },
+    "phone": "+49 55 5555 5555",
     "power": { "value": "Label.Power", "type": "translate" },
     "search": { "value": "Label.Search", "type": "translate" },
     "yes": { "value": "Label.Yes", "type": "translate" },

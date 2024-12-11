@@ -15,12 +15,10 @@ export class BudgetActivator {
         context: services.contextDataService.get<AppContextData>(QUOTE_APP_CONTEXT_DATA),
         quote
       };
-
       const storedDataKey: StoredDataKey = {
         passKey: UniqueIds.random(16),
         key: `QUOTE_${moment().format('YYYYMMDD')}_${UniqueIds.random(6).toUpperCase()}`
       };
-
       const cipher = BudgetUtils.encrypt(storedDataKey.passKey, budget);
 
       localStorage.setItem(storedDataKey.key, cipher);
@@ -42,7 +40,6 @@ export class BudgetActivator {
       }
 
       const storedDataKey = JSON.parse(atob(budget)) as StoredDataKey;
-
       const cipher = BudgetActivator.retrieveAll().find(({ index }) => index === storedDataKey.key)?.data;
 
       if (!cipher) {

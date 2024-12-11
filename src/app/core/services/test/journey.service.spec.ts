@@ -4,7 +4,7 @@ import { TestBed } from '@angular/core/testing';
 import { ContextDataService, HttpService } from '@shagui/ng-shagui/core';
 import { of } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { Configuration, ConfigurationDTO, dataHash } from '../../models';
+import { Configuration, ConfigurationDTO, dataHash, Version, VersionInfo } from '../../models';
 import { JourneyService } from '../journey.service';
 import { LiteralsService } from '../literals.service';
 
@@ -48,8 +48,10 @@ describe('JourneyService', () => {
   });
 
   it('should fetch configuration', async () => {
+    const dtoVersion: Version = 'v1.1.0';
     const lastUpdate = new Date('2023-10-01');
-    const mockConfigurationDTO: ConfigurationDTO = {
+    const mockConfigurationDTO = {
+      version: [{ value: dtoVersion }],
       homePageId: 'home',
       title: 'home',
       lastUpdate,
@@ -64,9 +66,10 @@ describe('JourneyService', () => {
       steppers: [],
       links: {},
       literals: {}
-    };
+    } as unknown as ConfigurationDTO;
 
-    const mockConfiguration: Configuration = {
+    const mockConfiguration = {
+      version: 'v1.0.0',
       homePageId: 'home',
       title: 'home',
       errorPageId: 'error',
@@ -82,44 +85,27 @@ describe('JourneyService', () => {
       steppers: { steppersMap: {} },
       literals: {},
       hash: dataHash(mockConfigurationDTO)
-    };
+    } as unknown as Configuration;
 
     httpService.get.and.returnValue(of(mockConfigurationDTO));
-    contextDataService.get.and.returnValue({ configuration: { hash: 'oldHash' } });
+    contextDataService.get.and.returnValue({ version: 'v1.0.0', configuration: { hash: 'oldHash' } });
 
     const result = await service.fetchConfiguration('test');
 
-    expect(result).toEqual(mockConfiguration);
+    console.log(JSON.stringify(result));
+
+    expect(result).toEqual({ configuration: { ...mockConfiguration, version: dtoVersion }, properties: { breakingchange: true } });
     expect(httpService.get).toHaveBeenCalledWith(`${environment.baseUrl}/journey/test`);
   });
 
-  it('should return undefined if configuration hash matches', async () => {
-    const mockConfigurationDTO: ConfigurationDTO = {
-      homePageId: 'home',
-      errorPageId: 'error',
-      lastUpdate: new Date('2023-10-01'),
-      pageMap: [],
-      steppers: [],
-      links: {},
-      literals: {}
-    };
-
-    httpService.get.and.returnValue(of(mockConfigurationDTO));
-    contextDataService.get.and.returnValue({ configuration: { hash: dataHash(mockConfigurationDTO) } });
-
-    const result = await service.fetchConfiguration('test');
-
-    expect(result).toBeUndefined();
-  });
-
   it('should set error page if not present in pageMap', () => {
-    const configuration: Configuration = {
+    const configuration = {
       homePageId: 'home',
       errorPageId: 'error',
       lastUpdate: new Date('2023-10-01'),
       pageMap: {},
       links: {}
-    };
+    } as Configuration;
 
     service['setErrorPage'](configuration, 'error');
 

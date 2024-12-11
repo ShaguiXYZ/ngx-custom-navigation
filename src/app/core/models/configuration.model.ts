@@ -2,8 +2,9 @@
 import { DataInfo } from '@shagui/ng-shagui/core';
 import { ServiceActivator } from '../service-activators';
 import { LiteralModel } from './literal.model';
-import { StepperDTO, Steppers } from './stepper.model';
 import { PageFormValidationSettings } from './page-form.model';
+import { Version, VersionInfo } from './quote-version.model';
+import { StepperDTO, Steppers } from './stepper.model';
 
 export type CompareOperations = 'AND' | 'OR';
 export type Links = DataInfo;
@@ -23,6 +24,7 @@ export interface ConfigurationDTO {
   pageMap: Page[];
   links?: Links;
   literals?: Literals;
+  version: VersionInfo[];
 }
 
 export interface PageConfiguration {
@@ -60,6 +62,7 @@ export interface Condition {
 
 export interface Configuration {
   hash?: string;
+  version: Version;
   homePageId: string;
   title?: LiteralModel;
   errorPageId: string;
