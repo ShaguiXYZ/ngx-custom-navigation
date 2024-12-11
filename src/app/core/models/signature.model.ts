@@ -23,6 +23,7 @@ export namespace SignatureModel {
   export const signModel = (model: QuoteModel, ignoreChangeDetection = false): SignatureModel => {
     const { signature } = model;
     const currentQuoteSignature = dataHash(QuoteSignificantData.getSignificantData(model));
+
     return {
       hash: currentQuoteSignature,
       changed: !ignoreChangeDetection && (signature?.changed || signature?.hash !== currentQuoteSignature)

@@ -68,6 +68,8 @@ describe('JourneyService', () => {
       literals: {}
     } as unknown as ConfigurationDTO;
 
+    const { version, ...significantData } = mockConfigurationDTO;
+
     const mockConfiguration = {
       version: 'v1.0.0',
       homePageId: 'home',
@@ -84,7 +86,7 @@ describe('JourneyService', () => {
       links: { error: 'error' },
       steppers: { steppersMap: {} },
       literals: {},
-      hash: dataHash(mockConfigurationDTO)
+      hash: dataHash(significantData)
     } as unknown as Configuration;
 
     httpService.get.and.returnValue(of(mockConfigurationDTO));

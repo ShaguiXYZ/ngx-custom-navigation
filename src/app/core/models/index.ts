@@ -20,7 +20,7 @@ export * from './quote-personal-data.model';
 export * from './quote-place.model';
 export * from './quote-settings.model';
 export * from './quote-vehicle.model';
+export * from './quote-version.model';
 export * from './quote.model';
 export * from './signature.model';
 export * from './stepper.model';
-export * from './quote-version.model';

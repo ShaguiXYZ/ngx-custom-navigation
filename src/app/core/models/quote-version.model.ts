@@ -49,8 +49,6 @@ export namespace VersionInfo {
       return parsed[0] === after;
     });
 
-    console.log('afterSorted', afterSorted);
-
     return afterSorted.some(after => after.breakingchange);
   };
   export const last = (versions: VersionInfo[] = []): VersionInfo => {

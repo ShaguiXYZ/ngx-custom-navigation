@@ -1,6 +1,6 @@
 import { HttpStatusCode } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { ContextDataService, deepCopy, HttpService } from '@shagui/ng-shagui/core';
+import { ContextDataService, HttpService } from '@shagui/ng-shagui/core';
 import { firstValueFrom, map, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { QUOTE_APP_CONTEXT_DATA } from '../constants';

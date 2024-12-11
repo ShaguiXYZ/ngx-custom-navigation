@@ -37,7 +37,8 @@ export class JourneyService {
     const configurationDTO = await firstValueFrom(
       this.httpService.get<ConfigurationDTO>(`${environment.baseUrl}/journey/${name}`).pipe(map(res => res as ConfigurationDTO))
     );
-    const hash = dataHash(configurationDTO);
+    const { version, ...significantData } = configurationDTO;
+    const hash = dataHash(significantData);
     const configuration = { ...this.init(configurationDTO), hash };
     const appContextData = this.contextDataService.get<AppContextData>(QUOTE_APP_CONTEXT_DATA);
     const contextConfiguration = appContextData?.configuration;
@@ -45,9 +46,9 @@ export class JourneyService {
     return {
       configuration,
       properties: {
-        breakingchange: contextConfiguration?.version
-          ? VersionInfo.isBreakingChange([{ value: contextConfiguration.version }], configurationDTO.version)
-          : contextConfiguration?.hash !== hash
+        breakingchange:
+          contextConfiguration?.hash !== hash &&
+          (contextConfiguration?.version ? VersionInfo.isBreakingChange([{ value: contextConfiguration.version }], version) : true)
       }
     };
   };

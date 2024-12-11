@@ -1,7 +1,7 @@
 import { inject } from '@angular/core';
 import { ActivatedRouteSnapshot, CanDeactivateFn, GuardResult, MaybeAsync, RouterStateSnapshot } from '@angular/router';
 import { ContextDataService } from '@shagui/ng-shagui/core';
-import { QUOTE_APP_CONTEXT_DATA, QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
+import { QUOTE_APP_CONTEXT_DATA } from 'src/app/core/constants';
 import { AppContextData, QuoteComponent, SignatureModel } from 'src/app/core/models';
 
 export const canDeactivateGuard: CanDeactivateFn<QuoteComponent> = (
