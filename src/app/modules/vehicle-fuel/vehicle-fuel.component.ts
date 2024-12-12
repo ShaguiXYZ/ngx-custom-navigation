@@ -1,16 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
 import { NxAccordionModule } from '@aposin/ng-aquila/accordion';
-import { NxButtonModule } from '@aposin/ng-aquila/button';
 import { NxCopytextModule } from '@aposin/ng-aquila/copytext';
-import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
-import { NxInputModule } from '@aposin/ng-aquila/input';
 import { CubicCapacityModel, FuelModel, QuoteComponent, VehicleClassesModel } from 'src/app/core/models';
 import { RoutingService, VehicleService } from 'src/app/core/services';
 import { QuoteTrackDirective } from 'src/app/core/tracking';
 import { HeaderTitleComponent, SelectableOptionComponent } from 'src/app/shared/components';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
-import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 
 @Component({
   selector: 'quote-vehicle-fuel',
@@ -21,13 +17,9 @@ import { QuoteLiteralPipe } from 'src/app/shared/pipes';
     HeaderTitleComponent,
     SelectableOptionComponent,
     NxAccordionModule,
-    NxButtonModule,
     NxCopytextModule,
-    NxFormfieldModule,
-    NxInputModule,
     QuoteLiteralDirective,
-    QuoteTrackDirective,
-    QuoteLiteralPipe
+    QuoteTrackDirective
   ],
   providers: [VehicleService],
   standalone: true

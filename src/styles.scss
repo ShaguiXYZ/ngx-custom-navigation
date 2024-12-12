@@ -12,15 +12,15 @@
 @import 'themes/light';
 
 body {
-  background: linear-gradient(121deg, rgba(255, 255, 255, 1) 0%, rgba(197, 197, 197, 1) 100%);
   background-image: none;
 
-  user-select: none;
+  // user-select' should be listed after '-webkit-user-select'.
   -webkit-user-select: none;
+  user-select: none;
 
   input {
-    user-select: auto;
     -webkit-user-select: auto;
+    user-select: auto;
   }
 }
 

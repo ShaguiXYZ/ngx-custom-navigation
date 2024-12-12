@@ -50,7 +50,7 @@
               [nxTrackEvents]="['click']"
               (uiSelect)="selectCubicCapacity(cubicCapacity)"
             >
-              <div class="card-container cubic-capacity-width">
+              <div class="card-container">
                 <span nxCopytext="medium" class="nx-margin-s" [ngClass]="{ 'nx-font-weight-bold': _selectedCubicCapacityselected }">
                   {{ cubicCapacity.data }}</span
                 >
@@ -58,28 +58,28 @@
             </quote-selectable-option>
           </div>
           }
-        </div>
-        <div class="button-container">
-          @let _cubicCapacityNotKnown = selectedCubicCapacity?.index === cubicCapacityNotKnown.index;
-          <quote-selectable-option [selected]="_cubicCapacityNotKnown" (uiSelect)="selectCubicCapacity(cubicCapacityNotKnown)">
-            <button
-              class="nx-margin-y-2xs center"
-              nxButton="tertiary small"
-              type="button"
+          <div class="vehicle__not_known nx-margin-2xs">
+            @let _cubicCapacityNotKnown = selectedCubicCapacity?.index === cubicCapacityNotKnown.index;
+            <quote-selectable-option
+              [selected]="_cubicCapacityNotKnown"
               [nxTrack]="{
                 displayment: cubicCapacityNotKnown.index,
                 fuel: cubicCapacityNotKnown.index,
                 power: selectedPower?.index
               }"
               [nxTrackEvents]="['click']"
+              (uiSelect)="selectCubicCapacity(cubicCapacityNotKnown)"
             >
-              <span
-                nxCopytext="medium"
-                [ngClass]="{ 'nx-font-weight-bold': _cubicCapacityNotKnown }"
-                nxQuoteLiteral="cubic-capacity-not-known"
-              ></span>
-            </button>
-          </quote-selectable-option>
+              <div class="card-container">
+                <span
+                  nxCopytext="medium"
+                  class="nx-margin-s"
+                  [ngClass]="{ 'nx-font-weight-bold': _cubicCapacityNotKnown }"
+                  nxQuoteLiteral="cubic-capacity-not-known"
+                ></span>
+              </div>
+            </quote-selectable-option>
+          </div>
         </div>
       </nx-expansion-panel>
 
@@ -108,24 +108,28 @@
             </quote-selectable-option>
           </div>
           }
-        </div>
-        <div class="button-container">
-          @let _powerNotKnown = selectedPower?.index === powerNotKnown.index;
-          <quote-selectable-option [selected]="_powerNotKnown" (uiSelect)="selectPower(powerNotKnown)">
-            <button
-              class="nx-margin-y-2xs center"
-              nxButton="tertiary small"
-              type="button"
+          <div class="vehicle__not_known nx-margin-2xs">
+            @let _powerNotKnown = selectedPower?.index === powerNotKnown.index;
+            <quote-selectable-option
+              [selected]="_powerNotKnown"
               [nxTrack]="{
                 displayment: selectedCubicCapacity?.index,
                 fuel: selectedFuel?.index,
                 power: powerNotKnown.index
               }"
               [nxTrackEvents]="['click']"
+              (uiSelect)="selectPower(powerNotKnown)"
             >
-              <span nxCopytext="medium" [ngClass]="{ 'nx-font-weight-bold': _powerNotKnown }" nxQuoteLiteral="power-not-known"></span>
-            </button>
-          </quote-selectable-option>
+              <div class="card-container">
+                <span
+                  nxCopytext="medium"
+                  class="nx-margin-s"
+                  [ngClass]="{ 'nx-font-weight-bold': _powerNotKnown }"
+                  nxQuoteLiteral="power-not-known"
+                ></span>
+              </div>
+            </quote-selectable-option>
+          </div>
         </div>
       </nx-expansion-panel>
     </nx-accordion>

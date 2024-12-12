@@ -4,8 +4,7 @@ export interface QuoteSettingsModel {
   agenthelpercode: number;
   channel: string;
   company: string;
-  groupings: [number];
-  journey: string;
+  groupings: number[];
   office: number;
   partnerid: string;
   commercialExceptions: {

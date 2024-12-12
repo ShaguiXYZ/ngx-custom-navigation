@@ -1,8 +1,11 @@
 {
-  "last_update": "2024-12-05 15:00:02",
   "homePageId": "on-boarding",
   "title": { "value": "Calcula tu seguro" },
-  "version": [{ "value": "v1.1", "breakingchange": true }],
+  "version": [
+    { "value": "v1.1", "breakingchange": true },
+    { "value": "v1.1.1", "date": 1733999306681 },
+    { "value": "v1.1.2", "date": 1698777600000 }
+  ],
   "steppers": [
     {
       "steps": [
@@ -655,7 +658,6 @@
       ],
       "configuration": {
         "literals": {
-          "header": "Estos son los seguros que mejor se adaptan a ti",
           "coverages-modal-header": "Compara las coberturas de tu seguro",
           "footer-next": "LLAMAR AHORA",
           "from-now": "Desde hoy {{value}}",

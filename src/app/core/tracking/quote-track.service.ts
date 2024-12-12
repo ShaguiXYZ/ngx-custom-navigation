@@ -60,9 +60,8 @@ export class QuoteTrackService implements OnDestroy {
   public trackEvent = async (eventType: TrackEventType, data: TrackInfo): Promise<number> => {
     const appContextData = this.contextDataService.get<AppContextData>(QUOTE_APP_CONTEXT_DATA);
     const {
-      settings: { journey },
       navigation: { lastPage, viewedPages },
-      configuration: { steppers }
+      configuration: { name: journey, steppers }
     } = appContextData;
     const fullUrl = lastPage && `${window.location.protocol}//${window.location.host}/${Page.routeFrom(lastPage)}`;
     const title = this.literalService.toString({ value: 'header', type: 'literal' });

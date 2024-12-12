@@ -1,5 +1,9 @@
 export type Version = `v${number}.${number}` | `v${number}.${number}.${number}`;
-export type VersionInfo = { value: Version; breakingchange?: boolean };
+export type VersionInfo = {
+  value: Version;
+  date?: number; // timestamp
+  breakingchange?: boolean;
+};
 
 export namespace VersionInfo {
   export const sort = (versions: VersionInfo[]): VersionInfo[] => {

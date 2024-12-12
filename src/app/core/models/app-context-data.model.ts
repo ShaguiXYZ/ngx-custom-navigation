@@ -24,19 +24,14 @@ export interface AppContextData {
 }
 
 export namespace AppContextData {
-  export const init = (settings: QuoteSettingsModel, configuration: Configuration, viewedPages: string[] = []): AppContextData => {
+  export const init = (settings: QuoteSettingsModel, configuration: Configuration): AppContextData => {
     const homePageId = configuration.homePageId;
-    const updatedViewedPages = viewedPages.length ? viewedPages : [homePageId];
-
-    if (updatedViewedPages[0] !== homePageId) {
-      updatedViewedPages.unshift(homePageId);
-    }
 
     return {
       settings,
       configuration,
       navigation: {
-        viewedPages: updatedViewedPages
+        viewedPages: [homePageId]
       }
     };
   };

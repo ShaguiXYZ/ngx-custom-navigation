@@ -19,7 +19,6 @@ export interface ConfigurationDTO {
   homePageId: string;
   title?: LiteralModel;
   errorPageId?: string;
-  lastUpdate?: Date;
   steppers?: StepperDTO[];
   pageMap: Page[];
   links?: Links;
@@ -62,11 +61,12 @@ export interface Condition {
 
 export interface Configuration {
   hash?: string;
+  name?: string;
   version: Version;
+  releaseDate?: Date;
   homePageId: string;
   title?: LiteralModel;
   errorPageId: string;
-  lastUpdate?: Date;
   pageMap: DataInfo<Page>;
   steppers?: Steppers;
   links?: Links;

@@ -47,14 +47,24 @@ describe('JourneyService', () => {
     expect(service).toBeTruthy();
   });
 
+  it('shoult get client journey', async () => {
+    const clientId = 1;
+    const journeyName = 'test';
+
+    httpService.get.and.returnValue(of([journeyName]));
+
+    service.clientJourney(clientId).then(result => {
+      expect(result).toBe(journeyName);
+    });
+  });
+
   it('should fetch configuration', async () => {
     const dtoVersion: Version = 'v1.1.0';
-    const lastUpdate = new Date('2023-10-01');
+    const journeyName = 'test';
     const mockConfigurationDTO = {
       version: [{ value: dtoVersion }],
       homePageId: 'home',
       title: 'home',
-      lastUpdate,
       errorPageId: 'error',
       pageMap: [
         {
@@ -71,11 +81,12 @@ describe('JourneyService', () => {
     const { version, ...significantData } = mockConfigurationDTO;
 
     const mockConfiguration = {
+      name: journeyName,
       version: 'v1.0.0',
+      releaseDate: undefined,
       homePageId: 'home',
       title: 'home',
       errorPageId: 'error',
-      lastUpdate,
       pageMap: {
         error: {
           pageId: 'error',
@@ -92,7 +103,7 @@ describe('JourneyService', () => {
     httpService.get.and.returnValue(of(mockConfigurationDTO));
     contextDataService.get.and.returnValue({ version: 'v1.0.0', configuration: { hash: 'oldHash' } });
 
-    const result = await service.fetchConfiguration('test');
+    const result = await service.fetchConfiguration(journeyName);
 
     console.log(JSON.stringify(result));
 
@@ -104,7 +115,6 @@ describe('JourneyService', () => {
     const configuration = {
       homePageId: 'home',
       errorPageId: 'error',
-      lastUpdate: new Date('2023-10-01'),
       pageMap: {},
       links: {}
     } as Configuration;

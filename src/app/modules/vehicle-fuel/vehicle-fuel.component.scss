@@ -9,18 +9,8 @@
       align-items: center;
       display: flex;
       flex-direction: column;
+      min-width: 110px;
       justify-content: center;
-
-      &.cubic-capacity-width {
-        width: 110px;
-      }
     }
   }
-}
-
-.button-container {
-  align-items: center;
-  display: flex;
-  flex: 1;
-  justify-content: center;
 }

@@ -109,9 +109,9 @@ describe('QuoteTrackService', () => {
 
   it('should track event with correct data', done => {
     const appContextData = {
-      configuration: { steppers: {} },
+      configuration: { name: 'test', steppers: {} },
       navigation: { viewedPages: ['page1', 'page2'] },
-      settings: { journey: 'journey' }
+      settings: {}
     } as AppContextData;
     contextDataService.get.and.returnValue(appContextData);
 
@@ -126,7 +126,7 @@ describe('QuoteTrackService', () => {
         expect(trackFnSpy).toHaveBeenCalledWith(
           'click',
           jasmine.objectContaining({
-            category: `tarificador ${appContextData.settings.journey}`
+            category: `tarificador ${appContextData.configuration.name}`
           })
         );
         done();

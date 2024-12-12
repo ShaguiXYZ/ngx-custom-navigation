@@ -17,7 +17,7 @@ describe('SettingsService', () => {
     const httpSpy = jasmine.createSpyObj('HttpService', ['get']);
     const translateSpy = jasmine.createSpyObj('TranslateService', ['setDefaultLang']);
     const contextSpy = jasmine.createSpyObj('ContextDataService', ['set', 'get']);
-    const journeySpy = jasmine.createSpyObj('JourneyService', ['fetchConfiguration']);
+    const journeySpy = jasmine.createSpyObj('JourneyService', ['clientJourney', 'fetchConfiguration']);
 
     TestBed.configureTestingModule({
       providers: [
@@ -46,6 +46,7 @@ describe('SettingsService', () => {
     journeyServiceSpy.fetchConfiguration.and.returnValue(
       Promise.resolve({ configuration: { homePageId: 'page', pageMap: { page: { pageId: 'id' } } } as unknown as Configuration })
     );
+    journeyServiceSpy.clientJourney.and.returnValue(Promise.resolve('journey'));
 
     await service.loadSettings();
 
@@ -58,6 +59,7 @@ describe('SettingsService', () => {
     journeyServiceSpy.fetchConfiguration.and.returnValue(
       Promise.resolve({ configuration: { homePageId: 'page', pageMap: { page: { pageId: 'id' } } } as unknown as Configuration })
     );
+    journeyServiceSpy.clientJourney.and.returnValue(Promise.resolve('journey'));
 
     await service.loadSettings();
 
@@ -70,6 +72,7 @@ describe('SettingsService', () => {
     journeyServiceSpy.fetchConfiguration.and.returnValue(
       Promise.resolve({ configuration: { homePageId: 'page', pageMap: { page: { pageId: 'id' } } } as unknown as Configuration })
     );
+    journeyServiceSpy.clientJourney.and.returnValue(Promise.resolve('journey'));
 
     await service.loadSettings();
 

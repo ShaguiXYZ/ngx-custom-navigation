@@ -1,3 +1,4 @@
+import { HttpParams } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { ContextDataService, DataInfo, HttpService, UniqueIds } from '@shagui/ng-shagui/core';
 import { firstValueFrom, map } from 'rxjs';
@@ -26,6 +27,23 @@ export class JourneyService {
   private readonly httpService = inject(HttpService);
   private readonly literalService = inject(LiteralsService);
 
+  public clientJourney = async (cliendId: number): Promise<string> => {
+    const httpParams = new HttpParams().append('clientId', cliendId.toString());
+
+    return await firstValueFrom(
+      this.httpService
+        .get<string[]>(`${environment.baseUrl}/journeys`, {
+          clientOptions: { params: httpParams }
+        })
+        .pipe(
+          map(res => res as string[]),
+          map(journeys => {
+            return journeys[0];
+          })
+        )
+    );
+  };
+
   public fetchConfiguration = async (
     name: string
   ): Promise<{
@@ -39,7 +57,7 @@ export class JourneyService {
     );
     const { version, ...significantData } = configurationDTO;
     const hash = dataHash(significantData);
-    const configuration = { ...this.init(configurationDTO), hash };
+    const configuration = { ...this.init(configurationDTO), hash, name };
     const appContextData = this.contextDataService.get<AppContextData>(QUOTE_APP_CONTEXT_DATA);
     const contextConfiguration = appContextData?.configuration;
 
@@ -65,13 +83,14 @@ export class JourneyService {
 
   private initQuote = (dto: ConfigurationDTO): Configuration => {
     const errorPageId = dto.errorPageId ?? UniqueIds.random();
+    const lastVersion = VersionInfo.last(dto.version);
 
     const configuration: Configuration = {
-      version: VersionInfo.last(dto.version).value,
+      version: lastVersion.value,
+      releaseDate: lastVersion.date ? new Date(lastVersion.date) : undefined,
       homePageId: dto.homePageId,
       title: dto.title,
       errorPageId,
-      lastUpdate: dto.lastUpdate,
       pageMap: dto.pageMap.reduce<DataInfo<Page>>((acc, page) => {
         acc[page.pageId] = page;
         return acc;

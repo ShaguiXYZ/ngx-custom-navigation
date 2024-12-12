@@ -17,7 +17,8 @@ import { QuoteTrackDirective } from 'src/app/core/tracking';
 
 @Component({
   selector: 'quote-offering-price-card',
-  standalone: true,
+  templateUrl: './offering-price-card.component.html',
+  styleUrl: './offering-price-card.component.scss',
   imports: [
     CommonModule,
     HeaderTitleComponent,
@@ -32,8 +33,7 @@ import { QuoteTrackDirective } from 'src/app/core/tracking';
     QuoteLiteralPipe,
     QuoteTrackDirective
   ],
-  templateUrl: './offering-price-card.component.html',
-  styleUrl: './offering-price-card.component.scss'
+  standalone: true,
 })
 export class QuoteOfferingPriceCardComponent implements OnInit, OnDestroy {
   @Input()
