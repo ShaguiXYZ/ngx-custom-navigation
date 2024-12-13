@@ -73,7 +73,7 @@ describe('QuoteComponent', () => {
   it('should load component data', () => {
     component['__updateComponentData'](component);
 
-    expect(contextDataService.get).toHaveBeenCalledTimes(3);
+    expect(contextDataService.get).toHaveBeenCalledTimes(2);
     expect(contextDataService.get).toHaveBeenCalledWith(QUOTE_CONTEXT_DATA);
     expect(contextDataService.get).toHaveBeenCalledWith(QUOTE_APP_CONTEXT_DATA);
   });
@@ -107,7 +107,7 @@ describe('QuoteComponent', () => {
 
     component['__updateComponentData'](component);
 
-    expect(contextDataService.get).toHaveBeenCalledTimes(3);
+    expect(contextDataService.get).toHaveBeenCalledTimes(2);
     expect(contextDataService.get).toHaveBeenCalledWith(QUOTE_CONTEXT_DATA);
     expect(contextDataService.get).toHaveBeenCalledWith(QUOTE_APP_CONTEXT_DATA);
     expect(component['_contextData']).toEqual({

@@ -34,8 +34,10 @@ export class QuoteDispatcherComponent implements OnInit {
     } = this._route.snapshot;
 
     if (dispatcher) {
+      const nextPage = pageMap[dispatcher];
+
       this.trackService.trackView(dispatcher);
-      this._router.navigate([Page.routeFrom(pageMap[dispatcher])], { skipLocationChange: true });
+      this._router.navigate([Page.routeFrom(nextPage)], { skipLocationChange: true });
 
       return;
     }

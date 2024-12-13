@@ -1,25 +1,10 @@
 {
-  "homePageId": "apology-screen",
   "version": [{ "value": "v0.0.0", "breakingchange": true }],
   "steppers": [],
-  "pageMap": [
-    {
-      "pageId": "apology-screen",
-      "configuration": {
-        "literals": {
-          "body": "Lo sentimos, nuestro el servicio no está disponible en estos momentos. <br/>Vuelva a intentarlo más tarde. <br/>Gracias por su comprensión.",
-          "footer-next": "FINALIZAR"
-        },
-        "data": {
-          "headerConfig": {
-            "showBack": false,
-            "showContactUs": false
-          },
-          "stepperConfig": {
-            "visible": false
-          }
-        }
-      }
-    }
-  ]
+  "pageMap": [],
+  "literals": {
+    "error-body": { "value": "Label.ErrorBody", "type": "translate" },
+    "error-title": "Workflow NOT FOUND",
+    "footer-next": { "value": "Label.Next", "type": "translate" }
+  }
 }

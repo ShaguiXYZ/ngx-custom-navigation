@@ -1,5 +1,5 @@
 {
-  "homePageId": "on-boarding",
+  "homePageId": "calcula-tu-seguro",
   "title": { "value": "Calcula tu seguro" },
   "version": [
     { "value": "v1.1", "breakingchange": true },
@@ -74,7 +74,8 @@
   ],
   "pageMap": [
     {
-      "pageId": "on-boarding",
+      "pageId": "calcula-tu-seguro",
+      "route": "on-boarding",
       "nextOptionList": [
         {
           "nextPageId": "is-client"
@@ -630,7 +631,7 @@
           ]
         },
         {
-          "nextPageId": "offerings"
+          "nextPageId": "este-es-tu-seguro"
         }
       ],
       "configuration": {
@@ -650,7 +651,8 @@
       }
     },
     {
-      "pageId": "offerings",
+      "pageId": "este-es-tu-seguro",
+      "route": "offerings",
       "nextOptionList": [
         {
           "nextPageId": "contact-time"
@@ -676,7 +678,7 @@
       "pageId": "confirmation",
       "nextOptionList": [
         {
-          "nextPageId": "on-boarding"
+          "nextPageId": "calcula-tu-seguro"
         }
       ],
       "configuration": {

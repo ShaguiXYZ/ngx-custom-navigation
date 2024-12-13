@@ -43,7 +43,7 @@ describe('RoutingService', () => {
     const result = await service.next();
 
     expect(result).toBeTrue();
-    expect(router.navigate).toHaveBeenCalledWith(['dispatcher', 'route3'], { skipLocationChange: true });
+    expect(router.navigate).toHaveBeenCalledWith(['dispatcher', 'page3'], { skipLocationChange: true });
   });
 
   it('should navigate to the previous step', async () => {
@@ -52,7 +52,7 @@ describe('RoutingService', () => {
     const result = await service.previous();
 
     expect(result).toBeTrue();
-    expect(router.navigate).toHaveBeenCalledWith(['dispatcher', 'route1'], { skipLocationChange: true });
+    expect(router.navigate).toHaveBeenCalledWith(['dispatcher', 'page1'], { skipLocationChange: true });
   });
 
   it('should navigate to the first page of a specific step', async () => {
@@ -61,7 +61,7 @@ describe('RoutingService', () => {
     const result = await service.goToStep({ key: 'step2', pages: ['page2'] });
 
     expect(result).toBeTrue();
-    expect(router.navigate).toHaveBeenCalledWith(['dispatcher', 'route2'], { skipLocationChange: true });
+    expect(router.navigate).toHaveBeenCalledWith(['dispatcher', 'page2'], { skipLocationChange: true });
   });
 
   it('should not navigate to the previous step if there is only one viewed page', async () => {
@@ -79,7 +79,7 @@ describe('RoutingService', () => {
     const result = await service.goToPage('page2');
 
     expect(result).toBeTrue();
-    expect(router.navigate).toHaveBeenCalledWith(['dispatcher', 'route2'], { skipLocationChange: true });
+    expect(router.navigate).toHaveBeenCalledWith(['dispatcher', 'page2'], { skipLocationChange: true });
   });
 
   it('should unsubscribe from all subscriptions on destroy', () => {

@@ -74,6 +74,11 @@ export class JourneyService {
   private init = (configuration: ConfigurationDTO): Configuration => {
     const quoteConfiguration: Configuration = this.initQuote(configuration);
 
+    if (!configuration.homePageId) {
+      quoteConfiguration.homePageId = quoteConfiguration.errorPageId;
+      quoteConfiguration.title = { value: 'error-title', type: 'literal' };
+    }
+
     this.initSteppers(quoteConfiguration, configuration.steppers);
     this.initLinks(quoteConfiguration, configuration.links);
     this.initLiterals(quoteConfiguration, configuration.literals);
@@ -105,17 +110,21 @@ export class JourneyService {
 
   private setErrorPage = (configuration: Configuration, errorPageId: string): void => {
     if (!configuration.pageMap[errorPageId]) {
-      const errorPage: Page = {
+      configuration.pageMap[errorPageId] = {
         pageId: errorPageId,
         route: QUOTE_ERROR_PAGE_ID,
         configuration: {
           literals: {
-            body: 'Lo sentimos, no podemos ofrecerle el seguro que necesitas en esta ocasion.'
+            body: { value: 'error-body', type: 'literal' }
+          },
+          data: {
+            headerConfig: {
+              showBack: false,
+              showContactUs: false
+            }
           }
         }
-      } as Page;
-
-      configuration.pageMap[errorPageId] = errorPage;
+      };
     }
 
     configuration.links = { ...configuration.links, [errorPageId]: errorPageId };
@@ -135,6 +144,7 @@ export class JourneyService {
 
             step.pages.forEach(pageId => {
               const page = configuration.pageMap[pageId];
+
               if (page) {
                 page.stepper = { key: stepperKey, stepKey };
                 page.routeTree = this.normalizeTextForUri(step.label);

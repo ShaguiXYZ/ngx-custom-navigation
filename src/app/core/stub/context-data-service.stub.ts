@@ -1,5 +1,5 @@
 import { DataInfo, deepCopy } from '@shagui/ng-shagui/core';
-import { last, Observable, of } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { QUOTE_APP_CONTEXT_DATA, QUOTE_CONTEXT_DATA } from '../constants';
 import { AppContextData, Page } from '../models';
 

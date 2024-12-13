@@ -45,10 +45,7 @@ export class SettingsService {
     const [quote, contextData] =
       actualContextData?.configuration.name !== configuration.name || properties?.breakingchange
         ? [QuoteModel.init(), AppContextData.init(settings, configuration)]
-        : [
-            { ...QuoteModel.init(), ...this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA) },
-            { ...actualContextData, configuration, settings }
-          ];
+        : [{ ...QuoteModel.init(), ...this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA) }, { ...actualContextData }];
 
     this.contextDataService.set(QUOTE_APP_CONTEXT_DATA, contextData, {
       persistent: true

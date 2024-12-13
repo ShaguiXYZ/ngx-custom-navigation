@@ -98,7 +98,7 @@ export const journeyGuard: CanActivateFn = (route: ActivatedRouteSnapshot, state
 
   homePageId === nextPage.pageId && contextDataService.set(QUOTE_CONTEXT_DATA, QuoteModel.init());
 
-  window.history.pushState({}, '', nextPage.routeTree ?? Page.routeFrom(nextPage));
+  window.history.pushState({}, '', nextPage.routeTree ?? nextPage.pageId);
 
   return true;
 };
