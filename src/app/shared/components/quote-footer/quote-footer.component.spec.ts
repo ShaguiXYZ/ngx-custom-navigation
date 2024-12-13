@@ -3,10 +3,10 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { TranslateService } from '@ngx-translate/core';
 import { ContextDataService } from '@shagui/ng-shagui/core';
 import { of } from 'rxjs';
+import { QuoteFooterConfig } from 'src/app/core/models';
 import { RoutingService } from 'src/app/core/services';
 import { ContextDataServiceStub } from 'src/app/core/stub';
 import { QuoteLiteralPipe } from '../../pipes';
-import { QuoteFooterConfig } from './models';
 import { QuoteFooterComponent } from './quote-footer.component';
 
 describe('QuoteFooterComponent', () => {

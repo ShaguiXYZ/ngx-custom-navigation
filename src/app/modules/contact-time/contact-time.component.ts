@@ -18,7 +18,6 @@ import { QuoteLiteralPipe } from 'src/app/shared/pipes';
     TextCardComponent,
     NxCopytextModule,
     QuoteLiteralDirective,
-    QuoteLiteralPipe,
     QuoteTrackDirective
   ],
   templateUrl: './contact-time.component.html',

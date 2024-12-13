@@ -6,12 +6,11 @@ import { NxIconModule } from '@aposin/ng-aquila/icon';
 import { ContextDataService } from '@shagui/ng-shagui/core';
 import { Subscription } from 'rxjs';
 import { QUOTE_APP_CONTEXT_DATA } from 'src/app/core/constants';
-import { AppContextData, QuoteModel } from 'src/app/core/models';
+import { AppContextData, QuoteFooterConfig } from 'src/app/core/models';
 import { RoutingService } from 'src/app/core/services';
 import { QuoteTrackDirective, TrackInfo } from 'src/app/core/tracking';
 import { QuoteLiteralDirective } from '../../directives';
 import { QuoteLiteralPipe } from '../../pipes';
-import { QuoteFooterConfig } from './models';
 import { QuoteZoneComponent } from '../quote-zone';
 
 @Component({

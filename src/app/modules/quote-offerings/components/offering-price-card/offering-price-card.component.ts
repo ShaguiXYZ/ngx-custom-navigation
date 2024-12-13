@@ -1,3 +1,4 @@
+import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout';
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, inject, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
@@ -7,13 +8,11 @@ import { NxHeadlineModule } from '@aposin/ng-aquila/headline';
 import { NxLinkModule } from '@aposin/ng-aquila/link';
 import { NxRadioModule } from '@aposin/ng-aquila/radio-button';
 import { Subscription } from 'rxjs';
-import { OfferingPriceModel } from 'src/app/core/models';
+import { OfferingPriceModel, QuoteFooterConfig } from 'src/app/core/models';
+import { QuoteTrackDirective } from 'src/app/core/tracking';
 import { HeaderTitleComponent, QuoteFooterComponent } from 'src/app/shared/components';
-import { QuoteFooterConfig } from 'src/app/shared/components/quote-footer/models';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
-import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout';
-import { QuoteTrackDirective } from 'src/app/core/tracking';
 
 @Component({
   selector: 'quote-offering-price-card',
@@ -33,7 +32,7 @@ import { QuoteTrackDirective } from 'src/app/core/tracking';
     QuoteLiteralPipe,
     QuoteTrackDirective
   ],
-  standalone: true,
+  standalone: true
 })
 export class QuoteOfferingPriceCardComponent implements OnInit, OnDestroy {
   @Input()

@@ -1,10 +1,14 @@
 /* eslint-disable @typescript-eslint/no-namespace */
 import { DataInfo } from '@shagui/ng-shagui/core';
 import { ServiceActivator } from '../service-activators';
+import { HeaderConfig } from './header-config.model';
 import { LiteralModel } from './literal.model';
 import { PageFormValidationSettings } from './page-form.model';
+import { QuoteFooterConfig } from './quote-footer-comfig.model';
 import { Version, VersionInfo } from './quote-version.model';
+import { QuoteModel } from './quote.model';
 import { StepperDTO, Steppers } from './stepper.model';
+import { StepperConfig } from './stepper-config.model';
 
 export type CompareOperations = 'AND' | 'OR';
 export type Links = DataInfo;
@@ -26,9 +30,16 @@ export interface ConfigurationDTO {
   version: VersionInfo[];
 }
 
+type PageData = {
+  contextData?: Partial<QuoteModel>;
+  headerConfig?: HeaderConfig;
+  footerConfig?: QuoteFooterConfig;
+  stepperConfig?: StepperConfig;
+} & DataInfo<unknown>;
+
 export interface PageConfiguration {
   literals?: Literals;
-  data?: DataInfo<unknown>;
+  data?: PageData;
   validationSettings?: PageFormValidationSettings;
   serviceActivators?: ServiceActivator[];
   zones?: Record<number, ZoneConfig>;

@@ -6,16 +6,11 @@ import { NxLinkModule } from '@aposin/ng-aquila/link';
 import { ContextDataService } from '@shagui/ng-shagui/core';
 import { Subscription } from 'rxjs';
 import { QUOTE_APP_CONTEXT_DATA } from 'src/app/core/constants';
-import { AppContextData, Page } from 'src/app/core/models';
+import { AppContextData, HeaderConfig, Page } from 'src/app/core/models';
 import { LiteralsService, RoutingService } from 'src/app/core/services';
 import { QuoteTrackDirective } from 'src/app/core/tracking';
 import { QuoteLinkDirective, QuoteLiteralDirective } from '../../directives';
 import { QuoteLiteralPipe } from '../../pipes';
-
-interface HeaderConfig {
-  showBack?: boolean;
-  showContactUs?: boolean;
-}
 
 @Component({
   selector: 'quote-header',

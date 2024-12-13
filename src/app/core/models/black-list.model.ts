@@ -1,8 +1,8 @@
 export type BlackListType = 'IDENTIFICATION_NUMBER' | 'PLATE_NUMBER' | 'PHONE_NUMBER' | 'EMAIL';
 
 export interface BlackListResponse {
-  blacklisted: boolean;
-  isClient: boolean;
+  blacklisted?: boolean;
+  isClient?: boolean;
 }
 
 export interface BlackListModel {

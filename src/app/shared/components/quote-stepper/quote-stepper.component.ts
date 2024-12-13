@@ -6,7 +6,7 @@ import { NxTooltipModule } from '@aposin/ng-aquila/tooltip';
 import { ContextDataService } from '@shagui/ng-shagui/core';
 import { last, Subscription } from 'rxjs';
 import { QUOTE_APP_CONTEXT_DATA } from 'src/app/core/constants';
-import { AppContextData, Step, Stepper } from 'src/app/core/models';
+import { AppContextData, Step, Stepper, StepperConfig } from 'src/app/core/models';
 import { QuoteLiteralPipe } from '../../pipes';
 import { QuoteStepperService } from './services';
 
@@ -53,8 +53,7 @@ export class QuoteStepperComponent implements OnInit, OnDestroy {
     const {
       navigation: { lastPage }
     } = this.contextDataService.get<AppContextData>(QUOTE_APP_CONTEXT_DATA);
-    const config: { visible?: boolean; label?: string; showLabel?: boolean; showSteps?: boolean } =
-      lastPage?.configuration?.data?.['stepperConfig'] ?? {};
+    const config: StepperConfig = lastPage?.configuration?.data?.stepperConfig ?? {};
 
     if (this.stepperData && this.stepperData.stepper && config.label) {
       this.stepperData.stepper.steps[this.stepperIndex].label = config.label;
