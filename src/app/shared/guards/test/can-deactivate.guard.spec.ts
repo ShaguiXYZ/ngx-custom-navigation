@@ -29,7 +29,7 @@ describe('canDeactivateGuard', () => {
     next = {} as RouterStateSnapshot;
 
     component['_contextData'] = {
-      signature: { changed: false, hash: 'hash' }
+      signature: { hash: 'hash' }
     } as QuoteModel;
   });
 

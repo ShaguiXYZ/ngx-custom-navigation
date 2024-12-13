@@ -24,11 +24,11 @@ export interface AppContextData {
 }
 
 export namespace AppContextData {
-  export const init = (settings: QuoteSettingsModel, configuration: Configuration): AppContextData => {
+  export const init = (settings: Partial<QuoteSettingsModel>, configuration: Configuration): AppContextData => {
     const homePageId = configuration.homePageId;
 
     return {
-      settings,
+      settings: settings as QuoteSettingsModel,
       configuration,
       navigation: {
         viewedPages: [homePageId]

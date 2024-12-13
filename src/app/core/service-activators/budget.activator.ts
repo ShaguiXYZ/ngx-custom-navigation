@@ -1,9 +1,9 @@
-import { deepCopy, IndexedData, UniqueIds } from '@shagui/ng-shagui/core';
+import { IndexedData, UniqueIds } from '@shagui/ng-shagui/core';
 import moment from 'moment';
 import { QUOTE_APP_CONTEXT_DATA, QUOTE_CONTEXT_DATA } from '../constants';
 import { BudgetError } from '../errors';
 import { BudgetUtils } from '../lib';
-import { AppContextData, Budget, QuoteModel, SignatureModel, StoredDataKey } from '../models';
+import { AppContextData, Budget, QuoteModel, StoredDataKey } from '../models';
 import { ActivatorServices } from './quote-activator.model';
 
 export class BudgetActivator {
@@ -50,8 +50,7 @@ export class BudgetActivator {
 
       services.contextDataService.set<AppContextData>(QUOTE_APP_CONTEXT_DATA, decrypted.context);
       services.contextDataService.set<QuoteModel>(QUOTE_CONTEXT_DATA, {
-        ...decrypted.quote,
-        signature: SignatureModel.signModel(decrypted.quote, true)
+        ...decrypted.quote
       });
 
       return Promise.resolve(true);

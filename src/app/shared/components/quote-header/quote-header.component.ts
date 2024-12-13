@@ -13,7 +13,6 @@ import { QuoteLinkDirective, QuoteLiteralDirective } from '../../directives';
 import { QuoteLiteralPipe } from '../../pipes';
 
 interface HeaderConfig {
-  changed?: boolean;
   showBack?: boolean;
   showContactUs?: boolean;
 }

@@ -34,8 +34,10 @@ export const journeyGuard: CanActivateFn = (route: ActivatedRouteSnapshot, state
   const { nextPage, viewedPages } = context.navigation;
 
   const resetContext = (context: AppContextData): UrlTree => {
+    const viewedPages = context.navigation.viewedPages.filter(pageId => context.configuration.pageMap[pageId]);
     const nextPage = context.configuration.pageMap[viewedPages[viewedPages.length - 1]];
 
+    context.navigation.viewedPages = viewedPages;
     context.navigation.lastPage = undefined;
     context.navigation.nextPage = nextPage;
     contextDataService.set(QUOTE_APP_CONTEXT_DATA, context);

@@ -13,7 +13,8 @@ import { VehicleTypes } from './models';
 
 @Component({
   selector: 'quote-vehicle-type',
-  standalone: true,
+  templateUrl: './vehicle-type.component.html',
+  styleUrl: './vehicle-type.component.scss',
   imports: [
     CommonModule,
     HeaderTitleComponent,
@@ -23,8 +24,7 @@ import { VehicleTypes } from './models';
     QuoteTrackDirective,
     QuoteLiteralPipe
   ],
-  templateUrl: './vehicle-type.component.html',
-  styleUrl: './vehicle-type.component.scss'
+  standalone: true
 })
 export class VehicleTypeComponent extends QuoteComponent implements OnInit {
   public vehicleTypes = VehicleTypes;

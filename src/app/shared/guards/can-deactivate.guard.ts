@@ -2,7 +2,7 @@ import { inject } from '@angular/core';
 import { ActivatedRouteSnapshot, CanDeactivateFn, GuardResult, MaybeAsync, RouterStateSnapshot } from '@angular/router';
 import { ContextDataService } from '@shagui/ng-shagui/core';
 import { QUOTE_APP_CONTEXT_DATA } from 'src/app/core/constants';
-import { AppContextData, QuoteComponent, SignatureModel } from 'src/app/core/models';
+import { AppContextData, QuoteComponent, QuoteModel } from 'src/app/core/models';
 
 export const canDeactivateGuard: CanDeactivateFn<QuoteComponent> = (
   component: QuoteComponent,
@@ -26,7 +26,7 @@ export const canDeactivateGuard: CanDeactivateFn<QuoteComponent> = (
 
     component['_contextData'].signature = {
       ...(component['_contextData'].signature ?? {}),
-      ...SignatureModel.signModel(component['_contextData'])
+      ...QuoteModel.signModel(component['_contextData'])
     };
 
     return canDeactivate;

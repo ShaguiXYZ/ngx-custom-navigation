@@ -16,7 +16,7 @@ export class OfferingsService {
   public pricing(quote: QuoteModel): Promise<QuoteOfferingModel> {
     const { signature } = quote;
 
-    if (!signature?.hash || signature?.changed) {
+    if (signature?.hash !== quote.offering.hash) {
       const { settings } = this.contextDataService.get<AppContextData>(QUOTE_APP_CONTEXT_DATA);
 
       return firstValueFrom(
@@ -32,9 +32,10 @@ export class OfferingsService {
             map(OfferingDTO.toModel),
             tap(async offering => {
               quote.offering = { ...quote.offering, quotationId: offering.quotationId, prices: offering.prices };
-              await this.serviceActivatorService.activateEntryPoint('on-pricing');
+              quote.signature = { ...quote.signature, ...QuoteModel.signModel(quote) };
+              quote.offering.hash = quote.signature.hash;
 
-              quote.signature = { ...quote.signature, ...SignatureModel.signModel(quote, true) };
+              await this.serviceActivatorService.activateEntryPoint('on-pricing');
 
               console.log('Quote changed');
             })

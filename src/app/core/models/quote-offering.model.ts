@@ -164,6 +164,7 @@ export interface QuoteOfferingModel {
   quotationId: number;
   price?: OfferingPriceModel;
   prices: OfferingPriceModel[];
+  hash?: string;
 }
 
 export namespace QuoteOfferingModel {

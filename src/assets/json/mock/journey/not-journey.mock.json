@@ -1,6 +1,6 @@
 {
   "homePageId": "apology-screen",
-  "version": [],
+  "version": [{ "value": "v0.0.0", "breakingchange": true }],
   "steppers": [],
   "pageMap": [
     {

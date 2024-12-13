@@ -2,13 +2,14 @@
 import { QuoteBlackList } from './quote-black-list.model';
 import { QuoteClientModel } from './quote-client.model';
 import { QuoteContactDataModel } from './quote-contact-data.model';
+import { QuoteControlModel } from './quote-control.model';
 import { QuoteDrivenModel } from './quote-driven.model';
 import { QuoteInsuranceCompanyModel } from './quote-insurance-company.model';
 import { QuoteOfferingModel } from './quote-offering.model';
 import { QuotePersonalDataModel } from './quote-personal-data.model';
 import { QuotePlaceModel } from './quote-place.model';
 import { QuoteVehicleModel } from './quote-vehicle.model';
-import { QuoteControlModel } from './quote-control.model';
+import { dataHash, SignatureModel } from './signature.model';
 
 export interface QuoteModel extends QuoteControlModel {
   blackList: QuoteBlackList;
@@ -20,6 +21,13 @@ export interface QuoteModel extends QuoteControlModel {
   personalData: QuotePersonalDataModel;
   place: QuotePlaceModel;
   vehicle: QuoteVehicleModel;
+}
+
+export namespace QuoteSignificantData {
+  export const getSignificantData = (quote: QuoteModel): Partial<QuoteModel> => {
+    const { blackList, contactData, forms, offering, signature, ...significantData } = quote;
+    return significantData;
+  };
 }
 
 export namespace QuoteModel {
@@ -34,4 +42,11 @@ export namespace QuoteModel {
     vehicle: QuoteVehicleModel.init(),
     offering: QuoteOfferingModel.init()
   });
+  export const signModel = (model: QuoteModel): SignatureModel => {
+    const currentQuoteSignature = dataHash(QuoteSignificantData.getSignificantData(model));
+
+    return {
+      hash: currentQuoteSignature
+    };
+  };
 }

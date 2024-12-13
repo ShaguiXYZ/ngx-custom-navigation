@@ -22,7 +22,7 @@ export abstract class QuoteComponent implements OnDestroy {
       this.contextDataService.onDataChange<QuoteModel>(QUOTE_CONTEXT_DATA).subscribe(data => (this._contextData = data))
     );
     this._contextData = this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA);
-    this.__updateComponentData(this);
+    Promise.resolve().then(() => this.__updateComponentData(this));
   }
 
   ngOnDestroy(): void {
@@ -48,7 +48,7 @@ export abstract class QuoteComponent implements OnDestroy {
       }
     }
 
-    Promise.resolve().then(() => lastPage && this.__zones(lastPage, component));
+    lastPage && this.__zones(lastPage, component);
   };
 
   private __zones = (page: Page, component: QuoteComponent): void => {

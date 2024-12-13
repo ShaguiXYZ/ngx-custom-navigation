@@ -21,7 +21,7 @@ export class SettingsService {
     this.translateService.setDefaultLang('es-ES');
 
     if (!clientJourney || !settings.commercialExceptions.enableWorkFlow) {
-      return this.disableWorkFlow(settings);
+      return this.loadJourney('not-journey', settings);
     }
 
     return this.loadJourney(clientJourney, settings);
@@ -30,36 +30,33 @@ export class SettingsService {
   private quoteSettings = (): Promise<QuoteSettingsModel> =>
     firstValueFrom(this.httpService.get<QuoteSettingsModel>(`${environment.baseUrl}/settings`).pipe(map(res => res as QuoteSettingsModel)));
 
-  private disableWorkFlow = async (settings: QuoteSettingsModel): Promise<void> => {
-    const { configuration } = await this.journeyService.fetchConfiguration('not-journey');
-
-    if (configuration) {
-      this.contextDataService.set(QUOTE_APP_CONTEXT_DATA, AppContextData.init(settings, configuration), {
-        persistent: true
-      });
-
-      const quoteData = QuoteModel.init();
-      this.contextDataService.set(QUOTE_CONTEXT_DATA, quoteData, { persistent: true });
+  private loadJourney = async (
+    journey: string,
+    settings: Partial<QuoteSettingsModel> & {
+      commercialExceptions: {
+        enableWorkFlow: boolean;
+        enableTracking: boolean;
+      };
     }
-  };
-
-  private loadJourney = async (journey: string, settings: QuoteSettingsModel): Promise<void> => {
+  ): Promise<void> => {
     console.group('SettingsService');
     const { configuration, properties } = await this.journeyService.fetchConfiguration(journey);
-    const [quote, appContextData] = properties?.breakingchange
-      ? [QuoteModel.init(), AppContextData.init(settings, configuration)]
-      : [
-          { ...QuoteModel.init(), ...this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA) },
-          { ...this.contextDataService.get<AppContextData>(QUOTE_APP_CONTEXT_DATA), configuration, settings }
-        ];
+    const actualContextData = this.contextDataService.get<AppContextData>(QUOTE_APP_CONTEXT_DATA);
+    const [quote, contextData] =
+      actualContextData?.configuration.name !== configuration.name || properties?.breakingchange
+        ? [QuoteModel.init(), AppContextData.init(settings, configuration)]
+        : [
+            { ...QuoteModel.init(), ...this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA) },
+            { ...actualContextData, configuration, settings }
+          ];
 
-    this.contextDataService.set(QUOTE_APP_CONTEXT_DATA, appContextData, {
+    this.contextDataService.set(QUOTE_APP_CONTEXT_DATA, contextData, {
       persistent: true
     });
     this.contextDataService.set(QUOTE_CONTEXT_DATA, quote, { persistent: true, referenced: true });
 
+    console.log('Quote configuration', QUOTE_APP_CONTEXT_DATA, contextData);
     console.log('Quote data', QUOTE_CONTEXT_DATA, quote);
-    console.log('Quote configuration', QUOTE_APP_CONTEXT_DATA, configuration);
     console.groupEnd();
   };
 }

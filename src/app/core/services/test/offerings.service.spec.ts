@@ -54,7 +54,7 @@ describe('OfferingsService', () => {
         personalData: {},
         place: {},
         vehicle: {},
-        signature: { changed: true, hash: 'hash' }
+        signature: { hash: 'hash' }
       } as QuoteModel)
       .then(offerings => {
         expect(offerings.prices.length).toBe(2);
@@ -68,8 +68,9 @@ describe('OfferingsService', () => {
   it('should return cached offerings when quote does not change', async () => {
     service
       .pricing({
-        signature: { changed: false, hash: 'hash' },
+        signature: { hash: 'hash' },
         offering: {
+          hash: 'hash',
           prices: [
             { modalityId: 1, modalityDescription: 'Offering 1', totalPremiumAmount: '100' },
             { modalityId: 2, modalityDescription: 'Offering 2', totalPremiumAmount: '200' }

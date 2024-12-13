@@ -2,7 +2,7 @@ import { Component, ViewEncapsulation } from '@angular/core';
 import { NxCopytextModule } from '@aposin/ng-aquila/copytext';
 import { NxHeadlineModule } from '@aposin/ng-aquila/headline';
 import { QuoteComponent } from 'src/app/core/models';
-import { HeaderTitleComponent, QuoteFooterComponent } from 'src/app/shared/components';
+import { QuoteFooterComponent } from 'src/app/shared/components';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 
@@ -11,7 +11,7 @@ import { QuoteLiteralPipe } from 'src/app/shared/pipes';
   templateUrl: './contact-us.component.html',
   styleUrl: './contact-us.component.scss',
   standalone: true,
-  imports: [HeaderTitleComponent, NxCopytextModule, NxHeadlineModule, QuoteFooterComponent, QuoteLiteralDirective, QuoteLiteralPipe],
+  imports: [NxCopytextModule, NxHeadlineModule, QuoteFooterComponent, QuoteLiteralDirective, QuoteLiteralPipe],
   encapsulation: ViewEncapsulation.None
 })
 export class ContactUsComponent extends QuoteComponent {

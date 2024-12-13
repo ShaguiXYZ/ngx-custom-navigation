@@ -10,7 +10,6 @@ import { RoutingService } from 'src/app/core/services';
 import { QuoteTrackDirective } from 'src/app/core/tracking';
 import { HeaderTitleComponent, IconCardComponent } from 'src/app/shared/components';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
-import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 import { DrivingLicenseIcons } from './models';
 
 @Component({
@@ -24,7 +23,6 @@ import { DrivingLicenseIcons } from './models';
     NxCopytextModule,
     NxHeadlineModule,
     QuoteLiteralDirective,
-    QuoteLiteralPipe,
     QuoteTrackDirective
   ],
   templateUrl: './driving-license-location.component.html',
