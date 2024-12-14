@@ -2,10 +2,10 @@ import { Component, HostListener, inject } from '@angular/core';
 import { RouterModule, RouterOutlet } from '@angular/router';
 import { NxGridModule } from '@aposin/ng-aquila/grid';
 import { NxLinkModule } from '@aposin/ng-aquila/link';
-import { ContextDataService } from '@shagui/ng-shagui/core';
+import { ContextDataService, NotificationService } from '@shagui/ng-shagui/core';
 import { QUOTE_APP_CONTEXT_DATA } from './core/constants';
 import { AppContextData } from './core/models';
-import { RoutingService } from './core/services';
+import { LiteralsService, RoutingService } from './core/services';
 import { routeTransitions } from './shared/animations';
 import {
   NotificationComponent,
@@ -38,7 +38,8 @@ import { QuoteLiteralPipe } from './shared/pipes';
 })
 export class AppComponent {
   private readonly contextDataService = inject(ContextDataService);
-  private readonly routingService = inject(RoutingService);
+  private readonly literalService = inject(LiteralsService);
+  private readonly notificationService = inject(NotificationService);
 
   // @howto Detect the Closing of a Browser Tab
   @HostListener('window:beforeunload', ['$event'])
@@ -49,7 +50,10 @@ export class AppComponent {
   // @howto Detect the Browser Back Button
   @HostListener('window:popstate', ['$event'])
   onPopState(event: PopStateEvent): void {
-    this.routingService.previous();
+    this.notificationService.error(
+      this.literalService.toString({ value: 'not-allowed', type: 'literal' }) || 'Operation not allowed ',
+      this.literalService.toString({ value: 'use-back-button', type: 'literal' }) || 'Please use the back button in the application'
+    );
 
     event.preventDefault();
     event.stopPropagation();
