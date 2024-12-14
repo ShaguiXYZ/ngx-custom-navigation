@@ -17,21 +17,19 @@ const appContextDataMock = {
     title: 'title',
     errorPageId: 'page2',
     steppers: {
-      steppersMap: {
-        stepper1: {
-          steps: [
-            {
-              key: 'step1',
-              label: 'key1',
-              pages: ['page1']
-            },
-            {
-              key: 'step2',
-              label: 'key2',
-              pages: ['page2']
-            }
-          ]
-        }
+      stepper1: {
+        steps: [
+          {
+            key: 'step1',
+            label: 'key1',
+            pages: ['page1']
+          },
+          {
+            key: 'step2',
+            label: 'key2',
+            pages: ['page2']
+          }
+        ]
       }
     },
     pageMap: {

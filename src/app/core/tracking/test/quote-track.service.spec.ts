@@ -32,7 +32,7 @@ describe('QuoteTrackService', () => {
     contextDataServiceSpy.get.and.callFake((contextDataKey: string): any => {
       if (contextDataKey === QUOTE_APP_CONTEXT_DATA) {
         return {
-          configuration: { steppers: { steppersMap: {} } },
+          configuration: { steppers: {} },
           navigation: { lastPage: { pageId: 'test' }, viewedPages: ['page1', 'page2'] }
         } as AppContextData;
       } else if (contextDataKey === QUOTE_CONTEXT_DATA) {

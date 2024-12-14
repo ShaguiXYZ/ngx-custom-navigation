@@ -1,4 +1,3 @@
-import { DataInfo } from '@shagui/ng-shagui/core';
 import { LiteralModel } from './literal.model';
 
 export interface StateInfo {
@@ -24,8 +23,4 @@ export interface Step {
 export interface Stepper {
   steps: Step[];
   stateInfo?: StateInfo;
-}
-
-export interface Steppers {
-  steppersMap: DataInfo<Stepper>;
 }

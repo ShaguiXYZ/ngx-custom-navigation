@@ -7,12 +7,17 @@ import { PageFormValidationSettings } from './page-form.model';
 import { QuoteFooterConfig } from './quote-footer-comfig.model';
 import { Version, VersionInfo } from './quote-version.model';
 import { QuoteModel } from './quote.model';
-import { StepperDTO, Steppers } from './stepper.model';
 import { StepperConfig } from './stepper-config.model';
+import { Stepper, StepperDTO } from './stepper.model';
 
 export type CompareOperations = 'AND' | 'OR';
 export type Links = DataInfo;
-export type Literals = DataInfo<LiteralModel>;
+export type Literals = {
+  header?: LiteralModel;
+  subheader?: LiteralModel;
+  body?: LiteralModel;
+  'footer-next'?: LiteralModel;
+} & DataInfo<LiteralModel>;
 
 export interface ZoneConfig {
   skipLoad?: boolean;
@@ -79,7 +84,7 @@ export interface Configuration {
   title?: LiteralModel;
   errorPageId: string;
   pageMap: DataInfo<Page>;
-  steppers?: Steppers;
+  steppers?: DataInfo<Stepper>;
   links?: Links;
   literals?: Literals;
 }

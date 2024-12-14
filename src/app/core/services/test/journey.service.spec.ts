@@ -95,7 +95,7 @@ describe('JourneyService', () => {
         }
       },
       links: { error: 'error' },
-      steppers: { steppersMap: {} },
+      steppers: {},
       literals: {},
       hash: dataHash(significantData)
     } as unknown as Configuration;

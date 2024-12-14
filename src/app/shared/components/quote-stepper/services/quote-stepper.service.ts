@@ -31,7 +31,7 @@ export class QuoteStepperService implements OnDestroy {
           return;
         }
 
-        const stepper = data.configuration.steppers?.steppersMap[page.stepper.key];
+        const stepper = data.configuration.steppers?.[page.stepper.key];
         const stepKey = page.stepper.stepKey;
 
         this.quoteSteps$.next(stepper ? { stepper, stepKey } : undefined);

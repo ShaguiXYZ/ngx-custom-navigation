@@ -729,7 +729,7 @@
       "configuration": {
         "literals": {
           "header": "Información de contacto",
-          "title": "Nos gustaría poder ayudarte, <br/>¡contactanos!",
+          "subheader": "Nos gustaría poder ayudarte, <br/>¡contactanos!",
           "footer-next": "FINALIZAR"
         },
         "data": {
@@ -839,7 +839,7 @@
       "configuration": {
         "literals": {
           "header": "Información de contacto",
-          "title": "Nos gustaría poder ayudarte, <br/>¡contactanos!"
+          "subheader": "Nos gustaría poder ayudarte, <br/>¡contactanos!"
         },
         "data": {
           "contactUsTexts": [
@@ -872,10 +872,14 @@
       "configuration": {
         "literals": {
           "header": { "value": "Dinos cómo podemos contactarte", "type": "value" },
-          "title": "Podemos ayudarte, <br/>¿Quieres que te llamemos?",
-          "body": "Podemos llamarte y ayudarte a encontrar el mejor seguro para ti, con las mejores coberturas."
+          "subheader": "Podemos ayudarte, <br/>¿Quieres que te llamemos?",
+          "body": "Podemos llamarte y ayudarte a encontrar el mejor seguro para ti, con las mejores coberturas.",
+          "line1": "<h1 class='info-header nx-font-weight-bold'>Horario comercial</h1>",
+          "line2": "Lunes a Jueves de 9h a 19h",
+          "line3": "Viernes de 9h a 18h"
         },
         "data": {
+          "contactUsTexts": ["line1", "line2", "line3"],
           "headerConfig": {
             "showBack": true,
             "showContactUs": false

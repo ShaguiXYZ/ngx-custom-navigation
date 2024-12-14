@@ -37,9 +37,7 @@ describe('QuoteStepperService', () => {
           page1: { stepper: { key: 'stepper1', stepKey: 'step1' } }
         },
         steppers: {
-          steppersMap: {
-            stepper1: mockStepper
-          }
+          stepper1: mockStepper
         }
       }
     } as unknown as AppContextData;
@@ -55,7 +53,7 @@ describe('QuoteStepperService', () => {
   it('should set quoteSteps$ to undefined if pageId is not present', done => {
     const mockAppContextData: AppContextData = {
       navigation: { lastPage: null },
-      configuration: { pageMap: {}, steppers: { steppersMap: {} } }
+      configuration: { pageMap: {}, steppers: {} }
     } as unknown as AppContextData;
 
     service.asObservable().subscribe(value => {
@@ -71,7 +69,7 @@ describe('QuoteStepperService', () => {
       navigation: { lastPage: { pageId: 'page1' } },
       configuration: {
         pageMap: { page1: {} },
-        steppers: { steppersMap: {} }
+        steppers: {}
       }
     } as unknown as AppContextData;
 

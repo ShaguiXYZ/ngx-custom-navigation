@@ -159,7 +159,7 @@ export class JourneyService {
       return acc;
     }, {} as DataInfo<Stepper>);
 
-    configuration.steppers = { steppersMap };
+    configuration.steppers = steppersMap;
   };
 
   private initLinks = (configuration: Configuration, links?: Links): void => {

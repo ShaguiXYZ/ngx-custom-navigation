@@ -163,10 +163,8 @@ describe('JourneyGuard', () => {
           page2: { pageId: 'page2', route: 'page2' }
         },
         steppers: {
-          steppersMap: {
-            step1: { stateInfo: true },
-            step2: { stateInfo: true }
-          }
+          step1: { stateInfo: true },
+          step2: { stateInfo: true }
         }
       }
     };

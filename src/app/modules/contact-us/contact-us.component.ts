@@ -15,5 +15,5 @@ import { QuoteLiteralPipe } from 'src/app/shared/pipes';
   encapsulation: ViewEncapsulation.None
 })
 export class ContactUsComponent extends QuoteComponent {
-  public contactUsTexts: string[] = ['<h1 class="info-header">Horario comercial</h1>', 'Lunes a Jueves de 9h a 19h', 'Viernes de 9h a 18h'];
+  public contactUsTexts: string[] = [];
 }

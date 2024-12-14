@@ -85,7 +85,7 @@ export class QuoteTrackService implements OnDestroy {
         };
 
         if (lastPage?.stepper) {
-          const stepper = steppers?.steppersMap?.[lastPage.stepper.key];
+          const stepper = steppers?.[lastPage.stepper.key];
           const stepperPages = stepper?.steps?.flatMap(step => step.pages) ?? [];
           const stepperPagesViewed = viewedPages.filter(page => stepperPages.includes(page));
           const step = stepper?.steps?.find(step => step.key === lastPage.stepper?.stepKey);
