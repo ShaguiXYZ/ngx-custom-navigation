@@ -1,3 +1,4 @@
+export * from './color-captcha';
 export * from './header-title';
 export * from './icon-card';
 export * from './loading';

@@ -4,16 +4,24 @@
   <quote-loading />
 
   <article nxLayout="content-section grid maxwidth nogutters" class="app__container">
+    @if (verified) {
     <header class="app__header nx-margin-bottom-3m">
       <quote-header />
       <quote-stepper />
     </header>
 
-    <div class="outlet__container" [@routeTransitions]="prepareRoute(outlet)">
+    <section class="outlet__container" [@routeTransitions]="prepareRoute(outlet)">
       <div class="outlet__content">
         <router-outlet #outlet="outlet" />
       </div>
-    </div>
+    </section>
+    } @else {
+    <section class="outlet__container">
+      <div class="captcha__content">
+        <quote-captcha />
+      </div>
+    </section>
+    }
 
     <footer class="app__footer nx-margin-top-xs">
       <div class="app__footer__copyright nx-margin-top-s">

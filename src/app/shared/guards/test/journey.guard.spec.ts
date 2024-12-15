@@ -1,8 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { ActivatedRoute, Router, RouterStateSnapshot } from '@angular/router';
 import { ContextDataService } from '@shagui/ng-shagui/core';
-import { QUOTE_APP_CONTEXT_DATA, QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
-import { QuoteModel } from 'src/app/core/models';
+import { QUOTE_APP_CONTEXT_DATA } from 'src/app/core/constants';
 import { journeyGuard } from '../journey.guard';
 
 describe('JourneyGuard', () => {
@@ -87,34 +86,6 @@ describe('JourneyGuard', () => {
     expect(mockContext.navigation.viewedPages).toEqual(['page1', 'page2']);
     expect(contextDataService.set).toHaveBeenCalledWith(QUOTE_APP_CONTEXT_DATA, mockContext);
     expect(result).toBeTrue();
-  });
-
-  it('should reset quote context data if navigating to home page', () => {
-    const mockContext = {
-      settings: {},
-      navigation: {
-        nextPage: { pageId: 'home', route: 'home' },
-        viewedPages: ['page1'],
-        lastPage: undefined
-      },
-      configuration: {
-        homePageId: 'home',
-        errorPageId: 'error',
-        pageMap: {
-          page1: { pageId: 'page1', route: 'page1' },
-          home: { pageId: 'home', route: 'home' }
-        }
-      }
-    };
-
-    contextDataService.get.and.returnValue(mockContext);
-
-    const activatedRoute = TestBed.inject(ActivatedRoute);
-    TestBed.runInInjectionContext(() => {
-      return journeyGuard(activatedRoute.snapshot, {} as RouterStateSnapshot);
-    });
-
-    expect(contextDataService.set).toHaveBeenCalledWith(QUOTE_CONTEXT_DATA, QuoteModel.init());
   });
 
   it('should handle navigation to error page correctly', () => {

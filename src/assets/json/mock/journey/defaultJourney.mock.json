@@ -1,10 +1,11 @@
 {
   "homePageId": "calcula-tu-seguro",
-  "title": { "value": "Calcula tu seguro" },
+  "title": { "value": "journey-title", "type": "literal" },
   "version": [
     { "value": "v1.1", "breakingchange": true },
     { "value": "v1.1.1", "date": 1733999306681 },
-    { "value": "v1.1.2", "date": 1698777600000 }
+    { "value": "v2.0.0", "date": 1734213499903, "breakingchange": true },
+    { "value": "v2.0.1", "date": 1734213772860 }
   ],
   "steppers": [
     {
@@ -141,8 +142,8 @@
               "value": "51"
             },
             {
-              "expression": "place.provinceCode",
               "union": "OR",
+              "expression": "place.provinceCode",
               "value": "52"
             }
           ]
@@ -255,8 +256,8 @@
               "value": false
             },
             {
-              "expression": "vehicle.vehicleType",
               "union": "AND",
+              "expression": "vehicle.vehicleType",
               "operation": "!==",
               "value": "new"
             }
@@ -270,8 +271,8 @@
               "value": false
             },
             {
-              "expression": "vehicle.vehicleType",
               "union": "AND",
+              "expression": "vehicle.vehicleType",
               "value": "new"
             }
           ]
@@ -442,8 +443,8 @@
               "value": false
             },
             {
-              "expression": "vehicle.vehicleType",
               "union": "AND",
+              "expression": "vehicle.vehicleType",
               "value": "new"
             }
           ]
@@ -456,13 +457,13 @@
               "value": "new"
             },
             {
-              "expression": "vehicle.vehicleType",
               "union": "OR",
+              "expression": "vehicle.vehicleType",
               "value": "second_hand"
             },
             {
-              "expression": "client.isPolicyOwner",
               "union": "AND",
+              "expression": "client.isPolicyOwner",
               "value": true
             }
           ]
@@ -475,8 +476,8 @@
               "value": false
             },
             {
-              "expression": "vehicle.vehicleType",
               "union": "AND",
+              "expression": "vehicle.vehicleType",
               "value": "old"
             }
           ]
@@ -911,7 +912,8 @@
     "contact-us": "external-contact-us"
   },
   "literals": {
-    "journey-title": "Calcula tu seguro",
+    "captcha-header": "Verificación de seguridad. Por favor, selecciona los simbolos rojos.",
+    "journey-title": "Seguro de coche",
     "bad-format": "Formato incorrecto",
     "budget-modal-header": "Datos de tu presupuesto",
     "budget-name": "Nombre del presupuesto",

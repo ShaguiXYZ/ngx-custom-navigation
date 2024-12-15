@@ -1,19 +1,17 @@
 <!-- eslint-disable @angular-eslint/template/elements-content -->
 <article class="center__info">
-  <header class="nx-margin-bottom-3m">
-    <div class="info__header nx-margin-bottom-xl">
-      <h4 nxHeadline="subsection-xsmall" class="nx-font-weight-bold" nxQuoteLiteral="header"></h4>
-      <h3 nxHeadline="subsection-xsmall" nxQuoteLiteral="subheader"></h3>
+  <quote-header-title>
+    <span nxQuoteLiteral="header"></span>
+    <p nxCopytext="normal" nxQuoteLiteral="subheader"></p>
+  </quote-header-title>
+  <section class="form-container">
+    <p nxCopytext="large" class="nx-margin-bottom-xs" nxQuoteLiteral="body"></p>
+    <div class="info-row info-phone nx-margin-y-s">
+      <a href="tel: {{ 'phone' | quoteLiteral }}" nxQuoteLiteral="phone"></a>
     </div>
-    <section class="form-container">
-      <div class="info-row nx-margin-y-s" nxQuoteLiteral="body"></div>
-      <div class="info-row info-phone nx-margin-y-s">
-        <a href="tel: {{ 'phone' | quoteLiteral }}" nxQuoteLiteral="phone"></a>
-      </div>
-      @for(text of contactUsTexts; track $index) {
-      <div nxCopytext="medium" class="info-row" [nxQuoteLiteral]="text"></div>
-      }
-    </section>
-  </header>
+    @for(text of contactUsTexts; track $index) {
+    <div nxCopytext="medium" class="info-row" [nxQuoteLiteral]="text"></div>
+    }
+  </section>
   <quote-footer />
 </article>

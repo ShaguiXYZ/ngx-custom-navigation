@@ -19,6 +19,14 @@
       flex: 1;
       overflow: hidden;
     }
+
+    .captcha__content {
+      align-items: center;
+      display: flex;
+      flex: 1;
+      justify-content: center;
+      overflow: hidden;
+    }
   }
 
   .app__footer {

@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-namespace */
 import { Configuration, Page } from './configuration.model';
+import { QuoteFlagsModel } from './flags.model';
 import { QuoteSettingsModel } from './quote-settings.model';
 import { QuoteModel } from './quote.model';
 
@@ -14,6 +15,7 @@ export interface Navigation {
   nextPage?: Page;
   lastPage?: Page;
   viewedPages: string[];
+  flags?: QuoteFlagsModel;
   track?: Track;
 }
 

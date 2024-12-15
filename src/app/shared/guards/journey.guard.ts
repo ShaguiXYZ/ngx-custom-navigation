@@ -96,8 +96,6 @@ export const journeyGuard: CanActivateFn = (route: ActivatedRouteSnapshot, state
   context.navigation = { ...context.navigation, viewedPages, lastPage, nextPage: undefined, track };
   contextDataService.set(QUOTE_APP_CONTEXT_DATA, context);
 
-  homePageId === nextPage.pageId && contextDataService.set(QUOTE_CONTEXT_DATA, QuoteModel.init());
-
   window.history.pushState({}, '', nextPage.routeTree ?? nextPage.pageId);
 
   return true;

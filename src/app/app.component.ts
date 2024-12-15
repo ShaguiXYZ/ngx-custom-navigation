@@ -1,4 +1,4 @@
-import { Component, HostListener, inject } from '@angular/core';
+import { Component, HostListener, inject, OnDestroy, OnInit } from '@angular/core';
 import { RouterModule, RouterOutlet } from '@angular/router';
 import { NxGridModule } from '@aposin/ng-aquila/grid';
 import { NxLinkModule } from '@aposin/ng-aquila/link';
@@ -8,6 +8,7 @@ import { AppContextData } from './core/models';
 import { LiteralsService, RoutingService } from './core/services';
 import { routeTransitions } from './shared/animations';
 import {
+  ColorCaptchaComponent,
   NotificationComponent,
   QuoteHeaderComponent,
   QuoteKeysComponent,
@@ -16,6 +17,8 @@ import {
 } from './shared/components';
 import { QuoteLiteralDirective } from './shared/directives';
 import { QuoteLiteralPipe } from './shared/pipes';
+import { Subscription } from 'rxjs';
+import { CaptchaComponent } from './modules/captcha/captcha.component';
 
 @Component({
   selector: 'quote-root',
@@ -28,6 +31,7 @@ import { QuoteLiteralPipe } from './shared/pipes';
     RouterModule,
     NxGridModule,
     NxLinkModule,
+    CaptchaComponent,
     NotificationComponent,
     QuoteKeysComponent,
     QuoteHeaderComponent,
@@ -36,10 +40,34 @@ import { QuoteLiteralPipe } from './shared/pipes';
     QuoteLiteralDirective
   ]
 })
-export class AppComponent {
+export class AppComponent implements OnInit, OnDestroy {
+  public verified?: boolean;
+
   private readonly contextDataService = inject(ContextDataService);
   private readonly literalService = inject(LiteralsService);
   private readonly notificationService = inject(NotificationService);
+
+  private readonly subscription$: Subscription[] = [];
+
+  constructor() {
+    const {
+      navigation: { flags }
+    } = this.contextDataService.get<AppContextData>(QUOTE_APP_CONTEXT_DATA);
+
+    this.verified = flags?.captchaVerified;
+  }
+
+  ngOnInit(): void {
+    this.subscription$.push(
+      this.contextDataService.onDataChange<AppContextData>(QUOTE_APP_CONTEXT_DATA).subscribe(appContextData => {
+        this.verified = appContextData.navigation.flags?.captchaVerified;
+      })
+    );
+  }
+
+  ngOnDestroy(): void {
+    this.subscription$.forEach(subscription => subscription.unsubscribe());
+  }
 
   // @howto Detect the Closing of a Browser Tab
   @HostListener('window:beforeunload', ['$event'])
@@ -50,7 +78,7 @@ export class AppComponent {
   // @howto Detect the Browser Back Button
   @HostListener('window:popstate', ['$event'])
   onPopState(event: PopStateEvent): void {
-    this.notificationService.error(
+    this.notificationService.warning(
       this.literalService.toString({ value: 'not-allowed', type: 'literal' }) || 'Operation not allowed ',
       this.literalService.toString({ value: 'use-back-button', type: 'literal' }) || 'Please use the back button in the application'
     );

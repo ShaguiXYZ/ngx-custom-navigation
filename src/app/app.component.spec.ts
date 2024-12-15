@@ -9,7 +9,6 @@ import { ContextDataService, NotificationModel, NotificationService } from '@sha
 import { of } from 'rxjs';
 import { AppComponent } from './app.component';
 import { ContextDataServiceStub } from './core/stub';
-import { RoutingService } from './core/services';
 import {
   NotificationComponent,
   QuoteFooterComponent,
@@ -23,11 +22,9 @@ describe('AppComponent', () => {
   let component: AppComponent;
   let fixture: ComponentFixture<AppComponent>;
   let notificationService: jasmine.SpyObj<NotificationService>;
-  let routingService: jasmine.SpyObj<RoutingService>;
 
   beforeEach(async () => {
     const notificationServiceSpy = jasmine.createSpyObj('NotificationService', ['warning', 'onNotification', 'onCloseNotification']);
-    const routingServiceSpy = jasmine.createSpyObj('RoutingService', ['previous']);
     const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate']);
 
     await TestBed.configureTestingModule({
@@ -47,7 +44,6 @@ describe('AppComponent', () => {
         provideRouter([]),
         { provide: ContextDataService, useClass: ContextDataServiceStub },
         { provide: NotificationService, useValue: notificationServiceSpy },
-        { provide: RoutingService, useValue: routingServiceSpy },
         { provide: TranslateService, useValue: translateServiceSpy },
         QuoteLiteralPipe
       ]
@@ -58,7 +54,6 @@ describe('AppComponent', () => {
     fixture = TestBed.createComponent(AppComponent);
     component = fixture.componentInstance;
     notificationService = TestBed.inject(NotificationService) as jasmine.SpyObj<NotificationService>;
-    routingService = TestBed.inject(RoutingService) as jasmine.SpyObj<RoutingService>;
 
     notificationService.onNotification.and.returnValue(
       of({
@@ -77,12 +72,12 @@ describe('AppComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should call notificationService.warning and routingService.previous on popstate event', () => {
+  it('should call notificationService.warning on popstate event', () => {
     const event = new PopStateEvent('popstate');
     spyOn(event, 'stopPropagation');
     component.onPopState(event);
 
-    expect(routingService.previous).toHaveBeenCalled();
+    expect(notificationService.warning).toHaveBeenCalled();
     expect(event.stopPropagation).toHaveBeenCalled();
   });
 
