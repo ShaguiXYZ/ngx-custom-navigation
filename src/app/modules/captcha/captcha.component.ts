@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { ContextDataService } from '@shagui/ng-shagui/core';
 import { QUOTE_APP_CONTEXT_DATA } from 'src/app/core/constants';
-import { AppContextData, QuoteComponent } from 'src/app/core/models';
+import { AppContextData } from 'src/app/core/models';
 import { ColorCaptchaComponent, HeaderTitleComponent } from 'src/app/shared/components';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
 
@@ -11,7 +12,9 @@ import { QuoteLiteralDirective } from 'src/app/shared/directives';
   standalone: true,
   imports: [ColorCaptchaComponent, HeaderTitleComponent, QuoteLiteralDirective]
 })
-export class CaptchaComponent extends QuoteComponent {
+export class CaptchaComponent {
+  private readonly contextDataService = inject(ContextDataService);
+
   public onCaptchaVerified(verified: boolean): void {
     const appContextData = this.contextDataService.get<AppContextData>(QUOTE_APP_CONTEXT_DATA);
     appContextData.navigation.flags = { ...appContextData.navigation.flags, captchaVerified: verified };

@@ -136,4 +136,66 @@ describe('QuoteTrackService', () => {
         done();
       });
   });
+
+  it('last stepper should be added to trackInfo', done => {
+    const appContextData = {
+      configuration: { name: 'test', steppers: { stepper1: { key: 'stepper1' } } },
+      navigation: { lastPage: { pageId: 'test', stepper: { key: 'stepper1' } }, viewedPages: ['page1', 'page2'] },
+      settings: {}
+    } as unknown as AppContextData;
+    contextDataService.get.and.returnValue(appContextData);
+
+    const trackInfo: TrackInfo = { brand: 'test' };
+    const trackFnSpy = spyOn(service as any, 'trackFn').and.returnValue(1);
+
+    spyOn(window, 'requestIdleCallback').and.callFake((callback: Function) => callback());
+
+    service
+      .trackEvent('click', trackInfo)
+      .then(() => {
+        expect(trackFnSpy).toHaveBeenCalledWith(
+          'click',
+          jasmine.objectContaining({
+            category: `tarificador ${appContextData.configuration.name}`,
+            page: appContextData.navigation.lastPage?.pageId
+          })
+        );
+        done();
+      })
+      .catch(error => {
+        fail(error);
+        done();
+      });
+  });
+
+  it('should not add stepper to trackInfo if stepper is not found', done => {
+    const appContextData = {
+      configuration: { name: 'test', steppers: {} },
+      navigation: { lastPage: { pageId: 'test', stepper: { key: 'stepper1' } }, viewedPages: ['page1', 'page2'] },
+      settings: {}
+    } as unknown as AppContextData;
+    contextDataService.get.and.returnValue(appContextData);
+
+    const trackInfo: TrackInfo = { brand: 'test' };
+    const trackFnSpy = spyOn(service as any, 'trackFn').and.returnValue(1);
+
+    spyOn(window, 'requestIdleCallback').and.callFake((callback: Function) => callback());
+
+    service
+      .trackEvent('click', trackInfo)
+      .then(() => {
+        expect(trackFnSpy).toHaveBeenCalledWith(
+          'click',
+          jasmine.objectContaining({
+            category: `tarificador ${appContextData.configuration.name}`,
+            page: appContextData.navigation.lastPage?.pageId
+          })
+        );
+        done();
+      })
+      .catch(error => {
+        fail(error);
+        done();
+      });
+  });
 });

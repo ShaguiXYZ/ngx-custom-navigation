@@ -42,7 +42,7 @@ describe('ColorCaptchaComponent', () => {
 
   it('should generate a captcha with 8 characters', () => {
     (component as any).generateCaptcha();
-    expect(component.captchaText.length).toBe(8);
+    expect(component.captchaImageIndexes.length).toBe(8);
   });
 
   it('should generate a captcha with 3 colored indices', () => {

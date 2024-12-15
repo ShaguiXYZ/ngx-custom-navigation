@@ -3,12 +3,13 @@ import { RouterModule, RouterOutlet } from '@angular/router';
 import { NxGridModule } from '@aposin/ng-aquila/grid';
 import { NxLinkModule } from '@aposin/ng-aquila/link';
 import { ContextDataService, NotificationService } from '@shagui/ng-shagui/core';
+import { Subscription } from 'rxjs';
 import { QUOTE_APP_CONTEXT_DATA } from './core/constants';
 import { AppContextData } from './core/models';
-import { LiteralsService, RoutingService } from './core/services';
+import { LiteralsService } from './core/services';
+import { CaptchaComponent } from './modules/captcha/captcha.component';
 import { routeTransitions } from './shared/animations';
 import {
-  ColorCaptchaComponent,
   NotificationComponent,
   QuoteHeaderComponent,
   QuoteKeysComponent,
@@ -17,8 +18,6 @@ import {
 } from './shared/components';
 import { QuoteLiteralDirective } from './shared/directives';
 import { QuoteLiteralPipe } from './shared/pipes';
-import { Subscription } from 'rxjs';
-import { CaptchaComponent } from './modules/captcha/captcha.component';
 
 @Component({
   selector: 'quote-root',

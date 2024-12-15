@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
+import { CAPTCHA_IMAGES } from './constants/captcha-images';
 
 @Component({
   selector: 'quote-color-captcha',
@@ -9,7 +10,9 @@ import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/cor
   standalone: true
 })
 export class ColorCaptchaComponent implements OnInit, OnDestroy {
-  public captchaText: string[] = [];
+  public readonly images = CAPTCHA_IMAGES;
+
+  public captchaImageIndexes: number[] = [];
   public coloredIndices: number[] = [];
   public selectedIndices: number[] = [];
   public timeToRefresh = 15;
@@ -70,14 +73,13 @@ export class ColorCaptchaComponent implements OnInit, OnDestroy {
   }
 
   private generateCaptcha(): void {
-    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz#@?%';
-    this.captchaText = [];
+    this.captchaImageIndexes = [];
     this.coloredIndices = [];
     this.selectedIndices = [];
 
     // Generate 8 random letters
     for (let i = 0; i < 8; i++) {
-      this.captchaText.push(characters.charAt(Math.floor(Math.random() * characters.length)));
+      this.captchaImageIndexes.push(Math.floor(Math.random() * this.images.length));
     }
 
     // Select 3 random letters and change their color

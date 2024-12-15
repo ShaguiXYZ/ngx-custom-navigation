@@ -135,4 +135,34 @@ describe('QuoteDispatcherComponent', () => {
 
     expect(BudgetActivator.retrieveBudget).toHaveBeenCalledWith({ contextDataService: mockContextDataService });
   });
+
+  it('should navigate to dispatcher route if dispatcher param exists', async () => {
+    const mockContext = {
+      settings: {},
+      configuration: {
+        homePageId: 'home',
+        errorPageId: 'error',
+        pageMap: {
+          home: {
+            pageId: 'home',
+            route: 'home-route'
+          },
+          dispatcher: {
+            pageId: 'dispatcher',
+            route: 'dispatcher-route'
+          }
+        }
+      },
+      navigation: {
+        viewedPages: []
+      }
+    };
+
+    mockContextDataService.get.and.returnValue(mockContext);
+    mockActivatedRoute.snapshot.params = { dispatcher: 'dispatcher' };
+
+    await component.ngOnInit();
+
+    expect(mockRouter.navigate).toHaveBeenCalledWith(['dispatcher-route'], { skipLocationChange: true });
+  });
 });

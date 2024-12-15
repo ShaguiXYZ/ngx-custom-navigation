@@ -6,27 +6,26 @@
   flex-direction: column;
   margin: 20px;
 
-  .captcha-text {
+  .captcha-image {
     align-items: center;
     background-color: var(--background-color);
     border-radius: 5px 5px 0 0;
     display: flex;
-    font-family: 'Wingdings', 'Font Awesome 5 Free', 'Comic Sans MS';
-    font-size: 5vw; /* Font size relative to the viewport width */
-    font-weight: bold;
     justify-content: center;
-    letter-spacing: 3px;
     margin-bottom: 10px;
     max-width: 600px; /* Limit the maximum width of the container */
     padding: 10px;
     user-select: none; /* Prevent text selection */
     width: 100%; /* Ensure the container takes up the full available width */
 
-    span {
+    .captcha-character {
+      align-items: center;
       cursor: pointer;
-      display: inline-block;
+      display: flex;
+      flex: content;
+      justify-content: center;
       padding: 5px;
-      transition: transform ease-in-out 0.3s;
+      transition: transform ease-in-out 1s;
 
       &.colored {
         color: var(--danger);
@@ -35,6 +34,10 @@
       &.selected {
         background-color: var(--warning);
         border-radius: 50px;
+      }
+
+      em {
+        font-size: 3rem;
       }
     }
   }

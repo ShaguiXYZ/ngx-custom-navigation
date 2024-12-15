@@ -1,15 +1,16 @@
 <!-- eslint-disable @angular-eslint/template/interactive-supports-focus -->
 <!-- eslint-disable @angular-eslint/template/click-events-have-key-events -->
 <div class="captcha-container">
-  <div class="captcha-text">
-    @for(char of captchaText; track $index) {
-    <span
+  <div class="captcha-image">
+    @for(image of captchaImageIndexes; track image) {
+    <div
+      class="captcha-character"
       [ngClass]="{ colored: coloredIndices.includes($index), selected: selectedIndices.includes($index) }"
       [ngStyle]="getRandomStyle()"
       (click)="onCharacterClick($index)"
     >
-      {{ char }}
-    </span>
+      <em class="fa-solid {{ images[image] }}"></em>
+    </div>
     }
   </div>
   <div class="progress-bar">
