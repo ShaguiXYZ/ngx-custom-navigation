@@ -50,16 +50,18 @@ export class AppComponent implements OnInit, OnDestroy {
 
   constructor() {
     const {
-      navigation: { flags }
+      settings: {
+        commercialExceptions: { captchaVerified }
+      }
     } = this.contextDataService.get<AppContextData>(QUOTE_APP_CONTEXT_DATA);
 
-    this.verified = flags?.captchaVerified;
+    this.verified = captchaVerified;
   }
 
   ngOnInit(): void {
     this.subscription$.push(
       this.contextDataService.onDataChange<AppContextData>(QUOTE_APP_CONTEXT_DATA).subscribe(appContextData => {
-        this.verified = appContextData.navigation.flags?.captchaVerified;
+        this.verified = appContextData.settings.commercialExceptions?.captchaVerified;
       })
     );
   }

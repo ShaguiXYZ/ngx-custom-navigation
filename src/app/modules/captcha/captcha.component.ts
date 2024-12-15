@@ -17,7 +17,7 @@ export class CaptchaComponent {
 
   public onCaptchaVerified(verified: boolean): void {
     const appContextData = this.contextDataService.get<AppContextData>(QUOTE_APP_CONTEXT_DATA);
-    appContextData.navigation.flags = { ...appContextData.navigation.flags, captchaVerified: verified };
+    appContextData.settings.commercialExceptions = { ...appContextData.settings.commercialExceptions, captchaVerified: verified };
     this.contextDataService.set(QUOTE_APP_CONTEXT_DATA, appContextData);
   }
 }

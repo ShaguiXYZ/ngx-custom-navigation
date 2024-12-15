@@ -5,7 +5,8 @@ import { AppContextData, Page } from '../models';
 
 const appContextDataMock = {
   settings: {
-    agent: 'agent'
+    agent: 'agent',
+    commercialExceptions: {}
   },
   navigation: {
     lastPage: {} as Page,

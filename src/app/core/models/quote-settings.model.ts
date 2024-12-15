@@ -8,6 +8,7 @@ export interface QuoteSettingsModel {
   office: number;
   partnerid: string;
   commercialExceptions: {
+    captchaVerified?: boolean;
     enableWorkFlow: boolean;
     enableTracking: boolean;
   };

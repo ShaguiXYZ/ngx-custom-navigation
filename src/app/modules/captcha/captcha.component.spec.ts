@@ -40,8 +40,8 @@ describe('CaptchaComponent', () => {
 
   it('should verify captcha and update context data', () => {
     const appContextData = {
-      navigation: {
-        flags: {}
+      settings: {
+        commercialExceptions: {}
       }
     } as AppContextData;
     contextDataService.get.and.returnValue(appContextData);
@@ -49,14 +49,14 @@ describe('CaptchaComponent', () => {
     component.onCaptchaVerified(true);
 
     expect(contextDataService.get).toHaveBeenCalledWith(QUOTE_APP_CONTEXT_DATA);
-    expect(appContextData.navigation.flags?.captchaVerified).toBeTrue();
+    expect(appContextData.settings.commercialExceptions?.captchaVerified).toBeTrue();
     expect(contextDataService.set).toHaveBeenCalledWith(QUOTE_APP_CONTEXT_DATA, appContextData);
   });
 
   it('should update context data with captchaVerified as false', () => {
     const appContextData = {
-      navigation: {
-        flags: {}
+      settings: {
+        commercialExceptions: {}
       }
     } as AppContextData;
     contextDataService.get.and.returnValue(appContextData);
@@ -64,7 +64,7 @@ describe('CaptchaComponent', () => {
     component.onCaptchaVerified(false);
 
     expect(contextDataService.get).toHaveBeenCalledWith(QUOTE_APP_CONTEXT_DATA);
-    expect(appContextData.navigation.flags?.captchaVerified).toBeFalse();
+    expect(appContextData.settings.commercialExceptions?.captchaVerified).toBeFalse();
     expect(contextDataService.set).toHaveBeenCalledWith(QUOTE_APP_CONTEXT_DATA, appContextData);
   });
 });

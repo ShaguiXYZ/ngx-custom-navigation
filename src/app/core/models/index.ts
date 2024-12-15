@@ -2,7 +2,6 @@ export * from './app-context-data.model';
 export * from './black-list.model';
 export * from './budget.model';
 export * from './configuration.model';
-export * from './flags.model';
 export * from './fuel-types.model';
 export * from './header-config.model';
 export * from './icon-data.model';
