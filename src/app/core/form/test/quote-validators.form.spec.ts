@@ -70,6 +70,20 @@ describe('QuoteFormValidarors', () => {
     expect(result).toEqual({ olderThanYears: true });
   });
 
+  it('should validate isYoungerThanYears correctly', () => {
+    const control = new FormControl(moment().subtract(10, 'years').toISOString());
+    const validatorFn = validators.isYoungerThanYears(18);
+    const result = validatorFn(control);
+    expect(result).toBeNull();
+  });
+
+  it('should invalidate isYoungerThanYears correctly', () => {
+    const control = new FormControl(moment().subtract(30, 'years').toISOString());
+    const validatorFn = validators.isYoungerThanYears(18);
+    const result = validatorFn(control);
+    expect(result).toEqual({ youngerThanYears: true });
+  });
+
   it('should validate maxYearsBetweenDates correctly', () => {
     const control = new FormControl(moment().subtract(5, 'years').toISOString());
     const validatorFn = validators.maxYearsBetweenDates(new Date(), 10);

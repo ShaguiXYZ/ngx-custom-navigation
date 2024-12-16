@@ -44,7 +44,9 @@ describe('SettingsService', () => {
     const settings: QuoteSettingsModel = { commercialExceptions: { enableWorkFlow: true } } as QuoteSettingsModel;
     httpServiceSpy.get.and.returnValue(of(settings));
     journeyServiceSpy.fetchConfiguration.and.returnValue(
-      Promise.resolve({ configuration: { homePageId: 'page', pageMap: { page: { pageId: 'id' } } } as unknown as Configuration })
+      Promise.resolve({
+        configuration: { name: 'name', homePageId: 'page', pageMap: { page: { pageId: 'id' } }, version: {} } as unknown as Configuration
+      })
     );
     journeyServiceSpy.clientJourney.and.returnValue(Promise.resolve('journey'));
 
@@ -57,7 +59,9 @@ describe('SettingsService', () => {
     const settings: QuoteSettingsModel = { commercialExceptions: { enableWorkFlow: false } } as QuoteSettingsModel;
     httpServiceSpy.get.and.returnValue(of(settings));
     journeyServiceSpy.fetchConfiguration.and.returnValue(
-      Promise.resolve({ configuration: { homePageId: 'page', pageMap: { page: { pageId: 'id' } } } as unknown as Configuration })
+      Promise.resolve({
+        configuration: { name: 'name', homePageId: 'page', pageMap: { page: { pageId: 'id' } }, version: {} } as unknown as Configuration
+      })
     );
     journeyServiceSpy.clientJourney.and.returnValue(Promise.resolve('journey'));
 
@@ -70,7 +74,9 @@ describe('SettingsService', () => {
     const settings: QuoteSettingsModel = { commercialExceptions: { enableWorkFlow: true } } as QuoteSettingsModel;
     httpServiceSpy.get.and.returnValue(of(settings));
     journeyServiceSpy.fetchConfiguration.and.returnValue(
-      Promise.resolve({ configuration: { homePageId: 'page', pageMap: { page: { pageId: 'id' } } } as unknown as Configuration })
+      Promise.resolve({
+        configuration: { name: 'name', homePageId: 'page', pageMap: { page: { pageId: 'id' } }, version: {} } as unknown as Configuration
+      })
     );
     journeyServiceSpy.clientJourney.and.returnValue(Promise.resolve('journey'));
 

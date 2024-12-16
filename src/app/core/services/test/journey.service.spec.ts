@@ -4,7 +4,7 @@ import { TestBed } from '@angular/core/testing';
 import { ContextDataService, HttpService } from '@shagui/ng-shagui/core';
 import { of } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { Configuration, ConfigurationDTO, dataHash, Version, VersionInfo } from '../../models';
+import { Configuration, ConfigurationDTO, dataHash, Version } from '../../models';
 import { JourneyService } from '../journey.service';
 import { LiteralsService } from '../literals.service';
 
@@ -82,7 +82,7 @@ describe('JourneyService', () => {
 
     const mockConfiguration = {
       name: journeyName,
-      version: 'v1.0.0',
+      version: { actual: 'v1.0.0' },
       releaseDate: undefined,
       homePageId: 'home',
       title: 'home',
@@ -101,13 +101,16 @@ describe('JourneyService', () => {
     } as unknown as Configuration;
 
     httpService.get.and.returnValue(of(mockConfigurationDTO));
-    contextDataService.get.and.returnValue({ version: 'v1.0.0', configuration: { hash: 'oldHash' } });
+    contextDataService.get.and.returnValue({ configuration: { version: {}, hash: 'oldHash' } });
 
     const result = await service.fetchConfiguration(journeyName);
 
     console.log(JSON.stringify(result));
 
-    expect(result).toEqual({ configuration: { ...mockConfiguration, version: dtoVersion }, properties: { breakingchange: true } });
+    expect(result).toEqual({
+      configuration: { ...mockConfiguration, version: { actual: dtoVersion, last: dtoVersion } },
+      properties: { breakingchange: true }
+    });
     expect(httpService.get).toHaveBeenCalledWith(`${environment.baseUrl}/journey/test`);
   });
 

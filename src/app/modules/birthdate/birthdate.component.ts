@@ -37,6 +37,7 @@ export class BirthdateComponent extends QuoteComponent implements OnInit {
   public form!: FormGroup;
   public birthdateFromContext: Moment | undefined;
   public minValue = 18;
+  public maxValue = 70;
 
   private readonly quoteFormValidarors = inject(QuoteFormValidarors);
   private readonly fb = inject(FormBuilder);
@@ -67,7 +68,8 @@ export class BirthdateComponent extends QuoteComponent implements OnInit {
     this.form = this.fb.group({
       birthdate: new FormControl(this.birthdateFromContext, [
         this.quoteFormValidarors.required(),
-        this.quoteFormValidarors.isOlderThanYears(this.minValue)
+        this.quoteFormValidarors.isOlderThanYears(this.minValue),
+        this.quoteFormValidarors.isYoungerThanYears(this.maxValue)
       ])
     });
   }

@@ -66,7 +66,9 @@ export class JourneyService {
       properties: {
         breakingchange:
           contextConfiguration?.hash !== hash &&
-          (contextConfiguration?.version ? VersionInfo.isBreakingChange([{ value: contextConfiguration.version }], version) : true)
+          (contextConfiguration?.version.actual
+            ? VersionInfo.isBreakingChange([{ value: contextConfiguration.version.actual }], version)
+            : true)
       }
     };
   };
@@ -77,6 +79,8 @@ export class JourneyService {
     if (!configuration.homePageId) {
       quoteConfiguration.homePageId = quoteConfiguration.errorPageId;
       quoteConfiguration.title = { value: 'error-title', type: 'literal' };
+
+      return quoteConfiguration;
     }
 
     this.initSteppers(quoteConfiguration, configuration.steppers);
@@ -91,7 +95,7 @@ export class JourneyService {
     const lastVersion = VersionInfo.last(dto.version);
 
     const configuration: Configuration = {
-      version: lastVersion.value,
+      version: { actual: lastVersion.value, last: lastVersion.value },
       releaseDate: lastVersion.date ? new Date(lastVersion.date) : undefined,
       homePageId: dto.homePageId,
       title: dto.title,

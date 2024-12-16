@@ -78,7 +78,7 @@ export interface Condition {
 export interface Configuration {
   hash?: string;
   name?: string;
-  version: Version;
+  version: { actual: Version; last?: Version };
   releaseDate?: Date;
   homePageId: string;
   title?: LiteralModel;

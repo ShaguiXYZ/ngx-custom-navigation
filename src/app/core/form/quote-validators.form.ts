@@ -46,6 +46,15 @@ export class QuoteFormValidarors {
       return this.activateEntryPoint(control, 'olderThanYears', timeBetween < years);
     };
 
+  public isYoungerThanYears =
+    (years: number): ValidatorFn =>
+    (control: AbstractControl): ValidationErrors | null => {
+      const bornDate = moment(control.value);
+      const timeBetween = moment().diff(bornDate, 'years');
+
+      return this.activateEntryPoint(control, 'youngerThanYears', timeBetween > years);
+    };
+
   public maxYearsBetweenDates =
     (date: Date, maxYears: number): ValidatorFn =>
     (control: AbstractControl): ValidationErrors | null => {

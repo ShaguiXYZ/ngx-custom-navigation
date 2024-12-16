@@ -18,10 +18,10 @@ export class ColorCaptchaComponent implements OnInit, OnDestroy {
   public timeToRefresh = 15;
   public timer!: number;
 
-  private rotationDeg = 45;
-
   @Output()
   public uiVerified: EventEmitter<boolean> = new EventEmitter<boolean>();
+
+  private rotationDeg = 45;
 
   private intervalId: any;
 

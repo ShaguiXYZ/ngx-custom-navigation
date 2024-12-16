@@ -111,6 +111,18 @@ describe('AppComponent', () => {
     const mockOutlet = { isActivated: false } as RouterOutlet;
     const result = component.prepareRoute(mockOutlet);
 
-    expect(result).toBe(-1);
+    expect(result).toBe(1);
+  });
+
+  it('should set verified to true on onCaptchaVerified', () => {
+    component.onCaptchaVerified(true);
+
+    expect(component.verified).toBeTrue();
+  });
+
+  it('should set verified to false on onCaptchaVerified', () => {
+    component.onCaptchaVerified(false);
+
+    expect(component.verified).toBeFalse();
   });
 });

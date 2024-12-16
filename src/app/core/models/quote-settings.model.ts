@@ -1,3 +1,9 @@
+export interface CommercialExceptionsModel {
+  captchaVerified?: boolean;
+  enableWorkFlow: boolean;
+  enableTracking: boolean;
+}
+
 export interface QuoteSettingsModel {
   agentid: string;
   agentcode: number;
@@ -7,9 +13,5 @@ export interface QuoteSettingsModel {
   groupings: number[];
   office: number;
   partnerid: string;
-  commercialExceptions: {
-    captchaVerified?: boolean;
-    enableWorkFlow: boolean;
-    enableTracking: boolean;
-  };
+  commercialExceptions: CommercialExceptionsModel;
 }

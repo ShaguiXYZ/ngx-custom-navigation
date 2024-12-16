@@ -1,15 +1,14 @@
-import { Component, HostListener, inject, OnDestroy, OnInit } from '@angular/core';
+import { Component, HostListener, inject } from '@angular/core';
 import { RouterModule, RouterOutlet } from '@angular/router';
 import { NxGridModule } from '@aposin/ng-aquila/grid';
 import { NxLinkModule } from '@aposin/ng-aquila/link';
 import { ContextDataService, NotificationService } from '@shagui/ng-shagui/core';
-import { Subscription } from 'rxjs';
 import { QUOTE_APP_CONTEXT_DATA } from './core/constants';
 import { AppContextData } from './core/models';
 import { LiteralsService } from './core/services';
-import { CaptchaComponent } from './modules/captcha/captcha.component';
 import { routeTransitions } from './shared/animations';
 import {
+  CaptchaComponent,
   NotificationComponent,
   QuoteHeaderComponent,
   QuoteKeysComponent,
@@ -39,14 +38,12 @@ import { QuoteLiteralPipe } from './shared/pipes';
     QuoteLiteralDirective
   ]
 })
-export class AppComponent implements OnInit, OnDestroy {
+export class AppComponent {
   public verified?: boolean;
 
   private readonly contextDataService = inject(ContextDataService);
   private readonly literalService = inject(LiteralsService);
   private readonly notificationService = inject(NotificationService);
-
-  private readonly subscription$: Subscription[] = [];
 
   constructor() {
     const {
@@ -56,18 +53,6 @@ export class AppComponent implements OnInit, OnDestroy {
     } = this.contextDataService.get<AppContextData>(QUOTE_APP_CONTEXT_DATA);
 
     this.verified = captchaVerified;
-  }
-
-  ngOnInit(): void {
-    this.subscription$.push(
-      this.contextDataService.onDataChange<AppContextData>(QUOTE_APP_CONTEXT_DATA).subscribe(appContextData => {
-        this.verified = appContextData.settings.commercialExceptions?.captchaVerified;
-      })
-    );
-  }
-
-  ngOnDestroy(): void {
-    this.subscription$.forEach(subscription => subscription.unsubscribe());
   }
 
   // @howto Detect the Closing of a Browser Tab
@@ -88,7 +73,15 @@ export class AppComponent implements OnInit, OnDestroy {
     event.stopPropagation();
   }
 
-  public prepareRoute = (outlet?: RouterOutlet): number => (outlet?.isActivated ? this.slideTo() : -1);
+  public prepareRoute = (outlet?: RouterOutlet): number => (outlet?.isActivated ? this.slideTo() : 1);
+
+  public onCaptchaVerified(verified: boolean): void {
+    const appContextData = this.contextDataService.get<AppContextData>(QUOTE_APP_CONTEXT_DATA);
+    appContextData.settings.commercialExceptions = { ...appContextData.settings.commercialExceptions, captchaVerified: verified };
+    this.contextDataService.set(QUOTE_APP_CONTEXT_DATA, appContextData);
+
+    this.verified = verified;
+  }
 
   private slideTo(): number {
     const {

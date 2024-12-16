@@ -13,6 +13,7 @@ export type QuoteFormValidations =
   | 'olderThanYears'
   | 'pastDate'
   | 'required'
-  | 'requiredTrue';
+  | 'requiredTrue'
+  | 'youngerThanYears';
 
 export type FormValidations = { [controlName: string]: ValidationErrors };

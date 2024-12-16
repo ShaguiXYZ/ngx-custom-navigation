@@ -65,7 +65,7 @@ export class DrivingLicenseDateComponent extends QuoteComponent implements OnIni
       this.drivingLicenseDateFromContext = moment(new Date(this._contextData.driven.licenseDate));
     }
 
-    const birthdate = moment(this._contextData.personalData.birthdate).toDate();
+    const birthdate = moment(this._contextData.personalData.birthdate, moment.ISO_8601).toDate();
 
     this.form = this.fb.group({
       licenseDate: new FormControl(this.drivingLicenseDateFromContext, [
