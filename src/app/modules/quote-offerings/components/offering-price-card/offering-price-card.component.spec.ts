@@ -5,6 +5,7 @@ import { OfferingPriceModel } from 'src/app/core/models';
 import { ContextDataServiceStub } from 'src/app/core/stub';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 import { QuoteOfferingPriceCardComponent } from './offering-price-card.component';
+import { NX_RECAPTCHA_TOKEN } from 'src/app/core/services';
 
 describe('QuoteOfferingPriceCardComponent', () => {
   let component: QuoteOfferingPriceCardComponent;
@@ -19,7 +20,8 @@ describe('QuoteOfferingPriceCardComponent', () => {
       providers: [
         { provide: ContextDataService, useClass: ContextDataServiceStub },
         { provide: TranslateService, useValue: translateServiceSpy },
-        { provide: QuoteLiteralPipe, useValue: quoteLiteralPipeSpy }
+        { provide: QuoteLiteralPipe, useValue: quoteLiteralPipeSpy },
+        { provide: NX_RECAPTCHA_TOKEN, useValue: { siteKey: 'mock-site-key' } }
       ]
     }).compileComponents();
   });

@@ -21,11 +21,11 @@
         </nx-error>
         } @if(form.get('birthdate')?.errors?.['olderThanYears']) {
         <nx-error appearance="text" nxFormfieldError>
-          <span nxQuoteLiteral="error-client-old" [nxQuoteLitealParams]="{ value: minValue }"></span>
+          <span nxQuoteLiteral="error-old-date" [nxQuoteLitealParams]="{ value: minValue }"></span>
         </nx-error>
         } @if(form.get('birthdate')?.errors?.['youngerThanYears']) {
         <nx-error appearance="text" nxFormfieldError>
-          <span nxQuoteLiteral="error-client-younger" [nxQuoteLitealParams]="{ value: maxValue }"></span>
+          <span nxQuoteLiteral="error-younger-date" [nxQuoteLitealParams]="{ value: maxValue }"></span>
         </nx-error>
         }
       </nx-formfield>

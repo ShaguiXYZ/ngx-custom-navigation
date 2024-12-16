@@ -20,10 +20,10 @@ import { QuoteZoneComponent } from '../../shared/components/quote-zone/quote-zon
     NxFormfieldModule,
     NxInputModule,
     QuoteFooterComponent,
+    QuoteZoneComponent,
     ReactiveFormsModule,
     QuoteLiteralDirective,
-    QuoteLiteralPipe,
-    QuoteZoneComponent
+    QuoteLiteralPipe
   ],
   providers: [{ provide: NX_DATE_LOCALE, useValue: 'es-ES' }, QuoteFormValidarors, TitleCasePipe],
   standalone: true
@@ -55,7 +55,7 @@ export class ClientNameComponent extends QuoteComponent implements OnInit {
   private createForm() {
     this.form = this.fb.group({
       name: new FormControl(this._contextData.personalData.name, [this.quoteFormValidarors.required()]),
-      surname: new FormControl(this._contextData.personalData.surname, [this.quoteFormValidarors.required()])
+      surname: new FormControl(this._contextData.personalData.surname, [this.quoteFormValidarors.required(3)])
     });
 
     let subscription = this.form.get('name')?.valueChanges.subscribe(value => {

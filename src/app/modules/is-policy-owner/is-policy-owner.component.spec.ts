@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { TranslateService } from '@ngx-translate/core';
 import { ContextDataService } from '@shagui/ng-shagui/core';
 import { QuoteModel } from 'src/app/core/models';
-import { RoutingService } from 'src/app/core/services';
+import { NX_RECAPTCHA_TOKEN, RoutingService } from 'src/app/core/services';
 import { ContextDataServiceStub } from 'src/app/core/stub';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 import { IsPolicyOwnerComponent } from './is-policy-owner.component';
@@ -25,7 +25,8 @@ describe('IsPolicyOwnerComponent', () => {
         { provide: RoutingService, useValue: routingServiceSpy },
         { provide: ContextDataService, useClass: ContextDataServiceStub },
         { provide: TranslateService, useValue: translateServiceSpy },
-        { provide: QuoteLiteralPipe, useValue: quoteLiteralPipeSpy }
+        { provide: QuoteLiteralPipe, useValue: quoteLiteralPipeSpy },
+        { provide: NX_RECAPTCHA_TOKEN, useValue: { siteKey: 'mock-site-key' } }
       ]
     }).compileComponents();
   });

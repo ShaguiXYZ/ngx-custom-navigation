@@ -82,14 +82,24 @@ export class QuoteFormValidarors {
   };
 
   public required =
-    (): ValidatorFn =>
+    (length: number = 0): ValidatorFn =>
     (control: AbstractControl): ValidationErrors | null =>
-      this.activateEntryPoint(control, 'required', !control.value);
+      this.activateEntryPoint(control, 'required', !control.value || `${control.value}`.trim().length < length);
 
   public informed =
     (): ValidatorFn =>
     (control: AbstractControl): ValidationErrors | null =>
       this.activateEntryPoint(control, 'required', !hasValue(control.value));
+
+  public maxLenght = (maxLength: number): ValidatorFn => {
+    return (control: AbstractControl): ValidationErrors | null =>
+      this.activateEntryPoint(control, 'maxLenght', `${control.value}`.trim().length > maxLength);
+  };
+
+  public minLenght = (minLength: number): ValidatorFn => {
+    return (control: AbstractControl): ValidationErrors | null =>
+      this.activateEntryPoint(control, 'minLenght', `${control.value}`.trim().length < minLength);
+  };
 
   public requiredTrue =
     (): ValidatorFn =>

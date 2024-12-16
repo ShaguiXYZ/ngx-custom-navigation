@@ -9,6 +9,7 @@ import { TrackInfo } from '../quote-track.model';
 import { QuoteTrackService } from '../quote-track.service';
 import { _window } from '../window-tracker.model';
 import { TranslateService } from '@ngx-translate/core';
+import { NX_RECAPTCHA_TOKEN } from '../../services';
 
 describe('QuoteTrackService', () => {
   let service: QuoteTrackService;
@@ -49,7 +50,8 @@ describe('QuoteTrackService', () => {
         { provide: Router, useValue: routerSpy },
         { provide: ContextDataService, useValue: contextDataServiceSpy },
         { provide: TranslateService, useValue: translateServiceSpy },
-        { provide: Subscription, useValue: subscriptionSpy }
+        { provide: Subscription, useValue: subscriptionSpy },
+        { provide: NX_RECAPTCHA_TOKEN, useValue: { siteKey: 'mock-site-key' } }
       ]
     });
 

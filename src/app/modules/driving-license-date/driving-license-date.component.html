@@ -23,6 +23,10 @@
         <nx-error appearance="text" nxFormfieldError
           ><span nxQuoteLiteral="error-min-years-between" [nxQuoteLitealParams]="{ value: minYears }"></span>
         </nx-error>
+        }@if(form.get('licenseDate')?.errors?.['olderThanYears']) {
+        <nx-error appearance="text" nxFormfieldError>
+          <span nxQuoteLiteral="error-old-date" [nxQuoteLitealParams]="{ value: minDrivingYears }"></span>
+        </nx-error>
         }
       </nx-formfield>
     </form>

@@ -4,7 +4,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { ContextDataService } from '@shagui/ng-shagui/core';
 import { of } from 'rxjs';
 import { QuoteFooterConfig } from 'src/app/core/models';
-import { RoutingService } from 'src/app/core/services';
+import { NX_RECAPTCHA_TOKEN, RoutingService } from 'src/app/core/services';
 import { ContextDataServiceStub } from 'src/app/core/stub';
 import { QuoteLiteralPipe } from '../../pipes';
 import { QuoteFooterComponent } from './quote-footer.component';
@@ -29,7 +29,8 @@ describe('QuoteFooterComponent', () => {
         { provide: ContextDataService, useClass: ContextDataServiceStub },
         { provide: TranslateService, useValue: translateServiceSpy },
         { provide: RoutingService, useValue: routingServiceSpy },
-        { provide: QuoteLiteralPipe, useValue: quoteLiteralPipeSpy }
+        { provide: QuoteLiteralPipe, useValue: quoteLiteralPipeSpy },
+        { provide: NX_RECAPTCHA_TOKEN, useValue: { siteKey: 'mock-site-key' } }
       ]
     }).compileComponents();
   });

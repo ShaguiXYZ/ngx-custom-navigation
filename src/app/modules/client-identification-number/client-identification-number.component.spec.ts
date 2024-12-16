@@ -8,6 +8,7 @@ import { NxInputModule } from '@aposin/ng-aquila/input';
 import { TranslateService } from '@ngx-translate/core';
 import { ContextDataService } from '@shagui/ng-shagui/core';
 import { QuoteModel } from 'src/app/core/models';
+import { NX_RECAPTCHA_TOKEN } from 'src/app/core/services';
 import { ContextDataServiceStub } from 'src/app/core/stub';
 import { HeaderTitleComponent, QuoteFooterComponent, QuoteFooterInfoComponent } from 'src/app/shared/components';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
@@ -40,7 +41,8 @@ describe('ClientIdentificationNumberComponent', () => {
         { provide: NX_DATE_LOCALE, useValue: 'es-ES' },
         { provide: ContextDataService, useClass: ContextDataServiceStub },
         { provide: TranslateService, useValue: translateServiceSpy },
-        { provide: QuoteLiteralPipe, useValue: quoteLiteralPipeSpy }
+        { provide: QuoteLiteralPipe, useValue: quoteLiteralPipeSpy },
+        { provide: NX_RECAPTCHA_TOKEN, useValue: { siteKey: 'mock-site-key' } }
       ]
     }).compileComponents();
   });

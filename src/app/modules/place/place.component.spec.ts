@@ -6,7 +6,7 @@ import { Subject } from 'rxjs';
 import { QUOTE_APP_CONTEXT_DATA, QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
 import { QuoteFormValidarors } from 'src/app/core/form';
 import { AppContextData, QuoteModel } from 'src/app/core/models';
-import { LocationService } from 'src/app/core/services';
+import { LocationService, NX_RECAPTCHA_TOKEN } from 'src/app/core/services';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 import { PlaceComponent } from './place.component';
 
@@ -45,7 +45,8 @@ describe('PlaceComponent', () => {
         { provide: ContextDataService, useValue: contextDataServiceSpy },
         { provide: TranslateService, useValue: translateServiceSpy },
         { provide: LocationService, useValue: locationServiceSpy },
-        { provide: QuoteLiteralPipe, useValue: quoteLiteralPipeSpy }
+        { provide: QuoteLiteralPipe, useValue: quoteLiteralPipeSpy },
+        { provide: NX_RECAPTCHA_TOKEN, useValue: { siteKey: 'mock-site-key' } }
       ]
     }).compileComponents();
 

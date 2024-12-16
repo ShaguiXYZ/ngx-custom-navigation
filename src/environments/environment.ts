@@ -8,5 +8,8 @@ export const environment = {
   appName: 'ngx-custom-navigation',
   baseUrl: './assets/json/mock', // url bff mock server
   domain: 'localhost:3000', // domain localhost
+  recaptcha: {
+    siteKey: ''
+  },
   scripts: []
 };

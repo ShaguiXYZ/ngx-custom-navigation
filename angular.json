@@ -44,6 +44,24 @@
             "allowedCommonJsDependencies": ["crypto-js", "iban", "moment"]
           },
           "configurations": {
+            "local": {
+              "optimization": false,
+              "outputHashing": "none",
+              "sourceMap": true,
+              "namedChunks": true,
+              "extractLicenses": false,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.local.ts"
+                }
+              ]
+            },
+            "development": {
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true
+            },
             "production": {
               "budgets": [
                 {
@@ -58,11 +76,6 @@
                 }
               ],
               "outputHashing": "all"
-            },
-            "development": {
-              "optimization": false,
-              "extractLicenses": false,
-              "sourceMap": true
             }
           },
           "defaultConfiguration": "production"
@@ -70,11 +83,14 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
-            "production": {
-              "buildTarget": "ngx-custom-navigation:build:production"
+            "local": {
+              "buildTarget": "ngx-custom-navigation:build:local"
             },
             "development": {
               "buildTarget": "ngx-custom-navigation:build:development"
+            },
+            "production": {
+              "buildTarget": "ngx-custom-navigation:build:production"
             }
           },
           "defaultConfiguration": "development"

@@ -3,7 +3,7 @@ import { ActivatedRoute, ActivatedRouteSnapshot, Router } from '@angular/router'
 import { ContextDataService } from '@shagui/ng-shagui/core';
 import { AppContextData } from 'src/app/core/models';
 import { BudgetActivator } from 'src/app/core/service-activators/budget.activator';
-import { RoutingService } from 'src/app/core/services';
+import { NX_RECAPTCHA_TOKEN, RoutingService } from 'src/app/core/services';
 import { QuoteDispatcherComponent } from './quote-dispatcher.component';
 import { TranslateService } from '@ngx-translate/core';
 
@@ -49,7 +49,8 @@ describe('QuoteDispatcherComponent', () => {
         { provide: ActivatedRoute, useValue: mockActivatedRoute },
         { provide: ContextDataService, useValue: mockContextDataService },
         { provide: RoutingService, useValue: mockRoutingService },
-        { provide: TranslateService, useValue: translateServiceSpy }
+        { provide: TranslateService, useValue: translateServiceSpy },
+        { provide: NX_RECAPTCHA_TOKEN, useValue: { siteKey: 'mock-site-key' } }
       ]
     }).compileComponents();
   });

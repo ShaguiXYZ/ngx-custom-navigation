@@ -3,13 +3,14 @@ import { CommonModule } from '@angular/common';
 import { Component, ElementRef, inject, OnInit, ViewChild } from '@angular/core';
 import { NxDialogService, NxModalModule, NxModalRef } from '@aposin/ng-aquila/modal';
 import { Subscription } from 'rxjs';
-import { OfferingPriceModel, QuoteComponent } from 'src/app/core/models';
+import { OfferingPriceModel, QuoteComponent, QuoteModel } from 'src/app/core/models';
 import { RoutingService } from 'src/app/core/services';
 import { OfferingsService } from 'src/app/core/services/offerings.service';
 import { HeaderTitleComponent, QuoteOfferingCoveragesComponent } from 'src/app/shared/components';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
 import { QuoteOfferingPriceCardComponent } from './components';
 import { QuoteError } from 'src/app/core/errors';
+import { QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
 
 @Component({
   selector: 'quote-quote-offerings',
@@ -43,6 +44,12 @@ export class QuoteOfferingsComponent extends QuoteComponent implements OnInit {
       .then(offering => (this.prices = offering.prices))
       .catch(() => {
         throw new QuoteError('Error fetching offering prices');
+      })
+      .finally(() => {
+        console.group('Offering prices fetched');
+        console.log('Context data', this._contextData);
+        console.log('Offering prices fetched', this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA));
+        console.groupEnd();
       });
 
     // this.resizeObserver = new ResizeObserver(entries => {

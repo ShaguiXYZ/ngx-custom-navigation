@@ -15,6 +15,7 @@ import { HeaderTitleComponent, QuoteFooterComponent } from 'src/app/shared/compo
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 import { DateOfIssueComponent } from './date-of-issue.component';
+import { NX_RECAPTCHA_TOKEN } from 'src/app/core/services';
 
 describe('DateOfIssueComponent', () => {
   let component: DateOfIssueComponent;
@@ -42,7 +43,8 @@ describe('DateOfIssueComponent', () => {
         { provide: NX_DATE_LOCALE, useValue: 'es-ES' },
         { provide: ContextDataService, useClass: ContextDataServiceStub },
         { provide: TranslateService, useValue: translateServiceSpy },
-        { provide: QuoteLiteralPipe, useValue: quoteLiteralPipeSpy }
+        { provide: QuoteLiteralPipe, useValue: quoteLiteralPipeSpy },
+        { provide: NX_RECAPTCHA_TOKEN, useValue: { siteKey: 'mock-site-key' } }
       ]
     }).compileComponents();
 

@@ -3,7 +3,7 @@ import { NxDialogService } from '@aposin/ng-aquila/modal';
 import { TranslateService } from '@ngx-translate/core';
 import { ContextDataService } from '@shagui/ng-shagui/core';
 import { QuoteModel } from 'src/app/core/models';
-import { RoutingService } from 'src/app/core/services';
+import { NX_RECAPTCHA_TOKEN, RoutingService } from 'src/app/core/services';
 import { ContextDataServiceStub } from 'src/app/core/stub';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 import { DrivingLicenseLocationComponent } from './driving-license-location.component';
@@ -28,7 +28,8 @@ describe('DrivingLicenseLocationComponent', () => {
         { provide: TranslateService, useValue: translateServiceSpy },
         { provide: RoutingService, useValue: routingServiceSpy },
         { provide: NxDialogService, useValue: dialogServiceSpy },
-        { provide: QuoteLiteralPipe, useValue: quoteLiteralPipeSpy }
+        { provide: QuoteLiteralPipe, useValue: quoteLiteralPipeSpy },
+        { provide: NX_RECAPTCHA_TOKEN, useValue: { siteKey: 'mock-site-key' } }
       ]
     }).compileComponents();
   });

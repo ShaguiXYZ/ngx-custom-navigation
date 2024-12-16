@@ -11,6 +11,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 import { ContextDataServiceStub } from 'src/app/core/stub';
 import { ContextDataService } from '@shagui/ng-shagui/core';
+import { NX_RECAPTCHA_TOKEN } from 'src/app/core/services';
 
 const mockWindow = {
   location: {
@@ -40,7 +41,8 @@ describe('ConfirmationComponent', () => {
       providers: [
         { provide: ContextDataService, useClass: ContextDataServiceStub },
         { provide: TranslateService, useValue: translateServiceSpy },
-        { provide: QuoteLiteralPipe, useValue: quoteLiteralPipeSpy }
+        { provide: QuoteLiteralPipe, useValue: quoteLiteralPipeSpy },
+        { provide: NX_RECAPTCHA_TOKEN, useValue: { siteKey: 'mock-site-key' } }
       ]
     }).compileComponents();
   });

@@ -17,6 +17,7 @@ import {
   QuoteStepperComponent
 } from './shared/components';
 import { QuoteLiteralPipe } from './shared/pipes';
+import { NX_RECAPTCHA_TOKEN, RecaptchaConfig } from './core/services';
 
 describe('AppComponent', () => {
   let component: AppComponent;
@@ -45,6 +46,7 @@ describe('AppComponent', () => {
         { provide: ContextDataService, useClass: ContextDataServiceStub },
         { provide: NotificationService, useValue: notificationServiceSpy },
         { provide: TranslateService, useValue: translateServiceSpy },
+        { provide: NX_RECAPTCHA_TOKEN, useValue: { siteKey: 'mock-site-key' } },
         QuoteLiteralPipe
       ]
     }).compileComponents();

@@ -17,8 +17,9 @@ import { routes } from './app.routes';
 import { APP_NAME, SCHEDULER_PERIOD } from './core/constants';
 import { GlobalErrorHandler } from './core/errors';
 import { httpErrorInterceptor, mockInterceptor } from './core/interceptors';
-import { LiteralsService, SettingsService } from './core/services';
+import { LiteralsService, NX_RECAPTCHA_TOKEN, SettingsService } from './core/services';
 import { TRANSLATE_MODULE_CONFIG, urls } from './shared/config';
+import { environment } from 'src/environments/environment';
 
 @Injectable()
 class DatePikerIntl extends NxDatepickerIntl {
@@ -54,6 +55,7 @@ export const appConfig: ApplicationConfig = {
     {
       provide: NX_CONTEX_CONFIG,
       useValue: { appName: APP_NAME.toUpperCase(), urls, cache: { schedulerPeriod: SCHEDULER_PERIOD } }
-    }
+    },
+    { provide: NX_RECAPTCHA_TOKEN, useValue: { siteKey: environment.recaptcha.siteKey } }
   ]
 };

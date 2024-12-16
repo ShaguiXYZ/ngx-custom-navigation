@@ -36,6 +36,7 @@ export class DrivingLicenseDateComponent extends QuoteComponent implements OnIni
   public form!: FormGroup;
   public maxDate = moment();
   public minYears = 18;
+  public minDrivingYears = 1;
 
   private drivingLicenseDateFromContext?: Moment;
 
@@ -71,7 +72,8 @@ export class DrivingLicenseDateComponent extends QuoteComponent implements OnIni
       licenseDate: new FormControl(this.drivingLicenseDateFromContext, [
         this.quoteFormValidarors.required(),
         this.quoteFormValidarors.isFutureDate(),
-        this.quoteFormValidarors.minYearsBetweenDates(birthdate, this.minYears)
+        this.quoteFormValidarors.minYearsBetweenDates(birthdate, this.minYears),
+        this.quoteFormValidarors.isOlderThanYears(this.minDrivingYears)
       ])
     });
   }

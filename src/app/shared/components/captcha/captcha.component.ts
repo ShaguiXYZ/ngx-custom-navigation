@@ -1,4 +1,5 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, inject, Output } from '@angular/core';
+import { CaptchaService } from 'src/app/core/services';
 import { QuoteLiteralDirective } from '../../directives';
 import { ColorCaptchaComponent } from '../color-captcha';
 import { HeaderTitleComponent } from '../header-title';
@@ -14,7 +15,12 @@ export class CaptchaComponent {
   @Output()
   public uiVerified: EventEmitter<boolean> = new EventEmitter<boolean>();
 
+  private readonly captchaService = inject(CaptchaService);
+
   public onUiVerified(verified: boolean): void {
-    this.uiVerified.emit(verified);
+    verified &&
+      this.captchaService.execute('submit').then(() => {
+        this.uiVerified.emit(verified);
+      });
   }
 }

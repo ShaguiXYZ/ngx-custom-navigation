@@ -10,7 +10,7 @@ import { NxInputModule } from '@aposin/ng-aquila/input';
 import { TranslateService } from '@ngx-translate/core';
 import { ContextDataService } from '@shagui/ng-shagui/core';
 import { CubicCapacityModel, FuelModel, FuelTypes, QuoteModel, VehicleClassesModel } from 'src/app/core/models';
-import { RoutingService, VehicleService } from 'src/app/core/services';
+import { NX_RECAPTCHA_TOKEN, RoutingService, VehicleService } from 'src/app/core/services';
 import { ContextDataServiceStub } from 'src/app/core/stub';
 import { HeaderTitleComponent, SelectableOptionComponent } from 'src/app/shared/components';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
@@ -51,7 +51,8 @@ describe('VehicleFuelComponent', () => {
         { provide: RoutingService, useValue: routingServiceSpy },
         { provide: VehicleService, useValue: vehicleServiceSpy },
         { provide: TranslateService, useValue: translateServiceSpy },
-        { provide: QuoteLiteralPipe, useValue: quoteLiteralPipeSpy }
+        { provide: QuoteLiteralPipe, useValue: quoteLiteralPipeSpy },
+        { provide: NX_RECAPTCHA_TOKEN, useValue: { siteKey: 'mock-site-key' } }
       ]
     }).compileComponents();
 

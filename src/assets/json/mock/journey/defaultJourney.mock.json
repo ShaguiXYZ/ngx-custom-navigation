@@ -174,8 +174,8 @@
           "header": "¿Cuándo naciste?",
           "birth-date": "Fecha de nacimiento",
           "error-required": "La fecha de nacimiento es obligatoria para continuar",
-          "error-client-old": "El cliente a de ser mayor de {{value}} años",
-          "error-client-younger": "El cliente a de ser menor de {{value}} años"
+          "error-old-date": "El cliente a debe ser mayor de {{value}} años",
+          "error-younger-date": "El cliente a de ser menor de {{value}} años"
         },
         "data": {
           "minValue": 25
@@ -193,8 +193,10 @@
         "literals": {
           "header": "¿Cuándo sacaste el carnet de conducir?",
           "issue-date": "Fecha de emisión",
-          "error-min-years-between": "El carnet de conducir debe tener al menos {{value}} años"
-        }
+          "error-min-years-between": "El carnet de conducir debe tener al menos {{value}} años",
+          "error-old-date": "El cliente debe tener al menos {{value}} años de experiencia en la conducción"
+        },
+        "data": { "minDrivingYears": 5 }
       }
     },
     {

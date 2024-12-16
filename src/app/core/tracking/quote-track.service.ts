@@ -1,13 +1,13 @@
 import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout';
 import { inject, Injectable, OnDestroy } from '@angular/core';
-import { ContextDataService, deepCopy, hasValue, JsonUtils, UniqueIds } from '@shagui/ng-shagui/core';
+import { ContextDataService, hasValue, JsonUtils, UniqueIds } from '@shagui/ng-shagui/core';
 import { Subscription } from 'rxjs';
 import { QUOTE_APP_CONTEXT_DATA, QUOTE_CONTEXT_DATA } from '../constants';
 import { TrackError } from '../errors';
 import { AppContextData, Page, QuoteModel } from '../models';
+import { CaptchaService, LiteralsService } from '../services';
 import { TrackEventType, TrackInfo, TrackInfoPageModel, TRACKING_QUOTE_MANIFEST } from './quote-track.model';
 import { _window } from './window-tracker.model';
-import { LiteralsService } from '../services';
 
 @Injectable({ providedIn: 'root' })
 export class QuoteTrackService implements OnDestroy {
@@ -17,6 +17,7 @@ export class QuoteTrackService implements OnDestroy {
   private referrer?: string;
 
   private readonly subscription$: Subscription[] = [];
+  private readonly captchaService = inject(CaptchaService);
   private readonly breakpointObserver = inject(BreakpointObserver);
   private readonly contextDataService = inject(ContextDataService);
   private readonly literalService = inject(LiteralsService);
@@ -125,6 +126,10 @@ export class QuoteTrackService implements OnDestroy {
     if (!_window._satellite) {
       throw new TrackError('Adobe Launch not found', eventType, trackInfo);
     }
+
+    await this.captchaService.execute('track').then((token: string) => {
+      _window.digitalData = { ..._window.digitalData, token };
+    });
 
     await _window._satellite.track(eventType, trackInfo);
   };
