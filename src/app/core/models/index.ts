@@ -12,7 +12,7 @@ export * from './page-form.model';
 export * from './pricing.model';
 export * from './quote-black-list.model';
 export * from './quote-client.model';
-export * from './quote-component.model';
+export * from '../../library/_quote-component/quote-component.model';
 export * from './quote-contact-data.model';
 export * from './quote-control.model';
 export * from './quote-driven.model';

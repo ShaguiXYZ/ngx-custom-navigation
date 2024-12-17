@@ -19,18 +19,17 @@ export class CaptchaComponent {
 
   private readonly captchaService = inject(CaptchaService);
 
-  public onUiVerified(verified: boolean): void {
-    verified &&
-      this.captchaService
-        .execute(CAPTCHA_SUBMIT_KEY)
-        .then(token => {
-          sessionStorage.setItem(CAPTCHA_TOKEN_KEY, token);
-
-          this.uiVerified.emit(verified);
-        })
-        .catch(error => {
-          console.error('Error executing captcha', error);
-          this.uiVerified.emit(false);
-        });
-  }
+  public onUiVerified = async (isVerified: boolean): Promise<void> => {
+    if (isVerified) {
+      try {
+        await this.captchaService.execute(CAPTCHA_SUBMIT_KEY);
+        this.uiVerified.emit(true);
+      } catch (error) {
+        console.error('Error executing captcha', error);
+        this.uiVerified.emit(false);
+      }
+    } else {
+      this.uiVerified.emit(false);
+    }
+  };
 }
