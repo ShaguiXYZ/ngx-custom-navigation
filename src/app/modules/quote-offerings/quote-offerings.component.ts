@@ -121,7 +121,7 @@ export class QuoteOfferingsComponent extends QuoteComponent implements OnInit {
 
     return this.dialogService.open(component, {
       maxWidth: '98%',
-      showCloseIcon: false,
+      showCloseIcon: true,
       data: {
         selectedPriceIndex
       }

@@ -50,17 +50,6 @@ export type TrackKey =
   | keyof typeof TRACKING_QUOTE_MANIFEST;
 export type TrackInfo = Partial<Record<TrackKey, string | number | boolean | null | undefined>>;
 
-export const quoteTrackInfo = {
-  category: 'car quote',
-  action: 'onboarding',
-  label: 'onboarding',
-  title: 'Onboarding',
-  client: 'Allianz',
-  location: 'Spain',
-  new: 'new',
-  brand: 'brand'
-};
-
 export interface TrackInfoPageModel {
   page: string;
   URL: string;

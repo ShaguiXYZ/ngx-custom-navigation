@@ -69,7 +69,7 @@ export interface ReceiptDTO {
 }
 
 export interface OperationDataDTO {
-  allianzOperationId: string;
+  operationId: string;
   policyDates: PolicyDatesDTO;
   quotationId: number;
   policyDTO: unknown;

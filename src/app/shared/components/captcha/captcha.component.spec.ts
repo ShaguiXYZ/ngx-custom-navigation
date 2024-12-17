@@ -4,6 +4,7 @@ import { ColorCaptchaComponent, HeaderTitleComponent } from 'src/app/shared/comp
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
 import { CaptchaComponent } from './captcha.component';
 import { CaptchaService } from 'src/app/core/services';
+import { CAPTCHA_SUBMIT_KEY } from './constants';
 
 describe('CaptchaComponent', () => {
   let component: CaptchaComponent;
@@ -38,7 +39,7 @@ describe('CaptchaComponent', () => {
 
     await component.onUiVerified(true);
 
-    expect(captchaServiceSpy.execute).toHaveBeenCalledWith('submit');
+    expect(captchaServiceSpy.execute).toHaveBeenCalledWith(CAPTCHA_SUBMIT_KEY);
     expect(component.uiVerified.emit).toHaveBeenCalledWith(true);
   });
 

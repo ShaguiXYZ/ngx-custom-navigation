@@ -18,7 +18,7 @@ export interface Authentication {
 export interface OperationHeaders {
   operationTypeCode?: string;
   productCode?: number;
-  operationAllianzId?: number;
+  operationId?: number;
   operative?: number;
   profile?: string;
 }
@@ -123,7 +123,7 @@ export interface PricingDTO {
 export namespace PricingDTO {
   export const fromModel = (model: QuoteModel, settings: QuoteSettingsModel): PricingDTO => ({
     authentication: { ...settings },
-    operationHeaders: { operationTypeCode: '', productCode: 0, operationAllianzId: 0, operative: 0, profile: '' },
+    operationHeaders: { operationTypeCode: '', productCode: 0, operationId: 0, operative: 0, profile: '' },
     operationDataT1: {
       generalData: {
         policyDates: {

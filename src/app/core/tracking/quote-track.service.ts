@@ -127,10 +127,14 @@ export class QuoteTrackService implements OnDestroy {
       throw new TrackError('Adobe Launch not found', eventType, trackInfo);
     }
 
-    await this.captchaService.execute('track').then((token: string) => {
-      _window.digitalData = { ..._window.digitalData, token };
-    });
-
-    await _window._satellite.track(eventType, trackInfo);
+    await this.captchaService
+      .execute(eventType)
+      .then(async (token: string) => {
+        _window.digitalData = { ..._window.digitalData, token };
+        await _window._satellite.track(eventType, trackInfo);
+      })
+      .catch((error: Error) => {
+        throw new TrackError(error.message, eventType, trackInfo);
+      });
   };
 }

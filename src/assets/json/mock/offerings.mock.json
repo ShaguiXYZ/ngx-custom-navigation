@@ -1,6 +1,6 @@
 {
   "operationData": {
-    "allianzOperationId": "22749128",
+    "operationId": "22749128",
     "policyDates": {
       "policyEffectiveDate": "20241108",
       "policyExpirationDate": "20251108"
@@ -42,7 +42,7 @@
           {
             "code": 10014,
             "texto": "Reclamación de daños, asistencia jurídica y adelanto de Indemnización.",
-            "description": "¿Qué se garantiza? Reclamación de daños frente a un tercero. Adicionalmente, adelanto de los daños sufridos por tu vehículo asegurado cuando se acredite la responsabilidad de otro vehículo identificado. ¿Y esta prestación que incluye? Asistencia jurídica en nombre del asegurado con los profesionales designados por Allianz.",
+            "description": "¿Qué se garantiza? Reclamación de daños frente a un tercero. Adicionalmente, adelanto de los daños sufridos por tu vehículo asegurado cuando se acredite la responsabilidad de otro vehículo identificado. ¿Y esta prestación que incluye? Asistencia jurídica en nombre del asegurado con los profesionales designados por Sahgui.",
             "isContracted": "S",
             "value": "5",
             "subcoverages": null
@@ -50,7 +50,7 @@
           {
             "code": 10120,
             "texto": "Siempre en marcha",
-            "description": "¿Y esta prestación que incluye? Puesta a disposición del asegurado de un conjunto de servicios destinados a garantizar su movilidad en caso de accidente o avería ocurrido en España, y una amplia gama de servicios siempre que el vehículo sea trasladado para su reparación a un taller de la ＂Red Allianz Excelentes＂.",
+            "description": "¿Y esta prestación que incluye? Puesta a disposición del asegurado de un conjunto de servicios destinados a garantizar su movilidad en caso de accidente o avería ocurrido en España, y una amplia gama de servicios siempre que el vehículo sea trasladado para su reparación a un taller de la ＂Red Sahgui Excelentes＂.",
             "isContracted": "S",
             "value": "6",
             "subcoverages": null
@@ -110,7 +110,7 @@
           {
             "code": 10014,
             "texto": "Reclamación de daños, asistencia jurídica y adelanto de Indemnización.",
-            "description": "¿Qué se garantiza? Reclamación de daños frente a un tercero. Adicionalmente, adelanto de los daños sufridos por tu vehículo asegurado cuando se acredite la responsabilidad de otro vehículo identificado. ¿Y esta prestación que incluye? Asistencia jurídica en nombre del asegurado con los profesionales designados por Allianz.",
+            "description": "¿Qué se garantiza? Reclamación de daños frente a un tercero. Adicionalmente, adelanto de los daños sufridos por tu vehículo asegurado cuando se acredite la responsabilidad de otro vehículo identificado. ¿Y esta prestación que incluye? Asistencia jurídica en nombre del asegurado con los profesionales designados por Sahgui.",
             "isContracted": "S",
             "value": "5",
             "subcoverages": null
@@ -118,7 +118,7 @@
           {
             "code": 10120,
             "texto": "Siempre en marcha",
-            "description": "¿Y esta prestación que incluye? Puesta a disposición del asegurado de un conjunto de servicios destinados a garantizar su movilidad en caso de accidente o avería ocurrido en España, y una amplia gama de servicios siempre que el vehículo sea trasladado para su reparación a un taller de la ＂Red Allianz Excelentes＂.",
+            "description": "¿Y esta prestación que incluye? Puesta a disposición del asegurado de un conjunto de servicios destinados a garantizar su movilidad en caso de accidente o avería ocurrido en España, y una amplia gama de servicios siempre que el vehículo sea trasladado para su reparación a un taller de la ＂Red Sahgui Excelentes＂.",
             "isContracted": "S",
             "value": "6",
             "subcoverages": null
@@ -202,7 +202,7 @@
           {
             "code": 10014,
             "texto": "Reclamación de daños, asistencia jurídica y adelanto de Indemnización.",
-            "description": "¿Qué se garantiza? Reclamación de daños frente a un tercero. Adicionalmente, adelanto de los daños sufridos por tu vehículo asegurado cuando se acredite la responsabilidad de otro vehículo identificado. ¿Y esta prestación que incluye? Asistencia jurídica en nombre del asegurado con los profesionales designados por Allianz.",
+            "description": "¿Qué se garantiza? Reclamación de daños frente a un tercero. Adicionalmente, adelanto de los daños sufridos por tu vehículo asegurado cuando se acredite la responsabilidad de otro vehículo identificado. ¿Y esta prestación que incluye? Asistencia jurídica en nombre del asegurado con los profesionales designados por Sahgui.",
             "isContracted": "S",
             "value": "5",
             "subcoverages": null
@@ -210,7 +210,7 @@
           {
             "code": 10120,
             "texto": "Siempre en marcha",
-            "description": "¿Y esta prestación que incluye? Puesta a disposición del asegurado de un conjunto de servicios destinados a garantizar su movilidad en caso de accidente o avería ocurrido en España, y una amplia gama de servicios siempre que el vehículo sea trasladado para su reparación a un taller de la ＂Red Allianz Excelentes＂.",
+            "description": "¿Y esta prestación que incluye? Puesta a disposición del asegurado de un conjunto de servicios destinados a garantizar su movilidad en caso de accidente o avería ocurrido en España, y una amplia gama de servicios siempre que el vehículo sea trasladado para su reparación a un taller de la ＂Red Sahgui Excelentes＂.",
             "isContracted": "S",
             "value": "6",
             "subcoverages": null
@@ -294,7 +294,7 @@
           {
             "code": 10014,
             "texto": "Reclamación de daños, asistencia jurídica y adelanto de Indemnización.",
-            "description": "¿Qué se garantiza? Reclamación de daños frente a un tercero. Adicionalmente, adelanto de los daños sufridos por tu vehículo asegurado cuando se acredite la responsabilidad de otro vehículo identificado. ¿Y esta prestación que incluye? Asistencia jurídica en nombre del asegurado con los profesionales designados por Allianz.",
+            "description": "¿Qué se garantiza? Reclamación de daños frente a un tercero. Adicionalmente, adelanto de los daños sufridos por tu vehículo asegurado cuando se acredite la responsabilidad de otro vehículo identificado. ¿Y esta prestación que incluye? Asistencia jurídica en nombre del asegurado con los profesionales designados por Sahgui.",
             "isContracted": "S",
             "value": "5",
             "subcoverages": null
@@ -302,7 +302,7 @@
           {
             "code": 10120,
             "texto": "Siempre en marcha",
-            "description": "¿Y esta prestación que incluye? Puesta a disposición del asegurado de un conjunto de servicios destinados a garantizar su movilidad en caso de accidente o avería ocurrido en España, y una amplia gama de servicios siempre que el vehículo sea trasladado para su reparación a un taller de la ＂Red Allianz Excelentes＂.",
+            "description": "¿Y esta prestación que incluye? Puesta a disposición del asegurado de un conjunto de servicios destinados a garantizar su movilidad en caso de accidente o avería ocurrido en España, y una amplia gama de servicios siempre que el vehículo sea trasladado para su reparación a un taller de la ＂Red Sahgui Excelentes＂.",
             "isContracted": "S",
             "value": "6",
             "subcoverages": null

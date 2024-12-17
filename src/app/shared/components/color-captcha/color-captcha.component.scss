@@ -5,27 +5,31 @@
   display: flex;
   flex-direction: column;
   margin: 20px;
+  max-width: 600px; /* Limit the maximum width of the container */
 
-  .captcha-image {
+  .captcha-items {
     align-items: center;
     background-color: var(--background-color);
     border-radius: 5px 5px 0 0;
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     margin-bottom: 10px;
-    max-width: 600px; /* Limit the maximum width of the container */
     padding: 10px;
     user-select: none; /* Prevent text selection */
     width: 100%; /* Ensure the container takes up the full available width */
 
     .captcha-character {
       align-items: center;
+      border: 1px solid var(--card-border-color);
+      border-radius: 15px;
       cursor: pointer;
       display: flex;
-      flex: content;
+      height: 85px;
       justify-content: center;
+      margin: 2px;
       padding: 5px;
-      transition: transform ease-in-out 1s;
+      width: 85px;
 
       &.colored {
         color: var(--danger);
@@ -33,11 +37,15 @@
 
       &.selected {
         background-color: var(--warning);
-        border-radius: 50px;
+      }
+
+      &:hover {
+        background-color: var(--comparison-table-selected-column-background-color) !important;
       }
 
       em {
         font-size: 3rem;
+        transition: transform ease-in-out 1s;
       }
     }
   }

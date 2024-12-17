@@ -22,6 +22,8 @@ export class ColorCaptchaComponent implements OnInit, OnDestroy {
   public uiVerified: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   private rotationDeg = 45;
+  private totalItems = 9;
+  private selectableItems = 0;
 
   private intervalId: any;
 
@@ -36,20 +38,7 @@ export class ColorCaptchaComponent implements OnInit, OnDestroy {
     clearInterval(this.intervalId);
   }
 
-  private startTimer(): void {
-    clearInterval(this.intervalId); // Ensure there are no previous timers
-
-    this.intervalId = setInterval(() => {
-      this.timer--;
-
-      if (this.timer === 0) {
-        this.generateCaptcha();
-        this.timer = this.timeToRefresh;
-      }
-    }, 1000);
-  }
-
-  public getRandomStyle(): any {
+  public getRandomStyle(): { transform: string } {
     const rotation = Math.floor(Math.random() * (this.rotationDeg * 2 + 1)) - this.rotationDeg; // Rotation between -45deg and 45deg
 
     return {
@@ -68,23 +57,39 @@ export class ColorCaptchaComponent implements OnInit, OnDestroy {
       this.selectedIndices = [];
     }
 
-    // Verify if the user has selected the 3 correct characters
-    this.uiVerified.emit(this.selectedIndices.length === 3 && this.selectedIndices.every(i => this.coloredIndices.includes(i)));
+    // Verify if the user has selected the selectableItems correct characters
+    this.uiVerified.emit(
+      this.selectedIndices.length === this.selectableItems && this.selectedIndices.every(i => this.coloredIndices.includes(i))
+    );
+  }
+
+  private startTimer(): void {
+    clearInterval(this.intervalId); // Ensure there are no previous timers
+
+    this.intervalId = setInterval(() => {
+      this.timer--;
+
+      if (this.timer === 0) {
+        this.generateCaptcha();
+        this.timer = this.timeToRefresh;
+      }
+    }, 1000);
   }
 
   private generateCaptcha(): void {
+    this.selectableItems = Math.floor(Math.random() * 4) + 3;
     this.captchaImageIndexes = [];
     this.coloredIndices = [];
     this.selectedIndices = [];
 
-    // Generate 8 random letters
-    for (let i = 0; i < 8; i++) {
+    // Generate n random letters
+    for (let i = 0; i < this.totalItems; i++) {
       this.captchaImageIndexes.push(Math.floor(Math.random() * this.images.length));
     }
 
-    // Select 3 random letters and change their color
-    while (this.coloredIndices.length < 3) {
-      const index = Math.floor(Math.random() * 8);
+    // Select selectableItems random letters and change their color
+    while (this.coloredIndices.length < this.selectableItems) {
+      const index = Math.floor(Math.random() * this.totalItems);
 
       if (!this.coloredIndices.includes(index)) {
         this.coloredIndices.push(index);

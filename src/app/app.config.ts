@@ -16,7 +16,7 @@ import { NX_CONTEX_CONFIG } from '@shagui/ng-shagui/core';
 import { routes } from './app.routes';
 import { APP_NAME, SCHEDULER_PERIOD } from './core/constants';
 import { GlobalErrorHandler } from './core/errors';
-import { httpErrorInterceptor, mockInterceptor } from './core/interceptors';
+import { httpErrorInterceptor, mockInterceptor, recaptchaInterceptor } from './core/interceptors';
 import { LiteralsService, NX_RECAPTCHA_TOKEN, SettingsService } from './core/services';
 import { TRANSLATE_MODULE_CONFIG, urls } from './shared/config';
 import { environment } from 'src/environments/environment';
@@ -41,7 +41,7 @@ export const appConfig: ApplicationConfig = {
   providers: [
     importProvidersFrom(TranslateModule.forRoot(TRANSLATE_MODULE_CONFIG)),
     provideAnimations(),
-    provideHttpClient(withInterceptors([httpErrorInterceptor, mockInterceptor])),
+    provideHttpClient(withInterceptors([httpErrorInterceptor, mockInterceptor, recaptchaInterceptor])),
     provideRouter(routes),
     provideZoneChangeDetection({ eventCoalescing: true }),
     {
