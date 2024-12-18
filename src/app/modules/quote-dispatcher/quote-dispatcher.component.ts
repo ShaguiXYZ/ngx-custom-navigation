@@ -7,6 +7,7 @@ import { AppContextData, Page } from 'src/app/core/models';
 import { ActivatorFn } from 'src/app/core/service-activators';
 import { BudgetActivator } from 'src/app/core/service-activators/budget.activator';
 import { QuoteTrackService } from 'src/app/core/tracking';
+import { AppUrls } from 'src/app/shared/config';
 
 /**
  * This component is used to load the routing module dynamically.
@@ -26,7 +27,8 @@ export class QuoteDispatcherComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     const {
-      configuration: { homePageId, pageMap }
+      configuration: { homePageId, pageMap },
+      navigation: { nextPage }
     } = this.contextDataService.get<AppContextData>(QUOTE_APP_CONTEXT_DATA);
 
     const {
@@ -37,7 +39,7 @@ export class QuoteDispatcherComponent implements OnInit {
       const nextPage = pageMap[dispatcher];
 
       this.trackService.trackView(dispatcher);
-      this._router.navigate([Page.routeFrom(nextPage)], { skipLocationChange: true });
+      this._router.navigate([nextPage.pageId], { skipLocationChange: true });
 
       return;
     }
@@ -49,9 +51,22 @@ export class QuoteDispatcherComponent implements OnInit {
     }
 
     if (homePageId) {
-      this._router.navigate([Page.routeFrom(pageMap[homePageId])], { skipLocationChange: true });
+      if (!nextPage?.pageId) this.resetContext();
+
+      this._router.navigate([AppUrls._loader], { skipLocationChange: true });
     } else {
       throw new JourneyError('Home page not found in configuration');
     }
   }
+
+  private resetContext = (): void => {
+    const context = this.contextDataService.get<AppContextData>(QUOTE_APP_CONTEXT_DATA);
+    const viewedPages = context.navigation.viewedPages.filter(pageId => context.configuration.pageMap[pageId]);
+    const nextPage = context.configuration.pageMap[viewedPages[viewedPages.length - 1]];
+
+    context.navigation.viewedPages = viewedPages;
+    context.navigation.lastPage = undefined;
+    context.navigation.nextPage = nextPage;
+    this.contextDataService.set(QUOTE_APP_CONTEXT_DATA, context);
+  };
 }

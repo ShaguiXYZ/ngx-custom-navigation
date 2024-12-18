@@ -9,6 +9,7 @@ import { Version, VersionInfo } from './quote-version.model';
 import { QuoteModel } from './quote.model';
 import { StepperConfig } from './stepper-config.model';
 import { Stepper, StepperDTO } from './stepper.model';
+import { WorkflowComponent } from 'src/app/library/library-manifest';
 
 export type CompareOperations = 'AND' | 'OR';
 export type Links = DataInfo;
@@ -54,13 +55,9 @@ export interface Page {
   configuration?: PageConfiguration;
   nextOptionList?: NextOption[];
   pageId: string;
-  route?: string;
+  component: WorkflowComponent;
   stepper?: { key: string; stepKey: string };
   routeTree?: string;
-}
-
-export namespace Page {
-  export const routeFrom = (page: Page): string => page.route ?? page.pageId;
 }
 
 export interface NextOption {

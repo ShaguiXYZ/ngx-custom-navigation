@@ -64,7 +64,7 @@ export class QuoteTrackService implements OnDestroy {
       navigation: { lastPage, viewedPages },
       configuration: { name: journey, steppers }
     } = appContextData;
-    const fullUrl = lastPage && `${window.location.protocol}//${window.location.host}/${Page.routeFrom(lastPage)}`;
+    const fullUrl = lastPage && `${window.location.protocol}//${window.location.host}/${lastPage.pageId}`;
     const title = this.literalService.toString({ value: 'header', type: 'literal' });
 
     return requestIdleCallback(async () => {

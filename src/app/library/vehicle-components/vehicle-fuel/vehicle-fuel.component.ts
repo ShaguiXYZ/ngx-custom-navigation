@@ -82,10 +82,6 @@ export class VehicleFuelComponent extends QuoteComponent implements OnInit {
 
     this.populateData();
 
-    this.navigateToNextPage();
-  }
-
-  private navigateToNextPage() {
     this.routingService.next();
   }
 

@@ -33,18 +33,6 @@ export const journeyGuard: CanActivateFn = (route: ActivatedRouteSnapshot, state
   const context = contextDataService.get<AppContextData>(QUOTE_APP_CONTEXT_DATA);
   const { nextPage, viewedPages } = context.navigation;
 
-  const resetContext = (context: AppContextData): UrlTree => {
-    const viewedPages = context.navigation.viewedPages.filter(pageId => context.configuration.pageMap[pageId]);
-    const nextPage = context.configuration.pageMap[viewedPages[viewedPages.length - 1]];
-
-    context.navigation.viewedPages = viewedPages;
-    context.navigation.lastPage = undefined;
-    context.navigation.nextPage = nextPage;
-    contextDataService.set(QUOTE_APP_CONTEXT_DATA, context);
-
-    return router.parseUrl(`${Page.routeFrom(context.navigation.nextPage)}`);
-  };
-
   const stateInfoControl = ({
     configuration: { steppers },
     navigation: { nextPage, lastPage, track }
@@ -77,10 +65,10 @@ export const journeyGuard: CanActivateFn = (route: ActivatedRouteSnapshot, state
     return _track;
   };
 
-  if (!nextPage?.pageId) return resetContext(context);
+  if (!nextPage?.pageId) return false;
 
   const track = stateInfoControl(context);
-  const { homePageId, errorPageId } = context.configuration;
+  const { errorPageId } = context.configuration;
   const pageIndex = viewedPages.indexOf(nextPage.pageId);
 
   let lastPage = nextPage;
@@ -95,8 +83,6 @@ export const journeyGuard: CanActivateFn = (route: ActivatedRouteSnapshot, state
 
   context.navigation = { ...context.navigation, viewedPages, lastPage, nextPage: undefined, track };
   contextDataService.set(QUOTE_APP_CONTEXT_DATA, context);
-
-  window.history.pushState({}, '', nextPage.routeTree ?? nextPage.pageId);
 
   return true;
 };
