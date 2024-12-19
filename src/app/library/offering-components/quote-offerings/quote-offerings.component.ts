@@ -29,6 +29,7 @@ export class QuoteOfferingsComponent extends QuoteComponent implements OnInit {
   public selectedPriceIndex = 0;
   public prices: OfferingPriceModel[] = [];
 
+  private componentDialogRef?: NxModalRef<QuoteOfferingCoveragesComponent>;
   private swipeCoord!: [number, number];
   private swipeTime!: number;
 
@@ -47,7 +48,6 @@ export class QuoteOfferingsComponent extends QuoteComponent implements OnInit {
       })
       .finally(() => {
         console.group('Offering prices fetched');
-        console.log('Context data', this._contextData);
         console.log('Offering prices fetched', this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA));
         console.groupEnd();
       });
@@ -102,23 +102,11 @@ export class QuoteOfferingsComponent extends QuoteComponent implements OnInit {
   public showCoverages(index: number) {
     this.selectedPriceIndex = index;
 
-    const componentDialogRef = this.openFromComponent(QuoteOfferingCoveragesComponent, index);
-
-    const subscriptions: Subscription[] = [
-      // componentDialogRef.componentInstance.budgetStored.subscribe(() => {
-      //   componentDialogRef.close();
-      //   subscriptions.forEach(subscription => subscription.unsubscribe());
-      // }),
-      // componentDialogRef.componentInstance.budgetRestored.subscribe(() => {
-      //   componentDialogRef.close();
-      //   subscriptions.forEach(subscription => subscription.unsubscribe());
-      // })
-    ];
+    this.componentDialogRef?.close();
+    this.componentDialogRef = this.openFromComponent(QuoteOfferingCoveragesComponent, index);
   }
 
   private openFromComponent<T = unknown>(component: ComponentType<T>, selectedPriceIndex: number): NxModalRef<T> {
-    // this.dialogService.closeAll();
-
     return this.dialogService.open(component, {
       maxWidth: '98%',
       showCloseIcon: true,

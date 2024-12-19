@@ -43,12 +43,25 @@ describe('CaptchaComponent', () => {
     expect(component.uiVerified.emit).toHaveBeenCalledWith(true);
   });
 
-  it('should not emit uiVerified when onUiVerified is called with false', () => {
+  it('should emit uiVerified when onUiVerified is called with false', () => {
     spyOn(component.uiVerified, 'emit');
 
     component.onUiVerified(false);
 
     expect(captchaServiceSpy.execute).not.toHaveBeenCalled();
-    expect(component.uiVerified.emit).not.toHaveBeenCalled();
+    expect(component.uiVerified.emit).toHaveBeenCalledWith(false);
+  });
+
+  it('should catch error and emit false when onUiVerified is called with true', async () => {
+    const error = new Error('test-error');
+    captchaServiceSpy.execute.and.returnValue(Promise.reject(error));
+    spyOn(console, 'error');
+    spyOn(component.uiVerified, 'emit');
+
+    await component.onUiVerified(true);
+
+    expect(captchaServiceSpy.execute).toHaveBeenCalledWith(CAPTCHA_SUBMIT_KEY);
+    expect(console.error).toHaveBeenCalledWith('Error executing captcha', error);
+    expect(component.uiVerified.emit).toHaveBeenCalledWith(false);
   });
 });

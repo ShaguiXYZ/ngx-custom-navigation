@@ -2,10 +2,10 @@
 import { TestBed } from '@angular/core/testing';
 import { ContextDataService } from '@shagui/ng-shagui/core';
 import { Subject } from 'rxjs';
+import { QUOTE_APP_CONTEXT_DATA, QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
+import { AppContextData } from 'src/app/core/models';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
-import { QUOTE_APP_CONTEXT_DATA, QUOTE_CONTEXT_DATA } from '../../constants';
-import { AppContextData } from '../app-context-data.model';
-import { QuoteComponent } from '../quote-component.model';
+import { QuoteComponent } from './quote-component.model';
 
 class TestQuoteComponent extends QuoteComponent {
   public someKey = 'someValue';

@@ -64,7 +64,7 @@ describe('QuoteDispatcherComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should navigate to homePageId route on init', async () => {
+  it('should navigate to workflow loader on init', async () => {
     const mockContext = {
       settings: {},
       configuration: {
@@ -73,7 +73,7 @@ describe('QuoteDispatcherComponent', () => {
         pageMap: {
           home: {
             pageId: 'home',
-            route: 'home-route'
+            component: 'home-compenent'
           }
         }
       },
@@ -86,7 +86,7 @@ describe('QuoteDispatcherComponent', () => {
 
     await component.ngOnInit();
 
-    expect(mockRouter.navigate).toHaveBeenCalledWith(['home-route'], { skipLocationChange: true });
+    expect(mockRouter.navigate).toHaveBeenCalledWith(['workflow-loader'], { skipLocationChange: true });
   });
 
   it('should throw error if homePageId is not found', async () => {
@@ -95,7 +95,7 @@ describe('QuoteDispatcherComponent', () => {
         pageMap: {
           home: {
             pageId: 'home',
-            route: 'home-route'
+            component: 'home-route'
           }
         }
       },
@@ -137,7 +137,7 @@ describe('QuoteDispatcherComponent', () => {
     expect(BudgetActivator.retrieveBudget).toHaveBeenCalledWith({ contextDataService: mockContextDataService });
   });
 
-  it('should navigate to dispatcher route if dispatcher param exists', async () => {
+  it('should navigate to dispatcher', async () => {
     const mockContext = {
       settings: {},
       configuration: {
@@ -164,6 +164,6 @@ describe('QuoteDispatcherComponent', () => {
 
     await component.ngOnInit();
 
-    expect(mockRouter.navigate).toHaveBeenCalledWith(['dispatcher-route'], { skipLocationChange: true });
+    expect(mockRouter.navigate).toHaveBeenCalledWith(['dispatcher'], { skipLocationChange: true });
   });
 });

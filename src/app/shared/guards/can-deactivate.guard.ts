@@ -1,11 +1,11 @@
 import { inject } from '@angular/core';
 import { ActivatedRouteSnapshot, CanDeactivateFn, GuardResult, MaybeAsync, RouterStateSnapshot } from '@angular/router';
-import { ContextDataService } from '@shagui/ng-shagui/core';
+import { ContextDataService, deepCopy } from '@shagui/ng-shagui/core';
 import { QUOTE_APP_CONTEXT_DATA } from 'src/app/core/constants';
 import { AppContextData, QuoteComponent, QuoteModel } from 'src/app/core/models';
 
-export const canDeactivateGuard: CanDeactivateFn<QuoteComponent> = (
-  component: QuoteComponent,
+export const canDeactivateGuard: CanDeactivateFn<{ _instance: QuoteComponent }> = (
+  component: { _instance: QuoteComponent },
   currentRoute: ActivatedRouteSnapshot,
   state: RouterStateSnapshot,
   next?: RouterStateSnapshot
@@ -22,12 +22,18 @@ export const canDeactivateGuard: CanDeactivateFn<QuoteComponent> = (
   const isErrorPage = ({ navigation: { nextPage }, configuration: { errorPageId } }: AppContextData) => errorPageId === nextPage?.pageId;
 
   const canDeactivate = (): boolean => {
-    const canDeactivate = (component.canDeactivate?.bind(component)(currentRoute, state, next) ?? true) as boolean;
+    const instance = component._instance;
+    const canDeactivate = (instance.canDeactivate?.bind(component._instance)(currentRoute, state, next) ?? true) as boolean;
 
-    component['_contextData'].signature = {
-      ...(component['_contextData'].signature ?? {}),
-      ...QuoteModel.signModel(component['_contextData'])
+    instance['_contextData'].signature = {
+      ...(instance['_contextData'].signature ?? {}),
+      ...QuoteModel.signModel(instance['_contextData'])
     };
+
+    if (!canDeactivate) {
+      context.navigation.nextPage = context.navigation.lastPage;
+      contextDataService.set(QUOTE_APP_CONTEXT_DATA, context);
+    }
 
     return canDeactivate;
   };

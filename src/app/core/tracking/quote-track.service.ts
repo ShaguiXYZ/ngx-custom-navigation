@@ -2,7 +2,7 @@ import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/l
 import { inject, Injectable, OnDestroy } from '@angular/core';
 import { ContextDataService, hasValue, JsonUtils, UniqueIds } from '@shagui/ng-shagui/core';
 import { Subscription } from 'rxjs';
-import { QUOTE_APP_CONTEXT_DATA, QUOTE_CONTEXT_DATA } from '../constants';
+import { CAPTCHA_TOKEN_KEY, QUOTE_APP_CONTEXT_DATA, QUOTE_CONTEXT_DATA } from '../constants';
 import { TrackError } from '../errors';
 import { AppContextData, Page, QuoteModel } from '../models';
 import { CaptchaService, LiteralsService } from '../services';
@@ -64,7 +64,7 @@ export class QuoteTrackService implements OnDestroy {
       navigation: { lastPage, viewedPages },
       configuration: { name: journey, steppers }
     } = appContextData;
-    const fullUrl = lastPage && `${window.location.protocol}//${window.location.host}/${Page.routeFrom(lastPage)}`;
+    const fullUrl = lastPage && `${window.location.protocol}//${window.location.host}/${lastPage.pageId}`;
     const title = this.literalService.toString({ value: 'header', type: 'literal' });
 
     return requestIdleCallback(async () => {
@@ -131,6 +131,8 @@ export class QuoteTrackService implements OnDestroy {
       .execute(eventType)
       .then(async (token: string) => {
         _window.digitalData = { ..._window.digitalData, token };
+        sessionStorage.setItem(CAPTCHA_TOKEN_KEY, token);
+
         await _window._satellite.track(eventType, trackInfo);
       })
       .catch((error: Error) => {

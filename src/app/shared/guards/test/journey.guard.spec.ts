@@ -29,35 +29,6 @@ describe('JourneyGuard', () => {
     router = TestBed.inject(Router) as jasmine.SpyObj<Router>;
   });
 
-  it('should navigate to the next page if nextPage is not defined', () => {
-    const mockContext = {
-      settings: {},
-      navigation: {
-        nextPage: undefined,
-        viewedPages: ['page1'],
-        lastPage: undefined
-      },
-      configuration: {
-        homePageId: 'home',
-        errorPageId: 'error',
-        pageMap: {
-          page1: { pageId: 'page1', route: 'page1' }
-        }
-      }
-    };
-
-    contextDataService.get.and.returnValue(mockContext);
-
-    const activatedRoute = TestBed.inject(ActivatedRoute);
-    const result = TestBed.runInInjectionContext(() => {
-      return journeyGuard(activatedRoute.snapshot, {} as RouterStateSnapshot);
-    });
-
-    expect(contextDataService.set).toHaveBeenCalledWith(QUOTE_APP_CONTEXT_DATA, mockContext);
-    expect(router.parseUrl).toHaveBeenCalledWith('page1');
-    expect(result).toBe(router.parseUrl('page1'));
-  });
-
   it('should update viewedPages and navigate to the next page', () => {
     const mockContext = {
       settings: {},

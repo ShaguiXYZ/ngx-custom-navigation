@@ -79,8 +79,6 @@ export class JourneyService {
     if (!configuration.homePageId) {
       quoteConfiguration.homePageId = quoteConfiguration.errorPageId;
       quoteConfiguration.title = { value: 'error-title', type: 'literal' };
-
-      return quoteConfiguration;
     }
 
     this.initSteppers(quoteConfiguration, configuration.steppers);
@@ -91,8 +89,8 @@ export class JourneyService {
   };
 
   private initQuote = (dto: ConfigurationDTO): Configuration => {
-    const errorPageId = dto.errorPageId ?? UniqueIds.random();
     const lastVersion = VersionInfo.last(dto.version);
+    const errorPageId = dto.errorPageId ?? UniqueIds.random();
 
     const configuration: Configuration = {
       version: { actual: lastVersion.value, last: lastVersion.value },
@@ -116,7 +114,7 @@ export class JourneyService {
     if (!configuration.pageMap[errorPageId]) {
       configuration.pageMap[errorPageId] = {
         pageId: errorPageId,
-        route: QUOTE_ERROR_PAGE_ID,
+        component: QUOTE_ERROR_PAGE_ID,
         configuration: {
           literals: {
             body: { value: 'error-body', type: 'literal' }
