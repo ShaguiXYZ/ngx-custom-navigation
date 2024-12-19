@@ -1,4 +1,4 @@
-import { AfterViewInit, Directive, ElementRef, inject, Input } from '@angular/core';
+import { AfterViewInit, Directive, ElementRef, Input } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { LiteralParam } from 'src/app/core/models';
 import { LiteralsService } from 'src/app/core/services';

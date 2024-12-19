@@ -1,9 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { TranslateService } from '@ngx-translate/core';
-import { ColorCaptchaComponent, HeaderTitleComponent } from 'src/app/shared/components';
+import { CaptchaService } from 'src/app/core/services';
+import { HeaderTitleComponent } from 'src/app/shared/components';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
 import { CaptchaComponent } from './captcha.component';
-import { CaptchaService } from 'src/app/core/services';
+import { ColorCaptchaComponent } from './components';
 import { CAPTCHA_SUBMIT_KEY } from './constants';
 
 describe('CaptchaComponent', () => {
@@ -39,7 +40,7 @@ describe('CaptchaComponent', () => {
 
     await component.onUiVerified(true);
 
-    expect(captchaServiceSpy.execute).toHaveBeenCalledWith(CAPTCHA_SUBMIT_KEY);
+    expect(captchaServiceSpy.execute).toHaveBeenCalledWith({ action: CAPTCHA_SUBMIT_KEY });
     expect(component.uiVerified.emit).toHaveBeenCalledWith(true);
   });
 
@@ -60,7 +61,7 @@ describe('CaptchaComponent', () => {
 
     await component.onUiVerified(true);
 
-    expect(captchaServiceSpy.execute).toHaveBeenCalledWith(CAPTCHA_SUBMIT_KEY);
+    expect(captchaServiceSpy.execute).toHaveBeenCalledWith({ action: CAPTCHA_SUBMIT_KEY });
     expect(console.error).toHaveBeenCalledWith('Error executing captcha', error);
     expect(component.uiVerified.emit).toHaveBeenCalledWith(false);
   });

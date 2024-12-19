@@ -1,5 +1,5 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { NX_DATE_LOCALE, NxDatefieldModule } from '@aposin/ng-aquila/datefield';
 import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
 import { NxInputModule } from '@aposin/ng-aquila/input';
@@ -9,7 +9,7 @@ import { DEFAULT_DATE_FORMAT, DEFAULT_DATE_FORMATS } from 'src/app/core/constant
 import { QuoteFormValidarors } from 'src/app/core/form';
 import { QuoteComponent } from 'src/app/core/models';
 import { HeaderTitleComponent, QuoteFooterComponent } from 'src/app/shared/components';
-import { QuoteLiteralDirective } from 'src/app/shared/directives';
+import { QuoteAutoFocusDirective, QuoteLiteralDirective } from 'src/app/shared/directives';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 
 @Component({
@@ -24,6 +24,7 @@ import { QuoteLiteralPipe } from 'src/app/shared/pipes';
     ReactiveFormsModule,
     QuoteFooterComponent,
     NxMomentDateModule,
+    QuoteAutoFocusDirective,
     QuoteLiteralDirective,
     QuoteLiteralPipe
   ],

@@ -3,7 +3,7 @@
   <section class="form-container">
     <form [formGroup]="form">
       <nx-formfield [label]="'year-of-manufacture-label' | quoteLiteral">
-        <input type="text" formControlName="yearOfManufacture" nxInput nxMask="0000" />
+        <input type="text" formControlName="yearOfManufacture" nxInput nxAutoFocus nxMask="0000" />
         @if(form.get('yearOfManufacture')?.errors?.['required']) {
         <nx-error appearance="text" nxFormfieldError><span nxQuoteLiteral="error-required"></span> </nx-error>
         } @if(form.get('yearOfManufacture')?.errors?.['maxValues']) {

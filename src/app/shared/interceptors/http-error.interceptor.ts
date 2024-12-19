@@ -3,10 +3,10 @@ import { inject } from '@angular/core';
 import { ContextDataService } from '@shagui/ng-shagui/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { QUOTE_APP_CONTEXT_DATA } from '../constants';
-import { HttpError } from '../errors';
-import { AppContextData } from '../models';
-import { RoutingService } from '../services';
+import { QUOTE_APP_CONTEXT_DATA } from '../../core/constants';
+import { HttpError } from '../../core/errors';
+import { AppContextData } from '../../core/models';
+import { RoutingService } from '../../core/services';
 
 export const httpErrorInterceptor: HttpInterceptorFn = (req: HttpRequest<unknown>, next: HttpHandlerFn): Observable<HttpEvent<unknown>> => {
   const contextDataService = inject(ContextDataService);

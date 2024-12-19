@@ -3,14 +3,14 @@
   <section class="form-container">
     <form [formGroup]="form">
       <nx-formfield [label]="'name' | quoteLiteral">
-        <input formControlName="name" nxInput />
+        <input formControlName="name" nxInput nxAutoFocus />
         @if(form.get('name')?.errors?.['required']) {
         <nx-error appearance="text" nxFormfieldError><span nxQuoteLiteral="error-required"></span> </nx-error>
         }
       </nx-formfield>
       <quote-zone>
         <nx-formfield label="Apellidos">
-          <input formControlName="surname" nxInput />
+          <input formControlName="surname" nxInput nxAutoFocus />
           @if(form.get('surname')?.errors?.['required']) {
           <nx-error appearance="text" nxFormfieldError><span nxQuoteLiteral="error-required"></span> </nx-error>
           }

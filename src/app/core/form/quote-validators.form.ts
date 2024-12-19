@@ -82,7 +82,7 @@ export class QuoteFormValidarors {
   };
 
   public required =
-    (length: number = 0): ValidatorFn =>
+    (length = 0): ValidatorFn =>
     (control: AbstractControl): ValidationErrors | null =>
       this.activateEntryPoint(control, 'required', !control.value || `${control.value}`.trim().length < length);
 
@@ -133,7 +133,7 @@ export class QuoteFormValidarors {
   ): ValidationErrors | null => {
     const validation = validationValue ? { [validationKey]: true } : null;
     const controlName = Object.keys(control.parent?.controls || {}).find(
-      key => (control.parent?.controls as { [key: string]: AbstractControl })[key] === control
+      key => (control.parent?.controls as Record<string, AbstractControl>)[key] === control
     );
 
     if (controlName) {

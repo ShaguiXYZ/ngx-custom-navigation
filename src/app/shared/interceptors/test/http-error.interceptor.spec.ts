@@ -2,8 +2,8 @@ import { HttpClient, HttpErrorResponse, HttpStatusCode, provideHttpClient, withI
 import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { ContextDataService } from '@shagui/ng-shagui/core';
-import { HttpError } from '../../errors';
-import { RoutingService } from '../../services';
+import { HttpError } from '../../../core/errors';
+import { RoutingService } from '../../../core/services';
 import { httpErrorInterceptor } from '../http-error.interceptor';
 
 describe('HttpErrorInterceptor', () => {

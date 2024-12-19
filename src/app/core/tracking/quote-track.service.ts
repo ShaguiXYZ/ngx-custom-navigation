@@ -4,7 +4,7 @@ import { ContextDataService, hasValue, JsonUtils, UniqueIds } from '@shagui/ng-s
 import { Subscription } from 'rxjs';
 import { CAPTCHA_TOKEN_KEY, QUOTE_APP_CONTEXT_DATA, QUOTE_CONTEXT_DATA } from '../constants';
 import { TrackError } from '../errors';
-import { AppContextData, Page, QuoteModel } from '../models';
+import { AppContextData, QuoteModel } from '../models';
 import { CaptchaService, LiteralsService } from '../services';
 import { TrackEventType, TrackInfo, TrackInfoPageModel, TRACKING_QUOTE_MANIFEST } from './quote-track.model';
 import { _window } from './window-tracker.model';
@@ -128,7 +128,7 @@ export class QuoteTrackService implements OnDestroy {
     }
 
     await this.captchaService
-      .execute(eventType)
+      .execute({ action: eventType })
       .then(async (token: string) => {
         _window.digitalData = { ..._window.digitalData, token };
         sessionStorage.setItem(CAPTCHA_TOKEN_KEY, token);

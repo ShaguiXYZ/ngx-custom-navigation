@@ -1,7 +1,7 @@
 import { HttpErrorResponse, HttpEvent, HttpHandlerFn, HttpInterceptorFn, HttpRequest, HttpStatusCode } from '@angular/common/http';
 import { catchError, Observable, throwError } from 'rxjs';
-import { CAPTCHA_TOKEN_KEY, G_RECAPTCHA_RESPONSE } from '../constants';
-import { HttpError } from '../errors';
+import { CAPTCHA_TOKEN_KEY, G_RECAPTCHA_RESPONSE } from '../../core/constants';
+import { HttpError } from '../../core/errors';
 
 export const recaptchaInterceptor: HttpInterceptorFn = (req: HttpRequest<unknown>, next: HttpHandlerFn): Observable<HttpEvent<unknown>> => {
   const token = sessionStorage.getItem(CAPTCHA_TOKEN_KEY);

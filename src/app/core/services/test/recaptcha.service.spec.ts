@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { TestBed } from '@angular/core/testing';
 import { NX_RECAPTCHA_TOKEN, CaptchaService, RecaptchaConfig } from '../recaptcha.service';
 
@@ -28,23 +29,23 @@ describe('CaptchaService', () => {
   it('should execute recaptcha and return token', async () => {
     const mockToken = 'mock-token';
     grecaptcha.enterprise = {
-      ready: (callback: Function) => callback(),
-      execute: (siteKey: string, options: any) => Promise.resolve(mockToken)
+      ready: (callback: () => void) => callback(),
+      execute: () => Promise.resolve(mockToken)
     };
 
-    const token = await service.execute('test-action');
+    const token = await service.execute({ action: 'test-action' });
     expect(token).toBe(mockToken);
   });
 
   it('should handle recaptcha execution error', async () => {
     const mockError = 'mock-error';
     grecaptcha.enterprise = {
-      ready: (callback: Function) => callback(),
-      execute: (siteKey: string, options: any) => Promise.reject(mockError)
+      ready: (callback: () => void) => callback(),
+      execute: () => Promise.reject(mockError)
     };
 
     try {
-      await service.execute('test-action');
+      await service.execute({ action: 'test-action' });
       fail('Expected error to be thrown');
     } catch (error) {
       expect(error).toBe(mockError);

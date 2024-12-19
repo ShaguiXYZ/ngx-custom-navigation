@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
@@ -13,7 +14,6 @@ import { PlaceComponent } from './place.component';
 describe('PlaceComponent', () => {
   let component: PlaceComponent;
   let fixture: ComponentFixture<PlaceComponent>;
-  let contextDataService: jasmine.SpyObj<ContextDataService>;
   let locationService: jasmine.SpyObj<LocationService>;
 
   beforeEach(waitForAsync(() => {
@@ -56,7 +56,6 @@ describe('PlaceComponent', () => {
       }
     });
 
-    contextDataService = TestBed.inject(ContextDataService) as jasmine.SpyObj<ContextDataService>;
     locationService = TestBed.inject(LocationService) as jasmine.SpyObj<LocationService>;
   }));
 

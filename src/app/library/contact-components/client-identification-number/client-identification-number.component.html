@@ -6,7 +6,7 @@
   <section class="form-container">
     <form [formGroup]="form">
       <nx-formfield [label]="'identification-number' | quoteLiteral">
-        <input formControlName="identificationNumber" nxInput />
+        <input formControlName="identificationNumber" nxInput nxAutoFocus />
         @if(form.get('identificationNumber')?.errors?.['required']) {
         <nx-error appearance="text" nxFormfieldError><span nxQuoteLiteral="error-required"></span> </nx-error>
         }

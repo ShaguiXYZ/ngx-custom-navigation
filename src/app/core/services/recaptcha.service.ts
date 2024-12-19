@@ -1,4 +1,4 @@
-import { Inject, Injectable, InjectionToken, Optional } from '@angular/core';
+import { Inject, Injectable, InjectionToken } from '@angular/core';
 
 export interface RecaptchaConfig {
   siteKey: string;
@@ -6,7 +6,12 @@ export interface RecaptchaConfig {
 
 export const NX_RECAPTCHA_TOKEN = new InjectionToken<RecaptchaConfig>('NX_RECAPTCHA_TOKEN');
 
-declare const grecaptcha: any;
+declare const grecaptcha: {
+  enterprise: {
+    ready: (callback: () => void) => void;
+    execute: (siteKey: string, data: { action: string }) => Promise<string>;
+  };
+};
 
 @Injectable({ providedIn: 'root' })
 export class CaptchaService {
@@ -14,13 +19,13 @@ export class CaptchaService {
     this.headScript();
   }
 
-  public execute = (action: string): Promise<string> => {
+  public execute = (data: { action: string }): Promise<string> => {
     return new Promise((resolve, reject) => {
       grecaptcha.enterprise.ready(() => {
         grecaptcha.enterprise
-          .execute(this.config.siteKey, { action })
+          .execute(this.config.siteKey, data)
           .then((token: string) => resolve(token))
-          .catch((error: any) => reject(error));
+          .catch((error: Error) => reject(error));
       });
     });
   };

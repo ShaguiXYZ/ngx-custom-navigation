@@ -5,7 +5,7 @@
   <section class="form-container">
     <form [formGroup]="form">
       <nx-formfield [label]="'e-mail' | quoteLiteral">
-        <input type="email" formControlName="email" nxInput />
+        <input type="email" formControlName="email" nxInput nxAutoFocus />
         @if(form.get('email')?.errors?.['required']) {
         <nx-error appearance="text" nxFormfieldError><span nxQuoteLiteral="error-required"></span> </nx-error>
         } @if(form.get('email')?.errors?.['matches']) {

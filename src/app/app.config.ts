@@ -13,13 +13,13 @@ import { provideRouter } from '@angular/router';
 import { NxDatepickerIntl } from '@aposin/ng-aquila/datefield';
 import { TranslateModule } from '@ngx-translate/core';
 import { NX_CONTEX_CONFIG } from '@shagui/ng-shagui/core';
+import { environment } from 'src/environments/environment';
 import { routes } from './app.routes';
 import { APP_NAME, SCHEDULER_PERIOD } from './core/constants';
 import { GlobalErrorHandler } from './core/errors';
-import { httpErrorInterceptor, mockInterceptor, recaptchaInterceptor } from './core/interceptors';
 import { LiteralsService, NX_RECAPTCHA_TOKEN, SettingsService } from './core/services';
 import { TRANSLATE_MODULE_CONFIG, urls } from './shared/config';
-import { environment } from 'src/environments/environment';
+import { httpErrorInterceptor, mockInterceptor, recaptchaInterceptor } from './shared/interceptors';
 
 @Injectable()
 class DatePikerIntl extends NxDatepickerIntl {

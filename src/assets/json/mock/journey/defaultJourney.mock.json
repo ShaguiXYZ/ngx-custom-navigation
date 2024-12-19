@@ -158,6 +158,7 @@
       ],
       "configuration": {
         "literals": {
+          "postal-code": "Código postal",
           "error-required": "El código postal es obligatorio para continuar",
           "error-not-found": "El código postal no existe",
           "header": "¿Cuál es tu código postal?",

@@ -6,8 +6,7 @@ import {
   FormControl,
   FormGroup,
   ReactiveFormsModule,
-  ValidationErrors,
-  Validators
+  ValidationErrors
 } from '@angular/forms';
 import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
 import { NxInputModule } from '@aposin/ng-aquila/input';
@@ -16,7 +15,7 @@ import { QuoteFormValidarors } from 'src/app/core/form';
 import { QuoteComponent } from 'src/app/core/models';
 import { LocationService } from 'src/app/core/services';
 import { HeaderTitleComponent, QuoteFooterComponent, QuoteFooterInfoComponent } from 'src/app/shared/components';
-import { QuoteLiteralDirective, QuoteMaskDirective } from 'src/app/shared/directives';
+import { QuoteAutoFocusDirective, QuoteLiteralDirective, QuoteMaskDirective } from 'src/app/shared/directives';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 
 @Component({
@@ -32,6 +31,7 @@ import { QuoteLiteralPipe } from 'src/app/shared/pipes';
     NxMaskModule,
     ReactiveFormsModule,
     QuoteMaskDirective,
+    QuoteAutoFocusDirective,
     QuoteLiteralDirective,
     QuoteLiteralPipe
   ],
