@@ -4,7 +4,7 @@ export enum AppUrls {
   _dispatcher = 'dispatcher',
   _loader = 'workflow-loader',
   _stored = 'stored',
-  home = 'home',
+  home = 'loading',
   root = '**'
 }
 

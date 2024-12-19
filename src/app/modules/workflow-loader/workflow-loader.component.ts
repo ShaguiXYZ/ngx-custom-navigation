@@ -14,7 +14,7 @@ import { LIBRARY_MANIFEST } from 'src/app/library/library-manifest';
 export class WorkflowLoaderComponent implements OnInit {
   protected _instance?: QuoteComponent;
 
-  @ViewChild('dynamicComponentContainer', { read: ViewContainerRef, static: true })
+  @ViewChild('dynamicComponent', { read: ViewContainerRef, static: true })
   private container!: ViewContainerRef;
 
   private readonly contextDataService = inject(ContextDataService);

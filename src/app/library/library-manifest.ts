@@ -40,51 +40,35 @@ import {
 } from './vehicle-components';
 
 export const LIBRARY_MANIFEST = {
-  birthdate: { library: 'client-components', name: 'birthdate', component: BirthdateComponent },
-  dateOfIssue: { library: 'client-components', name: 'date-of-issue', component: DateOfIssueComponent },
-  drivingLicenseDate: { library: 'client-components', name: 'driving-license-date', component: DrivingLicenseDateComponent },
-  drivingLicenseLocation: {
-    library: 'client-components',
-    name: 'driving-license-location',
-    component: DrivingLicenseLocationComponent
-  },
-  isClient: { library: 'client-components', name: 'is-client', component: IsClientComponent },
-  place: { library: 'client-components', name: 'place', component: PlaceComponent },
-  apologyScreen: { library: 'common-components', name: 'apology', component: ApologyComponent },
-  confirmation: { library: 'common-components', name: 'confirmation', component: ConfirmationComponent },
-  contactTime: { library: 'common-components', name: 'contact-time', component: ContactTimeComponent },
-  contactUs: { library: 'common-components', name: 'contact-us', component: ContactUsComponent },
-  onBoarding: { library: 'common-components', name: 'on-boarding', component: OnBoardingComponent },
-  clientEmail: { library: 'contact-components', name: 'client-email', component: ClientEMailComponent },
-  clientIdentificationNumber: {
-    library: 'contact-components',
-    name: 'client-identification-number',
-    component: ClientIdentificationNumberComponent
-  },
-  clientName: { library: 'contact-components', name: 'client-name', component: ClientNameComponent },
-  clientPhoneNumber: { library: 'contact-components', name: 'client-phone-number', component: ClientPhoneNumberComponent },
-  currentlyInsured: { library: 'insurance-components', name: 'currently-insured', component: CurrentlyInsuredComponent },
-  insuranceCompanies: { library: 'insurance-components', name: 'insurance-companies', component: InsuranceCompaniesComponent },
-  isPolicyOwner: { library: 'insurance-components', name: 'is-policy-owner', component: IsPolicyOwnerComponent },
-  numberAccidents: { library: 'insurance-components', name: 'number-accidents', component: NumberAccidentsComponent },
-  timeInsuranceHolder: {
-    library: 'insurance-components',
-    name: 'time-insurance-holder',
-    component: TimeInsuranceHolderComponent
-  },
-  quoteOfferings: { library: 'offering-components', name: 'quote-offerings', component: QuoteOfferingsComponent },
-  licensePlate: { library: 'vehicle-components', name: 'license-plate', component: LicensePlateComponent },
-  licenseYear: { library: 'vehicle-components', name: 'license-year', component: LicenseYearComponent },
-  vehicleBrand: { library: 'vehicle-components', name: 'vehicle-brand', component: VehicleBrandComponent },
-  vehicleFuel: { library: 'vehicle-components', name: 'vehicle-fuel', component: VehicleFuelComponent },
-  vehicleModelVersions: {
-    library: 'vehicle-components',
-    name: 'vehicle-model-versions',
-    component: VehicleModelVersionsComponent
-  },
-  vehicleModels: { library: 'vehicle-components', name: 'vehicle-models', component: VehicleModelsComponent },
-  vehicleType: { library: 'vehicle-components', name: 'vehicle-type', component: VehicleTypeComponent },
-  yourCarIs: { library: 'vehicle-components', name: 'your-car-is', component: YourCarIsComponent }
+  birthdate: { component: BirthdateComponent },
+  dateOfIssue: { component: DateOfIssueComponent },
+  drivingLicenseDate: { component: DrivingLicenseDateComponent },
+  drivingLicenseLocation: { component: DrivingLicenseLocationComponent },
+  isClient: { component: IsClientComponent },
+  place: { component: PlaceComponent },
+  apologyScreen: { component: ApologyComponent },
+  confirmation: { component: ConfirmationComponent },
+  contactTime: { component: ContactTimeComponent },
+  contactUs: { component: ContactUsComponent },
+  onBoarding: { component: OnBoardingComponent },
+  clientEmail: { component: ClientEMailComponent },
+  clientIdentificationNumber: { component: ClientIdentificationNumberComponent },
+  clientName: { component: ClientNameComponent },
+  clientPhoneNumber: { component: ClientPhoneNumberComponent },
+  currentlyInsured: { component: CurrentlyInsuredComponent },
+  insuranceCompanies: { component: InsuranceCompaniesComponent },
+  isPolicyOwner: { component: IsPolicyOwnerComponent },
+  numberAccidents: { component: NumberAccidentsComponent },
+  timeInsuranceHolder: { component: TimeInsuranceHolderComponent },
+  quoteOfferings: { component: QuoteOfferingsComponent },
+  licensePlate: { component: LicensePlateComponent },
+  licenseYear: { component: LicenseYearComponent },
+  vehicleBrand: { component: VehicleBrandComponent },
+  vehicleFuel: { component: VehicleFuelComponent },
+  vehicleModelVersions: { component: VehicleModelVersionsComponent },
+  vehicleModels: { component: VehicleModelsComponent },
+  vehicleType: { component: VehicleTypeComponent },
+  yourCarIs: { component: YourCarIsComponent }
 };
 
 export type WorkflowComponent = keyof typeof LIBRARY_MANIFEST;
