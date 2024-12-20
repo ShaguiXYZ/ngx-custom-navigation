@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { CAPTCHA_IMAGES } from './constants/captcha-images';
+import { TTL } from '@shagui/ng-shagui/core';
 
 @Component({
   selector: 'quote-color-captcha',
@@ -25,7 +26,7 @@ export class ColorCaptchaComponent implements OnInit, OnDestroy {
   private totalItems = 9;
   private selectableItems = 0;
 
-  private intervalId: any;
+  private intervalId?: NodeJS.Timeout;
 
   ngOnInit(): void {
     this.timer = this.timeToRefresh;
@@ -73,7 +74,7 @@ export class ColorCaptchaComponent implements OnInit, OnDestroy {
         this.generateCaptcha();
         this.timer = this.timeToRefresh;
       }
-    }, 1000);
+    }, TTL.seconds(1));
   }
 
   private generateCaptcha(): void {

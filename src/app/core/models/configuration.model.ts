@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-namespace */
 import { DataInfo } from '@shagui/ng-shagui/core';
 import { ServiceActivator } from '../service-activators';
 import { HeaderConfig } from './header-config.model';
@@ -55,7 +54,7 @@ export interface Page {
   configuration?: PageConfiguration;
   nextOptionList?: NextOption[];
   pageId: string;
-  component: WorkflowComponent;
+  component?: WorkflowComponent;
   stepper?: { key: string; stepKey: string };
   routeTree?: string;
 }

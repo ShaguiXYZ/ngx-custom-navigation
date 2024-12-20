@@ -78,7 +78,7 @@
   "pageMap": [
     {
       "pageId": "calcula-tu-seguro",
-      "component": "onBoarding",
+      "component": "on-boarding",
       "nextOptionList": [
         {
           "nextPageId": "is-client"
@@ -106,7 +106,6 @@
     },
     {
       "pageId": "is-client",
-      "component": "isClient",
       "nextOptionList": [
         {
           "nextPageId": "is-client-client-name",
@@ -136,7 +135,6 @@
     },
     {
       "pageId": "place",
-      "component": "place",
       "nextOptionList": [
         {
           "nextPageId": "contact-us",
@@ -168,7 +166,6 @@
     },
     {
       "pageId": "birthdate",
-      "component": "birthdate",
       "nextOptionList": [
         {
           "nextPageId": "driving-license-location"
@@ -189,7 +186,6 @@
     },
     {
       "pageId": "driving-license-date",
-      "component": "drivingLicenseDate",
       "nextOptionList": [
         {
           "nextPageId": "vehicle-type"
@@ -207,7 +203,6 @@
     },
     {
       "pageId": "driving-license-location",
-      "component": "drivingLicenseLocation",
       "nextOptionList": [
         {
           "nextPageId": "contact-us",
@@ -235,7 +230,6 @@
     },
     {
       "pageId": "date-of-issue",
-      "component": "dateOfIssue",
       "nextOptionList": [
         {
           "nextPageId": "birthdate"
@@ -250,7 +244,6 @@
     },
     {
       "pageId": "license-plate",
-      "component": "licensePlate",
       "nextOptionList": [
         {
           "nextPageId": "apology-screen",
@@ -322,7 +315,6 @@
     },
     {
       "pageId": "your-car-is",
-      "component": "yourCarIs",
       "nextOptionList": [
         {
           "nextPageId": "is-policy-owner"
@@ -342,7 +334,6 @@
     },
     {
       "pageId": "vehicle-brand",
-      "component": "vehicleBrand",
       "nextOptionList": [
         {
           "nextPageId": "vehicle-models"
@@ -356,7 +347,6 @@
     },
     {
       "pageId": "vehicle-type",
-      "component": "vehicleType",
       "nextOptionList": [
         {
           "nextPageId": "vehicle-brand",
@@ -383,7 +373,6 @@
     },
     {
       "pageId": "vehicle-models",
-      "component": "vehicleModels",
       "nextOptionList": [
         {
           "nextPageId": "vehicle-fuel"
@@ -397,7 +386,6 @@
     },
     {
       "pageId": "vehicle-fuel",
-      "component": "vehicleFuel",
       "nextOptionList": [
         {
           "nextPageId": "vehicle-model-versions"
@@ -413,7 +401,6 @@
     },
     {
       "pageId": "vehicle-model-versions",
-      "component": "vehicleModelVersions",
       "nextOptionList": [
         {
           "nextPageId": "your-car-is"
@@ -427,7 +414,6 @@
     },
     {
       "pageId": "license-year",
-      "component": "licenseYear",
       "nextOptionList": [
         {
           "nextPageId": "vehicle-brand",
@@ -454,7 +440,6 @@
     },
     {
       "pageId": "is-policy-owner",
-      "component": "isPolicyOwner",
       "nextOptionList": [
         {
           "nextPageId": "client-name",
@@ -515,7 +500,6 @@
     },
     {
       "pageId": "insurance-companies",
-      "component": "insuranceCompanies",
       "nextOptionList": [
         {
           "nextPageId": "time-insurance-holder"
@@ -529,7 +513,6 @@
     },
     {
       "pageId": "time-insurance-holder",
-      "component": "timeInsuranceHolder",
       "nextOptionList": [
         {
           "nextPageId": "number-accidents"
@@ -544,7 +527,6 @@
     },
     {
       "pageId": "number-accidents",
-      "component": "numberAccidents",
       "nextOptionList": [
         {
           "nextPageId": "client-name"
@@ -560,7 +542,6 @@
     },
     {
       "pageId": "client-name",
-      "component": "clientName",
       "nextOptionList": [
         {
           "nextPageId": "client-phone-number"
@@ -575,7 +556,6 @@
     },
     {
       "pageId": "client-phone-number",
-      "component": "clientPhoneNumber",
       "nextOptionList": [
         {
           "nextPageId": "is-client-client-name",
@@ -607,7 +587,6 @@
     },
     {
       "pageId": "client-email",
-      "component": "clientEmail",
       "nextOptionList": [
         {
           "nextPageId": "client-identification-number"
@@ -639,7 +618,6 @@
     },
     {
       "pageId": "client-identification-number",
-      "component": "clientIdentificationNumber",
       "nextOptionList": [
         {
           "nextPageId": "apology-screen",
@@ -681,7 +659,7 @@
     },
     {
       "pageId": "este-es-tu-seguro",
-      "component": "quoteOfferings",
+      "component": "quote-offerings",
       "nextOptionList": [
         {
           "nextPageId": "contact-time"
@@ -705,7 +683,6 @@
     },
     {
       "pageId": "confirmation",
-      "component": "confirmation",
       "nextOptionList": [
         {
           "nextPageId": "calcula-tu-seguro"
@@ -742,7 +719,6 @@
     },
     {
       "pageId": "contact-time",
-      "component": "contactTime",
       "nextOptionList": [
         {
           "nextPageId": "confirmation"
@@ -768,7 +744,6 @@
     },
     {
       "pageId": "contact-us",
-      "component": "contactUs",
       "configuration": {
         "literals": {
           "header": "Información de contacto",
@@ -789,7 +764,6 @@
     },
     {
       "pageId": "apology-screen",
-      "component": "apologyScreen",
       "configuration": {
         "literals": {
           "body": "Lo sentimos, no podemos ofrecerte el seguro que necesitas en esta ocasión.",
@@ -805,7 +779,7 @@
     },
     {
       "pageId": "is-client-client-name",
-      "component": "clientName",
+      "component": "client-name",
       "nextOptionList": [
         {
           "nextPageId": "is-client-client-phone-number"
@@ -823,7 +797,7 @@
     },
     {
       "pageId": "is-client-client-phone-number",
-      "component": "clientPhoneNumber",
+      "component": "client-phone-number",
       "nextOptionList": [
         {
           "nextPageId": "is-client-client-email"
@@ -838,7 +812,7 @@
     },
     {
       "pageId": "is-client-client-email",
-      "component": "clientEmail",
+      "component": "client-email",
       "nextOptionList": [
         {
           "nextPageId": "is-client-client-identification-number"
@@ -859,7 +833,7 @@
     },
     {
       "pageId": "is-client-client-identification-number",
-      "component": "clientIdentificationNumber",
+      "component": "client-identification-number",
       "nextOptionList": [
         {
           "nextPageId": "is-client-contact-us"
@@ -879,7 +853,7 @@
     },
     {
       "pageId": "is-client-contact-us",
-      "component": "contactUs",
+      "component": "contact-us",
       "configuration": {
         "literals": {
           "header": "Información de contacto",
@@ -907,7 +881,7 @@
     },
     {
       "pageId": "external-contact-us",
-      "component": "contactUs",
+      "component": "contact-us",
       "nextOptionList": [
         {
           "nextPageId": "external-contact-time"
@@ -936,7 +910,7 @@
     },
     {
       "pageId": "external-contact-time",
-      "component": "contactTime",
+      "component": "contact-time",
       "nextOptionList": [
         {
           "nextPageId": "external-contact-us"

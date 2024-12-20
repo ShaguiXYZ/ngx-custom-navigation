@@ -80,7 +80,7 @@ export const WORKFLOW: ConfigurationDTO = {
   pageMap: [
     {
       pageId: 'calcula-tu-seguro',
-      component: 'onBoarding',
+      component: 'on-boarding',
       nextOptionList: [
         {
           nextPageId: 'is-client'
@@ -108,7 +108,6 @@ export const WORKFLOW: ConfigurationDTO = {
     },
     {
       pageId: 'is-client',
-      component: 'isClient',
       nextOptionList: [
         {
           nextPageId: 'is-client-client-name',
@@ -138,7 +137,6 @@ export const WORKFLOW: ConfigurationDTO = {
     },
     {
       pageId: 'place',
-      component: 'place',
       nextOptionList: [
         {
           nextPageId: 'contact-us',
@@ -169,7 +167,6 @@ export const WORKFLOW: ConfigurationDTO = {
     },
     {
       pageId: 'birthdate',
-      component: 'birthdate',
       nextOptionList: [
         {
           nextPageId: 'driving-license-location'
@@ -190,7 +187,6 @@ export const WORKFLOW: ConfigurationDTO = {
     },
     {
       pageId: 'driving-license-date',
-      component: 'drivingLicenseDate',
       nextOptionList: [
         {
           nextPageId: 'vehicle-type'
@@ -208,7 +204,6 @@ export const WORKFLOW: ConfigurationDTO = {
     },
     {
       pageId: 'driving-license-location',
-      component: 'drivingLicenseLocation',
       nextOptionList: [
         {
           nextPageId: 'contact-us',
@@ -236,7 +231,6 @@ export const WORKFLOW: ConfigurationDTO = {
     },
     {
       pageId: 'date-of-issue',
-      component: 'dateOfIssue',
       nextOptionList: [
         {
           nextPageId: 'birthdate'
@@ -251,7 +245,6 @@ export const WORKFLOW: ConfigurationDTO = {
     },
     {
       pageId: 'license-plate',
-      component: 'licensePlate',
       nextOptionList: [
         {
           nextPageId: 'apology-screen',
@@ -323,7 +316,6 @@ export const WORKFLOW: ConfigurationDTO = {
     },
     {
       pageId: 'your-car-is',
-      component: 'yourCarIs',
       nextOptionList: [
         {
           nextPageId: 'is-policy-owner'
@@ -343,7 +335,6 @@ export const WORKFLOW: ConfigurationDTO = {
     },
     {
       pageId: 'vehicle-brand',
-      component: 'vehicleBrand',
       nextOptionList: [
         {
           nextPageId: 'vehicle-models'
@@ -357,7 +348,6 @@ export const WORKFLOW: ConfigurationDTO = {
     },
     {
       pageId: 'vehicle-type',
-      component: 'vehicleType',
       nextOptionList: [
         {
           nextPageId: 'vehicle-brand',
@@ -384,7 +374,6 @@ export const WORKFLOW: ConfigurationDTO = {
     },
     {
       pageId: 'vehicle-models',
-      component: 'vehicleModels',
       nextOptionList: [
         {
           nextPageId: 'vehicle-fuel'
@@ -398,7 +387,6 @@ export const WORKFLOW: ConfigurationDTO = {
     },
     {
       pageId: 'vehicle-fuel',
-      component: 'vehicleFuel',
       nextOptionList: [
         {
           nextPageId: 'vehicle-model-versions'
@@ -414,7 +402,6 @@ export const WORKFLOW: ConfigurationDTO = {
     },
     {
       pageId: 'vehicle-model-versions',
-      component: 'vehicleModelVersions',
       nextOptionList: [
         {
           nextPageId: 'your-car-is'
@@ -428,7 +415,6 @@ export const WORKFLOW: ConfigurationDTO = {
     },
     {
       pageId: 'license-year',
-      component: 'licenseYear',
       nextOptionList: [
         {
           nextPageId: 'vehicle-brand',
@@ -455,7 +441,6 @@ export const WORKFLOW: ConfigurationDTO = {
     },
     {
       pageId: 'is-policy-owner',
-      component: 'isPolicyOwner',
       nextOptionList: [
         {
           nextPageId: 'client-name',
@@ -516,7 +501,6 @@ export const WORKFLOW: ConfigurationDTO = {
     },
     {
       pageId: 'insurance-companies',
-      component: 'insuranceCompanies',
       nextOptionList: [
         {
           nextPageId: 'time-insurance-holder'
@@ -530,7 +514,6 @@ export const WORKFLOW: ConfigurationDTO = {
     },
     {
       pageId: 'time-insurance-holder',
-      component: 'timeInsuranceHolder',
       nextOptionList: [
         {
           nextPageId: 'number-accidents'
@@ -545,7 +528,6 @@ export const WORKFLOW: ConfigurationDTO = {
     },
     {
       pageId: 'number-accidents',
-      component: 'numberAccidents',
       nextOptionList: [
         {
           nextPageId: 'client-name'
@@ -561,7 +543,6 @@ export const WORKFLOW: ConfigurationDTO = {
     },
     {
       pageId: 'client-name',
-      component: 'clientName',
       nextOptionList: [
         {
           nextPageId: 'client-phone-number'
@@ -576,7 +557,6 @@ export const WORKFLOW: ConfigurationDTO = {
     },
     {
       pageId: 'client-phone-number',
-      component: 'clientPhoneNumber',
       nextOptionList: [
         {
           nextPageId: 'is-client-client-name',
@@ -608,7 +588,6 @@ export const WORKFLOW: ConfigurationDTO = {
     },
     {
       pageId: 'client-email',
-      component: 'clientEmail',
       nextOptionList: [
         {
           nextPageId: 'client-identification-number'
@@ -640,7 +619,6 @@ export const WORKFLOW: ConfigurationDTO = {
     },
     {
       pageId: 'client-identification-number',
-      component: 'clientIdentificationNumber',
       nextOptionList: [
         {
           nextPageId: 'apology-screen',
@@ -682,7 +660,7 @@ export const WORKFLOW: ConfigurationDTO = {
     },
     {
       pageId: 'este-es-tu-seguro',
-      component: 'quoteOfferings',
+      component: 'quote-offerings',
       nextOptionList: [
         {
           nextPageId: 'contact-time'
@@ -706,7 +684,6 @@ export const WORKFLOW: ConfigurationDTO = {
     },
     {
       pageId: 'confirmation',
-      component: 'confirmation',
       nextOptionList: [
         {
           nextPageId: 'calcula-tu-seguro'
@@ -732,7 +709,6 @@ export const WORKFLOW: ConfigurationDTO = {
     },
     {
       pageId: 'contact-time',
-      component: 'contactTime',
       nextOptionList: [
         {
           nextPageId: 'confirmation'
@@ -758,7 +734,6 @@ export const WORKFLOW: ConfigurationDTO = {
     },
     {
       pageId: 'contact-us',
-      component: 'contactUs',
       configuration: {
         literals: {
           header: 'Información de contacto',
@@ -779,7 +754,6 @@ export const WORKFLOW: ConfigurationDTO = {
     },
     {
       pageId: 'apology-screen',
-      component: 'apologyScreen',
       configuration: {
         literals: {
           body: 'Lo sentimos, no podemos ofrecerte el seguro que necesitas en esta ocasión.',
@@ -795,7 +769,7 @@ export const WORKFLOW: ConfigurationDTO = {
     },
     {
       pageId: 'is-client-client-name',
-      component: 'clientName',
+      component: 'client-name',
       nextOptionList: [
         {
           nextPageId: 'is-client-client-phone-number'
@@ -813,7 +787,7 @@ export const WORKFLOW: ConfigurationDTO = {
     },
     {
       pageId: 'is-client-client-phone-number',
-      component: 'clientPhoneNumber',
+      component: 'client-phone-number',
       nextOptionList: [
         {
           nextPageId: 'is-client-client-email'
@@ -828,7 +802,7 @@ export const WORKFLOW: ConfigurationDTO = {
     },
     {
       pageId: 'is-client-client-email',
-      component: 'clientEmail',
+      component: 'client-email',
       nextOptionList: [
         {
           nextPageId: 'is-client-client-identification-number'
@@ -849,7 +823,7 @@ export const WORKFLOW: ConfigurationDTO = {
     },
     {
       pageId: 'is-client-client-identification-number',
-      component: 'clientIdentificationNumber',
+      component: 'client-identification-number',
       nextOptionList: [
         {
           nextPageId: 'is-client-contact-us'
@@ -869,7 +843,7 @@ export const WORKFLOW: ConfigurationDTO = {
     },
     {
       pageId: 'is-client-contact-us',
-      component: 'contactUs',
+      component: 'contact-us',
       configuration: {
         literals: {
           header: 'Información de contacto',
@@ -897,7 +871,7 @@ export const WORKFLOW: ConfigurationDTO = {
     },
     {
       pageId: 'external-contact-us',
-      component: 'contactUs',
+      component: 'contact-us',
       nextOptionList: [
         {
           nextPageId: 'external-contact-time'
@@ -926,7 +900,7 @@ export const WORKFLOW: ConfigurationDTO = {
     },
     {
       pageId: 'external-contact-time',
-      component: 'contactTime',
+      component: 'contact-time',
       nextOptionList: [
         {
           nextPageId: 'external-contact-us'
