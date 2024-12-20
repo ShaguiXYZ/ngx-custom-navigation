@@ -4,9 +4,9 @@ import { ContextDataService, deepCopy } from '@shagui/ng-shagui/core';
 import { Subscription } from 'rxjs';
 import { QUOTE_APP_CONTEXT_DATA, QUOTE_CONTEXT_DATA } from '../../core/constants';
 import { ConditionEvaluation, patch } from '../../core/lib';
-import { AppContextData } from '../../core/models/app-context-data.model';
+import { AppContextData } from '../../core/models/_app-context-data.model';
 import { Page } from '../../core/models/configuration.model';
-import { QuoteModel } from '../../core/models/quote.model';
+import { QuoteModel } from '../../core/models/_quote.model';
 
 @Component({
   template: ''

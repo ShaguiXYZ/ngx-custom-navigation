@@ -6,10 +6,10 @@ import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
 import { NxInputModule } from '@aposin/ng-aquila/input';
 import { NxMaskModule } from '@aposin/ng-aquila/mask';
 import { QuoteFormValidarors } from 'src/app/core/form';
-import { QuoteComponent } from 'src/app/core/models';
 import { HeaderTitleComponent, QuoteFooterComponent } from 'src/app/shared/components';
 import { QuoteAutoFocusDirective, QuoteLiteralDirective } from 'src/app/shared/directives';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
+import { QuoteComponent } from '../../_quote-component';
 
 @Component({
   selector: 'quote-client-phone-number',

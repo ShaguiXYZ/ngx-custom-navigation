@@ -6,7 +6,7 @@ import { LiteralModel } from './literal.model';
 import { PageFormValidationSettings } from './page-form.model';
 import { QuoteFooterConfig } from './quote-footer-comfig.model';
 import { Version, VersionInfo } from './quote-version.model';
-import { QuoteModel } from './quote.model';
+import { QuoteModel } from './_quote.model';
 import { StepperConfig } from './stepper-config.model';
 import { Stepper, StepperDTO } from './stepper.model';
 import { WorkflowComponent } from 'src/app/library/library-manifest';

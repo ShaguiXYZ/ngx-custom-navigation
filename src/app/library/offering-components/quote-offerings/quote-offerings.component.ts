@@ -2,15 +2,15 @@ import { ComponentType } from '@angular/cdk/portal';
 import { CommonModule } from '@angular/common';
 import { Component, ElementRef, inject, OnInit, ViewChild } from '@angular/core';
 import { NxDialogService, NxModalModule, NxModalRef } from '@aposin/ng-aquila/modal';
-import { Subscription } from 'rxjs';
-import { OfferingPriceModel, QuoteComponent, QuoteModel } from 'src/app/core/models';
+import { QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
+import { QuoteError } from 'src/app/core/errors';
+import { OfferingPriceModel, QuoteModel } from 'src/app/core/models';
 import { RoutingService } from 'src/app/core/services';
 import { OfferingsService } from 'src/app/core/services/offerings.service';
 import { HeaderTitleComponent, QuoteOfferingCoveragesComponent } from 'src/app/shared/components';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
+import { QuoteComponent } from '../../_quote-component';
 import { QuoteOfferingPriceCardComponent } from './components';
-import { QuoteError } from 'src/app/core/errors';
-import { QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
 
 @Component({
   selector: 'quote-quote-offerings',

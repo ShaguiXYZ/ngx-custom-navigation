@@ -719,6 +719,17 @@
           "footer-next": "FINALIZAR"
         },
         "data": {
+          "contextData": {
+            "blackList": {},
+            "client": {},
+            "contactData": {},
+            "driven": {},
+            "insuranceCompany": {},
+            "personalData": {},
+            "place": {},
+            "vehicle": {},
+            "offering": {}
+          },
           "headerConfig": {
             "showBack": false,
             "showContactUs": false

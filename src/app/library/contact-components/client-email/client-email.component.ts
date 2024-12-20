@@ -6,10 +6,10 @@ import { NxInputModule } from '@aposin/ng-aquila/input';
 import { NxLinkModule } from '@aposin/ng-aquila/link';
 import { NxSwitcherModule } from '@aposin/ng-aquila/switcher';
 import { QuoteFormValidarors } from 'src/app/core/form';
-import { QuoteComponent } from 'src/app/core/models';
 import { HeaderTitleComponent, QuoteFooterComponent, QuoteZoneComponent } from 'src/app/shared/components';
 import { QuoteAutoFocusDirective, QuoteLiteralDirective } from 'src/app/shared/directives';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
+import { QuoteComponent } from '../../_quote-component';
 
 @Component({
   selector: 'quote-client-email',
@@ -68,8 +68,8 @@ export class ClientEMailComponent extends QuoteComponent implements OnInit {
         this.quoteFormValidarors.required(),
         this.quoteFormValidarors.matches([emailRegex]) // @howto use regex to validate email ignoring case
       ]),
-      accepInfo: new FormControl(this._contextData.client.accepInfo, [this.quoteFormValidarors.informed()]),
-      acceptPrivacyPolicy: new FormControl(this._contextData.client.acceptPrivacyPolicy, [this.quoteFormValidarors.requiredTrue()])
+      accepInfo: new FormControl(this._contextData.client.accepInfo ?? false, [this.quoteFormValidarors.informed()]),
+      acceptPrivacyPolicy: new FormControl(this._contextData.client.acceptPrivacyPolicy ?? false, [this.quoteFormValidarors.requiredTrue()])
     });
   }
 }

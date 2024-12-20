@@ -2,11 +2,11 @@ import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { NxButtonModule } from '@aposin/ng-aquila/button';
 import { hasValue } from '@shagui/ng-shagui/core';
-import { QuoteComponent } from 'src/app/core/models';
 import { RoutingService } from 'src/app/core/services';
 import { QuoteTrackDirective } from 'src/app/core/tracking';
 import { HeaderTitleComponent, SelectableOptionComponent } from 'src/app/shared/components';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
+import { QuoteComponent } from '../../_quote-component';
 
 @Component({
   selector: 'quote-is-policy-owner',

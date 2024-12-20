@@ -5,11 +5,11 @@ import { NX_DATE_LOCALE } from '@aposin/ng-aquila/datefield';
 import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
 import { NxInputModule } from '@aposin/ng-aquila/input';
 import { QuoteFormValidarors } from 'src/app/core/form';
-import { QuoteComponent } from 'src/app/core/models';
 import { HeaderTitleComponent, QuoteFooterComponent } from 'src/app/shared/components';
 import { QuoteAutoFocusDirective, QuoteLiteralDirective } from 'src/app/shared/directives';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 import { QuoteZoneComponent } from '../../../shared/components/quote-zone/quote-zone.component';
+import { QuoteComponent } from '../../_quote-component';
 
 @Component({
   selector: 'quote-client-name',

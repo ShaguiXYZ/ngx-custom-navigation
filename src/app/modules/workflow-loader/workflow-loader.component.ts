@@ -1,7 +1,8 @@
 import { Component, OnInit, ViewChild, ViewContainerRef, inject } from '@angular/core';
 import { ContextDataService } from '@shagui/ng-shagui/core';
 import { QUOTE_APP_CONTEXT_DATA } from 'src/app/core/constants';
-import { AppContextData, QuoteComponent } from 'src/app/core/models';
+import { AppContextData } from 'src/app/core/models';
+import { QuoteComponent } from 'src/app/library';
 import { LIBRARY_MANIFEST } from 'src/app/library/library-manifest';
 
 @Component({
@@ -25,7 +26,6 @@ export class WorkflowLoaderComponent implements OnInit {
 
   private loadComponent = (): void => {
     const {
-      configuration: { homePageId },
       navigation: { lastPage }
     } = this.contextDataService.get<AppContextData>(QUOTE_APP_CONTEXT_DATA);
 

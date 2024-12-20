@@ -2,11 +2,12 @@ import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
 import { NxAccordionModule } from '@aposin/ng-aquila/accordion';
 import { NxCopytextModule } from '@aposin/ng-aquila/copytext';
-import { CubicCapacityModel, FuelModel, QuoteComponent, VehicleClassesModel } from 'src/app/core/models';
+import { CubicCapacityModel, FuelModel, VehicleClassesModel } from 'src/app/core/models';
 import { RoutingService, VehicleService } from 'src/app/core/services';
 import { QuoteTrackDirective } from 'src/app/core/tracking';
 import { HeaderTitleComponent, SelectableOptionComponent } from 'src/app/shared/components';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
+import { QuoteComponent } from '../../_quote-component';
 
 @Component({
   selector: 'quote-vehicle-fuel',

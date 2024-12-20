@@ -5,12 +5,12 @@ import { NxCopytextModule } from '@aposin/ng-aquila/copytext';
 import { NxHeadlineModule } from '@aposin/ng-aquila/headline';
 import { NxDialogService } from '@aposin/ng-aquila/modal';
 import { IndexedData } from '@shagui/ng-shagui/core';
-import { QuoteComponent } from 'src/app/core/models';
 import { RoutingService } from 'src/app/core/services';
 import { QuoteTrackDirective } from 'src/app/core/tracking';
 import { HeaderTitleComponent, IconCardComponent } from 'src/app/shared/components';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
 import { DrivingLicenseIcons } from './models';
+import { QuoteComponent } from '../../_quote-component';
 
 @Component({
   selector: 'quote-driving-license-location',

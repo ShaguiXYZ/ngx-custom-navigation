@@ -2,7 +2,7 @@
 import moment from 'moment';
 import { DEFAULT_DATE_FORMAT } from '../constants';
 import { QuoteSettingsModel } from './quote-settings.model';
-import { QuoteModel } from './quote.model';
+import { QuoteModel } from './_quote.model';
 
 export interface Authentication {
   company?: string;

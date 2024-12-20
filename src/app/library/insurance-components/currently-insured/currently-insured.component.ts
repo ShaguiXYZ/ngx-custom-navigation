@@ -2,27 +2,18 @@ import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { NxButtonModule } from '@aposin/ng-aquila/button';
 import { hasValue } from '@shagui/ng-shagui/core';
-import { QuoteComponent } from 'src/app/core/models';
 import { RoutingService } from 'src/app/core/services';
 import { QuoteTrackDirective } from 'src/app/core/tracking';
 import { HeaderTitleComponent, SelectableOptionComponent } from 'src/app/shared/components';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
-import { QuoteLiteralPipe } from 'src/app/shared/pipes';
+import { QuoteComponent } from '../../_quote-component';
 
 @Component({
-  selector: 'app-currently-insured',
+  selector: 'quote-currently-insured',
   templateUrl: './currently-insured.component.html',
   styleUrl: './currently-insured.component.scss',
   standalone: true,
-  imports: [
-    CommonModule,
-    HeaderTitleComponent,
-    SelectableOptionComponent,
-    NxButtonModule,
-    QuoteLiteralDirective,
-    QuoteTrackDirective,
-    QuoteLiteralPipe
-  ]
+  imports: [CommonModule, HeaderTitleComponent, SelectableOptionComponent, NxButtonModule, QuoteLiteralDirective, QuoteTrackDirective]
 })
 export class CurrentlyInsuredComponent extends QuoteComponent {
   private readonly routingService = inject(RoutingService);

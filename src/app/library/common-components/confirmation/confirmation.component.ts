@@ -3,10 +3,10 @@ import { Router } from '@angular/router';
 import { NxButtonModule } from '@aposin/ng-aquila/button';
 import { NxCopytextModule } from '@aposin/ng-aquila/copytext';
 import { NxHeadlineModule } from '@aposin/ng-aquila/headline';
-import { QuoteComponent } from 'src/app/core/models';
 import { HeaderTitleComponent, QuoteFooterComponent } from 'src/app/shared/components';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
 import { environment } from 'src/environments/environment';
+import { QuoteComponent } from '../../_quote-component';
 
 @Component({
   selector: 'quote-confirmation',

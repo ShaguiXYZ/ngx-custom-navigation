@@ -7,12 +7,13 @@ import { NxInputModule } from '@aposin/ng-aquila/input';
 import { IndexedData } from '@shagui/ng-shagui/core';
 import { debounceTime, distinctUntilChanged, fromEvent, Subscription } from 'rxjs';
 import { DEBOUNCE_TIME } from 'src/app/core/constants';
-import { IIconData, QuoteComponent } from 'src/app/core/models';
+import { IIconData } from 'src/app/core/models';
 import { InsuranceCompaniesService, RoutingService } from 'src/app/core/services';
 import { QuoteTrackDirective } from 'src/app/core/tracking';
 import { HeaderTitleComponent, IconCardComponent, TextCardComponent } from 'src/app/shared/components';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
+import { QuoteComponent } from '../../_quote-component';
 import { InsuranceComponentService } from './services';
 
 @Component({

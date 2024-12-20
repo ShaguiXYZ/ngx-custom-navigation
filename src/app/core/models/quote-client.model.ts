@@ -12,5 +12,5 @@ export interface QuoteClientModel {
 }
 
 export namespace QuoteClientModel {
-  export const init = (): QuoteClientModel => ({ accepInfo: false });
+  export const init = (): QuoteClientModel => ({});
 }
