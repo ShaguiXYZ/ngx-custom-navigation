@@ -6,12 +6,12 @@ export class ConditionEvaluation {
   /**
    * Verifica si se cumplen las condiciones
    */
-  public static checkConditions = <T = unknown>(data: T, conditions?: Condition[]): boolean =>
-    conditions?.reduce((isValid: boolean, current: Condition) => {
+  public static checkConditions = <T = unknown>(data: T, conditions: Condition[] = []): boolean =>
+    conditions.reduce((isValid: boolean, current: Condition) => {
       const currentEval = this.evalCondition(data, current);
 
       return this.applyPreviousEval(isValid, currentEval, current.union);
-    }, true) ?? true;
+    }, true);
 
   private static evalCondition = <T>(data: T, condition: Condition): boolean => {
     try {

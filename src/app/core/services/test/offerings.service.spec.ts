@@ -72,9 +72,9 @@ describe('OfferingsService', () => {
         signature: { hash: 'hash' }
       } as QuoteModel)
       .then(offerings => {
-        expect(offerings.prices.length).toBe(2);
-        expect(offerings.prices[0].modalityId).toBe(1);
-        expect(offerings.prices[0].modalityDescription).toBe('Offering 1');
+        expect(offerings.prices?.length).toBe(2);
+        expect(offerings.prices?.[0].modalityId).toBe(1);
+        expect(offerings.prices?.[0].modalityDescription).toBe('Offering 1');
       });
 
     expect(httpClientSpy.get.calls.count()).withContext('one call').toBe(1);
@@ -94,7 +94,7 @@ describe('OfferingsService', () => {
         }
       } as unknown as QuoteModel)
       .then(offerings => {
-        expect(offerings.prices.length).toBe(2);
+        expect(offerings.prices?.length).toBe(2);
       });
 
     expect(httpClientSpy.get.calls.count()).withContext('no calls').toBe(0);

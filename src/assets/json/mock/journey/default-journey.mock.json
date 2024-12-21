@@ -526,7 +526,66 @@
       ],
       "configuration": {
         "literals": {
-          "header": "¿Has tenido algún accidente en {{literal-last}} {{years}} {{literal-year}}?",
+          "header": {
+            "value": "¿Has tenido algún accidente en {{last}}{{last-single}} {{value}} {{year}}{{years}}?",
+            "params": {
+              "value": {
+                "value": "insuranceCompany.yearsAsOwner",
+                "type": "data",
+                "conditions": [
+                  {
+                    "expression": "insuranceCompany.yearsAsOwner",
+                    "operation": ">",
+                    "value": 1
+                  }
+                ]
+              },
+              "last": {
+                "value": "los últimos",
+                "type": "value",
+                "conditions": [
+                  {
+                    "expression": "insuranceCompany.yearsAsOwner",
+                    "operation": ">",
+                    "value": 1
+                  }
+                ]
+              },
+              "last-single": {
+                "value": "el último",
+                "type": "value",
+                "conditions": [
+                  {
+                    "expression": "insuranceCompany.yearsAsOwner",
+                    "operation": "<=",
+                    "value": 1
+                  }
+                ]
+              },
+              "years": {
+                "value": "Label.Years",
+                "type": "translate",
+                "conditions": [
+                  {
+                    "expression": "insuranceCompany.yearsAsOwner",
+                    "operation": ">",
+                    "value": 1
+                  }
+                ]
+              },
+              "year": {
+                "value": "Label.Year",
+                "type": "translate",
+                "conditions": [
+                  {
+                    "expression": "insuranceCompany.yearsAsOwner",
+                    "operation": "<=",
+                    "value": 1
+                  }
+                ]
+              }
+            }
+          },
           "more-accidents": "{{value}} {{or-more}}",
           "footer-info": "Nos gustaría acompañarte en tus próximos viajes."
         }

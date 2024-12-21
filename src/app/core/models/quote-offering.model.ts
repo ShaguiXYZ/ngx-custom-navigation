@@ -161,9 +161,9 @@ export interface OfferingPriceModel {
 }
 
 export interface QuoteOfferingModel {
-  quotationId: number;
+  quotationId?: number;
   price?: OfferingPriceModel;
-  prices: OfferingPriceModel[];
+  prices?: OfferingPriceModel[];
   hash?: string;
 }
 

@@ -120,7 +120,7 @@ describe('QuoteOfferingsComponent', () => {
 
     fixture.whenStable().then(() => {
       expect(component['_contextData']).toEqual(mockQuote);
-      expect(component.prices).toEqual(mockOffering.prices);
+      expect(component.prices).toEqual(mockOffering.prices ?? []);
     });
   });
 

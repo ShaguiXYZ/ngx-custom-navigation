@@ -42,7 +42,7 @@ export class QuoteOfferingsComponent extends QuoteComponent implements OnInit {
   async ngOnInit(): Promise<void> {
     this.offeringsService
       .pricing(this._contextData)
-      .then(offering => (this.prices = offering.prices))
+      .then(offering => (this.prices = offering.prices ?? []))
       .catch(() => {
         throw new QuoteError('Error fetching offering prices');
       })

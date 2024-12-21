@@ -11,7 +11,7 @@ export const WORKFLOW: ConfigurationDTO = {
           pages: ['is-client', 'place', 'birthdate', 'driving-license-date', 'driving-license-location', 'date-of-issue']
         },
         {
-          label: { value: 'Datos del vehículo' },
+          label: { value: 'Datos del vehículo.' },
           pages: [
             'vehicle-type',
             'license-plate',
@@ -150,6 +150,7 @@ export const WORKFLOW: ConfigurationDTO = {
       ],
       configuration: {
         literals: {
+          'postal-code': 'Código postal',
           'error-required': 'El código postal es obligatorio para continuar',
           'error-not-found': 'El código postal no existe',
           header: '¿Cuál es tu código postal?',
@@ -527,7 +528,66 @@ export const WORKFLOW: ConfigurationDTO = {
       ],
       configuration: {
         literals: {
-          header: '¿Has tenido algún accidente en {{literal-last}} {{years}} {{literal-year}}?',
+          header: {
+            value: '¿Has tenido algún accidente en {{last}}{{last-single}} {{value}} {{years}}{{year}}?',
+            params: {
+              value: {
+                value: 'insuranceCompany.yearsAsOwner',
+                type: 'data',
+                conditions: [
+                  {
+                    expression: 'insuranceCompany.yearsAsOwner',
+                    operation: '>',
+                    value: 1
+                  }
+                ]
+              },
+              last: {
+                value: 'los últimos',
+                type: 'value',
+                conditions: [
+                  {
+                    expression: 'insuranceCompany.yearsAsOwner',
+                    operation: '>',
+                    value: 1
+                  }
+                ]
+              },
+              'last-single': {
+                value: 'el último',
+                type: 'value',
+                conditions: [
+                  {
+                    expression: 'insuranceCompany.yearsAsOwner',
+                    operation: '<=',
+                    value: 1
+                  }
+                ]
+              },
+              years: {
+                value: 'Label.Years',
+                type: 'translate',
+                conditions: [
+                  {
+                    expression: 'insuranceCompany.yearsAsOwner',
+                    operation: '>',
+                    value: 1
+                  }
+                ]
+              },
+              year: {
+                value: 'Label.Year',
+                type: 'translate',
+                conditions: [
+                  {
+                    expression: 'insuranceCompany.yearsAsOwner',
+                    operation: '<=',
+                    value: 1
+                  }
+                ]
+              }
+            }
+          },
           'more-accidents': '{{value}} {{or-more}}',
           'footer-info': 'Nos gustaría acompañarte en tus próximos viajes.'
         }
@@ -689,6 +749,17 @@ export const WORKFLOW: ConfigurationDTO = {
           'footer-next': 'FINALIZAR'
         },
         data: {
+          contextData: {
+            blackList: {},
+            client: {},
+            contactData: {},
+            driven: {},
+            insuranceCompany: {},
+            personalData: {},
+            place: {},
+            vehicle: {},
+            offering: {}
+          },
           headerConfig: {
             showBack: false,
             showContactUs: false

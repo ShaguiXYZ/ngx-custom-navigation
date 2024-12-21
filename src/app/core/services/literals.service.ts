@@ -1,8 +1,9 @@
 import { inject, Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { ContextDataService, DataInfo } from '@shagui/ng-shagui/core';
-import { QUOTE_APP_CONTEXT_DATA } from '../constants';
+import { ContextDataService, DataInfo, JsonUtils } from '@shagui/ng-shagui/core';
+import { QUOTE_APP_CONTEXT_DATA, QUOTE_CONTEXT_DATA } from '../constants';
 import { AppContextData, LiteralModel, LiteralParam, QuoteLiteral } from '../models';
+import { ConditionEvaluation } from '../lib';
 
 @Injectable({ providedIn: 'root' })
 export class LiteralsService {
@@ -23,7 +24,10 @@ export class LiteralsService {
         return this.getValue(literal, this.normalizeParams(params));
       }
 
-      if (this.isQuoteLiteral(literal)) {
+      if (
+        this.isQuoteLiteral(literal) &&
+        ConditionEvaluation.checkConditions(this.contextDataService.get(QUOTE_CONTEXT_DATA), literal.conditions)
+      ) {
         return this.getLiteral(literal, this.normalizeParams({ ...params, ...literal.params })) ?? '';
       }
 
@@ -52,12 +56,22 @@ export class LiteralsService {
     return Object.entries(params).reduce((acc, [key, value]) => acc.replaceAll(new RegExp(`{{\\s*${key}\\s*}}`, 'g'), value), literal);
   };
 
-  private getLiteral = (literal: QuoteLiteral, params?: DataInfo): string =>
-    literal?.type === 'translate'
-      ? this.translateService.instant(literal.value, { ...params, ...this.normalizeParams(literal.params) })
-      : literal?.type === 'literal'
-      ? this.transformLiteral(literal.value, literal.params)
-      : this.getValue(literal.value, { ...params, ...this.normalizeParams(literal.params) });
+  private getLiteral = (literal: QuoteLiteral, params?: DataInfo): string => {
+    switch (literal.type) {
+      case 'translate': {
+        const normalizedParams = { ...params, ...this.normalizeParams(literal.params) };
+        return this.translateService.instant(literal.value, normalizedParams);
+      }
+      case 'literal':
+        return this.transformLiteral(literal.value, literal.params);
+      case 'data':
+        return `${JsonUtils.valueOf(this.contextDataService.get(QUOTE_CONTEXT_DATA), literal.value) ?? ''}`;
+      default: {
+        const normalizedParams = { ...params, ...this.normalizeParams(literal.params) };
+        return this.getValue(literal.value, normalizedParams);
+      }
+    }
+  };
 
   private normalizeParams = (params?: LiteralParam): DataInfo => {
     return params

@@ -1,16 +1,5 @@
 <article class="component-container">
-  @let years = yearsAsOwner;
-
-  <quote-header-title
-    ><span
-      nxQuoteLiteral="header"
-      [nxQuoteLitealParams]="{
-        years: years === 1 ? '' : years.toString(),
-        'literal-last': years > 1 ? 'los últimos' : 'el último',
-        'literal-year': { value: years > 1 ? 'Label.Years' : 'Label.Year', type: 'translate' }
-      }"
-    ></span
-  ></quote-header-title>
+  <quote-header-title><span nxQuoteLiteral="header"></span></quote-header-title>
   <section class="form-container">
     @for (item of accidents; track item) {
     <div class="selectable-row">

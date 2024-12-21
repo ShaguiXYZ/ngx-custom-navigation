@@ -4,6 +4,4 @@ export interface FormValidationSettings {
   disabled?: boolean;
 }
 
-export interface PageFormValidationSettings {
-  [controlName: string]: Partial<Record<QuoteFormValidations, FormValidationSettings>>;
-}
+export type PageFormValidationSettings = Record<string, Partial<Record<QuoteFormValidations, FormValidationSettings>>>;
