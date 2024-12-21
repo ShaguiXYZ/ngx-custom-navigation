@@ -1016,7 +1016,12 @@
     "error-not-between-dates": { "value": "Errors.NotBetweenDates", "type": "translate" },
     "terms-and-conditions": "Términos y condiciones",
     "privacy-policy": "Política de privacidad",
-    "legal-notice": "Aviso legal y privacidad",
+    "legal-notice": {
+      "value": "<a class='link nx-font-weight-bold' href='{{legal-link}}' target='_blank'>Aviso legal y privacidad</a>",
+      "type": "value",
+      "params": { "legal-link": { "value": "legal-link", "type": "literal" } }
+    },
+    "legal-link": "https://www.shagui.com/aviso-legal",
     "cookies-policy": "Política de cookies"
   }
 }
