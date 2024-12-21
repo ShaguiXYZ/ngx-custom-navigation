@@ -4,7 +4,7 @@ import { TestBed } from '@angular/core/testing';
 import { ContextDataService, HttpService } from '@shagui/ng-shagui/core';
 import { of } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { Configuration, ConfigurationDTO, dataHash, Version } from '../../models';
+import { Configuration, ConfigurationDTO, dataHash, JourneyInfo, QuoteSettingsModel, Version } from '../../models';
 import { JourneyService } from '../journey.service';
 import { LiteralsService } from '../literals.service';
 
@@ -48,13 +48,14 @@ describe('JourneyService', () => {
   });
 
   it('shoult get client journey', async () => {
-    const clientId = 1;
     const journeyName = 'test';
+    const info: Record<string, JourneyInfo> = { '1': { name: journeyName } };
+    const settitngs: QuoteSettingsModel = { office: 1, commercialExceptions: { enableWorkFlow: true } } as QuoteSettingsModel;
 
-    httpService.get.and.returnValue(of([journeyName]));
+    httpService.get.and.returnValue(of(info));
 
-    service.clientJourney(clientId).then(result => {
-      expect(result).toBe(journeyName);
+    service.clientJourney(`${settitngs}`).then(result => {
+      expect(result.name).toBe(journeyName);
     });
   });
 
@@ -78,7 +79,7 @@ describe('JourneyService', () => {
       literals: {}
     } as unknown as ConfigurationDTO;
 
-    const { version, ...significantData } = mockConfigurationDTO;
+    const { ...significantData } = mockConfigurationDTO;
 
     const mockConfiguration = {
       name: journeyName,
@@ -103,14 +104,11 @@ describe('JourneyService', () => {
     httpService.get.and.returnValue(of(mockConfigurationDTO));
     contextDataService.get.and.returnValue({ configuration: { version: {}, hash: 'oldHash' } });
 
-    const result = await service.fetchConfiguration(journeyName);
+    const result = await service.fetchConfiguration(journeyName, [{ value: dtoVersion }]);
 
     console.log(JSON.stringify(result));
 
-    expect(result).toEqual({
-      configuration: { ...mockConfiguration, version: { actual: dtoVersion, last: dtoVersion } },
-      properties: { breakingchange: true }
-    });
+    expect(result).toEqual({ ...mockConfiguration, version: { actual: dtoVersion, last: dtoVersion } });
     expect(httpService.get).toHaveBeenCalledWith(`${environment.baseUrl}/journey/test`);
   });
 

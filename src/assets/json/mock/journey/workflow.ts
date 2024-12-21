@@ -3,14 +3,6 @@ import { ConfigurationDTO } from 'src/app/core/models';
 export const WORKFLOW: ConfigurationDTO = {
   homePageId: 'calcula-tu-seguro',
   title: { value: 'journey-title', type: 'literal' },
-  version: [
-    { value: 'v1.1', breakingchange: true },
-    { value: 'v1.1.1', date: 1733999306681 },
-    { value: 'v2.0.0', date: 1734213499903, breakingchange: true },
-    { value: 'v2.0.1', date: 1734213772860 },
-    { value: 'v2.1.0', date: 1734348268692, breakingchange: true },
-    { value: 'v2.1.1', date: 1734448620712 }
-  ],
   steppers: [
     {
       steps: [

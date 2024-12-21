@@ -1,9 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { TestBed } from '@angular/core/testing';
+import { ContextDataService } from '@shagui/ng-shagui/core';
 import { of } from 'rxjs';
 import { OfferingDTO, QuoteModel } from '../../models';
 import { OfferingsService } from '../offerings.service';
-import { ContextDataService } from '@shagui/ng-shagui/core';
 
 describe('OfferingsService', () => {
   let service: OfferingsService;
@@ -36,15 +36,30 @@ describe('OfferingsService', () => {
     const mockOfferings: OfferingDTO = {
       operationData: {
         priceGrid: [
-          { modalityId: 1, modalityDescription: 'Offering 1', totalPremiumAmount: '100' },
-          { modalityId: 2, modalityDescription: 'Offering 2', totalPremiumAmount: '200' }
+          {
+            modalityId: 1,
+            modalityDescription: 'Offering 1',
+            totalPremiumAmount: '100',
+            receiptData: { firstReceiptAmount: 100, followingReceiptAmount: 50 },
+            coverageList: [],
+            configurableCoverageList: []
+          },
+          {
+            modalityId: 2,
+            modalityDescription: 'Offering 2',
+            totalPremiumAmount: '200',
+            receiptData: { firstReceiptAmount: 200, followingReceiptAmount: 100 },
+            coverageList: [],
+            configurableCoverageList: []
+          }
         ]
       }
-    } as OfferingDTO;
+    } as unknown as OfferingDTO;
 
+    httpClientSpy.get.and.returnValue(of(mockOfferings));
     httpClientSpy.post.and.returnValue(of(mockOfferings));
 
-    service
+    await service
       .pricing({
         client: {},
         contactData: {},
@@ -62,6 +77,7 @@ describe('OfferingsService', () => {
         expect(offerings.prices[0].modalityDescription).toBe('Offering 1');
       });
 
+    expect(httpClientSpy.get.calls.count()).withContext('one call').toBe(1);
     expect(httpClientSpy.post.calls.count()).withContext('one call').toBe(1);
   });
 

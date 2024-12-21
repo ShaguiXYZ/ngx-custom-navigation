@@ -9,10 +9,12 @@ import {
   Configuration,
   ConfigurationDTO,
   dataHash,
+  JourneyInfo,
   Links,
   LiteralModel,
   Literals,
   Page,
+  QuoteSettingsModel,
   StateInfo,
   Step,
   Stepper,
@@ -21,60 +23,56 @@ import {
 } from '../models';
 import { LiteralsService } from './literals.service';
 
+export const QUOTE_JOURNEY_DISALED = 'not-journey';
+
 @Injectable({ providedIn: 'root' })
 export class JourneyService {
   private readonly contextDataService = inject(ContextDataService);
   private readonly httpService = inject(HttpService);
   private readonly literalService = inject(LiteralsService);
 
-  public clientJourney = async (cliendId: number): Promise<string> => {
-    const httpParams = new HttpParams().append('clientId', cliendId.toString());
+  public quoteSettings = (): Promise<QuoteSettingsModel> =>
+    firstValueFrom(
+      this.httpService.get<QuoteSettingsModel>(`${environment.baseUrl}/journey/settings`).pipe(map(res => res as QuoteSettingsModel))
+    );
+
+  public clientJourney = async (journeyId: string): Promise<JourneyInfo> => {
+    const httpParams = new HttpParams().append('clientId', journeyId);
 
     return await firstValueFrom(
       this.httpService
-        .get<string[]>(`${environment.baseUrl}/journeys`, {
+        .get<Record<string, JourneyInfo>>(`${environment.baseUrl}/journey/journeys`, {
           clientOptions: { params: httpParams }
         })
         .pipe(
-          map(res => res as string[]),
+          map(res => res as Record<string, JourneyInfo>),
           map(journeys => {
-            return journeys[0];
+            return journeys[journeyId];
           })
         )
     );
   };
 
-  public fetchConfiguration = async (
-    name: string
-  ): Promise<{
-    configuration: Configuration;
-    properties?: {
-      breakingchange: boolean;
-    };
-  }> => {
+  public fetchConfiguration = async (name: string, versions: VersionInfo[]): Promise<Configuration> => {
     const configurationDTO = await firstValueFrom(
       this.httpService.get<ConfigurationDTO>(`${environment.baseUrl}/journey/${name}`).pipe(map(res => res as ConfigurationDTO))
     );
-    const { version, ...significantData } = configurationDTO;
+    const { ...significantData } = configurationDTO;
     const hash = dataHash(significantData);
-    const configuration = { ...this.init(configurationDTO), hash, name };
-    const appContextData = this.contextDataService.get<AppContextData>(QUOTE_APP_CONTEXT_DATA);
-    const contextConfiguration = appContextData?.configuration;
-
-    return {
-      configuration,
-      properties: {
-        breakingchange:
-          contextConfiguration?.hash !== hash &&
-          (contextConfiguration?.version.actual
-            ? VersionInfo.isBreakingChange([{ value: contextConfiguration.version.actual }], version)
-            : true)
-      }
-    };
+    return { ...this.init(name, configurationDTO, VersionInfo.last(versions)), hash, name };
   };
 
-  private init = (configuration: ConfigurationDTO): Configuration => {
-    const quoteConfiguration: Configuration = this.initQuote(configuration);
+  public hasBreakingChange(versions: VersionInfo[]): boolean {
+    const contextData = this.contextDataService.get<AppContextData>(QUOTE_APP_CONTEXT_DATA);
+    const contextConfiguration = contextData?.configuration;
+
+    return contextConfiguration?.version.actual
+      ? VersionInfo.isBreakingChange([{ value: contextConfiguration.version.actual }], versions)
+      : true;
+  }
+
+  private init = (name: string, configuration: ConfigurationDTO, version: VersionInfo): Configuration => {
+    const quoteConfiguration: Configuration = this.initQuote(name, configuration, version);
 
     if (!configuration.homePageId) {
       quoteConfiguration.homePageId = quoteConfiguration.errorPageId;
@@ -88,13 +86,13 @@ export class JourneyService {
     return quoteConfiguration;
   };
 
-  private initQuote = (dto: ConfigurationDTO): Configuration => {
-    const lastVersion = VersionInfo.last(dto.version);
+  private initQuote = (name: string, dto: ConfigurationDTO, version: VersionInfo): Configuration => {
     const errorPageId = dto.errorPageId ?? UniqueIds.random();
 
     const configuration: Configuration = {
-      version: { actual: lastVersion.value, last: lastVersion.value },
-      releaseDate: lastVersion.date ? new Date(lastVersion.date) : undefined,
+      name,
+      version: { actual: version.value, last: version.value },
+      releaseDate: version.date ? new Date(version.date) : undefined,
       homePageId: dto.homePageId,
       title: dto.title,
       errorPageId,

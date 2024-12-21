@@ -1,0 +1,19 @@
+{
+  "not-journey": {
+    "name": "not-journey",
+    "versions": [{ "value": "v0.0", "breakingchange": true }]
+  },
+  "10": {
+    "name": "default-journey",
+    "versions": [
+      { "value": "v1.1" },
+      { "value": "v1.1.1", "date": 1733999306681 },
+      { "value": "v2.0.0", "date": 1734213499903, "breakingchange": true },
+      { "value": "v2.0.1", "date": 1734213772860 },
+      { "value": "v2.1.0", "date": 1734348268692, "breakingchange": true },
+      { "value": "v2.1.1", "date": 1734448620712 },
+      { "value": "v2.1.2", "date": 1734448620712, "breakingchange": true },
+      { "value": "v2.1.3", "date": 1734448620712, "breakingchange": true }
+    ]
+  }
+}

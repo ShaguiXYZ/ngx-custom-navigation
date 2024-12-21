@@ -1,45 +1,51 @@
 import { inject, Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { ContextDataService, HttpService } from '@shagui/ng-shagui/core';
-import { firstValueFrom, map } from 'rxjs';
-import { environment } from 'src/environments/environment';
+import { ContextDataService } from '@shagui/ng-shagui/core';
 import { QUOTE_APP_CONTEXT_DATA, QUOTE_CONTEXT_DATA } from '../constants';
-import { AppContextData, CommercialExceptionsModel, QuoteModel, QuoteSettingsModel, VersionInfo } from '../models';
-import { JourneyService } from './journey.service';
+import { AppContextData, CommercialExceptionsModel, JourneyInfo, QuoteModel, QuoteSettingsModel, VersionInfo } from '../models';
+import { JourneyService, QUOTE_JOURNEY_DISALED } from './journey.service';
 
 @Injectable({ providedIn: 'root' })
 export class SettingsService {
   private readonly contextDataService = inject(ContextDataService);
-  private readonly httpService = inject(HttpService);
   private readonly translateService = inject(TranslateService);
   private readonly journeyService = inject(JourneyService);
 
   public async loadSettings(): Promise<void> {
-    console.group('SettingsService');
-    const settings = await this.quoteSettings();
-    const clientJourney = await this.journeyService.clientJourney(settings.office);
-    const journeyName = !clientJourney || !settings.commercialExceptions.enableWorkFlow ? 'not-journey' : clientJourney;
+    const settings = await this.journeyService.quoteSettings();
+    const journeyId = settings.commercialExceptions.enableWorkFlow ? `${settings.office}` : QUOTE_JOURNEY_DISALED;
+    const info = await this.journeyService.clientJourney(journeyId);
+    const context = this.contextDataService.get<AppContextData>(QUOTE_APP_CONTEXT_DATA);
+
     this.translateService.setDefaultLang('es-ES');
 
-    return this.loadJourney(journeyName, settings).finally(() => console.groupEnd());
+    if (context?.configuration.name !== info.name || this.journeyService.hasBreakingChange(info.versions ?? [])) {
+      console.group('SettingsService');
+      await this.loadJourney(info, settings);
+      console.groupEnd();
+    } else {
+      context.settings.commercialExceptions = {
+        ...context.settings.commercialExceptions,
+        enableTracking: settings.commercialExceptions.enableTracking,
+        enableWorkFlow: settings.commercialExceptions.enableWorkFlow
+      };
+      this.contextDataService.set(QUOTE_APP_CONTEXT_DATA, context, { persistent: true });
+    }
   }
 
-  private quoteSettings = (): Promise<QuoteSettingsModel> =>
-    firstValueFrom(this.httpService.get<QuoteSettingsModel>(`${environment.baseUrl}/settings`).pipe(map(res => res as QuoteSettingsModel)));
-
   private loadJourney = async (
-    journey: string,
+    info: JourneyInfo,
     settings: Partial<QuoteSettingsModel> & {
       commercialExceptions: CommercialExceptionsModel;
     }
   ): Promise<void> => {
-    const { configuration, properties } = await this.journeyService.fetchConfiguration(journey);
+    const configuration = await this.journeyService.fetchConfiguration(info.name, info.versions ?? []);
     const actualConfiguration = this.contextDataService.get<AppContextData>(QUOTE_APP_CONTEXT_DATA);
+    const configurationChange = actualConfiguration?.configuration?.hash !== configuration.hash;
     const [quote, contextData] =
-      actualConfiguration?.configuration.name !== configuration.name || properties?.breakingchange
+      actualConfiguration?.configuration.name !== configuration.name || configurationChange
         ? [QuoteModel.init(), AppContextData.init(settings, configuration)]
         : [{ ...QuoteModel.init(), ...this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA) }, { ...actualConfiguration }];
-
     const versionUpdated = contextData.configuration.version.last
       ? VersionInfo.compare({ value: contextData.configuration.version.last }, { value: configuration.version.actual }) > 0
       : true;

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { TestBed } from '@angular/core/testing';
 import { ActivatedRoute, Router, RouterStateSnapshot } from '@angular/router';
 import { ContextDataService } from '@shagui/ng-shagui/core';
@@ -6,7 +7,6 @@ import { journeyGuard } from '../journey.guard';
 
 describe('JourneyGuard', () => {
   let contextDataService: jasmine.SpyObj<ContextDataService>;
-  let router: jasmine.SpyObj<Router>;
 
   beforeEach(() => {
     const contextDataServiceSpy = jasmine.createSpyObj('ContextDataService', ['get', 'set']);
@@ -26,7 +26,6 @@ describe('JourneyGuard', () => {
     });
 
     contextDataService = TestBed.inject(ContextDataService) as jasmine.SpyObj<ContextDataService>;
-    router = TestBed.inject(Router) as jasmine.SpyObj<Router>;
   });
 
   it('should update viewedPages and navigate to the next page', () => {

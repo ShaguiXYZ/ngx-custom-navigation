@@ -19,6 +19,11 @@ export type Literals = {
   'footer-next'?: LiteralModel;
 } & DataInfo<LiteralModel>;
 
+export interface JourneyInfo {
+  name: string;
+  versions?: VersionInfo[];
+}
+
 export interface ZoneConfig {
   skipLoad?: boolean;
   conditions?: Condition[];
@@ -32,7 +37,6 @@ export interface ConfigurationDTO {
   pageMap: Page[];
   links?: Links;
   literals?: Literals;
-  version: VersionInfo[];
 }
 
 type PageData = {
@@ -73,7 +77,7 @@ export interface Condition {
 
 export interface Configuration {
   hash?: string;
-  name?: string;
+  name: string;
   version: { actual: Version; last?: Version };
   releaseDate?: Date;
   homePageId: string;

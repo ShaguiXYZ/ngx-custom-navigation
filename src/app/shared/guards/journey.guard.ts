@@ -12,27 +12,19 @@ import { AppContextData, Page, QuoteModel, Track } from 'src/app/core/models';
  * @param state - The router state snapshot.
  * @returns A `MaybeAsync<GuardResult>` which can be a boolean or a UrlTree.
  *
- * This guard performs the following actions:
- * - Injects the `ContextDataService` and `Router` services.
- * - Retrieves the application context data.
- * - Checks if there is a `nextPage` defined in the navigation context.
- *   - If not, sets the `lastPage` to undefined and updates the `nextPage` to the last viewed page.
- *   - Updates the context data and navigates to the `nextPage`.
- * - If `nextPage` is defined:
- *   - Retrieves the `homePageId` and `errorPageId` from the configuration.
- *   - Updates the `viewedPages` array based on the `nextPage`.
- *   - Updates the navigation context with the new `viewedPages`, `lastPage`, and sets `nextPage` to undefined.
- *   - If the `nextPage` is the home page, initializes the quote context data.
- *   - Updates the browser's history state with the `nextPage` route.
- * - Returns `true` to allow the navigation.
+ * This guard function uses the application's context data to determine the next step in the navigation flow.
+ * It performs the following operations:
+ * - Injects the `ContextDataService` to access and manipulate context data.
+ * - Defines a helper function `stateInfoControl` to manage the state information of steppers.
+ * - Retrieves the current application context data.
+ * - Determines the next page to navigate to based on the viewed pages and configuration.
+ * - Updates the track information using the `stateInfoControl` function.
+ * - Manages the viewed pages and updates the navigation context.
+ * - Sets the updated context data back to the `ContextDataService`.
+ * - Returns `true` to allow the navigation to proceed.
  */
 export const journeyGuard: CanActivateFn = (route: ActivatedRouteSnapshot, state: RouterStateSnapshot): MaybeAsync<GuardResult> => {
   const contextDataService = inject(ContextDataService);
-  const router = inject(Router);
-
-  const context = contextDataService.get<AppContextData>(QUOTE_APP_CONTEXT_DATA);
-  const { nextPage, viewedPages } = context.navigation;
-
   const stateInfoControl = ({
     configuration: { steppers },
     navigation: { nextPage, lastPage, track }
@@ -65,8 +57,9 @@ export const journeyGuard: CanActivateFn = (route: ActivatedRouteSnapshot, state
     return _track;
   };
 
-  if (!nextPage?.pageId) return false;
-
+  const context = contextDataService.get<AppContextData>(QUOTE_APP_CONTEXT_DATA);
+  const { viewedPages } = context.navigation;
+  const nextPage = context.navigation.nextPage ?? context.configuration.pageMap[viewedPages[viewedPages.length - 1]];
   const track = stateInfoControl(context);
   const { errorPageId } = context.configuration;
   const pageIndex = viewedPages.indexOf(nextPage.pageId);

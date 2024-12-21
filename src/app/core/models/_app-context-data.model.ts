@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-namespace */
-import { Configuration, Page } from './configuration.model';
+import { Configuration, Page } from './_configuration.model';
 import { QuoteSettingsModel } from './quote-settings.model';
 import { QuoteModel } from './_quote.model';
 

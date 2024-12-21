@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-namespace */
+/* eslint-disable @typescript-eslint/consistent-type-definitions */
 export type Version = `v${number}.${number}` | `v${number}.${number}.${number}`;
 export type VersionInfo = {
   value: Version;

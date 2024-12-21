@@ -3,9 +3,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ContextDataService } from '@shagui/ng-shagui/core';
 import { QUOTE_APP_CONTEXT_DATA } from 'src/app/core/constants';
 import { JourneyError } from 'src/app/core/errors';
-import { AppContextData, Page } from 'src/app/core/models';
+import { AppContextData } from 'src/app/core/models';
 import { ActivatorFn } from 'src/app/core/service-activators';
 import { BudgetActivator } from 'src/app/core/service-activators/budget.activator';
+import { SettingsService } from 'src/app/core/services';
 import { QuoteTrackService } from 'src/app/core/tracking';
 import { AppUrls } from 'src/app/shared/config';
 
@@ -21,6 +22,7 @@ import { AppUrls } from 'src/app/shared/config';
 })
 export class QuoteDispatcherComponent implements OnInit {
   private readonly contextDataService = inject(ContextDataService);
+  private readonly settingsService = inject(SettingsService);
   private readonly trackService = inject(QuoteTrackService);
   private readonly _router = inject(Router);
   private readonly _route = inject(ActivatedRoute);
@@ -52,6 +54,8 @@ export class QuoteDispatcherComponent implements OnInit {
 
     if (homePageId) {
       if (!nextPage?.pageId) this.resetContext();
+
+      await this.settingsService.loadSettings();
 
       this._router.navigate([AppUrls._loader], { skipLocationChange: true });
     } else {

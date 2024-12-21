@@ -1,9 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute, ActivatedRouteSnapshot, Router } from '@angular/router';
-import { ContextDataService } from '@shagui/ng-shagui/core';
-import { AppContextData } from 'src/app/core/models';
+import { ContextDataService, HttpService } from '@shagui/ng-shagui/core';
+import { AppContextData, CommercialExceptionsModel, JourneyInfo, QuoteSettingsModel } from 'src/app/core/models';
 import { BudgetActivator } from 'src/app/core/service-activators/budget.activator';
-import { NX_RECAPTCHA_TOKEN, RoutingService } from 'src/app/core/services';
+import { JourneyService, NX_RECAPTCHA_TOKEN, RoutingService } from 'src/app/core/services';
 import { QuoteDispatcherComponent } from './quote-dispatcher.component';
 import { TranslateService } from '@ngx-translate/core';
 
@@ -14,13 +14,22 @@ describe('QuoteDispatcherComponent', () => {
   let mockActivatedRoute: jasmine.SpyObj<ActivatedRoute>;
   let mockContextDataService: jasmine.SpyObj<ContextDataService>;
   let mockRoutingService: jasmine.SpyObj<RoutingService>;
+  let mockHttpService: jasmine.SpyObj<HttpService>;
+  let mockJourneyService: jasmine.SpyObj<JourneyService>;
 
   beforeEach(async () => {
-    const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate']);
+    const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate', 'setDefaultLang']);
     mockRouter = jasmine.createSpyObj('Router', ['navigate']);
     mockActivatedRoute = jasmine.createSpyObj('ActivatedRoute', ['snapshot']);
     mockContextDataService = jasmine.createSpyObj('ContextDataService', ['get', 'set']);
     mockRoutingService = jasmine.createSpyObj('RoutingService', ['someMethod']);
+    mockHttpService = jasmine.createSpyObj('HttpService', ['get']);
+    mockJourneyService = jasmine.createSpyObj('JourneyService', [
+      'clientJourney',
+      'fetchConfiguration',
+      'hasBreakingChange',
+      'quoteSettings'
+    ]);
 
     mockActivatedRoute.snapshot = {
       params: {},
@@ -49,7 +58,9 @@ describe('QuoteDispatcherComponent', () => {
         { provide: ActivatedRoute, useValue: mockActivatedRoute },
         { provide: ContextDataService, useValue: mockContextDataService },
         { provide: RoutingService, useValue: mockRoutingService },
+        { provide: JourneyService, useValue: mockJourneyService },
         { provide: TranslateService, useValue: translateServiceSpy },
+        { provide: HttpService, useValue: mockHttpService },
         { provide: NX_RECAPTCHA_TOKEN, useValue: { siteKey: 'mock-site-key' } }
       ]
     }).compileComponents();
@@ -82,7 +93,13 @@ describe('QuoteDispatcherComponent', () => {
       }
     };
 
+    const mockCommercialExceptions = { enableWorkFlow: true } as unknown as CommercialExceptionsModel;
+
     mockContextDataService.get.and.returnValue(mockContext);
+    mockJourneyService.quoteSettings.and.returnValue(
+      Promise.resolve({ commercialExceptions: mockCommercialExceptions } as QuoteSettingsModel)
+    );
+    mockJourneyService.clientJourney.and.returnValue(Promise.resolve({} as JourneyInfo));
 
     await component.ngOnInit();
 
@@ -111,7 +128,9 @@ describe('QuoteDispatcherComponent', () => {
 
   it('should call BudgetActivator if stored param exists', async () => {
     const mockContext = {
-      settings: {},
+      settings: {
+        commercialExceptions: { enableWorkFlow: true }
+      },
       configuration: {
         homePageId: 'home',
         errorPageId: 'error',
@@ -127,8 +146,14 @@ describe('QuoteDispatcherComponent', () => {
       }
     };
 
+    const mockCommercialExceptions = { enableWorkFlow: true } as unknown as CommercialExceptionsModel;
+
     mockContextDataService.get.and.returnValue(mockContext);
     mockActivatedRoute.snapshot.params = { stored: 'some-budget' };
+    mockJourneyService.quoteSettings.and.returnValue(
+      Promise.resolve({ commercialExceptions: mockCommercialExceptions } as QuoteSettingsModel)
+    );
+    mockJourneyService.clientJourney.and.returnValue(Promise.resolve({} as JourneyInfo));
 
     spyOn(BudgetActivator, 'retrieveBudget').and.returnValue(async () => true);
 

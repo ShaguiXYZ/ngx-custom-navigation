@@ -1,27 +1,27 @@
 import { HttpStatusCode } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { ContextDataService, HttpService } from '@shagui/ng-shagui/core';
+import { HttpService } from '@shagui/ng-shagui/core';
 import { firstValueFrom, map, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { QUOTE_APP_CONTEXT_DATA } from '../constants';
-import { AppContextData, OfferingDTO, PricingDTO, QuoteModel, QuoteOfferingModel, SignatureModel } from '../models';
+import { OfferingDTO, PricingDTO, QuoteModel, QuoteOfferingModel } from '../models';
 import { ServiceActivatorService } from '../service-activators';
 
 @Injectable()
 export class OfferingsService {
-  private readonly contextDataService = inject(ContextDataService);
   private readonly serviceActivatorService = inject(ServiceActivatorService);
   private readonly httpService = inject(HttpService);
 
-  public pricing(quote: QuoteModel): Promise<QuoteOfferingModel> {
+  public async pricing(quote: QuoteModel): Promise<QuoteOfferingModel> {
     const { signature } = quote;
 
     if (signature?.hash !== quote.offering.hash) {
-      const { settings } = this.contextDataService.get<AppContextData>(QUOTE_APP_CONTEXT_DATA);
+      const offeringStaticData = await firstValueFrom(
+        this.httpService.get(`assets/json/offering.config.json`).pipe(map(res => res as Partial<PricingDTO>))
+      );
 
       return firstValueFrom(
         this.httpService
-          .post<PricingDTO, OfferingDTO>(`${environment.baseUrl}/offerings`, PricingDTO.fromModel(quote, settings), {
+          .post<PricingDTO, OfferingDTO>(`${environment.baseUrl}/offerings`, PricingDTO.fromModel(quote, offeringStaticData), {
             responseStatusMessage: {
               [HttpStatusCode.NotFound]: { text: 'Notifications.ModelsNotFound' }
             },

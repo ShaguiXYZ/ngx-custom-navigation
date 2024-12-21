@@ -1,0 +1,49 @@
+{
+  "authentication": {
+    "agentid": "12345",
+    "agentcode": 0,
+    "agenthelpercode": 0,
+    "channel": "chanel",
+    "company": "cia",
+    "groupings": [1, 3, 4, 5],
+    "office": 10,
+    "partnerid": "partner"
+  },
+  "operationHeaders": { "operationTypeCode": "", "productCode": 0, "operationId": 0, "operative": 0, "profile": "" },
+  "operationDataT1": {
+    "generalData": {
+      "receipts": { "firstReceiptType": 1, "followingReceiptType": 1, "paymentFrequency": "A" },
+      "discounts": {
+        "backgroundLevel": { "max": 0, "value": 0 },
+        "cap": { "max": 0, "value": 0 },
+        "capSurcharge": { "max": 50, "value": 0 },
+        "commissionReduction": { "max": "A", "value": "A" },
+        "centralAdjustment": { "max": 999, "value": 0 },
+        "transfer": { "max": 0, "value": 0 },
+        "employee": { "max": 0, "value": 0 },
+        "crossSale": { "max": 0, "value": 0 },
+        "campaigns": { "max": 0, "value": 0 }
+      }
+    },
+    "participantsData": {
+      "holder": {
+        "document": { "documentType": "N" }
+      },
+      "owner": {
+        "document": { "documentType": "N" }
+      },
+      "driver": null,
+      "secondDriver": null,
+      "nominatedDriver": true,
+      "nominatedSecondDriver": false
+    },
+    "riskData": {
+      "vehicleInfo": {
+        "vehicleClass": ""
+      }
+    },
+    "previousCompanyData": {
+      "previousPolicyLast5": ""
+    }
+  }
+}

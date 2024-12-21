@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-namespace */
 import { QuoteBlackList } from './quote-black-list.model';
 import { QuoteClientModel } from './quote-client.model';

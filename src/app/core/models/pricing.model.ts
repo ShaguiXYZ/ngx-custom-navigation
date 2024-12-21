@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-namespace */
 import moment from 'moment';
 import { DEFAULT_DATE_FORMAT } from '../constants';
-import { QuoteSettingsModel } from './quote-settings.model';
 import { QuoteModel } from './_quote.model';
+import { patch } from '../lib';
 
 export interface Authentication {
   company?: string;
@@ -121,66 +121,50 @@ export interface PricingDTO {
 }
 
 export namespace PricingDTO {
-  export const fromModel = (model: QuoteModel, settings: QuoteSettingsModel): PricingDTO => ({
-    authentication: { ...settings },
-    operationHeaders: { operationTypeCode: '', productCode: 0, operationId: 0, operative: 0, profile: '' },
-    operationDataT1: {
-      generalData: {
-        policyDates: {
-          policyEffectiveDate: model.client.dateOfIssue && moment(model.client.dateOfIssue).format(DEFAULT_DATE_FORMAT),
-          policyExpirationDate: model.client.expiration && moment(model.client.expiration).format(DEFAULT_DATE_FORMAT)
+  export const fromModel = (model: QuoteModel, settings: Partial<PricingDTO>): PricingDTO => {
+    const value = {
+      operationDataT1: {
+        generalData: {
+          policyDates: {
+            policyEffectiveDate: model.client.dateOfIssue && moment(model.client.dateOfIssue).format(DEFAULT_DATE_FORMAT),
+            policyExpirationDate: model.client.expiration && moment(model.client.expiration).format(DEFAULT_DATE_FORMAT)
+          }
         },
-        receipts: { firstReceiptType: 1, followingReceiptType: 1, paymentFrequency: 'A' },
-        discounts: {
-          backgroundLevel: { max: 0, value: 0 },
-          cap: { max: 0, value: 0 },
-          capSurcharge: { max: 50, value: 0 },
-          commissionReduction: { max: 'A', value: 'A' },
-          centralAdjustment: { max: 999, value: 0 },
-          transfer: { max: 0, value: 0 },
-          employee: { max: 0, value: 0 },
-          crossSale: { max: 0, value: 0 },
-          campaigns: { max: 0, value: 0 }
+        participantsData: {
+          holder: {
+            document: { documentNumber: model.personalData.identificationNumber },
+            address: { city: model.place.location, postalCode: model.place.postalCode },
+            birthDate: model.personalData.birthdate && moment(model.personalData.birthdate).format(DEFAULT_DATE_FORMAT),
+            licenseDate: model.driven.licenseDate && moment(model.driven.licenseDate).format(DEFAULT_DATE_FORMAT)
+          },
+          owner: {
+            document: { documentNumber: model.personalData.identificationNumber },
+            address: { city: model.place.location, postalCode: model.place.postalCode },
+            birthDate: model.personalData.birthdate && moment(model.personalData.birthdate).format(DEFAULT_DATE_FORMAT),
+            licenseDate: model.driven.licenseDate && moment(model.driven.licenseDate).format(DEFAULT_DATE_FORMAT)
+          }
+        },
+        riskData: {
+          postalCode: model.place.postalCode,
+          city: model.place.location,
+          province: model.place.provinceCode,
+          vehicleInfo: {
+            plateNumber: model.vehicle.plateNumber?.toUpperCase() ?? '',
+            vehicleTrademark: model.vehicle.brand,
+            vehicleModel: model.vehicle.model,
+            vehicleCode: model.vehicle.modelVersion?.index,
+            vehicleVersion: model.vehicle.modelVersion?.index,
+            creationDate: model.vehicle.creationDate && moment(model.vehicle.creationDate).format(DEFAULT_DATE_FORMAT),
+            vehicleBaseCode: model.vehicle.base7
+          }
+        },
+        previousCompanyData: {
+          companyCode: model.insuranceCompany.company?.index,
+          licensePlate: model.vehicle.plateNumber
         }
-      },
-      participantsData: {
-        holder: {
-          document: { documentType: 'N', documentNumber: model.personalData.identificationNumber },
-          address: { city: model.place.location, postalCode: model.place.postalCode },
-          birthDate: model.personalData.birthdate && moment(model.personalData.birthdate).format(DEFAULT_DATE_FORMAT),
-          licenseDate: model.driven.licenseDate && moment(model.driven.licenseDate).format(DEFAULT_DATE_FORMAT)
-        },
-        owner: {
-          document: { documentType: 'N', documentNumber: model.personalData.identificationNumber },
-          address: { city: model.place.location, postalCode: model.place.postalCode },
-          birthDate: model.personalData.birthdate && moment(model.personalData.birthdate).format(DEFAULT_DATE_FORMAT),
-          licenseDate: model.driven.licenseDate && moment(model.driven.licenseDate).format(DEFAULT_DATE_FORMAT)
-        },
-        driver: null,
-        secondDriver: null,
-        nominatedDriver: true,
-        nominatedSecondDriver: false
-      },
-      riskData: {
-        postalCode: model.place.postalCode,
-        city: model.place.location,
-        province: model.place.provinceCode,
-        vehicleInfo: {
-          plateNumber: model.vehicle.plateNumber?.toUpperCase() ?? '',
-          vehicleTrademark: model.vehicle.brand,
-          vehicleModel: model.vehicle.model,
-          vehicleCode: model.vehicle.modelVersion?.index,
-          vehicleClass: '',
-          vehicleVersion: model.vehicle.modelVersion?.index,
-          creationDate: model.vehicle.creationDate && moment(model.vehicle.creationDate).format(DEFAULT_DATE_FORMAT),
-          vehicleBaseCode: model.vehicle.base7
-        }
-      },
-      previousCompanyData: {
-        companyCode: model.insuranceCompany.company?.index,
-        previousPolicyLast5: '',
-        licensePlate: model.vehicle.plateNumber
       }
-    }
-  });
+    };
+
+    return patch<PricingDTO>(value, settings);
+  };
 }

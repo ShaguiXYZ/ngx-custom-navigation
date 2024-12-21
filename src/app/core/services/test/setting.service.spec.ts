@@ -1,28 +1,37 @@
 import { TestBed } from '@angular/core/testing';
 import { TranslateService } from '@ngx-translate/core';
-import { ContextDataService, HttpService } from '@shagui/ng-shagui/core';
-import { of } from 'rxjs';
-import { Configuration, QuoteSettingsModel } from '../../models';
-import { JourneyService } from '../journey.service';
+import { ContextDataService } from '@shagui/ng-shagui/core';
+import { CommercialExceptionsModel, Configuration, JourneyInfo, QuoteSettingsModel } from '../../models';
+import { JourneyService, QUOTE_JOURNEY_DISALED } from '../journey.service';
 import { SettingsService } from '../setting.service';
 
 describe('SettingsService', () => {
   let service: SettingsService;
-  let httpServiceSpy: jasmine.SpyObj<HttpService>;
   let translateServiceSpy: jasmine.SpyObj<TranslateService>;
   let contextDataServiceSpy: jasmine.SpyObj<ContextDataService>;
   let journeyServiceSpy: jasmine.SpyObj<JourneyService>;
 
   beforeEach(() => {
-    const httpSpy = jasmine.createSpyObj('HttpService', ['get']);
     const translateSpy = jasmine.createSpyObj('TranslateService', ['setDefaultLang']);
     const contextSpy = jasmine.createSpyObj('ContextDataService', ['set', 'get']);
-    const journeySpy = jasmine.createSpyObj('JourneyService', ['clientJourney', 'fetchConfiguration']);
+    const journeySpy = jasmine.createSpyObj('JourneyService', [
+      'clientJourney',
+      'fetchConfiguration',
+      'hasBreakingChange',
+      'quoteSettings'
+    ]);
+
+    const mockCommercialExceptions = { enableWorkFlow: true } as unknown as CommercialExceptionsModel;
+    journeySpy.quoteSettings.and.returnValue(Promise.resolve({ commercialExceptions: mockCommercialExceptions } as QuoteSettingsModel));
+
+    contextSpy.get.and.returnValue({
+      configuration: { name: 'name', version: { last: 'v0.0' } },
+      settings: { commercialExceptions: mockCommercialExceptions }
+    });
 
     TestBed.configureTestingModule({
       providers: [
         SettingsService,
-        { provide: HttpService, useValue: httpSpy },
         { provide: TranslateService, useValue: translateSpy },
         { provide: ContextDataService, useValue: contextSpy },
         { provide: JourneyService, useValue: journeySpy }
@@ -30,7 +39,6 @@ describe('SettingsService', () => {
     });
 
     service = TestBed.inject(SettingsService);
-    httpServiceSpy = TestBed.inject(HttpService) as jasmine.SpyObj<HttpService>;
     translateServiceSpy = TestBed.inject(TranslateService) as jasmine.SpyObj<TranslateService>;
     contextDataServiceSpy = TestBed.inject(ContextDataService) as jasmine.SpyObj<ContextDataService>;
     journeyServiceSpy = TestBed.inject(JourneyService) as jasmine.SpyObj<JourneyService>;
@@ -41,14 +49,12 @@ describe('SettingsService', () => {
   });
 
   it('should load settings and set default language', async () => {
-    const settings: QuoteSettingsModel = { commercialExceptions: { enableWorkFlow: true } } as QuoteSettingsModel;
-    httpServiceSpy.get.and.returnValue(of(settings));
+    const settings: QuoteSettingsModel = { office: 10, commercialExceptions: { enableWorkFlow: true } } as QuoteSettingsModel;
+    journeyServiceSpy.quoteSettings.and.returnValue(Promise.resolve(settings));
     journeyServiceSpy.fetchConfiguration.and.returnValue(
-      Promise.resolve({
-        configuration: { name: 'name', homePageId: 'page', pageMap: { page: { pageId: 'id' } }, version: {} } as unknown as Configuration
-      })
+      Promise.resolve({ name: 'name', homePageId: 'page', pageMap: { page: { pageId: 'id' } }, version: {} } as unknown as Configuration)
     );
-    journeyServiceSpy.clientJourney.and.returnValue(Promise.resolve('journey'));
+    journeyServiceSpy.clientJourney.and.returnValue(Promise.resolve({} as JourneyInfo));
 
     await service.loadSettings();
 
@@ -56,29 +62,24 @@ describe('SettingsService', () => {
   });
 
   it('should disable workflow if commercialExceptions.enableWorkFlow is false', async () => {
-    const settings: QuoteSettingsModel = { commercialExceptions: { enableWorkFlow: false } } as QuoteSettingsModel;
-    httpServiceSpy.get.and.returnValue(of(settings));
+    const settings: QuoteSettingsModel = { office: 10, commercialExceptions: { enableWorkFlow: false } } as QuoteSettingsModel;
+    journeyServiceSpy.quoteSettings.and.returnValue(Promise.resolve(settings));
     journeyServiceSpy.fetchConfiguration.and.returnValue(
-      Promise.resolve({
-        configuration: { name: 'name', homePageId: 'page', pageMap: { page: { pageId: 'id' } }, version: {} } as unknown as Configuration
-      })
+      Promise.resolve({ name: 'name', homePageId: 'page', pageMap: { page: { pageId: 'id' } }, version: {} } as unknown as Configuration)
     );
-    journeyServiceSpy.clientJourney.and.returnValue(Promise.resolve('journey'));
+    journeyServiceSpy.clientJourney.and.returnValue(Promise.resolve({} as JourneyInfo));
 
     await service.loadSettings();
 
+    expect(journeyServiceSpy.clientJourney).toHaveBeenCalledWith(QUOTE_JOURNEY_DISALED);
     expect(contextDataServiceSpy.set).toHaveBeenCalled();
   });
 
   it('should load context if commercialExceptions.enableWorkFlow is true', async () => {
-    const settings: QuoteSettingsModel = { commercialExceptions: { enableWorkFlow: true } } as QuoteSettingsModel;
-    httpServiceSpy.get.and.returnValue(of(settings));
     journeyServiceSpy.fetchConfiguration.and.returnValue(
-      Promise.resolve({
-        configuration: { name: 'name', homePageId: 'page', pageMap: { page: { pageId: 'id' } }, version: {} } as unknown as Configuration
-      })
+      Promise.resolve({ name: 'name', homePageId: 'page', pageMap: { page: { pageId: 'id' } }, version: {} } as unknown as Configuration)
     );
-    journeyServiceSpy.clientJourney.and.returnValue(Promise.resolve('journey'));
+    journeyServiceSpy.clientJourney.and.returnValue(Promise.resolve({} as JourneyInfo));
 
     await service.loadSettings();
 
