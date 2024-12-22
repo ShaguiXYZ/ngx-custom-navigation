@@ -11,7 +11,7 @@
           [max]="maxDate"
           [datepicker]="myDatepicker"
           [parseFormat]="dateFormats"
-          displayFormat="DD/MM/YYYY"
+          [displayFormat]="displayDateFormat"
         />
         <span nxFormfieldHint nxQuoteLiteral="hint-date-format"></span>
         <nx-datepicker-toggle [for]="myDatepicker" nxFormfieldSuffix></nx-datepicker-toggle>

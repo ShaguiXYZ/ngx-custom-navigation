@@ -5,7 +5,7 @@ import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
 import { NxInputModule } from '@aposin/ng-aquila/input';
 import { NxMomentDateModule } from '@aposin/ng-aquila/moment-date-adapter';
 import moment, { Moment } from 'moment';
-import { DEFAULT_DATE_FORMAT, DEFAULT_DATE_FORMATS } from 'src/app/core/constants';
+import { DEFAULT_DATE_FORMAT, DEFAULT_DATE_FORMATS, DEFAULT_DISPLAY_DATE_FORMAT } from 'src/app/core/constants';
 import { QuoteFormValidarors } from 'src/app/core/form';
 import { HeaderTitleComponent, QuoteFooterComponent } from 'src/app/shared/components';
 import { QuoteAutoFocusDirective, QuoteLiteralDirective } from 'src/app/shared/directives';
@@ -32,8 +32,9 @@ import { QuoteComponent } from '../../_quote-component';
   standalone: true
 })
 export class DrivingLicenseDateComponent extends QuoteComponent implements OnInit {
-  public dateFormat = DEFAULT_DATE_FORMAT;
-  public dateFormats = DEFAULT_DATE_FORMATS;
+  public readonly dateFormat = DEFAULT_DATE_FORMAT;
+  public readonly displayDateFormat = DEFAULT_DISPLAY_DATE_FORMAT;
+  public readonly dateFormats = DEFAULT_DATE_FORMATS;
   public form!: FormGroup;
   public maxDate = moment();
   public minYears = 18;
