@@ -11,6 +11,7 @@
   <section class="form-container">
     @for(icon of drivenLicenseCountries; track icon.index) {
     <quote-icon-card
+      class="nx-margin-3xs"
       [data]="icon"
       [selected]="selectedLocation?.index === icon.index"
       (uiSelect)="selectLocation(icon)"
