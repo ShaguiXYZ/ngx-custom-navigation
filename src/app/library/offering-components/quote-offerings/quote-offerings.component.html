@@ -4,7 +4,7 @@
   <quote-header-title><span nxQuoteLiteral="header"></span></quote-header-title>
   <section class="form-container">
     <div #carrouselInner class="inner__carrousel">
-      <div #carrouselTrack class="track nx-margin-s" (touchstart)="swipeStart($event)" (touchend)="swipeEnd($event)">
+      <div #carrouselTrack class="track nx-margin-s">
         @for(price of prices; track price.modalityId) {
         <div class="carousel__card" [ngClass]="{ selected: selectedPriceIndex === $index }" (click)="selectSteper($index)">
           <quote-offering-price-card
@@ -17,6 +17,13 @@
           />
         </div>
         }
+      </div>
+
+      <div class="carousel__operation carousel__left" (click)="previous()">
+        <em class="fa-solid fa-2xl fa-arrow-left"></em>
+      </div>
+      <div class="carousel__operation carousel__right" (click)="next()">
+        <em class="fa-solid fa-2xl fa-arrow-right"></em>
       </div>
     </div>
 

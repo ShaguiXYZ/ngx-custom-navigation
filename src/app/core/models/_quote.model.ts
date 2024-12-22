@@ -26,7 +26,7 @@ export interface QuoteModel extends QuoteControlModel {
 
 export namespace QuoteSignificantData {
   export const getSignificantData = (quote: QuoteModel): Partial<QuoteModel> => {
-    const { blackList, contactData, forms, offering, signature, ...significantData } = quote;
+    const { blackList, contactData, forms, offering, personalData, signature, ...significantData } = quote;
     return significantData;
   };
 }

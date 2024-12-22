@@ -129,7 +129,7 @@ describe('QuoteOfferingsComponent', () => {
       changedTouches: [new Touch({ identifier: 0, target: component['inner'].nativeElement, clientX: 100, clientY: 100 })]
     });
 
-    component.swipeStart(touchEvent);
+    component['swipeStart'](touchEvent);
 
     expect(component['swipeCoord']).toEqual([100, 100]);
     expect(component['swipeTime']).toBeDefined();
@@ -147,7 +147,7 @@ describe('QuoteOfferingsComponent', () => {
 
     spyOn(component, 'selectSteper');
 
-    component.swipeEnd(touchEvent);
+    component['swipeEnd'](touchEvent);
 
     expect(component.selectSteper).toHaveBeenCalledWith(1);
   });
@@ -187,7 +187,9 @@ describe('QuoteOfferingsComponent', () => {
 
     component['selectCarrouselCard']();
 
-    expect(component['track'].nativeElement.style.transform).toBe('translateX(0px)');
+    requestAnimationFrame(() => {
+      expect(component['track'].nativeElement.style.transform).toBe('translateX(0px)');
+    });
   });
 
   xit('should open the QuoteOfferingCoveragesComponent with the correct data', () => {

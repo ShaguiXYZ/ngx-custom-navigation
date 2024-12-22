@@ -10,6 +10,40 @@
   .inner__carrousel {
     display: block;
     overflow: hidden;
+    position: relative;
+
+    .carousel__operation {
+      align-items: center;
+      background: radial-gradient(circle, rgba(0, 122, 179, 1) 0%, rgba(0, 122, 179, 0.5) 100%);
+      background-color: var(--ui-03);
+      border-radius: 100px;
+      color: var(--ui-02);
+      display: flex;
+      gap: 8px;
+      justify-content: center;
+      height: 60px;
+      opacity: 0.1;
+      position: absolute;
+      top: 50%;
+      transition: background-color 1s ease-in-out, opacity 1s ease-in-out;
+      transform: translateY(-50%);
+      width: 60px;
+      z-index: 1;
+
+      &.carousel__left {
+        left: 0;
+      }
+
+      &.carousel__right {
+        right: 0;
+      }
+
+      &:hover {
+        background: radial-gradient(circle, rgba(0, 122, 179, 1) 0%, rgba(0, 122, 179, 0.5) 100%);
+        background-color: var(--ui-04);
+        opacity: 0.5;
+      }
+    }
 
     .track {
       display: flex;
