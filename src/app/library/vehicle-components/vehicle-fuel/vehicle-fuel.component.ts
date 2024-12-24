@@ -5,9 +5,10 @@ import { NxCopytextModule } from '@aposin/ng-aquila/copytext';
 import { CubicCapacityModel, FuelModel, VehicleClassesModel } from 'src/app/core/models';
 import { RoutingService, VehicleService } from 'src/app/core/services';
 import { QuoteTrackDirective } from 'src/app/core/tracking';
-import { HeaderTitleComponent, SelectableOptionComponent } from 'src/app/shared/components';
+import { HeaderTitleComponent, QuoteFooterComponent, SelectableOptionComponent } from 'src/app/shared/components';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
 import { QuoteComponent } from '../../_quote-component';
+import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
 
 @Component({
   selector: 'quote-vehicle-fuel',
@@ -16,9 +17,11 @@ import { QuoteComponent } from '../../_quote-component';
   imports: [
     CommonModule,
     HeaderTitleComponent,
+    QuoteFooterComponent,
     SelectableOptionComponent,
     NxAccordionModule,
     NxCopytextModule,
+    NxFormfieldModule,
     QuoteLiteralDirective,
     QuoteTrackDirective
   ],
@@ -28,6 +31,11 @@ import { QuoteComponent } from '../../_quote-component';
 export class VehicleFuelComponent extends QuoteComponent implements OnInit {
   public cubicCapacityNotKnown: CubicCapacityModel = { index: '-1', data: 'nsnc' };
   public powerNotKnown: VehicleClassesModel = { index: '-1', data: 'nsnc' };
+  public formValidations = {
+    cubicCapacity: false,
+    fuel: false,
+    power: false
+  };
 
   public cubicCapacities: CubicCapacityModel[] = [];
   public fuels: FuelModel[] = [];
@@ -51,17 +59,21 @@ export class VehicleFuelComponent extends QuoteComponent implements OnInit {
     ]);
   }
 
-  public override canDeactivate = (): boolean =>
-    this._contextData.vehicle.fuel !== undefined &&
-    this._contextData.vehicle.powerRange !== undefined &&
-    this._contextData.vehicle.cubicCapacity !== undefined;
+  public override canDeactivate = (): boolean => {
+    this.formValidations = {
+      cubicCapacity: !this.selectedCubicCapacity,
+      fuel: !this.selectedFuel,
+      power: !this.selectedPower
+    };
+
+    return !Object.values(this.formValidations).some(validation => validation);
+  };
 
   public async selectFuel(fuel: FuelModel) {
+    this.formValidations.fuel = false;
     this.selectedFuel = fuel;
     this.selectedCubicCapacity = undefined;
     this.selectedPower = undefined;
-
-    this.populateData();
 
     [this.cubicCapacities, this.powers] = await Promise.all([
       this.vehicleService.cubicCapacities(this._contextData.vehicle),
@@ -70,28 +82,26 @@ export class VehicleFuelComponent extends QuoteComponent implements OnInit {
   }
 
   public async selectCubicCapacity(cubicCapacity: CubicCapacityModel) {
+    this.formValidations.cubicCapacity = false;
     this.selectedCubicCapacity = cubicCapacity;
     this.selectedPower = undefined;
-
-    this.populateData();
 
     this.powers = await this.vehicleService.getVehicleClasses(this._contextData.vehicle);
   }
 
   public selectPower(power: VehicleClassesModel) {
+    this.formValidations.power = false;
     this.selectedPower = power;
-
-    this.populateData();
-
-    this.routingService.next();
   }
 
-  private populateData() {
+  public populateData() {
     this._contextData.vehicle = {
       ...this._contextData.vehicle,
       fuel: this.selectedFuel,
       cubicCapacity: this.selectedCubicCapacity,
       powerRange: this.selectedPower
     };
+
+    this.routingService.next();
   }
 }

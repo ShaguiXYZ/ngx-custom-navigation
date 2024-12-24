@@ -1,7 +1,10 @@
 <!-- eslint-disable @angular-eslint/template/interactive-supports-focus -->
 <!-- eslint-disable @angular-eslint/template/click-events-have-key-events -->
 <article class="component-container">
-  <quote-header-title><span nxQuoteLiteral="header"></span></quote-header-title>
+  <quote-header-title>
+    <span nxQuoteLiteral="header"></span>
+    <p nxCopytext="normal" nxQuoteLiteral="subheader"></p>
+  </quote-header-title>
   <section class="form-container">
     <div #carrouselInner class="inner__carrousel">
       <div #carrouselTrack class="track nx-margin-s">

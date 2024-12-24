@@ -25,6 +25,19 @@ import { AppContextData, Page, QuoteModel, Track } from 'src/app/core/models';
  */
 export const journeyGuard: CanActivateFn = (route: ActivatedRouteSnapshot, state: RouterStateSnapshot): MaybeAsync<GuardResult> => {
   const contextDataService = inject(ContextDataService);
+
+  /**
+   * Updates the track information based on the current and previous stepper keys.
+   *
+   * @param {AppContextData} param0 - The application context data containing configuration and navigation details.
+   * @param {Object} param0.configuration - The configuration object.
+   * @param {Object} param0.configuration.steppers - The steppers configuration.
+   * @param {Object} param0.navigation - The navigation object.
+   * @param {Object} param0.navigation.nextPage - The next page navigation details.
+   * @param {Object} param0.navigation.lastPage - The last page navigation details.
+   * @param {Object} param0.navigation.track - The current track information.
+   * @returns {Track | undefined} - The updated track information or undefined if no updates are made.
+   */
   const stateInfoControl = ({
     configuration: { steppers },
     navigation: { nextPage, lastPage, track }
@@ -36,7 +49,7 @@ export const journeyGuard: CanActivateFn = (route: ActivatedRouteSnapshot, state
     if (lastStepperKey && nextStepperKey !== lastStepperKey) {
       const lastStepper = steppers?.[lastStepperKey];
 
-      if (lastStepper?.stateInfo) {
+      if (lastStepper?.stateInfo?.inherited === false) {
         const inData = _track?.[lastStepperKey]?.inData;
 
         _track = { ...(_track ?? {}), [lastStepperKey]: { data: deepCopy(contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA)) } };
@@ -45,9 +58,9 @@ export const journeyGuard: CanActivateFn = (route: ActivatedRouteSnapshot, state
 
       const nextStepper = nextStepperKey && steppers?.[nextStepperKey];
 
-      if (nextStepper && nextStepper?.stateInfo) {
+      if (nextStepper && nextStepper?.stateInfo?.inherited === false) {
         const quote = deepCopy(contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA));
-        const tracked = _track?.[nextStepperKey]?.data ?? (nextStepper.stateInfo.inherited ? quote : QuoteModel.init());
+        const tracked = _track?.[nextStepperKey]?.data ?? QuoteModel.init();
 
         _track = { ...(_track ?? {}), [nextStepperKey]: { inData: quote, data: tracked } };
         contextDataService.set(QUOTE_CONTEXT_DATA, tracked);
@@ -58,10 +71,12 @@ export const journeyGuard: CanActivateFn = (route: ActivatedRouteSnapshot, state
   };
 
   const context = contextDataService.get<AppContextData>(QUOTE_APP_CONTEXT_DATA);
-  const { viewedPages } = context.navigation;
+  const {
+    configuration: { errorPageId },
+    navigation: { viewedPages }
+  } = context;
   const nextPage = context.navigation.nextPage ?? context.configuration.pageMap[viewedPages[viewedPages.length - 1]];
   const track = stateInfoControl(context);
-  const { errorPageId } = context.configuration;
   const pageIndex = viewedPages.indexOf(nextPage.pageId);
 
   let lastPage = nextPage;

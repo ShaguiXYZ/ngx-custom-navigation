@@ -9,6 +9,8 @@
         <input formControlName="phoneNumber" nxInput nxAutoFocus nxMask="000 00 00 00" />
         @if(form.get('phoneNumber')?.errors?.['required']) {
         <nx-error appearance="text" nxFormfieldError><span nxQuoteLiteral="error-required"></span> </nx-error>
+        } @if(form.get('phoneNumber')?.errors?.['matches']) {
+        <nx-error appearance="text" nxFormfieldError><span nxQuoteLiteral="bad-format"></span> </nx-error>
         }
       </nx-formfield>
     </form>

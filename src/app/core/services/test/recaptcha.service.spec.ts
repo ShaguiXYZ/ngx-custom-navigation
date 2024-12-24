@@ -10,6 +10,12 @@ describe('CaptchaService', () => {
   const mockConfig: RecaptchaConfig = { siteKey: mockSiteKey };
 
   beforeEach(() => {
+    (window as any).grecaptcha = {
+      enterprise: {
+        ready: (callback: () => void) => callback(),
+        execute: () => Promise.resolve('mock-token')
+      }
+    };
     TestBed.configureTestingModule({
       providers: [CaptchaService, { provide: NX_RECAPTCHA_TOKEN, useValue: mockConfig }]
     });

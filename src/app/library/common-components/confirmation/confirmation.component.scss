@@ -16,6 +16,10 @@
     &.nx-icon--fill {
       color: var(--interactive-primary);
       background-color: #eff6f6;
+
+      em {
+        font-size: 48px;
+      }
     }
   }
 }

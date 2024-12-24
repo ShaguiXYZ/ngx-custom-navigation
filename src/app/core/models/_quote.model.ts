@@ -24,13 +24,6 @@ export interface QuoteModel extends QuoteControlModel {
   vehicle: QuoteVehicleModel;
 }
 
-export namespace QuoteSignificantData {
-  export const getSignificantData = (quote: QuoteModel): Partial<QuoteModel> => {
-    const { blackList, contactData, forms, offering, personalData, signature, ...significantData } = quote;
-    return significantData;
-  };
-}
-
 export namespace QuoteModel {
   export const init = (): QuoteModel => ({
     blackList: QuoteBlackList.init(),
@@ -43,8 +36,12 @@ export namespace QuoteModel {
     vehicle: QuoteVehicleModel.init(),
     offering: QuoteOfferingModel.init()
   });
+  const getSignificantData = (quote: QuoteModel): Partial<QuoteModel> => {
+    const { blackList, contactData, forms, offering, personalData, signature, ...significantData } = quote;
+    return significantData;
+  };
   export const signModel = (model: QuoteModel): SignatureModel => {
-    const currentQuoteSignature = dataHash(QuoteSignificantData.getSignificantData(model));
+    const currentQuoteSignature = dataHash(getSignificantData(model));
 
     return {
       hash: currentQuoteSignature

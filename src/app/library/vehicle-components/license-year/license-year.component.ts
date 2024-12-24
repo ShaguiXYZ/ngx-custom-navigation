@@ -20,11 +20,11 @@ import { QuoteComponent } from '../../_quote-component';
   standalone: true,
   imports: [
     HeaderTitleComponent,
+    QuoteFooterComponent,
     NxFormfieldModule,
     NxInputModule,
     NxMaskModule,
     NxButtonModule,
-    QuoteFooterComponent,
     ReactiveFormsModule,
     CommonModule,
     QuoteAutoFocusDirective,

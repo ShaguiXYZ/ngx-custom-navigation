@@ -1,6 +1,9 @@
 <article class="component-container">
-  <quote-header-title> <span nxQuoteLiteral="header"></span></quote-header-title>
-  <div class="form-container">
+  <quote-header-title>
+    <span nxQuoteLiteral="header"></span>
+    <p nxCopytext="normal" nxQuoteLiteral="subheader"></p>
+  </quote-header-title>
+  <section class="form-container">
     <nx-accordion variant="light" [multi]="true">
       <nx-expansion-panel [expanded]="true">
         <nx-expansion-panel-header>
@@ -8,6 +11,9 @@
             <span nxQuoteLiteral="fuel"></span>
           </nx-expansion-panel-title>
         </nx-expansion-panel-header>
+        @if(formValidations.fuel) {
+        <nx-error appearance="text" nxFormfieldError><span nxQuoteLiteral="error-required"></span> </nx-error>
+        }
         <div class="vehicle__selections">
           @for(fuel of fuels; track $index) { @let _selectedFuel = fuel.index === selectedFuel?.index;
           <div class="vehicle__selection nx-margin-2xs">
@@ -36,6 +42,9 @@
             <span nxQuoteLiteral="cubic-capacity"></span>
           </nx-expansion-panel-title>
         </nx-expansion-panel-header>
+        @if(formValidations.cubicCapacity) {
+        <nx-error appearance="text" nxFormfieldError><span nxQuoteLiteral="error-required"></span> </nx-error>
+        }
         <div class="vehicle__selections">
           @for(cubicCapacity of cubicCapacities; track $index) { @let _selectedCubicCapacityselected = cubicCapacity.index ===
           selectedCubicCapacity?.index;
@@ -89,6 +98,9 @@
             <span nxQuoteLiteral="power"></span>
           </nx-expansion-panel-title>
         </nx-expansion-panel-header>
+        @if(formValidations.power) {
+        <nx-error appearance="text" nxFormfieldError><span nxQuoteLiteral="error-required"></span> </nx-error>
+        }
         <div class="vehicle__selections">
           @for(power of powers; track power.index) { @let _selectedPower = power.index === selectedPower?.index;
           <div class="vehicle__selection nx-margin-2xs">
@@ -133,5 +145,13 @@
         </div>
       </nx-expansion-panel>
     </nx-accordion>
-  </div>
+  </section>
+  <quote-footer
+    [trackInfo]="{
+      displayment: selectedCubicCapacity?.index,
+      fuel: selectedFuel?.index,
+      power: powerNotKnown.index
+    }"
+    (uiOnNext)="populateData()"
+  />
 </article>

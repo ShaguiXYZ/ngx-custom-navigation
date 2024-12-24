@@ -30,8 +30,8 @@ export class QuoteLiteralDirective implements AfterViewInit {
   private updateElement(): void {
     const soureceLiteral = this.el.nativeElement.innerHTML;
     const value = this.literalsService.transformLiteral(this.nxQuoteLiteral, this.nxQuoteLitealParams) || this.nxQuoteDefaultLiteral;
-    const safeHtml = this.domSanitizer.bypassSecurityTrustHtml(value ?? soureceLiteral);
+    const toSanitize = value || soureceLiteral;
 
-    this.el.nativeElement.innerHTML = this.domSanitizer.sanitize(1, safeHtml) ?? '';
+    this.el.nativeElement.innerHTML = this.domSanitizer.sanitize(1, toSanitize) ?? '';
   }
 }

@@ -1,7 +1,8 @@
 <!-- eslint-disable @angular-eslint/template/elements-content -->
 <article class="component-container">
   <quote-header-title>
-    <span nxQuoteLiteral="header" [nxQuoteLitealParams]="{ days: '60' }"></span>
+    <span nxQuoteLiteral="header"></span>
+    <p nxCopytext="normal" nxQuoteLiteral="subheader"></p>
   </quote-header-title>
   <section class="form-container">
     <quote-selectable-option [selected]="isPolicyOwner">
