@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { NxButtonModule } from '@aposin/ng-aquila/button';
 import { NxCopytextModule } from '@aposin/ng-aquila/copytext';
@@ -15,15 +15,11 @@ import { QuoteComponent } from '../../_quote-component';
   standalone: true,
   imports: [QuoteFooterComponent, HeaderTitleComponent, NxButtonModule, NxCopytextModule, NxHeadlineModule, QuoteLiteralDirective]
 })
-export class ConfirmationComponent extends QuoteComponent implements OnInit {
-  public clientName?: string;
+export class ConfirmationComponent extends QuoteComponent {
+  public icon = 'fa-face-smile';
   public href = environment.baseUrl;
 
   public readonly router = inject(Router);
-
-  ngOnInit(): void {
-    this.clientName = this._contextData.personalData.name;
-  }
 
   finishFlow() {
     window.location.assign(environment.baseUrl);

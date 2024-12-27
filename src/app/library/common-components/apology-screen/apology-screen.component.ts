@@ -6,6 +6,7 @@ import { NxHeadlineModule } from '@aposin/ng-aquila/headline';
 import { NxIconModule } from '@aposin/ng-aquila/icon';
 import { HeaderTitleComponent, QuoteFooterComponent } from 'src/app/shared/components';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
+import { QuoteComponent } from '../../_quote-component';
 
 @Component({
   selector: 'quote-apology-screen',
@@ -23,4 +24,6 @@ import { QuoteLiteralDirective } from 'src/app/shared/directives';
     QuoteLiteralDirective
   ]
 })
-export class ApologyComponent {}
+export class ApologyComponent extends QuoteComponent {
+  public icon = 'fa-face-frown';
+}

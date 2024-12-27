@@ -1,15 +1,18 @@
+<!-- eslint-disable @angular-eslint/template/elements-content -->
 <article>
   <quote-header-title>
-    <span nxQuoteLiteral="header"></span>
-    <p nxCopytext="normal" nxQuoteLiteral="subheader"></p>
-  </quote-header-title>
-  <section class="form-container">
     <div class="center__header">
+      <h3 nxHeadline="subsection-small" class="nx-font-weight-bold" nxQuoteLiteral="header"></h3>
+      @if(icon) {
       <div class="avatar__container nx-icon--fill nx-margin-y-m">
-        <em class="fa-regular fa-face-frown"></em>
+        <em class="fa-regular {{ icon }}"></em>
       </div>
+      }
+      <p nxCopytext="normal" nxQuoteLiteral="subheader"></p>
     </div>
-    <p nxCopytext="large" class="nx-margin-bottom-xs nx-margin-x-xs" nxQuoteLiteral="body"></p>
+  </quote-header-title>
+  <section class="form-container nx-margin-bottom-l">
+    <p nxCopytext="large" class="nx-margin-bottom-xs" nxQuoteLiteral="body"></p>
   </section>
   <quote-footer />
 </article>

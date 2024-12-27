@@ -3,10 +3,12 @@
   <quote-header-title>
     <div class="center__header">
       <h3 nxHeadline="subsection-small" class="nx-font-weight-bold" nxQuoteLiteral="header"></h3>
+      @if(icon) {
       <div class="avatar__container nx-icon--fill nx-margin-y-m">
-        <em class="fa-solid fa-car-rear"></em>
+        <em class="fa-solid {{ icon }}"></em>
       </div>
-      <span nxQuoteLiteral="subheader"></span>
+      }
+      <p nxCopytext="normal" nxQuoteLiteral="subheader"></p>
     </div>
   </quote-header-title>
   <section class="form-container coverages nx-margin-bottom-l">

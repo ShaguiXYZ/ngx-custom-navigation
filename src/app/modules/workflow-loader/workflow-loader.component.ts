@@ -37,9 +37,9 @@ export class WorkflowLoaderComponent implements OnInit {
         const manifest = LIBRARY_MANIFEST[manifestKey];
 
         this.container.clear();
-        const componentRef = this.container.createComponent(manifest.component);
+        const componentRef = this.container.createComponent<QuoteComponent>(manifest.component);
 
-        this._instance = componentRef.instance as QuoteComponent;
+        this._instance = componentRef.instance;
 
         window.history.pushState({}, '', lastPage.routeTree ?? lastPage.pageId);
       } catch {

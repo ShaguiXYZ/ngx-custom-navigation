@@ -23,4 +23,6 @@ import { QuoteComponent } from '../../_quote-component';
     QuoteLiteralDirective
   ]
 })
-export class OnBoardingComponent extends QuoteComponent {}
+export class OnBoardingComponent extends QuoteComponent {
+  public icon = 'fa-car-rear';
+}
