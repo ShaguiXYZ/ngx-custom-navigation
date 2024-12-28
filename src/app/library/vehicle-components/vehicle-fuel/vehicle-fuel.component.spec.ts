@@ -1,58 +1,32 @@
-import { CommonModule } from '@angular/common';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ReactiveFormsModule } from '@angular/forms';
-import { provideAnimations } from '@angular/platform-browser/animations';
-import { NxAccordionModule } from '@aposin/ng-aquila/accordion';
-import { NxButtonModule } from '@aposin/ng-aquila/button';
-import { NxCopytextModule } from '@aposin/ng-aquila/copytext';
-import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
-import { NxInputModule } from '@aposin/ng-aquila/input';
-import { TranslateService } from '@ngx-translate/core';
-import { ContextDataService } from '@shagui/ng-shagui/core';
-import { CubicCapacityModel, FuelModel, FuelTypes, QuoteModel, VehicleClassesModel } from 'src/app/core/models';
-import { NX_RECAPTCHA_TOKEN, RoutingService, VehicleService } from 'src/app/core/services';
-import { ContextDataServiceStub } from 'src/app/core/stub';
-import { HeaderTitleComponent, SelectableOptionComponent } from 'src/app/shared/components';
-import { QuoteLiteralDirective } from 'src/app/shared/directives';
-import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 import { VehicleFuelComponent } from './vehicle-fuel.component';
+import { VehicleService, RoutingService, NX_RECAPTCHA_TOKEN } from 'src/app/core/services';
+import { CubicCapacityModel, FuelModel, QuoteModel, VehicleClassesModel } from 'src/app/core/models';
+import { TranslateService } from '@ngx-translate/core';
+import { QuoteLiteralPipe } from 'src/app/shared/pipes';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('VehicleFuelComponent', () => {
   let component: VehicleFuelComponent;
   let fixture: ComponentFixture<VehicleFuelComponent>;
-
-  let routingService: jasmine.SpyObj<RoutingService>;
   let vehicleService: jasmine.SpyObj<VehicleService>;
+  let routingService: jasmine.SpyObj<RoutingService>;
 
   beforeEach(async () => {
+    const vehicleServiceSpy = jasmine.createSpyObj('VehicleService', ['getFuelTypes', 'cubicCapacities', 'getVehicleClasses']);
     const routingServiceSpy = jasmine.createSpyObj('RoutingService', ['next']);
-    const vehicleServiceSpy = jasmine.createSpyObj('VehicleService', ['getFuelTypes', 'getVehicleClasses', 'cubicCapacities']);
     const quoteLiteralPipeSpy = jasmine.createSpyObj('QuoteLiteralPipe', ['transform']);
     const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate']);
 
     await TestBed.configureTestingModule({
       declarations: [],
-      imports: [
-        CommonModule,
-        VehicleFuelComponent,
-        HeaderTitleComponent,
-        SelectableOptionComponent,
-        QuoteLiteralDirective,
-        ReactiveFormsModule,
-        NxAccordionModule,
-        NxButtonModule,
-        NxCopytextModule,
-        NxFormfieldModule,
-        NxInputModule
-      ],
+      imports: [VehicleFuelComponent, BrowserAnimationsModule],
       providers: [
-        provideAnimations(),
-        { provide: ContextDataService, useClass: ContextDataServiceStub },
-        { provide: RoutingService, useValue: routingServiceSpy },
         { provide: VehicleService, useValue: vehicleServiceSpy },
         { provide: TranslateService, useValue: translateServiceSpy },
         { provide: QuoteLiteralPipe, useValue: quoteLiteralPipeSpy },
-        { provide: NX_RECAPTCHA_TOKEN, useValue: { siteKey: 'mock-site-key' } }
+        { provide: NX_RECAPTCHA_TOKEN, useValue: { siteKey: 'mock-site-key' } },
+        { provide: RoutingService, useValue: routingServiceSpy }
       ]
     }).compileComponents();
 
@@ -61,84 +35,101 @@ describe('VehicleFuelComponent', () => {
         providers: [{ provide: VehicleService, useValue: vehicleServiceSpy }]
       }
     });
-  });
 
-  beforeEach(() => {
     fixture = TestBed.createComponent(VehicleFuelComponent);
     component = fixture.componentInstance;
-
-    routingService = TestBed.inject(RoutingService) as jasmine.SpyObj<RoutingService>;
     vehicleService = TestBed.inject(VehicleService) as jasmine.SpyObj<VehicleService>;
-
-    component['_contextData'] = {
-      vehicle: {
-        fuel: { index: '1', data: 'Petrol' },
-        cubicCapacity: { index: '1', data: '1000cc' },
-        powerRange: { index: '1', data: '100hp' }
-      }
-    } as unknown as QuoteModel;
-
-    // contextDataService.get.and.returnValue({
-    //   configuration: { literals: {} },
-    //   navigation: { lastPage: { configuration: { literals: {} } } },
-    //   vehicle: {
-    //     fuel: { index: 1, data: 'Petrol' },
-    //     cubicCapacity: { index: 1, data: '1000cc' },
-    //     powerRange: { index: 1, data: '100hp' }
-    //   }
-    // });
-
-    vehicleService.getFuelTypes.and.returnValue(Promise.resolve([] as FuelModel[]));
-    vehicleService.getVehicleClasses.and.returnValue(Promise.resolve([] as VehicleClassesModel[]));
-    vehicleService.cubicCapacities.and.returnValue(Promise.resolve([] as CubicCapacityModel[]));
-
-    fixture.detectChanges();
+    routingService = TestBed.inject(RoutingService) as jasmine.SpyObj<RoutingService>;
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should initialize context data on init', async () => {
+  it('should initialize with data', async () => {
+    const fuel = { index: '1', data: 'Petrol' } as unknown as FuelModel;
+    const cubicCapacity: CubicCapacityModel = { index: '1', data: '1500cc' };
+    const power: VehicleClassesModel = { index: '1', data: '100hp' };
+
+    component['_contextData'] = {
+      vehicle: {
+        fuel,
+        cubicCapacity,
+        powerRange: power
+      }
+    } as QuoteModel;
+
+    vehicleService.getFuelTypes.and.returnValue(Promise.resolve([fuel]));
+    vehicleService.cubicCapacities.and.returnValue(Promise.resolve([cubicCapacity]));
+    vehicleService.getVehicleClasses.and.returnValue(Promise.resolve([power]));
+
     await component.ngOnInit();
 
-    expect(vehicleService.getFuelTypes).toHaveBeenCalled();
-    expect(vehicleService.getVehicleClasses).toHaveBeenCalled();
-    expect(vehicleService.cubicCapacities).toHaveBeenCalled();
+    expect(component.selectedFuel).toEqual(fuel);
+    expect(component.selectedCubicCapacity).toEqual(cubicCapacity);
+    expect(component.selectedPower).toEqual(power);
+    expect(component.fuels).toEqual([fuel]);
+    expect(component.cubicCapacities).toEqual([cubicCapacity]);
+    expect(component.powers).toEqual([power]);
   });
 
-  it('should select fuel and reset cubic capacity and power', () => {
-    const fuel: FuelModel = { index: FuelTypes.DIESEL, data: 'Diesel' };
-    component.selectFuel(fuel);
+  it('should validate form on canDeactivate', () => {
+    component.selectedFuel = undefined;
+    component.selectedCubicCapacity = undefined;
+    component.selectedPower = undefined;
+
+    const canDeactivate = component.canDeactivate();
+
+    expect(canDeactivate).toBeFalse();
+    expect(component.formValidations.fuel).toBeTrue();
+    expect(component.formValidations.cubicCapacity).toBeTrue();
+    expect(component.formValidations.power).toBeTrue();
+  });
+
+  it('should select fuel and reset cubic capacity and power', async () => {
+    const fuel = { index: '1', data: 'Petrol' } as unknown as FuelModel;
+    component['_contextData'] = { vehicle: {} } as QuoteModel;
+
+    await component.selectFuel(fuel);
 
     expect(component.selectedFuel).toEqual(fuel);
     expect(component.selectedCubicCapacity).toBeUndefined();
     expect(component.selectedPower).toBeUndefined();
   });
 
-  it('should select cubic capacity and reset power', () => {
-    const cubicCapacity: CubicCapacityModel = { index: '2', data: '1500cc' };
-    component.selectCubicCapacity(cubicCapacity);
+  it('should select cubic capacity and reset power', async () => {
+    const cubicCapacity: CubicCapacityModel = { index: '1', data: '1500cc' };
+    component['_contextData'] = { vehicle: {} } as QuoteModel;
+
+    await component.selectCubicCapacity(cubicCapacity);
 
     expect(component.selectedCubicCapacity).toEqual(cubicCapacity);
     expect(component.selectedPower).toBeUndefined();
   });
 
-  it('should select power and navigate to next page', () => {
-    const power: VehicleClassesModel = { index: '150hp', data: '150hp' };
+  it('should select power', () => {
+    const power: VehicleClassesModel = { index: '1', data: '100hp' };
+
     component.selectPower(power);
 
     expect(component.selectedPower).toEqual(power);
+  });
+
+  it('should populate data and navigate to next', () => {
+    const fuel: FuelModel = { index: '1', data: 'Petrol' } as unknown as FuelModel;
+    const cubicCapacity: CubicCapacityModel = { index: '1', data: '1500cc' };
+    const power: VehicleClassesModel = { index: '1', data: '100hp' };
+
+    component.selectedFuel = fuel;
+    component.selectedCubicCapacity = cubicCapacity;
+    component.selectedPower = power;
+    component['_contextData'] = { vehicle: {} } as QuoteModel;
+
+    component.populateData();
+
+    expect((component['_contextData'] as QuoteModel).vehicle.fuel).toEqual(fuel);
+    expect((component['_contextData'] as QuoteModel).vehicle.cubicCapacity).toEqual(cubicCapacity);
+    expect((component['_contextData'] as QuoteModel).vehicle.powerRange).toEqual(power);
     expect(routingService.next).toHaveBeenCalled();
-  });
-
-  it('should return true for canDeactivate if all vehicle data is defined', () => {
-    expect(component.canDeactivate()).toBeTrue();
-  });
-
-  it('should return false for canDeactivate if any vehicle data is undefined', () => {
-    component['_contextData'].vehicle.fuel = undefined;
-
-    expect(component.canDeactivate()).toBeFalse();
   });
 });

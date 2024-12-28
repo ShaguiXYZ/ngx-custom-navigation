@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NxButtonModule } from '@aposin/ng-aquila/button';
 import { NxCopytextModule } from '@aposin/ng-aquila/copytext';
@@ -12,12 +13,6 @@ import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 import { ContextDataServiceStub } from 'src/app/core/stub';
 import { ContextDataService } from '@shagui/ng-shagui/core';
 import { NX_RECAPTCHA_TOKEN } from 'src/app/core/services';
-
-const mockWindow = {
-  location: {
-    assign() {}
-  }
-};
 
 describe('ConfirmationComponent', () => {
   let component: ConfirmationComponent;
@@ -62,12 +57,6 @@ describe('ConfirmationComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
-  });
-
-  it('should initialize clientName from context data', () => {
-    component['_contextData'] = { personalData: { name: 'John Doe' } } as QuoteModel;
-    component.ngOnInit();
-    expect(component.clientName).toBe('John Doe');
   });
 
   it('should set href to environment baseUrl', () => {

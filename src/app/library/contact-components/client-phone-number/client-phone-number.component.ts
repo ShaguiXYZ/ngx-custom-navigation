@@ -57,7 +57,7 @@ export class ClientPhoneNumberComponent extends QuoteComponent implements OnInit
     this.form = this.fb.group({
       phoneNumber: new FormControl(this._contextData.personalData.phoneNumber, [
         this.quoteFormValidarors.required(),
-        this.quoteFormValidarors.matches([/^[0-9]{3} [0-9]{2} [0-9]{2} [0-9]{2}$/])
+        this.quoteFormValidarors.matches([/^\d{3}\s?\d{2}\s?\d{2}\s?\d{2}$/])
       ])
     });
   }

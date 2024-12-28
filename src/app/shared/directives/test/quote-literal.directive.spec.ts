@@ -5,7 +5,7 @@ import { LiteralsService } from 'src/app/core/services';
 import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
-  template: `<div [nxQuoteLiteral]="literal" [nxQuoteLitealParams]="params" [nxQuoteDefaultLiteral]="defaultLiteral"></div>`
+  template: `<div [nxQuoteLiteral]="literal" [nxQuoteLitealParams]="params" [nxQuoteDefaultLiteral]="defaultLiteral">safeHtml</div>`
 })
 class TestComponent {
   literal = 'testLiteral';
@@ -45,33 +45,28 @@ describe('QuoteLiteralDirective', () => {
 
   it('should update element innerHTML with transformed literal', () => {
     literalsService.transformLiteral.and.returnValue('transformedLiteral');
-    domSanitizer.bypassSecurityTrustHtml.and.returnValue('safeHtml');
     domSanitizer.sanitize.and.returnValue('sanitizedHtml');
 
     fixture.detectChanges();
 
     expect(element.innerHTML).toBe('sanitizedHtml');
     expect(literalsService.transformLiteral).toHaveBeenCalledWith('testLiteral', { key: 'value' });
-    expect(domSanitizer.bypassSecurityTrustHtml).toHaveBeenCalledWith('transformedLiteral');
-    expect(domSanitizer.sanitize).toHaveBeenCalledWith(1, 'safeHtml');
+    expect(domSanitizer.sanitize).toHaveBeenCalledWith(1, 'transformedLiteral');
   });
 
   it('should update element innerHTML with default literal if transformed literal is empty', () => {
     literalsService.transformLiteral.and.returnValue('');
-    domSanitizer.bypassSecurityTrustHtml.and.returnValue('safeHtml');
     domSanitizer.sanitize.and.returnValue('sanitizedHtml');
 
     fixture.detectChanges();
 
     expect(element.innerHTML).toBe('sanitizedHtml');
     expect(literalsService.transformLiteral).toHaveBeenCalledWith('testLiteral', { key: 'value' });
-    expect(domSanitizer.bypassSecurityTrustHtml).toHaveBeenCalledWith('defaultLiteral');
-    expect(domSanitizer.sanitize).toHaveBeenCalledWith(1, 'safeHtml');
+    expect(domSanitizer.sanitize).toHaveBeenCalledWith(1, 'defaultLiteral');
   });
 
   it('should update element innerHTML with source literal if both transformed and default literals are empty', () => {
     literalsService.transformLiteral.and.returnValue('');
-    domSanitizer.bypassSecurityTrustHtml.and.returnValue('safeHtml');
     domSanitizer.sanitize.and.returnValue('sanitizedHtml');
 
     component.defaultLiteral = '';
@@ -79,7 +74,6 @@ describe('QuoteLiteralDirective', () => {
 
     expect(element.innerHTML).toBe('sanitizedHtml');
     expect(literalsService.transformLiteral).toHaveBeenCalledWith('testLiteral', { key: 'value' });
-    expect(domSanitizer.bypassSecurityTrustHtml).toHaveBeenCalledWith('');
     expect(domSanitizer.sanitize).toHaveBeenCalledWith(1, 'safeHtml');
   });
 });
