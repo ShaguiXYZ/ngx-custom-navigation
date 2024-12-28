@@ -16,10 +16,8 @@
       align-items: center;
       background: radial-gradient(circle, rgba(0, 122, 179, 1) 0%, rgba(0, 122, 179, 0.5) 100%);
       background-color: var(--ui-03);
-      border-radius: 100px;
       color: var(--ui-02);
       display: flex;
-      gap: 8px;
       justify-content: center;
       height: 60px;
       opacity: 0.1;
@@ -31,10 +29,12 @@
       z-index: 1;
 
       &.carousel__left {
+        border-radius: 100px 5px 5px 100px;
         left: 0;
       }
 
       &.carousel__right {
+        border-radius: 5px 100px 100px 5px;
         right: 0;
       }
 
