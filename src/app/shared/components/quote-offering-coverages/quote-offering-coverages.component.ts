@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Inject, inject, Input, OnInit } from '@angular/core';
+import { Component, Inject, inject, OnInit } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NxAccordionModule } from '@aposin/ng-aquila/accordion';
 import { NxButtonModule } from '@aposin/ng-aquila/button';
@@ -7,13 +7,13 @@ import { NxCopytextModule } from '@aposin/ng-aquila/copytext';
 import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
 import { NxHeadlineModule } from '@aposin/ng-aquila/headline';
 import { NxInputModule } from '@aposin/ng-aquila/input';
+import { NX_MODAL_DATA } from '@aposin/ng-aquila/modal';
 import { NxTabsModule } from '@aposin/ng-aquila/tabs';
-import { OfferingPriceModel, QuoteModel } from 'src/app/core/models';
-import { QuoteLiteralDirective } from '../../directives';
-import { HeaderTitleComponent } from '../header-title';
 import { ContextDataService } from '@shagui/ng-shagui/core';
 import { QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
-import { NX_MODAL_DATA } from '@aposin/ng-aquila/modal';
+import { OfferingPriceModel, QuoteModel } from 'src/app/library/models';
+import { QuoteLiteralDirective } from '../../directives';
+import { HeaderTitleComponent } from '../header-title';
 
 @Component({
   selector: 'quote-offering-coverages',

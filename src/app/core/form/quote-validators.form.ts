@@ -3,7 +3,7 @@ import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 import { ContextDataService, hasValue } from '@shagui/ng-shagui/core';
 import moment from 'moment';
 import { QUOTE_APP_CONTEXT_DATA, QUOTE_CONTEXT_DATA } from '../constants';
-import { AppContextData, QuoteModel } from '../models';
+import { AppContextData, QuoteControlModel } from '../models';
 import { ServiceActivatorService } from '../service-activators';
 import { FormValidations, QuoteFormValidations } from './quote.form.model';
 
@@ -147,7 +147,7 @@ export class QuoteFormValidarors {
       const lastPageId = lastPage?.pageId;
 
       if (lastPageId) {
-        const quote = this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA);
+        const quote = this.contextDataService.get<QuoteControlModel>(QUOTE_CONTEXT_DATA);
         const controlValidation: FormValidations = { [controlName]: { [validationKey]: validationValue } };
         const pageValidations = { ...(quote.forms?.[lastPageId] ?? {}), ...controlValidation };
         const validationSettings = lastPage.configuration?.validationSettings?.[controlName]?.[validationKey];

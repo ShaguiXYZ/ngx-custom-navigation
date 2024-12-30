@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-namespace */
 import { Configuration, Page } from './_configuration.model';
+import { QuoteControlModel } from './quote-control.model';
 import { QuoteSettingsModel } from './quote-settings.model';
-import { QuoteModel } from './_quote.model';
 
 export interface TrackData {
-  data?: QuoteModel;
-  inData?: QuoteModel;
+  data?: QuoteControlModel;
+  inData?: QuoteControlModel;
 }
 
 export type Track = Record<string, TrackData>;

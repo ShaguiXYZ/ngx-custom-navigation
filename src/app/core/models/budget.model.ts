@@ -1,9 +1,9 @@
 import { AppContextData } from './_app-context-data.model';
-import { QuoteModel } from './_quote.model';
+import { QuoteControlModel } from './quote-control.model';
 
 export interface Budget {
   context: AppContextData;
-  quote: QuoteModel;
+  quote: QuoteControlModel;
 }
 
 export interface StoredDataKey {

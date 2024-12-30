@@ -3,14 +3,14 @@ import moment from 'moment';
 import { QUOTE_APP_CONTEXT_DATA, QUOTE_CONTEXT_DATA } from '../constants';
 import { BudgetError } from '../errors';
 import { BudgetUtils } from '../lib';
-import { AppContextData, Budget, QuoteModel, StoredDataKey } from '../models';
+import { AppContextData, Budget, QuoteControlModel, StoredDataKey } from '../models';
 import { ActivatorServices } from './quote-activator.model';
 
 export class BudgetActivator {
   public static storeBudget =
     (services: ActivatorServices): (() => Promise<boolean>) =>
     async (): Promise<boolean> => {
-      const quote = services.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA);
+      const quote = services.contextDataService.get<QuoteControlModel>(QUOTE_CONTEXT_DATA);
       const budget: Budget = {
         context: services.contextDataService.get<AppContextData>(QUOTE_APP_CONTEXT_DATA),
         quote
@@ -32,7 +32,7 @@ export class BudgetActivator {
   public static retrieveBudget =
     (services: ActivatorServices): (() => Promise<boolean>) =>
     async (params?: { budget?: string }): Promise<boolean> => {
-      const { signature } = services.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA);
+      const { signature } = services.contextDataService.get<QuoteControlModel>(QUOTE_CONTEXT_DATA);
       const budget = params?.budget ?? signature?.budget;
 
       if (!budget) {
@@ -49,7 +49,7 @@ export class BudgetActivator {
       const decrypted = BudgetUtils.decrypt<Budget>(storedDataKey.passKey, cipher);
 
       services.contextDataService.set<AppContextData>(QUOTE_APP_CONTEXT_DATA, decrypted.context);
-      services.contextDataService.set<QuoteModel>(QUOTE_CONTEXT_DATA, {
+      services.contextDataService.set<QuoteControlModel>(QUOTE_CONTEXT_DATA, {
         ...decrypted.quote
       });
 

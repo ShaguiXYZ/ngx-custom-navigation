@@ -2,8 +2,9 @@ import { inject } from '@angular/core';
 import { ActivatedRouteSnapshot, CanDeactivateFn, GuardResult, MaybeAsync, RouterStateSnapshot } from '@angular/router';
 import { ContextDataService } from '@shagui/ng-shagui/core';
 import { QUOTE_APP_CONTEXT_DATA } from 'src/app/core/constants';
-import { AppContextData, QuoteModel } from 'src/app/core/models';
-import { QuoteComponent } from 'src/app/library';
+import { AppContextData } from 'src/app/core/models';
+import { QuoteComponent } from 'src/app/library/components';
+import { QuoteModel } from 'src/app/library/models';
 
 export const canDeactivateGuard: CanDeactivateFn<{ _instance: QuoteComponent }> = (
   component: { _instance: QuoteComponent },

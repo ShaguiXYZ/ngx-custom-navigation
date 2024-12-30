@@ -1,12 +1,12 @@
 import { Injectable, OnDestroy, inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { ContextDataService, deepCopy } from '@shagui/ng-shagui/core';
+import { ContextDataService } from '@shagui/ng-shagui/core';
 import { Subscription } from 'rxjs';
+import { AppUrls } from 'src/app/shared/config';
 import { QUOTE_APP_CONTEXT_DATA, QUOTE_CONTEXT_DATA } from '../constants';
 import { ConditionEvaluation } from '../lib';
-import { AppContextData, NextOption, Page, QuoteModel, Step } from '../models';
+import { AppContextData, NextOption, Page, QuoteControlModel, Step } from '../models';
 import { ServiceActivatorService } from '../service-activators';
-import { AppUrls } from 'src/app/shared/config';
 
 @Injectable({ providedIn: 'root' })
 export class RoutingService implements OnDestroy {
@@ -34,7 +34,7 @@ export class RoutingService implements OnDestroy {
   public next = async (): Promise<boolean> => {
     await this.serviceActivatorService.activateEntryPoint('next-page');
 
-    const toEveluate: QuoteModel = this.contextDataService.get(QUOTE_CONTEXT_DATA);
+    const toEveluate = this.contextDataService.get<QuoteControlModel>(QUOTE_CONTEXT_DATA);
     const nextPage = this.getNextRoute(toEveluate);
 
     if (!nextPage) {
@@ -75,7 +75,7 @@ export class RoutingService implements OnDestroy {
     return this.router.navigate([AppUrls._dispatcher, page.pageId], { skipLocationChange: true });
   };
 
-  private getNextRoute(data: QuoteModel): Page | undefined {
+  private getNextRoute(data: QuoteControlModel): Page | undefined {
     const pageId = this.appContextData.navigation.viewedPages[this.appContextData.navigation.viewedPages.length - 1];
     const page = this.getPage(pageId);
     const nextPageId = this.testNavigation(data, page!);
@@ -83,7 +83,7 @@ export class RoutingService implements OnDestroy {
     return this.appContextData.configuration.pageMap[nextPageId!];
   }
 
-  private testNavigation(data: QuoteModel, page: Page): string | undefined {
+  private testNavigation(data: QuoteControlModel, page: Page): string | undefined {
     if (page.nextOptionList) {
       return this.nextPageIdFromNextOptionList(data, page.nextOptionList);
     } else {
@@ -94,7 +94,7 @@ export class RoutingService implements OnDestroy {
   /**
    * Devuelve el nextPageId que cumpla las condiciones, o en última instancia el nextPageId por defecto (último)
    */
-  private nextPageIdFromNextOptionList(data: QuoteModel, nextOptionList: NextOption[]): string | undefined {
+  private nextPageIdFromNextOptionList(data: QuoteControlModel, nextOptionList: NextOption[]): string | undefined {
     const nextOption = nextOptionList.find(nextOption => ConditionEvaluation.checkConditions(data, nextOption.conditions));
 
     return nextOption?.nextPageId;

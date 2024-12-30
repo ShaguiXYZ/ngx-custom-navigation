@@ -1,9 +1,10 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { inject } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivateFn, GuardResult, MaybeAsync, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
+import { ActivatedRouteSnapshot, CanActivateFn, GuardResult, MaybeAsync, RouterStateSnapshot } from '@angular/router';
 import { ContextDataService, deepCopy } from '@shagui/ng-shagui/core';
 import { QUOTE_APP_CONTEXT_DATA, QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
-import { AppContextData, Page, QuoteModel, Track } from 'src/app/core/models';
+import { AppContextData, QuoteControlModel, Track } from 'src/app/core/models';
+import { QuoteModel } from 'src/app/library/models';
 
 /**
  * Guard function to control navigation flow based on the application's context data.
@@ -52,14 +53,14 @@ export const journeyGuard: CanActivateFn = (route: ActivatedRouteSnapshot, state
       if (lastStepper?.stateInfo?.inherited === false) {
         const inData = _track?.[lastStepperKey]?.inData;
 
-        _track = { ...(_track ?? {}), [lastStepperKey]: { data: deepCopy(contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA)) } };
+        _track = { ...(_track ?? {}), [lastStepperKey]: { data: deepCopy(contextDataService.get<QuoteControlModel>(QUOTE_CONTEXT_DATA)) } };
         inData && contextDataService.set(QUOTE_CONTEXT_DATA, inData);
       }
 
       const nextStepper = nextStepperKey && steppers?.[nextStepperKey];
 
       if (nextStepper && nextStepper?.stateInfo?.inherited === false) {
-        const quote = deepCopy(contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA));
+        const quote = deepCopy(contextDataService.get<QuoteControlModel>(QUOTE_CONTEXT_DATA));
         const tracked = _track?.[nextStepperKey]?.data ?? QuoteModel.init();
 
         _track = { ...(_track ?? {}), [nextStepperKey]: { inData: quote, data: tracked } };

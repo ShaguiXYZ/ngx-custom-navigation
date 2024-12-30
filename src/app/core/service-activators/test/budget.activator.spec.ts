@@ -1,7 +1,8 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { QUOTE_APP_CONTEXT_DATA, QUOTE_CONTEXT_DATA } from '../../constants';
 import { BudgetError } from '../../errors';
 import { BudgetUtils } from '../../lib';
-import { AppContextData, QuoteModel, StoredDataKey } from '../../models';
+import { AppContextData, QuoteControlModel, StoredDataKey } from '../../models';
 import { BudgetActivator } from '../budget.activator';
 import { ActivatorServices } from '../quote-activator.model';
 
@@ -16,7 +17,7 @@ describe('BudgetActivator', () => {
 
   describe('storeBudget', () => {
     it('should store budget in localStorage and update quote signature', async () => {
-      const quote: QuoteModel = { signature: {} } as QuoteModel;
+      const quote = { signature: {} } as QuoteControlModel;
       const appContextData: AppContextData = {} as AppContextData;
 
       (services.contextDataService.get as jasmine.Spy).and.callFake((key: string) => {
@@ -37,7 +38,7 @@ describe('BudgetActivator', () => {
     it('should retrieve budget from localStorage and update context data', async () => {
       const storedDataKey: StoredDataKey = { passKey: 'testPassKey', key: 'testKey' };
       const budgetKey = btoa(JSON.stringify(storedDataKey));
-      const quote: QuoteModel = { signature: { budget: budgetKey } } as QuoteModel;
+      const quote = { signature: { budget: budgetKey } } as QuoteControlModel;
       const cipher = BudgetUtils.encrypt(storedDataKey.passKey, { context: {}, quote });
 
       spyOn(BudgetActivator as any, 'retrieveAll').and.returnValue([{ index: 'testKey', data: cipher }]);
@@ -52,7 +53,7 @@ describe('BudgetActivator', () => {
     });
 
     it('should throw BudgetError if budget is not found', async () => {
-      const quote: QuoteModel = { signature: {} } as QuoteModel;
+      const quote = { signature: {} } as QuoteControlModel;
 
       (services.contextDataService.get as jasmine.Spy).and.returnValue(quote);
 

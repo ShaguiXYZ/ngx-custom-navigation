@@ -3,7 +3,7 @@ import { ContextDataService } from '@shagui/ng-shagui/core';
 import { QUOTE_APP_CONTEXT_DATA } from 'src/app/core/constants';
 import { JourneyError } from 'src/app/core/errors';
 import { AppContextData } from 'src/app/core/models';
-import { QuoteComponent } from 'src/app/library';
+import { QuoteComponent } from 'src/app/library/components';
 import { LIBRARY_MANIFEST, WorkflowComponent } from 'src/app/library/library-manifest';
 
 @Component({

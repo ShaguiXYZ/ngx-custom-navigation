@@ -5,28 +5,28 @@ import {
   DrivingLicenseLocationComponent,
   IsClientComponent,
   PlaceComponent
-} from './client-components';
+} from './components/client-components';
 import {
   ApologyComponent,
   ConfirmationComponent,
   ContactTimeComponent,
   ContactUsComponent,
   OnBoardingComponent
-} from './common-components';
+} from './components/common-components';
 import {
   ClientEMailComponent,
   ClientIdentificationNumberComponent,
   ClientNameComponent,
   ClientPhoneNumberComponent
-} from './contact-components';
+} from './components/contact-components';
 import {
   CurrentlyInsuredComponent,
   InsuranceCompaniesComponent,
   IsPolicyOwnerComponent,
   NumberAccidentsComponent,
   TimeInsuranceHolderComponent
-} from './insurance-components';
-import { QuoteOfferingsComponent } from './offering-components';
+} from './components/insurance-components';
+import { QuoteOfferingsComponent } from './components/offering-components';
 import {
   LicensePlateComponent,
   LicenseYearComponent,
@@ -36,7 +36,7 @@ import {
   VehicleModelVersionsComponent,
   VehicleTypeComponent,
   YourCarIsComponent
-} from './vehicle-components';
+} from './components/vehicle-components';
 
 export const LIBRARY_MANIFEST = {
   birthdate: { component: BirthdateComponent },

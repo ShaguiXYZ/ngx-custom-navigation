@@ -1,5 +1,6 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { QuoteModel } from 'src/app/library/models';
 import { QUOTE_CONTEXT_DATA } from '../../constants';
-import { QuoteModel } from '../../models';
 import { BlackListActivator } from '../black-list.activator';
 import { ActivatorServices } from '../quote-activator.model';
 

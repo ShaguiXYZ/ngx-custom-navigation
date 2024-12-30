@@ -18,4 +18,4 @@ export type QuoteFormValidations =
   | 'requiredTrue'
   | 'youngerThanYears';
 
-export type FormValidations = { [controlName: string]: ValidationErrors };
+export type FormValidations = Record<string, ValidationErrors>;

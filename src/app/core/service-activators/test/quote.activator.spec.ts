@@ -1,11 +1,12 @@
-import { QuoteActivator } from '../quote.activator';
-import { ActivatorServices } from '../quote-activator.model';
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { QUOTE_CONTEXT_DATA } from '../../constants';
-import { QuoteModel } from '../../models';
+import { QuoteControlModel } from '../../models';
+import { ActivatorServices } from '../quote-activator.model';
+import { QuoteActivator } from '../quote.activator';
 
 describe('QuoteActivator', () => {
   let services: ActivatorServices;
-  let quote: QuoteModel;
+  let quote: QuoteControlModel;
 
   beforeEach(() => {
     quote = { id: 1, text: 'Test quote' } as any;

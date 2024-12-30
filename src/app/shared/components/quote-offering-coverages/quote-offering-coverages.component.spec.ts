@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { CommonModule } from '@angular/common';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -12,7 +13,7 @@ import { NxTabsModule } from '@aposin/ng-aquila/tabs';
 import { TranslateService } from '@ngx-translate/core';
 import { ContextDataService } from '@shagui/ng-shagui/core';
 import { QUOTE_APP_CONTEXT_DATA, QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
-import { QuoteModel } from 'src/app/core/models';
+import { QuoteModel } from 'src/app/library/models';
 import { QuoteLiteralDirective } from '../../directives';
 import { HeaderTitleComponent } from '../header-title';
 import { QuoteOfferingCoveragesComponent } from './quote-offering-coverages.component';

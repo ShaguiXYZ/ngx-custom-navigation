@@ -1,8 +1,9 @@
 import { inject, Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { ContextDataService } from '@shagui/ng-shagui/core';
+import { QuoteModel } from 'src/app/library/models';
 import { QUOTE_APP_CONTEXT_DATA, QUOTE_CONTEXT_DATA } from '../constants';
-import { AppContextData, CommercialExceptionsModel, JourneyInfo, QuoteModel, QuoteSettingsModel, VersionInfo } from '../models';
+import { AppContextData, CommercialExceptionsModel, JourneyInfo, QuoteControlModel, QuoteSettingsModel, VersionInfo } from '../models';
 import { JourneyService, QUOTE_JOURNEY_DISALED } from './journey.service';
 
 @Injectable({ providedIn: 'root' })
@@ -45,7 +46,7 @@ export class SettingsService {
     const [quote, contextData] =
       actualConfiguration?.configuration.name !== configuration.name || configurationChange
         ? [QuoteModel.init(), AppContextData.init(settings, configuration)]
-        : [{ ...QuoteModel.init(), ...this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA) }, { ...actualConfiguration }];
+        : [{ ...QuoteModel.init(), ...this.contextDataService.get<QuoteControlModel>(QUOTE_CONTEXT_DATA) }, { ...actualConfiguration }];
     const versionUpdated = contextData.configuration.version.last
       ? VersionInfo.compare({ value: contextData.configuration.version.last }, { value: configuration.version.actual }) > 0
       : true;

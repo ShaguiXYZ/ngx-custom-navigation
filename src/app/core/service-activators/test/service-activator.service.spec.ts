@@ -1,10 +1,12 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { TestBed } from '@angular/core/testing';
 import { ContextDataService } from '@shagui/ng-shagui/core';
-import { ServiceActivatorService } from '../service-activator.service';
+import { QuoteModel } from 'src/app/library/models';
 import { QUOTE_APP_CONTEXT_DATA, QUOTE_CONTEXT_DATA } from '../../constants';
-import { AppContextData, QuoteModel } from '../../models';
 import { ConditionEvaluation } from '../../lib';
+import { AppContextData } from '../../models';
 import { ActivatorFnType, EntryPoint } from '../quote-activator.model';
+import { ServiceActivatorService } from '../service-activator.service';
 
 describe('ServiceActivatorService', () => {
   let service: ServiceActivatorService;

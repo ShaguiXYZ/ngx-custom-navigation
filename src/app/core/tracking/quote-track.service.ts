@@ -4,7 +4,7 @@ import { ContextDataService, hasValue, JsonUtils, UniqueIds } from '@shagui/ng-s
 import { Subscription } from 'rxjs';
 import { CAPTCHA_TOKEN_KEY, QUOTE_APP_CONTEXT_DATA, QUOTE_CONTEXT_DATA } from '../constants';
 import { TrackError } from '../errors';
-import { AppContextData, QuoteModel } from '../models';
+import { AppContextData, QuoteControlModel } from '../models';
 import { CaptchaService, LiteralsService } from '../services';
 import { TrackEventType, TrackInfo, TrackInfoPageModel, TRACKING_QUOTE_MANIFEST } from './quote-track.model';
 import { _window } from './window-tracker.model';
@@ -110,7 +110,7 @@ export class QuoteTrackService implements OnDestroy {
   };
 
   private loadManifest = (): TrackInfo => {
-    const quote = this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA);
+    const quote = this.contextDataService.get<QuoteControlModel>(QUOTE_CONTEXT_DATA);
 
     return Object.entries(TRACKING_QUOTE_MANIFEST).reduce<TrackInfo>((acc, [key, data]) => {
       if (!data.tracked) return acc;
