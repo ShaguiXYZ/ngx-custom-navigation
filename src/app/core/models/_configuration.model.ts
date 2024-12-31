@@ -28,42 +28,42 @@ export interface ZoneConfig {
   conditions?: Condition[];
 }
 
-export interface ConfigurationDTO {
+export interface ConfigurationDTO<T extends QuoteControlModel = QuoteControlModel, K = string> {
   homePageId: string;
   title?: LiteralModel;
   errorPageId?: string;
   steppers?: StepperDTO[];
-  pageMap: Page[];
+  pageMap: Page<T, K>[];
   links?: Links;
   literals?: Literals;
 }
 
-type PageData = {
-  contextData?: Partial<QuoteControlModel>;
+type PageData<T extends QuoteControlModel> = {
+  contextData?: Partial<T>;
   headerConfig?: HeaderConfig;
   footerConfig?: QuoteFooterConfig;
   stepperConfig?: StepperConfig;
 } & DataInfo<unknown>;
 
-export interface PageConfiguration {
+export interface PageConfiguration<T extends QuoteControlModel> {
   literals?: Literals;
-  data?: PageData;
+  data?: PageData<T>;
   validationSettings?: PageFormValidationSettings;
   serviceActivators?: ServiceActivator[];
   zones?: Record<number, ZoneConfig>;
 }
 
-export interface Page {
-  configuration?: PageConfiguration;
-  nextOptionList?: NextOption[];
-  pageId: string;
-  component?: string;
+export interface Page<T extends QuoteControlModel = QuoteControlModel, K = string> {
+  configuration?: PageConfiguration<T>;
+  nextOptionList?: NextOption<K>[];
+  pageId: K | string;
+  component?: K;
   stepper?: { key: string; stepKey: string };
   routeTree?: string;
 }
 
-export interface NextOption {
-  nextPageId: string;
+export interface NextOption<K = string> {
+  nextPageId: K | string;
   conditions?: Condition[];
 }
 
@@ -74,15 +74,15 @@ export interface Condition {
   union?: CompareOperations;
 }
 
-export interface Configuration {
+export interface Configuration<T extends QuoteControlModel = QuoteControlModel, K = string> {
   hash?: string;
   name: string;
   version: { actual: Version; last?: Version };
   releaseDate?: Date;
-  homePageId: string;
+  homePageId: K;
   title?: LiteralModel;
-  errorPageId: string;
-  pageMap: DataInfo<Page>;
+  errorPageId: K;
+  pageMap: DataInfo<Page<T, K>>;
   steppers?: DataInfo<Stepper>;
   links?: Links;
   literals?: Literals;

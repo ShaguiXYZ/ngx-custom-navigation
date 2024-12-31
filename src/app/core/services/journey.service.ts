@@ -149,7 +149,7 @@ export class JourneyService {
 
               if (page) {
                 page.stepper = { key: stepperKey, stepKey };
-                page.routeTree = this.normalizeTextForUri(step.label);
+                page.routeTree = this.normalizeTextForUri(page.routeTree?.trim() || step.label);
               }
             });
 

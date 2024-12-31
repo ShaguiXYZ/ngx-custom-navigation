@@ -40,10 +40,7 @@ export const journeyGuard: CanActivateFn = (route: ActivatedRouteSnapshot, state
    * @param {Object} param0.navigation.track - The current track information.
    * @returns {Track | undefined} - The updated track information or undefined if no updates are made.
    */
-  const stateInfoControl = ({
-    configuration: { steppers },
-    navigation: { nextPage, lastPage, track }
-  }: AppContextData): Track | undefined => {
+  const trackControl = ({ configuration: { steppers }, navigation: { nextPage, lastPage, track } }: AppContextData): Track | undefined => {
     const nextStepperKey = nextPage?.stepper?.key;
     const lastStepperKey = lastPage?.stepper?.key;
     let _track = deepCopy(track);
@@ -78,7 +75,7 @@ export const journeyGuard: CanActivateFn = (route: ActivatedRouteSnapshot, state
     navigation: { viewedPages }
   } = context;
   const nextPage = context.navigation.nextPage ?? context.configuration.pageMap[viewedPages[viewedPages.length - 1]];
-  const track = stateInfoControl(context);
+  const track = trackControl(context);
   const pageIndex = viewedPages.indexOf(nextPage.pageId);
 
   let lastPage = nextPage;

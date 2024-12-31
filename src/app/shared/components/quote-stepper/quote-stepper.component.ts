@@ -4,7 +4,7 @@ import { NxCopytextModule } from '@aposin/ng-aquila/copytext';
 import { NxIconModule } from '@aposin/ng-aquila/icon';
 import { NxTooltipModule } from '@aposin/ng-aquila/tooltip';
 import { ContextDataService } from '@shagui/ng-shagui/core';
-import { last, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { QUOTE_APP_CONTEXT_DATA } from 'src/app/core/constants';
 import { AppContextData, Step, Stepper, StepperConfig } from 'src/app/core/models';
 import { QuoteLiteralPipe } from '../../pipes';

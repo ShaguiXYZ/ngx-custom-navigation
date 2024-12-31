@@ -1,6 +1,8 @@
 import { ConfigurationDTO } from 'src/app/core/models';
+import { WorkflowManifestId } from 'src/app/library/library-manifest';
+import { QuoteModel } from 'src/app/library/models';
 
-export const WORKFLOW: ConfigurationDTO = {
+export const WORKFLOW: ConfigurationDTO<QuoteModel, WorkflowManifestId> = {
   homePageId: 'calcula-tu-seguro',
   title: { value: 'journey-title', type: 'literal' },
   steppers: [
@@ -895,8 +897,8 @@ export const WORKFLOW: ConfigurationDTO = {
       configuration: {
         literals: {
           header: '¿Nos puedes facilitar tu documento de identidad?',
-          'identification-number': 'Número de documento de identidad',
           subheader: 'Solo utilizaremos este dato para darte un presupuesto totalmente personalizado',
+          'identification-number': 'Número de documento de identidad',
           'footer-info': 'Para ofrecerte el mejor seguro es importante verificar tu identidad. '
         },
         validationSettings: {

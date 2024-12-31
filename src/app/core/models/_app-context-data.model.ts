@@ -3,28 +3,31 @@ import { Configuration, Page } from './_configuration.model';
 import { QuoteControlModel } from './quote-control.model';
 import { QuoteSettingsModel } from './quote-settings.model';
 
-export interface TrackData {
-  data?: QuoteControlModel;
-  inData?: QuoteControlModel;
+export interface TrackData<T extends QuoteControlModel> {
+  data?: T;
+  inData?: T;
 }
 
-export type Track = Record<string, TrackData>;
+export type Track<T extends QuoteControlModel = QuoteControlModel> = Record<string, TrackData<T>>;
 
-export interface Navigation {
-  nextPage?: Page;
-  lastPage?: Page;
+export interface Navigation<T extends QuoteControlModel, K = string> {
+  nextPage?: Page<T, K>;
+  lastPage?: Page<T, K>;
   viewedPages: string[];
-  track?: Track;
+  track?: Track<T>;
 }
 
-export interface AppContextData {
+export interface AppContextData<T extends QuoteControlModel = QuoteControlModel, K = string> {
   settings: QuoteSettingsModel;
-  configuration: Configuration;
-  navigation: Navigation;
+  configuration: Configuration<T, K>;
+  navigation: Navigation<T, K>;
 }
 
 export namespace AppContextData {
-  export const init = (settings: Partial<QuoteSettingsModel>, configuration: Configuration): AppContextData => {
+  export const init = <T extends QuoteControlModel>(
+    settings: Partial<QuoteSettingsModel>,
+    configuration: Configuration<T>
+  ): AppContextData<T> => {
     const homePageId = configuration.homePageId;
 
     return {

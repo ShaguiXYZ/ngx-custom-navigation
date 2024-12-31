@@ -74,9 +74,9 @@ const LIBRARY_MANIFEST = {
   'your-car-is': { component: YourCarIsComponent }
 };
 
-type WorkflowComponent = keyof typeof LIBRARY_MANIFEST;
+export type WorkflowManifestId = keyof typeof LIBRARY_MANIFEST;
 
-const errorPageId: WorkflowComponent = 'apology-screen';
+const errorPageId: WorkflowManifestId = 'apology-screen';
 
 export const VEHICLE_WORKFLOW_TOKEN = new InjectionToken<QuoteWorkflowSettings<QuoteComponent<QuoteModel>, QuoteModel>>(
   'VEHICLE_WORKFLOW_TOKEN',
