@@ -1,12 +1,13 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { NxCopytextModule } from '@aposin/ng-aquila/copytext';
 import { hasValue } from '@shagui/ng-shagui/core';
+import { QuoteComponent } from 'src/app/core/components';
 import { RoutingService } from 'src/app/core/services';
 import { QuoteTrackDirective } from 'src/app/core/tracking';
+import { QuoteModel } from 'src/app/library/models';
 import { HeaderTitleComponent, QuoteFooterComponent, QuoteFooterInfoComponent, TextCardComponent } from 'src/app/shared/components';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
-import { QuoteComponent } from '../../_quote-component';
 
 @Component({
   selector: 'quote-number-accidents',
@@ -24,7 +25,7 @@ import { QuoteComponent } from '../../_quote-component';
     QuoteLiteralPipe
   ]
 })
-export class NumberAccidentsComponent extends QuoteComponent implements OnInit {
+export class NumberAccidentsComponent extends QuoteComponent<QuoteModel> implements OnInit {
   public selectedAccidents?: number;
   public yearsAsOwner = 5;
   public accidents: number[] = [0, 1, 2, 3, 4];

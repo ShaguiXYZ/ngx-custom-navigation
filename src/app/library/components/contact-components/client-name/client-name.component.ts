@@ -4,11 +4,12 @@ import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule } from '@angul
 import { NX_DATE_LOCALE } from '@aposin/ng-aquila/datefield';
 import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
 import { NxInputModule } from '@aposin/ng-aquila/input';
+import { QuoteComponent } from 'src/app/core/components';
 import { QuoteFormValidarors } from 'src/app/core/form';
+import { QuoteModel } from 'src/app/library/models';
 import { HeaderTitleComponent, QuoteFooterComponent, QuoteZoneComponent } from 'src/app/shared/components';
 import { QuoteAutoFocusDirective, QuoteLiteralDirective } from 'src/app/shared/directives';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
-import { QuoteComponent } from '../../_quote-component';
 
 @Component({
   selector: 'quote-client-name',
@@ -28,7 +29,7 @@ import { QuoteComponent } from '../../_quote-component';
   providers: [{ provide: NX_DATE_LOCALE, useValue: 'es-ES' }, QuoteFormValidarors, TitleCasePipe],
   standalone: true
 })
-export class ClientNameComponent extends QuoteComponent implements OnInit {
+export class ClientNameComponent extends QuoteComponent<QuoteModel> implements OnInit {
   public form!: FormGroup;
 
   private readonly quoteFormValidarors = inject(QuoteFormValidarors);

@@ -2,15 +2,15 @@ import { ComponentType } from '@angular/cdk/portal';
 import { CommonModule } from '@angular/common';
 import { Component, ElementRef, inject, OnDestroy, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { NxDialogService, NxModalModule, NxModalRef } from '@aposin/ng-aquila/modal';
+import { QuoteComponent } from 'src/app/core/components';
 import { QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
 import { QuoteError } from 'src/app/core/errors';
 import { RoutingService } from 'src/app/core/services';
 import { OfferingPriceModel, QuoteModel } from 'src/app/library/models';
 import { OfferingsService } from 'src/app/library/services/offerings.service';
-import { HeaderTitleComponent, QuoteOfferingCoveragesComponent } from 'src/app/shared/components';
+import { HeaderTitleComponent } from 'src/app/shared/components';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
-import { QuoteComponent } from '../../_quote-component';
-import { QuoteOfferingPriceCardComponent } from './components';
+import { QuoteOfferingCoveragesComponent, QuoteOfferingPriceCardComponent } from './components';
 
 @Component({
   selector: 'quote-quote-offerings',
@@ -20,7 +20,7 @@ import { QuoteOfferingPriceCardComponent } from './components';
   providers: [OfferingsService],
   standalone: true
 })
-export class QuoteOfferingsComponent extends QuoteComponent implements OnInit, OnDestroy {
+export class QuoteOfferingsComponent extends QuoteComponent<QuoteModel> implements OnInit, OnDestroy {
   @ViewChild('carrouselInner', { static: true })
   private inner!: ElementRef;
   @ViewChild('carrouselTrack', { static: true })

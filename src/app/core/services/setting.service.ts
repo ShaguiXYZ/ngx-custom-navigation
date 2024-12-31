@@ -1,13 +1,14 @@
 import { inject, Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { ContextDataService } from '@shagui/ng-shagui/core';
-import { QuoteModel } from 'src/app/library/models';
+import { QUOTE_WORKFLOW_TOKEN } from '../components/constants';
 import { QUOTE_APP_CONTEXT_DATA, QUOTE_CONTEXT_DATA } from '../constants';
 import { AppContextData, CommercialExceptionsModel, JourneyInfo, QuoteControlModel, QuoteSettingsModel, VersionInfo } from '../models';
 import { JourneyService, QUOTE_JOURNEY_DISALED } from './journey.service';
 
 @Injectable({ providedIn: 'root' })
 export class SettingsService {
+  private readonly workFlowToken = inject(QUOTE_WORKFLOW_TOKEN);
   private readonly contextDataService = inject(ContextDataService);
   private readonly translateService = inject(TranslateService);
   private readonly journeyService = inject(JourneyService);
@@ -45,8 +46,11 @@ export class SettingsService {
     const configurationChange = actualConfiguration?.configuration?.hash !== configuration.hash;
     const [quote, contextData] =
       actualConfiguration?.configuration.name !== configuration.name || configurationChange
-        ? [QuoteModel.init(), AppContextData.init(settings, configuration)]
-        : [{ ...QuoteModel.init(), ...this.contextDataService.get<QuoteControlModel>(QUOTE_CONTEXT_DATA) }, { ...actualConfiguration }];
+        ? [this.workFlowToken.initializedModel(), AppContextData.init(settings, configuration)]
+        : [
+            { ...this.workFlowToken.initializedModel(), ...this.contextDataService.get<QuoteControlModel>(QUOTE_CONTEXT_DATA) },
+            { ...actualConfiguration }
+          ];
     const versionUpdated = contextData.configuration.version.last
       ? VersionInfo.compare({ value: contextData.configuration.version.last }, { value: configuration.version.actual }) > 0
       : true;

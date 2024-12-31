@@ -1,17 +1,18 @@
 import { inject } from '@angular/core';
 import { ActivatedRouteSnapshot, CanDeactivateFn, GuardResult, MaybeAsync, RouterStateSnapshot } from '@angular/router';
 import { ContextDataService } from '@shagui/ng-shagui/core';
+import { QuoteComponent } from 'src/app/core/components';
+import { QUOTE_WORKFLOW_TOKEN } from 'src/app/core/components/constants';
 import { QUOTE_APP_CONTEXT_DATA } from 'src/app/core/constants';
-import { AppContextData } from 'src/app/core/models';
-import { QuoteComponent } from 'src/app/library/components';
-import { QuoteModel } from 'src/app/library/models';
+import { AppContextData, QuoteControlModel } from 'src/app/core/models';
 
-export const canDeactivateGuard: CanDeactivateFn<{ _instance: QuoteComponent }> = (
-  component: { _instance: QuoteComponent },
+export const canDeactivateGuard: CanDeactivateFn<{ _instance: QuoteComponent<QuoteControlModel> }> = (
+  component: { _instance: QuoteComponent<QuoteControlModel> },
   currentRoute: ActivatedRouteSnapshot,
   state: RouterStateSnapshot,
   next?: RouterStateSnapshot
 ): MaybeAsync<GuardResult> => {
+  const workFlowToken = inject(QUOTE_WORKFLOW_TOKEN);
   const contextDataService = inject(ContextDataService);
   const context = contextDataService.get<AppContextData>(QUOTE_APP_CONTEXT_DATA);
 
@@ -29,7 +30,7 @@ export const canDeactivateGuard: CanDeactivateFn<{ _instance: QuoteComponent }> 
 
     instance['_contextData'].signature = {
       ...(instance['_contextData'].signature ?? {}),
-      ...QuoteModel.signModel(instance['_contextData'])
+      ...workFlowToken.signModel(instance['_contextData'])
     };
 
     if (!canDeactivate) {

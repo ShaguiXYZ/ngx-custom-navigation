@@ -13,7 +13,9 @@ import { QuoteTrackDirective } from 'src/app/core/tracking';
 import { HeaderTitleComponent, IconCardComponent, TextCardComponent } from 'src/app/shared/components';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
-import { QuoteComponent } from '../../_quote-component';
+
+import { QuoteComponent } from 'src/app/core/components';
+import { QuoteModel } from 'src/app/library/models';
 import { InsuranceComponentService } from './services';
 
 @Component({
@@ -36,7 +38,7 @@ import { InsuranceComponentService } from './services';
   providers: [InsuranceComponentService, InsuranceCompaniesService],
   standalone: true
 })
-export class InsuranceCompaniesComponent extends QuoteComponent implements OnInit {
+export class InsuranceCompaniesComponent extends QuoteComponent<QuoteModel> implements OnInit {
   @ViewChild('searchInput', { static: true })
   private searchInput!: ElementRef;
 

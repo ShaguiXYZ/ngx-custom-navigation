@@ -15,14 +15,17 @@ import { TranslateModule } from '@ngx-translate/core';
 import { NX_CONTEX_CONFIG } from '@shagui/ng-shagui/core';
 import { environment } from 'src/environments/environment';
 import { routes } from './app.routes';
+import { QUOTE_WORKFLOW_TOKEN } from './core/components/constants';
 import { APP_NAME, SCHEDULER_PERIOD } from './core/constants';
 import { GlobalErrorHandler } from './core/errors';
 import { LiteralsService, NX_RECAPTCHA_TOKEN, SettingsService } from './core/services';
+import { VEHICLE_WORKFLOW_TOKEN } from './library/library-manifest';
 import { TRANSLATE_MODULE_CONFIG, urls } from './shared/config';
 import { httpErrorInterceptor, mockInterceptor, recaptchaInterceptor } from './shared/interceptors';
 
 @Injectable()
 class DatePikerIntl extends NxDatepickerIntl {
+  private readonly WORKFLOW_TOKEN = inject(VEHICLE_WORKFLOW_TOKEN);
   private readonly literalsService = inject(LiteralsService);
 
   override switchToMonthViewLabel = this.literalsService.toString({
@@ -52,6 +55,7 @@ export const appConfig: ApplicationConfig = {
     },
     { provide: ErrorHandler, useClass: GlobalErrorHandler },
     { provide: NxDatepickerIntl, useClass: DatePikerIntl },
+    { provide: QUOTE_WORKFLOW_TOKEN, useExisting: VEHICLE_WORKFLOW_TOKEN },
     {
       provide: NX_CONTEX_CONFIG,
       useValue: { appName: APP_NAME.toUpperCase(), urls, cache: { schedulerPeriod: SCHEDULER_PERIOD } }

@@ -3,12 +3,11 @@ import { ServiceActivator } from '../service-activators';
 import { HeaderConfig } from './header-config.model';
 import { LiteralModel } from './literal.model';
 import { PageFormValidationSettings } from './page-form.model';
+import { QuoteControlModel } from './quote-control.model';
 import { QuoteFooterConfig } from './quote-footer-comfig.model';
 import { Version, VersionInfo } from './quote-version.model';
 import { StepperConfig } from './stepper-config.model';
 import { Stepper, StepperDTO } from './stepper.model';
-import { WorkflowComponent } from 'src/app/library/library-manifest';
-import { QuoteControlModel } from './quote-control.model';
 
 export type CompareOperations = 'AND' | 'OR';
 export type Links = DataInfo;
@@ -58,7 +57,7 @@ export interface Page {
   configuration?: PageConfiguration;
   nextOptionList?: NextOption[];
   pageId: string;
-  component?: WorkflowComponent;
+  component?: string;
   stepper?: { key: string; stepKey: string };
   routeTree?: string;
 }

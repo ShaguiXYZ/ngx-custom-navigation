@@ -3,10 +3,11 @@ import { Router } from '@angular/router';
 import { NxButtonModule } from '@aposin/ng-aquila/button';
 import { NxCopytextModule } from '@aposin/ng-aquila/copytext';
 import { NxHeadlineModule } from '@aposin/ng-aquila/headline';
+import { QuoteComponent } from 'src/app/core/components';
+import { QuoteModel } from 'src/app/library/models';
 import { HeaderTitleComponent, QuoteFooterComponent } from 'src/app/shared/components';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
 import { environment } from 'src/environments/environment';
-import { QuoteComponent } from '../../_quote-component';
 
 @Component({
   selector: 'quote-confirmation',
@@ -15,7 +16,7 @@ import { QuoteComponent } from '../../_quote-component';
   standalone: true,
   imports: [QuoteFooterComponent, HeaderTitleComponent, NxButtonModule, NxCopytextModule, NxHeadlineModule, QuoteLiteralDirective]
 })
-export class ConfirmationComponent extends QuoteComponent {
+export class ConfirmationComponent extends QuoteComponent<QuoteModel> {
   public icon = 'fa-face-smile';
   public href = environment.baseUrl;
 

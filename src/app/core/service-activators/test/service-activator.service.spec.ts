@@ -1,10 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { TestBed } from '@angular/core/testing';
 import { ContextDataService } from '@shagui/ng-shagui/core';
-import { QuoteModel } from 'src/app/library/models';
 import { QUOTE_APP_CONTEXT_DATA, QUOTE_CONTEXT_DATA } from '../../constants';
 import { ConditionEvaluation } from '../../lib';
-import { AppContextData } from '../../models';
+import { AppContextData, QuoteControlModel } from '../../models';
 import { ActivatorFnType, EntryPoint } from '../quote-activator.model';
 import { ServiceActivatorService } from '../service-activator.service';
 
@@ -51,7 +50,7 @@ describe('ServiceActivatorService', () => {
         return { navigation: { lastPage: { configuration: { serviceActivators: [mockEntryPoint] } } } } as unknown as AppContextData;
       }
       if (key === QUOTE_CONTEXT_DATA) {
-        return {} as QuoteModel;
+        return {} as QuoteControlModel;
       }
     });
 
@@ -76,7 +75,7 @@ describe('ServiceActivatorService', () => {
         return { navigation: { lastPage: { configuration: { serviceActivators: [mockEntryPoint] } } } } as unknown as AppContextData;
       }
       if (key === QUOTE_CONTEXT_DATA) {
-        return {} as QuoteModel;
+        return {} as QuoteControlModel;
       }
     });
 

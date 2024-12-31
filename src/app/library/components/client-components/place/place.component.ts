@@ -11,12 +11,13 @@ import {
 import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
 import { NxInputModule } from '@aposin/ng-aquila/input';
 import { NxMaskModule } from '@aposin/ng-aquila/mask';
+import { QuoteComponent } from 'src/app/core/components';
 import { QuoteFormValidarors } from 'src/app/core/form';
 import { LocationService } from 'src/app/core/services';
+import { QuoteModel } from 'src/app/library/models';
 import { HeaderTitleComponent, QuoteFooterComponent, QuoteFooterInfoComponent } from 'src/app/shared/components';
 import { QuoteAutoFocusDirective, QuoteLiteralDirective, QuoteMaskDirective } from 'src/app/shared/directives';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
-import { QuoteComponent } from '../../_quote-component';
 
 @Component({
   selector: 'quote-place',
@@ -38,7 +39,7 @@ import { QuoteComponent } from '../../_quote-component';
   providers: [LocationService, QuoteFormValidarors],
   standalone: true
 })
-export class PlaceComponent extends QuoteComponent implements OnInit {
+export class PlaceComponent extends QuoteComponent<QuoteModel> implements OnInit {
   public location?: string;
   public form!: FormGroup;
 

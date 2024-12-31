@@ -4,23 +4,20 @@ import { ContextDataService, deepCopy } from '@shagui/ng-shagui/core';
 import { Subscription } from 'rxjs';
 import { QUOTE_APP_CONTEXT_DATA, QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
 import { ConditionEvaluation, patch } from 'src/app/core/lib';
-import { AppContextData, Page } from 'src/app/core/models';
-import { QuoteModel } from '../../models';
+import { AppContextData, Page, QuoteControlModel } from 'src/app/core/models';
 
 @Component({
   template: ''
 })
-export abstract class QuoteComponent implements OnDestroy {
-  protected _contextData: QuoteModel;
+export abstract class QuoteComponent<T extends QuoteControlModel> implements OnDestroy {
+  protected _contextData: T;
   protected subscription$: Subscription[] = [];
 
   protected readonly contextDataService = inject(ContextDataService);
 
   constructor() {
-    this.subscription$.push(
-      this.contextDataService.onDataChange<QuoteModel>(QUOTE_CONTEXT_DATA).subscribe(data => (this._contextData = data))
-    );
-    this._contextData = this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA);
+    this.subscription$.push(this.contextDataService.onDataChange<T>(QUOTE_CONTEXT_DATA).subscribe(data => (this._contextData = data)));
+    this._contextData = this.contextDataService.get<T>(QUOTE_CONTEXT_DATA);
     Promise.resolve().then(() => this.__updateComponentData(this));
   }
 
@@ -32,7 +29,7 @@ export abstract class QuoteComponent implements OnDestroy {
     | ((currentRoute?: ActivatedRouteSnapshot, state?: RouterStateSnapshot, next?: RouterStateSnapshot) => MaybeAsync<GuardResult>)
     | undefined;
 
-  private __updateComponentData = <T extends QuoteComponent>(component: T): void => {
+  private __updateComponentData = <C extends QuoteComponent<T>>(component: C): void => {
     const {
       navigation: { lastPage }
     } = this.contextDataService.get<AppContextData>(QUOTE_APP_CONTEXT_DATA);
@@ -43,14 +40,14 @@ export abstract class QuoteComponent implements OnDestroy {
         component['_contextData'] = patch(component['_contextData'], value as Record<string, unknown>);
         this.contextDataService.set(QUOTE_CONTEXT_DATA, component['_contextData']);
       } else if (key in component) {
-        component[key as keyof T] = deepCopy(value) as T[keyof T];
+        component[key as keyof C] = deepCopy(value) as C[keyof C];
       }
     }
 
     lastPage && this.__zones(lastPage, component);
   };
 
-  private __zones = (page: Page, component: QuoteComponent): void => {
+  private __zones = (page: Page, component: QuoteComponent<T>): void => {
     if (!page.configuration?.zones) {
       return;
     }

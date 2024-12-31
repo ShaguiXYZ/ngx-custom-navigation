@@ -3,9 +3,10 @@ import { NxButtonModule } from '@aposin/ng-aquila/button';
 import { NxCardModule } from '@aposin/ng-aquila/card';
 import { NxCopytextModule } from '@aposin/ng-aquila/copytext';
 import { NxHeadlineModule } from '@aposin/ng-aquila/headline';
+import { QuoteComponent } from 'src/app/core/components';
+import { QuoteModel } from 'src/app/library/models';
 import { HeaderTitleComponent, QuoteFooterComponent, QuoteZoneComponent } from 'src/app/shared/components';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
-import { QuoteComponent } from '../../_quote-component';
 
 @Component({
   selector: 'quote-on-boarding',
@@ -23,6 +24,6 @@ import { QuoteComponent } from '../../_quote-component';
     QuoteLiteralDirective
   ]
 })
-export class OnBoardingComponent extends QuoteComponent {
+export class OnBoardingComponent extends QuoteComponent<QuoteModel> {
   public icon = 'fa-car-rear';
 }

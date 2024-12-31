@@ -12,7 +12,9 @@ import { QuoteTrackDirective } from 'src/app/core/tracking';
 import { HeaderTitleComponent, QuoteFooterComponent, QuoteFooterInfoComponent, QuoteZoneComponent } from 'src/app/shared/components';
 import { QuoteAutoFocusDirective, QuoteLiteralDirective } from 'src/app/shared/directives';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
-import { QuoteComponent } from '../../_quote-component';
+
+import { QuoteComponent } from 'src/app/core/components';
+import { QuoteModel } from 'src/app/library/models';
 import { CountryCodes, PatternsByCountry } from './models';
 
 @Component({
@@ -39,7 +41,7 @@ import { CountryCodes, PatternsByCountry } from './models';
   ],
   providers: [QuoteFormValidarors]
 })
-export class LicensePlateComponent extends QuoteComponent implements OnInit {
+export class LicensePlateComponent extends QuoteComponent<QuoteModel> implements OnInit {
   public form!: FormGroup;
   public countryCode: CountryCodes = 'E';
   public masks!: string;

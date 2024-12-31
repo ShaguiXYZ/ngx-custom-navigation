@@ -12,13 +12,13 @@ import { NxTabsModule } from '@aposin/ng-aquila/tabs';
 import { ContextDataService } from '@shagui/ng-shagui/core';
 import { QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
 import { OfferingPriceModel, QuoteModel } from 'src/app/library/models';
-import { QuoteLiteralDirective } from '../../directives';
-import { HeaderTitleComponent } from '../header-title';
+import { HeaderTitleComponent } from 'src/app/shared/components';
+import { QuoteLiteralDirective } from 'src/app/shared/directives';
 
 @Component({
   selector: 'quote-offering-coverages',
-  templateUrl: './quote-offering-coverages.component.html',
-  styleUrls: ['./quote-offering-coverages.component.scss'],
+  templateUrl: './offering-coverages.component.html',
+  styleUrls: ['./offering-coverages.component.scss'],
   imports: [
     CommonModule,
     HeaderTitleComponent,

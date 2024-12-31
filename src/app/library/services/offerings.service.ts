@@ -1,6 +1,6 @@
 import { HttpStatusCode } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { HttpService } from '@shagui/ng-shagui/core';
+import { deepCopy, HttpService } from '@shagui/ng-shagui/core';
 import { firstValueFrom, map, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { ServiceActivatorService } from '../../core/service-activators';
@@ -13,6 +13,8 @@ export class OfferingsService {
 
   public async pricing(quote: QuoteModel): Promise<QuoteOfferingModel> {
     const { signature } = quote;
+
+    console.log('Pricing quote', deepCopy(quote));
 
     if (signature?.hash !== quote.offering.hash) {
       const offeringStaticData = await firstValueFrom(

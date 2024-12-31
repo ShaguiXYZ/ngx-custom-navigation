@@ -7,7 +7,7 @@ import { AppContextData } from 'src/app/core/models';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 import { QuoteComponent } from './quote-component.model';
 
-class TestQuoteComponent extends QuoteComponent {
+class TestQuoteComponent extends QuoteComponent<any> {
   public someKey = 'someValue';
 
   constructor() {

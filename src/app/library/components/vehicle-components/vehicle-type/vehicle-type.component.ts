@@ -8,7 +8,9 @@ import { QuoteTrackDirective } from 'src/app/core/tracking';
 import { HeaderTitleComponent, TextCardComponent } from 'src/app/shared/components';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
-import { QuoteComponent } from '../../_quote-component';
+
+import { QuoteComponent } from 'src/app/core/components';
+import { QuoteModel } from 'src/app/library/models';
 import { VehicleTypes } from './models';
 
 @Component({
@@ -26,7 +28,7 @@ import { VehicleTypes } from './models';
   ],
   standalone: true
 })
-export class VehicleTypeComponent extends QuoteComponent implements OnInit {
+export class VehicleTypeComponent extends QuoteComponent<QuoteModel> implements OnInit {
   public vehicleTypes = VehicleTypes;
   public selectedType?: IndexedData;
 

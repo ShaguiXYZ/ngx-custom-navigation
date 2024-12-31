@@ -1,9 +1,9 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { TestBed } from '@angular/core/testing';
 import { ActivatedRoute, Router, RouterStateSnapshot } from '@angular/router';
 import { ContextDataService } from '@shagui/ng-shagui/core';
 import { QUOTE_APP_CONTEXT_DATA } from 'src/app/core/constants';
 import { journeyGuard } from '../journey.guard';
+import { QUOTE_WORKFLOW_TOKEN } from 'src/app/core/components/constants';
 
 describe('JourneyGuard', () => {
   let contextDataService: jasmine.SpyObj<ContextDataService>;
@@ -11,6 +11,11 @@ describe('JourneyGuard', () => {
   beforeEach(() => {
     const contextDataServiceSpy = jasmine.createSpyObj('ContextDataService', ['get', 'set']);
     const routerSpy = jasmine.createSpyObj('Router', ['parseUrl']);
+    const mockConfig = {
+      manifest: {},
+      initializedModel: () => {},
+      signModel: () => {}
+    };
 
     TestBed.configureTestingModule({
       providers: [
@@ -21,7 +26,8 @@ describe('JourneyGuard', () => {
           useValue: {
             snapshot: {}
           }
-        }
+        },
+        { provide: QUOTE_WORKFLOW_TOKEN, useValue: mockConfig }
       ]
     });
 

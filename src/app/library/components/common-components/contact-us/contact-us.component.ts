@@ -1,10 +1,11 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { NxCopytextModule } from '@aposin/ng-aquila/copytext';
 import { NxHeadlineModule } from '@aposin/ng-aquila/headline';
+import { QuoteComponent } from 'src/app/core/components';
+import { QuoteModel } from 'src/app/library/models';
 import { HeaderTitleComponent, QuoteFooterComponent } from 'src/app/shared/components';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
-import { QuoteComponent } from '../../_quote-component';
 
 @Component({
   selector: 'quote-contact-us',
@@ -14,6 +15,6 @@ import { QuoteComponent } from '../../_quote-component';
   imports: [HeaderTitleComponent, QuoteFooterComponent, QuoteLiteralDirective, QuoteLiteralPipe, NxCopytextModule, NxHeadlineModule],
   encapsulation: ViewEncapsulation.None
 })
-export class ContactUsComponent extends QuoteComponent {
+export class ContactUsComponent extends QuoteComponent<QuoteModel> {
   public contactUsTexts: string[] = [];
 }

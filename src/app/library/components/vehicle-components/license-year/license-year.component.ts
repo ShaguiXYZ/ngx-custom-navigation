@@ -7,11 +7,12 @@ import { NxInputModule } from '@aposin/ng-aquila/input';
 import { NxMaskModule } from '@aposin/ng-aquila/mask';
 import { NxDate } from '@shagui/ng-shagui/core';
 import moment from 'moment';
+import { QuoteComponent } from 'src/app/core/components';
 import { QuoteFormValidarors } from 'src/app/core/form';
+import { QuoteModel } from 'src/app/library/models';
 import { HeaderTitleComponent, QuoteFooterComponent } from 'src/app/shared/components';
 import { QuoteAutoFocusDirective, QuoteLiteralDirective } from 'src/app/shared/directives';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
-import { QuoteComponent } from '../../_quote-component';
 
 @Component({
   selector: 'quote-license-year',
@@ -33,7 +34,7 @@ import { QuoteComponent } from '../../_quote-component';
   ],
   providers: [QuoteFormValidarors]
 })
-export class LicenseYearComponent extends QuoteComponent implements OnInit {
+export class LicenseYearComponent extends QuoteComponent<QuoteModel> implements OnInit {
   public maxYearsOld = 50;
   public minYear!: number;
   public form!: FormGroup;

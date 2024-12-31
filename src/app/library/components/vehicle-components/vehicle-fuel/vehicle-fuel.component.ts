@@ -3,13 +3,13 @@ import { Component, inject, OnInit } from '@angular/core';
 import { NxAccordionModule } from '@aposin/ng-aquila/accordion';
 import { NxCopytextModule } from '@aposin/ng-aquila/copytext';
 import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
+import { QuoteComponent } from 'src/app/core/components';
 import { RoutingService } from 'src/app/core/services';
 import { QuoteTrackDirective } from 'src/app/core/tracking';
-import { CubicCapacityModel, FuelModel, VehicleClassesModel } from 'src/app/library/models';
+import { CubicCapacityModel, FuelModel, QuoteModel, VehicleClassesModel } from 'src/app/library/models';
 import { VehicleService } from 'src/app/library/services';
 import { HeaderTitleComponent, QuoteFooterComponent, SelectableOptionComponent } from 'src/app/shared/components';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
-import { QuoteComponent } from '../../_quote-component';
 
 @Component({
   selector: 'quote-vehicle-fuel',
@@ -29,7 +29,7 @@ import { QuoteComponent } from '../../_quote-component';
   providers: [VehicleService],
   standalone: true
 })
-export class VehicleFuelComponent extends QuoteComponent implements OnInit {
+export class VehicleFuelComponent extends QuoteComponent<QuoteModel> implements OnInit {
   public cubicCapacityNotKnown: CubicCapacityModel = { index: '-1', data: 'nsnc' };
   public powerNotKnown: VehicleClassesModel = { index: '-1', data: 'nsnc' };
   public formValidations = {

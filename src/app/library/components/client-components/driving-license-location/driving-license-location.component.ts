@@ -5,12 +5,13 @@ import { NxCopytextModule } from '@aposin/ng-aquila/copytext';
 import { NxHeadlineModule } from '@aposin/ng-aquila/headline';
 import { NxDialogService } from '@aposin/ng-aquila/modal';
 import { IndexedData } from '@shagui/ng-shagui/core';
+import { QuoteComponent } from 'src/app/core/components';
 import { RoutingService } from 'src/app/core/services';
 import { QuoteTrackDirective } from 'src/app/core/tracking';
+import { QuoteModel } from 'src/app/library/models';
 import { HeaderTitleComponent, IconCardComponent } from 'src/app/shared/components';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
 import { DrivingLicenseIcons } from './models';
-import { QuoteComponent } from '../../_quote-component';
 
 @Component({
   selector: 'quote-driving-license-location',
@@ -28,7 +29,7 @@ import { QuoteComponent } from '../../_quote-component';
   templateUrl: './driving-license-location.component.html',
   styleUrl: './driving-license-location.component.scss'
 })
-export class DrivingLicenseLocationComponent extends QuoteComponent implements OnInit {
+export class DrivingLicenseLocationComponent extends QuoteComponent<QuoteModel> implements OnInit {
   @ViewChild('template')
   private infoModal!: TemplateRef<unknown>;
 

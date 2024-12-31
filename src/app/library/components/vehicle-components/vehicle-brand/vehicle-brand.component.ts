@@ -13,7 +13,9 @@ import { VehicleService } from 'src/app/library/services';
 import { HeaderTitleComponent, IconCardComponent, QuoteZoneComponent, TextCardComponent } from 'src/app/shared/components';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
-import { QuoteComponent } from '../../_quote-component';
+
+import { QuoteComponent } from 'src/app/core/components';
+import { QuoteModel } from 'src/app/library/models';
 import { BrandComponentService } from './services';
 
 @Component({
@@ -37,7 +39,7 @@ import { BrandComponentService } from './services';
   providers: [BrandComponentService, VehicleService],
   standalone: true
 })
-export class VehicleBrandComponent extends QuoteComponent implements OnInit {
+export class VehicleBrandComponent extends QuoteComponent<QuoteModel> implements OnInit {
   @ViewChild('searchInput', { static: true })
   private searchInput!: ElementRef;
 

@@ -2,9 +2,9 @@
 import { inject } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivateFn, GuardResult, MaybeAsync, RouterStateSnapshot } from '@angular/router';
 import { ContextDataService, deepCopy } from '@shagui/ng-shagui/core';
+import { QUOTE_WORKFLOW_TOKEN } from 'src/app/core/components/constants';
 import { QUOTE_APP_CONTEXT_DATA, QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
 import { AppContextData, QuoteControlModel, Track } from 'src/app/core/models';
-import { QuoteModel } from 'src/app/library/models';
 
 /**
  * Guard function to control navigation flow based on the application's context data.
@@ -25,6 +25,7 @@ import { QuoteModel } from 'src/app/library/models';
  * - Returns `true` to allow the navigation to proceed.
  */
 export const journeyGuard: CanActivateFn = (route: ActivatedRouteSnapshot, state: RouterStateSnapshot): MaybeAsync<GuardResult> => {
+  const workFlowToken = inject(QUOTE_WORKFLOW_TOKEN);
   const contextDataService = inject(ContextDataService);
 
   /**
@@ -61,7 +62,7 @@ export const journeyGuard: CanActivateFn = (route: ActivatedRouteSnapshot, state
 
       if (nextStepper && nextStepper?.stateInfo?.inherited === false) {
         const quote = deepCopy(contextDataService.get<QuoteControlModel>(QUOTE_CONTEXT_DATA));
-        const tracked = _track?.[nextStepperKey]?.data ?? QuoteModel.init();
+        const tracked = _track?.[nextStepperKey]?.data ?? workFlowToken.initializedModel();
 
         _track = { ...(_track ?? {}), [nextStepperKey]: { inData: quote, data: tracked } };
         contextDataService.set(QUOTE_CONTEXT_DATA, tracked);

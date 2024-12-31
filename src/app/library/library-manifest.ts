@@ -1,3 +1,6 @@
+import { InjectionToken } from '@angular/core';
+import { QuoteComponent } from '../core/components';
+import { QuoteWorkflowSettings } from '../core/components/constants';
 import {
   BirthdateComponent,
   DateOfIssueComponent,
@@ -37,8 +40,9 @@ import {
   VehicleTypeComponent,
   YourCarIsComponent
 } from './components/vehicle-components';
+import { QuoteModel } from './models';
 
-export const LIBRARY_MANIFEST = {
+const LIBRARY_MANIFEST = {
   birthdate: { component: BirthdateComponent },
   'date-of-issue': { component: DateOfIssueComponent },
   'driving-license-date': { component: DrivingLicenseDateComponent },
@@ -70,4 +74,19 @@ export const LIBRARY_MANIFEST = {
   'your-car-is': { component: YourCarIsComponent }
 };
 
-export type WorkflowComponent = keyof typeof LIBRARY_MANIFEST;
+type WorkflowComponent = keyof typeof LIBRARY_MANIFEST;
+
+const errorPageId: WorkflowComponent = 'apology-screen';
+
+export const VEHICLE_WORKFLOW_TOKEN = new InjectionToken<QuoteWorkflowSettings<QuoteComponent<QuoteModel>, QuoteModel>>(
+  'VEHICLE_WORKFLOW_TOKEN',
+  {
+    providedIn: 'root',
+    factory: () => ({
+      errorPageId: errorPageId,
+      manifest: LIBRARY_MANIFEST,
+      initializedModel: QuoteModel.init,
+      signModel: QuoteModel.signModel
+    })
+  }
+);

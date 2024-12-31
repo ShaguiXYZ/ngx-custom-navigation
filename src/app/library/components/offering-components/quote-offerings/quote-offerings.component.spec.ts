@@ -14,8 +14,8 @@ import { NX_RECAPTCHA_TOKEN } from 'src/app/core/services';
 import { RoutingService } from 'src/app/core/services/routing.service';
 import { OfferingPriceModel, QuoteModel } from 'src/app/library/models';
 import { OfferingsService } from 'src/app/library/services/offerings.service';
-import { QuoteOfferingCoveragesComponent } from 'src/app/shared/components';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
+import { QuoteOfferingCoveragesComponent } from './components';
 import { QuoteOfferingsComponent } from './quote-offerings.component';
 
 describe('QuoteOfferingsComponent', () => {

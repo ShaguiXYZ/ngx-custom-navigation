@@ -5,12 +5,13 @@ import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
 import { NxInputModule } from '@aposin/ng-aquila/input';
 import { NxMomentDateModule } from '@aposin/ng-aquila/moment-date-adapter';
 import moment, { Moment } from 'moment';
+import { QuoteComponent } from 'src/app/core/components';
 import { DEFAULT_DATE_FORMAT, DEFAULT_DATE_FORMATS, DEFAULT_DISPLAY_DATE_FORMAT } from 'src/app/core/constants';
 import { QuoteFormValidarors } from 'src/app/core/form';
+import { QuoteModel } from 'src/app/library/models';
 import { HeaderTitleComponent, QuoteFooterComponent } from 'src/app/shared/components';
 import { QuoteAutoFocusDirective, QuoteLiteralDirective } from 'src/app/shared/directives';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
-import { QuoteComponent } from '../../_quote-component';
 
 @Component({
   selector: 'quote-birthdate',
@@ -31,7 +32,7 @@ import { QuoteComponent } from '../../_quote-component';
   ],
   providers: [{ provide: NX_DATE_LOCALE, useValue: 'es-ES' }, QuoteFormValidarors]
 })
-export class BirthdateComponent extends QuoteComponent implements OnInit {
+export class BirthdateComponent extends QuoteComponent<QuoteModel> implements OnInit {
   public readonly dateFormat = DEFAULT_DATE_FORMAT;
   public readonly displayDateFormat = DEFAULT_DISPLAY_DATE_FORMAT;
   public readonly dateFormats = DEFAULT_DATE_FORMATS;

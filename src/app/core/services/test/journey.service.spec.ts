@@ -1,9 +1,11 @@
+/* eslint-disable @typescript-eslint/no-empty-function */
 import { provideHttpClient } from '@angular/common/http';
 import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { ContextDataService, HttpService } from '@shagui/ng-shagui/core';
 import { of } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { QUOTE_WORKFLOW_TOKEN } from '../../components/constants';
 import { Configuration, ConfigurationDTO, dataHash, JourneyInfo, QuoteSettingsModel, Version } from '../../models';
 import { JourneyService } from '../journey.service';
 import { LiteralsService } from '../literals.service';
@@ -14,6 +16,12 @@ describe('JourneyService', () => {
   let contextDataService: jasmine.SpyObj<ContextDataService>;
   let httpService: jasmine.SpyObj<HttpService>;
   let literalService: jasmine.SpyObj<LiteralsService>;
+  const mockConfig = {
+    errorPageId: 'error',
+    manifest: {},
+    initializedModel: () => {},
+    signModel: () => {}
+  };
 
   beforeEach(() => {
     const contextDataServiceSpy = jasmine.createSpyObj('ContextDataService', ['get']);
@@ -28,7 +36,8 @@ describe('JourneyService', () => {
         JourneyService,
         { provide: ContextDataService, useValue: contextDataServiceSpy },
         { provide: HttpService, useValue: httpServiceSpy },
-        { provide: LiteralsService, useValue: literalServiceSpy }
+        { provide: LiteralsService, useValue: literalServiceSpy },
+        { provide: QUOTE_WORKFLOW_TOKEN, useValue: mockConfig }
       ]
     });
 

@@ -6,12 +6,12 @@ import { NxCopytextModule } from '@aposin/ng-aquila/copytext';
 import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
 import { NxInputModule } from '@aposin/ng-aquila/input';
 import { NxMaskModule } from '@aposin/ng-aquila/mask';
+import { QuoteComponent } from 'src/app/core/components';
 import { RoutingService } from 'src/app/core/services';
-import { QuoteVehicleModel } from 'src/app/library/models';
+import { QuoteModel, QuoteVehicleModel } from 'src/app/library/models';
 import { VehicleService } from 'src/app/library/services';
 import { HeaderTitleComponent, QuoteFooterComponent, TextCardComponent } from 'src/app/shared/components';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
-import { QuoteComponent } from '../../_quote-component';
 
 @Component({
   selector: 'quote-your-car-is',
@@ -33,7 +33,7 @@ import { QuoteComponent } from '../../_quote-component';
   providers: [VehicleService],
   standalone: true
 })
-export class YourCarIsComponent extends QuoteComponent implements OnInit {
+export class YourCarIsComponent extends QuoteComponent<QuoteModel> implements OnInit {
   public vehicleOptions: QuoteVehicleModel[] = [];
   public selectedVehicle?: QuoteVehicleModel;
 

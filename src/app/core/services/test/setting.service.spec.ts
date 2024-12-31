@@ -1,6 +1,8 @@
+/* eslint-disable @typescript-eslint/no-empty-function */
 import { TestBed } from '@angular/core/testing';
 import { TranslateService } from '@ngx-translate/core';
 import { ContextDataService } from '@shagui/ng-shagui/core';
+import { QUOTE_WORKFLOW_TOKEN } from '../../components/constants';
 import { CommercialExceptionsModel, Configuration, JourneyInfo, QuoteSettingsModel } from '../../models';
 import { JourneyService, QUOTE_JOURNEY_DISALED } from '../journey.service';
 import { SettingsService } from '../setting.service';
@@ -20,8 +22,13 @@ describe('SettingsService', () => {
       'hasBreakingChange',
       'quoteSettings'
     ]);
-
     const mockCommercialExceptions = { enableWorkFlow: true } as unknown as CommercialExceptionsModel;
+    const mockConfig = {
+      manifest: {},
+      initializedModel: () => {},
+      signModel: () => {}
+    };
+
     journeySpy.quoteSettings.and.returnValue(Promise.resolve({ commercialExceptions: mockCommercialExceptions } as QuoteSettingsModel));
 
     contextSpy.get.and.returnValue({
@@ -34,7 +41,8 @@ describe('SettingsService', () => {
         SettingsService,
         { provide: TranslateService, useValue: translateSpy },
         { provide: ContextDataService, useValue: contextSpy },
-        { provide: JourneyService, useValue: journeySpy }
+        { provide: JourneyService, useValue: journeySpy },
+        { provide: QUOTE_WORKFLOW_TOKEN, useValue: mockConfig }
       ]
     });
 

@@ -1,11 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { NxCopytextModule } from '@aposin/ng-aquila/copytext';
+import { QuoteComponent } from 'src/app/core/components';
 import { QuoteTrackDirective } from 'src/app/core/tracking';
-import { Hour } from 'src/app/library/models';
+import { Hour, QuoteModel } from 'src/app/library/models';
 import { HeaderTitleComponent, QuoteFooterComponent, QuoteZoneComponent, TextCardComponent } from 'src/app/shared/components';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
-import { QuoteComponent } from '../../_quote-component';
 
 @Component({
   selector: 'quote-contact-time',
@@ -23,7 +23,7 @@ import { QuoteComponent } from '../../_quote-component';
   templateUrl: './contact-time.component.html',
   styleUrl: './contact-time.component.scss'
 })
-export class ContactTimeComponent extends QuoteComponent implements OnInit {
+export class ContactTimeComponent extends QuoteComponent<QuoteModel> implements OnInit {
   public hours: { am: Hour[]; pm: Hour[] } = {
     // AM hours
     am: ['08:00', '09:00', '10:00', '11:00', '12:00', '13:00'],
