@@ -59,7 +59,7 @@ export const journeyGuard: CanActivateFn = (route: ActivatedRouteSnapshot, state
 
       if (nextStepper && nextStepper?.stateInfo?.inherited === false) {
         const quote = deepCopy(contextDataService.get<QuoteControlModel>(QUOTE_CONTEXT_DATA));
-        const tracked = _track?.[nextStepperKey]?.data ?? workFlowToken.initializedModel();
+        const tracked = _track?.[nextStepperKey]?.data ?? workFlowToken.initialize();
 
         _track = { ...(_track ?? {}), [nextStepperKey]: { inData: quote, data: tracked } };
         contextDataService.set(QUOTE_CONTEXT_DATA, tracked);

@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-empty-function */
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute, ActivatedRouteSnapshot, Router } from '@angular/router';
 import { ContextDataService, HttpService } from '@shagui/ng-shagui/core';
@@ -22,9 +21,7 @@ describe('QuoteDispatcherComponent', () => {
   beforeEach(async () => {
     const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate', 'setDefaultLang']);
     const mockConfig = {
-      manifest: {},
-      initializedModel: () => {},
-      signModel: () => {}
+      manifest: {}
     };
     mockRouter = jasmine.createSpyObj('Router', ['navigate']);
     mockActivatedRoute = jasmine.createSpyObj('ActivatedRoute', ['snapshot']);

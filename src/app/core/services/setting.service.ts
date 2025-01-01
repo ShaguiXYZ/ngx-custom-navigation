@@ -46,9 +46,9 @@ export class SettingsService {
     const configurationChange = actualConfiguration?.configuration?.hash !== configuration.hash;
     const [quote, contextData] =
       actualConfiguration?.configuration.name !== configuration.name || configurationChange
-        ? [this.workFlowToken.initializedModel(), AppContextData.init(settings, configuration)]
+        ? [this.workFlowToken.initialize(), AppContextData.init(settings, configuration)]
         : [
-            { ...this.workFlowToken.initializedModel(), ...this.contextDataService.get<QuoteControlModel>(QUOTE_CONTEXT_DATA) },
+            { ...this.workFlowToken.initialize(), ...this.contextDataService.get<QuoteControlModel>(QUOTE_CONTEXT_DATA) },
             { ...actualConfiguration }
           ];
     const versionUpdated = contextData.configuration.version.last

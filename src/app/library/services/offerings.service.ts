@@ -34,7 +34,7 @@ export class OfferingsService {
             map(OfferingDTO.toModel),
             tap(async offering => {
               quote.offering = { ...quote.offering, quotationId: offering.quotationId, prices: offering.prices };
-              quote.signature = { ...quote.signature, ...QuoteModel.signModel(quote) };
+              quote.signature = { ...quote.signature, hash: QuoteModel.hash(quote) };
               quote.offering.hash = quote.signature.hash;
 
               await this.serviceActivatorService.activateEntryPoint('on-pricing');

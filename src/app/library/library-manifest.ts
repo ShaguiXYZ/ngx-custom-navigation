@@ -85,8 +85,8 @@ export const VEHICLE_WORKFLOW_TOKEN = new InjectionToken<QuoteWorkflowSettings<Q
     factory: () => ({
       errorPageId: errorPageId,
       manifest: LIBRARY_MANIFEST,
-      initializedModel: QuoteModel.init,
-      signModel: QuoteModel.signModel
+      initialize: QuoteModel.init,
+      hash: QuoteModel.hash
     })
   }
 );

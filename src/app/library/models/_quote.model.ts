@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-namespace */
-import { dataHash, SignatureModel } from 'src/app/core/models';
+import { dataHash } from 'src/app/core/models';
+import { QuoteControlModel } from '../../core/models/quote-control.model';
 import { QuoteBlackList } from './quote-black-list.model';
 import { QuoteClientModel } from './quote-client.model';
 import { QuoteContactDataModel } from './quote-contact-data.model';
-import { QuoteControlModel } from '../../core/models/quote-control.model';
 import { QuoteDrivenModel } from './quote-driven.model';
 import { QuoteInsuranceCompanyModel } from './quote-insurance-company.model';
 import { QuoteOfferingModel } from './quote-offering.model';
@@ -40,11 +40,5 @@ export namespace QuoteModel {
     const { blackList, contactData, forms, offering, personalData, signature, ...significantData } = quote;
     return significantData;
   };
-  export const signModel = (model: QuoteModel): SignatureModel => {
-    const currentQuoteSignature = dataHash(getSignificantData(model));
-
-    return {
-      hash: currentQuoteSignature
-    };
-  };
+  export const hash = (model: QuoteModel): string => dataHash(getSignificantData(model));
 }

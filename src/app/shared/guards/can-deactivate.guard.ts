@@ -30,7 +30,7 @@ export const canDeactivateGuard: CanDeactivateFn<{ _instance: QuoteComponent<Quo
 
     instance['_contextData'].signature = {
       ...(instance['_contextData'].signature ?? {}),
-      ...workFlowToken.signModel(instance['_contextData'])
+      hash: workFlowToken.hash(instance['_contextData'])
     };
 
     if (!canDeactivate) {

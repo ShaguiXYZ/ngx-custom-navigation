@@ -25,8 +25,8 @@ describe('SettingsService', () => {
     const mockCommercialExceptions = { enableWorkFlow: true } as unknown as CommercialExceptionsModel;
     const mockConfig = {
       manifest: {},
-      initializedModel: () => {},
-      signModel: () => {}
+      initialize: () => {},
+      hash: () => {}
     };
 
     journeySpy.quoteSettings.and.returnValue(Promise.resolve({ commercialExceptions: mockCommercialExceptions } as QuoteSettingsModel));
