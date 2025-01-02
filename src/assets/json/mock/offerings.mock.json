@@ -14,6 +14,7 @@
         "modalityFullDescription": null,
         "paymentType": "A",
         "paymentTypeDescription": "Anual",
+        "premium": "1",
         "contractable": "S",
         "totalPremiumAmount": "534.34",
         "fee": "",

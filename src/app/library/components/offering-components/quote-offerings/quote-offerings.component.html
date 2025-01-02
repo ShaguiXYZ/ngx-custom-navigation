@@ -22,12 +22,14 @@
         }
       </div>
 
+      @if(prices.length > 1) {
       <div class="carousel__operation carousel__left" (click)="previous()">
         <em class="fa-solid fa-arrow-left"></em>
       </div>
       <div class="carousel__operation carousel__right" (click)="next()">
         <em class="fa-solid fa-arrow-right"></em>
       </div>
+      }
     </div>
 
     <div class="carousel__stepers nx-margin-top-s">

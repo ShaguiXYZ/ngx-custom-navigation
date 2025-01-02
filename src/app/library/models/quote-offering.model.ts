@@ -18,6 +18,7 @@ export interface PriceGridDTO {
   modalityDescription: string;
   modalityFullDescription?: string;
   paymentType: string;
+  premium?: string;
   paymentTypeDescription: string;
   contractable: string;
   totalPremiumAmount: string;
@@ -115,6 +116,7 @@ export namespace OfferingDTO {
         paymentTypeDescription: priceGrid.paymentTypeDescription,
         contractable: priceGrid.contractable,
         totalPremiumAmount: priceGrid.totalPremiumAmount,
+        popular: priceGrid.premium ? priceGrid.premium === '1' : false,
         fee: priceGrid.fee ? [priceGrid.fee] : [],
         receiptData: {
           firstReceiptAmount: parseFloat(priceGrid.receiptData.firstReceiptAmount),
