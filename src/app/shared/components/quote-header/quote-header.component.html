@@ -1,32 +1,40 @@
 <div class="container">
   <div class="head">
-    <div class="logo">
-      <img src="favicon.ico" alt="Logo" />
+    <div class="head__content">
+      <div>
+        <div class="logo-container enhance-header">
+          <div class="logo">
+            <img src="favicon.ico" alt="Logo" />
+          </div>
+        </div>
+
+        <div class="back">
+          @if (config.showBack) {
+          <nx-link
+            nxStyle="block icon-left"
+            [nxTrack]="{
+              label: 'header-back' | quoteLiteral
+            }"
+            [nxTrackEvents]="['click']"
+          >
+            <a (click)="return()" (keydown.enter)="return()" tabindex="0">
+              <nx-icon name="arrow-left" aria-hidden="true"></nx-icon> <span nxQuoteLiteral="header-back"></span
+            ></a>
+          </nx-link>
+          }
+        </div>
+      </div>
+
+      @if(config.showContactUs) {
+      <nx-link
+        [nxTrack]="{
+          label: 'we-call-you' | quoteLiteral
+        }"
+        [nxTrackEvents]="['click']"
+      >
+        <a class="contact-us" tabindex="0" nxQuoteLink="contact-us" nxQuoteLiteral="we-call-you"> </a>
+      </nx-link>
+      }
     </div>
-    @if(config.showContactUs) {
-    <nx-link
-      [nxTrack]="{
-        label: 'we-call-you' | quoteLiteral
-      }"
-      [nxTrackEvents]="['click']"
-    >
-      <a class="contact-us" tabindex="0" nxQuoteLink="contact-us" nxQuoteLiteral="we-call-you"> </a>
-    </nx-link>
-    }
-  </div>
-  <div class="back">
-    @if (config.showBack) {
-    <nx-link
-      nxStyle="block icon-left"
-      [nxTrack]="{
-        label: 'header-back' | quoteLiteral
-      }"
-      [nxTrackEvents]="['click']"
-    >
-      <a (click)="return()" (keydown.enter)="return()" tabindex="0">
-        <nx-icon name="arrow-left" aria-hidden="true"></nx-icon> <span nxQuoteLiteral="header-back"></span
-      ></a>
-    </nx-link>
-    }
   </div>
 </div>

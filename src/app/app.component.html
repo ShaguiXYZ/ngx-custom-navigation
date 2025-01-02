@@ -5,10 +5,11 @@
 
   <article nxLayout="content-section grid maxwidth nogutters" class="app__container">
     @if (verified) {
-    <header class="app__header nx-margin-bottom-3m">
+    <header class="app__header">
       <quote-header />
-      <quote-stepper />
     </header>
+
+    <quote-stepper class="nx-margin-bottom-3m" />
 
     <section class="outlet__container" [@routeTransitions]="prepareRoute(outlet)">
       <div class="outlet__content">

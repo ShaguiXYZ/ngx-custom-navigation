@@ -1,5 +1,11 @@
 @import '../../styles/carousel.scss';
 
+@property --angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
 .price-container {
   border: 1px solid var(--ui-04);
   border-radius: 10px;

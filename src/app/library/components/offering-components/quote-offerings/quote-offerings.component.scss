@@ -1,11 +1,5 @@
 @import './styles/carousel.scss';
 
-@property --angle {
-  syntax: '<angle>';
-  initial-value: 0deg;
-  inherits: false;
-}
-
 .form-container {
   .inner__carrousel {
     display: block;

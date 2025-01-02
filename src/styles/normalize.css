@@ -41,6 +41,7 @@ body {
 
 body,
 :host {
+  background: var(--ui-background);
   background-color: var(--ui-background);
   color: var(--text-01);
 }

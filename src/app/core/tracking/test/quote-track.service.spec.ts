@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout';
 import { TestBed } from '@angular/core/testing';
 import { NavigationEnd, Router } from '@angular/router';
@@ -94,7 +95,10 @@ describe('QuoteTrackService', () => {
   it('should track view with correct data', done => {
     const trackFnSpy = spyOn(service as any, 'trackFn').and.returnValue(1);
 
-    spyOn(window, 'requestIdleCallback').and.callFake((callback: Function) => callback());
+    spyOn(window, 'requestIdleCallback').and.callFake((callback: IdleRequestCallback) => {
+      callback({ timeRemaining: () => 50, didTimeout: false });
+      return 1; // Return a number to match the expected type
+    });
 
     service.trackView('test').then(() => {
       expect(_window.digitalData?.['infoPag']).toEqual(
@@ -120,7 +124,10 @@ describe('QuoteTrackService', () => {
     const trackInfo: TrackInfo = { brand: 'test' };
     const trackFnSpy = spyOn(service as any, 'trackFn').and.returnValue(1);
 
-    spyOn(window, 'requestIdleCallback').and.callFake((callback: Function) => callback());
+    spyOn(window, 'requestIdleCallback').and.callFake((callback: IdleRequestCallback) => {
+      callback({ timeRemaining: () => 50, didTimeout: false });
+      return 1; // Return a number to match the expected type
+    });
 
     service
       .trackEvent('click', trackInfo)
@@ -150,7 +157,10 @@ describe('QuoteTrackService', () => {
     const trackInfo: TrackInfo = { brand: 'test' };
     const trackFnSpy = spyOn(service as any, 'trackFn').and.returnValue(1);
 
-    spyOn(window, 'requestIdleCallback').and.callFake((callback: Function) => callback());
+    spyOn(window, 'requestIdleCallback').and.callFake((callback: IdleRequestCallback) => {
+      callback({ timeRemaining: () => 50, didTimeout: false });
+      return 1; // Return a number to match the expected type
+    });
 
     service
       .trackEvent('click', trackInfo)
@@ -181,7 +191,10 @@ describe('QuoteTrackService', () => {
     const trackInfo: TrackInfo = { brand: 'test' };
     const trackFnSpy = spyOn(service as any, 'trackFn').and.returnValue(1);
 
-    spyOn(window, 'requestIdleCallback').and.callFake((callback: Function) => callback());
+    spyOn(window, 'requestIdleCallback').and.callFake((callback: IdleRequestCallback) => {
+      callback({ timeRemaining: () => 50, didTimeout: false });
+      return 1; // Return a number to match the expected type
+    });
 
     service
       .trackEvent('click', trackInfo)

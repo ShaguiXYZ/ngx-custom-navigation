@@ -1,7 +1,8 @@
-import { Component, HostListener, inject } from '@angular/core';
-import { RouterModule, RouterOutlet } from '@angular/router';
+import { Component, HostListener, inject, OnDestroy, OnInit } from '@angular/core';
+import { NavigationEnd, Router, RouterModule, RouterOutlet } from '@angular/router';
 import { NxGridModule } from '@aposin/ng-aquila/grid';
-import { ContextDataService, NotificationService } from '@shagui/ng-shagui/core';
+import { $, ContextDataService, NotificationService } from '@shagui/ng-shagui/core';
+import { filter, Subscription } from 'rxjs';
 import { QUOTE_APP_CONTEXT_DATA } from './core/constants';
 import { AppContextData } from './core/models';
 import { LiteralsService } from './core/services';
@@ -36,14 +37,16 @@ import { QuoteLiteralPipe } from './shared/pipes';
     QuoteLiteralDirective
   ]
 })
-export class AppComponent {
+export class AppComponent implements OnInit, OnDestroy {
   public verified?: boolean;
+
+  private subscription$: Subscription[] = [];
 
   private readonly contextDataService = inject(ContextDataService);
   private readonly literalService = inject(LiteralsService);
   private readonly notificationService = inject(NotificationService);
 
-  constructor() {
+  constructor(private readonly router: Router) {
     const {
       settings: {
         commercialExceptions: { captchaVerified }
@@ -51,6 +54,14 @@ export class AppComponent {
     } = this.contextDataService.get<AppContextData>(QUOTE_APP_CONTEXT_DATA);
 
     this.verified = captchaVerified;
+  }
+
+  ngOnInit(): void {
+    this.subscription$.push(this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe(this.resetHeaderAnimation));
+  }
+
+  ngOnDestroy(): void {
+    this.subscription$.forEach(sub => sub.unsubscribe());
   }
 
   // @howto Detect the Closing of a Browser Tab
@@ -87,5 +98,15 @@ export class AppComponent {
     } = this.contextDataService.get<AppContextData>(QUOTE_APP_CONTEXT_DATA);
 
     return viewedPages.length;
+  }
+
+  private resetHeaderAnimation(): void {
+    const headerElement = $('.app__header');
+
+    if (headerElement) {
+      headerElement.classList.remove('app__header');
+      void headerElement.offsetWidth; // Trigger reflow
+      headerElement.classList.add('app__header');
+    }
   }
 }
