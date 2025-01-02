@@ -2,15 +2,16 @@
 import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout';
 import { TestBed } from '@angular/core/testing';
 import { NavigationEnd, Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import { ContextDataService } from '@shagui/ng-shagui/core';
 import { of, Subscription } from 'rxjs';
+import { NX_WORKFLOW_TOKEN } from '../../components/constants';
 import { QUOTE_APP_CONTEXT_DATA, QUOTE_CONTEXT_DATA } from '../../constants';
 import { AppContextData } from '../../models';
+import { NX_RECAPTCHA_TOKEN } from '../../services';
 import { TrackInfo } from '../quote-track.model';
 import { QuoteTrackService } from '../quote-track.service';
 import { _window } from '../window-tracker.model';
-import { TranslateService } from '@ngx-translate/core';
-import { NX_RECAPTCHA_TOKEN } from '../../services';
 
 describe('QuoteTrackService', () => {
   let service: QuoteTrackService;
@@ -24,6 +25,12 @@ describe('QuoteTrackService', () => {
     const contextDataServiceSpy = jasmine.createSpyObj('ContextDataService', ['get']);
     const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate']);
     const subscriptionSpy = jasmine.createSpyObj('Subscription', ['unsubscribe']);
+    const mockConfig = {
+      errorPageId: 'error',
+      manifest: {
+        tracks: {}
+      }
+    };
 
     breakpointObserverSpy.observe.and.returnValue({
       subscribe: jasmine
@@ -52,7 +59,8 @@ describe('QuoteTrackService', () => {
         { provide: ContextDataService, useValue: contextDataServiceSpy },
         { provide: TranslateService, useValue: translateServiceSpy },
         { provide: Subscription, useValue: subscriptionSpy },
-        { provide: NX_RECAPTCHA_TOKEN, useValue: { siteKey: 'mock-site-key' } }
+        { provide: NX_RECAPTCHA_TOKEN, useValue: { siteKey: 'mock-site-key' } },
+        { provide: NX_WORKFLOW_TOKEN, useValue: mockConfig }
       ]
     });
 

@@ -3,7 +3,7 @@ import { inject, Injectable } from '@angular/core';
 import { ContextDataService, DataInfo, HttpService, UniqueIds } from '@shagui/ng-shagui/core';
 import { firstValueFrom, map } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { QUOTE_WORKFLOW_TOKEN } from '../components/constants';
+import { NX_WORKFLOW_TOKEN } from '../components/constants';
 import { QUOTE_APP_CONTEXT_DATA } from '../constants';
 import {
   AppContextData,
@@ -28,7 +28,7 @@ export const QUOTE_JOURNEY_DISALED = 'not-journey';
 
 @Injectable({ providedIn: 'root' })
 export class JourneyService {
-  private readonly workFlowToken = inject(QUOTE_WORKFLOW_TOKEN);
+  private readonly workFlowToken = inject(NX_WORKFLOW_TOKEN);
   private readonly contextDataService = inject(ContextDataService);
   private readonly httpService = inject(HttpService);
   private readonly literalService = inject(LiteralsService);

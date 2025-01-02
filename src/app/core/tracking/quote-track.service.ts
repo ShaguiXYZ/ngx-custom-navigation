@@ -2,11 +2,12 @@ import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/l
 import { inject, Injectable, OnDestroy } from '@angular/core';
 import { ContextDataService, hasValue, JsonUtils, UniqueIds } from '@shagui/ng-shagui/core';
 import { Subscription } from 'rxjs';
+import { NX_WORKFLOW_TOKEN } from '../components/constants';
 import { CAPTCHA_TOKEN_KEY, QUOTE_APP_CONTEXT_DATA, QUOTE_CONTEXT_DATA } from '../constants';
 import { TrackError } from '../errors';
 import { AppContextData, QuoteControlModel } from '../models';
 import { CaptchaService, LiteralsService } from '../services';
-import { TrackEventType, TrackInfo, TrackInfoPageModel, TRACKING_QUOTE_MANIFEST } from './quote-track.model';
+import { TrackEventType, TrackInfo, TrackInfoPageModel } from './quote-track.model';
 import { _window } from './window-tracker.model';
 
 @Injectable({ providedIn: 'root' })
@@ -17,6 +18,9 @@ export class QuoteTrackService implements OnDestroy {
   private referrer?: string;
 
   private readonly subscription$: Subscription[] = [];
+
+  private readonly workFlowToken = inject(NX_WORKFLOW_TOKEN);
+
   private readonly captchaService = inject(CaptchaService);
   private readonly breakpointObserver = inject(BreakpointObserver);
   private readonly contextDataService = inject(ContextDataService);
@@ -74,7 +78,10 @@ export class QuoteTrackService implements OnDestroy {
           ...Object.entries(data)
             .filter(([, value]) => hasValue(value))
             .reduce((acc, [key, value]) => {
-              if (!(key in TRACKING_QUOTE_MANIFEST) || TRACKING_QUOTE_MANIFEST[key as keyof typeof TRACKING_QUOTE_MANIFEST].tracked) {
+              if (
+                !(key in this.workFlowToken.manifest.tracks) ||
+                this.workFlowToken.manifest.tracks[key as keyof typeof this.workFlowToken.manifest.tracks].tracked
+              ) {
                 acc[key] = `${value}`;
               }
               return acc;
@@ -112,11 +119,11 @@ export class QuoteTrackService implements OnDestroy {
   private loadManifest = (): TrackInfo => {
     const quote = this.contextDataService.get<QuoteControlModel>(QUOTE_CONTEXT_DATA);
 
-    return Object.entries(TRACKING_QUOTE_MANIFEST).reduce<TrackInfo>((acc, [key, data]) => {
+    return Object.entries(this.workFlowToken.manifest.tracks).reduce<TrackInfo>((acc, [key, data]) => {
       if (!data.tracked) return acc;
 
       const value = JsonUtils.valueOf(quote, data.value);
-      if (hasValue(value)) acc[key as keyof typeof TRACKING_QUOTE_MANIFEST] = `${value}`;
+      if (hasValue(value)) acc[key as keyof typeof this.workFlowToken.manifest.tracks] = `${value}`;
 
       return acc;
     }, {});

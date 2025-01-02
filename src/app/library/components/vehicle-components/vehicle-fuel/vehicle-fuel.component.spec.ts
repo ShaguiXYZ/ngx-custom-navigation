@@ -6,6 +6,7 @@ import { CubicCapacityModel, FuelModel, QuoteModel, VehicleClassesModel } from '
 import { VehicleService } from 'src/app/library/services';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 import { VehicleFuelComponent } from './vehicle-fuel.component';
+import { NX_WORKFLOW_TOKEN } from 'src/app/core/components/constants';
 
 describe('VehicleFuelComponent', () => {
   let component: VehicleFuelComponent;
@@ -18,6 +19,10 @@ describe('VehicleFuelComponent', () => {
     const routingServiceSpy = jasmine.createSpyObj('RoutingService', ['next']);
     const quoteLiteralPipeSpy = jasmine.createSpyObj('QuoteLiteralPipe', ['transform']);
     const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate']);
+    const mockConfig = {
+      errorPageId: 'error',
+      manifest: {}
+    };
 
     await TestBed.configureTestingModule({
       declarations: [],
@@ -26,8 +31,9 @@ describe('VehicleFuelComponent', () => {
         { provide: VehicleService, useValue: vehicleServiceSpy },
         { provide: TranslateService, useValue: translateServiceSpy },
         { provide: QuoteLiteralPipe, useValue: quoteLiteralPipeSpy },
+        { provide: RoutingService, useValue: routingServiceSpy },
         { provide: NX_RECAPTCHA_TOKEN, useValue: { siteKey: 'mock-site-key' } },
-        { provide: RoutingService, useValue: routingServiceSpy }
+        { provide: NX_WORKFLOW_TOKEN, useValue: mockConfig }
       ]
     }).compileComponents();
 

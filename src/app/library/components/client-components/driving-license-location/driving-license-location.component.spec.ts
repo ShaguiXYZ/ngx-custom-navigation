@@ -7,6 +7,7 @@ import { ContextDataServiceStub } from 'src/app/core/stub';
 import { QuoteModel } from 'src/app/library/models';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 import { DrivingLicenseLocationComponent } from './driving-license-location.component';
+import { NX_WORKFLOW_TOKEN } from 'src/app/core/components/constants';
 
 describe('DrivingLicenseLocationComponent', () => {
   let component: DrivingLicenseLocationComponent;
@@ -19,6 +20,10 @@ describe('DrivingLicenseLocationComponent', () => {
     const dialogServiceSpy = jasmine.createSpyObj('NxDialogService', ['open']);
     const quoteLiteralPipeSpy = jasmine.createSpyObj('QuoteLiteralPipe', ['transform']);
     const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate']);
+    const mockConfig = {
+      errorPageId: 'error',
+      manifest: {}
+    };
 
     await TestBed.configureTestingModule({
       declarations: [],
@@ -29,7 +34,8 @@ describe('DrivingLicenseLocationComponent', () => {
         { provide: RoutingService, useValue: routingServiceSpy },
         { provide: NxDialogService, useValue: dialogServiceSpy },
         { provide: QuoteLiteralPipe, useValue: quoteLiteralPipeSpy },
-        { provide: NX_RECAPTCHA_TOKEN, useValue: { siteKey: 'mock-site-key' } }
+        { provide: NX_RECAPTCHA_TOKEN, useValue: { siteKey: 'mock-site-key' } },
+        { provide: NX_WORKFLOW_TOKEN, useValue: mockConfig }
       ]
     }).compileComponents();
   });

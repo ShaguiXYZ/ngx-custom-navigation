@@ -2,7 +2,7 @@
 import { Component, OnInit, ViewChild, ViewContainerRef, inject } from '@angular/core';
 import { ContextDataService } from '@shagui/ng-shagui/core';
 import { QuoteComponent } from 'src/app/core/components';
-import { QUOTE_WORKFLOW_TOKEN } from 'src/app/core/components/constants';
+import { NX_WORKFLOW_TOKEN } from 'src/app/core/components/constants';
 import { QUOTE_APP_CONTEXT_DATA } from 'src/app/core/constants';
 import { JourneyError } from 'src/app/core/errors';
 import { AppContextData } from 'src/app/core/models';
@@ -19,7 +19,7 @@ export class WorkflowLoaderComponent implements OnInit {
   @ViewChild('dynamicComponent', { read: ViewContainerRef, static: true })
   private container!: ViewContainerRef;
 
-  private readonly workflowToken = inject(QUOTE_WORKFLOW_TOKEN);
+  private readonly workflowToken = inject(NX_WORKFLOW_TOKEN);
   private readonly contextDataService = inject(ContextDataService);
 
   ngOnInit(): void {
@@ -35,7 +35,7 @@ export class WorkflowLoaderComponent implements OnInit {
       const manifestKey = lastPage.component ?? lastPage.pageId;
 
       try {
-        const manifest = this.workflowToken.manifest[manifestKey];
+        const manifest = this.workflowToken.manifest.components[manifestKey];
 
         this.container.clear();
         const componentRef = this.container.createComponent<QuoteComponent<any>>(manifest.component);

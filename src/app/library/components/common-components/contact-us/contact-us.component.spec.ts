@@ -5,12 +5,13 @@ import { NxHeadlineModule } from '@aposin/ng-aquila/headline';
 import { NxIconModule } from '@aposin/ng-aquila/icon';
 import { TranslateService } from '@ngx-translate/core';
 import { ContextDataService } from '@shagui/ng-shagui/core';
+import { NX_WORKFLOW_TOKEN } from 'src/app/core/components/constants';
+import { NX_RECAPTCHA_TOKEN } from 'src/app/core/services';
 import { ContextDataServiceStub } from 'src/app/core/stub';
 import { HeaderTitleComponent, QuoteFooterComponent } from 'src/app/shared/components';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
-import { ContactUsComponent } from './contact-us.component';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
-import { NX_RECAPTCHA_TOKEN } from 'src/app/core/services';
+import { ContactUsComponent } from './contact-us.component';
 
 describe('ContactUsComponent', () => {
   let component: ContactUsComponent;
@@ -19,6 +20,10 @@ describe('ContactUsComponent', () => {
   beforeEach(async () => {
     const quoteLiteralPipeSpy = jasmine.createSpyObj('QuoteLiteralPipe', ['transform']);
     const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate']);
+    const mockConfig = {
+      errorPageId: 'error',
+      manifest: {}
+    };
 
     await TestBed.configureTestingModule({
       declarations: [],
@@ -35,7 +40,8 @@ describe('ContactUsComponent', () => {
         { provide: ContextDataService, useClass: ContextDataServiceStub },
         { provide: TranslateService, useValue: translateServiceSpy },
         { provide: QuoteLiteralPipe, useValue: quoteLiteralPipeSpy },
-        { provide: NX_RECAPTCHA_TOKEN, useValue: { siteKey: 'mock-site-key' } }
+        { provide: NX_RECAPTCHA_TOKEN, useValue: { siteKey: 'mock-site-key' } },
+        { provide: NX_WORKFLOW_TOKEN, useValue: mockConfig }
       ]
     }).compileComponents();
   });

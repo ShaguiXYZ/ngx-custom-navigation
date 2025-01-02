@@ -2,7 +2,7 @@
 import { TestBed } from '@angular/core/testing';
 import { ActivatedRoute, Router, RouterStateSnapshot } from '@angular/router';
 import { ContextDataService } from '@shagui/ng-shagui/core';
-import { QUOTE_WORKFLOW_TOKEN } from 'src/app/core/components/constants';
+import { NX_WORKFLOW_TOKEN } from 'src/app/core/components/constants';
 import { QUOTE_APP_CONTEXT_DATA } from 'src/app/core/constants';
 import { journeyGuard } from '../journey.guard';
 
@@ -26,7 +26,7 @@ describe('JourneyGuard', () => {
             snapshot: {}
           }
         },
-        { provide: QUOTE_WORKFLOW_TOKEN, useValue: mockConfig }
+        { provide: NX_WORKFLOW_TOKEN, useValue: mockConfig }
       ]
     });
 

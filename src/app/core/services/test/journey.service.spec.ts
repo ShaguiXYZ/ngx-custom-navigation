@@ -5,7 +5,7 @@ import { TestBed } from '@angular/core/testing';
 import { ContextDataService, HttpService } from '@shagui/ng-shagui/core';
 import { of } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { QUOTE_WORKFLOW_TOKEN } from '../../components/constants';
+import { NX_WORKFLOW_TOKEN } from '../../components/constants';
 import { Configuration, ConfigurationDTO, dataHash, JourneyInfo, QuoteSettingsModel, Version } from '../../models';
 import { JourneyService } from '../journey.service';
 import { LiteralsService } from '../literals.service';
@@ -37,7 +37,7 @@ describe('JourneyService', () => {
         { provide: ContextDataService, useValue: contextDataServiceSpy },
         { provide: HttpService, useValue: httpServiceSpy },
         { provide: LiteralsService, useValue: literalServiceSpy },
-        { provide: QUOTE_WORKFLOW_TOKEN, useValue: mockConfig }
+        { provide: NX_WORKFLOW_TOKEN, useValue: mockConfig }
       ]
     });
 

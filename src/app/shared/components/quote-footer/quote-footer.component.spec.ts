@@ -8,6 +8,7 @@ import { NX_RECAPTCHA_TOKEN, RoutingService } from 'src/app/core/services';
 import { ContextDataServiceStub } from 'src/app/core/stub';
 import { QuoteLiteralPipe } from '../../pipes';
 import { QuoteFooterComponent } from './quote-footer.component';
+import { NX_WORKFLOW_TOKEN } from 'src/app/core/components/constants';
 
 describe('QuoteFooterComponent', () => {
   let component: QuoteFooterComponent;
@@ -20,6 +21,10 @@ describe('QuoteFooterComponent', () => {
     const routingServiceSpy = jasmine.createSpyObj('RoutingService', ['next', 'previous']);
     const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate']);
     const quoteLiteralPipeSpy = jasmine.createSpyObj('QuoteLiteralPipe', ['transform']);
+    const mockConfig = {
+      errorPageId: 'error',
+      manifest: {}
+    };
 
     await TestBed.configureTestingModule({
       declarations: [],
@@ -30,7 +35,8 @@ describe('QuoteFooterComponent', () => {
         { provide: TranslateService, useValue: translateServiceSpy },
         { provide: RoutingService, useValue: routingServiceSpy },
         { provide: QuoteLiteralPipe, useValue: quoteLiteralPipeSpy },
-        { provide: NX_RECAPTCHA_TOKEN, useValue: { siteKey: 'mock-site-key' } }
+        { provide: NX_RECAPTCHA_TOKEN, useValue: { siteKey: 'mock-site-key' } },
+        { provide: NX_WORKFLOW_TOKEN, useValue: mockConfig }
       ]
     }).compileComponents();
   });

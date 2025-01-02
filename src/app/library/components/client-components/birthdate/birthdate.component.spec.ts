@@ -15,6 +15,7 @@ import { NX_RECAPTCHA_TOKEN } from 'src/app/core/services';
 import { QuoteModel } from 'src/app/library/models';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 import { BirthdateComponent } from './birthdate.component';
+import { NX_WORKFLOW_TOKEN } from 'src/app/core/components/constants';
 
 describe('BirthdateComponent', () => {
   let component: BirthdateComponent;
@@ -25,6 +26,10 @@ describe('BirthdateComponent', () => {
     const contextDataServiceSpy = jasmine.createSpyObj('ContextDataService', ['get', 'set', 'onDataChange']);
     const quoteLiteralPipeSpy = jasmine.createSpyObj('QuoteLiteralPipe', ['transform']);
     const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate']);
+    const mockConfig = {
+      errorPageId: 'error',
+      manifest: {}
+    };
 
     contextDataServiceSpy.get.and.callFake((contextDataKey: string): any => {
       if (contextDataKey === QUOTE_APP_CONTEXT_DATA) {
@@ -48,7 +53,8 @@ describe('BirthdateComponent', () => {
         { provide: ContextDataService, useValue: contextDataServiceSpy },
         { provide: TranslateService, useValue: translateServiceSpy },
         { provide: QuoteLiteralPipe, useValue: quoteLiteralPipeSpy },
-        { provide: NX_RECAPTCHA_TOKEN, useValue: { siteKey: 'mock-site-key' } }
+        { provide: NX_RECAPTCHA_TOKEN, useValue: { siteKey: 'mock-site-key' } },
+        { provide: NX_WORKFLOW_TOKEN, useValue: mockConfig }
       ]
     }).compileComponents();
   });

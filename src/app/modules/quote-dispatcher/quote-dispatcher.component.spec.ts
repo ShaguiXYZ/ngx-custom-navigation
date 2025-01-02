@@ -6,7 +6,7 @@ import { BudgetActivator } from 'src/app/core/service-activators/budget.activato
 import { JourneyService, NX_RECAPTCHA_TOKEN, RoutingService } from 'src/app/core/services';
 import { QuoteDispatcherComponent } from './quote-dispatcher.component';
 import { TranslateService } from '@ngx-translate/core';
-import { QUOTE_WORKFLOW_TOKEN } from 'src/app/core/components/constants';
+import { NX_WORKFLOW_TOKEN } from 'src/app/core/components/constants';
 
 describe('QuoteDispatcherComponent', () => {
   let component: QuoteDispatcherComponent;
@@ -66,7 +66,7 @@ describe('QuoteDispatcherComponent', () => {
         { provide: TranslateService, useValue: translateServiceSpy },
         { provide: HttpService, useValue: mockHttpService },
         { provide: NX_RECAPTCHA_TOKEN, useValue: { siteKey: 'mock-site-key' } },
-        { provide: QUOTE_WORKFLOW_TOKEN, useValue: mockConfig }
+        { provide: NX_WORKFLOW_TOKEN, useValue: mockConfig }
       ]
     }).compileComponents();
   });

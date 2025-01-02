@@ -2,7 +2,7 @@
 import { inject } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivateFn, GuardResult, MaybeAsync, RouterStateSnapshot } from '@angular/router';
 import { ContextDataService, deepCopy } from '@shagui/ng-shagui/core';
-import { QUOTE_WORKFLOW_TOKEN } from 'src/app/core/components/constants';
+import { NX_WORKFLOW_TOKEN } from 'src/app/core/components/constants';
 import { QUOTE_APP_CONTEXT_DATA, QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
 import { AppContextData, QuoteControlModel, Track } from 'src/app/core/models';
 
@@ -25,7 +25,7 @@ import { AppContextData, QuoteControlModel, Track } from 'src/app/core/models';
  * - Returns `true` to allow the navigation to proceed.
  */
 export const journeyGuard: CanActivateFn = (route: ActivatedRouteSnapshot, state: RouterStateSnapshot): MaybeAsync<GuardResult> => {
-  const workFlowToken = inject(QUOTE_WORKFLOW_TOKEN);
+  const workFlowToken = inject(NX_WORKFLOW_TOKEN);
   const contextDataService = inject(ContextDataService);
 
   /**

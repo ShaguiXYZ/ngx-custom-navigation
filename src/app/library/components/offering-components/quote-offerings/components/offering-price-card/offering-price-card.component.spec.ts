@@ -6,6 +6,7 @@ import { ContextDataServiceStub } from 'src/app/core/stub';
 import { OfferingPriceModel } from 'src/app/library/models';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 import { QuoteOfferingPriceCardComponent } from './offering-price-card.component';
+import { NX_WORKFLOW_TOKEN } from 'src/app/core/components/constants';
 
 describe('QuoteOfferingPriceCardComponent', () => {
   let component: QuoteOfferingPriceCardComponent;
@@ -14,6 +15,10 @@ describe('QuoteOfferingPriceCardComponent', () => {
   beforeEach(async () => {
     const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate']);
     const quoteLiteralPipeSpy = jasmine.createSpyObj('QuoteLiteralPipe', ['transform']);
+    const mockConfig = {
+      errorPageId: 'error',
+      manifest: {}
+    };
 
     await TestBed.configureTestingModule({
       imports: [QuoteOfferingPriceCardComponent],
@@ -21,7 +26,8 @@ describe('QuoteOfferingPriceCardComponent', () => {
         { provide: ContextDataService, useClass: ContextDataServiceStub },
         { provide: TranslateService, useValue: translateServiceSpy },
         { provide: QuoteLiteralPipe, useValue: quoteLiteralPipeSpy },
-        { provide: NX_RECAPTCHA_TOKEN, useValue: { siteKey: 'mock-site-key' } }
+        { provide: NX_RECAPTCHA_TOKEN, useValue: { siteKey: 'mock-site-key' } },
+        { provide: NX_WORKFLOW_TOKEN, useValue: mockConfig }
       ]
     }).compileComponents();
   });
