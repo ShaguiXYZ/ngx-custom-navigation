@@ -1,13 +1,9 @@
-import { CommonModule } from '@angular/common';
 import { Component, HostListener } from '@angular/core';
-import { NxModalModule } from '@aposin/ng-aquila/modal';
 import { ScreenRecorder } from '@shagui/ng-shagui/core';
 
 @Component({
   selector: 'quote-keys',
-  imports: [CommonModule, NxModalModule],
-  templateUrl: './quote-keys.component.html',
-  styleUrl: './quote-keys.component.scss',
+  template: ``,
   standalone: true
 })
 export class QuoteKeysComponent {
