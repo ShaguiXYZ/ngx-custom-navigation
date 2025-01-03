@@ -114,3 +114,15 @@ main {
     scale: 1;
   }
 }
+
+/* @howto reduce animations */
+/* animations */
+/* media for reduce animations if user deactive system property */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}

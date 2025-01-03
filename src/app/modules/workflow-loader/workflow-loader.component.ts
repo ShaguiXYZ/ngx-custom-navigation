@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { CommonModule } from '@angular/common';
 import { Component, OnInit, ViewChild, ViewContainerRef, inject } from '@angular/core';
 import { ContextDataService } from '@shagui/ng-shagui/core';
 import { QuoteComponent } from 'src/app/core/components';
@@ -8,16 +9,16 @@ import { JourneyError } from 'src/app/core/errors';
 import { AppContextData } from 'src/app/core/models';
 
 @Component({
-  selector: 'quote-workflow-loader',
-  template: `<ng-template #dynamicComponent></ng-template>`,
-  standalone: true,
-  imports: []
+  template: `<ng-template #dynamicComponent> </ng-template>`,
+  styleUrls: ['./workflow-loader.component.scss'],
+  imports: [CommonModule],
+  standalone: true
 })
 export class WorkflowLoaderComponent implements OnInit {
-  public _instance?: QuoteComponent<any>;
-
   @ViewChild('dynamicComponent', { read: ViewContainerRef, static: true })
   private container!: ViewContainerRef;
+
+  public _instance?: QuoteComponent<any>;
 
   private readonly workflowToken = inject(NX_WORKFLOW_TOKEN);
   private readonly contextDataService = inject(ContextDataService);

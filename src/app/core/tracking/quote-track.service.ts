@@ -65,8 +65,8 @@ export class QuoteTrackService implements OnDestroy {
   public trackEvent = async (eventType: TrackEventType, data: TrackInfo): Promise<number> => {
     const appContextData = this.contextDataService.get<AppContextData>(QUOTE_APP_CONTEXT_DATA);
     const {
-      navigation: { lastPage, viewedPages },
-      configuration: { name: journey, steppers }
+      configuration: { name: journey, steppers },
+      navigation: { lastPage, viewedPages }
     } = appContextData;
     const fullUrl = lastPage && `${window.location.protocol}//${window.location.host}/${lastPage.pageId}`;
     const title = this.literalService.toString({ value: 'header', type: 'literal' });
@@ -122,7 +122,7 @@ export class QuoteTrackService implements OnDestroy {
     return Object.entries(this.workFlowToken.manifest.tracks).reduce<TrackInfo>((acc, [key, data]) => {
       if (!data.tracked) return acc;
 
-      const value = JsonUtils.valueOf(quote, data.value);
+      const value = JsonUtils.get(quote, data.value);
       if (hasValue(value)) acc[key as keyof typeof this.workFlowToken.manifest.tracks] = `${value}`;
 
       return acc;

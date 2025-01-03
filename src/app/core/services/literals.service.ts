@@ -65,7 +65,7 @@ export class LiteralsService {
       case 'literal':
         return this.transformLiteral(literal.value, literal.params);
       case 'data':
-        return `${JsonUtils.valueOf(this.contextDataService.get(QUOTE_CONTEXT_DATA), literal.value) ?? ''}`;
+        return `${JsonUtils.get(this.contextDataService.get(QUOTE_CONTEXT_DATA), literal.value) ?? ''}`;
       default: {
         const normalizedParams = { ...params, ...this.normalizeParams(literal.params) };
         return this.getValue(literal.value, normalizedParams);

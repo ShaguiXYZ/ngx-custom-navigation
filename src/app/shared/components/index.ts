@@ -10,4 +10,5 @@ export * from './quote-keys';
 export * from './quote-stepper';
 export * from './quote-zone';
 export * from './selectable-option';
+export * from './switch-theme';
 export * from './text-card';

@@ -1,0 +1,24 @@
+.switch {
+  display: inline-block;
+  position: relative;
+
+  input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+
+  .switch-label {
+    cursor: pointer;
+    position: absolute;
+    transition: 1.4s;
+
+    .switch-inner {
+      background-color: inherit;
+      position: absolute;
+      transition: 1.4s;
+      height: max-content;
+      width: max-content;
+    }
+  }
+}

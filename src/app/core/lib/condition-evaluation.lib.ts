@@ -25,7 +25,7 @@ export class ConditionEvaluation {
     }
   };
 
-  private static dataItemValue = <T>(data: T, key: string): unknown => JsonUtils.valueOf(data, key);
+  private static dataItemValue = <T>(data: T, key: string): unknown => JsonUtils.get(data, key);
 
   private static applyPreviousEval = (previous: boolean, current: boolean, union?: CompareOperations): boolean =>
     (union &&

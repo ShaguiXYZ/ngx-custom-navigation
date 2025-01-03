@@ -12,12 +12,22 @@ import { LiteralsService, RoutingService } from 'src/app/core/services';
 import { QuoteTrackDirective } from 'src/app/core/tracking';
 import { QuoteLinkDirective, QuoteLiteralDirective } from '../../directives';
 import { QuoteLiteralPipe } from '../../pipes';
+import { SwitchThemeComponent } from '../switch-theme';
 
 @Component({
   selector: 'quote-header',
   templateUrl: './quote-header.component.html',
   styleUrl: './quote-header.component.scss',
-  imports: [CommonModule, NxLinkModule, NxIconModule, QuoteLinkDirective, QuoteLiteralDirective, QuoteLiteralPipe, QuoteTrackDirective],
+  imports: [
+    SwitchThemeComponent,
+    CommonModule,
+    NxLinkModule,
+    NxIconModule,
+    QuoteLinkDirective,
+    QuoteLiteralDirective,
+    QuoteLiteralPipe,
+    QuoteTrackDirective
+  ],
   standalone: true
 })
 export class QuoteHeaderComponent implements OnInit, OnDestroy {

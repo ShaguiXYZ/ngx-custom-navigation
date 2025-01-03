@@ -17,7 +17,7 @@ import { AppUrls } from 'src/app/shared/config';
  * @see sdc-route.service.ts
  */
 @Component({
-  template: '',
+  template: ``,
   standalone: true
 })
 export class QuoteDispatcherComponent implements OnInit {

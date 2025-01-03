@@ -94,8 +94,17 @@ export class AppComponent implements OnInit, OnDestroy {
 
   private slideTo(): number {
     const {
-      navigation: { viewedPages }
+      configuration: { steppers },
+      navigation: { viewedPages, lastPage }
     } = this.contextDataService.get<AppContextData>(QUOTE_APP_CONTEXT_DATA);
+
+    if (lastPage?.stepper) {
+      const stepper = steppers?.[lastPage.stepper.key];
+      const stepperPages = stepper?.steps?.flatMap(step => step.pages) ?? [];
+      const stepperPagesViewed = viewedPages.filter(page => stepperPages.includes(page));
+
+      return stepperPagesViewed.length;
+    }
 
     return viewedPages.length;
   }
