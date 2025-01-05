@@ -1,10 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { TestBed } from '@angular/core/testing';
 import { ContextDataService } from '@shagui/ng-shagui/core';
+import { NX_WORKFLOW_TOKEN } from '../../components/models';
 import { QUOTE_APP_CONTEXT_DATA, QUOTE_CONTEXT_DATA } from '../../constants';
 import { ConditionEvaluation } from '../../lib';
 import { AppContextData, QuoteControlModel } from '../../models';
-import { ActivatorFnType, EntryPoint } from '../quote-activator.model';
+import { EntryPoint, ServiceActivatorType } from '../quote-activator.model';
 import { ServiceActivatorService } from '../service-activator.service';
 
 describe('ServiceActivatorService', () => {
@@ -13,9 +14,17 @@ describe('ServiceActivatorService', () => {
 
   beforeEach(() => {
     const contextDataServiceSpy = jasmine.createSpyObj('ContextDataService', ['get']);
+    const mockConfig = {
+      errorPageId: 'error',
+      manifest: {}
+    };
 
     TestBed.configureTestingModule({
-      providers: [ServiceActivatorService, { provide: ContextDataService, useValue: contextDataServiceSpy }]
+      providers: [
+        ServiceActivatorService,
+        { provide: ContextDataService, useValue: contextDataServiceSpy },
+        { provide: NX_WORKFLOW_TOKEN, useValue: mockConfig }
+      ]
     });
 
     service = TestBed.inject(ServiceActivatorService);
@@ -60,7 +69,7 @@ describe('ServiceActivatorService', () => {
     await service.activateEntryPoint('SomeEntryPoint' as EntryPoint);
 
     expect(ConditionEvaluation.checkConditions).toHaveBeenCalled();
-    expect(service['runActivator']).toHaveBeenCalledWith('someActivator' as ActivatorFnType, {});
+    expect(service['runActivator']).toHaveBeenCalledWith('someActivator' as ServiceActivatorType, {});
   });
 
   it('should not activate service if conditions are not met', async () => {

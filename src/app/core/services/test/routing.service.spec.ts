@@ -6,6 +6,7 @@ import { QUOTE_APP_CONTEXT_DATA } from '../../constants';
 import { AppContextData } from '../../models';
 import { ContextDataServiceStub } from '../../stub';
 import { RoutingService } from '../routing.service';
+import { NX_WORKFLOW_TOKEN } from '../../components/models';
 
 describe('RoutingService', () => {
   let service: RoutingService;
@@ -15,12 +16,17 @@ describe('RoutingService', () => {
 
   beforeEach(() => {
     const routerSpy = jasmine.createSpyObj('Router', ['navigate']);
+    const mockConfig = {
+      errorPageId: 'error',
+      manifest: {}
+    };
 
     TestBed.configureTestingModule({
       providers: [
         RoutingService,
         { provide: Router, useValue: routerSpy },
-        { provide: ContextDataService, useClass: ContextDataServiceStub }
+        { provide: ContextDataService, useClass: ContextDataServiceStub },
+        { provide: NX_WORKFLOW_TOKEN, useValue: mockConfig }
       ]
     });
 

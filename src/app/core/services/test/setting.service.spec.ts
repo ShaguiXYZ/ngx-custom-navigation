@@ -2,7 +2,7 @@
 import { TestBed } from '@angular/core/testing';
 import { TranslateService } from '@ngx-translate/core';
 import { ContextDataService } from '@shagui/ng-shagui/core';
-import { NX_WORKFLOW_TOKEN } from '../../components/constants';
+import { NX_WORKFLOW_TOKEN } from '../../components/models';
 import { CommercialExceptionsModel, Configuration, JourneyInfo, QuoteSettingsModel } from '../../models';
 import { JourneyService, QUOTE_JOURNEY_DISALED } from '../journey.service';
 import { SettingsService } from '../setting.service';

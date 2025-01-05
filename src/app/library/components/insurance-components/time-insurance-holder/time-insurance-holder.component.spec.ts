@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NxCopytextModule } from '@aposin/ng-aquila/copytext';
 import { TranslateService } from '@ngx-translate/core';
 import { ContextDataService } from '@shagui/ng-shagui/core';
-import { NX_WORKFLOW_TOKEN } from 'src/app/core/components/constants';
+import { NX_WORKFLOW_TOKEN } from 'src/app/core/components/models';
 import { NX_RECAPTCHA_TOKEN, RoutingService } from 'src/app/core/services';
 import { ContextDataServiceStub } from 'src/app/core/stub';
 import { QuoteModel } from 'src/app/library/models';

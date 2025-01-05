@@ -1,9 +1,9 @@
-import { ActivatorFnType, EntryPoint } from '.';
+import { EntryPoint, ServiceActivatorType } from '.';
 import { Condition } from '../models';
 
 export interface ServiceActivator {
   entryPoint: EntryPoint;
-  activator: ActivatorFnType;
+  activator: ServiceActivatorType;
   params?: unknown;
   conditions?: Condition[];
 }

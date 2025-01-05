@@ -6,7 +6,7 @@ import { BudgetActivator } from 'src/app/core/service-activators/budget.activato
 import { JourneyService, NX_RECAPTCHA_TOKEN, RoutingService } from 'src/app/core/services';
 import { QuoteDispatcherComponent } from './quote-dispatcher.component';
 import { TranslateService } from '@ngx-translate/core';
-import { NX_WORKFLOW_TOKEN } from 'src/app/core/components/constants';
+import { NX_WORKFLOW_TOKEN } from 'src/app/core/components/models';
 
 describe('QuoteDispatcherComponent', () => {
   let component: QuoteDispatcherComponent;

@@ -8,7 +8,7 @@ import { NxDialogService, NxModalModule } from '@aposin/ng-aquila/modal';
 import { TranslateService } from '@ngx-translate/core';
 import { ContextDataService } from '@shagui/ng-shagui/core';
 import { Subject } from 'rxjs';
-import { NX_WORKFLOW_TOKEN } from 'src/app/core/components/constants';
+import { NX_WORKFLOW_TOKEN } from 'src/app/core/components/models';
 import { QUOTE_APP_CONTEXT_DATA, QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
 import { AppContextData } from 'src/app/core/models';
 import { NX_RECAPTCHA_TOKEN } from 'src/app/core/services';

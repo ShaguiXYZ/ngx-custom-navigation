@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { TestBed } from '@angular/core/testing';
 import { ContextDataService } from '@shagui/ng-shagui/core';
 import { of } from 'rxjs';
+import { NX_WORKFLOW_TOKEN } from 'src/app/core/components/models';
 import { OfferingDTO, QuoteModel } from '../../models';
 import { OfferingsService } from '../offerings.service';
 
@@ -11,6 +12,11 @@ describe('OfferingsService', () => {
   let httpClientSpy: jasmine.SpyObj<HttpClient>;
 
   beforeEach(() => {
+    const mockConfig = {
+      errorPageId: 'error',
+      manifest: {}
+    };
+
     contextDataServiceSpy = jasmine.createSpyObj('ContextDataService', ['get']);
     httpClientSpy = jasmine.createSpyObj('HttpClient', ['get', 'post', 'put', 'delete']);
 
@@ -21,7 +27,8 @@ describe('OfferingsService', () => {
       providers: [
         OfferingsService,
         { provide: ContextDataService, useValue: contextDataServiceSpy },
-        { provide: HttpClient, useValue: httpClientSpy }
+        { provide: HttpClient, useValue: httpClientSpy },
+        { provide: NX_WORKFLOW_TOKEN, useValue: mockConfig }
       ]
     });
 

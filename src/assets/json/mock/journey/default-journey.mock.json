@@ -119,7 +119,7 @@
         "data": {
           "contextData": { "client": { "isClient": false } },
           "headerConfig": {
-            "showBack": false,
+            "showBack": true,
             "showContactUs": false
           }
         }
@@ -293,7 +293,7 @@
         "serviceActivators": [
           {
             "entryPoint": "next-page",
-            "activator": "black-list-plate",
+            "activator": "$black-list-plate",
             "params": { "percentBlacklisted": 0.7 },
             "conditions": [
               {
@@ -527,7 +527,7 @@
       "configuration": {
         "literals": {
           "header": {
-            "value": "¿Has tenido algún accidente en {{last}}{{last-single}} {{value}} {{year}}{{years}}?",
+            "value": "¿Has tenido algún accidente en {{last}}{{last-single}} {{value}} {{years}}{{year}}?",
             "params": {
               "value": {
                 "value": "insuranceCompany.yearsAsOwner",
@@ -630,7 +630,7 @@
         "serviceActivators": [
           {
             "entryPoint": "next-page",
-            "activator": "black-list-phone",
+            "activator": "$black-list-phone",
             "params": { "percentIsClient": 0.7 }
           }
         ]
@@ -702,7 +702,7 @@
         "serviceActivators": [
           {
             "entryPoint": "next-page",
-            "activator": "black-list-identification-number",
+            "activator": "$black-list-identification-number",
             "params": { "percentIsClient": 0.7 }
           }
         ]
@@ -726,8 +726,8 @@
         },
         "serviceActivators": [
           {
-            "entryPoint": "on-pricing",
-            "activator": "store-budget"
+            "entryPoint": "$on-pricing",
+            "activator": "$store-budget"
           }
         ]
       }
@@ -893,8 +893,8 @@
       "configuration": {
         "literals": {
           "header": "¿Nos puedes facilitar tu documento de identidad?",
-          "identification-number": "Número de documento de identidad",
           "subheader": "Solo utilizaremos este dato para darte un presupuesto totalmente personalizado",
+          "identification-number": "Número de documento de identidad",
           "footer-info": "Para ofrecerte el mejor seguro es importante verificar tu identidad. "
         },
         "validationSettings": {
@@ -988,7 +988,6 @@
     "budget-key": "Clave del presupuesto",
     "create-budget": "Crear presupuesto",
     "e-mail": "Correo electrónico",
-    "not-allowed": "No permitido",
     "header-back": "Volver",
     "save-budget": "Guardar presupuesto",
     "retrieve-budget": "Recuperar presupuesto",
@@ -1017,12 +1016,7 @@
     "error-not-between-dates": { "value": "Errors.NotBetweenDates", "type": "translate" },
     "terms-and-conditions": "Términos y condiciones",
     "privacy-policy": "Política de privacidad",
-    "legal-notice": {
-      "value": "<a class='link nx-font-weight-bold' href='{{legal-link}}' target='_blank'>Aviso legal y privacidad</a>",
-      "type": "value",
-      "params": { "legal-link": { "value": "legal-link", "type": "literal" } }
-    },
-    "legal-link": "https://www.shagui.com/aviso-legal",
+    "legal-notice": "Aviso legal y privacidad",
     "cookies-policy": "Política de cookies"
   }
 }

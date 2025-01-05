@@ -37,7 +37,7 @@ export class OfferingsService {
               quote.signature = { ...quote.signature, hash: QuoteModel.hash(quote) };
               quote.offering.hash = quote.signature.hash;
 
-              await this.serviceActivatorService.activateEntryPoint('on-pricing');
+              await this.serviceActivatorService.activateEntryPoint('$on-pricing');
 
               console.log('Quote changed');
             })

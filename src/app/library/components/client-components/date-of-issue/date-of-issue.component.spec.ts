@@ -8,7 +8,7 @@ import { NxMomentDateModule } from '@aposin/ng-aquila/moment-date-adapter';
 import { TranslateService } from '@ngx-translate/core';
 import { ContextDataService } from '@shagui/ng-shagui/core';
 import moment from 'moment';
-import { NX_WORKFLOW_TOKEN } from 'src/app/core/components/constants';
+import { NX_WORKFLOW_TOKEN } from 'src/app/core/components/models';
 import { DEFAULT_DATE_FORMAT } from 'src/app/core/constants';
 import { NX_RECAPTCHA_TOKEN } from 'src/app/core/services';
 import { ContextDataServiceStub } from 'src/app/core/stub';

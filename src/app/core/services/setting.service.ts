@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { ContextDataService } from '@shagui/ng-shagui/core';
-import { NX_WORKFLOW_TOKEN } from '../components/constants';
+import { NX_WORKFLOW_TOKEN } from '../components/models';
 import { QUOTE_APP_CONTEXT_DATA, QUOTE_CONTEXT_DATA } from '../constants';
 import { AppContextData, CommercialExceptionsModel, JourneyInfo, QuoteControlModel, QuoteSettingsModel, VersionInfo } from '../models';
 import { JourneyService, QUOTE_JOURNEY_DISALED } from './journey.service';

@@ -1,6 +1,7 @@
 import { InjectionToken } from '@angular/core';
 import { QuoteComponent } from '../core/components';
-import { QuoteWorkflowSettings } from '../core/components/constants';
+import { QuoteWorkflowSettings } from '../core/components/models';
+import { ActivatorFn, ActivatorServices, ServiceActivatorType } from '../core/service-activators';
 import { TrackedData } from '../core/tracking';
 import {
   BirthdateComponent,
@@ -42,6 +43,7 @@ import {
   YourCarIsComponent
 } from './components/vehicle-components';
 import { QuoteModel } from './models';
+import { BlackListActivator } from './service-activators';
 
 const LIBRARY_MANIFEST = {
   birthdate: { component: BirthdateComponent },
@@ -105,6 +107,13 @@ const TRACKING_MANIFEST: Record<string, TrackedData> = {
   yearOfManufacture: { value: 'vehicle.yearOfManufacture', tracked: false }
 };
 
+const SERVICE_ACTIVATORS_MANIFEST: Record<ServiceActivatorType, (services: ActivatorServices) => ActivatorFn> = {
+  '$black-list-identification-number': BlackListActivator.checkIdentificationNumberBlackList,
+  '$black-list-plate': BlackListActivator.checkPlateBlackList,
+  '$black-list-phone': BlackListActivator.checkPhoneBlackList,
+  '$black-list-email': BlackListActivator.checkEmailBlackList
+};
+
 export type WorkflowManifestId = keyof typeof LIBRARY_MANIFEST;
 
 const errorPageId: WorkflowManifestId = 'apology-screen';
@@ -115,7 +124,7 @@ export const VEHICLE_WORKFLOW_TOKEN = new InjectionToken<QuoteWorkflowSettings<Q
     providedIn: 'root',
     factory: () => ({
       errorPageId: errorPageId,
-      manifest: { components: LIBRARY_MANIFEST, tracks: TRACKING_MANIFEST },
+      manifest: { components: LIBRARY_MANIFEST, serviceActivators: SERVICE_ACTIVATORS_MANIFEST, tracks: TRACKING_MANIFEST },
       initialize: QuoteModel.init,
       hash: QuoteModel.hash
     })

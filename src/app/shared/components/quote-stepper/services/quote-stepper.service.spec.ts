@@ -2,6 +2,7 @@
 import { TestBed } from '@angular/core/testing';
 import { ContextDataService } from '@shagui/ng-shagui/core';
 import { Subject } from 'rxjs';
+import { NX_WORKFLOW_TOKEN } from 'src/app/core/components/models';
 import { AppContextData, Stepper } from 'src/app/core/models';
 import { QuoteStepperService } from './quote-stepper.service';
 
@@ -11,13 +12,22 @@ describe('QuoteStepperService', () => {
   let contextDataServiceSpy: jasmine.SpyObj<ContextDataService>;
 
   beforeEach(() => {
+    const mockConfig = {
+      errorPageId: 'error',
+      manifest: {}
+    };
+
     contextDataServiceSpy = jasmine.createSpyObj('ContextDataService', ['get', 'set', 'onDataChange']);
     contextDataSubject = new Subject<AppContextData>();
 
     contextDataServiceSpy.onDataChange.and.returnValue(contextDataSubject.asObservable());
 
     TestBed.configureTestingModule({
-      providers: [QuoteStepperService, { provide: ContextDataService, useValue: contextDataServiceSpy }]
+      providers: [
+        QuoteStepperService,
+        { provide: ContextDataService, useValue: contextDataServiceSpy },
+        { provide: NX_WORKFLOW_TOKEN, useValue: mockConfig }
+      ]
     });
   });
 

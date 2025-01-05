@@ -297,7 +297,7 @@ export const WORKFLOW: ConfigurationDTO<QuoteModel, WorkflowManifestId> = {
         serviceActivators: [
           {
             entryPoint: 'next-page',
-            activator: 'black-list-plate',
+            activator: '$black-list-plate',
             params: { percentBlacklisted: 0.7 },
             conditions: [
               {
@@ -634,7 +634,7 @@ export const WORKFLOW: ConfigurationDTO<QuoteModel, WorkflowManifestId> = {
         serviceActivators: [
           {
             entryPoint: 'next-page',
-            activator: 'black-list-phone',
+            activator: '$black-list-phone',
             params: { percentIsClient: 0.7 }
           }
         ]
@@ -706,7 +706,7 @@ export const WORKFLOW: ConfigurationDTO<QuoteModel, WorkflowManifestId> = {
         serviceActivators: [
           {
             entryPoint: 'next-page',
-            activator: 'black-list-identification-number',
+            activator: '$black-list-identification-number',
             params: { percentIsClient: 0.7 }
           }
         ]
@@ -730,8 +730,8 @@ export const WORKFLOW: ConfigurationDTO<QuoteModel, WorkflowManifestId> = {
         },
         serviceActivators: [
           {
-            entryPoint: 'on-pricing',
-            activator: 'store-budget'
+            entryPoint: '$on-pricing',
+            activator: '$store-budget'
           }
         ]
       }

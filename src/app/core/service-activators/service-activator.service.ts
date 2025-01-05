@@ -3,17 +3,27 @@ import { ContextDataService } from '@shagui/ng-shagui/core';
 import { QUOTE_APP_CONTEXT_DATA, QUOTE_CONTEXT_DATA } from '../constants';
 import { ConditionEvaluation } from '../lib';
 import { AppContextData, QuoteControlModel } from '../models';
-import { ActivatorFn, ActivatorFnType, Activators, EntryPoint } from './quote-activator.model';
+import { ActivatorFn, Activators, EntryPoint, ServiceActivatorType } from './quote-activator.model';
+import { NX_WORKFLOW_TOKEN } from '../components/models';
 
 @Injectable({ providedIn: 'root' })
 export class ServiceActivatorService {
   private activators: Record<string, ActivatorFn> = {};
 
+  private readonly workFlowToken = inject(NX_WORKFLOW_TOKEN);
   private readonly contextDataService = inject(ContextDataService);
 
   constructor() {
-    Object.entries(Activators).forEach(([name, activatorFn]) =>
-      this.registerActivator(name as ActivatorFnType, activatorFn({ contextDataService: this.contextDataService }))
+    Object.entries(Activators).forEach(
+      ([name, serviceActivatorFn]) =>
+        serviceActivatorFn &&
+        this.registerActivator(name as ServiceActivatorType, serviceActivatorFn({ contextDataService: this.contextDataService }))
+    );
+
+    Object.entries(this.workFlowToken.manifest.serviceActivators || {}).forEach(
+      ([name, serviceActivatorFn]) =>
+        serviceActivatorFn &&
+        this.registerActivator(name as ServiceActivatorType, serviceActivatorFn({ contextDataService: this.contextDataService }))
     );
   }
 
@@ -41,10 +51,10 @@ export class ServiceActivatorService {
     );
   };
 
-  private registerActivator = (name: ActivatorFnType, activator: ActivatorFn): void => {
+  private registerActivator = (name: ServiceActivatorType, activator: ActivatorFn): void => {
     this.activators[name] = activator;
   };
 
-  private runActivator = (name: ActivatorFnType, params?: unknown): Promise<unknown> =>
+  private runActivator = (name: ServiceActivatorType, params?: unknown): Promise<unknown> =>
     this.activators[name]?.(params).then(value => value && this.activateEntryPoint(name));
 }

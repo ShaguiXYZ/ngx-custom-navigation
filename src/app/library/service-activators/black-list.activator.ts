@@ -1,8 +1,8 @@
 import { firstValueFrom, of } from 'rxjs';
-import { BlackListModel, BlackListResponse, BlackListType } from '../models';
-import { ActivatorServices } from './quote-activator.model';
-import { QUOTE_CONTEXT_DATA } from '../constants';
-import { QuoteModel } from 'src/app/library/models';
+import { QUOTE_CONTEXT_DATA } from '../../core/constants';
+import { BlackListModel, BlackListResponse, BlackListType } from '../../core/models';
+import { ActivatorServices } from '../../core/service-activators/quote-activator.model';
+import { QuoteModel } from '../models';
 
 export class BlackListActivator {
   public static checkIdentificationNumberBlackList =

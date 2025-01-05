@@ -7,7 +7,7 @@ import { ContextDataServiceStub } from 'src/app/core/stub';
 import { QuoteModel } from 'src/app/library/models';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 import { DrivingLicenseLocationComponent } from './driving-license-location.component';
-import { NX_WORKFLOW_TOKEN } from 'src/app/core/components/constants';
+import { NX_WORKFLOW_TOKEN } from 'src/app/core/components/models';
 
 describe('DrivingLicenseLocationComponent', () => {
   let component: DrivingLicenseLocationComponent;

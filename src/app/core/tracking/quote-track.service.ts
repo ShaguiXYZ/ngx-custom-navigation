@@ -2,7 +2,7 @@ import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/l
 import { inject, Injectable, OnDestroy } from '@angular/core';
 import { ContextDataService, hasValue, JsonUtils, UniqueIds } from '@shagui/ng-shagui/core';
 import { Subscription } from 'rxjs';
-import { NX_WORKFLOW_TOKEN } from '../components/constants';
+import { NX_WORKFLOW_TOKEN } from '../components/models';
 import { CAPTCHA_TOKEN_KEY, QUOTE_APP_CONTEXT_DATA, QUOTE_CONTEXT_DATA } from '../constants';
 import { TrackError } from '../errors';
 import { AppContextData, QuoteControlModel } from '../models';

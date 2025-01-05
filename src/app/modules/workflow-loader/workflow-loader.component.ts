@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit, ViewChild, ViewContainerRef, inject } from '@angular/core';
 import { ContextDataService } from '@shagui/ng-shagui/core';
 import { QuoteComponent } from 'src/app/core/components';
-import { NX_WORKFLOW_TOKEN } from 'src/app/core/components/constants';
+import { NX_WORKFLOW_TOKEN } from 'src/app/core/components/models';
 import { QUOTE_APP_CONTEXT_DATA } from 'src/app/core/constants';
 import { JourneyError } from 'src/app/core/errors';
 import { AppContextData } from 'src/app/core/models';

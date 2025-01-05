@@ -5,7 +5,7 @@ import { NavigationEnd, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ContextDataService } from '@shagui/ng-shagui/core';
 import { of, Subscription } from 'rxjs';
-import { NX_WORKFLOW_TOKEN } from '../../components/constants';
+import { NX_WORKFLOW_TOKEN } from '../../components/models';
 import { QUOTE_APP_CONTEXT_DATA, QUOTE_CONTEXT_DATA } from '../../constants';
 import { AppContextData } from '../../models';
 import { NX_RECAPTCHA_TOKEN } from '../../services';

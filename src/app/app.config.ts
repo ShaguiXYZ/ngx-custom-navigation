@@ -15,7 +15,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { NX_CONTEX_CONFIG } from '@shagui/ng-shagui/core';
 import { environment } from 'src/environments/environment';
 import { routes } from './app.routes';
-import { NX_WORKFLOW_TOKEN } from './core/components/constants';
+import { NX_WORKFLOW_TOKEN } from './core/components/models';
 import { APP_NAME, SCHEDULER_PERIOD } from './core/constants';
 import { GlobalErrorHandler } from './core/errors';
 import { LiteralsService, NX_RECAPTCHA_TOKEN, SettingsService } from './core/services';

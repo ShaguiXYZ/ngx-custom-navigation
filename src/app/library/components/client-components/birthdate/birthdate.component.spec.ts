@@ -15,7 +15,7 @@ import { NX_RECAPTCHA_TOKEN } from 'src/app/core/services';
 import { QuoteModel } from 'src/app/library/models';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 import { BirthdateComponent } from './birthdate.component';
-import { NX_WORKFLOW_TOKEN } from 'src/app/core/components/constants';
+import { NX_WORKFLOW_TOKEN } from 'src/app/core/components/models';
 
 describe('BirthdateComponent', () => {
   let component: BirthdateComponent;

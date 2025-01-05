@@ -6,7 +6,7 @@ import { ContextDataServiceStub } from 'src/app/core/stub';
 import { OfferingPriceModel } from 'src/app/library/models';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 import { QuoteOfferingPriceCardComponent } from './offering-price-card.component';
-import { NX_WORKFLOW_TOKEN } from 'src/app/core/components/constants';
+import { NX_WORKFLOW_TOKEN } from 'src/app/core/components/models';
 
 describe('QuoteOfferingPriceCardComponent', () => {
   let component: QuoteOfferingPriceCardComponent;

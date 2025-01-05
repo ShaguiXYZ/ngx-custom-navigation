@@ -138,7 +138,7 @@ export class QuoteFormValidarors {
 
     if (controlName) {
       if (validationValue) {
-        this.serviceActivatorService.activateEntryPoint(`form-${controlName}-${validationKey}`);
+        this.serviceActivatorService.activateEntryPoint(`#${controlName}-${validationKey}`);
       }
 
       const {

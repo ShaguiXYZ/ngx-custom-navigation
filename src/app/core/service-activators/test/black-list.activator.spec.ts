@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { QuoteModel } from 'src/app/library/models';
+import { BlackListActivator } from 'src/app/library/service-activators';
 import { QUOTE_CONTEXT_DATA } from '../../constants';
-import { BlackListActivator } from '../black-list.activator';
 import { ActivatorServices } from '../quote-activator.model';
 
 describe('BlackListActivator', () => {

@@ -5,7 +5,7 @@ import { TestBed } from '@angular/core/testing';
 import { ContextDataService, HttpService } from '@shagui/ng-shagui/core';
 import { of } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { NX_WORKFLOW_TOKEN } from '../../components/constants';
+import { NX_WORKFLOW_TOKEN } from '../../components/models';
 import { Configuration, ConfigurationDTO, dataHash, JourneyInfo, QuoteSettingsModel, Version } from '../../models';
 import { JourneyService } from '../journey.service';
 import { LiteralsService } from '../literals.service';

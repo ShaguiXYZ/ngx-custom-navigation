@@ -3,7 +3,7 @@ import { inject, Injectable } from '@angular/core';
 import { ContextDataService, DataInfo, HttpService, UniqueIds } from '@shagui/ng-shagui/core';
 import { firstValueFrom, map } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { NX_WORKFLOW_TOKEN } from '../components/constants';
+import { NX_WORKFLOW_TOKEN } from '../components/models';
 import { QUOTE_APP_CONTEXT_DATA } from '../constants';
 import {
   AppContextData,

@@ -1,10 +1,10 @@
 import { QUOTE_CONTEXT_DATA } from '../constants';
 import { patch } from '../lib';
 import { QuoteControlModel } from '../models';
-import { ActivatorServices } from './quote-activator.model';
+import { ActivatorServices, ServiceActivatorFn } from './quote-activator.model';
 
 export class QuoteActivator {
-  public static quotePatch =
+  public static quotePatch: ServiceActivatorFn =
     (services: ActivatorServices): ((params: unknown) => Promise<boolean>) =>
     async (params: unknown): Promise<boolean> => {
       const quote = services.contextDataService.get<QuoteControlModel>(QUOTE_CONTEXT_DATA);

@@ -4,10 +4,10 @@ import { QUOTE_APP_CONTEXT_DATA, QUOTE_CONTEXT_DATA } from '../constants';
 import { BudgetError } from '../errors';
 import { BudgetUtils } from '../lib';
 import { AppContextData, Budget, QuoteControlModel, StoredDataKey } from '../models';
-import { ActivatorServices } from './quote-activator.model';
+import { ActivatorServices, ServiceActivatorFn } from './quote-activator.model';
 
 export class BudgetActivator {
-  public static storeBudget =
+  public static storeBudget: ServiceActivatorFn =
     (services: ActivatorServices): (() => Promise<boolean>) =>
     async (): Promise<boolean> => {
       const quote = services.contextDataService.get<QuoteControlModel>(QUOTE_CONTEXT_DATA);
@@ -29,7 +29,7 @@ export class BudgetActivator {
       return true;
     };
 
-  public static retrieveBudget =
+  public static retrieveBudget: ServiceActivatorFn =
     (services: ActivatorServices): (() => Promise<boolean>) =>
     async (params?: { budget?: string }): Promise<boolean> => {
       const { signature } = services.contextDataService.get<QuoteControlModel>(QUOTE_CONTEXT_DATA);

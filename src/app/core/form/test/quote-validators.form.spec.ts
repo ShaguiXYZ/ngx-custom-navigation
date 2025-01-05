@@ -2,13 +2,18 @@ import { TestBed } from '@angular/core/testing';
 import { FormControl } from '@angular/forms';
 import moment from 'moment';
 import { QuoteFormValidarors } from '../quote-validators.form';
+import { NX_WORKFLOW_TOKEN } from '../../components/models';
 
 describe('QuoteFormValidarors', () => {
+  const mockConfig = {
+    errorPageId: 'error',
+    manifest: {}
+  };
   let validators: QuoteFormValidarors;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [QuoteFormValidarors]
+      providers: [QuoteFormValidarors, { provide: NX_WORKFLOW_TOKEN, useValue: mockConfig }]
     });
     validators = TestBed.inject(QuoteFormValidarors);
   });

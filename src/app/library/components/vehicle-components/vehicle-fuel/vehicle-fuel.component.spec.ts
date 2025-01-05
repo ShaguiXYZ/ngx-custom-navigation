@@ -6,7 +6,7 @@ import { CubicCapacityModel, FuelModel, QuoteModel, VehicleClassesModel } from '
 import { VehicleService } from 'src/app/library/services';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 import { VehicleFuelComponent } from './vehicle-fuel.component';
-import { NX_WORKFLOW_TOKEN } from 'src/app/core/components/constants';
+import { NX_WORKFLOW_TOKEN } from 'src/app/core/components/models';
 
 describe('VehicleFuelComponent', () => {
   let component: VehicleFuelComponent;

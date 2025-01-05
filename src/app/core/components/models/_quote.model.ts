@@ -1,5 +1,6 @@
 import { InjectionToken, Type } from '@angular/core';
 import { QuoteControlModel } from '../../models';
+import { Activator } from '../../service-activators';
 import { TrackedData } from '../../tracking';
 import { QuoteComponent } from '../_quote-component';
 
@@ -7,6 +8,7 @@ type Manifest<T> = Record<string, { component: Type<T> }>;
 
 export interface LibraryManifest<T> {
   components: Manifest<T>;
+  serviceActivators: Activator;
   tracks: Record<string, TrackedData>;
 }
 
