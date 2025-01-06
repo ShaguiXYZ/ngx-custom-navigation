@@ -3,14 +3,13 @@ import { Component, inject, OnInit } from '@angular/core';
 import { NxCopytextModule } from '@aposin/ng-aquila/copytext';
 import { IndexedData } from '@shagui/ng-shagui/core';
 import { Observable } from 'rxjs';
+import { QuoteComponent } from 'src/app/core/components';
 import { RoutingService } from 'src/app/core/services';
 import { QuoteTrackDirective } from 'src/app/core/tracking';
-import { HeaderTitleComponent, TextCardComponent } from 'src/app/shared/components';
+import { QuoteModel } from 'src/app/library/models';
+import { HeaderTitleComponent, QuoteFooterComponent, TextCardComponent } from 'src/app/shared/components';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
-
-import { QuoteComponent } from 'src/app/core/components';
-import { QuoteModel } from 'src/app/library/models';
 import { VehicleTypes } from './models';
 
 @Component({
@@ -20,6 +19,7 @@ import { VehicleTypes } from './models';
   imports: [
     CommonModule,
     HeaderTitleComponent,
+    QuoteFooterComponent,
     TextCardComponent,
     NxCopytextModule,
     QuoteLiteralDirective,

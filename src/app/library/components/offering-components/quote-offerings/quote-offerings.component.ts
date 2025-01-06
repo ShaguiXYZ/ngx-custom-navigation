@@ -8,7 +8,7 @@ import { QuoteError } from 'src/app/core/errors';
 import { RoutingService } from 'src/app/core/services';
 import { OfferingPriceModel, QuoteModel } from 'src/app/library/models';
 import { OfferingsService } from 'src/app/library/services/offerings.service';
-import { HeaderTitleComponent } from 'src/app/shared/components';
+import { HeaderTitleComponent, QuoteFooterComponent } from 'src/app/shared/components';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
 import { QuoteOfferingCoveragesComponent, QuoteOfferingPriceCardComponent } from './components';
 
@@ -16,7 +16,14 @@ import { QuoteOfferingCoveragesComponent, QuoteOfferingPriceCardComponent } from
   selector: 'quote-quote-offerings',
   templateUrl: './quote-offerings.component.html',
   styleUrl: './quote-offerings.component.scss',
-  imports: [CommonModule, HeaderTitleComponent, QuoteOfferingPriceCardComponent, NxModalModule, QuoteLiteralDirective],
+  imports: [
+    CommonModule,
+    HeaderTitleComponent,
+    QuoteFooterComponent,
+    QuoteOfferingPriceCardComponent,
+    NxModalModule,
+    QuoteLiteralDirective
+  ],
   providers: [OfferingsService],
   standalone: true
 })

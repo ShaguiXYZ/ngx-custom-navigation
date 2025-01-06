@@ -151,6 +151,14 @@ export const WORKFLOW: ConfigurationDTO<QuoteModel, WorkflowManifestId> = {
         }
       ],
       configuration: {
+        data: {
+          footerConfig: {
+            info: {
+              icon: 'fa-hand-holding-heart',
+              literal: 'footer-info'
+            }
+          }
+        },
         literals: {
           'postal-code': 'Código postal',
           'error-required': 'El código postal es obligatorio para continuar',
@@ -285,6 +293,12 @@ export const WORKFLOW: ConfigurationDTO<QuoteModel, WorkflowManifestId> = {
       ],
       configuration: {
         data: {
+          footerConfig: {
+            info: {
+              icon: 'fa-car',
+              literal: 'footer-info'
+            }
+          },
           contextData: { blackList: { plateNumber: { blacklisted: false } } }
         },
         literals: {
@@ -529,6 +543,14 @@ export const WORKFLOW: ConfigurationDTO<QuoteModel, WorkflowManifestId> = {
         }
       ],
       configuration: {
+        data: {
+          footerConfig: {
+            info: {
+              icon: 'fa-location-arrow',
+              literal: 'footer-info'
+            }
+          }
+        },
         literals: {
           header: {
             value: '¿Has tenido algún accidente en {{last}}{{last-single}} {{value}} {{years}}{{year}}?',
@@ -697,6 +719,14 @@ export const WORKFLOW: ConfigurationDTO<QuoteModel, WorkflowManifestId> = {
         }
       ],
       configuration: {
+        data: {
+          footerConfig: {
+            info: {
+              icon: 'fa-id-card',
+              literal: 'footer-info'
+            }
+          }
+        },
         literals: {
           header: '¿Nos puedes facilitar tu documento de identidad?',
           'identification-number': 'Número de DNI o NIE',

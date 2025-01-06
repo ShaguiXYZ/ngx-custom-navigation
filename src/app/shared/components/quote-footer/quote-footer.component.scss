@@ -39,14 +39,5 @@
         flex: 1;
       }
     }
-
-    ::ng-deep {
-      .extra__footer__info {
-        display: flex;
-        flex: 1;
-        flex-direction: column;
-        justify-content: flex-end;
-      }
-    }
   }
 }

@@ -5,17 +5,22 @@ import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
 import { NxIconModule } from '@aposin/ng-aquila/icon';
 import { NxInputModule } from '@aposin/ng-aquila/input';
 import { debounceTime, distinctUntilChanged, fromEvent, map, Subscription } from 'rxjs';
+import { QuoteComponent } from 'src/app/core/components';
 import { DEBOUNCE_TIME } from 'src/app/core/constants';
 import { IIconData } from 'src/app/core/models';
 import { RoutingService } from 'src/app/core/services';
 import { QuoteTrackDirective } from 'src/app/core/tracking';
+import { QuoteModel } from 'src/app/library/models';
 import { VehicleService } from 'src/app/library/services';
-import { HeaderTitleComponent, IconCardComponent, QuoteZoneComponent, TextCardComponent } from 'src/app/shared/components';
+import {
+  HeaderTitleComponent,
+  IconCardComponent,
+  QuoteFooterComponent,
+  QuoteZoneComponent,
+  TextCardComponent
+} from 'src/app/shared/components';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
-
-import { QuoteComponent } from 'src/app/core/components';
-import { QuoteModel } from 'src/app/library/models';
 import { BrandComponentService } from './services';
 
 @Component({
@@ -25,6 +30,7 @@ import { BrandComponentService } from './services';
   imports: [
     CommonModule,
     HeaderTitleComponent,
+    QuoteFooterComponent,
     IconCardComponent,
     TextCardComponent,
     QuoteZoneComponent,

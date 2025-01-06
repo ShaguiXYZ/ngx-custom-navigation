@@ -11,12 +11,13 @@ import { QuoteTrackDirective, TrackInfo } from 'src/app/core/tracking';
 import { QuoteLiteralDirective } from '../../directives';
 import { QuoteLiteralPipe } from '../../pipes';
 import { QuoteZoneComponent } from '../quote-zone';
+import { QuoteFooterInfoComponent } from '../quote-footer-info';
 
 @Component({
   selector: 'quote-footer',
   templateUrl: './quote-footer.component.html',
   styleUrl: './quote-footer.component.scss',
-  imports: [QuoteZoneComponent, CommonModule, NxButtonModule, QuoteLiteralDirective, QuoteTrackDirective],
+  imports: [QuoteFooterInfoComponent, QuoteZoneComponent, CommonModule, NxButtonModule, QuoteLiteralDirective, QuoteTrackDirective],
   standalone: true
 })
 export class QuoteFooterComponent implements OnInit, OnDestroy {
@@ -36,7 +37,7 @@ export class QuoteFooterComponent implements OnInit, OnDestroy {
   public _observedMobileMode?: boolean;
 
   private _trackInfo: TrackInfo = {};
-  private _trackFooterInfo: TrackInfo = {};
+  private _trackinfo: TrackInfo = {};
 
   private readonly subscription$: Subscription[] = [];
 
@@ -52,7 +53,7 @@ export class QuoteFooterComponent implements OnInit, OnDestroy {
         .subscribe((state: BreakpointState) => (this._observedMobileMode = state.breakpoints[Breakpoints.HandsetPortrait]))
     );
 
-    this._trackFooterInfo = { label: this.quoteLiteralPipe.transform('footer-next') };
+    this._trackinfo = { label: this.quoteLiteralPipe.transform('footer-next') };
 
     !this.config.ignoreQuoteConfig && this.footerButtonProperties();
   }
@@ -62,7 +63,7 @@ export class QuoteFooterComponent implements OnInit, OnDestroy {
   }
 
   public get trackInfo(): TrackInfo {
-    return { ...this._trackFooterInfo, ...this._trackInfo };
+    return { ...this._trackinfo, ...this._trackInfo };
   }
 
   @Input()

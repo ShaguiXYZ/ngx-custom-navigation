@@ -13,7 +13,7 @@ import { NX_WORKFLOW_TOKEN } from 'src/app/core/components/models';
 import { NX_RECAPTCHA_TOKEN, RoutingService } from 'src/app/core/services';
 import { ContextDataServiceStub } from 'src/app/core/stub';
 import { QuoteModel } from 'src/app/library/models';
-import { HeaderTitleComponent, QuoteFooterComponent, QuoteFooterInfoComponent } from 'src/app/shared/components';
+import { HeaderTitleComponent, QuoteFooterComponent } from 'src/app/shared/components';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 import { LicensePlateComponent } from './license-plate.component';
@@ -45,7 +45,6 @@ describe('LicensePlateComponent', () => {
         NxLicencePlateModule,
         NxMaskModule,
         QuoteFooterComponent,
-        QuoteFooterInfoComponent,
         HeaderTitleComponent,
         QuoteLiteralDirective,
         QuoteLiteralPipe

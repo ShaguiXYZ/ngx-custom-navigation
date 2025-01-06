@@ -9,7 +9,7 @@ import { QuoteComponent } from 'src/app/core/components';
 import { RoutingService } from 'src/app/core/services';
 import { QuoteTrackDirective } from 'src/app/core/tracking';
 import { QuoteModel } from 'src/app/library/models';
-import { HeaderTitleComponent, IconCardComponent } from 'src/app/shared/components';
+import { HeaderTitleComponent, IconCardComponent, QuoteFooterComponent } from 'src/app/shared/components';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
 import { DrivingLicenseIcons } from './models';
 
@@ -18,6 +18,7 @@ import { DrivingLicenseIcons } from './models';
   standalone: true,
   imports: [
     CommonModule,
+    QuoteFooterComponent,
     IconCardComponent,
     HeaderTitleComponent,
     NxButtonModule,

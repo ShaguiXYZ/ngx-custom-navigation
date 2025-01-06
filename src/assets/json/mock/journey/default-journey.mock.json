@@ -147,6 +147,14 @@
         }
       ],
       "configuration": {
+        "data": {
+          "footerConfig": {
+            "info": {
+              "icon": "fa-hand-holding-heart",
+              "literal": "footer-info"
+            }
+          }
+        },
         "literals": {
           "postal-code": "Código postal",
           "error-required": "El código postal es obligatorio para continuar",
@@ -281,6 +289,12 @@
       ],
       "configuration": {
         "data": {
+          "footerConfig": {
+            "info": {
+              "icon": "fa-car",
+              "literal": "footer-info"
+            }
+          },
           "contextData": { "blackList": { "plateNumber": { "blacklisted": false } } }
         },
         "literals": {
@@ -525,6 +539,14 @@
         }
       ],
       "configuration": {
+        "data": {
+          "footerConfig": {
+            "info": {
+              "icon": "fa-location-arrow",
+              "literal": "footer-info"
+            }
+          }
+        },
         "literals": {
           "header": {
             "value": "¿Has tenido algún accidente en {{last}}{{last-single}} {{value}} {{years}}{{year}}?",
@@ -693,6 +715,14 @@
         }
       ],
       "configuration": {
+        "data": {
+          "footerConfig": {
+            "info": {
+              "icon": "fa-id-card",
+              "literal": "footer-info"
+            }
+          }
+        },
         "literals": {
           "header": "¿Nos puedes facilitar tu documento de identidad?",
           "identification-number": "Número de DNI o NIE",

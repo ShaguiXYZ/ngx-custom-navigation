@@ -3,6 +3,7 @@ export interface QuoteFooterConfig {
   disableNext?: boolean;
   showBack?: boolean;
   showNext?: boolean;
+  info?: { icon?: string; literal: string };
   ignoreQuoteConfig?: boolean;
   /**
    *

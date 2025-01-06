@@ -6,7 +6,7 @@ import { QuoteComponent } from 'src/app/core/components';
 import { RoutingService } from 'src/app/core/services';
 import { QuoteTrackDirective } from 'src/app/core/tracking';
 import { QuoteModel } from 'src/app/library/models';
-import { HeaderTitleComponent, SelectableOptionComponent } from 'src/app/shared/components';
+import { HeaderTitleComponent, QuoteFooterComponent, SelectableOptionComponent } from 'src/app/shared/components';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
 
 @Component({
@@ -14,7 +14,15 @@ import { QuoteLiteralDirective } from 'src/app/shared/directives';
   templateUrl: './is-policy-owner.component.html',
   styleUrl: './is-policy-owner.component.scss',
   standalone: true,
-  imports: [CommonModule, HeaderTitleComponent, SelectableOptionComponent, NxButtonModule, QuoteLiteralDirective, QuoteTrackDirective]
+  imports: [
+    CommonModule,
+    HeaderTitleComponent,
+    QuoteFooterComponent,
+    SelectableOptionComponent,
+    NxButtonModule,
+    QuoteLiteralDirective,
+    QuoteTrackDirective
+  ]
 })
 export class IsPolicyOwnerComponent extends QuoteComponent<QuoteModel> {
   private readonly routingService = inject(RoutingService);

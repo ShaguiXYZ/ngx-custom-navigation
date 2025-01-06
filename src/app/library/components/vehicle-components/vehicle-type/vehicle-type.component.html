@@ -3,7 +3,7 @@
     <span nxQuoteLiteral="header"></span>
     <p nxCopytext="normal" nxQuoteLiteral="subheader"></p>
   </quote-header-title>
-  <div class="form-container">
+  <section class="form-container">
     @for(type of vehicleTypes; track type.index) {
     <div class="selectable-row">
       @let label = type.data | quoteLiteral;
@@ -19,5 +19,6 @@
       />
     </div>
     }
-  </div>
+  </section>
+  <quote-footer [config]="{ showNext: false }" />
 </article>

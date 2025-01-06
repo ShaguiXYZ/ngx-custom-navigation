@@ -7,7 +7,7 @@ import { NxInputModule } from '@aposin/ng-aquila/input';
 import { QuoteComponent } from 'src/app/core/components';
 import { QuoteFormValidarors } from 'src/app/core/form';
 import { QuoteModel } from 'src/app/library/models';
-import { HeaderTitleComponent, QuoteFooterComponent, QuoteFooterInfoComponent, QuoteZoneComponent } from 'src/app/shared/components';
+import { HeaderTitleComponent, QuoteFooterComponent } from 'src/app/shared/components';
 import { QuoteAutoFocusDirective, QuoteLiteralDirective } from 'src/app/shared/directives';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 
@@ -18,8 +18,6 @@ import { QuoteLiteralPipe } from 'src/app/shared/pipes';
   imports: [
     HeaderTitleComponent,
     QuoteFooterComponent,
-    QuoteFooterInfoComponent,
-    QuoteZoneComponent,
     NxCopytextModule,
     NxFormfieldModule,
     NxInputModule,

@@ -10,7 +10,7 @@ import { DEBOUNCE_TIME } from 'src/app/core/constants';
 import { IIconData } from 'src/app/core/models';
 import { InsuranceCompaniesService, RoutingService } from 'src/app/core/services';
 import { QuoteTrackDirective } from 'src/app/core/tracking';
-import { HeaderTitleComponent, IconCardComponent, TextCardComponent } from 'src/app/shared/components';
+import { HeaderTitleComponent, IconCardComponent, QuoteFooterComponent, TextCardComponent } from 'src/app/shared/components';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 
@@ -26,6 +26,7 @@ import { InsuranceComponentService } from './services';
     CommonModule,
     IconCardComponent,
     HeaderTitleComponent,
+    QuoteFooterComponent,
     TextCardComponent,
     NxFormfieldModule,
     NxIconModule,

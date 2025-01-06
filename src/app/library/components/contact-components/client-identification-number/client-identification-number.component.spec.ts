@@ -12,7 +12,7 @@ import { NX_WORKFLOW_TOKEN } from 'src/app/core/components/models';
 import { NX_RECAPTCHA_TOKEN } from 'src/app/core/services';
 import { ContextDataServiceStub } from 'src/app/core/stub';
 import { QuoteModel } from 'src/app/library/models';
-import { HeaderTitleComponent, QuoteFooterComponent, QuoteFooterInfoComponent } from 'src/app/shared/components';
+import { HeaderTitleComponent, QuoteFooterComponent } from 'src/app/shared/components';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 import { ClientIdentificationNumberComponent } from './client-identification-number.component';
@@ -39,7 +39,6 @@ describe('ClientIdentificationNumberComponent', () => {
         NxFormfieldModule,
         NxInputModule,
         QuoteFooterComponent,
-        QuoteFooterInfoComponent,
         HeaderTitleComponent,
         QuoteLiteralDirective,
         QuoteLiteralPipe

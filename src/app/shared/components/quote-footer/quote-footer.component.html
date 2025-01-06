@@ -32,5 +32,11 @@
   </div>
   <div class="footer-extras" [ngClass]="{ 'mobile-options': mobileMode }">
     <ng-content></ng-content>
+
+    @if(config.info) {
+    <quote-footer-info [icon]="config.info.icon"> <span [nxQuoteLiteral]="config.info.literal"></span> </quote-footer-info>
+    }
+
+    <ng-content select="[after]"></ng-content>
   </div>
 </quote-zone>

@@ -9,7 +9,7 @@ import { NxLicencePlateModule } from '@aposin/ng-aquila/licence-plate';
 import { QuoteFormValidarors } from 'src/app/core/form';
 import { RoutingService } from 'src/app/core/services';
 import { QuoteTrackDirective } from 'src/app/core/tracking';
-import { HeaderTitleComponent, QuoteFooterComponent, QuoteFooterInfoComponent, QuoteZoneComponent } from 'src/app/shared/components';
+import { HeaderTitleComponent, QuoteFooterComponent, QuoteZoneComponent } from 'src/app/shared/components';
 import { QuoteAutoFocusDirective, QuoteLiteralDirective } from 'src/app/shared/directives';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 
@@ -31,7 +31,6 @@ import { CountryCodes, PatternsByCountry } from './models';
     NxLicencePlateModule,
     NxButtonModule,
     QuoteFooterComponent,
-    QuoteFooterInfoComponent,
     QuoteZoneComponent,
     ReactiveFormsModule,
     QuoteAutoFocusDirective,

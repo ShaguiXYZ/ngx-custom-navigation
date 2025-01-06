@@ -3,7 +3,7 @@
     <span nxQuoteLiteral="header"></span>
     <p nxCopytext="normal" nxQuoteLiteral="subheader"></p>
   </quote-header-title>
-  <div class="form-container">
+  <section class="form-container">
     <form [formGroup]="form">
       <nx-formfield [label]="'search' | quoteLiteral" appearance="outline">
         <input #searchInput type="text" formControlName="searchInput" nxInput />
@@ -26,5 +26,6 @@
       />
     </div>
     }
-  </div>
+  </section>
+  <quote-footer [config]="{ showNext: false }" />
 </article>
