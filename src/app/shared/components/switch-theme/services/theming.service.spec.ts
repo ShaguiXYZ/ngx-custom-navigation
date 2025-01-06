@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { TestBed } from '@angular/core/testing';
 import { SESSION_THEME_KEY, Theme } from '../models';
 import { ThemingService } from './theming.service';
@@ -6,8 +7,10 @@ describe('ThemingService', () => {
   let service: ThemingService;
 
   beforeEach(() => {
+    const httpClientSpy = jasmine.createSpyObj('HttpClient', ['get', 'post', 'put', 'delete']);
+
     TestBed.configureTestingModule({
-      providers: [ThemingService]
+      providers: [ThemingService, { provide: HttpClient, useValue: httpClientSpy }]
     });
 
     service = TestBed.inject(ThemingService);

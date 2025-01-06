@@ -1,12 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { HttpClient } from '@angular/common/http';
 import { TestBed } from '@angular/core/testing';
 import { Router } from '@angular/router';
 import { ContextDataService } from '@shagui/ng-shagui/core';
+import { NX_WORKFLOW_TOKEN } from '../../components/models';
 import { QUOTE_APP_CONTEXT_DATA } from '../../constants';
 import { AppContextData } from '../../models';
 import { ContextDataServiceStub } from '../../stub';
 import { RoutingService } from '../routing.service';
-import { NX_WORKFLOW_TOKEN } from '../../components/models';
 
 describe('RoutingService', () => {
   let service: RoutingService;
@@ -16,6 +17,7 @@ describe('RoutingService', () => {
 
   beforeEach(() => {
     const routerSpy = jasmine.createSpyObj('Router', ['navigate']);
+    const httpClientSpy = jasmine.createSpyObj('HttpClient', ['get', 'post', 'put', 'delete']);
     const mockConfig = {
       errorPageId: 'error',
       manifest: {}
@@ -26,6 +28,7 @@ describe('RoutingService', () => {
         RoutingService,
         { provide: Router, useValue: routerSpy },
         { provide: ContextDataService, useClass: ContextDataServiceStub },
+        { provide: HttpClient, useValue: httpClientSpy },
         { provide: NX_WORKFLOW_TOKEN, useValue: mockConfig }
       ]
     });

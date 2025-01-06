@@ -3,6 +3,7 @@ import { FormControl } from '@angular/forms';
 import moment from 'moment';
 import { QuoteFormValidarors } from '../quote-validators.form';
 import { NX_WORKFLOW_TOKEN } from '../../components/models';
+import { HttpClient } from '@angular/common/http';
 
 describe('QuoteFormValidarors', () => {
   const mockConfig = {
@@ -12,8 +13,14 @@ describe('QuoteFormValidarors', () => {
   let validators: QuoteFormValidarors;
 
   beforeEach(() => {
+    const httpClientSpy = jasmine.createSpyObj('HttpClient', ['get', 'post', 'put', 'delete']);
+
     TestBed.configureTestingModule({
-      providers: [QuoteFormValidarors, { provide: NX_WORKFLOW_TOKEN, useValue: mockConfig }]
+      providers: [
+        QuoteFormValidarors,
+        { provide: HttpClient, useValue: httpClientSpy },
+        { provide: NX_WORKFLOW_TOKEN, useValue: mockConfig }
+      ]
     });
     validators = TestBed.inject(QuoteFormValidarors);
   });

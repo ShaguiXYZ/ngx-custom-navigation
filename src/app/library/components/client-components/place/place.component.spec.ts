@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { HttpClient } from '@angular/common/http';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
@@ -24,6 +25,7 @@ describe('PlaceComponent', () => {
     const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate']);
     const locationServiceSpy = jasmine.createSpyObj('LocationService', ['getAddress']);
     const quoteLiteralPipeSpy = jasmine.createSpyObj('QuoteLiteralPipe', ['transform']);
+    const httpClientSpy = jasmine.createSpyObj('HttpClient', ['get', 'post', 'put', 'delete']);
     const mockConfig = {
       errorPageId: 'error',
       manifest: {}
@@ -52,6 +54,7 @@ describe('PlaceComponent', () => {
         { provide: TranslateService, useValue: translateServiceSpy },
         { provide: LocationService, useValue: locationServiceSpy },
         { provide: QuoteLiteralPipe, useValue: quoteLiteralPipeSpy },
+        { provide: HttpClient, useValue: httpClientSpy },
         { provide: NX_RECAPTCHA_TOKEN, useValue: { siteKey: 'mock-site-key' } },
         { provide: NX_WORKFLOW_TOKEN, useValue: mockConfig }
       ]

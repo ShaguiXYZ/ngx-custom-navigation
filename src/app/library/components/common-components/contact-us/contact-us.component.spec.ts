@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { NxCopytextModule } from '@aposin/ng-aquila/copytext';
@@ -20,6 +21,7 @@ describe('ContactUsComponent', () => {
   beforeEach(async () => {
     const quoteLiteralPipeSpy = jasmine.createSpyObj('QuoteLiteralPipe', ['transform']);
     const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate']);
+    const httpClientSpy = jasmine.createSpyObj('HttpClient', ['get', 'post', 'put', 'delete']);
     const mockConfig = {
       errorPageId: 'error',
       manifest: {}
@@ -40,6 +42,7 @@ describe('ContactUsComponent', () => {
         { provide: ContextDataService, useClass: ContextDataServiceStub },
         { provide: TranslateService, useValue: translateServiceSpy },
         { provide: QuoteLiteralPipe, useValue: quoteLiteralPipeSpy },
+        { provide: HttpClient, useValue: httpClientSpy },
         { provide: NX_RECAPTCHA_TOKEN, useValue: { siteKey: 'mock-site-key' } },
         { provide: NX_WORKFLOW_TOKEN, useValue: mockConfig }
       ]

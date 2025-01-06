@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { HttpClient } from '@angular/common/http';
 import { TestBed } from '@angular/core/testing';
 import { ContextDataService } from '@shagui/ng-shagui/core';
 import { NX_WORKFLOW_TOKEN } from '../../components/models';
@@ -14,6 +15,7 @@ describe('ServiceActivatorService', () => {
 
   beforeEach(() => {
     const contextDataServiceSpy = jasmine.createSpyObj('ContextDataService', ['get']);
+    const httpClientSpy = jasmine.createSpyObj('HttpClient', ['get', 'post', 'put', 'delete']);
     const mockConfig = {
       errorPageId: 'error',
       manifest: {}
@@ -23,6 +25,7 @@ describe('ServiceActivatorService', () => {
       providers: [
         ServiceActivatorService,
         { provide: ContextDataService, useValue: contextDataServiceSpy },
+        { provide: HttpClient, useValue: httpClientSpy },
         { provide: NX_WORKFLOW_TOKEN, useValue: mockConfig }
       ]
     });

@@ -33,9 +33,9 @@ describe('QuoteOfferingsComponent', () => {
     const routingServiceSpy = jasmine.createSpyObj('RoutingService', ['next']);
     const dialogServiceSpy = jasmine.createSpyObj('NxDialogService', ['open']);
     const rendererSpy = jasmine.createSpyObj('Renderer2', ['listen', 'setStyle']);
-    const httpClientSpy = jasmine.createSpyObj('HttpClient', ['get', 'post', 'put', 'delete']);
     const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate']);
     const quoteLiteralPipeSpy = jasmine.createSpyObj('QuoteLiteralPipe', ['transform']);
+    const httpClientSpy = jasmine.createSpyObj('HttpClient', ['get', 'post', 'put', 'delete']);
     const mockConfig = {
       errorPageId: 'error',
       manifest: {}
@@ -68,10 +68,10 @@ describe('QuoteOfferingsComponent', () => {
         { provide: OfferingsService, useValue: offeringsServiceSpy },
         { provide: RoutingService, useValue: routingServiceSpy },
         { provide: NxDialogService, useValue: dialogServiceSpy },
-        { provide: HttpClient, useValue: httpClientSpy },
         { provide: TranslateService, useValue: translateServiceSpy },
         { provide: QuoteLiteralPipe, useValue: quoteLiteralPipeSpy },
         { provide: Renderer2, useValue: rendererSpy },
+        { provide: HttpClient, useValue: httpClientSpy },
         { provide: NX_RECAPTCHA_TOKEN, useValue: { siteKey: 'mock-site-key' } },
         { provide: NX_WORKFLOW_TOKEN, useValue: mockConfig }
       ]

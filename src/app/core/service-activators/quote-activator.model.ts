@@ -1,4 +1,4 @@
-import { ContextDataService } from '@shagui/ng-shagui/core';
+import { ContextDataService, HttpService } from '@shagui/ng-shagui/core';
 import { QuoteFormValidations } from '../form';
 import { BudgetActivator } from './budget.activator';
 import { QuoteActivator } from './quote.activator';
@@ -22,4 +22,5 @@ export interface ActivatorConfig {
 
 export interface ActivatorServices {
   contextDataService: ContextDataService;
+  httpService?: HttpService;
 }

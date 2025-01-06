@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { HttpClient } from '@angular/common/http';
 import { TestBed } from '@angular/core/testing';
 import { ContextDataService } from '@shagui/ng-shagui/core';
 import { Subject } from 'rxjs';
@@ -12,6 +13,7 @@ describe('QuoteStepperService', () => {
   let contextDataServiceSpy: jasmine.SpyObj<ContextDataService>;
 
   beforeEach(() => {
+    const httpClientSpy = jasmine.createSpyObj('HttpClient', ['get', 'post', 'put', 'delete']);
     const mockConfig = {
       errorPageId: 'error',
       manifest: {}
@@ -26,6 +28,7 @@ describe('QuoteStepperService', () => {
       providers: [
         QuoteStepperService,
         { provide: ContextDataService, useValue: contextDataServiceSpy },
+        { provide: HttpClient, useValue: httpClientSpy },
         { provide: NX_WORKFLOW_TOKEN, useValue: mockConfig }
       ]
     });
