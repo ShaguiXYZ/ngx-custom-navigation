@@ -13,7 +13,7 @@ import { QuoteTrackDirective } from 'src/app/core/tracking';
 import { OfferingPriceModel } from 'src/app/library/models';
 import { HeaderTitleComponent, QuoteFooterComponent } from 'src/app/shared/components';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
-import { QuoteLiteralPipe } from 'src/app/shared/pipes';
+import { QuoteLiteralPipe, QuoteNumberPipe } from 'src/app/shared/pipes';
 
 @Component({
   selector: 'quote-offering-price-card',
@@ -31,6 +31,7 @@ import { QuoteLiteralPipe } from 'src/app/shared/pipes';
     QuoteFooterComponent,
     QuoteLiteralDirective,
     QuoteLiteralPipe,
+    QuoteNumberPipe,
     QuoteTrackDirective
   ],
   standalone: true
@@ -87,7 +88,7 @@ export class QuoteOfferingPriceCardComponent implements OnInit, OnDestroy {
   public set price(value: OfferingPriceModel) {
     this._price = value;
     this.form?.patchValue({ feeSelectedIndex: this._price.feeSelectedIndex });
-    this.priceSegments = this._price.totalPremiumAmount.split(/[.,]/);
+    this.priceSegments = `${this._price.totalPremiumAmount}`.split(/[.,]/);
   }
 
   public get price(): OfferingPriceModel {
@@ -99,15 +100,15 @@ export class QuoteOfferingPriceCardComponent implements OnInit, OnDestroy {
   }
 
   public get priceDecimal(): string {
-    return this.priceSegments.length > 0 ? this.priceSegments[1] : '00';
+    return this.priceSegments.length > 1 ? this.priceSegments[1] : '00';
   }
 
   public get now(): Date {
     return new Date();
   }
 
-  public get fee(): string[] {
-    return (this._price.fee = this._price.fee || []);
+  public get fee(): number[] {
+    return (this._price.fee = this._price.fee ?? []);
   }
 
   public showCoverages(): void {

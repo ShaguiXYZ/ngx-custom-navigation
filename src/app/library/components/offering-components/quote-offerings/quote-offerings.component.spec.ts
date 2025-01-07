@@ -51,7 +51,7 @@ describe('QuoteOfferingsComponent', () => {
         } as AppContextData;
       } else if (contextDataKey === QUOTE_CONTEXT_DATA) {
         return {
-          offering: { price: { totalPremiumAmount: '100' }, prices: [{ totalPremiumAmount: '100' }, { totalPremiumAmount: '200' }] }
+          offering: { price: { totalPremiumAmount: '100' }, prices: [{ totalPremiumAmount: 100 }, { totalPremiumAmount: 200 }] }
         };
       }
 
@@ -90,7 +90,7 @@ describe('QuoteOfferingsComponent', () => {
   });
 
   it('should fetch offering prices on init', async () => {
-    const prices = [{ totalPremiumAmount: '100' }, { totalPremiumAmount: '200' }] as OfferingPriceModel[];
+    const prices = [{ totalPremiumAmount: 100 }, { totalPremiumAmount: 200 }] as OfferingPriceModel[];
 
     offeringsService.pricing.and.returnValue(Promise.resolve({ prices }));
 
@@ -111,8 +111,8 @@ describe('QuoteOfferingsComponent', () => {
   });
 
   it('should select steper and update selectedPriceIndex', () => {
-    component['_contextData'] = { offering: { prices: [{ totalPremiumAmount: '100' }, { totalPremiumAmount: '200' }] } } as QuoteModel;
-    component.prices = [{ totalPremiumAmount: '100' }, { totalPremiumAmount: '200' }] as OfferingPriceModel[];
+    component['_contextData'] = { offering: { prices: [{ totalPremiumAmount: 100 }, { totalPremiumAmount: 200 }] } } as QuoteModel;
+    component.prices = [{ totalPremiumAmount: '100' }, { totalPremiumAmount: 200 }] as OfferingPriceModel[];
 
     component.selectSteper(1);
 
@@ -122,7 +122,7 @@ describe('QuoteOfferingsComponent', () => {
 
   it('should call next and select next steper', () => {
     component['_contextData'] = { offering: {} } as QuoteModel;
-    component.prices = [{ totalPremiumAmount: '100' }, { totalPremiumAmount: '200' }] as OfferingPriceModel[];
+    component.prices = [{ totalPremiumAmount: 100 }, { totalPremiumAmount: 200 }] as OfferingPriceModel[];
     component.selectedPriceIndex = 0;
     component.next();
 
@@ -131,7 +131,7 @@ describe('QuoteOfferingsComponent', () => {
 
   it('should call previous and select previous steper', () => {
     component['_contextData'] = { offering: {} } as QuoteModel;
-    component.prices = [{ totalPremiumAmount: '100' }, { totalPremiumAmount: '200' }] as OfferingPriceModel[];
+    component.prices = [{ totalPremiumAmount: 100 }, { totalPremiumAmount: 200 }] as OfferingPriceModel[];
     component.selectedPriceIndex = 1;
     component.previous();
 
@@ -139,7 +139,7 @@ describe('QuoteOfferingsComponent', () => {
   });
 
   xit('should show coverages and open dialog', () => {
-    component.prices = [{ totalPremiumAmount: '100' }, { totalPremiumAmount: '200' }] as OfferingPriceModel[];
+    component.prices = [{ totalPremiumAmount: 100 }, { totalPremiumAmount: 200 }] as OfferingPriceModel[];
     component.showCoverages(1);
 
     expect(component.selectedPriceIndex).toBe(1);
@@ -152,7 +152,7 @@ describe('QuoteOfferingsComponent', () => {
 
   it('should call contactUs and navigate to next route', () => {
     component['_contextData'] = { offering: {} } as QuoteModel;
-    const price = { totalPremiumAmount: '100' } as OfferingPriceModel;
+    const price = { totalPremiumAmount: 100 } as OfferingPriceModel;
     component.contactUs(price);
 
     expect(component['_contextData'].offering.price).toEqual(price);
@@ -169,7 +169,7 @@ describe('QuoteOfferingsComponent', () => {
 
   it('should handle swipe end and select next steper', () => {
     component['_contextData'] = { offering: {} } as QuoteModel;
-    component.prices = [{ totalPremiumAmount: '100' }, { totalPremiumAmount: '200' }] as OfferingPriceModel[];
+    component.prices = [{ totalPremiumAmount: 100 }, { totalPremiumAmount: 200 }] as OfferingPriceModel[];
     component.selectedPriceIndex = 0;
     component['swipeCoord'] = [100, 200];
     component['swipeTime'] = new Date().getTime() - 1000;

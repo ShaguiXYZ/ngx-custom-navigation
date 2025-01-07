@@ -20,7 +20,7 @@
           @for(f of fee; track f) {
           <nx-radio-group formControlName="feeSelectedIndex">
             <nx-radio labelSize="small" [value]="$index">
-              <span nxCopytext="large" class="nx-font-weight-bold">{{ fee }} {{ 'currency' | quoteLiteral }}</span>
+              <span nxCopytext="normal" class="nx-font-weight-bold">{{ f | quoteNumber }} {{ 'currency' | quoteLiteral }}</span>
             </nx-radio>
           </nx-radio-group>
           }

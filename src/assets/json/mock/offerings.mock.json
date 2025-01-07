@@ -16,12 +16,12 @@
         "paymentTypeDescription": "Anual",
         "premium": "1",
         "contractable": "S",
-        "totalPremiumAmount": "534.34",
+        "totalPremiumAmount": "534.3400001",
         "fee": "",
         "newPremium": null,
         "receiptData": {
-          "firstReceiptAmount": "534.34",
-          "followingReceiptAmount": "534.34"
+          "firstReceiptAmount": "534.3400001",
+          "followingReceiptAmount": "534.3400001"
         },
         "coverageList": [
           {
@@ -84,12 +84,12 @@
         "paymentType": "A",
         "paymentTypeDescription": "Anual",
         "contractable": "S",
-        "totalPremiumAmount": "569.87",
+        "totalPremiumAmount": "569.8700001",
         "fee": "",
         "newPremium": null,
         "receiptData": {
-          "firstReceiptAmount": "569.87",
-          "followingReceiptAmount": "569.87"
+          "firstReceiptAmount": "569.8700001",
+          "followingReceiptAmount": "569.8700001"
         },
         "coverageList": [
           {
@@ -180,8 +180,8 @@
         "fee": "500.00",
         "newPremium": null,
         "receiptData": {
-          "firstReceiptAmount": "790.31",
-          "followingReceiptAmount": "790.31"
+          "firstReceiptAmount": "790.3100001",
+          "followingReceiptAmount": "790.3100001"
         },
         "coverageList": [
           {
@@ -268,7 +268,7 @@
         "paymentType": "A",
         "paymentTypeDescription": "Anual",
         "contractable": "S",
-        "totalPremiumAmount": "923.27",
+        "totalPremiumAmount": "923",
         "fee": "200.00",
         "newPremium": null,
         "receiptData": {

@@ -108,6 +108,8 @@ export namespace OfferingDTO {
         subcoverages: Array.isArray(coverageDTO.subcoverages) ? (coverageDTO.subcoverages as CoverageDTO[]).map(mapCoverage) : null
       });
 
+      const roundToNDecimals = (value: string, n: number): number => parseFloat(parseFloat(value).toFixed(n));
+
       return {
         modalityId: priceGrid.modalityId,
         modalityDescription: priceGrid.modalityDescription,
@@ -115,12 +117,12 @@ export namespace OfferingDTO {
         paymentType: priceGrid.paymentType,
         paymentTypeDescription: priceGrid.paymentTypeDescription,
         contractable: priceGrid.contractable,
-        totalPremiumAmount: priceGrid.totalPremiumAmount,
+        totalPremiumAmount: roundToNDecimals(priceGrid.totalPremiumAmount, 2),
         popular: priceGrid.premium ? priceGrid.premium === '1' : false,
-        fee: priceGrid.fee ? [priceGrid.fee] : [],
+        fee: priceGrid.fee ? [roundToNDecimals(priceGrid.fee, 2)] : [],
         receiptData: {
-          firstReceiptAmount: parseFloat(priceGrid.receiptData.firstReceiptAmount),
-          followingReceiptAmount: parseFloat(priceGrid.receiptData.followingReceiptAmount)
+          firstReceiptAmount: roundToNDecimals(priceGrid.receiptData.firstReceiptAmount, 2),
+          followingReceiptAmount: roundToNDecimals(priceGrid.receiptData.followingReceiptAmount, 2)
         },
         coverageList: priceGrid.coverageList.map(mapCoverage),
         configurableCoverageList: priceGrid.configurableCoverageList.map(mapCoverage)
@@ -154,8 +156,8 @@ export interface OfferingPriceModel {
   paymentTypeDescription: string;
   popular?: boolean;
   contractable: string;
-  totalPremiumAmount: string;
-  fee: string[];
+  totalPremiumAmount: number;
+  fee: number[];
   feeSelectedIndex?: number;
   receiptData: ReceiptData;
   coverageList: Coverage[];

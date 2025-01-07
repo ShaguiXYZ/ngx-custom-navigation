@@ -38,7 +38,7 @@ describe('QuoteOfferingPriceCardComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(QuoteOfferingPriceCardComponent);
     component = fixture.componentInstance;
-    component.price = { totalPremiumAmount: '123.45' } as OfferingPriceModel;
+    component.price = { totalPremiumAmount: 123.45 } as OfferingPriceModel;
 
     fixture.detectChanges();
   });
@@ -48,7 +48,7 @@ describe('QuoteOfferingPriceCardComponent', () => {
   });
 
   it('should set price and split price segments correctly', () => {
-    const price: OfferingPriceModel = { totalPremiumAmount: '123.45' } as OfferingPriceModel;
+    const price: OfferingPriceModel = { totalPremiumAmount: 123.45 } as OfferingPriceModel;
     component.price = price;
 
     expect(component.price).toEqual(price);
@@ -59,7 +59,7 @@ describe('QuoteOfferingPriceCardComponent', () => {
   it('should emit uiShowCoverages event when showCoverages is called', () => {
     spyOn(component.uiShowCoverages, 'emit');
 
-    const price: OfferingPriceModel = { totalPremiumAmount: '123.45' } as OfferingPriceModel;
+    const price: OfferingPriceModel = { totalPremiumAmount: 123.45 } as OfferingPriceModel;
     component.price = price;
     component.showCoverages();
 
@@ -69,7 +69,7 @@ describe('QuoteOfferingPriceCardComponent', () => {
   it('should emit uiContactUs event when contactUs is called', () => {
     spyOn(component.uiContactUs, 'emit');
 
-    const price: OfferingPriceModel = { totalPremiumAmount: '123.45' } as OfferingPriceModel;
+    const price: OfferingPriceModel = { totalPremiumAmount: 123.45 } as OfferingPriceModel;
     component.price = price;
     component.contactUs();
 
@@ -79,7 +79,7 @@ describe('QuoteOfferingPriceCardComponent', () => {
   it('should emit uiCallNow event when callNow is called', () => {
     spyOn(component.uiCallNow, 'emit');
 
-    const price: OfferingPriceModel = { totalPremiumAmount: '123.45' } as OfferingPriceModel;
+    const price: OfferingPriceModel = { totalPremiumAmount: 123.45 } as OfferingPriceModel;
     component.price = price;
     component.callNow();
 

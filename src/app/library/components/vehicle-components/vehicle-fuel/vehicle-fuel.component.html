@@ -17,6 +17,7 @@
         <div class="vehicle__selections">
           @for(fuel of fuels; track $index) { @let _selectedFuel = fuel.index === selectedFuel?.index;
           <div class="vehicle__selection nx-margin-2xs">
+            @defer(on viewport) {
             <quote-selectable-option
               [selected]="_selectedFuel"
               [nxTrack]="{
@@ -31,6 +32,9 @@
                 <span nxCopytext="medium" class="nx-margin-s" [ngClass]="{ 'nx-font-weight-bold': _selectedFuel }"> {{ fuel.data }}</span>
               </div>
             </quote-selectable-option>
+            } @placeholder {
+            <div class="card-placeholder"></div>
+            }
           </div>
           }
         </div>
@@ -49,6 +53,7 @@
           @for(cubicCapacity of cubicCapacities; track $index) { @let _selectedCubicCapacityselected = cubicCapacity.index ===
           selectedCubicCapacity?.index;
           <div class="vehicle__selection nx-margin-2xs">
+            @defer(on viewport) {
             <quote-selectable-option
               [selected]="_selectedCubicCapacityselected"
               [nxTrack]="{
@@ -65,6 +70,9 @@
                 >
               </div>
             </quote-selectable-option>
+            } @placeholder {
+            <div class="card-placeholder"></div>
+            }
           </div>
           }
           <div class="vehicle__not_known nx-margin-2xs">
@@ -104,6 +112,7 @@
         <div class="vehicle__selections">
           @for(power of powers; track power.index) { @let _selectedPower = power.index === selectedPower?.index;
           <div class="vehicle__selection nx-margin-2xs">
+            @defer(on viewport) {
             <quote-selectable-option
               [selected]="_selectedPower"
               [nxTrack]="{
@@ -118,6 +127,9 @@
                 <span nxCopytext="medium" class="nx-margin-s" [ngClass]="{ 'nx-font-weight-bold': _selectedPower }"> {{ power.data }}</span>
               </div>
             </quote-selectable-option>
+            } @placeholder {
+            <div class="card-placeholder"></div>
+            }
           </div>
           }
           <div class="vehicle__not_known nx-margin-2xs">

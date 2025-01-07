@@ -86,6 +86,19 @@
       .fee-values {
         display: flex;
         flex: 1;
+
+        ::ng-deep {
+          .nx-radio__label {
+            align-items: center;
+            display: flex;
+
+            .nx-radio__circle {
+              width: 16px;
+              min-width: 16px;
+              max-height: 16px;
+            }
+          }
+        }
       }
     }
 

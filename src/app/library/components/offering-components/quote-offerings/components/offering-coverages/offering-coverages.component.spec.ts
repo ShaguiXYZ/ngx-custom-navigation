@@ -34,8 +34,8 @@ describe('QuoteOfferingCoveragesComponent', () => {
           offering: {
             price: {},
             prices: [
-              { modalityId: 1, totalPremiumAmount: '100' },
-              { modalityId: 2, totalPremiumAmount: '200' }
+              { modalityId: 1, totalPremiumAmount: 100 },
+              { modalityId: 2, totalPremiumAmount: 200 }
             ]
           }
         } as QuoteModel;
@@ -81,8 +81,8 @@ describe('QuoteOfferingCoveragesComponent', () => {
   it('should initialize prices on init', () => {
     component.ngOnInit();
     expect(component.prices.length).toBe(2);
-    expect(component.prices[0].totalPremiumAmount).toBe('100');
-    expect(component.prices[1].totalPremiumAmount).toBe('200');
+    expect(component.prices[0].totalPremiumAmount).toBe(100);
+    expect(component.prices[1].totalPremiumAmount).toBe(200);
   });
 
   it('should have default selectedPriceIndex as 0', () => {
