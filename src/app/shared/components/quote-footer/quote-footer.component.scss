@@ -6,7 +6,7 @@
   .footer-options {
     align-items: flex-end;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
 
     ::ng-deep .nx-button--primary {
       color: var(--footer-option-color);
@@ -25,7 +25,7 @@
     }
 
     .mobile-option-back {
-      width: auto;
+      opacity: 0.5;
     }
   }
 

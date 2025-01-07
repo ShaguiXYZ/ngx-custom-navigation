@@ -6,18 +6,13 @@
   >
     @if (config.showBack) {
     <button
-      class="footer-option nx-margin-x-2xs nx-margin-y-2xs"
+      class="footer-option"
       [ngClass]="{ 'mobile-option-back': mobileMode }"
       nxButton="secondary medium"
+      nxQuoteLiteral="footer-back"
       type="button"
       (click)="goToPreviousStep()"
-    >
-      @if(mobileMode) {
-      <em class="fa-solid fa-arrow-left"></em>
-      }@else {
-      <span unxQuoteLiteral="footer-back"></span>
-      }
-    </button>
+    ></button>
     } @if (config.showNext) {
     <button
       class="footer-option"

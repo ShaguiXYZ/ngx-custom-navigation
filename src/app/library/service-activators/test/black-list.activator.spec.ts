@@ -1,15 +1,15 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { QuoteModel } from 'src/app/library/models';
-import { BlackListActivator } from 'src/app/library/service-activators';
-import { QUOTE_CONTEXT_DATA } from '../../constants';
-import { ActivatorServices } from '../quote-activator.model';
+import { QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
+import { ActivatorServices } from 'src/app/core/service-activators';
+import { QuoteModel } from '../../models';
+import { BlackListActivator } from '../black-list.activator';
 
 describe('BlackListActivator', () => {
   let services: ActivatorServices;
   let quote: QuoteModel;
 
   beforeEach(() => {
-    quote = { blackList: {} } as QuoteModel;
+    quote = { blackList: {}, personalData: {}, vehicle: {} } as QuoteModel;
     services = {
       contextDataService: {
         get: jasmine.createSpy('get').and.returnValue(quote),

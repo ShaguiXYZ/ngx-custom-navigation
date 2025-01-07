@@ -11,7 +11,7 @@ import { QuoteTrackDirective, TrackInfo } from 'src/app/core/tracking';
 import { QuoteLiteralDirective } from '../../directives';
 import { QuoteLiteralPipe } from '../../pipes';
 import { QuoteZoneComponent } from '../quote-zone';
-import { QuoteFooterInfoComponent } from '../quote-footer-info';
+import { QuoteFooterInfoComponent } from './components';
 
 @Component({
   selector: 'quote-footer',
