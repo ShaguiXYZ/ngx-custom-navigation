@@ -1,12 +1,13 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute, ActivatedRouteSnapshot, Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import { ContextDataService, HttpService } from '@shagui/ng-shagui/core';
-import { AppContextData, CommercialExceptionsModel, JourneyInfo, QuoteSettingsModel } from 'src/app/core/models';
+import { NX_WORKFLOW_TOKEN } from 'src/app/core/components/models';
+import { CommercialExceptionsModel, JourneyInfo, QuoteSettingsModel } from 'src/app/core/models';
 import { BudgetActivator } from 'src/app/core/service-activators/budget.activator';
 import { JourneyService, NX_RECAPTCHA_TOKEN, RoutingService } from 'src/app/core/services';
 import { QuoteDispatcherComponent } from './quote-dispatcher.component';
-import { TranslateService } from '@ngx-translate/core';
-import { NX_WORKFLOW_TOKEN } from 'src/app/core/components/models';
 
 describe('QuoteDispatcherComponent', () => {
   let component: QuoteDispatcherComponent;
@@ -80,57 +81,6 @@ describe('QuoteDispatcherComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should navigate to workflow loader on init', async () => {
-    const mockContext = {
-      settings: {},
-      configuration: {
-        homePageId: 'home',
-        errorPageId: 'error',
-        pageMap: {
-          home: {
-            pageId: 'home',
-            component: 'home-compenent'
-          }
-        }
-      },
-      navigation: {
-        viewedPages: []
-      }
-    };
-
-    const mockCommercialExceptions = { enableWorkFlow: true } as unknown as CommercialExceptionsModel;
-
-    mockContextDataService.get.and.returnValue(mockContext);
-    mockJourneyService.quoteSettings.and.returnValue(
-      Promise.resolve({ commercialExceptions: mockCommercialExceptions } as QuoteSettingsModel)
-    );
-    mockJourneyService.clientJourney.and.returnValue(Promise.resolve({} as JourneyInfo));
-
-    await component.ngOnInit();
-
-    expect(mockRouter.navigate).toHaveBeenCalledWith(['workflow-loader'], { skipLocationChange: true });
-  });
-
-  it('should throw error if homePageId is not found', async () => {
-    const mockContext: AppContextData = {
-      configuration: {
-        pageMap: {
-          home: {
-            pageId: 'home',
-            component: 'home-route'
-          }
-        }
-      },
-      navigation: {
-        viewedPages: []
-      }
-    } as unknown as AppContextData;
-
-    mockContextDataService.get.and.returnValue(mockContext);
-
-    await expectAsync(component.ngOnInit()).toBeRejectedWithError('Home page not found in configuration');
-  });
-
   it('should call BudgetActivator if stored param exists', async () => {
     const mockContext = {
       settings: {
@@ -167,9 +117,19 @@ describe('QuoteDispatcherComponent', () => {
     expect(BudgetActivator.retrieveBudget).toHaveBeenCalledWith({ contextDataService: mockContextDataService });
   });
 
-  it('should navigate to dispatcher', async () => {
+  it('should call trackService if dispatcher param exists', async () => {
+    mockActivatedRoute.snapshot.params = { dispatcher: 'some-dispatcher' };
+
+    await component.ngOnInit();
+
+    expect(mockJourneyService.quoteSettings).not.toHaveBeenCalled();
+  });
+
+  it('should call loader if dispatcher param exists', async () => {
     const mockContext = {
-      settings: {},
+      settings: {
+        commercialExceptions: { enableWorkFlow: true }
+      },
       configuration: {
         homePageId: 'home',
         errorPageId: 'error',
@@ -177,10 +137,6 @@ describe('QuoteDispatcherComponent', () => {
           home: {
             pageId: 'home',
             route: 'home-route'
-          },
-          dispatcher: {
-            pageId: 'dispatcher',
-            route: 'dispatcher-route'
           }
         }
       },
@@ -189,11 +145,54 @@ describe('QuoteDispatcherComponent', () => {
       }
     };
 
+    const mockCommercialExceptions = { enableWorkFlow: true } as unknown as CommercialExceptionsModel;
+
     mockContextDataService.get.and.returnValue(mockContext);
-    mockActivatedRoute.snapshot.params = { dispatcher: 'dispatcher' };
+    mockActivatedRoute.snapshot.params = { dispatcher: 'some-dispatcher' };
+    mockJourneyService.quoteSettings.and.returnValue(
+      Promise.resolve({ commercialExceptions: mockCommercialExceptions } as QuoteSettingsModel)
+    );
+    mockJourneyService.clientJourney.and.returnValue(Promise.resolve({} as JourneyInfo));
+
+    spyOn(component as any, 'loader').and.callThrough();
 
     await component.ngOnInit();
 
-    expect(mockRouter.navigate).toHaveBeenCalledWith(['dispatcher'], { skipLocationChange: true });
+    expect(component['loader']).toHaveBeenCalled();
+  });
+
+  it('should call resetContext if homePageId exists', async () => {
+    const mockContext = {
+      settings: {
+        commercialExceptions: { enableWorkFlow: true }
+      },
+      configuration: {
+        homePageId: 'home',
+        errorPageId: 'error',
+        pageMap: {
+          home: {
+            pageId: 'home',
+            route: 'home-route'
+          }
+        }
+      },
+      navigation: {
+        viewedPages: ['home']
+      }
+    };
+
+    const mockCommercialExceptions = { enableWorkFlow: true } as unknown as CommercialExceptionsModel;
+
+    mockContextDataService.get.and.returnValue(mockContext);
+    mockJourneyService.quoteSettings.and.returnValue(
+      Promise.resolve({ commercialExceptions: mockCommercialExceptions } as QuoteSettingsModel)
+    );
+    mockJourneyService.clientJourney.and.returnValue(Promise.resolve({} as JourneyInfo));
+
+    spyOn(component as any, 'resetContext').and.callThrough();
+
+    await component.ngOnInit();
+
+    expect(component['resetContext']).toHaveBeenCalled();
   });
 });

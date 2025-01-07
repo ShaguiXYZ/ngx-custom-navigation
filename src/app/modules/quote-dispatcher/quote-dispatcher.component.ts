@@ -13,8 +13,6 @@ import { AppUrls } from 'src/app/shared/config';
 /**
  * This component is used to load the routing module dynamically.
  *
- * @see app.routes.ts
- * @see sdc-route.service.ts
  */
 @Component({
   template: ``,
@@ -29,28 +27,27 @@ export class QuoteDispatcherComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     const {
-      configuration: { homePageId, pageMap },
-      navigation: { nextPage }
-    } = this.contextDataService.get<AppContextData>(QUOTE_APP_CONTEXT_DATA);
-
-    const {
       params: { stored, dispatcher }
     } = this._route.snapshot;
-
-    if (dispatcher) {
-      const nextPage = pageMap[dispatcher];
-
-      this.trackService.trackView(dispatcher);
-      this._router.navigate([nextPage.pageId], { skipLocationChange: true });
-
-      return;
-    }
 
     if (stored) {
       await (BudgetActivator.retrieveBudget({ contextDataService: this.contextDataService }) as ActivatorFn)({
         budget: stored as string
       });
     }
+
+    if (dispatcher) {
+      this.trackService.trackView(dispatcher);
+    }
+
+    this.loader();
+  }
+
+  private loader = async (): Promise<void> => {
+    const {
+      configuration: { homePageId },
+      navigation: { nextPage }
+    } = this.contextDataService.get<AppContextData>(QUOTE_APP_CONTEXT_DATA);
 
     if (homePageId) {
       if (!nextPage?.pageId) this.resetContext();
@@ -61,7 +58,7 @@ export class QuoteDispatcherComponent implements OnInit {
     } else {
       throw new JourneyError('Home page not found in configuration');
     }
-  }
+  };
 
   private resetContext = (): void => {
     const context = this.contextDataService.get<AppContextData>(QUOTE_APP_CONTEXT_DATA);
