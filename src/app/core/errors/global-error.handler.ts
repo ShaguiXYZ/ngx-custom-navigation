@@ -3,9 +3,18 @@ import { ConditionError } from './condition.error';
 import { TrackError } from './track.error';
 import { HttpError } from './http.error';
 import { QuoteError } from './quote.error';
+import { BudgetError } from './budget.error';
 
 export class GlobalErrorHandler implements ErrorHandler {
   handleError(error: Error): void {
+    if (error instanceof BudgetError) {
+      console.group('BudgetError');
+      console.error(`Error retrieving budget: ${error.message}`);
+      console.groupEnd();
+
+      return;
+    }
+
     if (error instanceof ConditionError) {
       console.group('ConditionError');
       console.error(`Error evaluating condition: ${error}`);

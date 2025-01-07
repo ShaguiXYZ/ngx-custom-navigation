@@ -129,4 +129,12 @@
       justify-content: center;
     }
   }
+
+  .price-footer {
+    .footer-option {
+      a {
+        color: var(--button-primary-text-color);
+      }
+    }
+  }
 }

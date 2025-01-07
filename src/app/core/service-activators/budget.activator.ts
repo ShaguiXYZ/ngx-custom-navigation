@@ -16,7 +16,7 @@ export class BudgetActivator {
         quote
       };
       const storedDataKey: StoredDataKey = {
-        passKey: UniqueIds.random(16),
+        passKey: UniqueIds.random(256),
         key: `QUOTE_${moment().format('YYYYMMDD')}_${UniqueIds.random(6).toUpperCase()}`
       };
       const cipher = BudgetUtils.encrypt(storedDataKey.passKey, budget);

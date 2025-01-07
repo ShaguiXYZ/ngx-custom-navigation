@@ -26,19 +26,13 @@
       }
 
       .back {
-        min-height: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
 
-        a {
-          color: #006192;
-          font-weight: 700;
-          font-size: 14px;
+        em {
+          margin-right: 8px;
         }
-      }
-
-      .contact-us {
-        color: #007ab3;
-        font-weight: 700;
-        font-size: 16px;
       }
     }
   }

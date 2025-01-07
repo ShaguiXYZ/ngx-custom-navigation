@@ -2,8 +2,8 @@ import { CommonModule } from '@angular/common';
 import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { NavigationEnd, Router } from '@angular/router';
+import { NxCopytextModule } from '@aposin/ng-aquila/copytext';
 import { NxIconModule } from '@aposin/ng-aquila/icon';
-import { NxLinkModule } from '@aposin/ng-aquila/link';
 import { $, ContextDataService } from '@shagui/ng-shagui/core';
 import { filter, Subscription } from 'rxjs';
 import { QUOTE_APP_CONTEXT_DATA } from 'src/app/core/constants';
@@ -21,7 +21,7 @@ import { SwitchThemeComponent } from '../switch-theme';
   imports: [
     SwitchThemeComponent,
     CommonModule,
-    NxLinkModule,
+    NxCopytextModule,
     NxIconModule,
     QuoteLinkDirective,
     QuoteLiteralDirective,

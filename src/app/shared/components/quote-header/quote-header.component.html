@@ -12,30 +12,34 @@
 
         <div class="back">
           @if (config.showBack) {
-          <nx-link
-            nxStyle="block icon-left"
+          <a
+            (click)="return()"
+            (keydown.enter)="return()"
+            tabindex="0"
             [nxTrack]="{
               label: 'header-back' | quoteLiteral
             }"
             [nxTrackEvents]="['click']"
           >
-            <a (click)="return()" (keydown.enter)="return()" tabindex="0">
-              <nx-icon name="arrow-left" aria-hidden="true"></nx-icon> <span nxQuoteLiteral="header-back"></span
-            ></a>
-          </nx-link>
+            <em class="fa-solid fa-xl fa-arrow-left"></em> <span nxCopytext="normal" nxQuoteLiteral="header-back"></span
+          ></a>
           }
         </div>
       </div>
 
       @if(config.showContactUs) {
-      <nx-link
+      <a
+        class="contact-us"
+        tabindex="0"
+        nxCopytext="normal"
+        nxQuoteLink="contact-us"
+        nxQuoteLiteral="we-call-you"
         [nxTrack]="{
           label: 'we-call-you' | quoteLiteral
         }"
         [nxTrackEvents]="['click']"
       >
-        <a class="contact-us" tabindex="0" nxQuoteLink="contact-us" nxQuoteLiteral="we-call-you"> </a>
-      </nx-link>
+      </a>
       }
     </div>
   </div>

@@ -8,9 +8,9 @@ export class BlackListActivator {
   public static checkIdentificationNumberBlackList =
     (services: ActivatorServices): (() => Promise<BlackListResponse>) =>
     async (params?: { percentBlacklisted?: number; percentIsClient?: number }): Promise<BlackListResponse> => {
-      const blackList = await BlackListActivator.isBlackListed('IDENTIFICATION_NUMBER', params);
-
       const quote = services.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA);
+      const blackList = await BlackListActivator.isBlackListed('IDENTIFICATION_NUMBER', quote.personalData.identificationNumber, params);
+
       quote.blackList = { ...quote.blackList, identificationNumber: blackList.value };
 
       return blackList.value;
@@ -19,9 +19,9 @@ export class BlackListActivator {
   public static checkPlateBlackList =
     (services: ActivatorServices): (() => Promise<BlackListResponse>) =>
     async (params?: { percentBlacklisted?: number; percentIsClient?: number }): Promise<BlackListResponse> => {
-      const blackList = await BlackListActivator.isBlackListed('PLATE_NUMBER', params);
-
       const quote = services.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA);
+      const blackList = await BlackListActivator.isBlackListed('PLATE_NUMBER', quote.vehicle.plateNumber, params);
+
       quote.blackList = { ...quote.blackList, plateNumber: blackList.value };
 
       return blackList.value;
@@ -30,9 +30,9 @@ export class BlackListActivator {
   public static checkPhoneBlackList =
     (services: ActivatorServices): (() => Promise<BlackListResponse>) =>
     async (params?: { percentBlacklisted?: number; percentIsClient?: number }): Promise<BlackListResponse> => {
-      const blackList = await BlackListActivator.isBlackListed('PHONE_NUMBER', params);
-
       const quote = services.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA);
+      const blackList = await BlackListActivator.isBlackListed('PHONE_NUMBER', quote.personalData.phoneNumber, params);
+
       quote.blackList = { ...quote.blackList, phoneNumber: blackList.value };
 
       return blackList.value;
@@ -41,9 +41,9 @@ export class BlackListActivator {
   public static checkEmailBlackList =
     (services: ActivatorServices): (() => Promise<BlackListResponse>) =>
     async (params?: { percentBlacklisted?: number; percentIsClient?: number }): Promise<BlackListResponse> => {
-      const blackList = await BlackListActivator.isBlackListed('EMAIL', params);
-
       const quote = services.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA);
+      const blackList = await BlackListActivator.isBlackListed('EMAIL', quote.personalData.email, params);
+
       quote.blackList = { ...quote.blackList, email: blackList.value };
 
       return blackList.value;
@@ -51,13 +51,16 @@ export class BlackListActivator {
 
   private static isBlackListed(
     type: BlackListType,
+    value?: string,
     params?: { percentBlacklisted?: number; percentIsClient?: number }
   ): Promise<BlackListModel> {
     const _params = { percentBlacklisted: 0.8, percentIsClient: 0.8, ...params };
-    const response: BlackListResponse = {
-      blacklisted: BlackListActivator.ramdomBoolean(_params.percentBlacklisted),
-      isClient: BlackListActivator.ramdomBoolean(_params.percentIsClient)
-    };
+    const response: BlackListResponse = !value
+      ? { blacklisted: false, isClient: false }
+      : {
+          blacklisted: BlackListActivator.ramdomBoolean(_params.percentBlacklisted),
+          isClient: BlackListActivator.ramdomBoolean(_params.percentIsClient)
+        };
 
     console.log(`blackList ${type}`, { response, _params });
 
