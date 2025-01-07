@@ -80,22 +80,33 @@
       align-items: center;
       display: flex;
       flex-direction: column;
-      height: 82px;
+      height: 75px;
       justify-content: center;
 
       .fee-values {
         display: flex;
         flex: 1;
 
-        ::ng-deep {
-          .nx-radio__label {
-            align-items: center;
-            display: flex;
+        .offering-fee {
+          align-items: flex-start;
+          display: flex;
+          flex-direction: row;
+          padding-top: 5px;
 
-            .nx-radio__circle {
-              width: 16px;
-              min-width: 16px;
-              max-height: 16px;
+          nx-radio + nx-radio {
+            margin-left: 12px;
+          }
+
+          ::ng-deep {
+            .nx-radio__label {
+              align-items: center;
+              display: flex;
+
+              .nx-radio__circle {
+                width: 16px;
+                min-width: 16px;
+                max-height: 16px;
+              }
             }
           }
         }

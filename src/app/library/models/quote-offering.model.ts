@@ -22,7 +22,7 @@ export interface PriceGridDTO {
   paymentTypeDescription: string;
   contractable: string;
   totalPremiumAmount: string;
-  fee: string;
+  fee: string | string[];
   newPremium: unknown;
   receiptData: ReceiptDataDTO;
   coverageList: CoverageDTO[];
@@ -119,7 +119,11 @@ export namespace OfferingDTO {
         contractable: priceGrid.contractable,
         totalPremiumAmount: roundToNDecimals(priceGrid.totalPremiumAmount, 2),
         popular: priceGrid.premium ? priceGrid.premium === '1' : false,
-        fee: priceGrid.fee ? [roundToNDecimals(priceGrid.fee, 2)] : [],
+        fee: priceGrid.fee
+          ? typeof priceGrid.fee === 'string'
+            ? [roundToNDecimals(priceGrid.fee, 2)]
+            : priceGrid.fee.splice(0, 2).map(value => roundToNDecimals(value, 2))
+          : [],
         receiptData: {
           firstReceiptAmount: roundToNDecimals(priceGrid.receiptData.firstReceiptAmount, 2),
           followingReceiptAmount: roundToNDecimals(priceGrid.receiptData.followingReceiptAmount, 2)

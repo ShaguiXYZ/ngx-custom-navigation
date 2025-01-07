@@ -901,7 +901,7 @@
       ],
       "configuration": {
         "literals": {
-          "header": "Déjanos tu email y recibe tu presupuesto al instante",
+          "header": "Déjanos tu email y nos pondremos en contacto contigo en breve.",
           "legal-text": { "value": "Texto legal pendiente definir...", "type": "value" },
           "more-info": "Quiero recibir información sobre productos y ofertas de Shagui",
           "privacy-policy": "política de privacidad"

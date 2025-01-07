@@ -14,16 +14,16 @@
   <section class="form-container">
     <div class="offering-fee">
       @if(fee.length) {
-      <div nxCopytext="large" class="fee-title nx-margin-bottom-2xs" nxQuoteLiteral="fee-header"></div>
+      <div nxCopytext="large" class="fee-title nx-margin-bottom-2xs nx-font-weight-bold" nxQuoteLiteral="fee-header"></div>
       <div class="fee-values">
         <form [formGroup]="form">
-          @for(f of fee; track f) {
-          <nx-radio-group formControlName="feeSelectedIndex">
+          <nx-radio-group class="offering-fee" formControlName="feeSelectedIndex">
+            @for(f of fee; track f) {
             <nx-radio labelSize="small" [value]="$index">
               <span nxCopytext="normal" class="nx-font-weight-bold">{{ f | quoteNumber }} {{ 'currency' | quoteLiteral }}</span>
             </nx-radio>
+            }
           </nx-radio-group>
-          }
         </form>
       </div>
       }

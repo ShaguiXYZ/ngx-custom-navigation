@@ -269,7 +269,7 @@
         "paymentTypeDescription": "Anual",
         "contractable": "S",
         "totalPremiumAmount": "923",
-        "fee": "200.00",
+        "fee": ["200.00", "300.00", "500"],
         "newPremium": null,
         "receiptData": {
           "firstReceiptAmount": "923.27",
