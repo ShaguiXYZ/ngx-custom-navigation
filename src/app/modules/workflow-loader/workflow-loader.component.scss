@@ -1,6 +1,6 @@
 :host {
   display: block;
-  height: 100%;
+  flex: 1;
   transition: display 0.7s allow-discrete, opacity 0.7s, scale 0.2s;
   width: 100%;
 

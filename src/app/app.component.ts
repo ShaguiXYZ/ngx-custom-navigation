@@ -1,12 +1,11 @@
 import { Component, HostListener, inject, OnDestroy, OnInit } from '@angular/core';
-import { NavigationEnd, Router, RouterModule, RouterOutlet } from '@angular/router';
+import { NavigationEnd, Router, RouterModule } from '@angular/router';
 import { NxGridModule } from '@aposin/ng-aquila/grid';
 import { $, ContextDataService, NotificationService } from '@shagui/ng-shagui/core';
 import { filter, Subscription } from 'rxjs';
 import { QUOTE_APP_CONTEXT_DATA } from './core/constants';
 import { AppContextData } from './core/models';
 import { LiteralsService } from './core/services';
-import { routeTransitions } from './shared/animations';
 import {
   CaptchaComponent,
   NotificationComponent,
@@ -22,7 +21,6 @@ import { QuoteLiteralPipe } from './shared/pipes';
   selector: 'quote-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
-  animations: [routeTransitions('slide')],
   standalone: true,
   providers: [QuoteLiteralPipe],
   imports: [
@@ -82,31 +80,12 @@ export class AppComponent implements OnInit, OnDestroy {
     event.stopPropagation();
   }
 
-  public prepareRoute = (outlet?: RouterOutlet): number => (outlet?.isActivated ? this.slideTo() : 1);
-
   public onCaptchaVerified(verified: boolean): void {
     const appContextData = this.contextDataService.get<AppContextData>(QUOTE_APP_CONTEXT_DATA);
     appContextData.settings.commercialExceptions = { ...appContextData.settings.commercialExceptions, captchaVerified: verified };
     this.contextDataService.set(QUOTE_APP_CONTEXT_DATA, appContextData);
 
     this.verified = verified;
-  }
-
-  private slideTo(): number {
-    const {
-      configuration: { steppers },
-      navigation: { viewedPages, lastPage }
-    } = this.contextDataService.get<AppContextData>(QUOTE_APP_CONTEXT_DATA);
-
-    if (lastPage?.stepper) {
-      const stepper = steppers?.[lastPage.stepper.key];
-      const stepperPages = stepper?.steps?.flatMap(step => step.pages) ?? [];
-      const stepperPagesViewed = viewedPages.filter(page => stepperPages.includes(page));
-
-      return stepperPagesViewed.length;
-    }
-
-    return viewedPages.length;
   }
 
   private resetHeaderAnimation(): void {

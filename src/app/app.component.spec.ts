@@ -1,13 +1,13 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideAnimations } from '@angular/platform-browser/animations';
-import { provideRouter, RouterOutlet } from '@angular/router';
+import { provideRouter } from '@angular/router';
 import { NxGridModule } from '@aposin/ng-aquila/grid';
 import { NxLinkModule } from '@aposin/ng-aquila/link';
 import { TranslateService } from '@ngx-translate/core';
 import { ContextDataService, NotificationModel, NotificationService } from '@shagui/ng-shagui/core';
 import { of } from 'rxjs';
 import { AppComponent } from './app.component';
+import { NX_RECAPTCHA_TOKEN } from './core/services';
 import { ContextDataServiceStub } from './core/stub';
 import {
   NotificationComponent,
@@ -17,7 +17,6 @@ import {
   QuoteStepperComponent
 } from './shared/components';
 import { QuoteLiteralPipe } from './shared/pipes';
-import { NX_RECAPTCHA_TOKEN, RecaptchaConfig } from './core/services';
 
 describe('AppComponent', () => {
   let component: AppComponent;
@@ -93,27 +92,6 @@ describe('AppComponent', () => {
     component.beforeunloadHandler(event);
 
     expect(event.preventDefault).toHaveBeenCalled();
-  });
-
-  it('should return the length of viewedPages in slideTo method', () => {
-    const result = component['slideTo']();
-
-    expect(result).toBe(2);
-  });
-
-  it('should prepare route correctly', () => {
-    const mockOutlet = { isActivated: true } as RouterOutlet;
-    spyOn<any>(component, 'slideTo').and.returnValue(5);
-    const result = component.prepareRoute(mockOutlet);
-
-    expect(result).toBe(5);
-  });
-
-  it('should return undefined if outlet is not activated in prepareRoute', () => {
-    const mockOutlet = { isActivated: false } as RouterOutlet;
-    const result = component.prepareRoute(mockOutlet);
-
-    expect(result).toBe(1);
   });
 
   it('should set verified to true on onCaptchaVerified', () => {

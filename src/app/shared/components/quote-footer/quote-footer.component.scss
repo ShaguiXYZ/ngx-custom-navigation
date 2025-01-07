@@ -4,9 +4,9 @@
   flex-direction: column;
 
   .footer-options {
+    align-items: flex-end;
     display: flex;
     justify-content: space-between;
-    align-items: flex-end;
 
     ::ng-deep .nx-button--primary {
       color: var(--footer-option-color);
@@ -31,13 +31,20 @@
 
   .footer-extras {
     display: flex;
-    flex-direction: column;
     flex: 1;
+    flex-direction: column;
 
     &.mobile-options {
       .footer-option {
         flex: 1;
       }
+    }
+
+    .footer-info {
+      display: flex;
+      flex: 1;
+      flex-direction: column;
+      justify-content: flex-end;
     }
   }
 }

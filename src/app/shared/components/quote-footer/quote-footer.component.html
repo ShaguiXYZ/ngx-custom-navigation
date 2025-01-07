@@ -34,7 +34,9 @@
     <ng-content></ng-content>
 
     @if(config.info) {
-    <quote-footer-info [icon]="config.info.icon"> <span [nxQuoteLiteral]="config.info.literal"></span> </quote-footer-info>
+    <div class="footer-info">
+      <quote-footer-info [icon]="config.info.icon"> <span [nxQuoteLiteral]="config.info.literal"></span> </quote-footer-info>
+    </div>
     }
 
     <ng-content select="[after]"></ng-content>
