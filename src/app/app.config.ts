@@ -25,7 +25,6 @@ import { httpErrorInterceptor, mockInterceptor, recaptchaInterceptor } from './s
 
 @Injectable()
 class DatePikerIntl extends NxDatepickerIntl {
-  private readonly WORKFLOW_TOKEN = inject(VEHICLE_WORKFLOW_TOKEN);
   private readonly literalsService = inject(LiteralsService);
 
   override switchToMonthViewLabel = this.literalsService.toString({

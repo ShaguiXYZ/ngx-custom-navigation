@@ -11,29 +11,29 @@ describe('VersionInfo', () => {
 
   describe('isBreakingChange', () => {
     it('should return false if after is empty', () => {
-      expect(VersionInfo.isBreakingChange([], [])).toBe(false);
+      expect(VersionInfo.breakingChange([], [])).toBe('none');
     });
 
     it('should return true if there is a breaking change in after', () => {
-      const after: VersionInfo[] = [{ value: 'v1.0.0', breakingchange: true }];
-      expect(VersionInfo.isBreakingChange([], after)).toBe(true);
+      const after: VersionInfo[] = [{ value: 'v1.0.0', breakingchange: 'all' }];
+      expect(VersionInfo.breakingChange([], after)).toBe('all');
     });
 
     it('should return false if there is no breaking change in after', () => {
       const after: VersionInfo[] = [{ value: 'v1.0.0' }];
-      expect(VersionInfo.isBreakingChange([], after)).toBe(false);
+      expect(VersionInfo.breakingChange([], after)).toBe('none');
     });
 
     it('should return true if there is a breaking change after the last before version', () => {
       const before: VersionInfo[] = [{ value: 'v1.0.0' }];
-      const after: VersionInfo[] = [{ value: 'v1.0.1' }, { value: 'v1.1.0', breakingchange: true }];
-      expect(VersionInfo.isBreakingChange(before, after)).toBe(true);
+      const after: VersionInfo[] = [{ value: 'v1.0.1' }, { value: 'v1.1.0', breakingchange: 'all' }];
+      expect(VersionInfo.breakingChange(before, after)).toBe('all');
     });
 
     it('should return false if there is no breaking change after the last before version', () => {
       const before: VersionInfo[] = [{ value: 'v1.0.0' }];
       const after: VersionInfo[] = [{ value: 'v1.0.1' }, { value: 'v1.1.0' }];
-      expect(VersionInfo.isBreakingChange(before, after)).toBe(false);
+      expect(VersionInfo.breakingChange(before, after)).toBe('none');
     });
   });
 

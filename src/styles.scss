@@ -25,6 +25,7 @@ body {
 
   a {
     color: var(--interactive-text);
+    cursor: pointer;
 
     &:hover {
       color: var(--hover-primary);
@@ -51,15 +52,6 @@ main {
       button {
         text-transform: capitalize;
       }
-
-      // .link {
-      //   color: var(--link-color);
-      //   cursor: pointer;
-
-      //   &:hover {
-      //     color: var(--hover-link);
-      //   }
-      // }
 
       // .selectable-row {
       //   // @howto: render the card-container when element is viewed

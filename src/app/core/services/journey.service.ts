@@ -1,12 +1,11 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { HttpParams } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { ContextDataService, DataInfo, HttpService, UniqueIds } from '@shagui/ng-shagui/core';
+import { DataInfo, HttpService, UniqueIds } from '@shagui/ng-shagui/core';
 import { firstValueFrom, map } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { NX_WORKFLOW_TOKEN } from '../components/models';
-import { QUOTE_APP_CONTEXT_DATA } from '../constants';
 import {
-  AppContextData,
   Configuration,
   ConfigurationDTO,
   dataHash,
@@ -29,7 +28,6 @@ export const QUOTE_JOURNEY_DISALED = 'not-journey';
 @Injectable({ providedIn: 'root' })
 export class JourneyService {
   private readonly workFlowToken = inject(NX_WORKFLOW_TOKEN);
-  private readonly contextDataService = inject(ContextDataService);
   private readonly httpService = inject(HttpService);
   private readonly literalService = inject(LiteralsService);
 
@@ -59,19 +57,9 @@ export class JourneyService {
     const configurationDTO = await firstValueFrom(
       this.httpService.get<ConfigurationDTO>(`${environment.baseUrl}/journey/${name}`).pipe(map(res => res as ConfigurationDTO))
     );
-    const { ...significantData } = configurationDTO;
-    const hash = dataHash(significantData);
-    return { ...this.init(name, configurationDTO, VersionInfo.last(versions)), hash, name };
+
+    return this.init(name, configurationDTO, VersionInfo.last(versions));
   };
-
-  public hasBreakingChange(versions: VersionInfo[]): boolean {
-    const contextData = this.contextDataService.get<AppContextData>(QUOTE_APP_CONTEXT_DATA);
-    const contextConfiguration = contextData?.configuration;
-
-    return contextConfiguration?.version.actual
-      ? VersionInfo.isBreakingChange([{ value: contextConfiguration.version.actual }], versions)
-      : true;
-  }
 
   private init = (name: string, configuration: ConfigurationDTO, version: VersionInfo): Configuration => {
     const quoteConfiguration: Configuration = this.initQuote(name, configuration, version);
@@ -90,6 +78,7 @@ export class JourneyService {
 
   private initQuote = (name: string, dto: ConfigurationDTO, version: VersionInfo): Configuration => {
     const errorPageId = dto.errorPageId ?? UniqueIds.random();
+    const hash = this.configuration_Hash(name, dto);
 
     const configuration: Configuration = {
       name,
@@ -102,12 +91,19 @@ export class JourneyService {
         acc[page.pageId] = page;
         return acc;
       }, {}),
-      links: {}
+      links: {},
+      hash
     };
 
     this.setErrorPage(configuration, errorPageId);
 
     return configuration;
+  };
+
+  private configuration_Hash = (name: string, dto: ConfigurationDTO): string => {
+    const { errorPageId, ...significantData } = dto;
+
+    return dataHash({ ...significantData, name });
   };
 
   private setErrorPage = (configuration: Configuration, errorPageId: string): void => {

@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-empty-function */
 import { provideHttpClient } from '@angular/common/http';
 import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
@@ -6,21 +5,24 @@ import { ContextDataService, HttpService } from '@shagui/ng-shagui/core';
 import { of } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { NX_WORKFLOW_TOKEN } from '../../components/models';
-import { Configuration, ConfigurationDTO, dataHash, JourneyInfo, QuoteSettingsModel, Version } from '../../models';
+import { Configuration, ConfigurationDTO, JourneyInfo, QuoteSettingsModel, Version } from '../../models';
 import { JourneyService } from '../journey.service';
 import { LiteralsService } from '../literals.service';
 
 describe('JourneyService', () => {
   let service: JourneyService;
   let httpMock: HttpTestingController;
-  let contextDataService: jasmine.SpyObj<ContextDataService>;
   let httpService: jasmine.SpyObj<HttpService>;
   let literalService: jasmine.SpyObj<LiteralsService>;
   const mockConfig = {
     errorPageId: 'error',
     manifest: {},
-    initializedModel: () => {},
-    signModel: () => {}
+    initializedModel: () => {
+      // empty
+    },
+    signModel: () => {
+      // empty
+    }
   };
 
   beforeEach(() => {
@@ -43,7 +45,6 @@ describe('JourneyService', () => {
 
     service = TestBed.inject(JourneyService);
     httpMock = TestBed.inject(HttpTestingController);
-    contextDataService = TestBed.inject(ContextDataService) as jasmine.SpyObj<ContextDataService>;
     httpService = TestBed.inject(HttpService) as jasmine.SpyObj<HttpService>;
     literalService = TestBed.inject(LiteralsService) as jasmine.SpyObj<LiteralsService>;
   });
@@ -88,7 +89,7 @@ describe('JourneyService', () => {
       literals: {}
     } as unknown as ConfigurationDTO;
 
-    const { ...significantData } = mockConfigurationDTO;
+    const hash = service['configuration_Hash'](journeyName, mockConfigurationDTO);
 
     const mockConfiguration = {
       name: journeyName,
@@ -107,11 +108,10 @@ describe('JourneyService', () => {
       links: { error: 'error' },
       steppers: {},
       literals: {},
-      hash: dataHash(significantData)
+      hash
     } as unknown as Configuration;
 
     httpService.get.and.returnValue(of(mockConfigurationDTO));
-    contextDataService.get.and.returnValue({ configuration: { version: {}, hash: 'oldHash' } });
 
     const result = await service.fetchConfiguration(journeyName, [{ value: dtoVersion }]);
 

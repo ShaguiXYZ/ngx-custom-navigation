@@ -1,13 +1,15 @@
 /* eslint-disable @typescript-eslint/no-namespace */
-/* eslint-disable @typescript-eslint/consistent-type-definitions */
 export type Version = `v${number}.${number}` | `v${number}.${number}.${number}`;
-export type VersionInfo = {
+export type Breakingchange = 'all' | 'workflow' | 'none';
+export interface VersionInfo {
   value: Version;
   date?: number; // timestamp
-  breakingchange?: boolean;
-};
+  breakingchange?: Breakingchange;
+}
 
 export namespace VersionInfo {
+  const majorVersionBreakingchange = (versions: VersionInfo[] = []): VersionInfo | undefined =>
+    versions.find(info => info.breakingchange === 'all') ?? versions.find(info => info.breakingchange === 'workflow');
   export const compare = (a: VersionInfo, b: VersionInfo): number => {
     if (!b?.value) {
       return 1;
@@ -39,26 +41,23 @@ export namespace VersionInfo {
       return compare(a, b);
     });
   };
-  export const isBreakingChange = (before: VersionInfo[] = [], after: VersionInfo[] = []): boolean => {
+  export const breakingChange = (before: VersionInfo[] = [], after: VersionInfo[] = []): Breakingchange => {
     if (after.length === 0) {
-      return false;
+      return 'none';
     }
 
-    let afterSorted = sort(after);
+    const afterSorted = sort(after);
 
     if (before.length === 0) {
-      return afterSorted.some(after => after.breakingchange);
+      return majorVersionBreakingchange(afterSorted)?.breakingchange ?? 'none';
     }
 
     const lastBeforeVersion = last(before);
 
     // remove after versions that are before the last before version
-    afterSorted = afterSorted.filter(after => {
-      const parsed = sort([lastBeforeVersion, after]);
-      return parsed[0] === after;
-    });
+    const filteredAfterSorted = afterSorted.filter(info => compare(lastBeforeVersion, info) > 0);
 
-    return afterSorted.some(after => after.breakingchange);
+    return majorVersionBreakingchange(filteredAfterSorted)?.breakingchange ?? 'none';
   };
   export const last = (versions: VersionInfo[] = []): VersionInfo => {
     return versions.length ? sort(versions)[0] : { value: 'v0.0.0' };
