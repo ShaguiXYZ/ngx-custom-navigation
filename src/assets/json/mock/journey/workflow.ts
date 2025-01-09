@@ -123,7 +123,7 @@ export const WORKFLOW: ConfigurationDTO<QuoteModel, WorkflowManifestId> = {
         data: {
           contextData: { client: { isClient: false } },
           headerConfig: {
-            showBack: true,
+            showBack: false,
             showContactUs: false
           }
         }
@@ -530,6 +530,8 @@ export const WORKFLOW: ConfigurationDTO<QuoteModel, WorkflowManifestId> = {
       ],
       configuration: {
         literals: {
+          year: '{{value}} año',
+          years: '{{value}} años',
           header: '¿Cuánto tiempo llevas como titular de un seguro en esta u otras compañías?',
           'time-desc': '{{value}} {{literal-year}} {{or-more}}'
         }
@@ -552,6 +554,11 @@ export const WORKFLOW: ConfigurationDTO<QuoteModel, WorkflowManifestId> = {
           }
         },
         literals: {
+          not: '{{first}}',
+          accident: '{{value}} {{last}}',
+          accidents: '{{value}} {{last}}',
+          first: 'Nimguno',
+          last: { value: 'or-more', type: 'literal' },
           header: {
             value: '¿Has tenido algún accidente en {{last}}{{last-single}} {{value}} {{years}}{{year}}?',
             params: {
@@ -612,7 +619,6 @@ export const WORKFLOW: ConfigurationDTO<QuoteModel, WorkflowManifestId> = {
               }
             }
           },
-          'more-accidents': '{{value}} {{or-more}}',
           'footer-info': 'Nos gustaría acompañarte en tus próximos viajes.'
         }
       }
@@ -905,7 +911,7 @@ export const WORKFLOW: ConfigurationDTO<QuoteModel, WorkflowManifestId> = {
       ],
       configuration: {
         literals: {
-          header: 'Déjanos tu email y recibe tu presupuesto al instante',
+          header: 'Déjanos tu email y nos pondremos en contacto contigo en breve.',
           'legal-text': { value: 'Texto legal pendiente definir...', type: 'value' },
           'more-info': 'Quiero recibir información sobre productos y ofertas de Shagui',
           'privacy-policy': 'política de privacidad'

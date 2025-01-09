@@ -4,6 +4,7 @@ import { TestBed } from '@angular/core/testing';
 import { CAPTCHA_TOKEN_KEY, G_RECAPTCHA_RESPONSE } from '../../../core/constants';
 import { HttpError } from '../../../core/errors';
 import { recaptchaInterceptor } from '../recaptcha.interceptor';
+import { StorageLib } from 'src/app/core/lib';
 
 describe('RecaptchaInterceptor', () => {
   let httpMock: HttpTestingController;
@@ -25,7 +26,7 @@ describe('RecaptchaInterceptor', () => {
 
   it('should add reCAPTCHA token to headers if token exists', () => {
     const token = 'test-token';
-    sessionStorage.setItem(CAPTCHA_TOKEN_KEY, token);
+    StorageLib.set(CAPTCHA_TOKEN_KEY, token, 'session');
 
     httpClient.get('/test').subscribe();
 
@@ -35,7 +36,7 @@ describe('RecaptchaInterceptor', () => {
   });
 
   it('should not add reCAPTCHA token to headers if token does not exist', () => {
-    sessionStorage.removeItem(CAPTCHA_TOKEN_KEY);
+    StorageLib.remove(CAPTCHA_TOKEN_KEY, 'session');
 
     httpClient.get('/test').subscribe();
 
@@ -45,7 +46,7 @@ describe('RecaptchaInterceptor', () => {
 
   it('should remove reCAPTCHA token from session storage on 403 error', () => {
     const token = 'test-token';
-    sessionStorage.setItem(CAPTCHA_TOKEN_KEY, token);
+    StorageLib.set(CAPTCHA_TOKEN_KEY, token, 'session');
 
     httpClient.get('/test').subscribe({
       error: (error: HttpErrorResponse) => {
@@ -56,7 +57,7 @@ describe('RecaptchaInterceptor', () => {
     const req = httpMock.expectOne('/test');
     req.flush({}, { status: 403, statusText: 'Forbidden' });
 
-    expect(sessionStorage.getItem(CAPTCHA_TOKEN_KEY)).toBeNull();
+    expect(StorageLib.get(CAPTCHA_TOKEN_KEY, 'local')).toBeNull();
   });
 
   it('should throw HttpError on error response', () => {

@@ -2,9 +2,10 @@ import { HttpErrorResponse, HttpEvent, HttpHandlerFn, HttpInterceptorFn, HttpReq
 import { catchError, Observable, throwError } from 'rxjs';
 import { CAPTCHA_TOKEN_KEY, G_RECAPTCHA_RESPONSE } from '../../core/constants';
 import { HttpError } from '../../core/errors';
+import { StorageLib } from 'src/app/core/lib';
 
 export const recaptchaInterceptor: HttpInterceptorFn = (req: HttpRequest<unknown>, next: HttpHandlerFn): Observable<HttpEvent<unknown>> => {
-  const token = sessionStorage.getItem(CAPTCHA_TOKEN_KEY);
+  const token = StorageLib.get(CAPTCHA_TOKEN_KEY);
 
   if (token) {
     req = req.clone({
@@ -18,7 +19,7 @@ export const recaptchaInterceptor: HttpInterceptorFn = (req: HttpRequest<unknown
     catchError((error: HttpErrorResponse) => {
       if (error.status === HttpStatusCode.Forbidden) {
         console.log('Forbidden error');
-        sessionStorage.removeItem(CAPTCHA_TOKEN_KEY);
+        StorageLib.remove(CAPTCHA_TOKEN_KEY);
       }
 
       const httpError = error as HttpErrorResponse;

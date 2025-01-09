@@ -1,8 +1,9 @@
 import { Component, inject, Input, OnDestroy, OnInit } from '@angular/core';
 import { NxSwitcherModule } from '@aposin/ng-aquila/switcher';
 import { Subscription } from 'rxjs';
-import { SESSION_THEME_KEY, Theme } from './models';
+import { STORAGE_THEME_KEY, Theme } from './models';
 import { ThemingService } from './services';
+import { StorageLib } from 'src/app/core/lib';
 
 @Component({
   selector: 'nx-switch-theme',
@@ -34,6 +35,6 @@ export class SwitchThemeComponent implements OnInit, OnDestroy {
 
   public switchTheme(): void {
     this.theme = this.theme === 'dark' ? 'light' : 'dark';
-    localStorage.setItem(SESSION_THEME_KEY, JSON.stringify({ active: this.theme }));
+    StorageLib.set(STORAGE_THEME_KEY, JSON.stringify({ active: this.theme }), 'local');
   }
 }

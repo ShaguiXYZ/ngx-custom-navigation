@@ -2,7 +2,7 @@ import { IndexedData, UniqueIds } from '@shagui/ng-shagui/core';
 import moment from 'moment';
 import { QUOTE_APP_CONTEXT_DATA, QUOTE_CONTEXT_DATA } from '../constants';
 import { BudgetError } from '../errors';
-import { BudgetUtils } from '../lib';
+import { BudgetUtils, StorageLib } from '../lib';
 import { AppContextData, Budget, QuoteControlModel, StoredDataKey } from '../models';
 import { ActivatorServices, ServiceActivatorFn } from './quote-activator.model';
 
@@ -17,11 +17,11 @@ export class BudgetActivator {
       };
       const storedDataKey: StoredDataKey = {
         passKey: UniqueIds.random(256),
-        key: `QUOTE_${moment().format('YYYYMMDD')}_${UniqueIds.random(6).toUpperCase()}`
+        key: `${moment().format('YYYYMMDD')}_${UniqueIds.random(6).toUpperCase()}`
       };
       const cipher = BudgetUtils.encrypt(storedDataKey.passKey, budget);
 
-      localStorage.setItem(storedDataKey.key, cipher);
+      StorageLib.set(storedDataKey.key, cipher, 'local');
 
       quote.signature = { ...quote.signature, budget: btoa(JSON.stringify(storedDataKey)) };
 
@@ -57,8 +57,8 @@ export class BudgetActivator {
     };
 
   private static retrieveAll = (): IndexedData<string>[] => {
-    const quoteRegExp = /QUOTE_\d{8}_\w{6}/;
-    const entries = Object.entries<string>(localStorage).filter(([key]) => quoteRegExp.test(key));
+    const quoteRegExp = /\d{8}_\w{6}/;
+    const entries = Object.entries(StorageLib.clear(quoteRegExp, 'local'));
 
     return entries.map(([index, data]) => ({
       index,

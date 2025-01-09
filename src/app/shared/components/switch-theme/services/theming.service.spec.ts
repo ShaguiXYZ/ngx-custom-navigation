@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { TestBed } from '@angular/core/testing';
-import { SESSION_THEME_KEY, Theme } from '../models';
+import { STORAGE_THEME_KEY, Theme } from '../models';
 import { ThemingService } from './theming.service';
 
 describe('ThemingService', () => {
@@ -17,7 +17,7 @@ describe('ThemingService', () => {
   });
 
   afterEach(() => {
-    localStorage.removeItem(SESSION_THEME_KEY);
+    localStorage.removeItem(STORAGE_THEME_KEY);
   });
 
   it('should be created', () => {

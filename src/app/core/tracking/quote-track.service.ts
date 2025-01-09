@@ -9,6 +9,7 @@ import { AppContextData, QuoteControlModel } from '../models';
 import { CaptchaService, LiteralsService } from '../services';
 import { TrackEventType, TrackInfo, TrackInfoPageModel } from './quote-track.model';
 import { _window } from './window-tracker.model';
+import { StorageLib } from '../lib';
 
 @Injectable({ providedIn: 'root' })
 export class QuoteTrackService implements OnDestroy {
@@ -138,7 +139,7 @@ export class QuoteTrackService implements OnDestroy {
       .execute({ action: eventType })
       .then(async (token: string) => {
         _window.digitalData = { ..._window.digitalData, token };
-        sessionStorage.setItem(CAPTCHA_TOKEN_KEY, token);
+        StorageLib.set(CAPTCHA_TOKEN_KEY, token);
 
         await _window._satellite.track(eventType, trackInfo);
       })

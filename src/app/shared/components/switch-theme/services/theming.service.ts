@@ -1,6 +1,7 @@
 import { ApplicationRef, inject, Injectable, OnDestroy } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { SESSION_THEME_KEY, Theme } from '../models';
+import { StorageLib } from 'src/app/core/lib';
+import { STORAGE_THEME_KEY, Theme } from '../models';
 
 // @howto service to handle theme changes
 @Injectable()
@@ -12,7 +13,7 @@ export class ThemingService implements OnDestroy {
   private readonly ref = inject(ApplicationRef);
 
   constructor() {
-    const storedTheme = localStorage.getItem(SESSION_THEME_KEY);
+    const storedTheme = StorageLib.get(STORAGE_THEME_KEY, 'local');
     const systemPrefersDark = this.darkThemeMq.matches;
 
     this.theme = (storedTheme && JSON.parse(storedTheme)?.active) || (systemPrefersDark ? 'dark' : 'light');
@@ -36,7 +37,7 @@ export class ThemingService implements OnDestroy {
   }
 
   private darkThemeMqListener = (e: MediaQueryListEvent): void => {
-    const storedTheme = localStorage.getItem(SESSION_THEME_KEY);
+    const storedTheme = StorageLib.get(STORAGE_THEME_KEY, 'local');
 
     if (storedTheme) return;
 
