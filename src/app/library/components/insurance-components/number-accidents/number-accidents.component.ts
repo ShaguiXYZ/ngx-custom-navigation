@@ -1,6 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { NxCopytextModule } from '@aposin/ng-aquila/copytext';
-import { hasValue } from '@shagui/ng-shagui/core';
+import { hasValue, IndexedData } from '@shagui/ng-shagui/core';
 import { QuoteComponent } from 'src/app/core/components';
 import { RoutingService } from 'src/app/core/services';
 import { QuoteTrackDirective } from 'src/app/core/tracking';
@@ -8,6 +8,7 @@ import { QuoteModel } from 'src/app/library/models';
 import { HeaderTitleComponent, QuoteFooterComponent, TextCardComponent } from 'src/app/shared/components';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
+import { NumberAccidents } from './models';
 
 @Component({
   selector: 'quote-number-accidents',
@@ -25,24 +26,23 @@ import { QuoteLiteralPipe } from 'src/app/shared/pipes';
   ]
 })
 export class NumberAccidentsComponent extends QuoteComponent<QuoteModel> implements OnInit {
-  public selectedAccidents?: number;
-  public yearsAsOwner = 5;
-  public accidents: number[] = [0, 1, 2, 3, 4];
+  public selectedAccidents?: IndexedData<string, number>;
+  public accidents = NumberAccidents;
 
   private readonly routingService = inject(RoutingService);
 
   ngOnInit(): void {
-    this.yearsAsOwner = this._contextData.insuranceCompany.yearsAsOwner || this.yearsAsOwner;
-    this.selectedAccidents = this._contextData.client.accidents;
+    this.selectedAccidents = this.accidents.find(accident => accident.index === this._contextData.client?.accidents);
 
     // @howto - Remove duplicates and sort the accidents array
-    this.accidents = this.accidents.filter((value, index) => this.accidents.indexOf(value) === index).sort((a, b) => a - b);
+    this.accidents = this.accidents.filter((value, index, self) => self.indexOf(value) === index).sort((a, b) => a.index - b.index);
   }
 
   public override canDeactivate = (): boolean => this.updateValidData();
 
-  public selectAccidents(accidents: number): void {
-    this._contextData.client.accidents = accidents;
+  public selectData(accidents: IndexedData<string, number>) {
+    this.selectedAccidents = accidents;
+    this._contextData.client.accidents = this.selectedAccidents?.index;
 
     this.routingService.next();
   }

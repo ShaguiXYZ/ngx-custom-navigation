@@ -4,29 +4,19 @@
     <p nxCopytext="normal" nxQuoteLiteral="subheader"></p>
   </quote-header-title>
   <section class="form-container">
-    @for (item of yearsAsOwner; track item) {
+    @for(years of yearsAsOwner; track years.index) {
     <div class="selectable-row">
+      @let label = years.data | quoteLiteral:{value:years.index.toString(), first: $first ? {value: 'first', type:'literal'}: '', last:
+      $last ? {value: 'last', type:'literal'} : ''};
       <quote-text-card
-        [selected]="selectedYears === item"
-        [data]="
-          'time-desc'
-            | quoteLiteral
-              : ($last
-                  ? {
-                      value: item.toString(),
-                      'literal-year': { value: item > 1 ? 'Label.Years' : 'Label.Year', type: 'translate' },
-                      'or-more': { value: 'Label.OrMore', type: 'translate' }
-                    }
-                  : {
-                      value: item.toString(),
-                      'literal-year': { value: item > 1 ? 'Label.Years' : 'Label.Year', type: 'translate' }
-                    })
-        "
+        [selected]="years.index === selectedYears?.index"
+        [data]="label"
         [nxTrack]="{
-          yearsAsOwner: item.toString(),
-        }"
+              label,
+              yearsAsOwner: years?.index?.toString() || null
+            }"
         [nxTrackEvents]="['click']"
-        (uiSelect)="selectData(item)"
+        (uiSelect)="selectData(years)"
       />
     </div>
     }

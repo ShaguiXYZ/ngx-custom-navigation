@@ -2,7 +2,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NxCopytextModule } from '@aposin/ng-aquila/copytext';
 import { TranslateService } from '@ngx-translate/core';
-import { ContextDataService } from '@shagui/ng-shagui/core';
+import { ContextDataService, IndexedData } from '@shagui/ng-shagui/core';
 import { NX_WORKFLOW_TOKEN } from 'src/app/core/components/models';
 import { NX_RECAPTCHA_TOKEN, RoutingService } from 'src/app/core/services';
 import { ContextDataServiceStub } from 'src/app/core/stub';
@@ -69,11 +69,11 @@ describe('TimeInsuranceHolderComponent', () => {
     component.ngOnInit();
 
     expect(component['_contextData']).toEqual({ insuranceCompany: { yearsAsOwner: 2 } } as QuoteModel);
-    expect(component.selectedYears).toBe(2);
+    expect(component.selectedYears).toEqual({ index: 2, data: 'years' });
   });
 
   it('should update contextData and call nextStep on selectedYears', () => {
-    component.selectData(3);
+    component.selectData({ index: 3 } as IndexedData<string, number>);
 
     expect(component['_contextData'].insuranceCompany.yearsAsOwner).toBe(3);
     expect(routingService.next).toHaveBeenCalled();

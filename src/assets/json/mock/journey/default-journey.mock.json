@@ -526,6 +526,8 @@
       ],
       "configuration": {
         "literals": {
+          "year": "{{value}} año",
+          "years": "{{value}} años",
           "header": "¿Cuánto tiempo llevas como titular de un seguro en esta u otras compañías?",
           "time-desc": "{{value}} {{literal-year}} {{or-more}}"
         }
@@ -548,6 +550,11 @@
           }
         },
         "literals": {
+          "not": "{{first}}",
+          "accident": "{{value}} {{last}}",
+          "accidents": "{{value}} {{last}}",
+          "first": "Nimguno",
+          "last": { "value": "or-more", "type": "literal" },
           "header": {
             "value": "¿Has tenido algún accidente en {{last}}{{last-single}} {{value}} {{years}}{{year}}?",
             "params": {
@@ -608,7 +615,6 @@
               }
             }
           },
-          "more-accidents": "{{value}} {{or-more}}",
           "footer-info": "Nos gustaría acompañarte en tus próximos viajes."
         }
       }
