@@ -132,7 +132,7 @@ export class JourneyService {
     if (!steppers) return;
 
     const steppersMap: DataInfo<Stepper> = steppers.reduce((acc, stepper) => {
-      const stepperKey = UniqueIds._next_();
+      const stepperKey = stepper.id ?? UniqueIds._next_();
 
       acc[stepperKey] = {
         steps: stepper.steps

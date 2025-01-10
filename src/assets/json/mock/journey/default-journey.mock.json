@@ -3,13 +3,14 @@
   "title": { "value": "journey-title", "type": "literal" },
   "steppers": [
     {
+      "id": "main",
       "steps": [
         {
           "label": { "value": "Datos personales" },
           "pages": ["is-client", "place", "birthdate", "driving-license-date", "driving-license-location", "date-of-issue"]
         },
         {
-          "label": { "value": "Datos del vehículo." },
+          "label": { "value": "Datos del vehículo" },
           "pages": [
             "vehicle-type",
             "license-plate",
@@ -32,6 +33,7 @@
       ]
     },
     {
+      "id": "client",
       "steps": [
         {
           "label": { "value": "Datos del Cliente" },

@@ -40,7 +40,7 @@ export class ColorCaptchaComponent implements OnInit, OnDestroy {
   }
 
   public getRandomStyle(): { transform: string } {
-    const rotation = Math.floor(Math.random() * (this.rotationDeg * 2 + 1)) - this.rotationDeg; // Rotation between -45deg and 45deg
+    const rotation = Math.floor(Math.random() * (this.rotationDeg * 2 + 1)) - this.rotationDeg; // Rotation between -{{rotationDeg}}deg and {{rotationDeg}}deg
 
     return {
       transform: `rotate(${rotation}deg)`

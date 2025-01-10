@@ -1,12 +1,13 @@
 import { inject, Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { ContextDataService } from '@shagui/ng-shagui/core';
+import { ContextDataService, deepCopy } from '@shagui/ng-shagui/core';
 import { NX_WORKFLOW_TOKEN } from '../components/models';
 import { QUOTE_APP_CONTEXT_DATA, QUOTE_CONTEXT_DATA } from '../constants';
 import {
   AppContextData,
   Breakingchange,
   CommercialExceptionsModel,
+  Configuration,
   JourneyInfo,
   QuoteControlModel,
   QuoteSettingsModel,
@@ -53,9 +54,9 @@ export class SettingsService {
   ): Promise<void> => {
     const remoteConfiguration = await this.journeyService.fetchConfiguration(info.name, info.versions ?? []);
     const actualContext = this.contextDataService.get<AppContextData>(QUOTE_APP_CONTEXT_DATA);
-    const configurationChange = actualContext?.configuration?.hash !== remoteConfiguration.hash;
-    const [quote, contextData] = configurationChange
-      ? [this.quoteByBreakingchange(breakingChange), AppContextData.init(settings, remoteConfiguration)]
+    const workflowChange = actualContext?.configuration?.hash !== remoteConfiguration.hash;
+    const [quote, contextData] = workflowChange
+      ? [this.quoteByBreakingchange(breakingChange), this.contextByBreakingchange(breakingChange, settings, remoteConfiguration)]
       : [this.contextDataService.get<QuoteControlModel>(QUOTE_CONTEXT_DATA), actualContext];
     const versionUpdated = contextData.configuration.version.last
       ? VersionInfo.compare({ value: contextData.configuration.version.last }, { value: remoteConfiguration.version.actual }) > 0
@@ -67,9 +68,7 @@ export class SettingsService {
       contextData.settings.commercialExceptions.captchaVerified = settings.commercialExceptions.captchaVerified;
     }
 
-    this.contextDataService.set(QUOTE_APP_CONTEXT_DATA, contextData, {
-      persistent: true
-    });
+    this.contextDataService.set(QUOTE_APP_CONTEXT_DATA, contextData, { persistent: true });
     this.contextDataService.set(QUOTE_CONTEXT_DATA, quote, { persistent: true, referenced: true });
 
     console.log('Quote configuration', QUOTE_APP_CONTEXT_DATA, contextData);
@@ -85,6 +84,20 @@ export class SettingsService {
   }
 
   private quoteByBreakingchange(breakingChange: Breakingchange): QuoteControlModel {
-    return breakingChange === 'all' ? this.workFlowToken.initialize() : this.contextDataService.get<QuoteControlModel>(QUOTE_CONTEXT_DATA);
+    return breakingChange === 'all'
+      ? this.workFlowToken.initialize()
+      : deepCopy(this.contextDataService.get<QuoteControlModel>(QUOTE_CONTEXT_DATA));
+  }
+
+  private contextByBreakingchange(
+    breakingChange: Breakingchange,
+    settings: Partial<QuoteSettingsModel>,
+    configuration: Configuration<QuoteControlModel>
+  ): AppContextData {
+    const context = this.contextDataService.get<AppContextData>(QUOTE_APP_CONTEXT_DATA);
+
+    return breakingChange === 'workflow'
+      ? { ...AppContextData.init(settings, configuration), navigation: context.navigation }
+      : AppContextData.init(settings, configuration);
   }
 }

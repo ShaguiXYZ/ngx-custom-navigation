@@ -77,9 +77,15 @@ describe('ClientIdentificationNumberComponent', () => {
   });
 
   it('should mark all fields as touched and update context data on updateValidData', () => {
-    component.form.controls['identificationNumber'].setValue('987654321');
+    component.form.controls['identificationNumber'].setValue('11111111H');
 
     expect(component.form.valid).toBeTrue();
+  });
+
+  it('should mark as invalid if identification number is invalid', () => {
+    component.form.controls['identificationNumber'].setValue('11111112H');
+
+    expect(component.form.valid).toBeFalse();
   });
 
   it('should return false if form is invalid on updateValidData', () => {

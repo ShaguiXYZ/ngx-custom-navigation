@@ -10,6 +10,7 @@ export interface StepDTO {
 }
 
 export interface StepperDTO {
+  id?: string;
   steps: StepDTO[];
   stateInfo?: boolean | StateInfo;
 }

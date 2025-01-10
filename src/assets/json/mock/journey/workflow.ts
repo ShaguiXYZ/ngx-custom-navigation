@@ -7,6 +7,7 @@ export const WORKFLOW: ConfigurationDTO<QuoteModel, WorkflowManifestId> = {
   title: { value: 'journey-title', type: 'literal' },
   steppers: [
     {
+      id: 'main',
       steps: [
         {
           label: { value: 'Datos personales' },
@@ -36,6 +37,7 @@ export const WORKFLOW: ConfigurationDTO<QuoteModel, WorkflowManifestId> = {
       ]
     },
     {
+      id: 'client',
       steps: [
         {
           label: { value: 'Datos del Cliente' },
