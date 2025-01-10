@@ -938,7 +938,7 @@ export const WORKFLOW: ConfigurationDTO<QuoteModel, WorkflowManifestId> = {
           'footer-info': 'Para ofrecerte el mejor seguro es importante verificar tu identidad. '
         },
         validationSettings: {
-          identificationNumber: { required: { disabled: true } }
+          identificationNumber: { required: { disabled: true }, '@isNif': { disabled: true }, '@isNie': { disabled: true } }
         }
       }
     },
@@ -1055,6 +1055,8 @@ export const WORKFLOW: ConfigurationDTO<QuoteModel, WorkflowManifestId> = {
     'error-past-date': { value: 'Errors.PastDate', type: 'translate' },
     'error-old-date': { value: 'Errors.OldDate', type: 'translate' },
     'error-not-between-dates': { value: 'Errors.NotBetweenDates', type: 'translate' },
+    'error-nif': 'El documento no tiene un formato válido',
+    'error-nie': 'El documento no tiene un formato válido',
     'terms-and-conditions': 'Términos y condiciones',
     'privacy-policy': 'Política de privacidad',
     'legal-notice': 'Aviso legal y privacidad',

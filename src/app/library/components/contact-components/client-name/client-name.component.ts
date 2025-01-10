@@ -40,7 +40,15 @@ export class ClientNameComponent extends QuoteComponent<QuoteModel> implements O
     this.createForm();
   }
 
-  public override canDeactivate = (): boolean => this.form.valid;
+  public override canDeactivate = (): boolean => {
+    this._contextData.personalData = {
+      ...this._contextData.personalData,
+      name: this.form.get('name')?.value?.trim(),
+      surname: this.form.get('surname')?.value?.trim()
+    };
+
+    return this.form.valid;
+  };
 
   public updateValidData = (): void => {
     this.form.markAllAsTouched();

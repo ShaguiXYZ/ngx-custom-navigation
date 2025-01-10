@@ -1,6 +1,6 @@
 import { ValidationErrors } from '@angular/forms';
 
-export type QuoteFormValidations =
+export type QuoteFormValidation =
   | 'betweenDates'
   | 'email'
   | 'futureDate'
@@ -16,6 +16,7 @@ export type QuoteFormValidations =
   | 'pastDate'
   | 'required'
   | 'requiredTrue'
-  | 'youngerThanYears';
+  | 'youngerThanYears'
+  | `@${string}`;
 
 export type FormValidations = Record<string, ValidationErrors>;

@@ -52,8 +52,7 @@ describe('TextCardComponent', () => {
     component.data = 'Rendered Data';
     fixture.detectChanges();
 
-    const containerElement = fixture.debugElement.query(By.css('.card-container'));
-    const textElement = containerElement.query(By.css('span'));
+    const textElement = fixture.debugElement.query(By.css('.card-container'));
 
     expect(textElement.nativeElement.textContent).toContain('Rendered Data');
   });

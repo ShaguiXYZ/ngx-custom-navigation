@@ -5,7 +5,7 @@ import moment from 'moment';
 import { QUOTE_APP_CONTEXT_DATA, QUOTE_CONTEXT_DATA } from '../constants';
 import { AppContextData, QuoteControlModel } from '../models';
 import { ServiceActivatorService } from '../service-activators';
-import { FormValidations, QuoteFormValidations } from './quote.form.model';
+import { FormValidations, QuoteFormValidation } from './quote.form.model';
 
 @Injectable()
 export class QuoteFormValidarors {
@@ -83,13 +83,19 @@ export class QuoteFormValidarors {
 
   public required =
     (length = 0): ValidatorFn =>
-    (control: AbstractControl): ValidationErrors | null =>
-      this.activateEntryPoint(control, 'required', !control.value || `${control.value}`.trim().length < length);
+    (control: AbstractControl): ValidationErrors | null => {
+      const value = typeof control.value === 'string' ? control.value.trim() : control.value;
+
+      return this.activateEntryPoint(control, 'required', !value || `${value}`.length < length);
+    };
 
   public informed =
     (): ValidatorFn =>
-    (control: AbstractControl): ValidationErrors | null =>
-      this.activateEntryPoint(control, 'required', !hasValue(control.value));
+    (control: AbstractControl): ValidationErrors | null => {
+      const value = typeof control.value === 'string' ? control.value.trim() : control.value;
+
+      return this.activateEntryPoint(control, 'required', !hasValue(value));
+    };
 
   public maxLenght = (maxLength: number): ValidatorFn => {
     return (control: AbstractControl): ValidationErrors | null =>
@@ -128,7 +134,7 @@ export class QuoteFormValidarors {
    */
   public activateEntryPoint = (
     control: AbstractControl,
-    validationKey: QuoteFormValidations,
+    validationKey: QuoteFormValidation,
     validationValue: boolean
   ): ValidationErrors | null => {
     const validation = validationValue ? { [validationKey]: true } : null;

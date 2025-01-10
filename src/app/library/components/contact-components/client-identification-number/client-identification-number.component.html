@@ -9,6 +9,10 @@
         <input formControlName="identificationNumber" nxInput nxAutoFocus />
         @if(form.get('identificationNumber')?.errors?.['required']) {
         <nx-error appearance="text" nxFormfieldError><span nxQuoteLiteral="error-required"></span> </nx-error>
+        } @if(form.get('identificationNumber')?.errors?.['@isNif']) {
+        <nx-error appearance="text" nxFormfieldError><span nxQuoteLiteral="error-nif"></span> </nx-error>
+        } @if(form.get('identificationNumber')?.errors?.['@isNie']) {
+        <nx-error appearance="text" nxFormfieldError><span nxQuoteLiteral="error-nie"></span> </nx-error>
         }
       </nx-formfield>
     </form>

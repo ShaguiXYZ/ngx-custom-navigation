@@ -2,9 +2,7 @@
   @defer(on viewport) {
   <quote-selectable-option [selected]="selected" [fullHeight]="fullHeight" (uiSelect)="selectText()">
     <div nxCopytext="normal" class="card-container nx-margin-left-4m" [ngClass]="{ selected, 'nx-font-weight-bold': selected }">
-      @if(data) {
       {{ data }}
-      }
       <ng-content></ng-content>
     </div>
   </quote-selectable-option>

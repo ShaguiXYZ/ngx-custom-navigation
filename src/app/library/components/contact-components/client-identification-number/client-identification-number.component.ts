@@ -1,5 +1,5 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, ValidationErrors, ValidatorFn } from '@angular/forms';
 import { NxCopytextModule } from '@aposin/ng-aquila/copytext';
 import { NX_DATE_LOCALE } from '@aposin/ng-aquila/datefield';
 import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
@@ -10,6 +10,7 @@ import { QuoteModel } from 'src/app/library/models';
 import { HeaderTitleComponent, QuoteFooterComponent } from 'src/app/shared/components';
 import { QuoteAutoFocusDirective, QuoteLiteralDirective } from 'src/app/shared/directives';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
+import { isNIF } from './models';
 
 @Component({
   selector: 'quote-client-identification-number',
@@ -39,7 +40,14 @@ export class ClientIdentificationNumberComponent extends QuoteComponent<QuoteMod
     this.createForm();
   }
 
-  public override canDeactivate = (): boolean => this.form.valid;
+  public override canDeactivate = (): boolean => {
+    this._contextData.personalData = {
+      ...this._contextData.personalData,
+      identificationNumber: this.form.get('identificationNumber')?.value?.trim()
+    };
+
+    return this.form.valid;
+  };
 
   public updateValidData = (): void => {
     this.form.markAllAsTouched();
@@ -54,7 +62,10 @@ export class ClientIdentificationNumberComponent extends QuoteComponent<QuoteMod
 
   private createForm() {
     this.form = this.fb.group({
-      identificationNumber: new FormControl(this._contextData.personalData.identificationNumber, [this.quoteFormValidarors.required()])
+      identificationNumber: new FormControl(this._contextData.personalData.identificationNumber, [
+        this.quoteFormValidarors.required(),
+        this.isValidDocument()
+      ])
     });
 
     const identificationNumberSubscription = this.form.get('identificationNumber')?.valueChanges.subscribe(value => {
@@ -65,4 +76,18 @@ export class ClientIdentificationNumberComponent extends QuoteComponent<QuoteMod
       this.subscription$.push(identificationNumberSubscription);
     }
   }
+
+  public isValidDocument =
+    (): ValidatorFn =>
+    (control: AbstractControl): ValidationErrors | null => {
+      const nifValidator = this.quoteFormValidarors.activateEntryPoint(control, '@isNif', !isNIF(control.value));
+
+      if (nifValidator) {
+        return nifValidator;
+      }
+
+      const nieValidator = this.quoteFormValidarors.activateEntryPoint(control, '@isNie', !isNIF(control.value));
+
+      return nieValidator;
+    };
 }
