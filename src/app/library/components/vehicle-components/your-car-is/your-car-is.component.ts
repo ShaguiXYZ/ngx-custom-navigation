@@ -8,10 +8,12 @@ import { NxInputModule } from '@aposin/ng-aquila/input';
 import { NxMaskModule } from '@aposin/ng-aquila/mask';
 import { QuoteComponent } from 'src/app/core/components';
 import { RoutingService } from 'src/app/core/services';
+import { QuoteTrackDirective } from 'src/app/core/tracking';
 import { QuoteModel, QuoteVehicleModel } from 'src/app/library/models';
 import { VehicleService } from 'src/app/library/services';
 import { HeaderTitleComponent, QuoteFooterComponent, TextCardComponent } from 'src/app/shared/components';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
+import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 
 @Component({
   selector: 'quote-your-car-is',
@@ -28,7 +30,9 @@ import { QuoteLiteralDirective } from 'src/app/shared/directives';
     NxInputModule,
     NxMaskModule,
     ReactiveFormsModule,
-    QuoteLiteralDirective
+    QuoteLiteralPipe,
+    QuoteLiteralDirective,
+    QuoteTrackDirective
   ],
   providers: [VehicleService],
   standalone: true

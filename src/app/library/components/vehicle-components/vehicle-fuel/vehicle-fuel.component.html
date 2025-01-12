@@ -21,6 +21,7 @@
             <quote-selectable-option
               [selected]="_selectedFuel"
               [nxTrack]="{
+                label: fuel.data,
                 displayment: selectedCubicCapacity?.index,
                 fuel: fuel.index,
                 power: selectedPower?.index
@@ -57,6 +58,7 @@
             <quote-selectable-option
               [selected]="_selectedCubicCapacityselected"
               [nxTrack]="{
+                label: cubicCapacity.data,
                 displayment: cubicCapacity.index,
                 fuel: selectedFuel?.index,
                 power: selectedPower?.index
@@ -76,10 +78,12 @@
           </div>
           }
           <div class="vehicle__not_known nx-margin-2xs">
-            @let _cubicCapacityNotKnown = selectedCubicCapacity?.index === cubicCapacityNotKnown.index;
+            @let _cubicCapacityNotKnown = selectedCubicCapacity?.index === cubicCapacityNotKnown.index; @let _cubicCapacityNotKnownLabel =
+            'cubic-capacity-not-known' | quoteLiteral;
             <quote-selectable-option
               [selected]="_cubicCapacityNotKnown"
               [nxTrack]="{
+                label: _cubicCapacityNotKnownLabel,
                 displayment: cubicCapacityNotKnown.index,
                 fuel: cubicCapacityNotKnown.index,
                 power: selectedPower?.index
@@ -88,12 +92,9 @@
               (uiSelect)="selectCubicCapacity(cubicCapacityNotKnown)"
             >
               <div class="card-container">
-                <span
-                  nxCopytext="medium"
-                  class="nx-margin-s"
-                  [ngClass]="{ 'nx-font-weight-bold': _cubicCapacityNotKnown }"
-                  nxQuoteLiteral="cubic-capacity-not-known"
-                ></span>
+                <span nxCopytext="medium" class="nx-margin-s" [ngClass]="{ 'nx-font-weight-bold': _cubicCapacityNotKnown }">{{
+                  _cubicCapacityNotKnownLabel
+                }}</span>
               </div>
             </quote-selectable-option>
           </div>
@@ -116,6 +117,7 @@
             <quote-selectable-option
               [selected]="_selectedPower"
               [nxTrack]="{
+                label: power.data,
                 displayment: selectedCubicCapacity?.index,
                 fuel: selectedFuel?.index,
                 power: power.index
@@ -133,10 +135,11 @@
           </div>
           }
           <div class="vehicle__not_known nx-margin-2xs">
-            @let _powerNotKnown = selectedPower?.index === powerNotKnown.index;
+            @let _powerNotKnown = selectedPower?.index === powerNotKnown.index; @let _powerNotKnownLabel = 'power-not-known' | quoteLiteral;
             <quote-selectable-option
               [selected]="_powerNotKnown"
               [nxTrack]="{
+                label: _powerNotKnownLabel,
                 displayment: selectedCubicCapacity?.index,
                 fuel: selectedFuel?.index,
                 power: powerNotKnown.index
@@ -145,12 +148,9 @@
               (uiSelect)="selectPower(powerNotKnown)"
             >
               <div class="card-container">
-                <span
-                  nxCopytext="medium"
-                  class="nx-margin-s"
-                  [ngClass]="{ 'nx-font-weight-bold': _powerNotKnown }"
-                  nxQuoteLiteral="power-not-known"
-                ></span>
+                <span nxCopytext="medium" class="nx-margin-s" [ngClass]="{ 'nx-font-weight-bold': _powerNotKnown }">{{
+                  _powerNotKnownLabel
+                }}</span>
               </div>
             </quote-selectable-option>
           </div>

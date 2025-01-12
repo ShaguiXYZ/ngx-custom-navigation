@@ -12,6 +12,7 @@ import { QuoteModel } from 'src/app/library/models';
 import { HeaderTitleComponent, IconCardComponent, QuoteFooterComponent } from 'src/app/shared/components';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
 import { DrivingLicenseIcons } from './models';
+import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 
 @Component({
   selector: 'quote-driving-license-location',
@@ -24,6 +25,7 @@ import { DrivingLicenseIcons } from './models';
     NxButtonModule,
     NxCopytextModule,
     NxHeadlineModule,
+    QuoteLiteralPipe,
     QuoteLiteralDirective,
     QuoteTrackDirective
   ],

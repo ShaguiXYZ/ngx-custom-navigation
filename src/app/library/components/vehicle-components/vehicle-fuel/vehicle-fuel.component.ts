@@ -10,6 +10,7 @@ import { CubicCapacityModel, FuelModel, QuoteModel, VehicleClassesModel } from '
 import { VehicleService } from 'src/app/library/services';
 import { HeaderTitleComponent, QuoteFooterComponent, SelectableOptionComponent } from 'src/app/shared/components';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
+import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 
 @Component({
   selector: 'quote-vehicle-fuel',
@@ -23,6 +24,7 @@ import { QuoteLiteralDirective } from 'src/app/shared/directives';
     NxAccordionModule,
     NxCopytextModule,
     NxFormfieldModule,
+    QuoteLiteralPipe,
     QuoteLiteralDirective,
     QuoteTrackDirective
   ],

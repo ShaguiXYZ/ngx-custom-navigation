@@ -14,7 +14,7 @@ export const WORKFLOW: ConfigurationDTO<QuoteModel, WorkflowManifestId> = {
           pages: ['is-client', 'place', 'birthdate', 'driving-license-date', 'driving-license-location', 'date-of-issue']
         },
         {
-          label: { value: 'Datos del vehículo.' },
+          label: { value: 'Datos del vehículo' },
           pages: [
             'vehicle-type',
             'license-plate',
@@ -23,6 +23,7 @@ export const WORKFLOW: ConfigurationDTO<QuoteModel, WorkflowManifestId> = {
             'vehicle-models',
             'vehicle-fuel',
             'vehicle-model-versions',
+            'vehicle-parking',
             'license-year'
           ]
         },
@@ -329,7 +330,7 @@ export const WORKFLOW: ConfigurationDTO<QuoteModel, WorkflowManifestId> = {
       pageId: 'your-car-is',
       nextOptionList: [
         {
-          nextPageId: 'is-policy-owner'
+          nextPageId: 'vehicle-parking'
         }
       ],
       configuration: {
@@ -341,6 +342,22 @@ export const WORKFLOW: ConfigurationDTO<QuoteModel, WorkflowManifestId> = {
           footerConfig: {
             showNext: false
           }
+        }
+      }
+    },
+    {
+      pageId: 'vehicle-parking',
+      nextOptionList: [
+        {
+          nextPageId: 'is-policy-owner'
+        }
+      ],
+      configuration: {
+        literals: {
+          header: '¿Donde tienes pensado aparcar el vehículo?',
+          street_parked: 'En la calle',
+          driveway_parked: 'En el garaje de casa',
+          garage_parked: 'En un garaje comunitario'
         }
       }
     },

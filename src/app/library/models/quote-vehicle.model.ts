@@ -94,6 +94,7 @@ export interface QuoteVehicleModel extends Partial<VehicleData> {
   brand?: string;
   yearOfManufacture?: number;
   vehicleType?: string;
+  vehicleParkingType?: string;
   creationDate?: Date;
   notFound?: boolean;
 }

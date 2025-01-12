@@ -39,6 +39,7 @@ import {
   VehicleFuelComponent,
   VehicleModelsComponent,
   VehicleModelVersionsComponent,
+  VehicleParkingComponent,
   VehicleTypeComponent,
   YourCarIsComponent
 } from './components/vehicle-components';
@@ -73,6 +74,7 @@ const LIBRARY_MANIFEST = {
   'vehicle-fuel': { component: VehicleFuelComponent },
   'vehicle-model-versions': { component: VehicleModelVersionsComponent },
   'vehicle-models': { component: VehicleModelsComponent },
+  'vehicle-parking': { component: VehicleParkingComponent },
   'vehicle-type': { component: VehicleTypeComponent },
   'your-car-is': { component: YourCarIsComponent }
 };
@@ -104,7 +106,8 @@ const TRACKING_MANIFEST: Record<string, TrackedData> = {
   plateNumber: { value: 'vehicle.plateNumber', tracked: false },
   power: { value: 'vehicle.powerRange.index', tracked: false },
   new: { value: 'vehicle.vehicleType', tracked: true },
-  yearOfManufacture: { value: 'vehicle.yearOfManufacture', tracked: false }
+  yearOfManufacture: { value: 'vehicle.yearOfManufacture', tracked: false },
+  vehicleParkingType: { value: 'vehicle.vehicleParkingType', tracked: false }
 };
 
 const SERVICE_ACTIVATORS_MANIFEST: Record<ServiceActivatorType, (services: ActivatorServices) => ActivatorFn> = {

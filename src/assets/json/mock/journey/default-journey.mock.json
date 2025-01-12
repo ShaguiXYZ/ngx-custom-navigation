@@ -19,6 +19,7 @@
             "vehicle-models",
             "vehicle-fuel",
             "vehicle-model-versions",
+            "vehicle-parking",
             "license-year"
           ]
         },
@@ -325,7 +326,7 @@
       "pageId": "your-car-is",
       "nextOptionList": [
         {
-          "nextPageId": "is-policy-owner"
+          "nextPageId": "vehicle-parking"
         }
       ],
       "configuration": {
@@ -337,6 +338,22 @@
           "footerConfig": {
             "showNext": false
           }
+        }
+      }
+    },
+    {
+      "pageId": "vehicle-parking",
+      "nextOptionList": [
+        {
+          "nextPageId": "is-policy-owner"
+        }
+      ],
+      "configuration": {
+        "literals": {
+          "header": "¿Donde tienes pensado aparcar el vehículo?",
+          "street-parked": "En la calle",
+          "driveway-parked": "En el garaje de casa",
+          "garage-parked": "En un garaje comunitario"
         }
       }
     },
@@ -528,10 +545,10 @@
       ],
       "configuration": {
         "literals": {
-          "year": "{{value}} año",
-          "years": "{{value}} años",
+          "year": "{{value}} año {{last}}",
+          "years": "{{value}} años {{last}}",
           "header": "¿Cuánto tiempo llevas como titular de un seguro en esta u otras compañías?",
-          "time-desc": "{{value}} {{literal-year}} {{or-more}}"
+          "last": { "value": "or-more", "type": "literal" }
         }
       }
     },

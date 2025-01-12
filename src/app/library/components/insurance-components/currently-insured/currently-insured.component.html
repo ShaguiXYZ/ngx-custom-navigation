@@ -1,33 +1,37 @@
-<!-- eslint-disable @angular-eslint/template/elements-content -->
 <article class="component-container">
   <quote-header-title>
     <span nxQuoteLiteral="header"></span>
     <p nxCopytext="normal" nxQuoteLiteral="subheader"></p>
   </quote-header-title>
   <section class="form-container">
+    @let yesLabel = 'yes' | quoteLiteral; @let noLabel = 'no' | quoteLiteral;
     <quote-selectable-option [selected]="isCurrentlyInsured">
       <button
         nxButton="tertiary medium"
         type="button"
-        nxQuoteLiteral="yes"
         [nxTrack]="{
+          label: yesLabel,
           insurance: true
         }"
         [nxTrackEvents]="['click']"
         (click)="onCurrentlyInsuredChange(true)"
-      ></button>
+      >
+        {{ yesLabel }}
+      </button>
     </quote-selectable-option>
     <quote-selectable-option [selected]="isCurrentlyInsured === false">
       <button
         nxButton="tertiary medium"
         type="button"
-        nxQuoteLiteral="no"
         [nxTrack]="{
+          label: noLabel,
           insurance: false
         }"
         [nxTrackEvents]="['click']"
         (click)="onCurrentlyInsuredChange(false)"
-      ></button>
+      >
+        {{ noLabel }}
+      </button>
     </quote-selectable-option>
   </section>
   <quote-footer [config]="{ showNext: false }" />

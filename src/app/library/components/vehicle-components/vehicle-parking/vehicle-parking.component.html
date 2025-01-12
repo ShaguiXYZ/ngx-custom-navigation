@@ -1,0 +1,24 @@
+<article class="component-container">
+  <quote-header-title>
+    <span nxQuoteLiteral="header"></span>
+    <p nxCopytext="normal" nxQuoteLiteral="subheader"></p>
+  </quote-header-title>
+  <section class="form-container">
+    @for(type of vehicleParkingTypes; track type.index) {
+    <div class="selectable-row">
+      @let label = type.data | quoteLiteral:{value:type.index, first: $first ? {value: 'first', type:'literal'}: '', last: $last ? {value:
+      'last', type:'literal'} : ''};
+      <quote-text-card
+        [selected]="type.index === selectedType?.index"
+        [data]="label"
+        [nxTrack]="{
+          label
+        }"
+        [nxTrackEvents]="['click']"
+        (uiSelect)="selectType(type)"
+      />
+    </div>
+    }
+  </section>
+  <quote-footer [config]="{ showNext: false }" />
+</article>

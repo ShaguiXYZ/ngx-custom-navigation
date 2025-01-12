@@ -1,4 +1,3 @@
-<!-- eslint-disable @angular-eslint/template/elements-content -->
 <article class="component-container">
   <quote-header-title>
     <span nxQuoteLiteral="header"></span>
@@ -6,28 +5,31 @@
   </quote-header-title>
   <section class="form-container">
     <quote-selectable-option [selected]="isPolicyOwner">
+      @let yesLabel = 'yes' | quoteLiteral; @let noLabel = 'no' | quoteLiteral;
       <button
         nxButton="tertiary medium"
         type="button"
-        nxQuoteLiteral="yes"
         [nxTrack]="{
-          insurance: true
+          label: yesLabel
         }"
         [nxTrackEvents]="['click']"
         (click)="onIsPolicyOwnerChange(true)"
-      ></button>
+      >
+        {{ yesLabel }}
+      </button>
     </quote-selectable-option>
     <quote-selectable-option [selected]="isPolicyOwner === false">
       <button
         nxButton="tertiary medium"
         type="button"
-        nxQuoteLiteral="no"
         [nxTrack]="{
-          insurance: false
+          label: noLabel
         }"
         [nxTrackEvents]="['click']"
         (click)="onIsPolicyOwnerChange(false)"
-      ></button>
+      >
+        {{ noLabel }}
+      </button>
     </quote-selectable-option>
   </section>
   <quote-footer [config]="{ showNext: false }" />

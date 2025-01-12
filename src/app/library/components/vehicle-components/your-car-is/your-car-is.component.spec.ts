@@ -8,7 +8,8 @@ import { NxMaskModule } from '@aposin/ng-aquila/mask';
 import { TranslateService } from '@ngx-translate/core';
 import { ContextDataService } from '@shagui/ng-shagui/core';
 import { firstValueFrom, of } from 'rxjs';
-import { RoutingService } from 'src/app/core/services';
+import { NX_WORKFLOW_TOKEN } from 'src/app/core/components/models';
+import { NX_RECAPTCHA_TOKEN, RoutingService } from 'src/app/core/services';
 import { ContextDataServiceStub } from 'src/app/core/stub';
 import { QuoteModel, QuoteVehicleModel } from 'src/app/library/models';
 import { VehicleService } from 'src/app/library/services';
@@ -22,6 +23,10 @@ describe('YourCarIsComponent', () => {
   let fixture: ComponentFixture<YourCarIsComponent>;
   let routingService: jasmine.SpyObj<RoutingService>;
   let vehicleService: jasmine.SpyObj<VehicleService>;
+  const mockConfig = {
+    errorPageId: 'error',
+    manifest: {}
+  };
 
   beforeEach(async () => {
     const quoteLiteralPipeSpy = jasmine.createSpyObj('QuoteLiteralPipe', ['transform']);
@@ -49,7 +54,9 @@ describe('YourCarIsComponent', () => {
         { provide: TranslateService, useValue: translateServiceSpy },
         { provide: RoutingService, useValue: routingServiceSpy },
         { provide: VehicleService, useValue: vehicleServiceSpy },
-        { provide: QuoteLiteralPipe, useValue: quoteLiteralPipeSpy }
+        { provide: QuoteLiteralPipe, useValue: quoteLiteralPipeSpy },
+        { provide: NX_RECAPTCHA_TOKEN, useValue: { siteKey: 'mock-site-key' } },
+        { provide: NX_WORKFLOW_TOKEN, useValue: mockConfig }
       ]
     }).compileComponents();
 

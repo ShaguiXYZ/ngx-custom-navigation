@@ -17,7 +17,7 @@
       [selected]="selectedLocation?.index === icon.index"
       (uiSelect)="selectLocation(icon)"
       [nxTrack]="{
-        label: icon.data,
+        label: icon.index | quoteLiteral,
         location: icon.index
       }"
       [nxTrackEvents]="['click']"
