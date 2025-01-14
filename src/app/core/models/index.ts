@@ -6,6 +6,7 @@ export * from './fuel-types.model';
 export * from './header-config.model';
 export * from './icon-data.model';
 export * from './insurance-company.model';
+export * from './language.model';
 export * from './literal.model';
 export * from './location.model';
 export * from './page-form.model';

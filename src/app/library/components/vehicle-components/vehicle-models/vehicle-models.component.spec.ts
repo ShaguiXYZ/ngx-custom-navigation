@@ -3,7 +3,9 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { TranslateService } from '@ngx-translate/core';
 import { ContextDataService } from '@shagui/ng-shagui/core';
+import { of } from 'rxjs';
 import { DEBOUNCE_TIME } from 'src/app/core/constants';
+import { NX_LANGUAGE_CONFIG } from 'src/app/core/models';
 import { RoutingService } from 'src/app/core/services';
 import { ContextDataServiceStub } from 'src/app/core/stub';
 import { QuoteModel } from 'src/app/library/models';
@@ -19,9 +21,15 @@ describe('VehicleModelsComponent', () => {
 
   beforeEach(async () => {
     const quoteLiteralPipeSpy = jasmine.createSpyObj('QuoteLiteralPipe', ['transform']);
-    const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate']);
     const routingServiceSpy = jasmine.createSpyObj('RoutingService', ['next']);
     const vehicleServiceSpy = jasmine.createSpyObj('VehicleService', ['getModels']);
+    const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate', 'setDefaultLang', 'use', 'instant']);
+    const mockLanguageConfig = {
+      current: 'en',
+      languages: ['en', 'fr']
+    };
+
+    translateServiceSpy.use.and.returnValue(of('en'));
 
     await TestBed.configureTestingModule({
       declarations: [],
@@ -31,7 +39,8 @@ describe('VehicleModelsComponent', () => {
         { provide: TranslateService, useValue: translateServiceSpy },
         { provide: RoutingService, useValue: routingServiceSpy },
         { provide: VehicleService, useValue: vehicleServiceSpy },
-        { provide: QuoteLiteralPipe, useValue: quoteLiteralPipeSpy }
+        { provide: QuoteLiteralPipe, useValue: quoteLiteralPipeSpy },
+        { provide: NX_LANGUAGE_CONFIG, useValue: mockLanguageConfig }
       ]
     }).compileComponents();
 

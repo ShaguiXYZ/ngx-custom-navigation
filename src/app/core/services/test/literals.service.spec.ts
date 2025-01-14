@@ -1,22 +1,33 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { TestBed } from '@angular/core/testing';
 import { TranslateService } from '@ngx-translate/core';
-import { QuoteLiteral } from '../../models';
+import { of } from 'rxjs';
+import { NX_LANGUAGE_CONFIG, QuoteLiteral } from '../../models';
 import { LiteralsService } from '../literals.service';
 
 describe('LiteralsService', () => {
   let service: LiteralsService;
-  let translateServiceSpy: jasmine.SpyObj<TranslateService>;
+  let translateService: jasmine.SpyObj<TranslateService>;
 
   beforeEach(() => {
-    const spy = jasmine.createSpyObj('TranslateService', ['instant']);
+    const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate', 'setDefaultLang', 'use', 'instant']);
+    const mockLanguageConfig = {
+      current: 'en',
+      languages: ['en', 'fr']
+    };
+
+    translateServiceSpy.use.and.returnValue(of('en'));
 
     TestBed.configureTestingModule({
-      providers: [LiteralsService, { provide: TranslateService, useValue: spy }]
+      providers: [
+        LiteralsService,
+        { provide: TranslateService, useValue: translateServiceSpy },
+        { provide: NX_LANGUAGE_CONFIG, useValue: mockLanguageConfig }
+      ]
     });
 
     service = TestBed.inject(LiteralsService);
-    translateServiceSpy = TestBed.inject(TranslateService) as jasmine.SpyObj<TranslateService>;
+    translateService = TestBed.inject(TranslateService) as jasmine.SpyObj<TranslateService>;
   });
 
   it('should be created', () => {
@@ -41,9 +52,9 @@ describe('LiteralsService', () => {
   it('should return the translated value if literal is a QuoteLiteral with type "translate"', () => {
     const literal: QuoteLiteral = { type: 'translate', value: 'HELLO' };
     const params = { name: 'John' };
-    translateServiceSpy.instant.and.returnValue('Hello, John!');
+    translateService.instant.and.returnValue('Hello, John!');
     expect(service.toString(literal, params)).toBe('Hello, John!');
-    expect(translateServiceSpy.instant).toHaveBeenCalledWith('HELLO', params);
+    expect(translateService.instant).toHaveBeenCalledWith('HELLO', params);
   });
 
   it('should return the value if literal is a QuoteLiteral with type other than "translate"', () => {

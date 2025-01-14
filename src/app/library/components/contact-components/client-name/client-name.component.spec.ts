@@ -6,7 +6,9 @@ import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
 import { NxInputModule } from '@aposin/ng-aquila/input';
 import { TranslateService } from '@ngx-translate/core';
 import { ContextDataService } from '@shagui/ng-shagui/core';
+import { of } from 'rxjs';
 import { NX_WORKFLOW_TOKEN } from 'src/app/core/components/models';
+import { NX_LANGUAGE_CONFIG } from 'src/app/core/models';
 import { NX_RECAPTCHA_TOKEN } from 'src/app/core/services';
 import { ContextDataServiceStub } from 'src/app/core/stub';
 import { QuoteModel } from 'src/app/library/models';
@@ -18,13 +20,19 @@ describe('ClientNameComponent', () => {
   let fixture: ComponentFixture<ClientNameComponent>;
 
   beforeEach(async () => {
-    const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate']);
     const quoteLiteralPipeSpy = jasmine.createSpyObj('QuoteLiteralPipe', ['transform']);
     const httpClientSpy = jasmine.createSpyObj('HttpClient', ['get', 'post', 'put', 'delete']);
-    const mockConfig = {
+    const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate', 'setDefaultLang', 'use', 'instant']);
+    const mockWorkflowConfig = {
       errorPageId: 'error',
       manifest: {}
     };
+    const mockLanguageConfig = {
+      current: 'en',
+      languages: ['en', 'fr']
+    };
+
+    translateServiceSpy.use.and.returnValue(of('en'));
 
     await TestBed.configureTestingModule({
       declarations: [],
@@ -36,7 +44,8 @@ describe('ClientNameComponent', () => {
         { provide: QuoteLiteralPipe, useValue: quoteLiteralPipeSpy },
         { provide: HttpClient, useValue: httpClientSpy },
         { provide: NX_RECAPTCHA_TOKEN, useValue: { siteKey: 'mock-site-key' } },
-        { provide: NX_WORKFLOW_TOKEN, useValue: mockConfig }
+        { provide: NX_WORKFLOW_TOKEN, useValue: mockWorkflowConfig },
+        { provide: NX_LANGUAGE_CONFIG, useValue: mockLanguageConfig }
       ]
     }).compileComponents();
   });

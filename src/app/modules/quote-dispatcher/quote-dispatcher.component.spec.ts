@@ -3,8 +3,9 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute, ActivatedRouteSnapshot, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ContextDataService, HttpService } from '@shagui/ng-shagui/core';
+import { of } from 'rxjs';
 import { NX_WORKFLOW_TOKEN } from 'src/app/core/components/models';
-import { CommercialExceptionsModel, JourneyInfo, QuoteSettingsModel } from 'src/app/core/models';
+import { CommercialExceptionsModel, JourneyInfo, NX_LANGUAGE_CONFIG, QuoteSettingsModel } from 'src/app/core/models';
 import { BudgetActivator } from 'src/app/core/service-activators/budget.activator';
 import { JourneyService, NX_RECAPTCHA_TOKEN, RoutingService } from 'src/app/core/services';
 import { QuoteDispatcherComponent } from './quote-dispatcher.component';
@@ -20,10 +21,18 @@ describe('QuoteDispatcherComponent', () => {
   let mockJourneyService: jasmine.SpyObj<JourneyService>;
 
   beforeEach(async () => {
-    const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate', 'setDefaultLang']);
-    const mockConfig = {
+    const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate', 'setDefaultLang', 'use', 'instant']);
+    const mockWorkflowConfig = {
+      errorPageId: 'error',
       manifest: {}
     };
+    const mockLanguageConfig = {
+      current: 'en',
+      languages: ['en', 'fr']
+    };
+
+    translateServiceSpy.use.and.returnValue(of('en'));
+
     mockRouter = jasmine.createSpyObj('Router', ['navigate']);
     mockActivatedRoute = jasmine.createSpyObj('ActivatedRoute', ['snapshot']);
     mockContextDataService = jasmine.createSpyObj('ContextDataService', ['get', 'set']);
@@ -67,7 +76,8 @@ describe('QuoteDispatcherComponent', () => {
         { provide: TranslateService, useValue: translateServiceSpy },
         { provide: HttpService, useValue: mockHttpService },
         { provide: NX_RECAPTCHA_TOKEN, useValue: { siteKey: 'mock-site-key' } },
-        { provide: NX_WORKFLOW_TOKEN, useValue: mockConfig }
+        { provide: NX_WORKFLOW_TOKEN, useValue: mockWorkflowConfig },
+        { provide: NX_LANGUAGE_CONFIG, useValue: mockLanguageConfig }
       ]
     }).compileComponents();
   });

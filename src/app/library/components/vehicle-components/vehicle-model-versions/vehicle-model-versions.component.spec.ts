@@ -14,6 +14,9 @@ import { HeaderTitleComponent, IconCardComponent, TextCardComponent } from 'src/
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 import { VehicleModelVersionsComponent } from './vehicle-model-versions.component';
+import { NX_WORKFLOW_TOKEN } from 'src/app/core/components/models';
+import { NX_LANGUAGE_CONFIG } from 'src/app/core/models';
+import { of } from 'rxjs';
 
 describe('VehicleModelVersionsComponent', () => {
   let component: VehicleModelVersionsComponent;
@@ -23,9 +26,19 @@ describe('VehicleModelVersionsComponent', () => {
 
   beforeEach(async () => {
     const quoteLiteralPipeSpy = jasmine.createSpyObj('QuoteLiteralPipe', ['transform']);
-    const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate']);
     const routingServiceSpy = jasmine.createSpyObj('RoutingService', ['next']);
     const vehicleServiceSpy = jasmine.createSpyObj('VehicleService', ['vehicleModelVersions']);
+    const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate', 'setDefaultLang', 'use', 'instant']);
+    const mockWorkflowConfig = {
+      errorPageId: 'error',
+      manifest: {}
+    };
+    const mockLanguageConfig = {
+      current: 'en',
+      languages: ['en', 'fr']
+    };
+
+    translateServiceSpy.use.and.returnValue(of('en'));
 
     await TestBed.configureTestingModule({
       declarations: [],
@@ -47,7 +60,9 @@ describe('VehicleModelVersionsComponent', () => {
         { provide: TranslateService, useValue: translateServiceSpy },
         { provide: RoutingService, useValue: routingServiceSpy },
         { provide: VehicleService, useValue: vehicleServiceSpy },
-        { provide: QuoteLiteralPipe, useValue: quoteLiteralPipeSpy }
+        { provide: QuoteLiteralPipe, useValue: quoteLiteralPipeSpy },
+        { provide: NX_WORKFLOW_TOKEN, useValue: mockWorkflowConfig },
+        { provide: NX_LANGUAGE_CONFIG, useValue: mockLanguageConfig }
       ]
     }).compileComponents();
 

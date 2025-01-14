@@ -18,6 +18,8 @@ import { HeaderTitleComponent, QuoteFooterComponent } from 'src/app/shared/compo
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 import { DateOfIssueComponent } from './date-of-issue.component';
+import { NX_LANGUAGE_CONFIG } from 'src/app/core/models';
+import { of } from 'rxjs';
 
 describe('DateOfIssueComponent', () => {
   let component: DateOfIssueComponent;
@@ -25,12 +27,18 @@ describe('DateOfIssueComponent', () => {
 
   beforeEach(async () => {
     const quoteLiteralPipeSpy = jasmine.createSpyObj('QuoteLiteralPipe', ['transform']);
-    const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate']);
     const httpClientSpy = jasmine.createSpyObj('HttpClient', ['get', 'post', 'put', 'delete']);
-    const mockConfig = {
+    const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate', 'setDefaultLang', 'use', 'instant']);
+    const mockWorkflowConfig = {
       errorPageId: 'error',
       manifest: {}
     };
+    const mockLanguageConfig = {
+      current: 'en',
+      languages: ['en', 'fr']
+    };
+
+    translateServiceSpy.use.and.returnValue(of('en'));
 
     await TestBed.configureTestingModule({
       declarations: [],
@@ -53,7 +61,8 @@ describe('DateOfIssueComponent', () => {
         { provide: QuoteLiteralPipe, useValue: quoteLiteralPipeSpy },
         { provide: HttpClient, useValue: httpClientSpy },
         { provide: NX_RECAPTCHA_TOKEN, useValue: { siteKey: 'mock-site-key' } },
-        { provide: NX_WORKFLOW_TOKEN, useValue: mockConfig }
+        { provide: NX_WORKFLOW_TOKEN, useValue: mockWorkflowConfig },
+        { provide: NX_LANGUAGE_CONFIG, useValue: mockLanguageConfig }
       ]
     }).compileComponents();
 

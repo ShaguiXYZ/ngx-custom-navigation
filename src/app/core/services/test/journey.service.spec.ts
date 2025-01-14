@@ -115,8 +115,6 @@ describe('JourneyService', () => {
 
     const result = await service.fetchConfiguration(journeyName, [{ value: dtoVersion }]);
 
-    console.log(JSON.stringify(result));
-
     expect(result).toEqual({ ...mockConfiguration, version: { actual: dtoVersion, last: dtoVersion } });
     expect(httpService.get).toHaveBeenCalledWith(`${environment.baseUrl}/journey/test`);
   });

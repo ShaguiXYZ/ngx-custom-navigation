@@ -22,6 +22,12 @@ import { LiteralsService, NX_RECAPTCHA_TOKEN, SettingsService } from './core/ser
 import { VEHICLE_WORKFLOW_TOKEN } from './library/library-manifest';
 import { TRANSLATE_MODULE_CONFIG, urls } from './shared/config';
 import { httpErrorInterceptor, mockInterceptor, recaptchaInterceptor } from './shared/interceptors';
+import { NX_LANGUAGE_CONFIG } from './core/models';
+
+const Languages = {
+  ['en-GB']: 'en-GB',
+  ['es-ES']: 'es-ES'
+};
 
 @Injectable()
 class DatePikerIntl extends NxDatepickerIntl {
@@ -59,6 +65,7 @@ export const appConfig: ApplicationConfig = {
       provide: NX_CONTEX_CONFIG,
       useValue: { appName: APP_NAME.toUpperCase(), urls, cache: { schedulerPeriod: SCHEDULER_PERIOD } }
     },
+    { provide: NX_LANGUAGE_CONFIG, useValue: { languages: Languages } },
     { provide: NX_RECAPTCHA_TOKEN, useValue: { siteKey: environment.recaptcha.siteKey } }
   ]
 };

@@ -1,0 +1,5 @@
+<div>
+  @for(lang of languages; track lang) { @if(currentLanguage !== lang) {
+  <button [class]="lang" (click)="changeLanguage(lang)">{{ getLanguageName(lang) }}</button>
+  } }
+</div>

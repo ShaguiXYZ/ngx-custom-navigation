@@ -63,10 +63,10 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   // @howto Detect the Closing of a Browser Tab
-  @HostListener('window:beforeunload', ['$event'])
-  beforeunloadHandler(event: BeforeUnloadEvent): void {
-    event.preventDefault();
-  }
+  // @HostListener('window:beforeunload', ['$event'])
+  // beforeunloadHandler(event: BeforeUnloadEvent): void {
+  //   event.preventDefault();
+  // }
 
   // @howto Detect the Browser Back Button
   @HostListener('window:popstate', ['$event'])

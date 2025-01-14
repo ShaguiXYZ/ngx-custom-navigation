@@ -3,9 +3,10 @@ import { TranslateService } from '@ngx-translate/core';
 import { ContextDataService } from '@shagui/ng-shagui/core';
 import { QUOTE_APP_CONTEXT_DATA } from 'src/app/core/constants';
 import { AppContextData } from 'src/app/core/models';
-import { RoutingService } from 'src/app/core/services';
+import { LanguageService, RoutingService } from 'src/app/core/services';
 import { ContextDataServiceStub } from 'src/app/core/stub';
 import { QuoteHeaderComponent } from './quote-header.component';
+import { QuoteLiteralPipe } from '../../pipes';
 
 describe('QuoteHeaderComponent', () => {
   let component: QuoteHeaderComponent;
@@ -14,15 +15,19 @@ describe('QuoteHeaderComponent', () => {
   let routingService: jasmine.SpyObj<RoutingService>;
 
   beforeEach(async () => {
+    const quoteLiteralPipeSpy = jasmine.createSpyObj('QuoteLiteralPipe', ['transform']);
     const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate']);
     const routingServiceSpy = jasmine.createSpyObj('RoutingService', ['previous']);
+    const languageServiceSpy = jasmine.createSpyObj('LanguageService', ['languages', 'current', 'i18n']);
 
     await TestBed.configureTestingModule({
       imports: [QuoteHeaderComponent],
       providers: [
         { provide: ContextDataService, useClass: ContextDataServiceStub },
         { provide: TranslateService, useValue: translateServiceSpy },
-        { provide: RoutingService, useValue: routingServiceSpy }
+        { provide: RoutingService, useValue: routingServiceSpy },
+        { provide: QuoteLiteralPipe, useValue: quoteLiteralPipeSpy },
+        { provide: LanguageService, useValue: languageServiceSpy }
       ]
     }).compileComponents();
   });

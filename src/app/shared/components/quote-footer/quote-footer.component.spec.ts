@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { TranslateService } from '@ngx-translate/core';
 import { ContextDataService } from '@shagui/ng-shagui/core';
 import { of } from 'rxjs';
-import { QuoteFooterConfig } from 'src/app/core/models';
+import { NX_LANGUAGE_CONFIG, QuoteFooterConfig } from 'src/app/core/models';
 import { NX_RECAPTCHA_TOKEN, RoutingService } from 'src/app/core/services';
 import { ContextDataServiceStub } from 'src/app/core/stub';
 import { QuoteLiteralPipe } from '../../pipes';
@@ -19,11 +19,15 @@ describe('QuoteFooterComponent', () => {
   beforeEach(async () => {
     const breakpointObserverSpy = jasmine.createSpyObj('BreakpointObserver', ['observe']);
     const routingServiceSpy = jasmine.createSpyObj('RoutingService', ['next', 'previous']);
-    const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate']);
     const quoteLiteralPipeSpy = jasmine.createSpyObj('QuoteLiteralPipe', ['transform']);
-    const mockConfig = {
+    const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate', 'setDefaultLang', 'use', 'instant']);
+    const mockWorkflowConfig = {
       errorPageId: 'error',
       manifest: {}
+    };
+    const mockLanguageConfig = {
+      current: 'en',
+      languages: ['en', 'fr']
     };
 
     await TestBed.configureTestingModule({
@@ -36,7 +40,8 @@ describe('QuoteFooterComponent', () => {
         { provide: RoutingService, useValue: routingServiceSpy },
         { provide: QuoteLiteralPipe, useValue: quoteLiteralPipeSpy },
         { provide: NX_RECAPTCHA_TOKEN, useValue: { siteKey: 'mock-site-key' } },
-        { provide: NX_WORKFLOW_TOKEN, useValue: mockConfig }
+        { provide: NX_WORKFLOW_TOKEN, useValue: mockWorkflowConfig },
+        { provide: NX_LANGUAGE_CONFIG, useValue: mockLanguageConfig }
       ]
     }).compileComponents();
   });

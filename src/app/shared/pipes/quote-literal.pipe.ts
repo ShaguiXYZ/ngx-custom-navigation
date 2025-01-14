@@ -13,7 +13,9 @@ export class QuoteLiteralPipe implements PipeTransform {
   private readonly literalsService = inject(LiteralsService);
 
   public transform(literal: LiteralModel, params?: LiteralParam): string {
-    const literalValue = typeof literal === 'string' ? ({ value: `${literal}`, params, type: 'literal' } as QuoteLiteral) : literal;
+    const literalValue: QuoteLiteral =
+      typeof literal === 'string' || typeof literal === 'number' ? { value: `${literal}`, params, type: 'literal' } : literal;
+
     return this.literalsService.toString(literalValue, params);
   }
 }

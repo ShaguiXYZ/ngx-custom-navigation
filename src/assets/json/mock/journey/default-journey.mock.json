@@ -159,7 +159,7 @@
           }
         },
         "literals": {
-          "postal-code": "Código postal",
+          "postal-code": { "value": "Label.PostalCode", "type": "translate" },
           "error-required": "El código postal es obligatorio para continuar",
           "error-not-found": "El código postal no existe",
           "header": "¿Cuál es tu código postal?",
@@ -1043,7 +1043,7 @@
     "budget-key": "Clave del presupuesto",
     "create-budget": "Crear presupuesto",
     "e-mail": "Correo electrónico",
-    "header-back": "Volver",
+    "header-back": { "value": "Label.Back", "type": "translate" },
     "save-budget": "Guardar presupuesto",
     "retrieve-budget": "Recuperar presupuesto",
     "store-budget": "Almacenar presupuesto",

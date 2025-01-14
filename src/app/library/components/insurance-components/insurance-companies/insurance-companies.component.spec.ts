@@ -4,7 +4,9 @@ import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { TranslateService } from '@ngx-translate/core';
 import { ContextDataService, IndexedData } from '@shagui/ng-shagui/core';
+import { of } from 'rxjs';
 import { DEBOUNCE_TIME } from 'src/app/core/constants';
+import { NX_LANGUAGE_CONFIG } from 'src/app/core/models';
 import { InsuranceCompaniesService, RoutingService } from 'src/app/core/services';
 import { ContextDataServiceStub } from 'src/app/core/stub';
 import { QuoteModel } from 'src/app/library/models';
@@ -23,7 +25,13 @@ describe('InsuranceCompaniesComponent', () => {
     const insuranceCompaniesServiceSpy = jasmine.createSpyObj('InsuranceCompaniesService', ['companies']);
     const quoteLiteralPipeSpy = jasmine.createSpyObj('QuoteLiteralPipe', ['transform']);
     const routingServiceSpy = jasmine.createSpyObj('RoutingService', ['next']);
-    const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate']);
+    const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate', 'setDefaultLang', 'use', 'instant']);
+    const mockLanguageConfig = {
+      current: 'en',
+      languages: ['en', 'fr']
+    };
+
+    translateServiceSpy.use.and.returnValue(of('en'));
 
     await TestBed.configureTestingModule({
       declarations: [],
@@ -35,7 +43,8 @@ describe('InsuranceCompaniesComponent', () => {
         { provide: TranslateService, useValue: translateServiceSpy },
         { provide: InsuranceCompaniesService, useValue: insuranceCompaniesServiceSpy },
         { provide: RoutingService, useValue: routingServiceSpy },
-        { provide: QuoteLiteralPipe, useValue: quoteLiteralPipeSpy }
+        { provide: QuoteLiteralPipe, useValue: quoteLiteralPipeSpy },
+        { provide: NX_LANGUAGE_CONFIG, useValue: mockLanguageConfig }
       ]
     }).compileComponents();
 

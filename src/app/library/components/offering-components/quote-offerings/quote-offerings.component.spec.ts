@@ -7,10 +7,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NxDialogService, NxModalModule } from '@aposin/ng-aquila/modal';
 import { TranslateService } from '@ngx-translate/core';
 import { ContextDataService } from '@shagui/ng-shagui/core';
-import { Subject } from 'rxjs';
+import { of, Subject } from 'rxjs';
 import { NX_WORKFLOW_TOKEN } from 'src/app/core/components/models';
 import { QUOTE_APP_CONTEXT_DATA, QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
-import { AppContextData } from 'src/app/core/models';
+import { AppContextData, NX_LANGUAGE_CONFIG } from 'src/app/core/models';
 import { NX_RECAPTCHA_TOKEN } from 'src/app/core/services';
 import { RoutingService } from 'src/app/core/services/routing.service';
 import { OfferingPriceModel, QuoteModel } from 'src/app/library/models';
@@ -33,13 +33,19 @@ describe('QuoteOfferingsComponent', () => {
     const routingServiceSpy = jasmine.createSpyObj('RoutingService', ['next']);
     const dialogServiceSpy = jasmine.createSpyObj('NxDialogService', ['open']);
     const rendererSpy = jasmine.createSpyObj('Renderer2', ['listen', 'setStyle']);
-    const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate']);
     const quoteLiteralPipeSpy = jasmine.createSpyObj('QuoteLiteralPipe', ['transform']);
     const httpClientSpy = jasmine.createSpyObj('HttpClient', ['get', 'post', 'put', 'delete']);
-    const mockConfig = {
+    const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate', 'setDefaultLang', 'use', 'instant']);
+    const mockWorkflowConfig = {
       errorPageId: 'error',
       manifest: {}
     };
+    const mockLanguageConfig = {
+      current: 'en',
+      languages: ['en', 'fr']
+    };
+
+    translateServiceSpy.use.and.returnValue(of('en'));
 
     dialogServiceSpy.open.and.returnValue({});
 
@@ -73,7 +79,8 @@ describe('QuoteOfferingsComponent', () => {
         { provide: Renderer2, useValue: rendererSpy },
         { provide: HttpClient, useValue: httpClientSpy },
         { provide: NX_RECAPTCHA_TOKEN, useValue: { siteKey: 'mock-site-key' } },
-        { provide: NX_WORKFLOW_TOKEN, useValue: mockConfig }
+        { provide: NX_WORKFLOW_TOKEN, useValue: mockWorkflowConfig },
+        { provide: NX_LANGUAGE_CONFIG, useValue: mockLanguageConfig }
       ]
     }).compileComponents();
 

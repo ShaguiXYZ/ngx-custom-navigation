@@ -1,12 +1,14 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TranslateService } from '@ngx-translate/core';
+import { of } from 'rxjs';
+import { NX_WORKFLOW_TOKEN } from 'src/app/core/components/models';
+import { NX_LANGUAGE_CONFIG } from 'src/app/core/models';
 import { NX_RECAPTCHA_TOKEN, RoutingService } from 'src/app/core/services';
 import { CubicCapacityModel, FuelModel, QuoteModel, VehicleClassesModel } from 'src/app/library/models';
 import { VehicleService } from 'src/app/library/services';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 import { VehicleFuelComponent } from './vehicle-fuel.component';
-import { NX_WORKFLOW_TOKEN } from 'src/app/core/components/models';
 
 describe('VehicleFuelComponent', () => {
   let component: VehicleFuelComponent;
@@ -18,11 +20,17 @@ describe('VehicleFuelComponent', () => {
     const vehicleServiceSpy = jasmine.createSpyObj('VehicleService', ['getFuelTypes', 'cubicCapacities', 'getVehicleClasses']);
     const routingServiceSpy = jasmine.createSpyObj('RoutingService', ['next']);
     const quoteLiteralPipeSpy = jasmine.createSpyObj('QuoteLiteralPipe', ['transform']);
-    const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate']);
-    const mockConfig = {
+    const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate', 'setDefaultLang', 'use', 'instant']);
+    const mockWorkflowConfig = {
       errorPageId: 'error',
       manifest: {}
     };
+    const mockLanguageConfig = {
+      current: 'en',
+      languages: ['en', 'fr']
+    };
+
+    translateServiceSpy.use.and.returnValue(of('en'));
 
     await TestBed.configureTestingModule({
       declarations: [],
@@ -33,7 +41,8 @@ describe('VehicleFuelComponent', () => {
         { provide: QuoteLiteralPipe, useValue: quoteLiteralPipeSpy },
         { provide: RoutingService, useValue: routingServiceSpy },
         { provide: NX_RECAPTCHA_TOKEN, useValue: { siteKey: 'mock-site-key' } },
-        { provide: NX_WORKFLOW_TOKEN, useValue: mockConfig }
+        { provide: NX_WORKFLOW_TOKEN, useValue: mockWorkflowConfig },
+        { provide: NX_LANGUAGE_CONFIG, useValue: mockLanguageConfig }
       ]
     }).compileComponents();
 

@@ -1,14 +1,14 @@
 import { inject, Injectable } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
 import { ContextDataService, DataInfo, JsonUtils } from '@shagui/ng-shagui/core';
 import { QUOTE_APP_CONTEXT_DATA, QUOTE_CONTEXT_DATA } from '../constants';
-import { AppContextData, LiteralModel, LiteralParam, QuoteLiteral } from '../models';
 import { ConditionEvaluation } from '../lib';
+import { AppContextData, LiteralModel, LiteralParam, QuoteLiteral } from '../models';
+import { LanguageService } from './language.service';
 
 @Injectable({ providedIn: 'root' })
 export class LiteralsService {
   private readonly contextDataService = inject(ContextDataService);
-  private readonly translateService = inject(TranslateService);
+  private readonly languageService = inject(LanguageService);
 
   public toString(literal?: LiteralModel, params?: LiteralParam): string {
     if (!literal) {
@@ -60,7 +60,7 @@ export class LiteralsService {
     switch (literal.type) {
       case 'translate': {
         const normalizedParams = { ...params, ...this.normalizeParams(literal.params) };
-        return this.translateService.instant(literal.value, normalizedParams);
+        return this.languageService.instant(literal.value, normalizedParams);
       }
       case 'literal':
         return this.transformLiteral(literal.value, literal.params);

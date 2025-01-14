@@ -17,6 +17,8 @@ import { QuoteModel } from 'src/app/library/models';
 import { HeaderTitleComponent } from 'src/app/shared/components';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
 import { QuoteOfferingCoveragesComponent } from './offering-coverages.component';
+import { of } from 'rxjs';
+import { NX_LANGUAGE_CONFIG } from 'src/app/core/models';
 
 describe('QuoteOfferingCoveragesComponent', () => {
   let component: QuoteOfferingCoveragesComponent;
@@ -24,7 +26,13 @@ describe('QuoteOfferingCoveragesComponent', () => {
 
   beforeEach(async () => {
     const contextDataServiceSpy = jasmine.createSpyObj('ContextDataService', ['get']);
-    const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate']);
+    const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate', 'setDefaultLang', 'use', 'instant']);
+    const mockLanguageConfig = {
+      current: 'en',
+      languages: ['en', 'fr']
+    };
+
+    translateServiceSpy.use.and.returnValue(of('en'));
 
     contextDataServiceSpy.get.and.callFake((contextDataKey: string): any => {
       if (contextDataKey === QUOTE_APP_CONTEXT_DATA) {
@@ -63,7 +71,8 @@ describe('QuoteOfferingCoveragesComponent', () => {
       providers: [
         { provide: NX_MODAL_DATA, useValue: { selectedPriceIndex: 0 } },
         { provide: ContextDataService, useValue: contextDataServiceSpy },
-        { provide: TranslateService, useValue: translateServiceSpy }
+        { provide: TranslateService, useValue: translateServiceSpy },
+        { provide: NX_LANGUAGE_CONFIG, useValue: mockLanguageConfig }
       ]
     }).compileComponents();
   });

@@ -6,7 +6,8 @@ import { NxAvatarModule } from '@aposin/ng-aquila/avatar';
 import { NxCopytextModule } from '@aposin/ng-aquila/copytext';
 import { TranslateService } from '@ngx-translate/core';
 import { ContextDataService } from '@shagui/ng-shagui/core';
-import { IIconData } from 'src/app/core/models';
+import { of } from 'rxjs';
+import { IIconData, NX_LANGUAGE_CONFIG } from 'src/app/core/models';
 import { ContextDataServiceStub } from 'src/app/core/stub';
 import { QuoteLiteralDirective } from '../../directives';
 import { SelectableOptionComponent } from '../selectable-option';
@@ -18,14 +19,21 @@ describe('IconCardComponent', () => {
   let fixture: ComponentFixture<IconCardComponent>;
 
   beforeEach(async () => {
-    const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate']);
+    const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate', 'setDefaultLang', 'use', 'instant']);
+    const mockLanguageConfig = {
+      current: 'en',
+      languages: ['en', 'fr']
+    };
+
+    translateServiceSpy.use.and.returnValue(of('en'));
 
     await TestBed.configureTestingModule({
       declarations: [],
       imports: [IconCardComponent, CommonModule, SelectableOptionComponent, NxAvatarModule, NxCopytextModule, QuoteLiteralDirective],
       providers: [
         { provide: ContextDataService, useClass: ContextDataServiceStub },
-        { provide: TranslateService, useValue: translateServiceSpy }
+        { provide: TranslateService, useValue: translateServiceSpy },
+        { provide: NX_LANGUAGE_CONFIG, useValue: mockLanguageConfig }
       ],
       deferBlockBehavior: DeferBlockBehavior.Manual
     }).compileComponents();

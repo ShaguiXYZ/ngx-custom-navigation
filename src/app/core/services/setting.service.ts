@@ -1,5 +1,4 @@
 import { inject, Injectable } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
 import { ContextDataService, deepCopy } from '@shagui/ng-shagui/core';
 import { NX_WORKFLOW_TOKEN } from '../components/models';
 import { QUOTE_APP_CONTEXT_DATA, QUOTE_CONTEXT_DATA } from '../constants';
@@ -19,7 +18,6 @@ import { JourneyService, QUOTE_JOURNEY_DISALED } from './journey.service';
 export class SettingsService {
   private readonly workFlowToken = inject(NX_WORKFLOW_TOKEN);
   private readonly contextDataService = inject(ContextDataService);
-  private readonly translateService = inject(TranslateService);
   private readonly journeyService = inject(JourneyService);
 
   public async loadSettings(): Promise<void> {
@@ -28,8 +26,6 @@ export class SettingsService {
     const info = await this.journeyService.clientJourney(journeyId);
     const context = this.contextDataService.get<AppContextData>(QUOTE_APP_CONTEXT_DATA);
     const breakingChange = this.breakingChange(context, info.versions ?? []);
-
-    this.translateService.setDefaultLang('es-ES');
 
     if (context?.configuration.name !== info.name || breakingChange !== 'none') {
       console.group('SettingsService');

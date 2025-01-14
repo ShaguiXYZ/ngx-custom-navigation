@@ -1,5 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { TranslateService } from '@ngx-translate/core';
+import { of } from 'rxjs';
+import { NX_LANGUAGE_CONFIG } from 'src/app/core/models';
 import { CaptchaService } from 'src/app/core/services';
 import { HeaderTitleComponent } from 'src/app/shared/components';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
@@ -13,7 +15,14 @@ describe('CaptchaComponent', () => {
   let captchaServiceSpy: jasmine.SpyObj<CaptchaService>;
 
   beforeEach(async () => {
-    const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate']);
+    const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate', 'setDefaultLang', 'use', 'instant']);
+    const mockLanguageConfig = {
+      current: 'en',
+      languages: ['en', 'fr']
+    };
+
+    translateServiceSpy.use.and.returnValue(of('en'));
+
     captchaServiceSpy = jasmine.createSpyObj('CaptchaService', ['execute']);
 
     await TestBed.configureTestingModule({
@@ -21,7 +30,8 @@ describe('CaptchaComponent', () => {
       imports: [CaptchaComponent, ColorCaptchaComponent, HeaderTitleComponent, QuoteLiteralDirective],
       providers: [
         { provide: CaptchaService, useValue: captchaServiceSpy },
-        { provide: TranslateService, useValue: translateServiceSpy }
+        { provide: TranslateService, useValue: translateServiceSpy },
+        { provide: NX_LANGUAGE_CONFIG, useValue: mockLanguageConfig }
       ]
     }).compileComponents();
 
