@@ -35,6 +35,16 @@
           margin-right: 8px;
         }
       }
+
+      .contact__info {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+
+        quote-language {
+          margin-left: 10px;
+        }
+      }
     }
   }
 }

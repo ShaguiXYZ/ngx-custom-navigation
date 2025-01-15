@@ -2,7 +2,7 @@ import { AfterViewInit, Directive, ElementRef, Input, OnDestroy } from '@angular
 import { DomSanitizer } from '@angular/platform-browser';
 import { Subscription } from 'rxjs';
 import { LiteralParam } from 'src/app/core/models';
-import { LanguageService, LiteralsService } from 'src/app/core/services';
+import { LiteralsService } from 'src/app/core/services';
 
 @Directive({
   selector: '[nxQuoteLiteral]',
@@ -22,11 +22,10 @@ export class QuoteLiteralDirective implements AfterViewInit, OnDestroy {
 
   constructor(
     private readonly literalsService: LiteralsService,
-    private readonly languageService: LanguageService,
     private readonly el: ElementRef<HTMLElement>,
     private readonly domSanitizer: DomSanitizer
   ) {
-    this.subscrition$ = this.languageService.asObservable().subscribe(() => this.updateElement());
+    this.subscrition$ = this.literalsService.onLanguageChange().subscribe(() => this.updateElement());
   }
 
   ngOnDestroy(): void {

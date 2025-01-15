@@ -5,7 +5,7 @@
   </quote-header-title>
   <section class="form-container">
     <form [formGroup]="form">
-      <nx-formfield label="{{ 'postal-code' | quoteLiteral }}">
+      <nx-formfield [label]="'postal-code' | quoteLiteral">
         <input type="text" formControlName="postalCode" nxInput maxlength="5" nxQuoteMask="numeric" nxAutoFocus />
         <span nxFormfieldHint> {{ location }} </span>
         @if(form.get('postalCode')?.hasError('required')) {

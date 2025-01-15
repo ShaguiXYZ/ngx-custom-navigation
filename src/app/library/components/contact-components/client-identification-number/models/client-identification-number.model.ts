@@ -32,7 +32,15 @@ export const isNIE = (nie?: string): boolean => {
   const nieLetter = nie.charAt(0);
   const nieNumber = nie.substring(1, 8);
   const nieLetterIndex = 'XYZ'.indexOf(nieLetter);
-  const letterIndex = Number(nieNumber) % 23;
+  if (nieLetterIndex === -1) {
+    return false;
+  }
 
-  return nieLetterIndex === letterIndex;
+  // Convert the initial letter to its corresponding number
+  const convertedNieNumber = nieLetterIndex + nieNumber;
+  const letter = nie.charAt(8);
+  const validLetters = 'TRWAGMYFPDXBNJZSQVHLCKE';
+  const letterIndex = Number(convertedNieNumber) % 23;
+
+  return letter.toUpperCase() === validLetters.charAt(letterIndex);
 };

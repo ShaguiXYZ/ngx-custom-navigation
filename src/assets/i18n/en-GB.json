@@ -2,10 +2,10 @@
   "Errors": {
     "FieldRequired": "Field required",
     "FutureDate": "The date cannot be in the future",
-    "PastDate": "The date cannot be in the past",
-    "OldDate": "The date cannot be earlier than {{value}}",
     "NotBetween": "The value must be between {{min}} and {{max}}",
-    "NotBetweenDates": "The date must be between {{min}} and {{max}}"
+    "NotBetweenDates": "The date must be between {{min}} and {{max}}",
+    "OldDate": "The date cannot be earlier than {{value}}",
+    "PastDate": "The date cannot be in the past"
   },
   "Label": {
     "AllBrands": "All brands",
@@ -28,8 +28,14 @@
     "Power": "Power",
     "Search": "Search",
     "Year": "year",
-    "Years": "years",
     "YearOfManufacture": "Year of manufacture",
-    "Yes": "Yes"
+    "Years": "years",
+    "Yes": "Yes",
+    "WeCallYou": "We call you"
+  },
+  "Pages": {
+    "Captcha": {
+      "Header": "Security verification. Please select the red symbols."
+    }
   }
 }

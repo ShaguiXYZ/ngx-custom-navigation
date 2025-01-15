@@ -61,15 +61,6 @@ export class QuoteHeaderComponent implements OnInit, OnDestroy {
     this.routingService.previous();
   }
 
-  public changeLanguage = (): void => {
-    // const {
-    //   navigation: { lastPage }
-    // } = this.contextDataService.get<AppContextData>(QUOTE_APP_CONTEXT_DATA);
-    // this.router.navigate([AppUrls._dispatcher, lastPage!.pageId], { skipLocationChange: true }).then(() => {
-    //   window.location.reload();
-    // });
-  };
-
   private resetHeaderAnimation(): void {
     const headerElement = $('.enhance-header');
 

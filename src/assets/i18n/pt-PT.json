@@ -1,6 +1,41 @@
 {
-  "Header": {
-    "Title": "Título do aplicativo",
-    "Help": "Ajuda"
+  "Errors": {
+    "FieldRequired": "Campo obrigatório",
+    "FutureDate": "A data não pode estar no futuro",
+    "NotBetween": "O valor deve estar entre {{min}} e {{max}}",
+    "NotBetweenDates": "A data deve estar entre {{min}} e {{max}}",
+    "OldDate": "A data não pode ser anterior a {{value}}",
+    "PastDate": "A data não pode estar no passado"
+  },
+  "Label": {
+    "AllBrands": "Todas as marcas",
+    "AllModels": "Todos os modelos",
+    "Back": "Voltar",
+    "Brand": "Marca",
+    "CubicCapacity": "Capacidade cúbica",
+    "DateFormat": "Formato: DD/MM/AAAA",
+    "Datepicker": {
+      "SwitchToMonthView": "Escolher data",
+      "SwitchToMultiYearViewLabel": "Escolher mês e ano"
+    },
+    "ErrorBody": "Desculpe, não podemos processar seu pedido no momento. Por favor, tente novamente mais tarde.",
+    "Fuel": "Combustível",
+    "Model": "Modelo",
+    "Next": "Próximo",
+    "No": "Não",
+    "OrMore": "ou mais",
+    "PostalCode": "Código postal",
+    "Power": "Potência",
+    "Search": "Pesquisar",
+    "Year": "ano",
+    "YearOfManufacture": "Ano de fabricação",
+    "Years": "anos",
+    "Yes": "Sim",
+    "WeCallYou": "Nós ligamos para você"
+  },
+  "Pages": {
+    "Captcha": {
+      "Header": "Verificação de segurança. Por favor, selecione os símbolos vermelhos."
+    }
   }
 }

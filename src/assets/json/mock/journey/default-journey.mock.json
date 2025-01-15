@@ -1035,7 +1035,7 @@
     "contact-us": "external-contact-us"
   },
   "literals": {
-    "captcha-header": "Verificación de seguridad. Por favor, selecciona los simbolos rojos.",
+    "captcha-header": { "value": "Pages.Captcha.Header", "type": "translate" },
     "journey-title": "Seguro de coche",
     "bad-format": "Formato incorrecto",
     "budget-modal-header": "Datos de tu presupuesto",
@@ -1061,7 +1061,7 @@
     "power": { "value": "Label.Power", "type": "translate" },
     "search": { "value": "Label.Search", "type": "translate" },
     "yes": { "value": "Label.Yes", "type": "translate" },
-    "we-call-you": "Te llamamos",
+    "we-call-you": { "value": "Label.WeCallYou", "type": "translate" },
     "warning-header-back-button": "¡ Aviso !",
     "warning-text-back-button": "Usa los botones de la aplicación para desplazarte por ella.",
     "error-required": { "value": "Errors.FieldRequired", "type": "translate" },

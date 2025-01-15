@@ -3,7 +3,7 @@ import { Component, ElementRef } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Subject } from 'rxjs';
-import { LanguageService, LiteralsService } from 'src/app/core/services';
+import { LiteralsService } from 'src/app/core/services';
 import { QuoteLiteralDirective } from '../quote-literal.directive';
 
 @Component({
@@ -20,23 +20,20 @@ describe('QuoteLiteralDirective', () => {
   let fixture: ComponentFixture<TestComponent>;
   let element: HTMLElement;
   let literalsService: jasmine.SpyObj<LiteralsService>;
-  let languageService: jasmine.SpyObj<LanguageService>;
   let domSanitizer: jasmine.SpyObj<DomSanitizer>;
 
   beforeEach(() => {
     const languageSubject = new Subject<any>();
-    literalsService = jasmine.createSpyObj('LiteralsService', ['transformLiteral']);
-    languageService = jasmine.createSpyObj('LanguageService', ['asObservable']);
+    literalsService = jasmine.createSpyObj('LiteralsService', ['transformLiteral', 'onLanguageChange']);
     domSanitizer = jasmine.createSpyObj('DomSanitizer', ['bypassSecurityTrustHtml', 'sanitize']);
 
-    languageService.asObservable.and.returnValue(languageSubject.asObservable());
+    literalsService.onLanguageChange.and.returnValue(languageSubject.asObservable());
 
     TestBed.configureTestingModule({
       declarations: [TestComponent],
       imports: [QuoteLiteralDirective],
       providers: [
         { provide: LiteralsService, useValue: literalsService },
-        { provide: LanguageService, useValue: languageService },
         { provide: DomSanitizer, useValue: domSanitizer }
       ]
     });
@@ -47,7 +44,7 @@ describe('QuoteLiteralDirective', () => {
   });
 
   it('should create an instance', () => {
-    const directive = new QuoteLiteralDirective(literalsService, languageService, new ElementRef(element), domSanitizer);
+    const directive = new QuoteLiteralDirective(literalsService, new ElementRef(element), domSanitizer);
     expect(directive).toBeTruthy();
   });
 

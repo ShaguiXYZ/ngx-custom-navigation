@@ -1,16 +1,32 @@
-import { inject, Injectable } from '@angular/core';
+import { inject, Injectable, OnDestroy } from '@angular/core';
 import { ContextDataService, DataInfo, JsonUtils } from '@shagui/ng-shagui/core';
 import { QUOTE_APP_CONTEXT_DATA, QUOTE_CONTEXT_DATA } from '../constants';
 import { ConditionEvaluation } from '../lib';
 import { AppContextData, LiteralModel, LiteralParam, QuoteLiteral } from '../models';
 import { LanguageService } from './language.service';
+import { Subject, Subscription } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
-export class LiteralsService {
+export class LiteralsService implements OnDestroy {
+  private readonly languageChange$ = new Subject<string>();
+  private readonly subscrition$: Subscription;
+
   private readonly contextDataService = inject(ContextDataService);
   private readonly languageService = inject(LanguageService);
 
-  public toString(literal?: LiteralModel, params?: LiteralParam): string {
+  constructor() {
+    this.subscrition$ = this.languageService.asObservable().subscribe(this.languageChange$.next.bind(this.languageChange$));
+  }
+
+  ngOnDestroy(): void {
+    this.subscrition$.unsubscribe();
+  }
+
+  public onLanguageChange() {
+    return this.languageChange$.asObservable();
+  }
+
+  public toString = (literal?: LiteralModel, params?: LiteralParam): string => {
     if (!literal) {
       return '';
     }
@@ -36,7 +52,7 @@ export class LiteralsService {
 
     return strLiteral.replaceAll(/{{.*?}}/g, '');
     // return strLiteral?.replaceAll(/{{[^ ]*?}}/g, '');
-  }
+  };
 
   public transformLiteral = (literalKey: string, params?: LiteralParam): string => {
     const contextData = this.contextDataService.get<AppContextData>(QUOTE_APP_CONTEXT_DATA);

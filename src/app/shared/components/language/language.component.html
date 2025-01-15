@@ -1,5 +1,11 @@
-<div>
-  @for(lang of languages; track lang) { @if(currentLanguage !== lang) {
-  <button [class]="lang" (click)="changeLanguage(lang)">{{ getLanguageName(lang) }}</button>
-  } }
+<!-- eslint-disable @angular-eslint/template/click-events-have-key-events -->
+<div class="language-menu">
+  <div class="current__language">
+    <div class="language" [attr.data-lang]="currentLanguage" tabindex="0" nxCopytext="normal"></div>
+  </div>
+  <div class="other__languages">
+    @for(lang of languages; track lang){ @if(currentLanguage !== lang){
+    <div class="language" [attr.data-lang]="lang" (click)="changeLanguage(lang)" tabindex="0" nxCopytext="normal"></div>
+    } }
+  </div>
 </div>

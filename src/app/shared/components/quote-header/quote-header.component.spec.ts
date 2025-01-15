@@ -1,12 +1,14 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { TranslateService } from '@ngx-translate/core';
 import { ContextDataService } from '@shagui/ng-shagui/core';
+import { Subject } from 'rxjs';
 import { QUOTE_APP_CONTEXT_DATA } from 'src/app/core/constants';
 import { AppContextData } from 'src/app/core/models';
 import { LanguageService, RoutingService } from 'src/app/core/services';
 import { ContextDataServiceStub } from 'src/app/core/stub';
-import { QuoteHeaderComponent } from './quote-header.component';
 import { QuoteLiteralPipe } from '../../pipes';
+import { QuoteHeaderComponent } from './quote-header.component';
 
 describe('QuoteHeaderComponent', () => {
   let component: QuoteHeaderComponent;
@@ -15,10 +17,13 @@ describe('QuoteHeaderComponent', () => {
   let routingService: jasmine.SpyObj<RoutingService>;
 
   beforeEach(async () => {
+    const languageServiceSubject = new Subject<any>();
     const quoteLiteralPipeSpy = jasmine.createSpyObj('QuoteLiteralPipe', ['transform']);
     const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate']);
     const routingServiceSpy = jasmine.createSpyObj('RoutingService', ['previous']);
-    const languageServiceSpy = jasmine.createSpyObj('LanguageService', ['languages', 'current', 'i18n']);
+    const languageServiceSpy = jasmine.createSpyObj('LanguageService', ['asObservable', 'languages', 'current', 'i18n']);
+
+    languageServiceSpy.asObservable.and.returnValue(languageServiceSubject.asObservable());
 
     await TestBed.configureTestingModule({
       imports: [QuoteHeaderComponent],

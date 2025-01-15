@@ -1,0 +1,41 @@
+{
+  "Errors": {
+    "FieldRequired": "Camp requerit",
+    "FutureDate": "La data no pot estar en el futur",
+    "NotBetween": "El valor ha d'estar entre {{min}} i {{max}}",
+    "NotBetweenDates": "La data ha d'estar entre {{min}} i {{max}}",
+    "OldDate": "La data no pot ser anterior a {{value}}",
+    "PastDate": "La data no pot estar en el passat"
+  },
+  "Label": {
+    "AllBrands": "Totes les marques",
+    "AllModels": "Tots els models",
+    "Back": "Enrere",
+    "Brand": "Marca",
+    "CubicCapacity": "Cilindrada",
+    "DateFormat": "Format: DD/MM/AAAA",
+    "Datepicker": {
+      "SwitchToMonthView": "Escollir data",
+      "SwitchToMultiYearViewLabel": "Escollir mes i any"
+    },
+    "ErrorBody": "Ho sentim, no podem processar la seva sol·licitud en aquest moment. Si us plau, torni-ho a intentar més tard.",
+    "Fuel": "Combustible",
+    "Model": "Model",
+    "Next": "Següent",
+    "No": "No",
+    "OrMore": "o més",
+    "PostalCode": "Codi postal",
+    "Power": "Potència",
+    "Search": "Cercar",
+    "Year": "any",
+    "YearOfManufacture": "Any de fabricació",
+    "Years": "anys",
+    "Yes": "Sí",
+    "WeCallYou": "Et truquem"
+  },
+  "Pages": {
+    "Captcha": {
+      "Header": "Verificació de seguretat. Si us plau, selecciona els símbols vermells."
+    }
+  }
+}

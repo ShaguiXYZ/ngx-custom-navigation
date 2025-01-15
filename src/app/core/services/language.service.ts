@@ -1,6 +1,6 @@
 import { DOCUMENT } from '@angular/common';
 import { Inject, Injectable, LOCALE_ID, Optional } from '@angular/core';
-import { InterpolationParameters, TranslateService } from '@ngx-translate/core';
+import { TranslateService } from '@ngx-translate/core';
 import { firstValueFrom, Observable, Subject } from 'rxjs';
 import { StorageLib } from '../lib';
 import { LanguageConfig, Languages, NX_LANGUAGE_CONFIG, STORAGE_LANGUAGE_KEY } from '../models';
@@ -10,7 +10,7 @@ import { LanguageConfig, Languages, NX_LANGUAGE_CONFIG, STORAGE_LANGUAGE_KEY } f
 })
 export class LanguageService {
   private readonly config: LanguageConfig;
-  private languageChange$ = new Subject<string>();
+  private readonly languageChange$ = new Subject<string>();
 
   constructor(
     @Optional()
@@ -35,7 +35,6 @@ export class LanguageService {
 
   public async i18n(key: string): Promise<void> {
     if (this.config.languages[key]) {
-      console.log('Setting language to', key);
       await firstValueFrom(this.translateService.use(key));
 
       this.document.documentElement.lang = key;
@@ -49,16 +48,9 @@ export class LanguageService {
     }
   }
 
-  public instant = (key: string | string[], interpolateParams?: InterpolationParameters) => {
-    const data = this.translateService.instant(key, interpolateParams);
+  public instant = this.translateService.instant.bind(this.translateService);
 
-    console.log('Instant', key, data, this.translateService.currentLang);
-
-    return data;
-  };
-  public asObservable(): Observable<string> {
-    return this.languageChange$.asObservable();
-  }
+  public asObservable = (): Observable<string> => this.languageChange$.asObservable();
 
   private configureService(): LanguageConfig {
     const sessionData = StorageLib.get(STORAGE_LANGUAGE_KEY, 'local');

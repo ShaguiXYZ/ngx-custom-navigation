@@ -1,11 +1,11 @@
 {
   "Errors": {
     "FieldRequired": "Campo requerido",
-    "FutureDate": "La fecha no puede ser futura",
-    "PastDate": "La fecha no puede ser pasada",
-    "OldDate": "La fecha no puede ser anterior a {{value}}",
+    "FutureDate": "La fecha no puede estar en el futuro",
     "NotBetween": "El valor debe estar entre {{min}} y {{max}}",
-    "NotBetweenDates": "La fecha debe estar entre {{min}} y {{max}}"
+    "NotBetweenDates": "La fecha debe estar entre {{min}} y {{max}}",
+    "OldDate": "La fecha no puede ser anterior a {{value}}",
+    "PastDate": "La fecha no puede estar en el pasado"
   },
   "Label": {
     "AllBrands": "Todas las marcas",
@@ -15,21 +15,27 @@
     "CubicCapacity": "Cilindrada",
     "DateFormat": "Formato: DD/MM/AAAA",
     "Datepicker": {
-      "SwitchToMonthView": "Elige fecha",
-      "SwitchToMultiYearViewLabel": "Elige mes y año"
+      "SwitchToMonthView": "Elegir fecha",
+      "SwitchToMultiYearViewLabel": "Elegir mes y año"
     },
-    "ErrorBody": "Lo siento, en estos momentos no podemos atender tu solicitud. Por favor, inténtalo de nuevo más tarde.",
+    "ErrorBody": "Lo sentimos, no podemos procesar su solicitud en este momento. Por favor, inténtelo de nuevo más tarde.",
     "Fuel": "Combustible",
     "Model": "Modelo",
-    "Next": "Continuar",
+    "Next": "Siguiente",
     "No": "No",
     "OrMore": "o más",
     "PostalCode": "Código postal",
     "Power": "Potencia",
     "Search": "Buscar",
     "Year": "año",
-    "Years": "años",
     "YearOfManufacture": "Año de fabricación",
-    "Yes": "Sí"
+    "Years": "años",
+    "Yes": "Sí",
+    "WeCallYou": "Te llamamos"
+  },
+  "Pages": {
+    "Captcha": {
+      "Header": "Verificación de seguridad. Por favor, selecciona los simbolos rojos."
+    }
   }
 }

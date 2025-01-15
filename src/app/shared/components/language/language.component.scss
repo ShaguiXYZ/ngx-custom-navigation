@@ -1,7 +1,59 @@
-.en-GB {
+.language-menu {
+  display: inline-block;
+  position: relative;
+
+  .current__language {
+    align-items: center;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+  }
+
+  .other__languages {
+    align-items: center;
+    display: flex;
+    height: 0;
+    flex-direction: column;
+    left: 0;
+    opacity: 0;
+    position: absolute;
+    top: 100%;
+    transition: height 1s ease allow-discrete, opacity 1s ease;
+    width: 100%;
+    z-index: 1;
+  }
+}
+
+.language-menu:hover .other__languages {
+  height: auto;
+  opacity: 1;
+}
+
+.language {
+  align-items: center;
+  background-size: cover;
+  background-position: center;
+  border-radius: 100%;
+  cursor: pointer;
+  display: inline-block;
+  justify-content: center;
+  margin: 5px 0;
+  height: 24px;
+  width: 24px;
+}
+
+.language[data-lang='es-CA'] {
+  background-image: url('/images/flags/es-CA.svg');
+}
+
+.language[data-lang='es-ES'] {
+  background-image: url('/images/flags/es-ES.svg');
+}
+
+.language[data-lang='en-GB'] {
   background-image: url('/images/flags/en-GB.svg');
 }
 
-.es-ES {
-  background-image: url('/images/flags/es-ES.svg');
+.language[data-lang='pt-PT'] {
+  background-image: url('/images/flags/pt-PT.svg');
 }

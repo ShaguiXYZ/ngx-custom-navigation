@@ -90,17 +90,17 @@ describe('AppComponent', () => {
     expect(event.stopPropagation).toHaveBeenCalled();
   });
 
-  // it('should prevent default behavior on beforeunload event', () => {
-  //   const event = {
-  //     preventDefault: () => {
-  //       return;
-  //     }
-  //   } as unknown as BeforeUnloadEvent;
-  //   spyOn(event, 'preventDefault');
-  //   component.beforeunloadHandler(event);
+  it('should prevent default behavior on beforeunload event', () => {
+    const event = {
+      preventDefault: () => {
+        return;
+      }
+    } as unknown as BeforeUnloadEvent;
+    spyOn(event, 'preventDefault');
+    component.beforeunloadHandler(event);
 
-  //   expect(event.preventDefault).toHaveBeenCalled();
-  // });
+    expect(event.preventDefault).toHaveBeenCalled();
+  });
 
   it('should set verified to true on onCaptchaVerified', () => {
     component.onCaptchaVerified(true);

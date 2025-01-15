@@ -1,10 +1,12 @@
 import { Component, EventEmitter, inject, OnInit, Output } from '@angular/core';
+import { NxCopytextModule } from '@aposin/ng-aquila/copytext';
 import { LanguageService } from 'src/app/core/services';
 
 @Component({
   selector: 'quote-language',
   templateUrl: './language.component.html',
   styleUrls: ['./language.component.scss'],
+  imports: [NxCopytextModule],
   standalone: true
 })
 export class LanguageComponent implements OnInit {

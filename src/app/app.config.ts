@@ -6,6 +6,7 @@ import {
   importProvidersFrom,
   inject,
   Injectable,
+  OnDestroy,
   provideZoneChangeDetection
 } from '@angular/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
@@ -23,15 +24,39 @@ import { VEHICLE_WORKFLOW_TOKEN } from './library/library-manifest';
 import { TRANSLATE_MODULE_CONFIG, urls } from './shared/config';
 import { httpErrorInterceptor, mockInterceptor, recaptchaInterceptor } from './shared/interceptors';
 import { NX_LANGUAGE_CONFIG } from './core/models';
+import { Subscription } from 'rxjs';
 
 const Languages = {
   ['en-GB']: 'en-GB',
-  ['es-ES']: 'es-ES'
+  ['es-ES']: 'es-ES',
+  ['es-CA']: 'es-CA',
+  ['pt-PT']: 'pt-PT'
 };
 
 @Injectable()
-class DatePikerIntl extends NxDatepickerIntl {
+class DatePikerIntl extends NxDatepickerIntl implements OnDestroy {
+  private readonly literalSubscription: Subscription = new Subscription();
   private readonly literalsService = inject(LiteralsService);
+
+  constructor() {
+    super();
+
+    this.literalSubscription = this.literalsService.onLanguageChange().subscribe(() => {
+      this.switchToMonthViewLabel = this.literalsService.toString({
+        value: 'Label.Datepicker.SwitchToMonthView',
+        type: 'translate'
+      });
+
+      this.switchToMultiYearViewLabel = this.literalsService.toString({
+        value: 'Label.Datepicker.SwitchToMultiYearViewLabel',
+        type: 'translate'
+      });
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.literalSubscription.unsubscribe();
+  }
 
   override switchToMonthViewLabel = this.literalsService.toString({
     value: 'Label.Datepicker.SwitchToMonthView',

@@ -27,21 +27,23 @@
         </div>
       </div>
 
-      @if(config.showContactUs) {
-      <a
-        class="contact-us"
-        tabindex="0"
-        nxCopytext="normal"
-        nxQuoteLink="contact-us"
-        nxQuoteLiteral="we-call-you"
-        [nxTrack]="{
-          label: 'we-call-you' | quoteLiteral
-        }"
-        [nxTrackEvents]="['click']"
-      >
-      </a>
-      }
-      <quote-language (uiChange)="changeLanguage()" />
+      <div class="contact__info">
+        @if(config.showContactUs) {
+        <a
+          class="contact-us"
+          tabindex="0"
+          nxCopytext="normal"
+          nxQuoteLink="contact-us"
+          nxQuoteLiteral="we-call-you"
+          [nxTrack]="{
+            label: 'we-call-you' | quoteLiteral
+          }"
+          [nxTrackEvents]="['click']"
+        >
+        </a>
+        }
+        <quote-language />
+      </div>
     </div>
   </div>
 </div>
