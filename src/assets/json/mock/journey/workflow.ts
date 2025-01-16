@@ -10,11 +10,11 @@ export const WORKFLOW: ConfigurationDTO<QuoteModel, WorkflowManifestId> = {
       id: 'main',
       steps: [
         {
-          label: { value: 'Datos personales' },
+          label: { value: 'Steps.PersonalData', type: 'translate' },
           pages: ['is-client', 'place', 'birthdate', 'driving-license-date', 'driving-license-location', 'date-of-issue']
         },
         {
-          label: { value: 'Datos del vehículo' },
+          label: { value: 'Steps.VehicleData', type: 'translate' },
           pages: [
             'vehicle-type',
             'license-plate',
@@ -28,11 +28,11 @@ export const WORKFLOW: ConfigurationDTO<QuoteModel, WorkflowManifestId> = {
           ]
         },
         {
-          label: { value: 'Datos del Seguro' },
+          label: { value: 'Steps.InsuranceData', type: 'translate' },
           pages: ['is-policy-owner', 'insurance-companies', 'time-insurance-holder', 'number-accidents']
         },
         {
-          label: { value: 'Datos del Contacto' },
+          label: { value: 'Steps.ContactData', type: 'translate' },
           pages: ['client-name', 'client-phone-number', 'client-email', 'client-identification-number']
         }
       ]
@@ -41,7 +41,7 @@ export const WORKFLOW: ConfigurationDTO<QuoteModel, WorkflowManifestId> = {
       id: 'client',
       steps: [
         {
-          label: { value: 'Datos del Cliente' },
+          label: { value: 'Steps.ClientData', type: 'translate' },
           pages: [
             'is-client-client-name',
             'is-client-client-phone-number',
@@ -50,7 +50,7 @@ export const WORKFLOW: ConfigurationDTO<QuoteModel, WorkflowManifestId> = {
           ]
         },
         {
-          label: { value: 'Te llamamos' },
+          label: { value: 'Steps.WeCallYou', type: 'translate' },
           pages: ['is-client-contact-us']
         }
       ],
@@ -61,11 +61,11 @@ export const WORKFLOW: ConfigurationDTO<QuoteModel, WorkflowManifestId> = {
     {
       steps: [
         {
-          label: { value: 'Como podemos contactarte' },
+          label: { value: 'Steps.ContactMode', type: 'translate' },
           pages: ['external-contact-us']
         },
         {
-          label: { value: 'Cuando podemos contactarte' },
+          label: { value: 'Steps.ContactTime', type: 'translate' },
           pages: ['external-contact-time']
         }
       ],
@@ -163,7 +163,7 @@ export const WORKFLOW: ConfigurationDTO<QuoteModel, WorkflowManifestId> = {
           }
         },
         literals: {
-          'postal-code': 'Código postal',
+          'postal-code': { value: 'Label.PostalCode', type: 'translate' },
           'error-required': 'El código postal es obligatorio para continuar',
           'error-not-found': 'El código postal no existe',
           header: '¿Cuál es tu código postal?',
@@ -355,9 +355,9 @@ export const WORKFLOW: ConfigurationDTO<QuoteModel, WorkflowManifestId> = {
       configuration: {
         literals: {
           header: '¿Donde tienes pensado aparcar el vehículo?',
-          street_parked: 'En la calle',
-          driveway_parked: 'En el garaje de casa',
-          garage_parked: 'En un garaje comunitario'
+          'street-parked': 'En la calle',
+          'driveway-parked': 'En el garaje de casa',
+          'garage-parked': 'En un garaje comunitario'
         }
       }
     },
@@ -549,10 +549,10 @@ export const WORKFLOW: ConfigurationDTO<QuoteModel, WorkflowManifestId> = {
       ],
       configuration: {
         literals: {
-          year: '{{value}} año',
-          years: '{{value}} años',
+          year: '{{value}} año {{last}}',
+          years: '{{value}} años {{last}}',
           header: '¿Cuánto tiempo llevas como titular de un seguro en esta u otras compañías?',
-          'time-desc': '{{value}} {{literal-year}} {{or-more}}'
+          last: { value: 'or-more', type: 'literal' }
         }
       }
     },
@@ -1039,7 +1039,7 @@ export const WORKFLOW: ConfigurationDTO<QuoteModel, WorkflowManifestId> = {
     'contact-us': 'external-contact-us'
   },
   literals: {
-    'captcha-header': 'Verificación de seguridad. Por favor, selecciona los simbolos rojos.',
+    'captcha-header': { value: 'Pages.Captcha.Header', type: 'translate' },
     'journey-title': 'Seguro de coche',
     'bad-format': 'Formato incorrecto',
     'budget-modal-header': 'Datos de tu presupuesto',
@@ -1047,7 +1047,7 @@ export const WORKFLOW: ConfigurationDTO<QuoteModel, WorkflowManifestId> = {
     'budget-key': 'Clave del presupuesto',
     'create-budget': 'Crear presupuesto',
     'e-mail': 'Correo electrónico',
-    'header-back': 'Volver',
+    'header-back': { value: 'Label.Back', type: 'translate' },
     'save-budget': 'Guardar presupuesto',
     'retrieve-budget': 'Recuperar presupuesto',
     'store-budget': 'Almacenar presupuesto',
@@ -1066,7 +1066,7 @@ export const WORKFLOW: ConfigurationDTO<QuoteModel, WorkflowManifestId> = {
     power: { value: 'Label.Power', type: 'translate' },
     search: { value: 'Label.Search', type: 'translate' },
     yes: { value: 'Label.Yes', type: 'translate' },
-    'we-call-you': 'Te llamamos',
+    'we-call-you': { value: 'Label.WeCallYou', type: 'translate' },
     'warning-header-back-button': '¡ Aviso !',
     'warning-text-back-button': 'Usa los botones de la aplicación para desplazarte por ella.',
     'error-required': { value: 'Errors.FieldRequired', type: 'translate' },

@@ -52,14 +52,15 @@ export class BlackListActivator {
   private static isBlackListed(
     type: BlackListType,
     value?: string,
-    params?: { percentBlacklisted?: number; percentIsClient?: number }
+    params?: { percentBlacklisted?: number; percentIsClient?: number; percentHasDebt?: number }
   ): Promise<BlackListModel> {
-    const _params = { percentBlacklisted: 0.8, percentIsClient: 0.8, ...params };
+    const _params = { percentBlacklisted: 0.8, percentIsClient: 0.8, percentHasDebt: 0.8, ...params };
     const response: BlackListResponse = !value
       ? { blacklisted: false, isClient: false }
       : {
           blacklisted: BlackListActivator.ramdomBoolean(_params.percentBlacklisted),
-          isClient: BlackListActivator.ramdomBoolean(_params.percentIsClient)
+          isClient: BlackListActivator.ramdomBoolean(_params.percentIsClient),
+          hasDebt: BlackListActivator.ramdomBoolean(_params.percentHasDebt)
         };
 
     console.log(`blackList ${type}`, { response, _params });

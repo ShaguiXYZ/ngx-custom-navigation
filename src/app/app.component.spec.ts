@@ -4,7 +4,7 @@ import { provideRouter } from '@angular/router';
 import { NxGridModule } from '@aposin/ng-aquila/grid';
 import { NxLinkModule } from '@aposin/ng-aquila/link';
 import { TranslateService } from '@ngx-translate/core';
-import { ContextDataService, NotificationModel, NotificationService } from '@shagui/ng-shagui/core';
+import { ContextDataService, HttpService, NotificationModel, NotificationService } from '@shagui/ng-shagui/core';
 import { of } from 'rxjs';
 import { AppComponent } from './app.component';
 import { NX_LANGUAGE_CONFIG } from './core/models';
@@ -18,6 +18,7 @@ import {
   QuoteStepperComponent
 } from './shared/components';
 import { QuoteLiteralPipe } from './shared/pipes';
+import { NX_WORKFLOW_TOKEN } from './core/components/models';
 
 describe('AppComponent', () => {
   let component: AppComponent;
@@ -27,6 +28,11 @@ describe('AppComponent', () => {
   beforeEach(async () => {
     const notificationServiceSpy = jasmine.createSpyObj('NotificationService', ['warning', 'onNotification', 'onCloseNotification']);
     const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate', 'setDefaultLang', 'use', 'instant']);
+    const httpClientSpy = jasmine.createSpyObj('HttpClient', ['get', 'post', 'put', 'delete']);
+    const mockWorkflowConfig = {
+      errorPageId: 'error',
+      manifest: {}
+    };
     const mockLanguageConfig = {
       current: 'en',
       languages: ['en', 'fr']
@@ -52,7 +58,9 @@ describe('AppComponent', () => {
         { provide: ContextDataService, useClass: ContextDataServiceStub },
         { provide: NotificationService, useValue: notificationServiceSpy },
         { provide: TranslateService, useValue: translateServiceSpy },
+        { provide: HttpService, useValue: httpClientSpy },
         { provide: NX_RECAPTCHA_TOKEN, useValue: { siteKey: 'mock-site-key' } },
+        { provide: NX_WORKFLOW_TOKEN, useValue: mockWorkflowConfig },
         { provide: NX_LANGUAGE_CONFIG, useValue: mockLanguageConfig },
         QuoteLiteralPipe
       ]

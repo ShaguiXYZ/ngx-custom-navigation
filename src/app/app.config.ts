@@ -14,24 +14,17 @@ import { provideRouter } from '@angular/router';
 import { NxDatepickerIntl } from '@aposin/ng-aquila/datefield';
 import { TranslateModule } from '@ngx-translate/core';
 import { NX_CONTEX_CONFIG } from '@shagui/ng-shagui/core';
+import { Subscription } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { routes } from './app.routes';
 import { NX_WORKFLOW_TOKEN } from './core/components/models';
 import { APP_NAME, SCHEDULER_PERIOD } from './core/constants';
 import { GlobalErrorHandler } from './core/errors';
+import { NX_LANGUAGE_CONFIG } from './core/models';
 import { LiteralsService, NX_RECAPTCHA_TOKEN, SettingsService } from './core/services';
 import { VEHICLE_WORKFLOW_TOKEN } from './library/library-manifest';
-import { TRANSLATE_MODULE_CONFIG, urls } from './shared/config';
+import { LanguageConfig, TRANSLATE_MODULE_CONFIG, urls } from './shared/config';
 import { httpErrorInterceptor, mockInterceptor, recaptchaInterceptor } from './shared/interceptors';
-import { NX_LANGUAGE_CONFIG } from './core/models';
-import { Subscription } from 'rxjs';
-
-const Languages = {
-  ['en-GB']: 'en-GB',
-  ['es-ES']: 'es-ES',
-  ['es-CA']: 'es-CA',
-  ['pt-PT']: 'pt-PT'
-};
 
 @Injectable()
 class DatePikerIntl extends NxDatepickerIntl implements OnDestroy {
@@ -90,7 +83,7 @@ export const appConfig: ApplicationConfig = {
       provide: NX_CONTEX_CONFIG,
       useValue: { appName: APP_NAME.toUpperCase(), urls, cache: { schedulerPeriod: SCHEDULER_PERIOD } }
     },
-    { provide: NX_LANGUAGE_CONFIG, useValue: { languages: Languages } },
+    { provide: NX_LANGUAGE_CONFIG, useValue: LanguageConfig },
     { provide: NX_RECAPTCHA_TOKEN, useValue: { siteKey: environment.recaptcha.siteKey } }
   ]
 };

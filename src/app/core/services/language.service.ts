@@ -59,6 +59,8 @@ export class LanguageService {
 
     if (storageConfig.current && languageKeys.includes(storageConfig.current)) {
       return { ...this.nxLanguageConfig, current: storageConfig.current };
+    } else if (this.nxLanguageConfig.current && languageKeys.includes(this.nxLanguageConfig.current)) {
+      return { ...this.nxLanguageConfig, current: this.nxLanguageConfig.current };
     } else if (languageKeys.includes(this.locale)) {
       return { ...this.nxLanguageConfig, current: this.locale };
     } else {

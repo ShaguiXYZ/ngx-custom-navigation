@@ -3,6 +3,7 @@ export type BlackListType = 'IDENTIFICATION_NUMBER' | 'PLATE_NUMBER' | 'PHONE_NU
 export interface BlackListResponse {
   blacklisted?: boolean;
   isClient?: boolean;
+  hasDebt?: boolean;
 }
 
 export interface BlackListModel {

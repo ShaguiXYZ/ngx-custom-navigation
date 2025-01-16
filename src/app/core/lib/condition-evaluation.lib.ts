@@ -1,6 +1,6 @@
 import { JsonUtils } from '@shagui/ng-shagui/core';
-import { CompareOperations, Condition } from '../models';
 import { ConditionError } from '../errors';
+import { CompareOperations, Condition } from '../models';
 
 export class ConditionEvaluation {
   /**

@@ -33,6 +33,16 @@
     "Yes": "Yes",
     "WeCallYou": "We call you"
   },
+  "Steps": {
+    "PersonalData": "Personal data",
+    "VehicleData": "Vehicle data",
+    "InsuranceData": "Insurance data",
+    "ContactData": "Contact data",
+    "ClientData": "Client data",
+    "WeCallYou": "We call you",
+    "ContactMode": "How can we contact you",
+    "ContactTime": "Best time to contact you"
+  },
   "Pages": {
     "Captcha": {
       "Header": "Security verification. Please select the red symbols."

@@ -33,6 +33,16 @@
     "Yes": "Sí",
     "WeCallYou": "Et truquem"
   },
+  "Steps": {
+    "PersonalData": "Dades personals",
+    "VehicleData": "Dades del vehicle",
+    "InsuranceData": "Dades de l'assegurança",
+    "ContactData": "Dades de contacte",
+    "ClientData": "Dades del client",
+    "WeCallYou": "Et truquem",
+    "ContactMode": "Com podem contactar-te",
+    "ContactTime": "Millor horari per contactar-te"
+  },
   "Pages": {
     "Captcha": {
       "Header": "Verificació de seguretat. Si us plau, selecciona els símbols vermells."

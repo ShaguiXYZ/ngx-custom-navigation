@@ -1,4 +1,5 @@
 import { HttpClient } from '@angular/common/http';
+import { LOCALE_ID } from '@angular/core';
 import { MissingTranslationHandler, MissingTranslationHandlerParams, TranslateLoader, TranslateModuleConfig } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
@@ -19,4 +20,14 @@ export const TRANSLATE_MODULE_CONFIG: TranslateModuleConfig = {
     deps: [HttpClient]
   },
   missingTranslationHandler: { provide: MissingTranslationHandler, useClass: CustomMissingTranslationHandler }
+};
+
+export const LanguageConfig = {
+  current: LOCALE_ID,
+  languages: {
+    'en-GB': 'English',
+    'es-ES': 'Español (España)',
+    'es-CA': 'Català',
+    'pt-PT': 'Português (Portugal)'
+  }
 };

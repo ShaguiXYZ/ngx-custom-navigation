@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, OnDestroy, OnInit } from '@angular/core';
+import { Component, inject, Input, OnDestroy, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { NavigationEnd, Router } from '@angular/router';
 import { NxCopytextModule } from '@aposin/ng-aquila/copytext';
@@ -33,6 +33,9 @@ import { SwitchThemeComponent } from '../switch-theme';
   standalone: true
 })
 export class QuoteHeaderComponent implements OnInit, OnDestroy {
+  @Input()
+  public verified?: boolean;
+
   public config: HeaderConfig = {};
 
   private subscription$: Subscription[] = [];
@@ -51,6 +54,8 @@ export class QuoteHeaderComponent implements OnInit, OnDestroy {
       }),
       this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe(this.resetHeaderAnimation)
     );
+
+    this.config = this.headerConfig();
   }
 
   ngOnDestroy(): void {
@@ -74,6 +79,6 @@ export class QuoteHeaderComponent implements OnInit, OnDestroy {
   private headerConfig = (lastPage?: Page): HeaderConfig => {
     const config = lastPage?.configuration?.data?.['headerConfig'] ?? {};
 
-    return { ...{ showBack: true, showContactUs: true }, ...config };
+    return this.verified ? { ...{ showBack: true, showContactUs: true, showLanguages: true }, ...config } : { showLanguages: true };
   };
 }

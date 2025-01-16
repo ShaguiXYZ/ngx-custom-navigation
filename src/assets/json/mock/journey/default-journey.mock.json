@@ -6,11 +6,11 @@
       "id": "main",
       "steps": [
         {
-          "label": { "value": "Datos personales" },
+          "label": { "value": "Steps.PersonalData", "type": "translate" },
           "pages": ["is-client", "place", "birthdate", "driving-license-date", "driving-license-location", "date-of-issue"]
         },
         {
-          "label": { "value": "Datos del vehículo" },
+          "label": { "value": "Steps.VehicleData", "type": "translate" },
           "pages": [
             "vehicle-type",
             "license-plate",
@@ -24,11 +24,11 @@
           ]
         },
         {
-          "label": { "value": "Datos del Seguro" },
+          "label": { "value": "Steps.InsuranceData", "type": "translate" },
           "pages": ["is-policy-owner", "insurance-companies", "time-insurance-holder", "number-accidents"]
         },
         {
-          "label": { "value": "Datos del Contacto" },
+          "label": { "value": "Steps.ContactData", "type": "translate" },
           "pages": ["client-name", "client-phone-number", "client-email", "client-identification-number"]
         }
       ]
@@ -37,7 +37,7 @@
       "id": "client",
       "steps": [
         {
-          "label": { "value": "Datos del Cliente" },
+          "label": { "value": "Steps.ClientData", "type": "translate" },
           "pages": [
             "is-client-client-name",
             "is-client-client-phone-number",
@@ -46,7 +46,7 @@
           ]
         },
         {
-          "label": { "value": "Te llamamos" },
+          "label": { "value": "Steps.WeCallYou", "type": "translate" },
           "pages": ["is-client-contact-us"]
         }
       ],
@@ -57,11 +57,11 @@
     {
       "steps": [
         {
-          "label": { "value": "Como podemos contactarte" },
+          "label": { "value": "Steps.ContactMode", "type": "translate" },
           "pages": ["external-contact-us"]
         },
         {
-          "label": { "value": "Cuando podemos contactarte" },
+          "label": { "value": "Steps.ContactTime", "type": "translate" },
           "pages": ["external-contact-time"]
         }
       ],

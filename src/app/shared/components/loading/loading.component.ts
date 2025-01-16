@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, OnDestroy, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { NxDialogService, NxModalModule, NxModalRef } from '@aposin/ng-aquila/modal';
-import { NxSpinnerModule } from '@aposin/ng-aquila/spinner';
 import { LoadingService } from '@shagui/ng-shagui/core';
 import { Subscription } from 'rxjs';
 
@@ -9,7 +8,7 @@ import { Subscription } from 'rxjs';
   selector: 'quote-loading',
   templateUrl: './loading.component.html',
   styleUrls: ['./loading.component.scss'],
-  imports: [CommonModule, NxModalModule, NxSpinnerModule],
+  imports: [CommonModule, NxModalModule],
   standalone: true
 })
 export class QuoteLoadingComponent implements OnInit, OnDestroy {

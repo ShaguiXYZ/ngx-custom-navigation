@@ -33,6 +33,16 @@
     "Yes": "Sim",
     "WeCallYou": "Nós ligamos para você"
   },
+  "Steps": {
+    "PersonalData": "Dados pessoais",
+    "VehicleData": "Dados do veículo",
+    "InsuranceData": "Dados do seguro",
+    "ContactData": "Dados de contato",
+    "ClientData": "Dados do cliente",
+    "WeCallYou": "Nós ligamos para você",
+    "ContactMode": "Como podemos contatá-lo",
+    "ContactTime": "Melhor horário para contato"
+  },
   "Pages": {
     "Captcha": {
       "Header": "Verificação de segurança. Por favor, selecione os símbolos vermelhos."
