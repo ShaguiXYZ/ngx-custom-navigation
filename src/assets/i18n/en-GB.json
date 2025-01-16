@@ -24,7 +24,6 @@
     "Next": "Next",
     "No": "No",
     "OrMore": "or more",
-    "PostalCode": "Postal code",
     "Power": "Power",
     "Search": "Search",
     "Year": "year",
@@ -46,6 +45,78 @@
   "Pages": {
     "Captcha": {
       "Header": "Security verification. Please select the red symbols."
+    },
+    "CalculateYourInsurance": {
+      "Header": "Calculate your insurance",
+      "FooterNext": "START",
+      "Subheader": "You are less than 5 minutes away from getting the most comprehensive insurance.",
+      "Coverage-1": "24/7 national and international roadside assistance",
+      "Coverage-2": "We deliver the replacement car to your home",
+      "Coverage-3": "Network of excellent workshops at your disposal"
+    },
+    "IsClient": {
+      "Header": "Are you a Shagui customer?"
+    },
+    "PostalCode": {
+      "Header": "What is your postal code?",
+      "FooterInfo": "Did you know that being a Shagui customer has many exclusive advantages?",
+      "ErrorRequired": "The postal code is required to continue",
+      "ErrorNotFound": "The postal code does not exist",
+      "Hint": "Postal code"
+    },
+    "Birthdate": {
+      "Header": "When were you born?",
+      "ErrorRequired": "The birthdate is required to continue",
+      "ErrorNotOldEnough": "The customer must be older than {{value}} years",
+      "ErrorYoungerDate": "The customer must be younger than {{value}} years",
+      "Hint": "Birthdate"
+    },
+    "DateOfIssue": {
+      "Header": "When do you want your insurance to start?",
+      "Hint": "Start date"
+    },
+    "DrivingLicenseLocation": {
+      "Header": "Where did you get your driving license?",
+      "Help": "Indicate the place of origin where you obtained your first driving license.",
+      "HelpHeader": "License acquisition",
+      "EU": "In Europe",
+      "UK": "In the United Kingdom",
+      "Other": "In another country"
+    },
+    "DrivingLicenseDate": {
+      "Header": "When did you get your driving license?",
+      "Hint": "Date of issue",
+      "ErrorMinYearsBetween": "The driving license must be at least {{value}} years old",
+      "ErrorOldDate": "The customer must have at least {{value}} years of driving experience"
+    },
+    "VehicleType": {
+      "Header": "Did you just buy your car?",
+      "VehicleOld": "No, I already had it",
+      "VehicleNew": "Yes, it's new",
+      "VehicleSecondHand": "Yes, it's second hand",
+      "VehicleUnregistered": "It's new and I haven't registered it yet"
+    },
+    "LicensePlate": {
+      "Header": "What is your vehicle's license plate?",
+      "Hint": "License plate",
+      "ContinueWithoutLicensePlate": "Continue without license plate",
+      "FooterInfo": "Providing your license plate will get your quote much faster",
+      "ErrorRequired": "The license plate is required to continue",
+      "BadFormat": "The license plate format is incorrect ({{value}})"
+    },
+    "VehicleParking": {
+      "Header": "Where do you plan to park the vehicle?",
+      "Garage": "In a garage",
+      "Street": "On the street",
+      "PublicParking": "In public parking",
+      "Other": "Other"
+    },
+    "YourCarIs": {
+      "Header": "Select the model",
+      "ContinueWithoutCar": "Continue without vehicle"
+    },
+    "IsPolicyOwner": {
+      "Header": "Are you or have you been the owner of an insurance policy, for this car or another, in the last {{days}} days?"
     }
   }
 }

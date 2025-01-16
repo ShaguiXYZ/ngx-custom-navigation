@@ -24,7 +24,6 @@
     "Next": "Següent",
     "No": "No",
     "OrMore": "o més",
-    "PostalCode": "Codi postal",
     "Power": "Potència",
     "Search": "Cercar",
     "Year": "any",
@@ -46,6 +45,78 @@
   "Pages": {
     "Captcha": {
       "Header": "Verificació de seguretat. Si us plau, selecciona els símbols vermells."
+    },
+    "CalculateYourInsurance": {
+      "Header": "Calcula la teva assegurança",
+      "FooterNext": "COMENÇAR",
+      "Subheader": "Estàs a menys de 5 minuts d'obtenir l'assegurança més completa.",
+      "Coverage-1": "Assistència en carretera nacional i internacional 24/7",
+      "Coverage-2": "Et portem el cotxe de substitució a casa",
+      "Coverage-3": "Xarxa de tallers excel·lents a la teva disposició"
+    },
+    "IsClient": {
+      "Header": "Ets client de Shagui?"
+    },
+    "PostalCode": {
+      "Header": "Quin és el teu codi postal?",
+      "FooterInfo": "Sabies que ser client de Shagui té molts avantatges exclusius?",
+      "ErrorRequired": "El codi postal és obligatori per continuar",
+      "ErrorNotFound": "El codi postal no existeix",
+      "Hint": "Codi postal"
+    },
+    "Birthdate": {
+      "Header": "Quan vas néixer?",
+      "ErrorRequired": "La data de naixement és obligatòria per continuar",
+      "ErrorNotOldEnough": "El client ha de ser major de {{value}} anys",
+      "ErrorYoungerDate": "El client ha de ser menor de {{value}} anys",
+      "Hint": "Data de naixement"
+    },
+    "DateOfIssue": {
+      "Header": "Quan vols que comenci la teva assegurança?",
+      "Hint": "Data de contractació"
+    },
+    "DrivingLicenseLocation": {
+      "Header": "On vas treure't el carnet de conduir?",
+      "Help": "Indica el lloc d'origen on vas obtenir el teu primer carnet de conduir.",
+      "HelpHeader": "Obtenció del carnet",
+      "EU": "A Europa",
+      "UK": "Al Regne Unit",
+      "Other": "En un altre país"
+    },
+    "DrivingLicenseDate": {
+      "Header": "Quan vas treure't el carnet de conduir?",
+      "Hint": "Data d'emissió",
+      "ErrorMinYearsBetween": "El carnet de conduir ha de tenir almenys {{value}} anys",
+      "ErrorOldDate": "El client ha de tenir almenys {{value}} anys d'experiència en la conducció"
+    },
+    "VehicleType": {
+      "Header": "Acabes de comprar el teu cotxe?",
+      "VehicleOld": "No, ja el tenia",
+      "VehicleNew": "Sí, és nou",
+      "VehicleSecondHand": "Sí, és de segona mà",
+      "VehicleUnregistered": "És nou i encara no l'he matriculat"
+    },
+    "LicensePlate": {
+      "Header": "Quina és la matrícula del teu vehicle?",
+      "Hint": "Matrícula",
+      "ContinueWithoutLicensePlate": "Continuar sense matrícula",
+      "FooterInfo": "Facilitant la teva matrícula obtindràs la teva cotització molt més ràpid",
+      "ErrorRequired": "La matrícula és obligatòria per continuar",
+      "BadFormat": "El format de la matrícula no és correcte ({{value}})"
+    },
+    "VehicleParking": {
+      "Header": "On tens pensat aparcar el vehicle?",
+      "Garage": "En garatge",
+      "Street": "Al carrer",
+      "PublicParking": "En aparcament públic",
+      "Other": "Altres"
+    },
+    "YourCarIs": {
+      "Header": "Selecciona el model",
+      "ContinueWithoutCar": "Continuar sense vehicle"
+    },
+    "IsPolicyOwner": {
+      "Header": "Ets o has estat el propietari d'una pòlissa d'assegurança, per aquest cotxe o un altre, en els últims {{days}} dies?"
     }
   }
 }

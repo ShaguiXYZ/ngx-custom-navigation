@@ -2,15 +2,19 @@ import { IndexedData } from '@shagui/ng-shagui/core';
 
 export const VehicleParkingTypes: IndexedData[] = [
   {
-    index: 'street_parked',
-    data: 'street-parked'
+    index: 'street',
+    data: 'street'
   },
   {
-    index: 'driveway_parked',
-    data: 'driveway-parked'
+    index: 'public-parking',
+    data: 'public-parking'
   },
   {
-    index: 'garage_parked',
-    data: 'garage-parked'
+    index: 'garage',
+    data: 'garage'
+  },
+  {
+    index: 'other',
+    data: 'other'
   }
 ];

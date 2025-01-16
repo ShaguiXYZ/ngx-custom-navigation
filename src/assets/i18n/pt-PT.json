@@ -24,7 +24,6 @@
     "Next": "Próximo",
     "No": "Não",
     "OrMore": "ou mais",
-    "PostalCode": "Código postal",
     "Power": "Potência",
     "Search": "Pesquisar",
     "Year": "ano",
@@ -46,6 +45,78 @@
   "Pages": {
     "Captcha": {
       "Header": "Verificação de segurança. Por favor, selecione os símbolos vermelhos."
+    },
+    "CalculateYourInsurance": {
+      "Header": "Calcule o seu seguro",
+      "FooterNext": "COMEÇAR",
+      "Subheader": "Você está a menos de 5 minutos de obter o seguro mais completo.",
+      "Coverage-1": "Assistência rodoviária nacional e internacional 24/7",
+      "Coverage-2": "Entregamos o carro de substituição na sua casa",
+      "Coverage-3": "Rede de oficinas excelentes à sua disposição"
+    },
+    "IsClient": {
+      "Header": "Você é cliente Shagui?"
+    },
+    "PostalCode": {
+      "Header": "Qual é o seu código postal?",
+      "FooterInfo": "Você sabia que ser cliente da Shagui tem muitas vantagens exclusivas?",
+      "ErrorRequired": "O código postal é obrigatório para continuar",
+      "ErrorNotFound": "O código postal não existe",
+      "Hint": "Código postal"
+    },
+    "Birthdate": {
+      "Header": "Quando você nasceu?",
+      "ErrorRequired": "A data de nascimento é obrigatória para continuar",
+      "ErrorNotOldEnough": "O cliente deve ser maior de {{value}} anos",
+      "ErrorYoungerDate": "O cliente deve ser menor de {{value}} anos",
+      "Hint": "Data de nascimento"
+    },
+    "DateOfIssue": {
+      "Header": "Quando você quer que seu seguro comece?",
+      "Hint": "Data de início"
+    },
+    "DrivingLicenseLocation": {
+      "Header": "Onde você tirou a carteira de motorista?",
+      "Help": "Indique o local de origem onde você obteve sua primeira carteira de motorista.",
+      "HelpHeader": "Obtenção da carteira",
+      "EU": "Na Europa",
+      "UK": "No Reino Unido",
+      "Other": "Em outro país"
+    },
+    "DrivingLicenseDate": {
+      "Header": "Quando você tirou a carteira de motorista?",
+      "Hint": "Data de emissão",
+      "ErrorMinYearsBetween": "A carteira de motorista deve ter pelo menos {{value}} anos",
+      "ErrorOldDate": "O cliente deve ter pelo menos {{value}} anos de experiência na condução"
+    },
+    "VehicleType": {
+      "Header": "Você acabou de comprar seu carro?",
+      "VehicleOld": "Não, já o tinha",
+      "VehicleNew": "Sim, é novo",
+      "VehicleSecondHand": "Sim, é de segunda mão",
+      "VehicleUnregistered": "É novo e ainda não o matriculei"
+    },
+    "LicensePlate": {
+      "Header": "Qual é a matrícula do seu veículo?",
+      "Hint": "Matrícula",
+      "ContinueWithoutLicensePlate": "Continuar sem matrícula",
+      "FooterInfo": "Facilitando sua matrícula, você obterá sua cotação muito mais rápido",
+      "ErrorRequired": "A matrícula é obrigatória para continuar",
+      "BadFormat": "O formato da matrícula não está correto ({{value}})"
+    },
+    "VehicleParking": {
+      "Header": "Onde você planeja estacionar o veículo?",
+      "Garage": "Na garagem",
+      "Street": "Na rua",
+      "PublicParking": "Em estacionamento público",
+      "Other": "Outro"
+    },
+    "YourCarIs": {
+      "Header": "Selecione o modelo",
+      "ContinueWithoutCar": "Continuar sem veículo"
+    },
+    "IsPolicyOwner": {
+      "Header": "Você é ou já foi proprietário de uma apólice de seguro, para este carro ou outro, nos últimos {{days}} dias?"
     }
   }
 }

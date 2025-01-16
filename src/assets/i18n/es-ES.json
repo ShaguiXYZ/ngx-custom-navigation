@@ -24,7 +24,6 @@
     "Next": "Siguiente",
     "No": "No",
     "OrMore": "o más",
-    "PostalCode": "Código postal",
     "Power": "Potencia",
     "Search": "Buscar",
     "Year": "año",
@@ -46,6 +45,78 @@
   "Pages": {
     "Captcha": {
       "Header": "Verificación de seguridad. Por favor, selecciona los simbolos rojos."
+    },
+    "CalculateYourInsurance": {
+      "Header": "Calcula tu seguro",
+      "FooterNext": "EMPEZAR",
+      "Subheader": "Estás a menos de 5 minutos de conseguir el seguro más completo.",
+      "Coverage-1": "Asistencia en carretera nacional e internacional 24/7",
+      "Coverage-2": "Te llevamos el coche de sustitución a tu casa",
+      "Coverage-3": "Red de talleres excelentes a tu disposición"
+    },
+    "IsClient": {
+      "Header": "¿Eres cliente de Shagui?"
+    },
+    "PostalCode": {
+      "Header": "¿Cuál es tu código postal?",
+      "FooterInfo": "¿Sabías que ser cliente de Shagui tiene muchas ventajas exclusivas?",
+      "ErrorRequired": "El código postal es obligatorio para continuar",
+      "ErrorNotFound": "El código postal no existe",
+      "Hint": "Código postal"
+    },
+    "Birthdate": {
+      "Header": "¿Cuándo naciste?",
+      "ErrorRequired": "La fecha de nacimiento es obligatoria para continuar",
+      "ErrorNotOldEnough": "El cliente a debe ser mayor de {{value}} años",
+      "ErrorYoungerDate": "El cliente a de ser menor de {{value}} años",
+      "Hint": "Fecha de nacimiento"
+    },
+    "DateOfIssue": {
+      "Header": "¿Cuándo quieres que empiece tu seguro?",
+      "Hint": "Fecha de contratación"
+    },
+    "DrivingLicenseLocation": {
+      "Header": "¿Dónde sacaste el carnet de conducir?",
+      "Help": "Indica lugar de origen donde obtuviste tu primera licencia de condución.",
+      "HelpHeader": "Obtención del carnet",
+      "EU": "En Europa",
+      "UK": "En Reino Unido",
+      "Other": "En otro país"
+    },
+    "DrivingLicenseDate": {
+      "Header": "¿Cuándo sacaste el carnet de conducir?",
+      "Hint": "Fecha de emisión",
+      "ErrorMinYearsBetween": "El carnet de conducir debe tener al menos {{value}} años",
+      "ErrorOldDate": "El cliente debe tener al menos {{value}} años de experiencia en la conducción"
+    },
+    "VehicleType": {
+      "Header": "¿Acabas de comprar tu coche?",
+      "VehicleOld": "No, ya lo tenía",
+      "VehicleNew": "Sí, es nuevo",
+      "VehicleSecondHand": "Sí, es de segunda mano",
+      "VehicleUnregistered": "Es nuevo y todavía no lo he matriculado"
+    },
+    "LicensePlate": {
+      "Header": "¿Cuál es la matrícula de tu vehículo?",
+      "Hint": "Matrícula",
+      "ContinueWithoutLicensePlate": "Continuar sin matrícula",
+      "FooterInfo": "Facilitando tu matrícula obtendrás tu cotización mucho más rápido",
+      "ErrorRequired": "La matrícula es obligatoria para continuar",
+      "BadFormat": "El formato de la matrícula no es correcto ({{value}})"
+    },
+    "VehicleParking": {
+      "Header": "¿Donde tienes pensado aparcar el vehículo?",
+      "Garage": "En garaje",
+      "Street": "En la calle",
+      "PublicParking": "En parking público",
+      "Other": "Otro"
+    },
+    "YourCarIs": {
+      "Header": "Selecciona el modelo",
+      "ContinueWithoutCar": "Continuar sin vehículo"
+    },
+    "IsPolicyOwner": {
+      "Header": "¿Eres o has sido titular de un seguro, para este coche u otro, en los últimos {{days}} días?"
     }
   }
 }

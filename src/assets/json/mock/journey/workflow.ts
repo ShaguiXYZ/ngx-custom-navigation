@@ -85,12 +85,12 @@ export const WORKFLOW: ConfigurationDTO<QuoteModel, WorkflowManifestId> = {
       ],
       configuration: {
         literals: {
-          'footer-next': 'EMPEZAR',
-          header: 'Calcular mi seguro',
-          subheader: 'Estás a menos de 5 minutos de conseguir el seguro más completo',
-          'coverage-1': 'Asistencia en carretera nacional e internacional 24/7',
-          'coverage-2': 'Te llevamos el coche de sustitución a tu casa',
-          'coverage-3': 'Red de talleres excelentes a tu disposición'
+          'footer-next': { value: 'Pages.CalculateYourInsurance.FooterNext', type: 'translate' },
+          header: { value: 'Pages.CalculateYourInsurance.Header', type: 'translate' },
+          subheader: { value: 'Pages.CalculateYourInsurance.Subheader', type: 'translate' },
+          'coverage-1': { value: 'Pages.CalculateYourInsurance.Coverage-1', type: 'translate' },
+          'coverage-2': { value: 'Pages.CalculateYourInsurance.Coverage-2', type: 'translate' },
+          'coverage-3': { value: 'Pages.CalculateYourInsurance.Coverage-3', type: 'translate' }
         },
         data: {
           headerConfig: {
@@ -121,7 +121,7 @@ export const WORKFLOW: ConfigurationDTO<QuoteModel, WorkflowManifestId> = {
       ],
       configuration: {
         literals: {
-          header: '¿Eres cliente de Shagui?'
+          header: { value: 'Pages.IsClient.Header', type: 'translate' }
         },
         data: {
           contextData: { client: { isClient: false } },
@@ -163,11 +163,11 @@ export const WORKFLOW: ConfigurationDTO<QuoteModel, WorkflowManifestId> = {
           }
         },
         literals: {
-          'postal-code': { value: 'Label.PostalCode', type: 'translate' },
-          'error-required': 'El código postal es obligatorio para continuar',
-          'error-not-found': 'El código postal no existe',
-          header: '¿Cuál es tu código postal?',
-          'footer-info': '¿Sabías que ser cliente de Shagui tiene muchas ventajas exclusivas?'
+          'postal-code': { value: 'Pages.PostalCode.Hint', type: 'translate' },
+          header: { value: 'Pages.PostalCode.Header', type: 'translate' },
+          'footer-info': { value: 'Pages.PostalCode.FooterInfo', type: 'translate' },
+          'error-required': { value: 'Pages.PostalCode.ErrorRequired', type: 'translate' },
+          'error-not-found': { value: 'Pages.PostalCode.ErrorNotFound', type: 'translate' }
         }
       }
     },
@@ -180,11 +180,11 @@ export const WORKFLOW: ConfigurationDTO<QuoteModel, WorkflowManifestId> = {
       ],
       configuration: {
         literals: {
-          header: '¿Cuándo naciste?',
-          'birth-date': 'Fecha de nacimiento',
-          'error-required': 'La fecha de nacimiento es obligatoria para continuar',
-          'error-old-date': 'El cliente a debe ser mayor de {{value}} años',
-          'error-younger-date': 'El cliente a de ser menor de {{value}} años'
+          header: { value: 'Pages.Birthdate.Header', type: 'translate' },
+          'birth-date': { value: 'Pages.Birthdate.Hint', type: 'translate' },
+          'error-required': { value: 'Pages.Birthdate.ErrorRequired', type: 'translate' },
+          'error-old-date': { value: 'Pages.Birthdate.ErrorNotOldEnough', type: 'translate' },
+          'error-younger-date': { value: 'Pages.Birthdate.ErrorYoungerDate', type: 'translate' }
         },
         data: {
           minValue: 25
@@ -200,10 +200,10 @@ export const WORKFLOW: ConfigurationDTO<QuoteModel, WorkflowManifestId> = {
       ],
       configuration: {
         literals: {
-          header: '¿Cuándo sacaste el carnet de conducir?',
-          'issue-date': 'Fecha de emisión',
-          'error-min-years-between': 'El carnet de conducir debe tener al menos {{value}} años',
-          'error-old-date': 'El cliente debe tener al menos {{value}} años de experiencia en la conducción'
+          header: { value: 'Pages.DrivingLicenseDate.Header', type: 'translate' },
+          'issue-date': { value: 'Pages.DrivingLicenseDate.Hint', type: 'translate' },
+          'error-min-years-between': { value: 'Pages.DrivingLicenseDate.ErrorMinYearsBetween', type: 'translate' },
+          'error-old-date': { value: 'Pages.DrivingLicenseDate.ErrorOldDate', type: 'translate' }
         },
         data: { minDrivingYears: 5 }
       }
@@ -226,12 +226,12 @@ export const WORKFLOW: ConfigurationDTO<QuoteModel, WorkflowManifestId> = {
       ],
       configuration: {
         literals: {
-          header: '¿Dónde sacaste el carnet de conducir?',
-          help: 'Indica lugar de origen donde obtuviste tu primera licencia de condución.',
-          'help-header': 'Obtención del carnet',
-          eu: 'En Europa',
-          uk: 'En Reino Unido',
-          other: 'En otro país'
+          header: { value: 'Pages.DrivingLicenseLocation.Header', type: 'translate' },
+          help: { value: 'Pages.DrivingLicenseLocation.Help', type: 'translate' },
+          'help-header': { value: 'Pages.DrivingLicenseLocation.HelpHeader', type: 'translate' },
+          eu: { value: 'Pages.DrivingLicenseLocation.EU', type: 'translate' },
+          uk: { value: 'Pages.DrivingLicenseLocation.UK', type: 'translate' },
+          other: { value: 'Pages.DrivingLicenseLocation.Other', type: 'translate' }
         }
       }
     },
@@ -244,8 +244,8 @@ export const WORKFLOW: ConfigurationDTO<QuoteModel, WorkflowManifestId> = {
       ],
       configuration: {
         literals: {
-          'date-of-issue-label': 'Fecha de contratación',
-          header: '¿Cuándo quieres que empiece tu seguro?'
+          header: { value: 'Pages.DateOfIssue.Header', type: 'translate' },
+          'date-of-issue-label': { value: 'Pages.DateOfIssue.Hint', type: 'translate' }
         }
       }
     },
@@ -305,11 +305,11 @@ export const WORKFLOW: ConfigurationDTO<QuoteModel, WorkflowManifestId> = {
           contextData: { blackList: { plateNumber: { blacklisted: false } } }
         },
         literals: {
-          'continue-without-license-plate': 'Continuar sin matrícula',
-          'footer-info': 'Facilitando tu matrícula obtendrás tu cotización mucho más rápido',
-          header: '¿Cuál es la matrícula de tu coche?',
-          'license-plate': 'Matrícula',
-          'bad-format': 'El formato de la matrícula no es correcto ({{value}})'
+          header: { value: 'Pages.LicensePlate.Header', type: 'translate' },
+          'continue-without-license-plate': { value: 'Pages.LicensePlate.ContinueWithoutLicensePlate', type: 'translate' },
+          'footer-info': { value: 'Pages.LicensePlate.FooterInfo', type: 'translate' },
+          'license-plate': { value: 'Pages.LicensePlate.Hint', type: 'translate' },
+          'bad-format': { value: 'Pages.LicensePlate.BadFormat', type: 'translate' }
         },
         serviceActivators: [
           {
@@ -335,8 +335,8 @@ export const WORKFLOW: ConfigurationDTO<QuoteModel, WorkflowManifestId> = {
       ],
       configuration: {
         literals: {
-          'continue-without-car': 'Continuar sin vehículo',
-          header: 'Selecciona el modelo'
+          header: { value: 'Pages.YourCarIs.Header', type: 'translate' },
+          'continue-without-car': { value: 'Pages.YourCarIs.ContinueWithoutCar', type: 'translate' }
         },
         data: {
           footerConfig: {
@@ -354,10 +354,11 @@ export const WORKFLOW: ConfigurationDTO<QuoteModel, WorkflowManifestId> = {
       ],
       configuration: {
         literals: {
-          header: '¿Donde tienes pensado aparcar el vehículo?',
-          'street-parked': 'En la calle',
-          'driveway-parked': 'En el garaje de casa',
-          'garage-parked': 'En un garaje comunitario'
+          header: { value: 'Pages.VehicleParking.Header', type: 'translate' },
+          street: { value: 'Pages.VehicleParking.Street', type: 'translate' },
+          'public-parking': { value: 'Pages.VehicleParking.PublicParking', type: 'translate' },
+          garage: { value: 'Pages.VehicleParking.Garage', type: 'translate' },
+          other: { value: 'Pages.VehicleParking.Other', type: 'translate' }
         }
       }
     },
@@ -392,11 +393,11 @@ export const WORKFLOW: ConfigurationDTO<QuoteModel, WorkflowManifestId> = {
       ],
       configuration: {
         literals: {
-          header: '¿Acabas de comprar tu coche?',
-          'vehicle-old': 'No, ya lo tenía',
-          'vehicle-new': 'Sí, es nuevo',
-          'vehicle-second-hand': 'Sí, es de segunda mano',
-          'vehicle-unregistered': 'Es nuevo y todavía no lo he matriculado'
+          header: { value: 'Pages.VehicleType.Header', type: 'translate' },
+          'vehicle-old': { value: 'Pages.VehicleType.VehicleOld', type: 'translate' },
+          'vehicle-new': { value: 'Pages.VehicleType.VehicleNew', type: 'translate' },
+          'vehicle-second-hand': { value: 'Pages.VehicleType.VehicleSecondHand', type: 'translate' },
+          'vehicle-unregistered': { value: 'Pages.VehicleType.VehicleUnregistered', type: 'translate' }
         }
       }
     },
@@ -523,7 +524,13 @@ export const WORKFLOW: ConfigurationDTO<QuoteModel, WorkflowManifestId> = {
       ],
       configuration: {
         literals: {
-          header: '¿Eres o has sido titular de un seguro, para este coche u otro, en los últimos {{days}} días?'
+          header: {
+            value: 'Pages.IsPolicyOwner.Header',
+            params: {
+              days: { value: 'insuranceCompany.yearsAsOwner', type: 'data' }
+            },
+            type: 'translate'
+          }
         }
       }
     },
