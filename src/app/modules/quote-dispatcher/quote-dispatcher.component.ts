@@ -1,6 +1,6 @@
-import { Component, inject, OnDestroy, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ContextDataService, LoadingService } from '@shagui/ng-shagui/core';
+import { ContextDataService } from '@shagui/ng-shagui/core';
 import { QUOTE_APP_CONTEXT_DATA } from 'src/app/core/constants';
 import { JourneyError } from 'src/app/core/errors';
 import { AppContextData } from 'src/app/core/models';
@@ -19,17 +19,14 @@ import { AppUrls } from 'src/app/shared/config';
   styleUrl: './quote-dispatcher.component.scss',
   standalone: true
 })
-export class QuoteDispatcherComponent implements OnInit, OnDestroy {
+export class QuoteDispatcherComponent implements OnInit {
   private readonly contextDataService = inject(ContextDataService);
-  private readonly loadingService = inject(LoadingService);
   private readonly settingsService = inject(SettingsService);
   private readonly trackService = inject(QuoteTrackService);
   private readonly _router = inject(Router);
   private readonly _route = inject(ActivatedRoute);
 
   async ngOnInit(): Promise<void> {
-    this.loadingService.showLoading = true;
-
     const {
       params: { stored, dispatcher }
     } = this._route.snapshot;
@@ -45,10 +42,6 @@ export class QuoteDispatcherComponent implements OnInit, OnDestroy {
     }
 
     this.loader();
-  }
-
-  ngOnDestroy(): void {
-    this.loadingService.showLoading = false;
   }
 
   private loader = async (): Promise<void> => {

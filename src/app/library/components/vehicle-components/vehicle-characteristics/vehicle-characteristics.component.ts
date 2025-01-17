@@ -13,9 +13,9 @@ import { QuoteLiteralDirective } from 'src/app/shared/directives';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 
 @Component({
-  selector: 'quote-vehicle-fuel',
-  templateUrl: './vehicle-fuel.component.html',
-  styleUrl: './vehicle-fuel.component.scss',
+  selector: 'quote-vehicle-characteristics',
+  templateUrl: './vehicle-characteristics.component.html',
+  styleUrl: './vehicle-characteristics.component.scss',
   imports: [
     CommonModule,
     HeaderTitleComponent,
@@ -31,7 +31,7 @@ import { QuoteLiteralPipe } from 'src/app/shared/pipes';
   providers: [VehicleService],
   standalone: true
 })
-export class VehicleFuelComponent extends QuoteComponent<QuoteModel> implements OnInit {
+export class VehicleCharacteristicsComponent extends QuoteComponent<QuoteModel> implements OnInit {
   public cubicCapacityNotKnown: CubicCapacityModel = { index: '-1', data: 'nsnc' };
   public powerNotKnown: VehicleClassesModel = { index: '-1', data: 'nsnc' };
   public formValidations = {

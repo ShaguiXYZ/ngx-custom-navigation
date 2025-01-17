@@ -17,7 +17,7 @@
             "your-car-is",
             "vehicle-brand",
             "vehicle-models",
-            "vehicle-fuel",
+            "vehicle-characteristics",
             "vehicle-model-versions",
             "vehicle-parking",
             "license-year"
@@ -401,7 +401,7 @@
       "pageId": "vehicle-models",
       "nextOptionList": [
         {
-          "nextPageId": "vehicle-fuel"
+          "nextPageId": "vehicle-characteristics"
         }
       ],
       "configuration": {
@@ -411,7 +411,7 @@
       }
     },
     {
-      "pageId": "vehicle-fuel",
+      "pageId": "vehicle-characteristics",
       "nextOptionList": [
         {
           "nextPageId": "vehicle-model-versions"
@@ -419,9 +419,9 @@
       ],
       "configuration": {
         "literals": {
-          "cubic-capacity-not-known": "No sé la cilindrada",
-          "header": "Seleccione sus características",
-          "power-not-known": "No sé la potencia"
+          "header": { "value": "Pages.VehicleCharacteristics.Header", "type": "translate" },
+          "cubic-capacity-not-known": { "value": "Pages.VehicleCharacteristics.CubicCapacityNotKnown", "type": "translate" },
+          "power-not-known": { "value": "Pages.VehicleCharacteristics.PowerNotKnown", "type": "translate" }
         }
       }
     },
@@ -434,7 +434,7 @@
       ],
       "configuration": {
         "literals": {
-          "header": "¿Y la versión?"
+          "header": { "value": "Pages.VehicleModelVersions.Header", "type": "translate" }
         }
       }
     },
@@ -456,8 +456,8 @@
       ],
       "configuration": {
         "literals": {
-          "header": "¿En qué año matriculaste tu coche?",
-          "year-of-manufacture-label": "Año de matriculación"
+          "header": { "value": "Pages.LicenseYear.Header", "type": "translate" },
+          "year-of-manufacture-label": { "value": "Pages.LicenseYear.Hint", "type": "translate" }
         },
         "data": {
           "maxYearsOld": 25
@@ -539,7 +539,7 @@
       ],
       "configuration": {
         "literals": {
-          "header": "¿Con qué compañía tienes tu seguro actualmente?"
+          "header": { "value": "Pages.InsuranceCompanies.Header", "type": "translate" }
         }
       }
     },
@@ -552,9 +552,9 @@
       ],
       "configuration": {
         "literals": {
-          "year": "{{value}} año {{last}}",
-          "years": "{{value}} años {{last}}",
-          "header": "¿Cuánto tiempo llevas como titular de un seguro en esta u otras compañías?",
+          "header": { "value": "Pages.TimeInsuranceHolder.Header", "type": "translate" },
+          "year": { "value": "Pages.TimeInsuranceHolder.Year", "type": "translate" },
+          "years": { "value": "Pages.TimeInsuranceHolder.Years", "type": "translate" },
           "last": { "value": "or-more", "type": "literal" }
         }
       }
@@ -579,10 +579,11 @@
           "not": "{{first}}",
           "accident": "{{value}} {{last}}",
           "accidents": "{{value}} {{last}}",
-          "first": "Nimguno",
+          "first": { "value": "Pages.NumberAccidents.First", "type": "translate" },
           "last": { "value": "or-more", "type": "literal" },
           "header": {
-            "value": "¿Has tenido algún accidente en {{last}}{{last-single}} {{value}} {{years}}{{year}}?",
+            "value": "Pages.NumberAccidents.Header",
+            "type": "translate",
             "params": {
               "value": {
                 "value": "insuranceCompany.yearsAsOwner",
@@ -596,8 +597,8 @@
                 ]
               },
               "last": {
-                "value": "los últimos",
-                "type": "value",
+                "value": "Pages.NumberAccidents.Last",
+                "type": "translate",
                 "conditions": [
                   {
                     "expression": "insuranceCompany.yearsAsOwner",
@@ -607,8 +608,8 @@
                 ]
               },
               "last-single": {
-                "value": "el último",
-                "type": "value",
+                "value": "Pages.NumberAccidents.LastSingle",
+                "type": "translate",
                 "conditions": [
                   {
                     "expression": "insuranceCompany.yearsAsOwner",
@@ -641,7 +642,7 @@
               }
             }
           },
-          "footer-info": "Nos gustaría acompañarte en tus próximos viajes."
+          "footer-info": { "value": "Pages.NumberAccidents.FooterInfo", "type": "translate" }
         }
       }
     },
@@ -654,8 +655,9 @@
       ],
       "configuration": {
         "literals": {
-          "header": "Nos gustaría conocerte un poco más",
-          "name": "Nombre"
+          "header": { "value": "Pages.ClientName.Header", "type": "translate" },
+          "name": { "value": "Pages.ClientName.Hint", "type": "translate" },
+          "error-required": { "value": "Pages.ClientName.ErrorRequired", "type": "translate" }
         }
       }
     },
@@ -677,9 +679,11 @@
       ],
       "configuration": {
         "literals": {
-          "header": "¿Cuál es tu número de teléfono?",
-          "phone-number": "Número de teléfono",
-          "subheader": "Sabemos que los seguros a veces son complejos. Por eso, solo te llamaremos para darte asistencia personalizada."
+          "header": { "value": "Pages.ClientPhoneNumber.Header", "type": "translate" },
+          "subheader": { "value": "Pages.ClientPhoneNumber.Subheader", "type": "translate" },
+          "phone-number": { "value": "Pages.ClientPhoneNumber.Hint", "type": "translate" },
+          "error-required": { "value": "Pages.ClientPhoneNumber.ErrorRequired", "type": "translate" },
+          "bad-format": { "value": "Pages.ClientPhoneNumber.BadFormat", "type": "translate" }
         },
         "serviceActivators": [
           {

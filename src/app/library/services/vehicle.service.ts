@@ -5,6 +5,7 @@ import { catchError, firstValueFrom, map } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { HttpError } from '../../core/errors';
 import {
+  BrandDTO,
   CubicCapacityDTO,
   CubicCapacityModel,
   FuelDTO,
@@ -21,6 +22,8 @@ export class VehicleService {
   private readonly _BRANCHES_CACHE_ID_ = `_${UniqueIds.next()}_`;
   private readonly _MODELS_CACHE_ID_ = `_${UniqueIds.next()}_`;
   private readonly _MODEL_VERSIONS_CACHE_ID_ = `_${UniqueIds.next()}_`;
+
+  private readonly VEHICLE_API = environment.baseUrl;
 
   private http = inject(HttpService);
 
@@ -79,7 +82,7 @@ export class VehicleService {
 
     return firstValueFrom(
       this.http
-        .get<string[]>(`${environment.baseUrl}/brand`, {
+        .get<BrandDTO>(`${this.VEHICLE_API}/makes`, {
           clientOptions: { params: httpParams },
           responseStatusMessage: {
             [HttpStatusCode.NotFound]: { text: 'Notifications.BrandsNotFound' }
@@ -88,8 +91,9 @@ export class VehicleService {
           cache: { id: this.cacheBrands(), ttl: TTL.XXL }
         })
         .pipe(
-          map(res => res as string[]),
-          map(res => (brand ? res.filter(data => data.toLowerCase().includes(brand.toLowerCase())) : res)),
+          map(res => res as BrandDTO),
+          map(res => res.data.map(data => data.name.toUpperCase())),
+          map(res => (brand ? res.filter(data => data.includes(brand.toUpperCase())) : res)),
           map(res => res.sort((a, b) => a.localeCompare(b)))
         )
     );

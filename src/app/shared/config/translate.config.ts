@@ -27,7 +27,7 @@ export const LanguageConfig = {
   languages: {
     'en-GB': 'English',
     'es-ES': 'Español (España)',
-    'es-CA': 'Català',
+    'ca-ES': 'Català',
     'pt-PT': 'Português (Portugal)'
   }
 };

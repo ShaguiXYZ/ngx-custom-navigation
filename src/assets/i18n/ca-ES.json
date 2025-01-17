@@ -117,6 +117,45 @@
     },
     "IsPolicyOwner": {
       "Header": "Ets o has estat el propietari d'una pòlissa d'assegurança, per aquest cotxe o un altre, en els últims {{days}} dies?"
+    },
+    "LicenseYear": {
+      "Header": "En quin any vas matricular el teu cotxe?",
+      "Hint": "Any de matriculació"
+    },
+    "VehicleCharacteristics": {
+      "Header": "Selecciona les seves característiques",
+      "CubicCapacityNotKnown": "No sé la cilindrada",
+      "PowerNotKnown": "No sé la potència"
+    },
+    "VehicleModelVersions": {
+      "Header": "I la versió?"
+    },
+    "InsuranceCompanies": {
+      "Header": "Amb quina companyia tens la teva assegurança actualment?"
+    },
+    "TimeInsuranceHolder": {
+      "Header": "Quant de temps portes com a titular d'una assegurança en aquesta o altres companyies?",
+      "Year": "{{value}} any {{last}}",
+      "Years": "{{value}} anys {{last}}"
+    },
+    "NumberAccidents": {
+      "Header": "Has tingut algun accident en {{last}}{{last-single}} {{value}} {{years}}{{year}}?",
+      "First": "Cap",
+      "Last": "els últims",
+      "LastSingle": "l'últim",
+      "FooterInfo": "Ens agradaria acompanyar-te en els teus propers viatges."
+    },
+    "ClientName": {
+      "Header": "Ens agradaria conèixer-te una mica més",
+      "Hint": "Nom i cognoms",
+      "ErrorRequired": "El nom és obligatori per continuar"
+    },
+    "ClientPhoneNumber": {
+      "Header": "Quin és el teu número de telèfon?",
+      "Subheader": "Sabem que les assegurances a vegades són complexes. Per això, només et trucarem per donar-te assistència personalitzada.",
+      "Hint": "Número de telèfon",
+      "ErrorRequired": "El número de telèfon és obligatori per continuar",
+      "BadFormat": "El número de telèfon no és vàlid"
     }
   }
 }

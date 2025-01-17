@@ -8,11 +8,11 @@ import { NX_RECAPTCHA_TOKEN, RoutingService } from 'src/app/core/services';
 import { CubicCapacityModel, FuelModel, QuoteModel, VehicleClassesModel } from 'src/app/library/models';
 import { VehicleService } from 'src/app/library/services';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
-import { VehicleFuelComponent } from './vehicle-fuel.component';
+import { VehicleCharacteristicsComponent } from './vehicle-characteristics.component';
 
-describe('VehicleFuelComponent', () => {
-  let component: VehicleFuelComponent;
-  let fixture: ComponentFixture<VehicleFuelComponent>;
+describe('VehicleCharacteristicsComponent', () => {
+  let component: VehicleCharacteristicsComponent;
+  let fixture: ComponentFixture<VehicleCharacteristicsComponent>;
   let vehicleService: jasmine.SpyObj<VehicleService>;
   let routingService: jasmine.SpyObj<RoutingService>;
 
@@ -34,7 +34,7 @@ describe('VehicleFuelComponent', () => {
 
     await TestBed.configureTestingModule({
       declarations: [],
-      imports: [VehicleFuelComponent, BrowserAnimationsModule],
+      imports: [VehicleCharacteristicsComponent, BrowserAnimationsModule],
       providers: [
         { provide: VehicleService, useValue: vehicleServiceSpy },
         { provide: TranslateService, useValue: translateServiceSpy },
@@ -46,13 +46,13 @@ describe('VehicleFuelComponent', () => {
       ]
     }).compileComponents();
 
-    TestBed.overrideComponent(VehicleFuelComponent, {
+    TestBed.overrideComponent(VehicleCharacteristicsComponent, {
       set: {
         providers: [{ provide: VehicleService, useValue: vehicleServiceSpy }]
       }
     });
 
-    fixture = TestBed.createComponent(VehicleFuelComponent);
+    fixture = TestBed.createComponent(VehicleCharacteristicsComponent);
     component = fixture.componentInstance;
     vehicleService = TestBed.inject(VehicleService) as jasmine.SpyObj<VehicleService>;
     routingService = TestBed.inject(RoutingService) as jasmine.SpyObj<RoutingService>;

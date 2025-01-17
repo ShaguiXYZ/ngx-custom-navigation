@@ -117,6 +117,45 @@
     },
     "IsPolicyOwner": {
       "Header": "Are you or have you been the owner of an insurance policy, for this car or another, in the last {{days}} days?"
+    },
+    "LicenseYear": {
+      "Header": "In which year did you register your car?",
+      "Hint": "Year of registration"
+    },
+    "VehicleCharacteristics": {
+      "Header": "Select your characteristics",
+      "CubicCapacityNotKnown": "I don't know the cubic capacity",
+      "PowerNotKnown": "I don't know the power"
+    },
+    "VehicleModelVersions": {
+      "Header": "And the version?"
+    },
+    "InsuranceCompanies": {
+      "Header": "Which company do you currently have your insurance with?"
+    },
+    "TimeInsuranceHolder": {
+      "Header": "How long have you been the holder of an insurance policy with this or other companies?",
+      "Year": "{{value}} year {{last}}",
+      "Years": "{{value}} years {{last}}"
+    },
+    "NumberAccidents": {
+      "Header": "Have you had any accidents in the last {{value}} {{years}}{{year}}?",
+      "First": "None",
+      "Last": "the last",
+      "LastSingle": "the last",
+      "FooterInfo": "We would like to accompany you on your next trips."
+    },
+    "ClientName": {
+      "Header": "We would like to know you a little better",
+      "Hint": "Name and surname",
+      "ErrorRequired": "The name is required to continue"
+    },
+    "ClientPhoneNumber": {
+      "Header": "What is your phone number?",
+      "Subheader": "We know that insurance can sometimes be complex. Therefore, we will only call you to provide personalized assistance.",
+      "Hint": "Phone number",
+      "ErrorRequired": "The phone number is required to continue",
+      "BadFormat": "The phone number is not valid"
     }
   }
 }

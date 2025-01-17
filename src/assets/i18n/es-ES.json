@@ -117,6 +117,45 @@
     },
     "IsPolicyOwner": {
       "Header": "¿Eres o has sido titular de un seguro, para este coche u otro, en los últimos {{days}} días?"
+    },
+    "LicenseYear": {
+      "Header": "¿En qué año matriculaste tu coche?",
+      "Hint": "Año de matriculación"
+    },
+    "VehicleCharacteristics": {
+      "Header": "Seleccione sus características",
+      "CubicCapacityNotKnown": "No sé la cilindrada",
+      "PowerNotKnown": "No sé la potencia"
+    },
+    "VehicleModelVersions": {
+      "Header": "¿Y la versión?"
+    },
+    "InsuranceCompanies": {
+      "Header": "¿Con qué compañía tienes tu seguro actualmente?"
+    },
+    "TimeInsuranceHolder": {
+      "Header": "¿Cuánto tiempo llevas como titular de un seguro en esta u otras compañías?",
+      "Year": "{{value}} año {{last}}",
+      "Years": "{{value}} años {{last}}"
+    },
+    "NumberAccidents": {
+      "Header": "¿Has tenido algún accidente en {{last}}{{last-single}} {{value}} {{years}}{{year}}?",
+      "First": "Ninguno",
+      "Last": "los últimos",
+      "LastSingle": "el último",
+      "FooterInfo": "Nos gustaría acompañarte en tus próximos viajes."
+    },
+    "ClientName": {
+      "Header": "Nos gustaría conocerte un poco más",
+      "Hint": "Nombre y apellidos",
+      "ErrorRequired": "El nombre es obligatorio para continuar"
+    },
+    "ClientPhoneNumber": {
+      "Header": "¿Cuál es tu número de teléfono?",
+      "Subheader": "Sabemos que los seguros a veces son complejos. Por eso, solo te llamaremos para darte asistencia personalizada.",
+      "Hint": "Número de teléfono",
+      "ErrorRequired": "El número de teléfono es obligatorio para continuar",
+      "BadFormat": "El número de teléfono no es válido"
     }
   }
 }

@@ -1,2 +1,2 @@
 export * from './routing';
-export * from './translate-utils';
+export * from './translate.config';

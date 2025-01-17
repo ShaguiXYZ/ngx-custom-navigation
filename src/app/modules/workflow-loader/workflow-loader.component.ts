@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { CommonModule } from '@angular/common';
-import { Component, OnInit, ViewChild, ViewContainerRef, inject } from '@angular/core';
-import { ContextDataService } from '@shagui/ng-shagui/core';
+import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild, ViewContainerRef, inject } from '@angular/core';
+import { ContextDataService, LoadingService } from '@shagui/ng-shagui/core';
 import { QuoteComponent } from 'src/app/core/components';
 import { NX_WORKFLOW_TOKEN } from 'src/app/core/components/models';
 import { QUOTE_APP_CONTEXT_DATA } from 'src/app/core/constants';
@@ -14,7 +14,7 @@ import { AppContextData } from 'src/app/core/models';
   imports: [CommonModule],
   standalone: true
 })
-export class WorkflowLoaderComponent implements OnInit {
+export class WorkflowLoaderComponent implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild('dynamicComponent', { read: ViewContainerRef, static: true })
   private container!: ViewContainerRef;
 
@@ -22,9 +22,18 @@ export class WorkflowLoaderComponent implements OnInit {
 
   private readonly workflowToken = inject(NX_WORKFLOW_TOKEN);
   private readonly contextDataService = inject(ContextDataService);
+  private readonly loadingService = inject(LoadingService);
 
   ngOnInit(): void {
     this.loadComponent();
+  }
+
+  ngOnDestroy(): void {
+    this.loadingService.showLoading = true;
+  }
+
+  ngAfterViewInit(): void {
+    this.loadingService.showLoading = false;
   }
 
   private loadComponent = (): void => {

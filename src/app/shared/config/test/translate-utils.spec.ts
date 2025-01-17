@@ -2,7 +2,7 @@ import { HttpClient, provideHttpClient } from '@angular/common/http';
 import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
-import { createTranslateLoader, CustomMissingTranslationHandler } from '../translate-utils';
+import { createTranslateLoader, CustomMissingTranslationHandler } from '../translate.config';
 
 describe('TranslateUtils', () => {
   let httpClient: HttpClient;

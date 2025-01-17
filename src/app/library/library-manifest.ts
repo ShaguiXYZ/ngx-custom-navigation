@@ -36,13 +36,13 @@ import {
   LicensePlateComponent,
   LicenseYearComponent,
   VehicleBrandComponent,
-  VehicleFuelComponent,
   VehicleModelsComponent,
   VehicleModelVersionsComponent,
   VehicleParkingComponent,
   VehicleTypeComponent,
   YourCarIsComponent
 } from './components/vehicle-components';
+import { VehicleCharacteristicsComponent } from './components/vehicle-components/vehicle-characteristics/vehicle-characteristics.component';
 import { QuoteModel } from './models';
 import { BlackListActivator } from './service-activators';
 
@@ -71,7 +71,7 @@ const LIBRARY_MANIFEST = {
   'license-plate': { component: LicensePlateComponent },
   'license-year': { component: LicenseYearComponent },
   'vehicle-brand': { component: VehicleBrandComponent },
-  'vehicle-fuel': { component: VehicleFuelComponent },
+  'vehicle-characteristics': { component: VehicleCharacteristicsComponent },
   'vehicle-model-versions': { component: VehicleModelVersionsComponent },
   'vehicle-models': { component: VehicleModelsComponent },
   'vehicle-parking': { component: VehicleParkingComponent },
