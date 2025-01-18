@@ -16,26 +16,25 @@ import { QuoteLiteralDirective } from 'src/app/shared/directives';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 
 @Component({
-  selector: 'quote-your-car-is',
-  templateUrl: './your-car-is.component.html',
-  styleUrl: './your-car-is.component.scss',
-  imports: [
-    CommonModule,
-    HeaderTitleComponent,
-    QuoteFooterComponent,
-    TextCardComponent,
-    NxButtonModule,
-    NxCopytextModule,
-    NxFormfieldModule,
-    NxInputModule,
-    NxMaskModule,
-    ReactiveFormsModule,
-    QuoteLiteralPipe,
-    QuoteLiteralDirective,
-    QuoteTrackDirective
-  ],
-  providers: [VehicleService],
-  standalone: true
+    selector: 'quote-your-car-is',
+    templateUrl: './your-car-is.component.html',
+    styleUrl: './your-car-is.component.scss',
+    imports: [
+        CommonModule,
+        HeaderTitleComponent,
+        QuoteFooterComponent,
+        TextCardComponent,
+        NxButtonModule,
+        NxCopytextModule,
+        NxFormfieldModule,
+        NxInputModule,
+        NxMaskModule,
+        ReactiveFormsModule,
+        QuoteLiteralPipe,
+        QuoteLiteralDirective,
+        QuoteTrackDirective
+    ],
+    providers: [VehicleService]
 })
 export class YourCarIsComponent extends QuoteComponent<QuoteModel> implements OnInit {
   public vehicleOptions: QuoteVehicleModel[] = [];

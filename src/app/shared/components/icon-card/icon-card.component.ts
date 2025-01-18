@@ -7,11 +7,10 @@ import { QuoteLiteralDirective } from '../../directives';
 import { SelectableOptionComponent } from '../selectable-option';
 
 @Component({
-  selector: 'quote-icon-card',
-  templateUrl: './icon-card.component.html',
-  styleUrl: './icon-card.component.scss',
-  imports: [CommonModule, SelectableOptionComponent, NxAvatarModule, NxCopytextModule, QuoteLiteralDirective],
-  standalone: true
+    selector: 'quote-icon-card',
+    templateUrl: './icon-card.component.html',
+    styleUrl: './icon-card.component.scss',
+    imports: [CommonModule, SelectableOptionComponent, NxAvatarModule, NxCopytextModule, QuoteLiteralDirective]
 })
 export class IconCardComponent {
   @Input()

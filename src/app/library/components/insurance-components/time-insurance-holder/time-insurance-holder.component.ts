@@ -11,19 +11,18 @@ import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 import { TimeInsuranceHolder } from './models';
 
 @Component({
-  selector: 'quote-time-insurance-holder',
-  templateUrl: './time-insurance-holder.component.html',
-  styleUrl: './time-insurance-holder.component.scss',
-  standalone: true,
-  imports: [
-    HeaderTitleComponent,
-    TextCardComponent,
-    QuoteFooterComponent,
-    NxCopytextModule,
-    QuoteLiteralDirective,
-    QuoteTrackDirective,
-    QuoteLiteralPipe
-  ]
+    selector: 'quote-time-insurance-holder',
+    templateUrl: './time-insurance-holder.component.html',
+    styleUrl: './time-insurance-holder.component.scss',
+    imports: [
+        HeaderTitleComponent,
+        TextCardComponent,
+        QuoteFooterComponent,
+        NxCopytextModule,
+        QuoteLiteralDirective,
+        QuoteTrackDirective,
+        QuoteLiteralPipe
+    ]
 })
 export class TimeInsuranceHolderComponent extends QuoteComponent<QuoteModel> implements OnInit {
   public yearsAsOwner = TimeInsuranceHolder;

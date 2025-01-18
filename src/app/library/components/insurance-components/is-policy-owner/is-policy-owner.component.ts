@@ -11,20 +11,19 @@ import { QuoteLiteralDirective } from 'src/app/shared/directives';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 
 @Component({
-  selector: 'quote-is-policy-owner',
-  templateUrl: './is-policy-owner.component.html',
-  styleUrl: './is-policy-owner.component.scss',
-  standalone: true,
-  imports: [
-    CommonModule,
-    HeaderTitleComponent,
-    QuoteFooterComponent,
-    SelectableOptionComponent,
-    NxButtonModule,
-    QuoteLiteralPipe,
-    QuoteLiteralDirective,
-    QuoteTrackDirective
-  ]
+    selector: 'quote-is-policy-owner',
+    templateUrl: './is-policy-owner.component.html',
+    styleUrl: './is-policy-owner.component.scss',
+    imports: [
+        CommonModule,
+        HeaderTitleComponent,
+        QuoteFooterComponent,
+        SelectableOptionComponent,
+        NxButtonModule,
+        QuoteLiteralPipe,
+        QuoteLiteralDirective,
+        QuoteTrackDirective
+    ]
 })
 export class IsPolicyOwnerComponent extends QuoteComponent<QuoteModel> {
   private readonly routingService = inject(RoutingService);

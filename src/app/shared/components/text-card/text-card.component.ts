@@ -5,11 +5,10 @@ import { NxCopytextModule } from '@aposin/ng-aquila/copytext';
 import { SelectableOptionComponent } from '../selectable-option';
 
 @Component({
-  selector: 'quote-text-card',
-  templateUrl: './text-card.component.html',
-  styleUrl: './text-card.component.scss',
-  standalone: true,
-  imports: [CommonModule, SelectableOptionComponent, NxAvatarModule, NxCopytextModule]
+    selector: 'quote-text-card',
+    templateUrl: './text-card.component.html',
+    styleUrl: './text-card.component.scss',
+    imports: [CommonModule, SelectableOptionComponent, NxAvatarModule, NxCopytextModule]
 })
 export class TextCardComponent {
   @Input()

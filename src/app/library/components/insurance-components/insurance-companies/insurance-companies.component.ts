@@ -19,25 +19,24 @@ import { QuoteModel } from 'src/app/library/models';
 import { InsuranceComponentService } from './services';
 
 @Component({
-  selector: 'quote-insurance-companies',
-  templateUrl: './insurance-companies.component.html',
-  styleUrl: './insurance-companies.component.scss',
-  imports: [
-    CommonModule,
-    IconCardComponent,
-    HeaderTitleComponent,
-    QuoteFooterComponent,
-    TextCardComponent,
-    NxFormfieldModule,
-    NxIconModule,
-    NxInputModule,
-    ReactiveFormsModule,
-    QuoteLiteralDirective,
-    QuoteTrackDirective,
-    QuoteLiteralPipe
-  ],
-  providers: [InsuranceComponentService, InsuranceCompaniesService],
-  standalone: true
+    selector: 'quote-insurance-companies',
+    templateUrl: './insurance-companies.component.html',
+    styleUrl: './insurance-companies.component.scss',
+    imports: [
+        CommonModule,
+        IconCardComponent,
+        HeaderTitleComponent,
+        QuoteFooterComponent,
+        TextCardComponent,
+        NxFormfieldModule,
+        NxIconModule,
+        NxInputModule,
+        ReactiveFormsModule,
+        QuoteLiteralDirective,
+        QuoteTrackDirective,
+        QuoteLiteralPipe
+    ],
+    providers: [InsuranceComponentService, InsuranceCompaniesService]
 })
 export class InsuranceCompaniesComponent extends QuoteComponent<QuoteModel> implements OnInit {
   @ViewChild('searchInput', { static: true })

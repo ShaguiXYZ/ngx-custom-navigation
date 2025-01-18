@@ -11,12 +11,11 @@ import { QuoteLiteralPipe } from '../../pipes';
 import { QuoteStepperService } from './services';
 
 @Component({
-  selector: 'quote-stepper',
-  templateUrl: './quote-stepper.component.html',
-  styleUrls: ['./quote-stepper.component.scss'],
-  providers: [QuoteStepperService],
-  imports: [CommonModule, NxCopytextModule, NxIconModule, NxTooltipModule, QuoteLiteralPipe],
-  standalone: true
+    selector: 'quote-stepper',
+    templateUrl: './quote-stepper.component.html',
+    styleUrls: ['./quote-stepper.component.scss'],
+    providers: [QuoteStepperService],
+    imports: [CommonModule, NxCopytextModule, NxIconModule, NxTooltipModule, QuoteLiteralPipe]
 })
 export class QuoteStepperComponent implements OnInit, OnDestroy {
   public stepperData?: { stepper: Stepper; stepKey: string };

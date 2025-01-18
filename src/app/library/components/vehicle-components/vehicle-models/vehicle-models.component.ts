@@ -17,25 +17,24 @@ import { QuoteLiteralDirective } from 'src/app/shared/directives';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 
 @Component({
-  selector: 'quote-vehicle-models',
-  templateUrl: './vehicle-models.component.html',
-  styleUrl: './vehicle-models.component.scss',
-  imports: [
-    CommonModule,
-    HeaderTitleComponent,
-    QuoteFooterComponent,
-    TextCardComponent,
-    NxCopytextModule,
-    NxFormfieldModule,
-    NxIconModule,
-    NxInputModule,
-    ReactiveFormsModule,
-    QuoteLiteralDirective,
-    QuoteTrackDirective,
-    QuoteLiteralPipe
-  ],
-  providers: [VehicleService],
-  standalone: true
+    selector: 'quote-vehicle-models',
+    templateUrl: './vehicle-models.component.html',
+    styleUrl: './vehicle-models.component.scss',
+    imports: [
+        CommonModule,
+        HeaderTitleComponent,
+        QuoteFooterComponent,
+        TextCardComponent,
+        NxCopytextModule,
+        NxFormfieldModule,
+        NxIconModule,
+        NxInputModule,
+        ReactiveFormsModule,
+        QuoteLiteralDirective,
+        QuoteTrackDirective,
+        QuoteLiteralPipe
+    ],
+    providers: [VehicleService]
 })
 export class VehicleModelsComponent extends QuoteComponent<QuoteModel> implements OnInit {
   @ViewChild('searchInput', { static: true })

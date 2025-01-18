@@ -20,23 +20,22 @@ import { QuoteAutoFocusDirective, QuoteLiteralDirective, QuoteMaskDirective } fr
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 
 @Component({
-  selector: 'quote-place',
-  templateUrl: './place.component.html',
-  styleUrl: './place.component.scss',
-  imports: [
-    HeaderTitleComponent,
-    QuoteFooterComponent,
-    NxFormfieldModule,
-    NxInputModule,
-    NxMaskModule,
-    ReactiveFormsModule,
-    QuoteMaskDirective,
-    QuoteAutoFocusDirective,
-    QuoteLiteralDirective,
-    QuoteLiteralPipe
-  ],
-  providers: [LocationService, QuoteFormValidarors],
-  standalone: true
+    selector: 'quote-place',
+    templateUrl: './place.component.html',
+    styleUrl: './place.component.scss',
+    imports: [
+        HeaderTitleComponent,
+        QuoteFooterComponent,
+        NxFormfieldModule,
+        NxInputModule,
+        NxMaskModule,
+        ReactiveFormsModule,
+        QuoteMaskDirective,
+        QuoteAutoFocusDirective,
+        QuoteLiteralDirective,
+        QuoteLiteralPipe
+    ],
+    providers: [LocationService, QuoteFormValidarors]
 })
 export class PlaceComponent extends QuoteComponent<QuoteModel> implements OnInit {
   public location?: string;

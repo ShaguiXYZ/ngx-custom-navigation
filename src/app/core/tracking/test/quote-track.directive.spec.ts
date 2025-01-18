@@ -6,7 +6,8 @@ import { TrackEventType } from '../quote-track.model';
 import { QuoteTrackService } from '../quote-track.service';
 
 @Component({
-  template: `<div [nxTrack]="trackInfo" [nxTrackEvents]="trackEvents"></div>`
+    template: `<div [nxTrack]="trackInfo" [nxTrackEvents]="trackEvents"></div>`,
+    standalone: false
 })
 class TestComponent {
   trackInfo = { id: 'test-id' };

@@ -14,23 +14,22 @@ import { QuoteAutoFocusDirective, QuoteLiteralDirective } from 'src/app/shared/d
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 
 @Component({
-  selector: 'quote-driving-license-date',
-  templateUrl: './driving-license-date.component.html',
-  styleUrl: './driving-license-date.component.scss',
-  imports: [
-    HeaderTitleComponent,
-    NxDatefieldModule,
-    NxFormfieldModule,
-    NxInputModule,
-    ReactiveFormsModule,
-    QuoteFooterComponent,
-    NxMomentDateModule,
-    QuoteAutoFocusDirective,
-    QuoteLiteralDirective,
-    QuoteLiteralPipe
-  ],
-  providers: [{ provide: NX_DATE_LOCALE, useValue: 'es-ES' }, QuoteFormValidarors],
-  standalone: true
+    selector: 'quote-driving-license-date',
+    templateUrl: './driving-license-date.component.html',
+    styleUrl: './driving-license-date.component.scss',
+    imports: [
+        HeaderTitleComponent,
+        NxDatefieldModule,
+        NxFormfieldModule,
+        NxInputModule,
+        ReactiveFormsModule,
+        QuoteFooterComponent,
+        NxMomentDateModule,
+        QuoteAutoFocusDirective,
+        QuoteLiteralDirective,
+        QuoteLiteralPipe
+    ],
+    providers: [{ provide: NX_DATE_LOCALE, useValue: 'es-ES' }, QuoteFormValidarors]
 })
 export class DrivingLicenseDateComponent extends QuoteComponent<QuoteModel> implements OnInit {
   public readonly dateFormat = DEFAULT_DATE_FORMAT;

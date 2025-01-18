@@ -13,23 +13,22 @@ import { QuoteLiteralDirective } from 'src/app/shared/directives';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 
 @Component({
-  selector: 'quote-vehicle-characteristics',
-  templateUrl: './vehicle-characteristics.component.html',
-  styleUrl: './vehicle-characteristics.component.scss',
-  imports: [
-    CommonModule,
-    HeaderTitleComponent,
-    QuoteFooterComponent,
-    SelectableOptionComponent,
-    NxAccordionModule,
-    NxCopytextModule,
-    NxFormfieldModule,
-    QuoteLiteralPipe,
-    QuoteLiteralDirective,
-    QuoteTrackDirective
-  ],
-  providers: [VehicleService],
-  standalone: true
+    selector: 'quote-vehicle-characteristics',
+    templateUrl: './vehicle-characteristics.component.html',
+    styleUrl: './vehicle-characteristics.component.scss',
+    imports: [
+        CommonModule,
+        HeaderTitleComponent,
+        QuoteFooterComponent,
+        SelectableOptionComponent,
+        NxAccordionModule,
+        NxCopytextModule,
+        NxFormfieldModule,
+        QuoteLiteralPipe,
+        QuoteLiteralDirective,
+        QuoteTrackDirective
+    ],
+    providers: [VehicleService]
 })
 export class VehicleCharacteristicsComponent extends QuoteComponent<QuoteModel> implements OnInit {
   public cubicCapacityNotKnown: CubicCapacityModel = { index: '-1', data: 'nsnc' };

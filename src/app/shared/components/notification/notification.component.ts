@@ -6,11 +6,10 @@ import { NotificationModel, NotificationService } from '@shagui/ng-shagui/core';
 import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'nx-notification',
-  styleUrls: ['./notification.component.scss'],
-  templateUrl: './notification.component.html',
-  standalone: true,
-  imports: [CommonModule, NxButtonModule, NxMessageModule]
+    selector: 'nx-notification',
+    styleUrls: ['./notification.component.scss'],
+    templateUrl: './notification.component.html',
+    imports: [CommonModule, NxButtonModule, NxMessageModule]
 })
 export class NotificationComponent implements OnInit, OnDestroy {
   public notifications: NotificationModel[] = [];

@@ -11,19 +11,18 @@ import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 import { NumberAccidents } from './models';
 
 @Component({
-  selector: 'quote-number-accidents',
-  templateUrl: './number-accidents.component.html',
-  styleUrl: './number-accidents.component.scss',
-  standalone: true,
-  imports: [
-    HeaderTitleComponent,
-    QuoteFooterComponent,
-    TextCardComponent,
-    NxCopytextModule,
-    QuoteLiteralDirective,
-    QuoteTrackDirective,
-    QuoteLiteralPipe
-  ]
+    selector: 'quote-number-accidents',
+    templateUrl: './number-accidents.component.html',
+    styleUrl: './number-accidents.component.scss',
+    imports: [
+        HeaderTitleComponent,
+        QuoteFooterComponent,
+        TextCardComponent,
+        NxCopytextModule,
+        QuoteLiteralDirective,
+        QuoteTrackDirective,
+        QuoteLiteralPipe
+    ]
 })
 export class NumberAccidentsComponent extends QuoteComponent<QuoteModel> implements OnInit {
   public selectedAccidents?: IndexedData<string, number>;

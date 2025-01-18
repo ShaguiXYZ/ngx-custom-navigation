@@ -15,24 +15,23 @@ import { QuoteAutoFocusDirective, QuoteLiteralDirective } from 'src/app/shared/d
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 
 @Component({
-  selector: 'quote-license-year',
-  templateUrl: './license-year.component.html',
-  styleUrl: './license-year.component.scss',
-  standalone: true,
-  imports: [
-    HeaderTitleComponent,
-    QuoteFooterComponent,
-    NxFormfieldModule,
-    NxInputModule,
-    NxMaskModule,
-    NxButtonModule,
-    ReactiveFormsModule,
-    CommonModule,
-    QuoteAutoFocusDirective,
-    QuoteLiteralDirective,
-    QuoteLiteralPipe
-  ],
-  providers: [QuoteFormValidarors]
+    selector: 'quote-license-year',
+    templateUrl: './license-year.component.html',
+    styleUrl: './license-year.component.scss',
+    imports: [
+        HeaderTitleComponent,
+        QuoteFooterComponent,
+        NxFormfieldModule,
+        NxInputModule,
+        NxMaskModule,
+        NxButtonModule,
+        ReactiveFormsModule,
+        CommonModule,
+        QuoteAutoFocusDirective,
+        QuoteLiteralDirective,
+        QuoteLiteralPipe
+    ],
+    providers: [QuoteFormValidarors]
 })
 export class LicenseYearComponent extends QuoteComponent<QuoteModel> implements OnInit {
   public maxYearsOld = 50;

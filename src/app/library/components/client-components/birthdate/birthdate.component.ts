@@ -14,23 +14,22 @@ import { QuoteAutoFocusDirective, QuoteLiteralDirective } from 'src/app/shared/d
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 
 @Component({
-  selector: 'quote-birthdate',
-  templateUrl: './birthdate.component.html',
-  styleUrl: './birthdate.component.scss',
-  standalone: true,
-  imports: [
-    HeaderTitleComponent,
-    QuoteFooterComponent,
-    NxDatefieldModule,
-    NxFormfieldModule,
-    NxInputModule,
-    NxMomentDateModule,
-    ReactiveFormsModule,
-    QuoteAutoFocusDirective,
-    QuoteLiteralDirective,
-    QuoteLiteralPipe
-  ],
-  providers: [{ provide: NX_DATE_LOCALE, useValue: 'es-ES' }, QuoteFormValidarors]
+    selector: 'quote-birthdate',
+    templateUrl: './birthdate.component.html',
+    styleUrl: './birthdate.component.scss',
+    imports: [
+        HeaderTitleComponent,
+        QuoteFooterComponent,
+        NxDatefieldModule,
+        NxFormfieldModule,
+        NxInputModule,
+        NxMomentDateModule,
+        ReactiveFormsModule,
+        QuoteAutoFocusDirective,
+        QuoteLiteralDirective,
+        QuoteLiteralPipe
+    ],
+    providers: [{ provide: NX_DATE_LOCALE, useValue: 'es-ES' }, QuoteFormValidarors]
 })
 export class BirthdateComponent extends QuoteComponent<QuoteModel> implements OnInit {
   public readonly dateFormat = DEFAULT_DATE_FORMAT;

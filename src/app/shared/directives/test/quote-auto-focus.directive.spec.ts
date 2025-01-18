@@ -4,9 +4,8 @@ import { By } from '@angular/platform-browser';
 import { QuoteAutoFocusDirective } from '../quote-auto-focus.directive';
 
 @Component({
-  template: `<input nxAutoFocus />`,
-  standalone: true,
-  imports: [QuoteAutoFocusDirective]
+    template: `<input nxAutoFocus />`,
+    imports: [QuoteAutoFocusDirective]
 })
 class TestComponent {}
 

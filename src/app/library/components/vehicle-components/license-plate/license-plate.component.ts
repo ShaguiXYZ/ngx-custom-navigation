@@ -18,27 +18,26 @@ import { QuoteModel } from 'src/app/library/models';
 import { CountryCodes, PatternsByCountry } from './models';
 
 @Component({
-  selector: 'quote-license-plate',
-  templateUrl: './license-plate.component.html',
-  styleUrl: './license-plate.component.scss',
-  standalone: true,
-  imports: [
-    CommonModule,
-    HeaderTitleComponent,
-    NxCopytextModule,
-    NxFormfieldModule,
-    NxInputModule,
-    NxLicencePlateModule,
-    NxButtonModule,
-    QuoteFooterComponent,
-    QuoteZoneComponent,
-    ReactiveFormsModule,
-    QuoteAutoFocusDirective,
-    QuoteLiteralDirective,
-    QuoteLiteralPipe,
-    QuoteTrackDirective
-  ],
-  providers: [QuoteFormValidarors]
+    selector: 'quote-license-plate',
+    templateUrl: './license-plate.component.html',
+    styleUrl: './license-plate.component.scss',
+    imports: [
+        CommonModule,
+        HeaderTitleComponent,
+        NxCopytextModule,
+        NxFormfieldModule,
+        NxInputModule,
+        NxLicencePlateModule,
+        NxButtonModule,
+        QuoteFooterComponent,
+        QuoteZoneComponent,
+        ReactiveFormsModule,
+        QuoteAutoFocusDirective,
+        QuoteLiteralDirective,
+        QuoteLiteralPipe,
+        QuoteTrackDirective
+    ],
+    providers: [QuoteFormValidarors]
 })
 export class LicensePlateComponent extends QuoteComponent<QuoteModel> implements OnInit {
   public form!: FormGroup;

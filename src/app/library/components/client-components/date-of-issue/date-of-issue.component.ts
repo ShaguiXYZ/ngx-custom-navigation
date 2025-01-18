@@ -14,23 +14,22 @@ import { QuoteAutoFocusDirective, QuoteLiteralDirective } from 'src/app/shared/d
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 
 @Component({
-  selector: 'quote-date-of-issue',
-  templateUrl: './date-of-issue.component.html',
-  styleUrl: './date-of-issue.component.scss',
-  standalone: true,
-  imports: [
-    HeaderTitleComponent,
-    NxDatefieldModule,
-    NxFormfieldModule,
-    NxInputModule,
-    NxMomentDateModule,
-    QuoteFooterComponent,
-    ReactiveFormsModule,
-    QuoteAutoFocusDirective,
-    QuoteLiteralDirective,
-    QuoteLiteralPipe
-  ],
-  providers: [{ provide: NX_DATE_LOCALE, useValue: 'es-ES' }, QuoteFormValidarors]
+    selector: 'quote-date-of-issue',
+    templateUrl: './date-of-issue.component.html',
+    styleUrl: './date-of-issue.component.scss',
+    imports: [
+        HeaderTitleComponent,
+        NxDatefieldModule,
+        NxFormfieldModule,
+        NxInputModule,
+        NxMomentDateModule,
+        QuoteFooterComponent,
+        ReactiveFormsModule,
+        QuoteAutoFocusDirective,
+        QuoteLiteralDirective,
+        QuoteLiteralPipe
+    ],
+    providers: [{ provide: NX_DATE_LOCALE, useValue: 'es-ES' }, QuoteFormValidarors]
 })
 export class DateOfIssueComponent extends QuoteComponent<QuoteModel> implements OnInit {
   public readonly dateFormat = DEFAULT_DATE_FORMAT;

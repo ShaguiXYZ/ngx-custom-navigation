@@ -11,20 +11,19 @@ import { QuoteLiteralDirective } from 'src/app/shared/directives';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 
 @Component({
-  selector: 'quote-is-client',
-  templateUrl: './is-client.component.html',
-  styleUrl: './is-client.component.scss',
-  standalone: true,
-  imports: [
-    CommonModule,
-    HeaderTitleComponent,
-    QuoteFooterComponent,
-    SelectableOptionComponent,
-    NxButtonModule,
-    QuoteLiteralPipe,
-    QuoteLiteralDirective,
-    QuoteTrackDirective
-  ]
+    selector: 'quote-is-client',
+    templateUrl: './is-client.component.html',
+    styleUrl: './is-client.component.scss',
+    imports: [
+        CommonModule,
+        HeaderTitleComponent,
+        QuoteFooterComponent,
+        SelectableOptionComponent,
+        NxButtonModule,
+        QuoteLiteralPipe,
+        QuoteLiteralDirective,
+        QuoteTrackDirective
+    ]
 })
 export class IsClientComponent extends QuoteComponent<QuoteModel> {
   private readonly routingService = inject(RoutingService);
