@@ -5,10 +5,10 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { NxDatefieldModule } from '@aposin/ng-aquila/datefield';
 import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
 import { NxInputModule } from '@aposin/ng-aquila/input';
-import { NxMomentDateModule } from '@aposin/ng-aquila/moment-date-adapter';
+import { NxIsoDateModule } from '@aposin/ng-aquila/iso-date-adapter';
 import { TranslateService } from '@ngx-translate/core';
 import { ContextDataService } from '@shagui/ng-shagui/core';
-import moment from 'moment';
+import dayjs from 'dayjs';
 import { Subject } from 'rxjs';
 import { NX_WORKFLOW_TOKEN } from 'src/app/core/components/models';
 import { DEFAULT_DATE_FORMAT, QUOTE_APP_CONTEXT_DATA, QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
@@ -54,7 +54,7 @@ describe('DrivingLicenseDateComponent', () => {
 
     await TestBed.configureTestingModule({
       declarations: [],
-      imports: [DrivingLicenseDateComponent, ReactiveFormsModule, NxDatefieldModule, NxFormfieldModule, NxInputModule, NxMomentDateModule],
+      imports: [DrivingLicenseDateComponent, ReactiveFormsModule, NxDatefieldModule, NxFormfieldModule, NxInputModule, NxIsoDateModule],
       providers: [
         { provide: ContextDataService, useValue: contextDataServiceSpy },
         { provide: TranslateService, useValue: translateServiceSpy },
@@ -84,7 +84,7 @@ describe('DrivingLicenseDateComponent', () => {
   });
 
   it('should initialize form with context data', () => {
-    const licenseDate = moment(new Date(component.form.controls['licenseDate'].value)).format(DEFAULT_DATE_FORMAT);
+    const licenseDate = dayjs(new Date(component.form.controls['licenseDate'].value)).format(DEFAULT_DATE_FORMAT);
 
     expect(licenseDate).toEqual('2022-01-01');
   });
@@ -109,7 +109,7 @@ describe('DrivingLicenseDateComponent', () => {
   });
 
   it('should invalidate form if driving license date is a future date', () => {
-    component.form.controls['licenseDate'].setValue(moment().add(1, 'years').format(DEFAULT_DATE_FORMAT));
+    component.form.controls['licenseDate'].setValue(dayjs().add(1, 'years').format(DEFAULT_DATE_FORMAT));
 
     expect(component.form.valid).toBeFalse();
   });

@@ -1,9 +1,9 @@
+import { HttpClient } from '@angular/common/http';
 import { TestBed } from '@angular/core/testing';
 import { FormControl } from '@angular/forms';
-import moment from 'moment';
-import { QuoteFormValidarors } from '../quote-validators.form';
+import dayjs from 'dayjs';
 import { NX_WORKFLOW_TOKEN } from '../../components/models';
-import { HttpClient } from '@angular/common/http';
+import { QuoteFormValidarors } from '../quote-validators.form';
 
 describe('QuoteFormValidarors', () => {
   const mockConfig = {
@@ -40,14 +40,14 @@ describe('QuoteFormValidarors', () => {
   });
 
   it('should validate isFutureDate correctly', () => {
-    const control = new FormControl(moment().subtract(1, 'day').toISOString());
+    const control = new FormControl(dayjs().subtract(1, 'day').toISOString());
     const validatorFn = validators.isFutureDate();
     const result = validatorFn(control);
     expect(result).toBeNull();
   });
 
   it('should invalidate isFutureDate correctly', () => {
-    const control = new FormControl(moment().add(1, 'day').toISOString());
+    const control = new FormControl(dayjs().add(1, 'day').toISOString());
     const validatorFn = validators.isFutureDate();
     const result = validatorFn(control);
 
@@ -55,56 +55,56 @@ describe('QuoteFormValidarors', () => {
   });
 
   it('should validate isPastDate correctly', () => {
-    const control = new FormControl(moment().add(1, 'day').toISOString());
+    const control = new FormControl(dayjs().add(1, 'day').toISOString());
     const validatorFn = validators.isPastDate();
     const result = validatorFn(control);
     expect(result).toBeNull();
   });
 
   it('should invalidate isPastDate correctly', () => {
-    const control = new FormControl(moment().subtract(1, 'day').toISOString());
+    const control = new FormControl(dayjs().subtract(1, 'day').toISOString());
     const validatorFn = validators.isPastDate();
     const result = validatorFn(control);
     expect(result).toEqual({ pastDate: true });
   });
 
   it('should validate isOlderThanYears correctly', () => {
-    const control = new FormControl(moment().subtract(30, 'years').toISOString());
+    const control = new FormControl(dayjs().subtract(30, 'years').toISOString());
     const validatorFn = validators.isOlderThanYears(18);
     const result = validatorFn(control);
     expect(result).toBeNull();
   });
 
   it('should invalidate isOlderThanYears correctly', () => {
-    const control = new FormControl(moment().subtract(10, 'years').toISOString());
+    const control = new FormControl(dayjs().subtract(10, 'years').toISOString());
     const validatorFn = validators.isOlderThanYears(18);
     const result = validatorFn(control);
     expect(result).toEqual({ olderThanYears: true });
   });
 
   it('should validate isYoungerThanYears correctly', () => {
-    const control = new FormControl(moment().subtract(10, 'years').toISOString());
+    const control = new FormControl(dayjs().subtract(10, 'years').toISOString());
     const validatorFn = validators.isYoungerThanYears(18);
     const result = validatorFn(control);
     expect(result).toBeNull();
   });
 
   it('should invalidate isYoungerThanYears correctly', () => {
-    const control = new FormControl(moment().subtract(30, 'years').toISOString());
+    const control = new FormControl(dayjs().subtract(30, 'years').toISOString());
     const validatorFn = validators.isYoungerThanYears(18);
     const result = validatorFn(control);
     expect(result).toEqual({ youngerThanYears: true });
   });
 
   it('should validate maxYearsBetweenDates correctly', () => {
-    const control = new FormControl(moment().subtract(5, 'years').toISOString());
+    const control = new FormControl(dayjs().subtract(5, 'years').toISOString());
     const validatorFn = validators.maxYearsBetweenDates(new Date(), 10);
     const result = validatorFn(control);
     expect(result).toBeNull();
   });
 
   it('should invalidate maxYearsBetweenDates correctly', () => {
-    const control = new FormControl(moment().subtract(15, 'years').toISOString());
+    const control = new FormControl(dayjs().subtract(15, 'years').toISOString());
     const validatorFn = validators.maxYearsBetweenDates(new Date(), 10);
     const result = validatorFn(control);
     expect(result).toEqual({ maxYearsBetweenDates: true });
@@ -125,14 +125,14 @@ describe('QuoteFormValidarors', () => {
   });
 
   it('should validate minYearsBetweenDates correctly', () => {
-    const control = new FormControl(moment().subtract(5, 'years').toISOString());
+    const control = new FormControl(dayjs().subtract(5, 'years').toISOString());
     const validatorFn = validators.minYearsBetweenDates(new Date(), 3);
     const result = validatorFn(control);
     expect(result).toBeNull();
   });
 
   it('should invalidate minYearsBetweenDates correctly', () => {
-    const control = new FormControl(moment().subtract(1, 'years').toISOString());
+    const control = new FormControl(dayjs().subtract(1, 'years').toISOString());
     const validatorFn = validators.minYearsBetweenDates(new Date(), 3);
     const result = validatorFn(control);
     expect(result).toEqual({ minYearsBetweenDates: true });

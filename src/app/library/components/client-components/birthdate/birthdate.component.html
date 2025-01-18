@@ -37,7 +37,7 @@
   </section>
   <quote-footer
     [trackInfo]="{
-      birthdate: form.get('birthdate')?.value?.format(dateFormat)
+      birthdate: form.get('birthdate')?.value
     }"
     (uiOnNext)="updateValidData()"
   />

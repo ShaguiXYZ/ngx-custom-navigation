@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-namespace */
-import moment from 'moment';
+import dayjs from 'dayjs';
 import { DEFAULT_DATE_FORMAT } from '../../core/constants';
-import { QuoteModel } from './_quote.model';
 import { patch } from '../../core/lib';
+import { QuoteModel } from './_quote.model';
 
 export interface Authentication {
   company?: string;
@@ -126,22 +126,22 @@ export namespace PricingDTO {
       operationDataT1: {
         generalData: {
           policyDates: {
-            policyEffectiveDate: model.client.dateOfIssue && moment(model.client.dateOfIssue).format(DEFAULT_DATE_FORMAT),
-            policyExpirationDate: model.client.expiration && moment(model.client.expiration).format(DEFAULT_DATE_FORMAT)
+            policyEffectiveDate: model.client.dateOfIssue && dayjs(model.client.dateOfIssue).format(DEFAULT_DATE_FORMAT),
+            policyExpirationDate: model.client.expiration && dayjs(model.client.expiration).format(DEFAULT_DATE_FORMAT)
           }
         },
         participantsData: {
           holder: {
             document: { documentNumber: model.personalData.identificationNumber },
             address: { city: model.place.location, postalCode: model.place.postalCode },
-            birthDate: model.personalData.birthdate && moment(model.personalData.birthdate).format(DEFAULT_DATE_FORMAT),
-            licenseDate: model.driven.licenseDate && moment(model.driven.licenseDate).format(DEFAULT_DATE_FORMAT)
+            birthDate: model.personalData.birthdate && dayjs(model.personalData.birthdate).format(DEFAULT_DATE_FORMAT),
+            licenseDate: model.driven.licenseDate && dayjs(model.driven.licenseDate).format(DEFAULT_DATE_FORMAT)
           },
           owner: {
             document: { documentNumber: model.personalData.identificationNumber },
             address: { city: model.place.location, postalCode: model.place.postalCode },
-            birthDate: model.personalData.birthdate && moment(model.personalData.birthdate).format(DEFAULT_DATE_FORMAT),
-            licenseDate: model.driven.licenseDate && moment(model.driven.licenseDate).format(DEFAULT_DATE_FORMAT)
+            birthDate: model.personalData.birthdate && dayjs(model.personalData.birthdate).format(DEFAULT_DATE_FORMAT),
+            licenseDate: model.driven.licenseDate && dayjs(model.driven.licenseDate).format(DEFAULT_DATE_FORMAT)
           }
         },
         riskData: {
@@ -154,7 +154,7 @@ export namespace PricingDTO {
             vehicleModel: model.vehicle.model,
             vehicleCode: model.vehicle.modelVersion?.index,
             vehicleVersion: model.vehicle.modelVersion?.index,
-            creationDate: model.vehicle.creationDate && moment(model.vehicle.creationDate).format(DEFAULT_DATE_FORMAT),
+            creationDate: model.vehicle.creationDate && dayjs(model.vehicle.creationDate).format(DEFAULT_DATE_FORMAT),
             vehicleBaseCode: model.vehicle.base7
           }
         },

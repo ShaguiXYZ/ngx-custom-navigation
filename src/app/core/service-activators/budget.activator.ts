@@ -1,5 +1,5 @@
 import { IndexedData, UniqueIds } from '@shagui/ng-shagui/core';
-import moment from 'moment';
+import dayjs from 'dayjs';
 import { QUOTE_APP_CONTEXT_DATA, QUOTE_CONTEXT_DATA } from '../constants';
 import { BudgetError } from '../errors';
 import { BudgetUtils, StorageLib } from '../lib';
@@ -17,7 +17,7 @@ export class BudgetActivator {
       };
       const storedDataKey: StoredDataKey = {
         passKey: UniqueIds.random(256),
-        key: `${moment().format('YYYYMMDD')}_${UniqueIds.random(6).toUpperCase()}`
+        key: `${dayjs().format('YYYYMMDD')}_${UniqueIds.random(6).toUpperCase()}`
       };
       const cipher = BudgetUtils.encrypt(storedDataKey.passKey, budget);
 

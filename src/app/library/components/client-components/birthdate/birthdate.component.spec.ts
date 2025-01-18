@@ -5,10 +5,10 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { NxDatefieldModule } from '@aposin/ng-aquila/datefield';
 import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
 import { NxInputModule } from '@aposin/ng-aquila/input';
-import { NxMomentDateModule } from '@aposin/ng-aquila/moment-date-adapter';
+import { NxIsoDateModule } from '@aposin/ng-aquila/iso-date-adapter';
 import { TranslateService } from '@ngx-translate/core';
 import { ContextDataService } from '@shagui/ng-shagui/core';
-import moment from 'moment';
+import dayjs from 'dayjs';
 import { of, Subject } from 'rxjs';
 import { NX_WORKFLOW_TOKEN } from 'src/app/core/components/models';
 import { DEFAULT_DATE_FORMAT, QUOTE_APP_CONTEXT_DATA, QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
@@ -56,7 +56,7 @@ describe('BirthdateComponent', () => {
 
     await TestBed.configureTestingModule({
       declarations: [],
-      imports: [BirthdateComponent, ReactiveFormsModule, NxDatefieldModule, NxFormfieldModule, NxInputModule, NxMomentDateModule],
+      imports: [BirthdateComponent, ReactiveFormsModule, NxDatefieldModule, NxFormfieldModule, NxInputModule, NxIsoDateModule],
       providers: [
         { provide: ContextDataService, useValue: contextDataServiceSpy },
         { provide: TranslateService, useValue: translateServiceSpy },
@@ -87,7 +87,7 @@ describe('BirthdateComponent', () => {
   });
 
   it('should initialize form with birthdate from context', () => {
-    const birthdate = moment(new Date(component.form.controls['birthdate'].value)).format(DEFAULT_DATE_FORMAT);
+    const birthdate = dayjs(new Date(component.form.controls['birthdate'].value)).format(DEFAULT_DATE_FORMAT);
 
     expect(birthdate).toEqual('2000-01-01');
   });
@@ -101,14 +101,14 @@ describe('BirthdateComponent', () => {
   });
 
   it('should invalidate form if birthdate is less than 18 years ago', () => {
-    component.form.controls['birthdate'].setValue(moment().subtract(17, 'years').format(DEFAULT_DATE_FORMAT));
+    component.form.controls['birthdate'].setValue(dayjs().subtract(17, 'years').format(DEFAULT_DATE_FORMAT));
 
     expect(component.form.valid).toBeFalse();
     expect(component.form.controls['birthdate'].errors).toEqual({ olderThanYears: true });
   });
 
   it('should validate form if birthdate is 18 years or more ago', () => {
-    component.form.controls['birthdate'].setValue(moment().subtract(18, 'years').format(DEFAULT_DATE_FORMAT));
+    component.form.controls['birthdate'].setValue(dayjs().subtract(18, 'years').format(DEFAULT_DATE_FORMAT));
     component['updateValidData']();
 
     expect(component.form.valid).toBeTrue();

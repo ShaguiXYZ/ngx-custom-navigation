@@ -1,11 +1,14 @@
 import { inject, Injectable } from '@angular/core';
 import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 import { ContextDataService, hasValue } from '@shagui/ng-shagui/core';
-import moment from 'moment';
+import dayjs from 'dayjs';
+import isBetween from 'dayjs/plugin/isBetween';
 import { QUOTE_APP_CONTEXT_DATA, QUOTE_CONTEXT_DATA } from '../constants';
 import { AppContextData, QuoteControlModel } from '../models';
 import { ServiceActivatorService } from '../service-activators';
 import { FormValidations, QuoteFormValidation } from './quote.form.model';
+
+dayjs.extend(isBetween);
 
 @Injectable()
 export class QuoteFormValidarors {
@@ -14,9 +17,9 @@ export class QuoteFormValidarors {
 
   public betweenDates = (startDate: Date, endDate: Date): ValidatorFn => {
     return (control: AbstractControl): ValidationErrors | null => {
-      const controlDate = moment(control.value);
-      const start = moment(startDate);
-      const end = moment(endDate);
+      const controlDate = dayjs(control.value);
+      const start = dayjs(startDate);
+      const end = dayjs(endDate);
 
       // @howto make isBetween inclusive ingnoring time
       return this.activateEntryPoint(
@@ -30,18 +33,18 @@ export class QuoteFormValidarors {
   public isFutureDate =
     (): ValidatorFn =>
     (control: AbstractControl): ValidationErrors | null =>
-      this.activateEntryPoint(control, 'futureDate', moment(control.value).isAfter(moment()));
+      this.activateEntryPoint(control, 'futureDate', dayjs(control.value).isAfter(dayjs()));
 
   public isPastDate =
     (): ValidatorFn =>
     (control: AbstractControl): ValidationErrors | null =>
-      this.activateEntryPoint(control, 'pastDate', moment(control.value).isBefore(moment()));
+      this.activateEntryPoint(control, 'pastDate', dayjs(control.value).isBefore(dayjs()));
 
   public isOlderThanYears =
     (years: number): ValidatorFn =>
     (control: AbstractControl): ValidationErrors | null => {
-      const bornDate = moment(control.value);
-      const timeBetween = moment().diff(bornDate, 'years');
+      const bornDate = dayjs(control.value);
+      const timeBetween = dayjs().diff(bornDate, 'years');
 
       return this.activateEntryPoint(control, 'olderThanYears', timeBetween < years);
     };
@@ -49,8 +52,8 @@ export class QuoteFormValidarors {
   public isYoungerThanYears =
     (years: number): ValidatorFn =>
     (control: AbstractControl): ValidationErrors | null => {
-      const bornDate = moment(control.value);
-      const timeBetween = moment().diff(bornDate, 'years');
+      const bornDate = dayjs(control.value);
+      const timeBetween = dayjs().diff(bornDate, 'years');
 
       return this.activateEntryPoint(control, 'youngerThanYears', timeBetween > years);
     };
@@ -58,8 +61,8 @@ export class QuoteFormValidarors {
   public maxYearsBetweenDates =
     (date: Date, maxYears: number): ValidatorFn =>
     (control: AbstractControl): ValidationErrors | null => {
-      const controlDate = moment(control.value);
-      const timeBetween = moment(date).diff(controlDate, 'years');
+      const controlDate = dayjs(control.value);
+      const timeBetween = dayjs(date).diff(controlDate, 'years');
 
       return this.activateEntryPoint(control, 'maxYearsBetweenDates', Math.abs(timeBetween) > maxYears);
     };
@@ -71,8 +74,8 @@ export class QuoteFormValidarors {
   public minYearsBetweenDates =
     (date: Date, maxYears: number): ValidatorFn =>
     (control: AbstractControl): ValidationErrors | null => {
-      const controlDate = moment(control.value);
-      const timeBetween = moment(date).diff(controlDate, 'years');
+      const controlDate = dayjs(control.value);
+      const timeBetween = dayjs(date).diff(controlDate, 'years');
 
       return this.activateEntryPoint(control, 'minYearsBetweenDates', Math.abs(timeBetween) < maxYears);
     };
