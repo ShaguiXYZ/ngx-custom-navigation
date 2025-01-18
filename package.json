@@ -36,9 +36,9 @@
     "@angular/cli": "19.1.2",
     "@angular/compiler-cli": "19.1.1",
     "@types/crypto-js": "^4.2.2",
-    "@types/jasmine": "~5.1.4",
-    "angular-eslint": "18.4.0",
-    "eslint": "^9.17.0",
+    "@types/jasmine": "~5.1.5",
+    "angular-eslint": "19.0.2",
+    "eslint": "^9.18.0",
     "jasmine-core": "~5.5.0",
     "jasmine-spec-reporter": "~7.0.0",
     "karma": "~6.4.4",
@@ -48,7 +48,7 @@
     "karma-jasmine-html-reporter": "~2.1.0",
     "karma-mocha-reporter": "~2.2.5",
     "karma-spec-reporter": "^0.0.36",
-    "typescript": "~5.5.4",
-    "typescript-eslint": "8.18.1"
+    "typescript": "~5.7.3",
+    "typescript-eslint": "8.20.0"
   }
 }
