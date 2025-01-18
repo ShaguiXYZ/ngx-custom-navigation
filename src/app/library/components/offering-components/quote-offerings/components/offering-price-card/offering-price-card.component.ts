@@ -16,25 +16,24 @@ import { QuoteLiteralDirective } from 'src/app/shared/directives';
 import { QuoteLiteralPipe, QuoteNumberPipe } from 'src/app/shared/pipes';
 
 @Component({
-  selector: 'quote-offering-price-card',
-  templateUrl: './offering-price-card.component.html',
-  styleUrl: './offering-price-card.component.scss',
-  imports: [
-    CommonModule,
-    HeaderTitleComponent,
-    ReactiveFormsModule,
-    NxButtonModule,
-    NxCopytextModule,
-    NxHeadlineModule,
-    NxLinkModule,
-    NxRadioModule,
-    QuoteFooterComponent,
-    QuoteLiteralDirective,
-    QuoteLiteralPipe,
-    QuoteNumberPipe,
-    QuoteTrackDirective
-  ],
-  standalone: true
+    selector: 'quote-offering-price-card',
+    templateUrl: './offering-price-card.component.html',
+    styleUrl: './offering-price-card.component.scss',
+    imports: [
+        CommonModule,
+        HeaderTitleComponent,
+        ReactiveFormsModule,
+        NxButtonModule,
+        NxCopytextModule,
+        NxHeadlineModule,
+        NxLinkModule,
+        NxRadioModule,
+        QuoteFooterComponent,
+        QuoteLiteralDirective,
+        QuoteLiteralPipe,
+        QuoteNumberPipe,
+        QuoteTrackDirective
+    ]
 })
 export class QuoteOfferingPriceCardComponent implements OnInit, OnDestroy {
   @Input()

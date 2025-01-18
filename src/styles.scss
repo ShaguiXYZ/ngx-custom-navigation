@@ -2,14 +2,13 @@
 /**
   Themes
 */
-@import '@angular/cdk/overlay-prebuilt.css';
-@import '@angular/cdk/a11y-prebuilt.css';
+@use '@angular/cdk/overlay-prebuilt.css';
+@use '@angular/cdk/a11y-prebuilt.css';
 
-@import 'core-colors';
-@import 'core-globals';
+@use 'core-globals';
 
-@import 'themes/dark';
-@import 'themes/light';
+@use 'themes/dark';
+@use 'themes/light';
 
 body {
   background-image: none;

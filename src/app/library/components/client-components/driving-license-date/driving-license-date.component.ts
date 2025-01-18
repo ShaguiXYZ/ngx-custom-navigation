@@ -3,8 +3,8 @@ import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule } from '@angul
 import { NX_DATE_LOCALE, NxDatefieldModule } from '@aposin/ng-aquila/datefield';
 import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
 import { NxInputModule } from '@aposin/ng-aquila/input';
-import { NxMomentDateModule } from '@aposin/ng-aquila/moment-date-adapter';
-import moment, { Moment } from 'moment';
+import { NxIsoDateModule } from '@aposin/ng-aquila/iso-date-adapter';
+import dayjs, { Dayjs } from 'dayjs';
 import { QuoteComponent } from 'src/app/core/components';
 import { DEFAULT_DATE_FORMAT, DEFAULT_DATE_FORMATS, DEFAULT_DISPLAY_DATE_FORMAT } from 'src/app/core/constants';
 import { QuoteFormValidarors } from 'src/app/core/form';
@@ -19,29 +19,28 @@ import { QuoteLiteralPipe } from 'src/app/shared/pipes';
   styleUrl: './driving-license-date.component.scss',
   imports: [
     HeaderTitleComponent,
+    QuoteFooterComponent,
     NxDatefieldModule,
     NxFormfieldModule,
     NxInputModule,
     ReactiveFormsModule,
-    QuoteFooterComponent,
-    NxMomentDateModule,
+    NxIsoDateModule,
     QuoteAutoFocusDirective,
     QuoteLiteralDirective,
     QuoteLiteralPipe
   ],
-  providers: [{ provide: NX_DATE_LOCALE, useValue: 'es-ES' }, QuoteFormValidarors],
-  standalone: true
+  providers: [{ provide: NX_DATE_LOCALE, useValue: 'es-ES' }, QuoteFormValidarors]
 })
 export class DrivingLicenseDateComponent extends QuoteComponent<QuoteModel> implements OnInit {
   public readonly dateFormat = DEFAULT_DATE_FORMAT;
   public readonly displayDateFormat = DEFAULT_DISPLAY_DATE_FORMAT;
   public readonly dateFormats = DEFAULT_DATE_FORMATS;
   public form!: FormGroup;
-  public maxDate = moment();
+  public maxDate = dayjs();
   public minYears = 18;
   public minDrivingYears = 1;
 
-  private drivingLicenseDateFromContext?: Moment;
+  private drivingLicenseDateFromContext?: Dayjs;
 
   private readonly quoteFormValidarors = inject(QuoteFormValidarors);
   private readonly fb = inject(FormBuilder);
@@ -59,17 +58,17 @@ export class DrivingLicenseDateComponent extends QuoteComponent<QuoteModel> impl
       this._contextData.driven = {
         ...this._contextData.driven,
         ...this.form.value,
-        licenseDate: moment(new Date(this.form.controls['licenseDate'].value)).format(DEFAULT_DATE_FORMAT)
+        licenseDate: dayjs(new Date(this.form.controls['licenseDate'].value)).format(DEFAULT_DATE_FORMAT)
       };
     }
   };
 
   private createForm() {
     if (this._contextData.driven.licenseDate) {
-      this.drivingLicenseDateFromContext = moment(new Date(this._contextData.driven.licenseDate));
+      this.drivingLicenseDateFromContext = dayjs(new Date(this._contextData.driven.licenseDate));
     }
 
-    const birthdate = moment(this._contextData.personalData.birthdate, moment.ISO_8601).toDate();
+    const birthdate = dayjs(this._contextData.personalData.birthdate).toDate();
 
     this.form = this.fb.group({
       licenseDate: new FormControl(this.drivingLicenseDateFromContext, [

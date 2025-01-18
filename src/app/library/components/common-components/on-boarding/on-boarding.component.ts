@@ -9,20 +9,19 @@ import { HeaderTitleComponent, QuoteFooterComponent, QuoteZoneComponent } from '
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
 
 @Component({
-  selector: 'quote-on-boarding',
-  templateUrl: './on-boarding.component.html',
-  styleUrl: './on-boarding.component.scss',
-  standalone: true,
-  imports: [
-    HeaderTitleComponent,
-    QuoteFooterComponent,
-    QuoteZoneComponent,
-    NxButtonModule,
-    NxCardModule,
-    NxCopytextModule,
-    NxHeadlineModule,
-    QuoteLiteralDirective
-  ]
+    selector: 'quote-on-boarding',
+    templateUrl: './on-boarding.component.html',
+    styleUrl: './on-boarding.component.scss',
+    imports: [
+        HeaderTitleComponent,
+        QuoteFooterComponent,
+        QuoteZoneComponent,
+        NxButtonModule,
+        NxCardModule,
+        NxCopytextModule,
+        NxHeadlineModule,
+        QuoteLiteralDirective
+    ]
 })
 export class OnBoardingComponent extends QuoteComponent<QuoteModel> {
   public icon = 'fa-car-rear';

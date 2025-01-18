@@ -3,8 +3,8 @@ import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule } from '@angul
 import { NX_DATE_LOCALE, NxDatefieldModule } from '@aposin/ng-aquila/datefield';
 import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
 import { NxInputModule } from '@aposin/ng-aquila/input';
-import { NxMomentDateModule } from '@aposin/ng-aquila/moment-date-adapter';
-import moment, { Moment } from 'moment';
+import { NxIsoDateModule } from '@aposin/ng-aquila/iso-date-adapter';
+import dayjs, { Dayjs } from 'dayjs';
 import { QuoteComponent } from 'src/app/core/components';
 import { DEFAULT_DATE_FORMAT, DEFAULT_DATE_FORMATS, DEFAULT_DISPLAY_DATE_FORMAT } from 'src/app/core/constants';
 import { QuoteFormValidarors } from 'src/app/core/form';
@@ -17,14 +17,13 @@ import { QuoteLiteralPipe } from 'src/app/shared/pipes';
   selector: 'quote-birthdate',
   templateUrl: './birthdate.component.html',
   styleUrl: './birthdate.component.scss',
-  standalone: true,
   imports: [
     HeaderTitleComponent,
     QuoteFooterComponent,
     NxDatefieldModule,
     NxFormfieldModule,
     NxInputModule,
-    NxMomentDateModule,
+    NxIsoDateModule,
     ReactiveFormsModule,
     QuoteAutoFocusDirective,
     QuoteLiteralDirective,
@@ -36,9 +35,9 @@ export class BirthdateComponent extends QuoteComponent<QuoteModel> implements On
   public readonly dateFormat = DEFAULT_DATE_FORMAT;
   public readonly displayDateFormat = DEFAULT_DISPLAY_DATE_FORMAT;
   public readonly dateFormats = DEFAULT_DATE_FORMATS;
-  public readonly maxDate = moment();
+  public readonly maxDate = dayjs();
   public form!: FormGroup;
-  public birthdateFromContext: Moment | undefined;
+  public birthdateFromContext: Dayjs | undefined;
   public minValue = 18;
   public maxValue = 70;
 
@@ -58,18 +57,18 @@ export class BirthdateComponent extends QuoteComponent<QuoteModel> implements On
       this._contextData.personalData = {
         ...this._contextData.personalData,
         ...this.form.value,
-        birthdate: moment(new Date(this.form.controls['birthdate'].value)).format(DEFAULT_DATE_FORMAT)
+        birthdate: dayjs(new Date(this.form.controls['birthdate'].value)).format(DEFAULT_DATE_FORMAT)
       };
     }
   };
 
   private createForm() {
     if (this._contextData.personalData.birthdate) {
-      this.birthdateFromContext = moment(new Date(this._contextData.personalData.birthdate));
+      this.birthdateFromContext = dayjs(new Date(this._contextData.personalData.birthdate));
     }
 
     this.form = this.fb.group({
-      birthdate: new FormControl(this.birthdateFromContext, [
+      birthdate: new FormControl(this.birthdateFromContext?.toDate(), [
         this.quoteFormValidarors.required(),
         this.quoteFormValidarors.isOlderThanYears(this.minValue),
         this.quoteFormValidarors.isYoungerThanYears(this.maxValue)

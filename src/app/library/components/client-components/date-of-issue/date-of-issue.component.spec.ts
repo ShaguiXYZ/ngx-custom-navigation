@@ -5,12 +5,14 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { NX_DATE_LOCALE, NxDatefieldModule } from '@aposin/ng-aquila/datefield';
 import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
 import { NxInputModule } from '@aposin/ng-aquila/input';
-import { NxMomentDateModule } from '@aposin/ng-aquila/moment-date-adapter';
+import { NxIsoDateModule } from '@aposin/ng-aquila/iso-date-adapter';
 import { TranslateService } from '@ngx-translate/core';
 import { ContextDataService } from '@shagui/ng-shagui/core';
-import moment from 'moment';
+import dayjs from 'dayjs';
+import { of } from 'rxjs';
 import { NX_WORKFLOW_TOKEN } from 'src/app/core/components/models';
 import { DEFAULT_DATE_FORMAT } from 'src/app/core/constants';
+import { NX_LANGUAGE_CONFIG } from 'src/app/core/models';
 import { NX_RECAPTCHA_TOKEN } from 'src/app/core/services';
 import { ContextDataServiceStub } from 'src/app/core/stub';
 import { QuoteModel } from 'src/app/library/models';
@@ -18,8 +20,6 @@ import { HeaderTitleComponent, QuoteFooterComponent } from 'src/app/shared/compo
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 import { DateOfIssueComponent } from './date-of-issue.component';
-import { NX_LANGUAGE_CONFIG } from 'src/app/core/models';
-import { of } from 'rxjs';
 
 describe('DateOfIssueComponent', () => {
   let component: DateOfIssueComponent;
@@ -48,7 +48,7 @@ describe('DateOfIssueComponent', () => {
         NxDatefieldModule,
         NxFormfieldModule,
         NxInputModule,
-        NxMomentDateModule,
+        NxIsoDateModule,
         HeaderTitleComponent,
         QuoteFooterComponent,
         QuoteLiteralDirective,
@@ -83,14 +83,14 @@ describe('DateOfIssueComponent', () => {
   });
 
   it('should initialize form with context data', () => {
-    const dateOfIssue = moment(new Date(component.form.controls['dateOfIssue'].value)).format(DEFAULT_DATE_FORMAT);
+    const dateOfIssue = dayjs(new Date(component.form.controls['dateOfIssue'].value)).format(DEFAULT_DATE_FORMAT);
 
     expect(dateOfIssue).toEqual('2003-01-01');
   });
 
   it('should mark form as touched and update context data on updateValidData', () => {
-    const futureDate = moment().add(1, 'day').format(DEFAULT_DATE_FORMAT);
-    const expiration = moment(futureDate).add(component['expirationInfo'].value, component['expirationInfo'].unit);
+    const futureDate = dayjs().add(1, 'day').format(DEFAULT_DATE_FORMAT);
+    const expiration = dayjs(futureDate).add(component['expirationInfo'].value, component['expirationInfo'].unit);
 
     component.form.controls['dateOfIssue'].setValue(futureDate);
     component['updateValidData']();
@@ -102,7 +102,7 @@ describe('DateOfIssueComponent', () => {
   });
 
   it('should return form validity on canDeactivate', done => {
-    const futureDate = moment().add(1, 'day').format(DEFAULT_DATE_FORMAT);
+    const futureDate = dayjs().add(1, 'day').format(DEFAULT_DATE_FORMAT);
 
     component.form.controls['dateOfIssue'].setValue(futureDate);
     const result = component.canDeactivate();

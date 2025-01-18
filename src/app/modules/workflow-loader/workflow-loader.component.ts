@@ -9,10 +9,9 @@ import { JourneyError } from 'src/app/core/errors';
 import { AppContextData } from 'src/app/core/models';
 
 @Component({
-  template: `<ng-template #dynamicComponent> </ng-template>`,
-  styleUrls: ['./workflow-loader.component.scss'],
-  imports: [CommonModule],
-  standalone: true
+    template: `<ng-template #dynamicComponent> </ng-template>`,
+    styleUrls: ['./workflow-loader.component.scss'],
+    imports: [CommonModule]
 })
 export class WorkflowLoaderComponent implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild('dynamicComponent', { read: ViewContainerRef, static: true })

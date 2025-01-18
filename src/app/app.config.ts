@@ -1,12 +1,12 @@
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import {
-  APP_INITIALIZER,
   ApplicationConfig,
   ErrorHandler,
   importProvidersFrom,
   inject,
   Injectable,
   OnDestroy,
+  provideAppInitializer,
   provideZoneChangeDetection
 } from '@angular/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
@@ -61,21 +61,20 @@ class DatePikerIntl extends NxDatepickerIntl implements OnDestroy {
   });
 }
 
-const initSettings = (settings: SettingsService) => (): Promise<void> => settings.loadSettings();
+const appInitializer = (): Promise<void> => {
+  const settings = inject(SettingsService);
+
+  return settings.loadSettings();
+};
 
 export const appConfig: ApplicationConfig = {
   providers: [
     importProvidersFrom(TranslateModule.forRoot(TRANSLATE_MODULE_CONFIG)),
+    provideAppInitializer(appInitializer),
     provideAnimations(),
     provideHttpClient(withInterceptors([httpErrorInterceptor, mockInterceptor, recaptchaInterceptor])),
     provideRouter(routes),
     provideZoneChangeDetection({ eventCoalescing: true }),
-    {
-      provide: APP_INITIALIZER,
-      useFactory: initSettings,
-      deps: [SettingsService],
-      multi: true
-    },
     { provide: ErrorHandler, useClass: GlobalErrorHandler },
     { provide: NxDatepickerIntl, useClass: DatePikerIntl },
     { provide: NX_WORKFLOW_TOKEN, useExisting: VEHICLE_WORKFLOW_TOKEN },

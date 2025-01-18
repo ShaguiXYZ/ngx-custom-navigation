@@ -6,11 +6,10 @@ import { ColorCaptchaComponent } from './components/color-captcha';
 import { CAPTCHA_SUBMIT_KEY } from './constants';
 
 @Component({
-  selector: 'quote-captcha',
-  templateUrl: './captcha.component.html',
-  styleUrl: './captcha.component.scss',
-  imports: [ColorCaptchaComponent, HeaderTitleComponent, QuoteLiteralDirective],
-  standalone: true
+    selector: 'quote-captcha',
+    templateUrl: './captcha.component.html',
+    styleUrl: './captcha.component.scss',
+    imports: [ColorCaptchaComponent, HeaderTitleComponent, QuoteLiteralDirective]
 })
 export class CaptchaComponent {
   @Output()

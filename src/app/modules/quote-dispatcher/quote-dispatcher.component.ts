@@ -16,8 +16,7 @@ import { AppUrls } from 'src/app/shared/config';
  */
 @Component({
   template: ``,
-  styleUrl: './quote-dispatcher.component.scss',
-  standalone: true
+  styleUrl: './quote-dispatcher.component.scss'
 })
 export class QuoteDispatcherComponent implements OnInit {
   private readonly contextDataService = inject(ContextDataService);

@@ -7,7 +7,8 @@ import { ConditionEvaluation, patch } from 'src/app/core/lib';
 import { AppContextData, Page, QuoteControlModel } from 'src/app/core/models';
 
 @Component({
-  template: ''
+    template: '',
+    standalone: false
 })
 export abstract class QuoteComponent<T extends QuoteControlModel> implements OnDestroy {
   protected _contextData: T;

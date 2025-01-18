@@ -10,20 +10,19 @@ import { HeaderTitleComponent, QuoteFooterComponent } from 'src/app/shared/compo
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
 
 @Component({
-  selector: 'quote-apology-screen',
-  templateUrl: './apology-screen.component.html',
-  styleUrl: './apology-screen.component.scss',
-  standalone: true,
-  imports: [
-    HeaderTitleComponent,
-    QuoteFooterComponent,
-    NxButtonModule,
-    NxCardModule,
-    NxCopytextModule,
-    NxHeadlineModule,
-    NxIconModule,
-    QuoteLiteralDirective
-  ]
+    selector: 'quote-apology-screen',
+    templateUrl: './apology-screen.component.html',
+    styleUrl: './apology-screen.component.scss',
+    imports: [
+        HeaderTitleComponent,
+        QuoteFooterComponent,
+        NxButtonModule,
+        NxCardModule,
+        NxCopytextModule,
+        NxHeadlineModule,
+        NxIconModule,
+        QuoteLiteralDirective
+    ]
 })
 export class ApologyComponent extends QuoteComponent<QuoteModel> {
   public icon = 'fa-face-frown';

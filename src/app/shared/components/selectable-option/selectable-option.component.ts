@@ -2,11 +2,10 @@ import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
-  selector: 'quote-selectable-option',
-  standalone: true,
-  imports: [CommonModule],
-  templateUrl: './selectable-option.component.html',
-  styleUrl: './selectable-option.component.scss'
+    selector: 'quote-selectable-option',
+    imports: [CommonModule],
+    templateUrl: './selectable-option.component.html',
+    styleUrl: './selectable-option.component.scss'
 })
 export class SelectableOptionComponent {
   @Input()

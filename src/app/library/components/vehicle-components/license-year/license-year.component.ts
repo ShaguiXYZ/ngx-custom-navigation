@@ -6,7 +6,7 @@ import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
 import { NxInputModule } from '@aposin/ng-aquila/input';
 import { NxMaskModule } from '@aposin/ng-aquila/mask';
 import { NxDate } from '@shagui/ng-shagui/core';
-import moment from 'moment';
+import dayjs from 'dayjs';
 import { QuoteComponent } from 'src/app/core/components';
 import { QuoteFormValidarors } from 'src/app/core/form';
 import { QuoteModel } from 'src/app/library/models';
@@ -18,7 +18,6 @@ import { QuoteLiteralPipe } from 'src/app/shared/pipes';
   selector: 'quote-license-year',
   templateUrl: './license-year.component.html',
   styleUrl: './license-year.component.scss',
-  standalone: true,
   imports: [
     HeaderTitleComponent,
     QuoteFooterComponent,
@@ -62,7 +61,7 @@ export class LicenseYearComponent extends QuoteComponent<QuoteModel> implements 
       yearOfManufacture: new FormControl(this._contextData.vehicle.yearOfManufacture, [
         this.quoteFormValidarors.required(),
         this.quoteFormValidarors.minValues(this.minYear),
-        this.quoteFormValidarors.maxValues(moment().year())
+        this.quoteFormValidarors.maxValues(dayjs().year())
       ])
     });
   }

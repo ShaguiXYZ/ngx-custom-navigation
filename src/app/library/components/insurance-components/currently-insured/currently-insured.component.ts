@@ -11,20 +11,19 @@ import { QuoteLiteralDirective } from 'src/app/shared/directives';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 
 @Component({
-  selector: 'quote-currently-insured',
-  templateUrl: './currently-insured.component.html',
-  styleUrl: './currently-insured.component.scss',
-  standalone: true,
-  imports: [
-    CommonModule,
-    HeaderTitleComponent,
-    QuoteFooterComponent,
-    SelectableOptionComponent,
-    NxButtonModule,
-    QuoteLiteralPipe,
-    QuoteLiteralDirective,
-    QuoteTrackDirective
-  ]
+    selector: 'quote-currently-insured',
+    templateUrl: './currently-insured.component.html',
+    styleUrl: './currently-insured.component.scss',
+    imports: [
+        CommonModule,
+        HeaderTitleComponent,
+        QuoteFooterComponent,
+        SelectableOptionComponent,
+        NxButtonModule,
+        QuoteLiteralPipe,
+        QuoteLiteralDirective,
+        QuoteTrackDirective
+    ]
 })
 export class CurrentlyInsuredComponent extends QuoteComponent<QuoteModel> {
   private readonly routingService = inject(RoutingService);

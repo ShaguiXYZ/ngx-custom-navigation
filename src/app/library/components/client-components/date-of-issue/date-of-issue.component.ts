@@ -3,8 +3,8 @@ import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule } from '@angul
 import { NX_DATE_LOCALE, NxDatefieldModule } from '@aposin/ng-aquila/datefield';
 import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
 import { NxInputModule } from '@aposin/ng-aquila/input';
-import { NxMomentDateModule } from '@aposin/ng-aquila/moment-date-adapter';
-import moment, { DurationInputArg2, Moment } from 'moment';
+import { NxIsoDateModule } from '@aposin/ng-aquila/iso-date-adapter';
+import dayjs, { Dayjs, ManipulateType } from 'dayjs';
 import { QuoteComponent } from 'src/app/core/components';
 import { DEFAULT_DATE_FORMAT, DEFAULT_DATE_FORMATS, DEFAULT_DISPLAY_DATE_FORMAT } from 'src/app/core/constants';
 import { QuoteFormValidarors } from 'src/app/core/form';
@@ -17,14 +17,13 @@ import { QuoteLiteralPipe } from 'src/app/shared/pipes';
   selector: 'quote-date-of-issue',
   templateUrl: './date-of-issue.component.html',
   styleUrl: './date-of-issue.component.scss',
-  standalone: true,
   imports: [
     HeaderTitleComponent,
+    QuoteFooterComponent,
     NxDatefieldModule,
     NxFormfieldModule,
     NxInputModule,
-    NxMomentDateModule,
-    QuoteFooterComponent,
+    NxIsoDateModule,
     ReactiveFormsModule,
     QuoteAutoFocusDirective,
     QuoteLiteralDirective,
@@ -37,15 +36,12 @@ export class DateOfIssueComponent extends QuoteComponent<QuoteModel> implements 
   public readonly displayDateFormat = DEFAULT_DISPLAY_DATE_FORMAT;
   public readonly dateFormats = DEFAULT_DATE_FORMATS;
   public form!: FormGroup;
-  public expirationInfo: { unit: DurationInputArg2; value: number } = {
-    value: 1,
-    unit: 'y'
-  };
   public maxDays = 90;
-  public minDate = moment();
-  public maxDate = moment().add(this.maxDays, 'days');
+  public minDate = dayjs();
+  public maxDate = dayjs().add(this.maxDays, 'days');
 
-  private dateOfIssueFromContext: Moment | undefined;
+  private expirationInfo: { value: number; unit: ManipulateType } = { value: 1, unit: 'y' };
+  private dateOfIssueFromContext: Dayjs | undefined;
 
   private readonly quoteFormValidarors = inject(QuoteFormValidarors);
   private readonly fb = inject(FormBuilder);
@@ -60,8 +56,8 @@ export class DateOfIssueComponent extends QuoteComponent<QuoteModel> implements 
     this.form.markAllAsTouched();
 
     if (this.form.valid) {
-      const dateOfIssue = moment(new Date(this.form.controls['dateOfIssue'].value));
-      const expiration = moment(dateOfIssue).add(this.expirationInfo.value, this.expirationInfo.unit);
+      const dateOfIssue = dayjs(new Date(this.form.controls['dateOfIssue'].value));
+      const expiration = dayjs(dateOfIssue).add(this.expirationInfo.value, this.expirationInfo.unit);
 
       this._contextData.client = {
         ...this._contextData.client,
@@ -74,10 +70,11 @@ export class DateOfIssueComponent extends QuoteComponent<QuoteModel> implements 
 
   private createForm() {
     if (this._contextData.client.dateOfIssue) {
-      this.dateOfIssueFromContext = moment(new Date(this._contextData.client.dateOfIssue));
+      this.dateOfIssueFromContext = dayjs(new Date(this._contextData.client.dateOfIssue));
     }
+
     this.form = this.fb.group({
-      dateOfIssue: new FormControl(this.dateOfIssueFromContext, [
+      dateOfIssue: new FormControl(this.dateOfIssueFromContext?.toDate(), [
         this.quoteFormValidarors.required(),
         this.quoteFormValidarors.betweenDates(this.minDate.toDate(), this.maxDate.toDate())
       ])

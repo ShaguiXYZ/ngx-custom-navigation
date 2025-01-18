@@ -41,7 +41,7 @@
               "includePaths": ["src/styles"]
             },
             "scripts": ["src/assets/js/tracking.js"],
-            "allowedCommonJsDependencies": ["crypto-js", "iban", "moment"]
+            "allowedCommonJsDependencies": ["crypto-js", "iban", "dayjs"]
           },
           "configurations": {
             "local": {

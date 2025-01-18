@@ -3,11 +3,10 @@ import { NxCopytextModule } from '@aposin/ng-aquila/copytext';
 import { LanguageService } from 'src/app/core/services';
 
 @Component({
-  selector: 'quote-language',
-  templateUrl: './language.component.html',
-  styleUrls: ['./language.component.scss'],
-  imports: [NxCopytextModule],
-  standalone: true
+    selector: 'quote-language',
+    templateUrl: './language.component.html',
+    styleUrls: ['./language.component.scss'],
+    imports: [NxCopytextModule]
 })
 export class LanguageComponent implements OnInit {
   @Output()

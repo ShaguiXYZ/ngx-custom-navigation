@@ -5,11 +5,10 @@ import { LoadingService } from '@shagui/ng-shagui/core';
 import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'quote-loading',
-  templateUrl: './loading.component.html',
-  styleUrls: ['./loading.component.scss'],
-  imports: [CommonModule, NxModalModule],
-  standalone: true
+    selector: 'quote-loading',
+    templateUrl: './loading.component.html',
+    styleUrls: ['./loading.component.scss'],
+    imports: [CommonModule, NxModalModule]
 })
 export class QuoteLoadingComponent implements OnInit, OnDestroy {
   @ViewChild('loadingBody')

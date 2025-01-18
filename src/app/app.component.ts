@@ -18,22 +18,21 @@ import { QuoteLiteralDirective } from './shared/directives';
 import { QuoteLiteralPipe } from './shared/pipes';
 
 @Component({
-  selector: 'quote-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
-  standalone: true,
-  providers: [QuoteLiteralPipe],
-  imports: [
-    RouterModule,
-    NxGridModule,
-    CaptchaComponent,
-    NotificationComponent,
-    QuoteKeysComponent,
-    QuoteHeaderComponent,
-    QuoteLoadingComponent,
-    QuoteStepperComponent,
-    QuoteLiteralDirective
-  ]
+    selector: 'quote-root',
+    templateUrl: './app.component.html',
+    styleUrls: ['./app.component.scss'],
+    providers: [QuoteLiteralPipe],
+    imports: [
+        RouterModule,
+        NxGridModule,
+        CaptchaComponent,
+        NotificationComponent,
+        QuoteKeysComponent,
+        QuoteHeaderComponent,
+        QuoteLoadingComponent,
+        QuoteStepperComponent,
+        QuoteLiteralDirective
+    ]
 })
 export class AppComponent implements OnInit, OnDestroy {
   public verified?: boolean;

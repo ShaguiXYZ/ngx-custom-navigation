@@ -3,8 +3,7 @@ import { ScreenRecorder } from '@shagui/ng-shagui/core';
 
 @Component({
   selector: 'quote-keys',
-  template: ``,
-  standalone: true
+  template: ``
 })
 export class QuoteKeysComponent {
   @HostListener('document:keydown', ['$event'])

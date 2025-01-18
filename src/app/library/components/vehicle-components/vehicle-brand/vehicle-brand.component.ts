@@ -24,26 +24,25 @@ import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 import { BrandComponentService } from './services';
 
 @Component({
-  selector: 'quote-vehicle-brand',
-  templateUrl: './vehicle-brand.component.html',
-  styleUrl: './vehicle-brand.component.scss',
-  imports: [
-    CommonModule,
-    HeaderTitleComponent,
-    QuoteFooterComponent,
-    IconCardComponent,
-    TextCardComponent,
-    QuoteZoneComponent,
-    NxIconModule,
-    NxFormfieldModule,
-    NxInputModule,
-    ReactiveFormsModule,
-    QuoteLiteralDirective,
-    QuoteLiteralPipe,
-    QuoteTrackDirective
-  ],
-  providers: [BrandComponentService, VehicleService],
-  standalone: true
+    selector: 'quote-vehicle-brand',
+    templateUrl: './vehicle-brand.component.html',
+    styleUrl: './vehicle-brand.component.scss',
+    imports: [
+        CommonModule,
+        HeaderTitleComponent,
+        QuoteFooterComponent,
+        IconCardComponent,
+        TextCardComponent,
+        QuoteZoneComponent,
+        NxIconModule,
+        NxFormfieldModule,
+        NxInputModule,
+        ReactiveFormsModule,
+        QuoteLiteralDirective,
+        QuoteLiteralPipe,
+        QuoteTrackDirective
+    ],
+    providers: [BrandComponentService, VehicleService]
 })
 export class VehicleBrandComponent extends QuoteComponent<QuoteModel> implements OnInit {
   @ViewChild('searchInput', { static: true })

@@ -16,21 +16,20 @@ import { LanguageComponent } from '../language';
 import { SwitchThemeComponent } from '../switch-theme';
 
 @Component({
-  selector: 'quote-header',
-  templateUrl: './quote-header.component.html',
-  styleUrl: './quote-header.component.scss',
-  imports: [
-    LanguageComponent,
-    SwitchThemeComponent,
-    CommonModule,
-    NxCopytextModule,
-    NxIconModule,
-    QuoteLinkDirective,
-    QuoteLiteralDirective,
-    QuoteTrackDirective,
-    QuoteLiteralPipe
-  ],
-  standalone: true
+    selector: 'quote-header',
+    templateUrl: './quote-header.component.html',
+    styleUrl: './quote-header.component.scss',
+    imports: [
+        LanguageComponent,
+        SwitchThemeComponent,
+        CommonModule,
+        NxCopytextModule,
+        NxIconModule,
+        QuoteLinkDirective,
+        QuoteLiteralDirective,
+        QuoteTrackDirective,
+        QuoteLiteralPipe
+    ]
 })
 export class QuoteHeaderComponent implements OnInit, OnDestroy {
   @Input()

@@ -13,23 +13,22 @@ import { QuoteAutoFocusDirective, QuoteLiteralDirective } from 'src/app/shared/d
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 
 @Component({
-  selector: 'quote-client-phone-number',
-  templateUrl: './client-phone-number.component.html',
-  styleUrl: './client-phone-number.component.scss',
-  standalone: true,
-  imports: [
-    HeaderTitleComponent,
-    QuoteFooterComponent,
-    NxCopytextModule,
-    NxFormfieldModule,
-    NxMaskModule,
-    NxInputModule,
-    ReactiveFormsModule,
-    QuoteAutoFocusDirective,
-    QuoteLiteralDirective,
-    QuoteLiteralPipe
-  ],
-  providers: [{ provide: NX_DATE_LOCALE, useValue: 'es-ES' }, QuoteFormValidarors]
+    selector: 'quote-client-phone-number',
+    templateUrl: './client-phone-number.component.html',
+    styleUrl: './client-phone-number.component.scss',
+    imports: [
+        HeaderTitleComponent,
+        QuoteFooterComponent,
+        NxCopytextModule,
+        NxFormfieldModule,
+        NxMaskModule,
+        NxInputModule,
+        ReactiveFormsModule,
+        QuoteAutoFocusDirective,
+        QuoteLiteralDirective,
+        QuoteLiteralPipe
+    ],
+    providers: [{ provide: NX_DATE_LOCALE, useValue: 'es-ES' }, QuoteFormValidarors]
 })
 export class ClientPhoneNumberComponent extends QuoteComponent<QuoteModel> implements OnInit {
   public form!: FormGroup;

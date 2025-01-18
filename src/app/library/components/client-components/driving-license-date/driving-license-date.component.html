@@ -37,7 +37,7 @@
   </section>
   <quote-footer
     [trackInfo]="{
-      drivenLicenseDate: form.get('licenseDate')?.value?.format(dateFormat)
+      drivenLicenseDate: form.get('licenseDate')?.value
     }"
     (uiOnNext)="updateValidData()"
   />

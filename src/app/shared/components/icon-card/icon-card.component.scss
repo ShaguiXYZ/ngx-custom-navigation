@@ -25,6 +25,8 @@
   }
 
   .card__label {
+    max-width: -webkit-fill-available;
+    padding: 0 5px;
     text-align: center;
   }
 }

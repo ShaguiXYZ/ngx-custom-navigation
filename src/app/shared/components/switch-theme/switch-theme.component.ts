@@ -6,12 +6,11 @@ import { ThemingService } from './services';
 import { StorageLib } from 'src/app/core/lib';
 
 @Component({
-  selector: 'nx-switch-theme',
-  templateUrl: './switch-theme.component.html',
-  styleUrls: ['./switch-theme.component.scss'],
-  imports: [NxSwitcherModule],
-  providers: [ThemingService],
-  standalone: true
+    selector: 'nx-switch-theme',
+    templateUrl: './switch-theme.component.html',
+    styleUrls: ['./switch-theme.component.scss'],
+    imports: [NxSwitcherModule],
+    providers: [ThemingService]
 })
 export class SwitchThemeComponent implements OnInit, OnDestroy {
   private readonly subscription$: Subscription[] = [];

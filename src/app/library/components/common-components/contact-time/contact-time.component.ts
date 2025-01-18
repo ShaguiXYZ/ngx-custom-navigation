@@ -8,20 +8,19 @@ import { HeaderTitleComponent, QuoteFooterComponent, QuoteZoneComponent, TextCar
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
 
 @Component({
-  selector: 'quote-contact-time',
-  standalone: true,
-  imports: [
-    CommonModule,
-    HeaderTitleComponent,
-    QuoteFooterComponent,
-    QuoteZoneComponent,
-    TextCardComponent,
-    NxCopytextModule,
-    QuoteLiteralDirective,
-    QuoteTrackDirective
-  ],
-  templateUrl: './contact-time.component.html',
-  styleUrl: './contact-time.component.scss'
+    selector: 'quote-contact-time',
+    imports: [
+        CommonModule,
+        HeaderTitleComponent,
+        QuoteFooterComponent,
+        QuoteZoneComponent,
+        TextCardComponent,
+        NxCopytextModule,
+        QuoteLiteralDirective,
+        QuoteTrackDirective
+    ],
+    templateUrl: './contact-time.component.html',
+    styleUrl: './contact-time.component.scss'
 })
 export class ContactTimeComponent extends QuoteComponent<QuoteModel> implements OnInit {
   public hours: { am: Hour[]; pm: Hour[] } = {

@@ -13,19 +13,18 @@ import { QuoteLiteralDirective } from 'src/app/shared/directives';
 import { QuoteOfferingCoveragesComponent, QuoteOfferingPriceCardComponent } from './components';
 
 @Component({
-  selector: 'quote-quote-offerings',
-  templateUrl: './quote-offerings.component.html',
-  styleUrl: './quote-offerings.component.scss',
-  imports: [
-    CommonModule,
-    HeaderTitleComponent,
-    QuoteFooterComponent,
-    QuoteOfferingPriceCardComponent,
-    NxModalModule,
-    QuoteLiteralDirective
-  ],
-  providers: [OfferingsService],
-  standalone: true
+    selector: 'quote-quote-offerings',
+    templateUrl: './quote-offerings.component.html',
+    styleUrl: './quote-offerings.component.scss',
+    imports: [
+        CommonModule,
+        HeaderTitleComponent,
+        QuoteFooterComponent,
+        QuoteOfferingPriceCardComponent,
+        NxModalModule,
+        QuoteLiteralDirective
+    ],
+    providers: [OfferingsService]
 })
 export class QuoteOfferingsComponent extends QuoteComponent<QuoteModel> implements OnInit, OnDestroy {
   @ViewChild('carrouselInner', { static: true })

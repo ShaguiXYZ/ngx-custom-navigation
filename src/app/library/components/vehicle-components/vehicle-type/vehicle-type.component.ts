@@ -13,20 +13,19 @@ import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 import { VehicleTypes } from './models';
 
 @Component({
-  selector: 'quote-vehicle-type',
-  templateUrl: './vehicle-type.component.html',
-  styleUrl: './vehicle-type.component.scss',
-  imports: [
-    CommonModule,
-    HeaderTitleComponent,
-    QuoteFooterComponent,
-    TextCardComponent,
-    NxCopytextModule,
-    QuoteLiteralDirective,
-    QuoteTrackDirective,
-    QuoteLiteralPipe
-  ],
-  standalone: true
+    selector: 'quote-vehicle-type',
+    templateUrl: './vehicle-type.component.html',
+    styleUrl: './vehicle-type.component.scss',
+    imports: [
+        CommonModule,
+        HeaderTitleComponent,
+        QuoteFooterComponent,
+        TextCardComponent,
+        NxCopytextModule,
+        QuoteLiteralDirective,
+        QuoteTrackDirective,
+        QuoteLiteralPipe
+    ]
 })
 export class VehicleTypeComponent extends QuoteComponent<QuoteModel> implements OnInit {
   public vehicleTypes = VehicleTypes;

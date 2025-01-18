@@ -7,7 +7,8 @@ import { LiteralsService } from 'src/app/core/services';
 import { QuoteLiteralDirective } from '../quote-literal.directive';
 
 @Component({
-  template: `<div [nxQuoteLiteral]="literal" [nxQuoteLitealParams]="params" [nxQuoteDefaultLiteral]="defaultLiteral">safeHtml</div>`
+    template: `<div [nxQuoteLiteral]="literal" [nxQuoteLitealParams]="params" [nxQuoteDefaultLiteral]="defaultLiteral">safeHtml</div>`,
+    standalone: false
 })
 class TestComponent {
   literal = 'testLiteral';

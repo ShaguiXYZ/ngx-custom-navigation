@@ -16,23 +16,22 @@ import { HeaderTitleComponent } from 'src/app/shared/components';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
 
 @Component({
-  selector: 'quote-offering-coverages',
-  templateUrl: './offering-coverages.component.html',
-  styleUrls: ['./offering-coverages.component.scss'],
-  imports: [
-    CommonModule,
-    HeaderTitleComponent,
-    NxAccordionModule,
-    NxButtonModule,
-    NxCopytextModule,
-    NxFormfieldModule,
-    NxHeadlineModule,
-    NxInputModule,
-    NxTabsModule,
-    ReactiveFormsModule,
-    QuoteLiteralDirective
-  ],
-  standalone: true
+    selector: 'quote-offering-coverages',
+    templateUrl: './offering-coverages.component.html',
+    styleUrls: ['./offering-coverages.component.scss'],
+    imports: [
+        CommonModule,
+        HeaderTitleComponent,
+        NxAccordionModule,
+        NxButtonModule,
+        NxCopytextModule,
+        NxFormfieldModule,
+        NxHeadlineModule,
+        NxInputModule,
+        NxTabsModule,
+        ReactiveFormsModule,
+        QuoteLiteralDirective
+    ]
 })
 export class QuoteOfferingCoveragesComponent implements OnInit {
   public selectedPriceIndex!: number;
