@@ -2,7 +2,7 @@
 import { HttpClient } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
-import { NX_DATE_LOCALE, NxDatefieldModule } from '@aposin/ng-aquila/datefield';
+import { NxDatefieldModule } from '@aposin/ng-aquila/datefield';
 import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
 import { NxInputModule } from '@aposin/ng-aquila/input';
 import { NxIsoDateModule } from '@aposin/ng-aquila/iso-date-adapter';
@@ -55,7 +55,6 @@ describe('DateOfIssueComponent', () => {
         QuoteLiteralPipe
       ],
       providers: [
-        { provide: NX_DATE_LOCALE, useValue: 'es-ES' },
         { provide: ContextDataService, useClass: ContextDataServiceStub },
         { provide: TranslateService, useValue: translateServiceSpy },
         { provide: QuoteLiteralPipe, useValue: quoteLiteralPipeSpy },

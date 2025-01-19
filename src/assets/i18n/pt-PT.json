@@ -13,7 +13,7 @@
     "Back": "Voltar",
     "Brand": "Marca",
     "CubicCapacity": "Capacidade cúbica",
-    "DateFormat": "Formato: DD/MM/AAAA",
+    "DateFormat": "Formato: {{format}}",
     "Datepicker": {
       "SwitchToMonthView": "Escolher data",
       "SwitchToMultiYearViewLabel": "Escolher mês e ano"

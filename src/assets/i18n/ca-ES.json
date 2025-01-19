@@ -13,7 +13,7 @@
     "Back": "Enrere",
     "Brand": "Marca",
     "CubicCapacity": "Cilindrada",
-    "DateFormat": "Format: DD/MM/AAAA",
+    "DateFormat": "Formato: {{format}}",
     "Datepicker": {
       "SwitchToMonthView": "Escollir data",
       "SwitchToMultiYearViewLabel": "Escollir mes i any"

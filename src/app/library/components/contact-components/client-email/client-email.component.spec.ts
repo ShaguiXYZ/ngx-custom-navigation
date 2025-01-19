@@ -2,7 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NxCopytextModule } from '@aposin/ng-aquila/copytext';
-import { NX_DATE_LOCALE } from '@aposin/ng-aquila/datefield';
 import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
 import { NxInputModule } from '@aposin/ng-aquila/input';
 import { NxLinkModule } from '@aposin/ng-aquila/link';
@@ -55,7 +54,6 @@ describe('ClientEMailComponent', () => {
         NxSwitcherModule
       ],
       providers: [
-        { provide: NX_DATE_LOCALE, useValue: 'es-ES' },
         { provide: ContextDataService, useClass: ContextDataServiceStub },
         { provide: TranslateService, useValue: translateServiceSpy },
         { provide: QuoteLiteralPipe, useValue: quoteLiteralPipeSpy },

@@ -1,7 +1,6 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, ValidationErrors, ValidatorFn } from '@angular/forms';
 import { NxCopytextModule } from '@aposin/ng-aquila/copytext';
-import { NX_DATE_LOCALE } from '@aposin/ng-aquila/datefield';
 import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
 import { NxInputModule } from '@aposin/ng-aquila/input';
 import { QuoteComponent } from 'src/app/core/components';
@@ -13,21 +12,21 @@ import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 import { isNIF } from './models';
 
 @Component({
-    selector: 'quote-client-identification-number',
-    templateUrl: './client-identification-number.component.html',
-    styleUrl: './client-identification-number.component.scss',
-    imports: [
-        HeaderTitleComponent,
-        QuoteFooterComponent,
-        NxCopytextModule,
-        NxFormfieldModule,
-        NxInputModule,
-        ReactiveFormsModule,
-        QuoteAutoFocusDirective,
-        QuoteLiteralDirective,
-        QuoteLiteralPipe
-    ],
-    providers: [{ provide: NX_DATE_LOCALE, useValue: 'es-ES' }, QuoteFormValidarors]
+  selector: 'quote-client-identification-number',
+  templateUrl: './client-identification-number.component.html',
+  styleUrl: './client-identification-number.component.scss',
+  imports: [
+    HeaderTitleComponent,
+    QuoteFooterComponent,
+    NxCopytextModule,
+    NxFormfieldModule,
+    NxInputModule,
+    ReactiveFormsModule,
+    QuoteAutoFocusDirective,
+    QuoteLiteralDirective,
+    QuoteLiteralPipe
+  ],
+  providers: [QuoteFormValidarors]
 })
 export class ClientIdentificationNumberComponent extends QuoteComponent<QuoteModel> implements OnInit {
   public form!: FormGroup;

@@ -10,7 +10,7 @@ describe('LanguageComponent', () => {
 
   beforeEach(async () => {
     languageServiceMock = {
-      languages: { en: 'English', es: 'Spanish' },
+      languages: { en: { value: 'English' }, es: { value: 'Spanish' } },
       current: 'en',
       i18n: jasmine.createSpy('i18n').and.returnValue(Promise.resolve())
     };
@@ -49,6 +49,6 @@ describe('LanguageComponent', () => {
 
   it('should return the correct language name', () => {
     const langName = component.getLanguageName('es');
-    expect(langName).toBe('Spanish');
+    expect(langName).toEqual({ value: 'Spanish' });
   });
 });

@@ -3,7 +3,7 @@ import { Inject, Injectable, LOCALE_ID, Optional } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { firstValueFrom, Observable, Subject } from 'rxjs';
 import { StorageLib } from '../lib';
-import { LanguageConfig, Languages, NX_LANGUAGE_CONFIG, STORAGE_LANGUAGE_KEY } from '../models';
+import { LanguageConfig, Languages, LocaleConfig, NX_LANGUAGE_CONFIG, STORAGE_LANGUAGE_KEY } from '../models';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +15,7 @@ export class LanguageService {
   constructor(
     @Optional()
     @Inject(NX_LANGUAGE_CONFIG)
-    private readonly nxLanguageConfig: Partial<LanguageConfig> & { languages: Record<string, string> } = { languages: Languages },
+    private readonly nxLanguageConfig: Partial<LanguageConfig> & { languages: Record<string, LocaleConfig> } = { languages: Languages },
     @Inject(DOCUMENT) private readonly document: Document,
     @Inject(LOCALE_ID) private readonly locale: string,
     private readonly translateService: TranslateService
@@ -29,7 +29,7 @@ export class LanguageService {
     return this.config.current;
   }
 
-  public get languages(): Record<string, string> {
+  public get languages(): Record<string, LocaleConfig> {
     return this.config.languages;
   }
 

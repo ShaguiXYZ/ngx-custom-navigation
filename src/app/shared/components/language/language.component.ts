@@ -1,12 +1,13 @@
 import { Component, EventEmitter, inject, OnInit, Output } from '@angular/core';
 import { NxCopytextModule } from '@aposin/ng-aquila/copytext';
+import { LocaleConfig } from 'src/app/core/models';
 import { LanguageService } from 'src/app/core/services';
 
 @Component({
-    selector: 'quote-language',
-    templateUrl: './language.component.html',
-    styleUrls: ['./language.component.scss'],
-    imports: [NxCopytextModule]
+  selector: 'quote-language',
+  templateUrl: './language.component.html',
+  styleUrls: ['./language.component.scss'],
+  imports: [NxCopytextModule]
 })
 export class LanguageComponent implements OnInit {
   @Output()
@@ -27,5 +28,5 @@ export class LanguageComponent implements OnInit {
     this.languageService.i18n(lang).then(() => this.uiChange.emit(lang));
   };
 
-  public getLanguageName = (lang: string): string => this.languageService.languages[lang];
+  public getLanguageName = (lang: string): LocaleConfig => this.languageService.languages[lang];
 }

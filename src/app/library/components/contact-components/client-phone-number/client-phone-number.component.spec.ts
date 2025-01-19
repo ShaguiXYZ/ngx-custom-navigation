@@ -2,7 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NxCopytextModule } from '@aposin/ng-aquila/copytext';
-import { NX_DATE_LOCALE } from '@aposin/ng-aquila/datefield';
 import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
 import { NxInputModule } from '@aposin/ng-aquila/input';
 import { NxMaskModule } from '@aposin/ng-aquila/mask';
@@ -40,7 +39,6 @@ describe('ClientPhoneNumberComponent', () => {
       declarations: [],
       imports: [ClientPhoneNumberComponent, ReactiveFormsModule, NxCopytextModule, NxFormfieldModule, NxMaskModule, NxInputModule],
       providers: [
-        { provide: NX_DATE_LOCALE, useValue: 'es-ES' },
         { provide: ContextDataService, useClass: ContextDataServiceStub },
         { provide: TranslateService, useValue: translateServiceSpy },
         { provide: QuoteLiteralPipe, useValue: quoteLiteralPipeSpy },

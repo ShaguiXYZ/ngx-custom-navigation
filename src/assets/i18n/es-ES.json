@@ -13,7 +13,7 @@
     "Back": "Atrás",
     "Brand": "Marca",
     "CubicCapacity": "Cilindrada",
-    "DateFormat": "Formato: DD/MM/AAAA",
+    "DateFormat": "Formato: {{format}}",
     "Datepicker": {
       "SwitchToMonthView": "Elegir fecha",
       "SwitchToMultiYearViewLabel": "Elegir mes y año"

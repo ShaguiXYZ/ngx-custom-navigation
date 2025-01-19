@@ -25,9 +25,9 @@ export const TRANSLATE_MODULE_CONFIG: TranslateModuleConfig = {
 export const LanguageConfig = {
   current: LOCALE_ID,
   languages: {
-    'en-GB': 'English',
-    'es-ES': 'Español (España)',
-    'ca-ES': 'Català',
-    'pt-PT': 'Português (Portugal)'
+    'en-GB': { value: 'English', format: 'MM/DD/YYYY', formats: ['MM/DD/YYYY', 'MM/DD/YY', 'MMDDYYYY', 'MMDDYY'] },
+    'es-ES': { value: 'Español (España)', format: 'DD/MM/YYYY', formats: ['DD/MM/YYYY', 'DD/MM/YY', 'DDMMYYYY', 'DDMMYY'] },
+    'ca-ES': { value: 'Català', format: 'DD/MM/YYYY', formats: ['DD/MM/YYYY', 'DD/MM/YY', 'DDMMYYYY', 'DDMMYY'] },
+    'pt-PT': { value: 'Português (Portugal)', format: 'DD/MM/YYYY', formats: ['DD/MM/YYYY', 'DD/MM/YY', 'DDMMYYYY', 'DDMMYY'] }
   }
 };

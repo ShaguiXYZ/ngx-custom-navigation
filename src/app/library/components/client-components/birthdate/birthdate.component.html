@@ -13,10 +13,10 @@
           nxAutoFocus
           [max]="maxDate"
           [datepicker]="myDatepicker"
-          [parseFormat]="dateFormats"
+          [parseFormat]="displayDateFormats"
           [displayFormat]="displayDateFormat"
         />
-        <span nxFormfieldHint nxQuoteLiteral="hint-date-format"></span>
+        <span nxFormfieldHint nxQuoteLiteral="hint-date-format" [nxQuoteLitealParams]="{ format: displayDateFormat }"></span>
         <nx-datepicker-toggle [for]="myDatepicker" nxFormfieldSuffix></nx-datepicker-toggle>
         <nx-datepicker #myDatepicker></nx-datepicker>
         @if(form.get('birthdate')?.errors?.['required']) {

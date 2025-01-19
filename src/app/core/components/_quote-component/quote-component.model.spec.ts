@@ -6,6 +6,7 @@ import { QUOTE_APP_CONTEXT_DATA, QUOTE_CONTEXT_DATA } from 'src/app/core/constan
 import { AppContextData } from 'src/app/core/models';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 import { QuoteComponent } from './quote-component.model';
+import { LanguageService } from '../../services';
 
 class TestQuoteComponent extends QuoteComponent<any> {
   public someKey = 'someValue';
@@ -21,8 +22,10 @@ describe('QuoteComponent', () => {
 
   beforeEach(() => {
     const contextDataSubject = new Subject<any>();
+    const languageSubject = new Subject<any>();
     const contextDataServiceSpy = jasmine.createSpyObj('ContextDataService', ['get', 'set', 'onDataChange']);
     const quoteLiteralPipeSpy = jasmine.createSpyObj('QuoteLiteralPipe', ['transform']);
+    const languageServiceSpy = jasmine.createSpyObj('LanguageService', ['asObservable', 'languages', 'current', 'i18n']);
 
     contextDataServiceSpy.get.and.callFake((key: string): any => {
       if (key === QUOTE_CONTEXT_DATA) {
@@ -45,12 +48,14 @@ describe('QuoteComponent', () => {
     });
 
     contextDataServiceSpy.onDataChange.and.returnValue(contextDataSubject.asObservable());
+    languageServiceSpy.asObservable.and.returnValue(languageSubject.asObservable());
 
     TestBed.configureTestingModule({
       providers: [
         TestQuoteComponent,
         { provide: ContextDataService, useValue: contextDataServiceSpy },
-        { provide: QuoteLiteralPipe, useValue: quoteLiteralPipeSpy }
+        { provide: QuoteLiteralPipe, useValue: quoteLiteralPipeSpy },
+        { provide: LanguageService, useValue: languageServiceSpy }
       ]
     });
 

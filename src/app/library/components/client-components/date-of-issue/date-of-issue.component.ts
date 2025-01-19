@@ -1,12 +1,12 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { NX_DATE_LOCALE, NxDatefieldModule } from '@aposin/ng-aquila/datefield';
+import { NxDatefieldModule } from '@aposin/ng-aquila/datefield';
 import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
 import { NxInputModule } from '@aposin/ng-aquila/input';
 import { NxIsoDateModule } from '@aposin/ng-aquila/iso-date-adapter';
 import dayjs, { Dayjs, ManipulateType } from 'dayjs';
 import { QuoteComponent } from 'src/app/core/components';
-import { DEFAULT_DATE_FORMAT, DEFAULT_DATE_FORMATS, DEFAULT_DISPLAY_DATE_FORMAT } from 'src/app/core/constants';
+import { DEFAULT_DATE_FORMAT } from 'src/app/core/constants';
 import { QuoteFormValidarors } from 'src/app/core/form';
 import { QuoteModel } from 'src/app/library/models';
 import { HeaderTitleComponent, QuoteFooterComponent } from 'src/app/shared/components';
@@ -29,16 +29,13 @@ import { QuoteLiteralPipe } from 'src/app/shared/pipes';
     QuoteLiteralDirective,
     QuoteLiteralPipe
   ],
-  providers: [{ provide: NX_DATE_LOCALE, useValue: 'es-ES' }, QuoteFormValidarors]
+  providers: [QuoteFormValidarors]
 })
 export class DateOfIssueComponent extends QuoteComponent<QuoteModel> implements OnInit {
-  public readonly dateFormat = DEFAULT_DATE_FORMAT;
-  public readonly displayDateFormat = DEFAULT_DISPLAY_DATE_FORMAT;
-  public readonly dateFormats = DEFAULT_DATE_FORMATS;
+  public readonly maxDays = 90;
+  public readonly minDate = dayjs();
+  public readonly maxDate = dayjs().add(this.maxDays, 'days');
   public form!: FormGroup;
-  public maxDays = 90;
-  public minDate = dayjs();
-  public maxDate = dayjs().add(this.maxDays, 'days');
 
   private expirationInfo: { value: number; unit: ManipulateType } = { value: 1, unit: 'y' };
   private dateOfIssueFromContext: Dayjs | undefined;
