@@ -4,7 +4,6 @@ import { LiteralsService } from 'src/app/core/services';
 
 @Pipe({
   name: 'quoteLiteral',
-  standalone: true,
   pure: false // @howto: This pipe is impure because it depends on the language service
 })
 export class QuoteLiteralPipe implements PipeTransform {

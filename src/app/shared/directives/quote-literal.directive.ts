@@ -5,8 +5,7 @@ import { LiteralParam } from 'src/app/core/models';
 import { LiteralsService } from 'src/app/core/services';
 
 @Directive({
-  selector: '[nxQuoteLiteral]',
-  standalone: true
+  selector: '[nxQuoteLiteral]'
 })
 export class QuoteLiteralDirective implements AfterViewInit, OnDestroy {
   @Input()

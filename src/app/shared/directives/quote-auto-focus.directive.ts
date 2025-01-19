@@ -4,8 +4,7 @@ import { Directive, ElementRef, OnInit, Renderer2 } from '@angular/core';
  * Directive to set focus on an input element when it is rendered.
  */
 @Directive({
-  selector: '[nxAutoFocus]',
-  standalone: true
+  selector: '[nxAutoFocus]'
 })
 export class QuoteAutoFocusDirective implements OnInit {
   constructor(private readonly el: ElementRef<HTMLElement>, private readonly renderer: Renderer2) {}

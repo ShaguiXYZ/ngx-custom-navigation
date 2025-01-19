@@ -5,8 +5,7 @@ import { AppContextData } from 'src/app/core/models';
 import { RoutingService } from 'src/app/core/services';
 
 @Directive({
-  selector: '[nxQuoteLink]',
-  standalone: true
+  selector: '[nxQuoteLink]'
 })
 export class QuoteLinkDirective implements OnInit {
   @Input()

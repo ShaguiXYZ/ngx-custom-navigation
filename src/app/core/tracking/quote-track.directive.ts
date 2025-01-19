@@ -3,8 +3,7 @@ import { TrackEventType, TrackInfo } from './quote-track.model';
 import { QuoteTrackService } from './quote-track.service';
 
 @Directive({
-  selector: '[nxTrack]',
-  standalone: true
+  selector: '[nxTrack]'
 })
 export class QuoteTrackDirective implements OnInit {
   @Input('nxTrack')

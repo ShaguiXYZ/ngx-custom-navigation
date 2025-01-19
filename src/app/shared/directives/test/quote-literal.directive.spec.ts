@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Component, ElementRef } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { DomSanitizer } from '@angular/platform-browser';
@@ -7,8 +6,8 @@ import { LiteralsService } from 'src/app/core/services';
 import { QuoteLiteralDirective } from '../quote-literal.directive';
 
 @Component({
-    template: `<div [nxQuoteLiteral]="literal" [nxQuoteLitealParams]="params" [nxQuoteDefaultLiteral]="defaultLiteral">safeHtml</div>`,
-    standalone: false
+  template: `<div [nxQuoteLiteral]="literal" [nxQuoteLitealParams]="params" [nxQuoteDefaultLiteral]="defaultLiteral">safeHtml</div>`,
+  standalone: false
 })
 class TestComponent {
   literal = 'testLiteral';

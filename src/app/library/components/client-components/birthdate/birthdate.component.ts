@@ -37,9 +37,10 @@ export class BirthdateComponent extends QuoteComponent<QuoteModel> implements On
   public readonly dateFormats = DEFAULT_DATE_FORMATS;
   public readonly maxDate = dayjs();
   public form!: FormGroup;
-  public birthdateFromContext: Dayjs | undefined;
   public minValue = 18;
   public maxValue = 70;
+
+  private birthdateFromContext: Dayjs | undefined;
 
   private readonly quoteFormValidarors = inject(QuoteFormValidarors);
   private readonly fb = inject(FormBuilder);

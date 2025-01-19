@@ -1,8 +1,7 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'quoteNumber',
-  standalone: true
+  name: 'quoteNumber'
 })
 export class QuoteNumberPipe implements PipeTransform {
   transform(value: number): string {

@@ -71,7 +71,7 @@ export class DrivingLicenseDateComponent extends QuoteComponent<QuoteModel> impl
     const birthdate = dayjs(this._contextData.personalData.birthdate).toDate();
 
     this.form = this.fb.group({
-      licenseDate: new FormControl(this.drivingLicenseDateFromContext, [
+      licenseDate: new FormControl(this.drivingLicenseDateFromContext?.toDate(), [
         this.quoteFormValidarors.required(),
         this.quoteFormValidarors.isFutureDate(),
         this.quoteFormValidarors.minYearsBetweenDates(birthdate, this.minYears),

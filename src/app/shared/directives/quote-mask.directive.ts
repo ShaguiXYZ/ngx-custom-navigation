@@ -2,8 +2,7 @@ import { Directive, ElementRef, EventEmitter, HostListener, Input, Output } from
 import { QUOTE_MASK, QuoteMaskType } from '../models';
 
 @Directive({
-  selector: '[nxQuoteMask]',
-  standalone: true
+  selector: '[nxQuoteMask]'
 })
 export class QuoteMaskDirective {
   @Input()
