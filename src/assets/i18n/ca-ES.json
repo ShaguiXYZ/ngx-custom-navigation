@@ -157,5 +157,11 @@
       "ErrorRequired": "El número de telèfon és obligatori per continuar",
       "BadFormat": "El número de telèfon no és vàlid"
     }
+  },
+  "Footer": {
+    "TermsAndConditions": "Termes i condicions",
+    "PrivacyPolicy": "Política de privacitat",
+    "LegalNotice": "Avís legal i privacitat",
+    "CookiesPolicy": "Política de cookies"
   }
 }

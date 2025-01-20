@@ -157,5 +157,11 @@
       "ErrorRequired": "El número de teléfono es obligatorio para continuar",
       "BadFormat": "El número de teléfono no es válido"
     }
+  },
+  "Footer": {
+    "TermsAndConditions": "Términos y condiciones",
+    "PrivacyPolicy": "Política de privacidad",
+    "LegalNotice": "Aviso legal y privacidad",
+    "CookiesPolicy": "Política de cookies"
   }
 }
