@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { NxCopytextModule } from '@aposin/ng-aquila/copytext';
 import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
@@ -13,34 +13,32 @@ import { QuoteAutoFocusDirective, QuoteLiteralDirective } from 'src/app/shared/d
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 
 @Component({
-    selector: 'quote-client-email',
-    templateUrl: './client-email.component.html',
-    styleUrl: './client-email.component.scss',
-    imports: [
-        HeaderTitleComponent,
-        NxCopytextModule,
-        NxFormfieldModule,
-        NxInputModule,
-        NxLinkModule,
-        NxSwitcherModule,
-        QuoteFooterComponent,
-        QuoteZoneComponent,
-        QuoteAutoFocusDirective,
-        QuoteLiteralDirective,
-        QuoteLiteralPipe,
-        ReactiveFormsModule
-    ],
-    providers: [QuoteFormValidarors]
+  selector: 'quote-client-email',
+  templateUrl: './client-email.component.html',
+  styleUrl: './client-email.component.scss',
+  imports: [
+    HeaderTitleComponent,
+    NxCopytextModule,
+    NxFormfieldModule,
+    NxInputModule,
+    NxLinkModule,
+    NxSwitcherModule,
+    QuoteFooterComponent,
+    QuoteZoneComponent,
+    QuoteAutoFocusDirective,
+    QuoteLiteralDirective,
+    QuoteLiteralPipe,
+    ReactiveFormsModule
+  ],
+  providers: [QuoteFormValidarors]
 })
-export class ClientEMailComponent extends QuoteComponent<QuoteModel> implements OnInit {
+export class ClientEMailComponent extends QuoteComponent<QuoteModel> {
   public form!: FormGroup;
 
   private readonly quoteFormValidarors = inject(QuoteFormValidarors);
   private readonly fb = inject(FormBuilder);
 
-  ngOnInit(): void {
-    this.createForm();
-  }
+  protected override ngQuoteInit = this.createForm.bind(this);
 
   public override canDeactivate = (): boolean => this.form.valid;
 

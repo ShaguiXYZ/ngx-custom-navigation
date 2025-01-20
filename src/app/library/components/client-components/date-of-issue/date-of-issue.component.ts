@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { NxDatefieldModule } from '@aposin/ng-aquila/datefield';
 import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
@@ -31,7 +31,7 @@ import { QuoteLiteralPipe } from 'src/app/shared/pipes';
   ],
   providers: [QuoteFormValidarors]
 })
-export class DateOfIssueComponent extends QuoteComponent<QuoteModel> implements OnInit {
+export class DateOfIssueComponent extends QuoteComponent<QuoteModel> {
   public readonly maxDays = 90;
   public readonly minDate = dayjs();
   public readonly maxDate = dayjs().add(this.maxDays, 'days');
@@ -43,9 +43,7 @@ export class DateOfIssueComponent extends QuoteComponent<QuoteModel> implements 
   private readonly quoteFormValidarors = inject(QuoteFormValidarors);
   private readonly fb = inject(FormBuilder);
 
-  ngOnInit(): void {
-    this.createForm();
-  }
+  protected override ngQuoteInit = this.createForm.bind(this);
 
   public override canDeactivate = (): boolean => this.form.valid;
 

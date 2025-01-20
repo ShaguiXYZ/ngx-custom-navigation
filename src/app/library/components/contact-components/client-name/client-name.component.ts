@@ -1,5 +1,5 @@
 import { TitleCasePipe } from '@angular/common';
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
 import { NxInputModule } from '@aposin/ng-aquila/input';
@@ -27,16 +27,14 @@ import { QuoteLiteralPipe } from 'src/app/shared/pipes';
   ],
   providers: [QuoteFormValidarors, TitleCasePipe]
 })
-export class ClientNameComponent extends QuoteComponent<QuoteModel> implements OnInit {
+export class ClientNameComponent extends QuoteComponent<QuoteModel> {
   public form!: FormGroup;
 
   private readonly quoteFormValidarors = inject(QuoteFormValidarors);
   private readonly titleCasePipe = inject(TitleCasePipe);
   private readonly fb = inject(FormBuilder);
 
-  ngOnInit(): void {
-    this.createForm();
-  }
+  protected override ngQuoteInit = this.createForm.bind(this);
 
   public override canDeactivate = (): boolean => {
     this._contextData.personalData = {

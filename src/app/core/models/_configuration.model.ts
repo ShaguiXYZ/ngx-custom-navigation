@@ -50,7 +50,7 @@ export interface PageConfiguration<T extends QuoteControlModel> {
   data?: PageData<T>;
   validationSettings?: PageFormValidationSettings;
   serviceActivators?: ServiceActivator[];
-  zones?: Record<number, ZoneConfig>;
+  zones?: Record<string, ZoneConfig>;
 }
 
 export interface Page<T extends QuoteControlModel = QuoteControlModel, K = string> {

@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, ValidationErrors, ValidatorFn } from '@angular/forms';
 import { NxCopytextModule } from '@aposin/ng-aquila/copytext';
 import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
@@ -28,15 +28,13 @@ import { isNIF } from './models';
   ],
   providers: [QuoteFormValidarors]
 })
-export class ClientIdentificationNumberComponent extends QuoteComponent<QuoteModel> implements OnInit {
+export class ClientIdentificationNumberComponent extends QuoteComponent<QuoteModel> {
   public form!: FormGroup;
 
   private readonly quoteFormValidarors = inject(QuoteFormValidarors);
   private readonly fb = inject(FormBuilder);
 
-  ngOnInit(): void {
-    this.createForm();
-  }
+  protected override ngQuoteInit = this.createForm.bind(this);
 
   public override canDeactivate = (): boolean => {
     this._contextData.personalData = {

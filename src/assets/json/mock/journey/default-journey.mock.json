@@ -945,7 +945,7 @@
         "validationSettings": {
           "acceptPrivacyPolicy": { "requiredTrue": { "disabled": true } }
         },
-        "zones": { "2": { "skipLoad": true } }
+        "zones": { "privacy-policy": { "skipLoad": true } }
       }
     },
     {

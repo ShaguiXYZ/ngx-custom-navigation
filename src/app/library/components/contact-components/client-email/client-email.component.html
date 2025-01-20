@@ -3,6 +3,7 @@
     <span nxQuoteLiteral="header"></span>
     <p nxCopytext="normal" nxQuoteLiteral="subheader"></p>
   </quote-header-title>
+  @defer(when !!form) {
   <section class="form-container">
     <form [formGroup]="form">
       <nx-formfield [label]="'e-mail' | quoteLiteral">
@@ -13,7 +14,7 @@
         <nx-error appearance="text" nxFormfieldError><span nxQuoteLiteral="bad-format"></span> </nx-error>
         }
       </nx-formfield>
-      <quote-zone>
+      <quote-zone name="accep-info">
         <div class="products-info nx-margin-top-s">
           <div class="products-info-literal nx-margin-right-xs" nxCopytext="normal">
             <span nxQuoteLiteral="more-info"></span>
@@ -21,7 +22,7 @@
           <nx-switcher formControlName="accepInfo" />
         </div>
       </quote-zone>
-      <quote-zone>
+      <quote-zone name="privacy-policy">
         <div class="products-info nx-margin-top-s">
           <div class="privatity products-info-literal nx-margin-right-xs" nxCopytext="normal">
             <span nxQuoteLiteral="privacy-policy-text"></span>
@@ -32,7 +33,7 @@
         <nx-error class="align-right" appearance="text" nxFormfieldError><span nxQuoteLiteral="error-required"></span></nx-error>
         }
       </quote-zone>
-      <quote-zone>
+      <quote-zone name="legal-text">
         <div class="legal-text nx-margin-top-s" nxCopytext="normal" nxQuoteLiteral="legal-text">
           <span class="products-info-literal nx-margin-y-s"></span>
         </div>
@@ -45,4 +46,5 @@
     }"
     (uiOnNext)="updateValidData()"
   />
+  }
 </article>

@@ -5,7 +5,7 @@
   </quote-header-title>
   <section class="form-container">
     <form [formGroup]="form">
-      <quote-zone>
+      <quote-zone name="search">
         <nx-formfield [label]="'search' | quoteLiteral" appearance="outline">
           <input #searchInput type="text" formControlName="searchInput" nxInput />
           <span nxFormfieldSuffix>

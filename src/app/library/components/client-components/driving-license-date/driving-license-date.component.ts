@@ -1,6 +1,6 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { NX_DATE_LOCALE, NxDatefieldModule } from '@aposin/ng-aquila/datefield';
+import { NxDatefieldModule } from '@aposin/ng-aquila/datefield';
 import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
 import { NxInputModule } from '@aposin/ng-aquila/input';
 import { NxIsoDateModule } from '@aposin/ng-aquila/iso-date-adapter';
@@ -29,12 +29,12 @@ import { QuoteLiteralPipe } from 'src/app/shared/pipes';
     QuoteLiteralDirective,
     QuoteLiteralPipe
   ],
-  providers: [{ provide: NX_DATE_LOCALE, useValue: 'es-ES' }, QuoteFormValidarors]
+  providers: [QuoteFormValidarors]
 })
-export class DrivingLicenseDateComponent extends QuoteComponent<QuoteModel> implements OnInit {
+export class DrivingLicenseDateComponent extends QuoteComponent<QuoteModel> {
   public readonly maxDate = dayjs();
   public readonly minYears = 18;
-  public readonly minDrivingYears = 1;
+  public minDrivingYears = 1;
   public form!: FormGroup;
 
   private drivingLicenseDateFromContext?: Dayjs;
@@ -42,9 +42,7 @@ export class DrivingLicenseDateComponent extends QuoteComponent<QuoteModel> impl
   private readonly quoteFormValidarors = inject(QuoteFormValidarors);
   private readonly fb = inject(FormBuilder);
 
-  ngOnInit(): void {
-    this.createForm();
-  }
+  protected override ngQuoteInit = this.createForm.bind(this);
 
   public override canDeactivate = (): boolean => this.form.valid;
 

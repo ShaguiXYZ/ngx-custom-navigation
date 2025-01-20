@@ -3,8 +3,8 @@ import { ActivatedRouteSnapshot, GuardResult, MaybeAsync, RouterStateSnapshot } 
 import { ContextDataService, deepCopy } from '@shagui/ng-shagui/core';
 import { Subject, Subscription, takeUntil } from 'rxjs';
 import { DEFAULT_DISPLAY_DATE_FORMAT, QUOTE_APP_CONTEXT_DATA, QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
-import { ConditionEvaluation, patch } from 'src/app/core/lib';
-import { AppContextData, Page, QuoteControlModel } from 'src/app/core/models';
+import { patch } from 'src/app/core/lib';
+import { AppContextData, QuoteControlModel } from 'src/app/core/models';
 import { LanguageService } from '../../services';
 
 @Component({
@@ -15,6 +15,8 @@ export abstract class QuoteComponent<T extends QuoteControlModel> implements OnD
   protected displayDateFormats: string[] = [DEFAULT_DISPLAY_DATE_FORMAT];
   protected _contextData: T;
   protected subscription$: Subscription[] = [];
+
+  protected ngQuoteInit?: () => void;
 
   protected readonly contextDataService = inject(ContextDataService);
 
@@ -68,22 +70,6 @@ export abstract class QuoteComponent<T extends QuoteControlModel> implements OnD
       }
     }
 
-    lastPage && this.__zones(lastPage, component);
-  };
-
-  private __zones = (page: Page, component: QuoteComponent<T>): void => {
-    if (!page.configuration?.zones) {
-      return;
-    }
-
-    const sections = Array.from(document.getElementsByTagName('quote-zone'));
-
-    Object.entries(page.configuration.zones).forEach(([key, value]) => {
-      const index = Number(key);
-
-      if (value.skipLoad && sections[index] && ConditionEvaluation.checkConditions(component['_contextData'], value.conditions)) {
-        sections[index].remove();
-      }
-    });
+    this.ngQuoteInit?.();
   };
 }

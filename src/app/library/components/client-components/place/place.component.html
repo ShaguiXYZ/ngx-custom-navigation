@@ -3,6 +3,7 @@
     <span nxQuoteLiteral="header"></span>
     <p nxCopytext="normal" nxQuoteLiteral="subheader"></p>
   </quote-header-title>
+  @defer(when !!form) {
   <section class="form-container">
     <form [formGroup]="form">
       <nx-formfield [label]="'postal-code' | quoteLiteral">
@@ -27,4 +28,5 @@
     (uiOnNext)="updateValidData()"
   >
   </quote-footer>
+  }
 </article>

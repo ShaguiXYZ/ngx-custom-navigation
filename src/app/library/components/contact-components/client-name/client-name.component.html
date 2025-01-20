@@ -3,6 +3,7 @@
     <span nxQuoteLiteral="header"></span>
     <p nxCopytext="normal" nxQuoteLiteral="subheader"></p>
   </quote-header-title>
+  @defer(when !!form) {
   <section class="form-container">
     <form [formGroup]="form">
       <nx-formfield [label]="'name' | quoteLiteral">
@@ -11,7 +12,7 @@
         <nx-error appearance="text" nxFormfieldError><span nxQuoteLiteral="error-required"></span> </nx-error>
         }
       </nx-formfield>
-      <quote-zone>
+      <quote-zone name="surname">
         <nx-formfield label="Apellidos">
           <input formControlName="surname" nxInput nxAutoFocus />
           @if(form.get('surname')?.errors?.['required']) {
@@ -28,4 +29,5 @@
     }"
     (uiOnNext)="updateValidData()"
   />
+  }
 </article>

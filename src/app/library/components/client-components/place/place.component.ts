@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import {
   AbstractControl,
   AsyncValidatorFn,
@@ -20,24 +20,24 @@ import { QuoteAutoFocusDirective, QuoteLiteralDirective, QuoteMaskDirective } fr
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 
 @Component({
-    selector: 'quote-place',
-    templateUrl: './place.component.html',
-    styleUrl: './place.component.scss',
-    imports: [
-        HeaderTitleComponent,
-        QuoteFooterComponent,
-        NxFormfieldModule,
-        NxInputModule,
-        NxMaskModule,
-        ReactiveFormsModule,
-        QuoteMaskDirective,
-        QuoteAutoFocusDirective,
-        QuoteLiteralDirective,
-        QuoteLiteralPipe
-    ],
-    providers: [LocationService, QuoteFormValidarors]
+  selector: 'quote-place',
+  templateUrl: './place.component.html',
+  styleUrl: './place.component.scss',
+  imports: [
+    HeaderTitleComponent,
+    QuoteFooterComponent,
+    NxFormfieldModule,
+    NxInputModule,
+    NxMaskModule,
+    ReactiveFormsModule,
+    QuoteMaskDirective,
+    QuoteAutoFocusDirective,
+    QuoteLiteralDirective,
+    QuoteLiteralPipe
+  ],
+  providers: [LocationService, QuoteFormValidarors]
 })
-export class PlaceComponent extends QuoteComponent<QuoteModel> implements OnInit {
+export class PlaceComponent extends QuoteComponent<QuoteModel> {
   public location?: string;
   public form!: FormGroup;
 
@@ -45,9 +45,7 @@ export class PlaceComponent extends QuoteComponent<QuoteModel> implements OnInit
   private readonly quoteFormValidarors = inject(QuoteFormValidarors);
   private readonly fb = inject(FormBuilder);
 
-  ngOnInit(): void {
-    this.createForm();
-  }
+  protected override ngQuoteInit = this.createForm.bind(this);
 
   public override canDeactivate = (): boolean => this.form.valid;
 
