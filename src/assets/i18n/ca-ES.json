@@ -5,7 +5,8 @@
     "NotBetween": "El valor ha d'estar entre {{min}} i {{max}}",
     "NotBetweenDates": "La data ha d'estar entre {{min}} i {{max}}",
     "OldDate": "La data no pot ser anterior a {{value}}",
-    "PastDate": "La data no pot estar en el passat"
+    "PastDate": "La data no pot estar en el passat",
+    "BadFormat": "El format no és correcte"
   },
   "Label": {
     "AllBrands": "Totes les marques",
@@ -18,6 +19,7 @@
       "SwitchToMonthView": "Escollir data",
       "SwitchToMultiYearViewLabel": "Escollir mes i any"
     },
+    "Email": "Correu electrònic",
     "ErrorBody": "Ho sentim, no podem processar la seva sol·licitud en aquest moment. Si us plau, torni-ho a intentar més tard.",
     "Fuel": "Combustible",
     "Model": "Model",
@@ -147,8 +149,10 @@
     },
     "ClientName": {
       "Header": "Ens agradaria conèixer-te una mica més",
-      "Hint": "Nom i cognoms",
-      "ErrorRequired": "El nom és obligatori per continuar"
+      "NameHint": "Nom",
+      "SurnameHint": "Cognoms",
+      "NameRequired": "El nom és obligatori per continuar",
+      "SurnameRequired": "El cognom és obligatori per continuar"
     },
     "ClientPhoneNumber": {
       "Header": "Quin és el teu número de telèfon?",
@@ -156,6 +160,58 @@
       "Hint": "Número de telèfon",
       "ErrorRequired": "El número de telèfon és obligatori per continuar",
       "BadFormat": "El número de telèfon no és vàlid"
+    },
+    "ClientEmail": {
+      "Header": "Deixa'ns el teu correu electrònic i rep el teu pressupost a l'instant",
+      "AccepInfo": "Vull rebre informació sobre productes i ofertes de Shagui",
+      "PrivacyPolicy": "He llegit i accepto la {{private-policy-a}} de Shagui.",
+      "PrivacyPolicyLink": "https://www.shagui.com/privacidad/ca",
+      "LinkText": "política de privacitat",
+      "LegalText": "Accepto les condicions legals i la política de privacitat",
+      "ErrorRequired": "El correu electrònic és obligatori per continuar",
+      "BadFormat": "El correu electrònic no és vàlid"
+    },
+    "ClientIdentificationNumber": {
+      "Header": "Ens pots facilitar el teu document d'identitat?",
+      "Subheader": "Només utilitzarem aquesta dada per donar-te un pressupost totalment personalitzat",
+      "Hint": "Número de DNI o NIE",
+      "FooterInfo": "Per oferir-te la millor assegurança és important verificar la teva identitat.",
+      "ErrorRequired": "El número d'identificació és obligatori per continuar",
+      "ErrorNif": "El número d'identificació no és vàlid",
+      "ErrorNie": "El número d'identificació no és vàlid"
+    },
+    "IsClientClientName": {
+      "Header": "Com et dius?",
+      "HintName": "Nom",
+      "HintNSurname": "Cognoms",
+      "ErrorRequired": "El nom és obligatori per continuar"
+    },
+    "IsClientClientPhoneNumber": {
+      "Header": "Quin és el teu número de telèfon?",
+      "Subheader": "Sabem que les assegurances a vegades són complexes. Per això, només et trucarem per donar-te assistència personalitzada.",
+      "Hint": "Número de telèfon",
+      "ErrorRequired": "El número de telèfon és obligatori per continuar",
+      "BadFormat": "El número de telèfon no és vàlid"
+    },
+    "IsClientClientEmail": {
+      "Header": "Deixa'ns el teu correu electrònic i ens posarem en contacte amb tu en breu.",
+      "Hint": "Correu electrònic",
+      "AccepInfo": "Vull rebre informació sobre productes i ofertes de Shagui",
+      "ErrorRequired": "El correu electrònic és obligatori per continuar",
+      "BadFormat": "El correu electrònic no és vàlid"
+    },
+    "IsClientClientIdentificationNumber": {
+      "Header": "Ens pots facilitar el teu document d'identitat?",
+      "Subheader": "Només utilitzarem aquesta dada per donar-te un pressupost totalment personalitzat",
+      "Hint": "Número de document d'identitat",
+      "FooterInfo": "Per oferir-te la millor assegurança és important verificar la teva identitat.",
+      "ErrorRequired": "El número d'identificació és obligatori per continuar",
+      "ErrorNif": "El número d'identificació no és vàlid",
+      "ErrorNie": "El número d'identificació no és vàlid"
+    },
+    "IsClientContactUs": {
+      "Header": "Informació de contacte",
+      "Subheader": "Ens agradaria poder ajudar-te, <br/>contacta'ns!"
     }
   },
   "Footer": {

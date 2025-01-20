@@ -5,7 +5,8 @@
     "NotBetween": "The value must be between {{min}} and {{max}}",
     "NotBetweenDates": "The date must be between {{min}} and {{max}}",
     "OldDate": "The date cannot be earlier than {{value}}",
-    "PastDate": "The date cannot be in the past"
+    "PastDate": "The date cannot be in the past",
+    "BadFormat": "The format is incorrect"
   },
   "Label": {
     "AllBrands": "All brands",
@@ -18,6 +19,7 @@
       "SwitchToMonthView": "Choose date",
       "SwitchToMultiYearViewLabel": "Choose month and year"
     },
+    "Email": "Email",
     "ErrorBody": "Sorry, we cannot process your request at this moment. Please try again later.",
     "Fuel": "Fuel",
     "Model": "Model",
@@ -147,8 +149,10 @@
     },
     "ClientName": {
       "Header": "We would like to know you a little better",
-      "Hint": "Name and surname",
-      "ErrorRequired": "The name is required to continue"
+      "NameHint": "Name",
+      "SurnameHint": "Surname",
+      "NameRequired": "The name is required to continue",
+      "SurnameRequired": "The surname is required to continue"
     },
     "ClientPhoneNumber": {
       "Header": "What is your phone number?",
@@ -156,6 +160,58 @@
       "Hint": "Phone number",
       "ErrorRequired": "The phone number is required to continue",
       "BadFormat": "The phone number is not valid"
+    },
+    "ClientEmail": {
+      "Header": "Leave us your email and receive your quote instantly",
+      "AccepInfo": "I want to receive information about Shagui products and offers",
+      "PrivacyPolicy": "I have read and accept Shagui's {{private-policy-a}}.",
+      "PrivacyPolicyLink": "https://www.shagui.com/privacy/en",
+      "LinkText": "privacy policy",
+      "LegalText": "I accept the legal terms and privacy policy",
+      "ErrorRequired": "The email is required to continue",
+      "BadFormat": "The email is not valid"
+    },
+    "ClientIdentificationNumber": {
+      "Header": "Can you provide your identification document?",
+      "Subheader": "We will only use this data to give you a fully personalized quote",
+      "Hint": "DNI or NIE number",
+      "FooterInfo": "To offer you the best insurance, it is important to verify your identity.",
+      "ErrorRequired": "The identification number is required to continue",
+      "ErrorNif": "The identification number is not valid",
+      "ErrorNie": "The identification number is not valid"
+    },
+    "IsClientClientName": {
+      "Header": "What is your name?",
+      "HintName": "Name",
+      "HintNSurname": "Surname",
+      "ErrorRequired": "The name is required to continue"
+    },
+    "IsClientClientPhoneNumber": {
+      "Header": "What is your phone number?",
+      "Subheader": "We know that insurance can sometimes be complex. Therefore, we will only call you to provide personalized assistance.",
+      "Hint": "Phone number",
+      "ErrorRequired": "The phone number is required to continue",
+      "BadFormat": "The phone number is not valid"
+    },
+    "IsClientClientEmail": {
+      "Header": "Leave us your email and we will contact you shortly.",
+      "Hint": "Email",
+      "AccepInfo": "I want to receive information about Shagui products and offers",
+      "ErrorRequired": "The email is required to continue",
+      "BadFormat": "The email is not valid"
+    },
+    "IsClientClientIdentificationNumber": {
+      "Header": "Can you provide your identification document?",
+      "Subheader": "We will only use this data to give you a fully personalized quote",
+      "Hint": "Identification document number",
+      "FooterInfo": "To offer you the best insurance, it is important to verify your identity.",
+      "ErrorRequired": "The identification number is required to continue",
+      "ErrorNif": "The identification number is not valid",
+      "ErrorNie": "The identification number is not valid"
+    },
+    "IsClientContactUs": {
+      "Header": "Contact information",
+      "Subheader": "We would like to help you, <br/>contact us!"
     }
   },
   "Footer": {

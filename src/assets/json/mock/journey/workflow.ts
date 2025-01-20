@@ -21,7 +21,7 @@ export const WORKFLOW: ConfigurationDTO<QuoteModel, WorkflowManifestId> = {
             'your-car-is',
             'vehicle-brand',
             'vehicle-models',
-            'vehicle-fuel',
+            'vehicle-characteristics',
             'vehicle-model-versions',
             'vehicle-parking',
             'license-year'
@@ -405,7 +405,7 @@ export const WORKFLOW: ConfigurationDTO<QuoteModel, WorkflowManifestId> = {
       pageId: 'vehicle-models',
       nextOptionList: [
         {
-          nextPageId: 'vehicle-fuel'
+          nextPageId: 'vehicle-characteristics'
         }
       ],
       configuration: {
@@ -415,7 +415,7 @@ export const WORKFLOW: ConfigurationDTO<QuoteModel, WorkflowManifestId> = {
       }
     },
     {
-      pageId: 'vehicle-fuel',
+      pageId: 'vehicle-characteristics',
       nextOptionList: [
         {
           nextPageId: 'vehicle-model-versions'
@@ -423,9 +423,9 @@ export const WORKFLOW: ConfigurationDTO<QuoteModel, WorkflowManifestId> = {
       ],
       configuration: {
         literals: {
-          'cubic-capacity-not-known': 'No sé la cilindrada',
-          header: 'Seleccione sus características',
-          'power-not-known': 'No sé la potencia'
+          header: { value: 'Pages.VehicleCharacteristics.Header', type: 'translate' },
+          'cubic-capacity-not-known': { value: 'Pages.VehicleCharacteristics.CubicCapacityNotKnown', type: 'translate' },
+          'power-not-known': { value: 'Pages.VehicleCharacteristics.PowerNotKnown', type: 'translate' }
         }
       }
     },
@@ -438,7 +438,7 @@ export const WORKFLOW: ConfigurationDTO<QuoteModel, WorkflowManifestId> = {
       ],
       configuration: {
         literals: {
-          header: '¿Y la versión?'
+          header: { value: 'Pages.VehicleModelVersions.Header', type: 'translate' }
         }
       }
     },
@@ -460,8 +460,8 @@ export const WORKFLOW: ConfigurationDTO<QuoteModel, WorkflowManifestId> = {
       ],
       configuration: {
         literals: {
-          header: '¿En qué año matriculaste tu coche?',
-          'year-of-manufacture-label': 'Año de matriculación'
+          header: { value: 'Pages.LicenseYear.Header', type: 'translate' },
+          'year-of-manufacture-label': { value: 'Pages.LicenseYear.Hint', type: 'translate' }
         },
         data: {
           maxYearsOld: 25
@@ -527,7 +527,7 @@ export const WORKFLOW: ConfigurationDTO<QuoteModel, WorkflowManifestId> = {
           header: {
             value: 'Pages.IsPolicyOwner.Header',
             params: {
-              days: { value: 'insuranceCompany.yearsAsOwner', type: 'data' }
+              days: 25
             },
             type: 'translate'
           }
@@ -543,7 +543,7 @@ export const WORKFLOW: ConfigurationDTO<QuoteModel, WorkflowManifestId> = {
       ],
       configuration: {
         literals: {
-          header: '¿Con qué compañía tienes tu seguro actualmente?'
+          header: { value: 'Pages.InsuranceCompanies.Header', type: 'translate' }
         }
       }
     },
@@ -556,9 +556,9 @@ export const WORKFLOW: ConfigurationDTO<QuoteModel, WorkflowManifestId> = {
       ],
       configuration: {
         literals: {
-          year: '{{value}} año {{last}}',
-          years: '{{value}} años {{last}}',
-          header: '¿Cuánto tiempo llevas como titular de un seguro en esta u otras compañías?',
+          header: { value: 'Pages.TimeInsuranceHolder.Header', type: 'translate' },
+          year: { value: 'Pages.TimeInsuranceHolder.Year', type: 'translate' },
+          years: { value: 'Pages.TimeInsuranceHolder.Years', type: 'translate' },
           last: { value: 'or-more', type: 'literal' }
         }
       }
@@ -583,10 +583,11 @@ export const WORKFLOW: ConfigurationDTO<QuoteModel, WorkflowManifestId> = {
           not: '{{first}}',
           accident: '{{value}} {{last}}',
           accidents: '{{value}} {{last}}',
-          first: 'Nimguno',
+          first: { value: 'Pages.NumberAccidents.First', type: 'translate' },
           last: { value: 'or-more', type: 'literal' },
           header: {
-            value: '¿Has tenido algún accidente en {{last}}{{last-single}} {{value}} {{years}}{{year}}?',
+            value: 'Pages.NumberAccidents.Header',
+            type: 'translate',
             params: {
               value: {
                 value: 'insuranceCompany.yearsAsOwner',
@@ -600,8 +601,8 @@ export const WORKFLOW: ConfigurationDTO<QuoteModel, WorkflowManifestId> = {
                 ]
               },
               last: {
-                value: 'los últimos',
-                type: 'value',
+                value: 'Pages.NumberAccidents.Last',
+                type: 'translate',
                 conditions: [
                   {
                     expression: 'insuranceCompany.yearsAsOwner',
@@ -611,8 +612,8 @@ export const WORKFLOW: ConfigurationDTO<QuoteModel, WorkflowManifestId> = {
                 ]
               },
               'last-single': {
-                value: 'el último',
-                type: 'value',
+                value: 'Pages.NumberAccidents.LastSingle',
+                type: 'translate',
                 conditions: [
                   {
                     expression: 'insuranceCompany.yearsAsOwner',
@@ -645,7 +646,7 @@ export const WORKFLOW: ConfigurationDTO<QuoteModel, WorkflowManifestId> = {
               }
             }
           },
-          'footer-info': 'Nos gustaría acompañarte en tus próximos viajes.'
+          'footer-info': { value: 'Pages.NumberAccidents.FooterInfo', type: 'translate' }
         }
       }
     },
@@ -658,8 +659,11 @@ export const WORKFLOW: ConfigurationDTO<QuoteModel, WorkflowManifestId> = {
       ],
       configuration: {
         literals: {
-          header: 'Nos gustaría conocerte un poco más',
-          name: 'Nombre'
+          header: { value: 'Pages.ClientName.Header', type: 'translate' },
+          name: { value: 'Pages.ClientName.NameHint', type: 'translate' },
+          surname: { value: 'Pages.ClientName.SurnameHint', type: 'translate' },
+          'name-error-required': { value: 'Pages.ClientName.NameRequired', type: 'translate' },
+          'surname-error-required': { value: 'Pages.ClientName.SurnameRequired', type: 'translate' }
         }
       }
     },
@@ -681,9 +685,11 @@ export const WORKFLOW: ConfigurationDTO<QuoteModel, WorkflowManifestId> = {
       ],
       configuration: {
         literals: {
-          header: '¿Cuál es tu número de teléfono?',
-          'phone-number': 'Número de teléfono',
-          subheader: 'Sabemos que los seguros a veces son complejos. Por eso, solo te llamaremos para darte asistencia personalizada.'
+          header: { value: 'Pages.ClientPhoneNumber.Header', type: 'translate' },
+          subheader: { value: 'Pages.ClientPhoneNumber.Subheader', type: 'translate' },
+          'phone-number': { value: 'Pages.ClientPhoneNumber.Hint', type: 'translate' },
+          'error-required': { value: 'Pages.ClientPhoneNumber.ErrorRequired', type: 'translate' },
+          'bad-format': { value: 'Pages.ClientPhoneNumber.BadFormat', type: 'translate' }
         },
         serviceActivators: [
           {
@@ -703,25 +709,25 @@ export const WORKFLOW: ConfigurationDTO<QuoteModel, WorkflowManifestId> = {
       ],
       configuration: {
         literals: {
-          header: 'Déjanos tu email y recibe tu presupuesto al instante',
-          'legal-text': { value: 'Texto legal pendiente definir...', type: 'value' },
-          'more-info': 'Quiero recibir información sobre productos y ofertas de Shagui',
-          'privacy-policy-text': {
-            value: 'He leído y acepto la {{private-policy-a}} de Shagui.',
-            type: 'value',
+          header: { value: 'Pages.ClientEmail.Header', type: 'translate' },
+          'legal-text': { value: 'Pages.ClientEmail.LegalText', type: 'translate' },
+          'accep-info': { value: 'Pages.ClientEmail.AccepInfo', type: 'translate' },
+          'privacy-policy': {
+            value: 'Pages.ClientEmail.PrivacyPolicy',
+            type: 'translate',
             params: {
               'private-policy-a': {
-                value: 'privacy-policy-tag',
+                value: "<a class='link nx-font-weight-bold' href='{{link}}' target='_blank'>{{link-text}}</a>",
+                type: 'value',
                 params: {
-                  link: { value: 'privacy-policy-link', type: 'literal' },
-                  'link-text': 'política de privacidad'
-                },
-                type: 'literal'
+                  link: { value: 'Pages.ClientEmail.PrivacyPolicyLink', type: 'translate' },
+                  'link-text': { value: 'Pages.ClientEmail.LinkText', type: 'translate' }
+                }
               }
             }
           },
-          'privacy-policy-tag': "<a class='link nx-font-weight-bold' href='{{link}}' target='_blank'>{{link-text}}</a>",
-          'privacy-policy-link': 'https://www.shagui.com/privacidad'
+          'error-required': { value: 'Pages.ClientEmail.ErrorRequired', type: 'translate' },
+          'bad-format': { value: 'Pages.ClientEmail.BadFormat', type: 'translate' }
         }
       }
     },
@@ -760,10 +766,13 @@ export const WORKFLOW: ConfigurationDTO<QuoteModel, WorkflowManifestId> = {
           }
         },
         literals: {
-          header: '¿Nos puedes facilitar tu documento de identidad?',
-          'identification-number': 'Número de DNI o NIE',
-          subheader: 'Solo utilizaremos este dato para darte un presupuesto totalmente personalizado',
-          'footer-info': 'Para ofrecerte el mejor seguro es importante verificar tu identidad.'
+          header: { value: 'Pages.ClientIdentificationNumber.Header', type: 'translate' },
+          subheader: { value: 'Pages.ClientIdentificationNumber.Subheader', type: 'translate' },
+          'identification-number': { value: 'Pages.ClientIdentificationNumber.Hint', type: 'translate' },
+          'footer-info': { value: 'Pages.ClientIdentificationNumber.FooterInfo', type: 'translate' },
+          'error-required': { value: 'Pages.ClientPhoneNumber.ErrorRequired', type: 'translate' },
+          'error-nif': { value: 'Pages.ClientIdentificationNumber.ErrorNif', type: 'translate' },
+          'error-nie': { value: 'Pages.ClientIdentificationNumber.ErrorNie', type: 'translate' }
         },
         serviceActivators: [
           {
@@ -904,8 +913,10 @@ export const WORKFLOW: ConfigurationDTO<QuoteModel, WorkflowManifestId> = {
       ],
       configuration: {
         literals: {
-          header: '¿Como te llamas?',
-          name: 'Nombre'
+          header: { value: 'Pages.IsClientClientName.Header', type: 'translate' },
+          name: { value: 'Pages.IsClientClientName.HintName', type: 'translate' },
+          surname: { value: 'Pages.IsClientClientName.HintNSurname', type: 'translate' },
+          'name-error-required': { value: 'Pages.IsClientClientName.ErrorRequired', type: 'translate' }
         },
         validationSettings: {
           surname: { required: { disabled: true } }
@@ -922,8 +933,11 @@ export const WORKFLOW: ConfigurationDTO<QuoteModel, WorkflowManifestId> = {
       ],
       configuration: {
         literals: {
-          header: '¿Cuál es tu número de teléfono?',
-          'phone-number': 'Número de teléfono'
+          header: { value: 'Pages.IsClientClientPhoneNumber.Header', type: 'translate' },
+          subheader: { value: 'Pages.IsClientClientPhoneNumber.Subheader', type: 'translate' },
+          'phone-number': { value: 'Pages.IsClientClientPhoneNumber.Hint', type: 'translate' },
+          'error-required': { value: 'Pages.IsClientClientPhoneNumber.ErrorRequired', type: 'translate' },
+          'bad-format': { value: 'Pages.IsClientClientPhoneNumber.BadFormat', type: 'translate' }
         }
       }
     },
@@ -937,15 +951,14 @@ export const WORKFLOW: ConfigurationDTO<QuoteModel, WorkflowManifestId> = {
       ],
       configuration: {
         literals: {
-          header: 'Déjanos tu email y nos pondremos en contacto contigo en breve.',
-          'legal-text': { value: 'Texto legal pendiente definir...', type: 'value' },
-          'more-info': 'Quiero recibir información sobre productos y ofertas de Shagui',
-          'privacy-policy': 'política de privacidad'
+          header: { value: 'Pages.IsClientClientEmail.Header', type: 'translate' },
+          'e-mail': { value: 'Pages.IsClientClientEmail.Hint', type: 'translate' },
+          'accep-info': { value: 'Pages.IsClientClientEmail.AccepInfo', type: 'translate' }
         },
         validationSettings: {
           acceptPrivacyPolicy: { requiredTrue: { disabled: true } }
         },
-        zones: { '2': { skipLoad: true } }
+        zones: { 'privacy-policy': { skipLoad: true }, 'legal-text': { skipLoad: true } }
       }
     },
     {
@@ -958,10 +971,13 @@ export const WORKFLOW: ConfigurationDTO<QuoteModel, WorkflowManifestId> = {
       ],
       configuration: {
         literals: {
-          header: '¿Nos puedes facilitar tu documento de identidad?',
-          subheader: 'Solo utilizaremos este dato para darte un presupuesto totalmente personalizado',
-          'identification-number': 'Número de documento de identidad',
-          'footer-info': 'Para ofrecerte el mejor seguro es importante verificar tu identidad. '
+          header: { value: 'Pages.IsClientClientIdentificationNumber.Header', type: 'translate' },
+          subheader: { value: 'Pages.IsClientClientIdentificationNumber.Subheader', type: 'translate' },
+          'identification-number': { value: 'Pages.IsClientClientIdentificationNumber.Hint', type: 'translate' },
+          'footer-info': { value: 'Pages.IsClientClientIdentificationNumber.FooterInfo', type: 'translate' },
+          'error-required': { value: 'Pages.IsClientClientPhoneNumber.ErrorRequired', type: 'translate' },
+          'error-nif': { value: 'Pages.IsClientClientIdentificationNumber.ErrorNif', type: 'translate' },
+          'error-nie': { value: 'Pages.IsClientClientIdentificationNumber.ErrorNie', type: 'translate' }
         },
         validationSettings: {
           identificationNumber: { required: { disabled: true }, '@isNif': { disabled: true }, '@isNie': { disabled: true } }
@@ -973,8 +989,8 @@ export const WORKFLOW: ConfigurationDTO<QuoteModel, WorkflowManifestId> = {
       component: 'contact-us',
       configuration: {
         literals: {
-          header: 'Información de contacto',
-          subheader: 'Nos gustaría poder ayudarte, <br/>¡contactanos!'
+          header: { value: 'Pages.IsClientContactUs.Header', type: 'translate' },
+          subheader: { value: 'Pages.IsClientContactUs.Subheader', type: 'translate' }
         },
         data: {
           contactUsTexts: [
@@ -1048,12 +1064,12 @@ export const WORKFLOW: ConfigurationDTO<QuoteModel, WorkflowManifestId> = {
   literals: {
     'captcha-header': { value: 'Pages.Captcha.Header', type: 'translate' },
     'journey-title': 'Seguro de coche',
-    'bad-format': 'Formato incorrecto',
+    'bad-format': { value: 'Errors.BadFormat', type: 'translate' },
     'budget-modal-header': 'Datos de tu presupuesto',
     'budget-name': 'Nombre del presupuesto',
     'budget-key': 'Clave del presupuesto',
     'create-budget': 'Crear presupuesto',
-    'e-mail': 'Correo electrónico',
+    'e-mail': { value: 'Label.Email', type: 'translate' },
     'header-back': { value: 'Label.Back', type: 'translate' },
     'save-budget': 'Guardar presupuesto',
     'retrieve-budget': 'Recuperar presupuesto',
@@ -1083,9 +1099,9 @@ export const WORKFLOW: ConfigurationDTO<QuoteModel, WorkflowManifestId> = {
     'error-not-between-dates': { value: 'Errors.NotBetweenDates', type: 'translate' },
     'error-nif': 'El documento no tiene un formato válido',
     'error-nie': 'El documento no tiene un formato válido',
-    'terms-and-conditions': 'Términos y condiciones',
-    'privacy-policy': 'Política de privacidad',
-    'legal-notice': 'Aviso legal y privacidad',
-    'cookies-policy': 'Política de cookies'
+    'terms-and-conditions': { value: 'Footer.TermsAndConditions', type: 'translate' },
+    'privacy-policy': { value: 'Footer.PrivacyPolicy', type: 'translate' },
+    'legal-notice': { value: 'Footer.LegalNotice', type: 'translate' },
+    'cookies-policy': { value: 'Footer.CookiesPolicy', type: 'translate' }
   }
 };

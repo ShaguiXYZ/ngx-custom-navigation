@@ -5,7 +5,8 @@
     "NotBetween": "O valor deve estar entre {{min}} e {{max}}",
     "NotBetweenDates": "A data deve estar entre {{min}} e {{max}}",
     "OldDate": "A data não pode ser anterior a {{value}}",
-    "PastDate": "A data não pode estar no passado"
+    "PastDate": "A data não pode estar no passado",
+    "BadFormat": "O formato não está correto"
   },
   "Label": {
     "AllBrands": "Todas as marcas",
@@ -18,6 +19,7 @@
       "SwitchToMonthView": "Escolher data",
       "SwitchToMultiYearViewLabel": "Escolher mês e ano"
     },
+    "Email": "Email",
     "ErrorBody": "Desculpe, não podemos processar seu pedido no momento. Por favor, tente novamente mais tarde.",
     "Fuel": "Combustível",
     "Model": "Modelo",
@@ -147,8 +149,10 @@
     },
     "ClientName": {
       "Header": "Gostaríamos de conhecê-lo um pouco mais",
-      "Hint": "Nome e sobrenome",
-      "ErrorRequired": "O nome é obrigatório para continuar"
+      "NameHint": "Nome",
+      "SurnameHint": "Sobrenomes",
+      "NameRequired": "O nome é obrigatório para continuar",
+      "SurnameRequired": "O sobrenome é obrigatório para continuar"
     },
     "ClientPhoneNumber": {
       "Header": "Qual é o seu número de telefone?",
@@ -156,6 +160,58 @@
       "Hint": "Número de telefone",
       "ErrorRequired": "O número de telefone é obrigatório para continuar",
       "BadFormat": "O número de telefone não é válido"
+    },
+    "ClientEmail": {
+      "Header": "Deixe-nos seu email e receba seu orçamento instantaneamente",
+      "AccepInfo": "Quero receber informações sobre produtos e ofertas da Shagui",
+      "PrivacyPolicy": "Li e aceito a {{private-policy-a}} da Shagui.",
+      "PrivacyPolicyLink": "https://www.shagui.com/privacidade/pt",
+      "LinkText": "política de privacidade",
+      "LegalText": "Aceito os termos legais e a política de privacidade",
+      "ErrorRequired": "O email é obrigatório para continuar",
+      "BadFormat": "O email não é válido"
+    },
+    "ClientIdentificationNumber": {
+      "Header": "Você pode nos fornecer seu documento de identidade?",
+      "Subheader": "Usaremos esses dados apenas para lhe dar um orçamento totalmente personalizado",
+      "Hint": "Número de DNI ou NIE",
+      "FooterInfo": "Para oferecer o melhor seguro, é importante verificar sua identidade.",
+      "ErrorRequired": "O número de identificação é obrigatório para continuar",
+      "ErrorNif": "O número de identificação não é válido",
+      "ErrorNie": "O número de identificação não é válido"
+    },
+    "IsClientClientName": {
+      "Header": "Qual é o seu nome?",
+      "HintName": "Nome",
+      "HintNSurname": "Sobrenomes",
+      "ErrorRequired": "O nome é obrigatório para continuar"
+    },
+    "IsClientClientPhoneNumber": {
+      "Header": "Qual é o seu número de telefone?",
+      "Subheader": "Sabemos que os seguros às vezes são complexos. Por isso, só ligaremos para oferecer assistência personalizada.",
+      "Hint": "Número de telefone",
+      "ErrorRequired": "O número de telefone é obrigatório para continuar",
+      "BadFormat": "O número de telefone não é válido"
+    },
+    "IsClientClientEmail": {
+      "Header": "Deixe-nos seu email e entraremos em contato com você em breve.",
+      "Hint": "Email",
+      "AccepInfo": "Quero receber informações sobre produtos e ofertas da Shagui",
+      "ErrorRequired": "O email é obrigatório para continuar",
+      "BadFormat": "O email não é válido"
+    },
+    "IsClientClientIdentificationNumber": {
+      "Header": "Você pode nos fornecer seu documento de identidade?",
+      "Subheader": "Usaremos esses dados apenas para lhe dar um orçamento totalmente personalizado",
+      "Hint": "Número de documento de identidade",
+      "FooterInfo": "Para oferecer o melhor seguro, é importante verificar sua identidade.",
+      "ErrorRequired": "O número de identificação é obrigatório para continuar",
+      "ErrorNif": "O número de identificação não é válido",
+      "ErrorNie": "O número de identificação não é válido"
+    },
+    "IsClientContactUs": {
+      "Header": "Informações de contato",
+      "Subheader": "Gostaríamos de poder ajudá-lo, <br/>entre em contato conosco!"
     }
   },
   "Footer": {

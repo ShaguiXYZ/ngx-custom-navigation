@@ -5,7 +5,8 @@
     "NotBetween": "El valor debe estar entre {{min}} y {{max}}",
     "NotBetweenDates": "La fecha debe estar entre {{min}} y {{max}}",
     "OldDate": "La fecha no puede ser anterior a {{value}}",
-    "PastDate": "La fecha no puede estar en el pasado"
+    "PastDate": "La fecha no puede estar en el pasado",
+    "BadFormat": "El formato no es correcto"
   },
   "Label": {
     "AllBrands": "Todas las marcas",
@@ -18,6 +19,7 @@
       "SwitchToMonthView": "Elegir fecha",
       "SwitchToMultiYearViewLabel": "Elegir mes y año"
     },
+    "Email": "Correo electrónico",
     "ErrorBody": "Lo sentimos, no podemos procesar su solicitud en este momento. Por favor, inténtelo de nuevo más tarde.",
     "Fuel": "Combustible",
     "Model": "Modelo",
@@ -147,8 +149,10 @@
     },
     "ClientName": {
       "Header": "Nos gustaría conocerte un poco más",
-      "Hint": "Nombre y apellidos",
-      "ErrorRequired": "El nombre es obligatorio para continuar"
+      "NameHint": "Nombre",
+      "SurnameHint": "Apellidos",
+      "NameRequired": "El nombre es obligatorio para continuar",
+      "SurnameRequired": "El apellido es obligatorio para continuar"
     },
     "ClientPhoneNumber": {
       "Header": "¿Cuál es tu número de teléfono?",
@@ -156,6 +160,58 @@
       "Hint": "Número de teléfono",
       "ErrorRequired": "El número de teléfono es obligatorio para continuar",
       "BadFormat": "El número de teléfono no es válido"
+    },
+    "ClientEmail": {
+      "Header": "Déjanos tu email y recibe tu presupuesto al instante",
+      "AccepInfo": "Quiero recibir información sobre productos y ofertas de Shagui",
+      "PrivacyPolicy": "He leído y acepto la {{private-policy-a}} de Shagui.",
+      "LinkText": "política de privacidad",
+      "PrivacyPolicyLink": "https://www.shagui.com/privacidad/es",
+      "LegalText": "Acepto las condiciones legales y la política de privacidad",
+      "ErrorRequired": "El correo electrónico es obligatorio para continuar",
+      "BadFormat": "El correo electrónico no es válido"
+    },
+    "ClientIdentificationNumber": {
+      "Header": "¿Nos puedes facilitar tu documento de identidad?",
+      "Subheader": "Solo utilizaremos este dato para darte un presupuesto totalmente personalizado",
+      "Hint": "Número de DNI o NIE",
+      "FooterInfo": "Para ofrecerte el mejor seguro es importante verificar tu identidad.",
+      "ErrorRequired": "El número de identificación es obligatorio para continuar",
+      "ErrorNif": "El número de identificación no es válido",
+      "ErrorNie": "El número de identificación no es válido"
+    },
+    "IsClientClientName": {
+      "Header": "¿Como te llamas?",
+      "HintName": "Nombre",
+      "HintNSurname": "Apellidos",
+      "ErrorRequired": "El nombre es obligatorio para continuar"
+    },
+    "IsClientClientPhoneNumber": {
+      "Header": "¿Cuál es tu número de teléfono?",
+      "Subheader": "Sabemos que los seguros a veces son complejos. Por eso, solo te llamaremos para darte asistencia personalizada.",
+      "Hint": "Número de teléfono",
+      "ErrorRequired": "El número de teléfono es obligatorio para continuar",
+      "BadFormat": "El número de teléfono no es válido"
+    },
+    "IsClientClientEmail": {
+      "Header": "Déjanos tu email y nos pondremos en contacto contigo en breve.",
+      "Hint": "Correo electrónico",
+      "AccepInfo": "Quiero recibir información sobre productos y ofertas de Shagui",
+      "ErrorRequired": "El correo electrónico es obligatorio para continuar",
+      "BadFormat": "El correo electrónico no es válido"
+    },
+    "IsClientClientIdentificationNumber": {
+      "Header": "¿Nos puedes facilitar tu documento de identidad?",
+      "Subheader": "Solo utilizaremos este dato para darte un presupuesto totalmente personalizado",
+      "Hint": "Número de documento de identidad",
+      "FooterInfo": "Para ofrecerte el mejor seguro es importante verificar tu identidad.",
+      "ErrorRequired": "El número de identificación es obligatorio para continuar",
+      "ErrorNif": "El número de identificación no es válido",
+      "ErrorNie": "El número de identificación no es válido"
+    },
+    "IsClientContactUs": {
+      "Header": "Información de contacto",
+      "Subheader": "Nos gustaría poder ayudarte, <br/>¡contactanos!"
     }
   },
   "Footer": {

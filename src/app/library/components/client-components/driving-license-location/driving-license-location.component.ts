@@ -15,21 +15,21 @@ import { DrivingLicenseIcons } from './models';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 
 @Component({
-    selector: 'quote-driving-license-location',
-    imports: [
-        CommonModule,
-        QuoteFooterComponent,
-        IconCardComponent,
-        HeaderTitleComponent,
-        NxButtonModule,
-        NxCopytextModule,
-        NxHeadlineModule,
-        QuoteLiteralPipe,
-        QuoteLiteralDirective,
-        QuoteTrackDirective
-    ],
-    templateUrl: './driving-license-location.component.html',
-    styleUrl: './driving-license-location.component.scss'
+  selector: 'quote-driving-license-location',
+  templateUrl: './driving-license-location.component.html',
+  styleUrl: './driving-license-location.component.scss',
+  imports: [
+    CommonModule,
+    QuoteFooterComponent,
+    IconCardComponent,
+    HeaderTitleComponent,
+    NxButtonModule,
+    NxCopytextModule,
+    NxHeadlineModule,
+    QuoteLiteralPipe,
+    QuoteLiteralDirective,
+    QuoteTrackDirective
+  ]
 })
 export class DrivingLicenseLocationComponent extends QuoteComponent<QuoteModel> implements OnInit {
   @ViewChild('template')

@@ -656,8 +656,10 @@
       "configuration": {
         "literals": {
           "header": { "value": "Pages.ClientName.Header", "type": "translate" },
-          "name": { "value": "Pages.ClientName.Hint", "type": "translate" },
-          "error-required": { "value": "Pages.ClientName.ErrorRequired", "type": "translate" }
+          "name": { "value": "Pages.ClientName.NameHint", "type": "translate" },
+          "surname": { "value": "Pages.ClientName.SurnameHint", "type": "translate" },
+          "name-error-required": { "value": "Pages.ClientName.NameRequired", "type": "translate" },
+          "surname-error-required": { "value": "Pages.ClientName.SurnameRequired", "type": "translate" }
         }
       }
     },
@@ -703,25 +705,25 @@
       ],
       "configuration": {
         "literals": {
-          "header": "Déjanos tu email y recibe tu presupuesto al instante",
-          "legal-text": { "value": "Texto legal pendiente definir...", "type": "value" },
-          "more-info": "Quiero recibir información sobre productos y ofertas de Shagui",
-          "privacy-policy-text": {
-            "value": "He leído y acepto la {{private-policy-a}} de Shagui.",
-            "type": "value",
+          "header": { "value": "Pages.ClientEmail.Header", "type": "translate" },
+          "legal-text": { "value": "Pages.ClientEmail.LegalText", "type": "translate" },
+          "accep-info": { "value": "Pages.ClientEmail.AccepInfo", "type": "translate" },
+          "privacy-policy": {
+            "value": "Pages.ClientEmail.PrivacyPolicy",
+            "type": "translate",
             "params": {
               "private-policy-a": {
-                "value": "privacy-policy-tag",
+                "value": "<a class='link nx-font-weight-bold' href='{{link}}' target='_blank'>{{link-text}}</a>",
+                "type": "value",
                 "params": {
-                  "link": { "value": "privacy-policy-link", "type": "literal" },
-                  "link-text": "política de privacidad"
-                },
-                "type": "literal"
+                  "link": { "value": "Pages.ClientEmail.PrivacyPolicyLink", "type": "translate" },
+                  "link-text": { "value": "Pages.ClientEmail.LinkText", "type": "translate" }
+                }
               }
             }
           },
-          "privacy-policy-tag": "<a class='link nx-font-weight-bold' href='{{link}}' target='_blank'>{{link-text}}</a>",
-          "privacy-policy-link": "https://www.shagui.com/privacidad"
+          "error-required": { "value": "Pages.ClientEmail.ErrorRequired", "type": "translate" },
+          "bad-format": { "value": "Pages.ClientEmail.BadFormat", "type": "translate" }
         }
       }
     },
@@ -760,10 +762,13 @@
           }
         },
         "literals": {
-          "header": "¿Nos puedes facilitar tu documento de identidad?",
-          "identification-number": "Número de DNI o NIE",
-          "subheader": "Solo utilizaremos este dato para darte un presupuesto totalmente personalizado",
-          "footer-info": "Para ofrecerte el mejor seguro es importante verificar tu identidad."
+          "header": { "value": "Pages.ClientIdentificationNumber.Header", "type": "translate" },
+          "subheader": { "value": "Pages.ClientIdentificationNumber.Subheader", "type": "translate" },
+          "identification-number": { "value": "Pages.ClientIdentificationNumber.Hint", "type": "translate" },
+          "footer-info": { "value": "Pages.ClientIdentificationNumber.FooterInfo", "type": "translate" },
+          "error-required": { "value": "Pages.ClientPhoneNumber.ErrorRequired", "type": "translate" },
+          "error-nif": { "value": "Pages.ClientIdentificationNumber.ErrorNif", "type": "translate" },
+          "error-nie": { "value": "Pages.ClientIdentificationNumber.ErrorNie", "type": "translate" }
         },
         "serviceActivators": [
           {
@@ -904,8 +909,10 @@
       ],
       "configuration": {
         "literals": {
-          "header": "¿Como te llamas?",
-          "name": "Nombre"
+          "header": { "value": "Pages.IsClientClientName.Header", "type": "translate" },
+          "name": { "value": "Pages.IsClientClientName.HintName", "type": "translate" },
+          "surname": { "value": "Pages.IsClientClientName.HintNSurname", "type": "translate" },
+          "name-error-required": { "value": "Pages.IsClientClientName.ErrorRequired", "type": "translate" }
         },
         "validationSettings": {
           "surname": { "required": { "disabled": true } }
@@ -922,8 +929,11 @@
       ],
       "configuration": {
         "literals": {
-          "header": "¿Cuál es tu número de teléfono?",
-          "phone-number": "Número de teléfono"
+          "header": { "value": "Pages.IsClientClientPhoneNumber.Header", "type": "translate" },
+          "subheader": { "value": "Pages.IsClientClientPhoneNumber.Subheader", "type": "translate" },
+          "phone-number": { "value": "Pages.IsClientClientPhoneNumber.Hint", "type": "translate" },
+          "error-required": { "value": "Pages.IsClientClientPhoneNumber.ErrorRequired", "type": "translate" },
+          "bad-format": { "value": "Pages.IsClientClientPhoneNumber.BadFormat", "type": "translate" }
         }
       }
     },
@@ -937,15 +947,14 @@
       ],
       "configuration": {
         "literals": {
-          "header": "Déjanos tu email y nos pondremos en contacto contigo en breve.",
-          "legal-text": { "value": "Texto legal pendiente definir...", "type": "value" },
-          "more-info": "Quiero recibir información sobre productos y ofertas de Shagui",
-          "privacy-policy": "política de privacidad"
+          "header": { "value": "Pages.IsClientClientEmail.Header", "type": "translate" },
+          "e-mail": { "value": "Pages.IsClientClientEmail.Hint", "type": "translate" },
+          "accep-info": { "value": "Pages.IsClientClientEmail.AccepInfo", "type": "translate" }
         },
         "validationSettings": {
           "acceptPrivacyPolicy": { "requiredTrue": { "disabled": true } }
         },
-        "zones": { "privacy-policy": { "skipLoad": true } }
+        "zones": { "privacy-policy": { "skipLoad": true }, "legal-text": { "skipLoad": true } }
       }
     },
     {
@@ -958,10 +967,13 @@
       ],
       "configuration": {
         "literals": {
-          "header": "¿Nos puedes facilitar tu documento de identidad?",
-          "subheader": "Solo utilizaremos este dato para darte un presupuesto totalmente personalizado",
-          "identification-number": "Número de documento de identidad",
-          "footer-info": "Para ofrecerte el mejor seguro es importante verificar tu identidad. "
+          "header": { "value": "Pages.IsClientClientIdentificationNumber.Header", "type": "translate" },
+          "subheader": { "value": "Pages.IsClientClientIdentificationNumber.Subheader", "type": "translate" },
+          "identification-number": { "value": "Pages.IsClientClientIdentificationNumber.Hint", "type": "translate" },
+          "footer-info": { "value": "Pages.IsClientClientIdentificationNumber.FooterInfo", "type": "translate" },
+          "error-required": { "value": "Pages.IsClientClientPhoneNumber.ErrorRequired", "type": "translate" },
+          "error-nif": { "value": "Pages.IsClientClientIdentificationNumber.ErrorNif", "type": "translate" },
+          "error-nie": { "value": "Pages.IsClientClientIdentificationNumber.ErrorNie", "type": "translate" }
         },
         "validationSettings": {
           "identificationNumber": { "required": { "disabled": true }, "@isNif": { "disabled": true }, "@isNie": { "disabled": true } }
@@ -973,15 +985,14 @@
       "component": "contact-us",
       "configuration": {
         "literals": {
-          "header": "Información de contacto",
-          "subheader": "Nos gustaría poder ayudarte, <br/>¡contactanos!"
+          "header": { "value": "Pages.IsClientContactUs.Header", "type": "translate" },
+          "subheader": { "value": "Pages.IsClientContactUs.Subheader", "type": "translate" },
+          "literal-1": "<h1 class='info-header nx-font-weight-bold'>Horario comercial</h1>",
+          "literal-2": "Lunes a Jueves de 9h a 19h",
+          "literal-3": "Viernes de 9h a 18h"
         },
         "data": {
-          "contactUsTexts": [
-            "<h1 class='info-header nx-font-weight-bold'>Horario comercial</h1>",
-            "Lunes a Jueves de 9h a 19h",
-            "Viernes de 9h a 18h"
-          ],
+          "contactUsTexts": ["literal-1", "literal-2", "literal-3"],
           "footerConfig": {
             "showNext": false
           },
@@ -1048,12 +1059,12 @@
   "literals": {
     "captcha-header": { "value": "Pages.Captcha.Header", "type": "translate" },
     "journey-title": "Seguro de coche",
-    "bad-format": "Formato incorrecto",
+    "bad-format": { "value": "Errors.BadFormat", "type": "translate" },
     "budget-modal-header": "Datos de tu presupuesto",
     "budget-name": "Nombre del presupuesto",
     "budget-key": "Clave del presupuesto",
     "create-budget": "Crear presupuesto",
-    "e-mail": "Correo electrónico",
+    "e-mail": { "value": "Label.Email", "type": "translate" },
     "header-back": { "value": "Label.Back", "type": "translate" },
     "save-budget": "Guardar presupuesto",
     "retrieve-budget": "Recuperar presupuesto",
