@@ -79,6 +79,8 @@ describe('BirthdateComponent', () => {
       }
     } as unknown as QuoteModel;
 
+    component['ngQuoteInit']();
+
     fixture.detectChanges();
   });
 

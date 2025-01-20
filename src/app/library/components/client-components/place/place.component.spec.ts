@@ -84,6 +84,8 @@ describe('PlaceComponent', () => {
       place: { postalCode: '12345', province: 'TestProvince', location: 'TestLocation' }
     } as QuoteModel;
 
+    component['ngQuoteInit']();
+
     fixture.detectChanges();
   });
 
@@ -120,7 +122,7 @@ describe('PlaceComponent', () => {
     expect(component.form.valid).toBeFalse();
   });
 
-  it('should validate postal code asynchronously', waitForAsync(() => {
+  it('should validate postal code asynchronously', () => {
     const mockLocation = { postalCode: '12345', province: 'TestProvince', provinceCode: '12', location: 'TestLocation' };
     locationService.getAddress.and.returnValue(Promise.resolve(mockLocation));
 
@@ -130,9 +132,9 @@ describe('PlaceComponent', () => {
     fixture.whenStable().then(() => {
       expect(component.form.controls['postalCode'].valid).toBeTrue();
     });
-  }));
+  });
 
-  it('should invalidate postal code if not recognized', waitForAsync(() => {
+  it('should invalidate postal code if not recognized', () => {
     locationService.getAddress.and.returnValue(Promise.resolve(undefined));
 
     component.form.controls['postalCode'].setValue('99999');
@@ -142,5 +144,5 @@ describe('PlaceComponent', () => {
       expect(component.form.controls['postalCode'].valid).toBeFalse();
       expect(component.location).toBe('');
     });
-  }));
+  });
 });

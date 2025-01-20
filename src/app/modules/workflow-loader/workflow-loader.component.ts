@@ -9,9 +9,9 @@ import { JourneyError } from 'src/app/core/errors';
 import { AppContextData } from 'src/app/core/models';
 
 @Component({
-    template: `<ng-template #dynamicComponent> </ng-template>`,
-    styleUrls: ['./workflow-loader.component.scss'],
-    imports: [CommonModule]
+  template: `<ng-template #dynamicComponent> </ng-template>`,
+  styleUrls: ['./workflow-loader.component.scss'],
+  imports: [CommonModule]
 })
 export class WorkflowLoaderComponent implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild('dynamicComponent', { read: ViewContainerRef, static: true })
@@ -36,27 +36,28 @@ export class WorkflowLoaderComponent implements OnInit, OnDestroy, AfterViewInit
   }
 
   private loadComponent = (): void => {
-    const {
-      navigation: { lastPage }
-    } = this.contextDataService.get<AppContextData>(QUOTE_APP_CONTEXT_DATA);
+    const lastPage = this.contextDataService.get<AppContextData>(QUOTE_APP_CONTEXT_DATA)?.navigation?.lastPage;
 
-    if (lastPage) {
-      const manifestKey = lastPage.component ?? lastPage.pageId;
-
-      try {
-        const manifest = this.workflowToken.manifest.components[manifestKey];
-
-        this.container.clear();
-        const componentRef = this.container.createComponent<QuoteComponent<any>>(manifest.component);
-
-        this._instance = componentRef.instance;
-
-        window.history.pushState({}, '', lastPage.routeTree ?? lastPage.pageId);
-      } catch {
-        throw new JourneyError(`Failed to load component ${manifestKey} avalilable values are ${Object.keys(this.workflowToken.manifest)}`);
-      }
-    } else {
+    if (!lastPage) {
       throw new JourneyError('No last page found in context data');
+    }
+
+    const manifestKey = lastPage.component ?? lastPage.pageId;
+    const manifest = this.workflowToken.manifest.components[manifestKey];
+
+    if (!manifest) {
+      throw new JourneyError(
+        `Failed to load component ${manifestKey} available values are ${Object.keys(this.workflowToken.manifest.components)}`
+      );
+    }
+
+    try {
+      this.container.clear();
+      const componentRef = this.container.createComponent<QuoteComponent<any>>(manifest.component);
+      this._instance = componentRef.instance;
+      window.history.pushState({}, '', lastPage.routeTree ?? lastPage.pageId);
+    } catch {
+      throw new JourneyError(`Failed to load component ${manifestKey}`);
     }
   };
 }

@@ -72,6 +72,8 @@ describe('ClientIdentificationNumberComponent', () => {
       }
     } as QuoteModel;
 
+    component['ngQuoteInit']();
+
     fixture.detectChanges();
   });
 

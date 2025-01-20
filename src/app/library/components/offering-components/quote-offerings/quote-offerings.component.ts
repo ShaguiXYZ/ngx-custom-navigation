@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { Component, ElementRef, inject, OnDestroy, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { NxDialogService, NxModalModule, NxModalRef } from '@aposin/ng-aquila/modal';
 import { QuoteComponent } from 'src/app/core/components';
-import { QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
 import { QuoteError } from 'src/app/core/errors';
 import { RoutingService } from 'src/app/core/services';
 import { OfferingPriceModel, QuoteModel } from 'src/app/library/models';
@@ -13,18 +12,18 @@ import { QuoteLiteralDirective } from 'src/app/shared/directives';
 import { QuoteOfferingCoveragesComponent, QuoteOfferingPriceCardComponent } from './components';
 
 @Component({
-    selector: 'quote-quote-offerings',
-    templateUrl: './quote-offerings.component.html',
-    styleUrl: './quote-offerings.component.scss',
-    imports: [
-        CommonModule,
-        HeaderTitleComponent,
-        QuoteFooterComponent,
-        QuoteOfferingPriceCardComponent,
-        NxModalModule,
-        QuoteLiteralDirective
-    ],
-    providers: [OfferingsService]
+  selector: 'quote-quote-offerings',
+  templateUrl: './quote-offerings.component.html',
+  styleUrl: './quote-offerings.component.scss',
+  imports: [
+    CommonModule,
+    HeaderTitleComponent,
+    QuoteFooterComponent,
+    QuoteOfferingPriceCardComponent,
+    NxModalModule,
+    QuoteLiteralDirective
+  ],
+  providers: [OfferingsService]
 })
 export class QuoteOfferingsComponent extends QuoteComponent<QuoteModel> implements OnInit, OnDestroy {
   @ViewChild('carrouselInner', { static: true })
@@ -56,7 +55,7 @@ export class QuoteOfferingsComponent extends QuoteComponent<QuoteModel> implemen
       })
       .finally(() => {
         console.group('Offering prices fetched');
-        console.log('Offering prices fetched', this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA));
+        console.log('Offering prices fetched', this._contextData);
         console.groupEnd();
       });
 
@@ -95,10 +94,6 @@ export class QuoteOfferingsComponent extends QuoteComponent<QuoteModel> implemen
 
   public previous(): void {
     this.selectSteper((this.selectedPriceIndex - 1 + this.prices.length) % this.prices.length);
-  }
-
-  public selectFee(event: OfferingPriceModel): void {
-    console.log('selectFee', event);
   }
 
   public showCoverages(index: number) {

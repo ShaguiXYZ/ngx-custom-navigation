@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-namespace */
+import { JsonUtils } from '@shagui/ng-shagui/core';
 import dayjs from 'dayjs';
 import { DEFAULT_DATE_FORMAT } from '../../core/constants';
-import { patch } from '../../core/lib';
 import { QuoteModel } from './_quote.model';
 
 export interface Authentication {
@@ -165,6 +165,6 @@ export namespace PricingDTO {
       }
     };
 
-    return patch<PricingDTO>(value, settings);
+    return JsonUtils.patch<PricingDTO>(value, settings);
   };
 }

@@ -85,6 +85,8 @@ describe('LicensePlateComponent', () => {
       }
     } as QuoteModel;
 
+    component['ngQuoteInit']();
+
     fixture.detectChanges();
   });
 

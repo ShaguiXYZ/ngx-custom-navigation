@@ -59,6 +59,8 @@ describe('ClientNameComponent', () => {
       }
     } as QuoteModel;
 
+    component['ngQuoteInit']();
+
     fixture.detectChanges();
   });
 

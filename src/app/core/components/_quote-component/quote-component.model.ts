@@ -1,9 +1,8 @@
 import { Component, inject, OnDestroy } from '@angular/core';
 import { ActivatedRouteSnapshot, GuardResult, MaybeAsync, RouterStateSnapshot } from '@angular/router';
-import { ContextDataService, deepCopy } from '@shagui/ng-shagui/core';
+import { ContextDataService, deepCopy, JsonUtils } from '@shagui/ng-shagui/core';
 import { Subject, Subscription, takeUntil } from 'rxjs';
 import { DEFAULT_DISPLAY_DATE_FORMAT, QUOTE_APP_CONTEXT_DATA, QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
-import { patch } from 'src/app/core/lib';
 import { AppContextData, QuoteControlModel } from 'src/app/core/models';
 import { LanguageService } from '../../services';
 
@@ -63,7 +62,7 @@ export abstract class QuoteComponent<T extends QuoteControlModel> implements OnD
 
     for (const [key, value] of Object.entries(pageData)) {
       if (key === 'contextData' && typeof component['_contextData'] === 'object' && typeof value === 'object') {
-        component['_contextData'] = patch(component['_contextData'], value as Record<string, unknown>);
+        component['_contextData'] = JsonUtils.patch(component['_contextData'], value as Record<string, unknown>);
         this.contextDataService.set(QUOTE_CONTEXT_DATA, component['_contextData']);
       } else if (key in component) {
         component[key as keyof C] = deepCopy(value) as C[keyof C];

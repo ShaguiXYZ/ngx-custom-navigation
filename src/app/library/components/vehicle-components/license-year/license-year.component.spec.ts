@@ -60,6 +60,8 @@ describe('LicenseYearComponent', () => {
       driven: { hasDrivenLicense: true }
     } as QuoteModel;
 
+    component['ngQuoteInit']();
+
     fixture.detectChanges();
   });
 

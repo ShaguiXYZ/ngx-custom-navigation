@@ -60,6 +60,8 @@ describe('ClientPhoneNumberComponent', () => {
       }
     } as QuoteModel;
 
+    component['ngQuoteInit']();
+
     fixture.detectChanges();
   });
 
