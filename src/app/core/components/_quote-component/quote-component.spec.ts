@@ -5,8 +5,9 @@ import { Subject } from 'rxjs';
 import { QUOTE_APP_CONTEXT_DATA, QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
 import { AppContextData } from 'src/app/core/models';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
-import { QuoteComponent } from './quote-component.model';
+import { ServiceActivatorService } from '../../service-activators';
 import { LanguageService } from '../../services';
+import { QuoteComponent } from './quote-component';
 
 class TestQuoteComponent extends QuoteComponent<any> {
   public someKey = 'someValue';
@@ -26,6 +27,7 @@ describe('QuoteComponent', () => {
     const contextDataServiceSpy = jasmine.createSpyObj('ContextDataService', ['get', 'set', 'onDataChange']);
     const quoteLiteralPipeSpy = jasmine.createSpyObj('QuoteLiteralPipe', ['transform']);
     const languageServiceSpy = jasmine.createSpyObj('LanguageService', ['asObservable', 'languages', 'current', 'i18n']);
+    const activateEntryPointSpy = jasmine.createSpyObj('ServiceActivatorService', ['activateEntryPoint']);
 
     contextDataServiceSpy.get.and.callFake((key: string): any => {
       if (key === QUOTE_CONTEXT_DATA) {
@@ -55,7 +57,8 @@ describe('QuoteComponent', () => {
         TestQuoteComponent,
         { provide: ContextDataService, useValue: contextDataServiceSpy },
         { provide: QuoteLiteralPipe, useValue: quoteLiteralPipeSpy },
-        { provide: LanguageService, useValue: languageServiceSpy }
+        { provide: LanguageService, useValue: languageServiceSpy },
+        { provide: ServiceActivatorService, useValue: activateEntryPointSpy }
       ]
     });
 

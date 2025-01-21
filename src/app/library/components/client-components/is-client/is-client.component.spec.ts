@@ -10,6 +10,7 @@ import { ContextDataServiceStub } from 'src/app/core/stub';
 import { QuoteModel } from 'src/app/library/models';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 import { IsClientComponent } from './is-client.component';
+import { ServiceActivatorService } from 'src/app/core/service-activators';
 
 describe('IsClientComponent', () => {
   let component: IsClientComponent;
@@ -19,6 +20,7 @@ describe('IsClientComponent', () => {
   beforeEach(async () => {
     const quoteLiteralPipeSpy = jasmine.createSpyObj('QuoteLiteralPipe', ['transform']);
     const routingServiceSpy = jasmine.createSpyObj('RoutingService', ['next']);
+    const activateEntryPointSpy = jasmine.createSpyObj('ServiceActivatorService', ['activateEntryPoint']);
     const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate', 'setDefaultLang', 'use', 'instant']);
     const mockWorkflowConfig = {
       errorPageId: 'error',
@@ -38,6 +40,7 @@ describe('IsClientComponent', () => {
         { provide: RoutingService, useValue: routingServiceSpy },
         { provide: ContextDataService, useClass: ContextDataServiceStub },
         { provide: TranslateService, useValue: translateServiceSpy },
+        { provide: ServiceActivatorService, useValue: activateEntryPointSpy },
         { provide: QuoteLiteralPipe, useValue: quoteLiteralPipeSpy },
         { provide: NX_RECAPTCHA_TOKEN, useValue: { siteKey: 'mock-site-key' } },
         { provide: NX_WORKFLOW_TOKEN, useValue: mockWorkflowConfig },

@@ -6,6 +6,10 @@ import { NxIconModule } from '@aposin/ng-aquila/icon';
 import { NxInputModule } from '@aposin/ng-aquila/input';
 import { TranslateService } from '@ngx-translate/core';
 import { ContextDataService } from '@shagui/ng-shagui/core';
+import { of } from 'rxjs';
+import { NX_WORKFLOW_TOKEN } from 'src/app/core/components/models';
+import { NX_LANGUAGE_CONFIG } from 'src/app/core/models';
+import { ServiceActivatorService } from 'src/app/core/service-activators';
 import { RoutingService } from 'src/app/core/services';
 import { ContextDataServiceStub } from 'src/app/core/stub';
 import { ModelVersionModel, QuoteModel } from 'src/app/library/models';
@@ -14,9 +18,6 @@ import { HeaderTitleComponent, IconCardComponent, TextCardComponent } from 'src/
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 import { VehicleModelVersionsComponent } from './vehicle-model-versions.component';
-import { NX_WORKFLOW_TOKEN } from 'src/app/core/components/models';
-import { NX_LANGUAGE_CONFIG } from 'src/app/core/models';
-import { of } from 'rxjs';
 
 describe('VehicleModelVersionsComponent', () => {
   let component: VehicleModelVersionsComponent;
@@ -29,6 +30,7 @@ describe('VehicleModelVersionsComponent', () => {
     const routingServiceSpy = jasmine.createSpyObj('RoutingService', ['next']);
     const vehicleServiceSpy = jasmine.createSpyObj('VehicleService', ['vehicleModelVersions']);
     const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate', 'setDefaultLang', 'use', 'instant']);
+    const activateEntryPointSpy = jasmine.createSpyObj('ServiceActivatorService', ['activateEntryPoint']);
     const mockWorkflowConfig = {
       errorPageId: 'error',
       manifest: {}
@@ -60,6 +62,7 @@ describe('VehicleModelVersionsComponent', () => {
         { provide: TranslateService, useValue: translateServiceSpy },
         { provide: RoutingService, useValue: routingServiceSpy },
         { provide: VehicleService, useValue: vehicleServiceSpy },
+        { provide: ServiceActivatorService, useValue: activateEntryPointSpy },
         { provide: QuoteLiteralPipe, useValue: quoteLiteralPipeSpy },
         { provide: NX_WORKFLOW_TOKEN, useValue: mockWorkflowConfig },
         { provide: NX_LANGUAGE_CONFIG, useValue: mockLanguageConfig }

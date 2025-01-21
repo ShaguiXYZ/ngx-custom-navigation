@@ -797,6 +797,17 @@
         },
         "serviceActivators": [
           {
+            "entryPoint": "on-init",
+            "activator": "$patch-quote",
+            "params": { "insuranceCompany": { "company": {} } },
+            "conditions": [
+              {
+                "expression": "client.isPolicyOwner",
+                "value": false
+              }
+            ]
+          },
+          {
             "entryPoint": "$on-pricing",
             "activator": "$store-budget"
           }
@@ -812,10 +823,9 @@
       ],
       "configuration": {
         "literals": {
-          "header": "¡Muchas gracias {{ name }}!",
-          "subheader": "Uno de nuestros agentes te llamará a la hora que has solicitado para darte toda la información que necesites.",
-          "body": "",
-          "footer-next": "FINALIZAR"
+          "header": { "value": "Pages.Confirmation.Header", "type": "translate" },
+          "subheader": { "value": "Pages.Confirmation.Subheader", "type": "translate" },
+          "footer-next": { "value": "Pages.Confirmation.FooterNext", "type": "translate" }
         },
         "data": {
           "contextData": {

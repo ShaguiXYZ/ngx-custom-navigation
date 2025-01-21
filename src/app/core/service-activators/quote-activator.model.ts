@@ -8,7 +8,7 @@ export type ServiceActivatorFn = (services: ActivatorServices) => ActivatorFn;
 export type Activator = Partial<Record<EntryPoint, ServiceActivatorFn>>;
 export type ServiceActivatorType = `$${string}`;
 export type ValidationActivatorType = `#${string}-${QuoteFormValidation}`;
-export type EntryPoint = 'next-page' | 'previous-page' | ServiceActivatorType | ValidationActivatorType;
+export type EntryPoint = 'next-page' | 'previous-page' | 'on-init' | 'on-destroy' | ServiceActivatorType | ValidationActivatorType;
 
 export const Activators: Activator = {
   '$patch-quote': QuoteActivator.quotePatch,

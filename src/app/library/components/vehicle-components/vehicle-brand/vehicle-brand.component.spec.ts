@@ -14,6 +14,7 @@ import { VehicleService } from 'src/app/library/services';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 import { BrandComponentService } from './services';
 import { VehicleBrandComponent } from './vehicle-brand.component';
+import { ServiceActivatorService } from 'src/app/core/service-activators';
 
 describe('VehicleBrandComponent', () => {
   let component: VehicleBrandComponent;
@@ -27,6 +28,7 @@ describe('VehicleBrandComponent', () => {
     const routingServiceSpy = jasmine.createSpyObj('RoutingService', ['next']);
     const brandServiceSpy = jasmine.createSpyObj('BrandService', ['iconBrands']);
     const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate', 'setDefaultLang', 'use', 'instant']);
+    const activateEntryPointSpy = jasmine.createSpyObj('ServiceActivatorService', ['activateEntryPoint']);
     const mockLanguageConfig = {
       current: 'en',
       languages: ['en', 'fr']
@@ -43,6 +45,7 @@ describe('VehicleBrandComponent', () => {
         { provide: TranslateService, useValue: translateServiceSpy },
         { provide: VehicleService, useValue: vehicleServiceSpy },
         { provide: RoutingService, useValue: routingServiceSpy },
+        { provide: ServiceActivatorService, useValue: activateEntryPointSpy },
         { provide: QuoteLiteralPipe, useValue: quoteLiteralPipeSpy },
         { provide: NX_LANGUAGE_CONFIG, useValue: mockLanguageConfig }
       ]

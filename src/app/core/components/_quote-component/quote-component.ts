@@ -5,6 +5,7 @@ import { Subject, Subscription, takeUntil } from 'rxjs';
 import { DEFAULT_DISPLAY_DATE_FORMAT, QUOTE_APP_CONTEXT_DATA, QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
 import { AppContextData, QuoteControlModel } from 'src/app/core/models';
 import { LanguageService } from '../../services';
+import { ServiceActivatorService } from '../../service-activators';
 
 @Component({
   template: ''
@@ -21,8 +22,11 @@ export abstract class QuoteComponent<T extends QuoteControlModel> implements OnD
 
   private readonly _destroyed = new Subject<void>();
   private readonly languageService = inject(LanguageService);
+  private readonly serviveActivatorService = inject(ServiceActivatorService);
 
   constructor() {
+    this.serviveActivatorService.activateEntryPoint('on-init');
+
     this.subscription$.push(this.contextDataService.onDataChange<T>(QUOTE_CONTEXT_DATA).subscribe(data => (this._contextData = data)));
     this._contextData = this.contextDataService.get<T>(QUOTE_CONTEXT_DATA);
     this.__localeConfig();
@@ -35,6 +39,8 @@ export abstract class QuoteComponent<T extends QuoteControlModel> implements OnD
     this._destroyed.complete();
 
     this.subscription$.forEach(subscription => subscription.unsubscribe());
+
+    this.serviveActivatorService.activateEntryPoint('on-destroy');
   }
 
   public canDeactivate:

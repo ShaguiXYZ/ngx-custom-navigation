@@ -9,6 +9,7 @@ import { ContextDataServiceStub } from 'src/app/core/stub';
 import { QuoteModel } from 'src/app/library/models';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 import { DrivingLicenseLocationComponent } from './driving-license-location.component';
+import { ServiceActivatorService } from 'src/app/core/service-activators';
 
 describe('DrivingLicenseLocationComponent', () => {
   let component: DrivingLicenseLocationComponent;
@@ -20,6 +21,7 @@ describe('DrivingLicenseLocationComponent', () => {
     const routingServiceSpy = jasmine.createSpyObj('RoutingService', ['next']);
     const dialogServiceSpy = jasmine.createSpyObj('NxDialogService', ['open']);
     const quoteLiteralPipeSpy = jasmine.createSpyObj('QuoteLiteralPipe', ['transform']);
+    const activateEntryPointSpy = jasmine.createSpyObj('ServiceActivatorService', ['activateEntryPoint']);
     const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate', 'setDefaultLang', 'use', 'instant']);
     const mockWorkflowConfig = {
       errorPageId: 'error',
@@ -39,6 +41,7 @@ describe('DrivingLicenseLocationComponent', () => {
         { provide: RoutingService, useValue: routingServiceSpy },
         { provide: NxDialogService, useValue: dialogServiceSpy },
         { provide: QuoteLiteralPipe, useValue: quoteLiteralPipeSpy },
+        { provide: ServiceActivatorService, useValue: activateEntryPointSpy },
         { provide: NX_RECAPTCHA_TOKEN, useValue: { siteKey: 'mock-site-key' } },
         { provide: NX_WORKFLOW_TOKEN, useValue: mockWorkflowConfig },
         { provide: NX_LANGUAGE_CONFIG, useValue: mockLanguageConfig }

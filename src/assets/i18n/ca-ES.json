@@ -212,6 +212,11 @@
     "IsClientContactUs": {
       "Header": "Informació de contacte",
       "Subheader": "Ens agradaria poder ajudar-te, <br/>contacta'ns!"
+    },
+    "Confirmation": {
+      "Header": "Moltes gràcies {{name}}!",
+      "Subheader": "Un dels nostres agents et trucarà a l'hora que has sol·licitat per donar-te tota la informació que necessitis.",
+      "FooterNext": "FINALITZAR"
     }
   },
   "Footer": {

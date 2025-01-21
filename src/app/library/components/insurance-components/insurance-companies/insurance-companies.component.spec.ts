@@ -13,6 +13,7 @@ import { QuoteModel } from 'src/app/library/models';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 import { InsuranceCompaniesComponent } from './insurance-companies.component';
 import { InsuranceComponentService } from './services';
+import { ServiceActivatorService } from 'src/app/core/service-activators';
 
 describe('InsuranceCompaniesComponent', () => {
   let component: InsuranceCompaniesComponent;
@@ -25,6 +26,7 @@ describe('InsuranceCompaniesComponent', () => {
     const insuranceCompaniesServiceSpy = jasmine.createSpyObj('InsuranceCompaniesService', ['companies']);
     const quoteLiteralPipeSpy = jasmine.createSpyObj('QuoteLiteralPipe', ['transform']);
     const routingServiceSpy = jasmine.createSpyObj('RoutingService', ['next']);
+    const activateEntryPointSpy = jasmine.createSpyObj('ServiceActivatorService', ['activateEntryPoint']);
     const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate', 'setDefaultLang', 'use', 'instant']);
     const mockLanguageConfig = {
       current: 'en',
@@ -44,6 +46,7 @@ describe('InsuranceCompaniesComponent', () => {
         { provide: InsuranceCompaniesService, useValue: insuranceCompaniesServiceSpy },
         { provide: RoutingService, useValue: routingServiceSpy },
         { provide: QuoteLiteralPipe, useValue: quoteLiteralPipeSpy },
+        { provide: ServiceActivatorService, useValue: activateEntryPointSpy },
         { provide: NX_LANGUAGE_CONFIG, useValue: mockLanguageConfig }
       ]
     }).compileComponents();

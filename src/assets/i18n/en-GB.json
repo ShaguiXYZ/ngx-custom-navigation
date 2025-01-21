@@ -212,6 +212,11 @@
     "IsClientContactUs": {
       "Header": "Contact information",
       "Subheader": "We would like to help you, <br/>contact us!"
+    },
+    "Confirmation": {
+      "Header": "Thank you very much {{name}}!",
+      "Subheader": "One of our agents will call you at the requested time to provide you with all the information you need.",
+      "FooterNext": "FINISH"
     }
   },
   "Footer": {

@@ -5,6 +5,7 @@ import { ContextDataService, IndexedData } from '@shagui/ng-shagui/core';
 import { of } from 'rxjs';
 import { NX_WORKFLOW_TOKEN } from 'src/app/core/components/models';
 import { NX_LANGUAGE_CONFIG } from 'src/app/core/models';
+import { ServiceActivatorService } from 'src/app/core/service-activators';
 import { NX_RECAPTCHA_TOKEN, RoutingService } from 'src/app/core/services';
 import { ContextDataServiceStub } from 'src/app/core/stub';
 import { QuoteModel } from 'src/app/library/models';
@@ -21,6 +22,7 @@ describe('VehicleParkingComponent', () => {
     const quoteLiteralPipeSpy = jasmine.createSpyObj('QuoteLiteralPipe', ['transform']);
     const routingServiceSpy = jasmine.createSpyObj('RoutingService', ['next']);
     const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate', 'setDefaultLang', 'use', 'instant']);
+    const activateEntryPointSpy = jasmine.createSpyObj('ServiceActivatorService', ['activateEntryPoint']);
     const mockWorkflowConfig = {
       errorPageId: 'error',
       manifest: {}
@@ -38,6 +40,7 @@ describe('VehicleParkingComponent', () => {
         { provide: ContextDataService, useClass: ContextDataServiceStub },
         { provide: TranslateService, useValue: translateServiceSpy },
         { provide: RoutingService, useValue: routingServiceSpy },
+        { provide: ServiceActivatorService, useValue: activateEntryPointSpy },
         { provide: QuoteLiteralPipe, useValue: quoteLiteralPipeSpy },
         { provide: NX_RECAPTCHA_TOKEN, useValue: { siteKey: 'mock-site-key' } },
         { provide: NX_WORKFLOW_TOKEN, useValue: mockWorkflowConfig },

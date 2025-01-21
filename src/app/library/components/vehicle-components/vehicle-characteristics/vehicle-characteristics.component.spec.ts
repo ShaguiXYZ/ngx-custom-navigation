@@ -9,6 +9,7 @@ import { CubicCapacityModel, FuelModel, QuoteModel, VehicleClassesModel } from '
 import { VehicleService } from 'src/app/library/services';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 import { VehicleCharacteristicsComponent } from './vehicle-characteristics.component';
+import { ServiceActivatorService } from 'src/app/core/service-activators';
 
 describe('VehicleCharacteristicsComponent', () => {
   let component: VehicleCharacteristicsComponent;
@@ -21,6 +22,7 @@ describe('VehicleCharacteristicsComponent', () => {
     const routingServiceSpy = jasmine.createSpyObj('RoutingService', ['next']);
     const quoteLiteralPipeSpy = jasmine.createSpyObj('QuoteLiteralPipe', ['transform']);
     const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate', 'setDefaultLang', 'use', 'instant']);
+    const activateEntryPointSpy = jasmine.createSpyObj('ServiceActivatorService', ['activateEntryPoint']);
     const mockWorkflowConfig = {
       errorPageId: 'error',
       manifest: {}
@@ -40,6 +42,7 @@ describe('VehicleCharacteristicsComponent', () => {
         { provide: TranslateService, useValue: translateServiceSpy },
         { provide: QuoteLiteralPipe, useValue: quoteLiteralPipeSpy },
         { provide: RoutingService, useValue: routingServiceSpy },
+        { provide: ServiceActivatorService, useValue: activateEntryPointSpy },
         { provide: NX_RECAPTCHA_TOKEN, useValue: { siteKey: 'mock-site-key' } },
         { provide: NX_WORKFLOW_TOKEN, useValue: mockWorkflowConfig },
         { provide: NX_LANGUAGE_CONFIG, useValue: mockLanguageConfig }
