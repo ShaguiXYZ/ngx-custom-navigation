@@ -3,7 +3,6 @@ import { Component, ElementRef, inject, OnInit, ViewChild } from '@angular/core'
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { NxCopytextModule } from '@aposin/ng-aquila/copytext';
 import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
-import { NxIconModule } from '@aposin/ng-aquila/icon';
 import { NxInputModule } from '@aposin/ng-aquila/input';
 import { debounceTime, distinctUntilChanged, fromEvent, map, Subscription } from 'rxjs';
 import { QuoteComponent } from 'src/app/core/components';
@@ -17,24 +16,23 @@ import { QuoteLiteralDirective } from 'src/app/shared/directives';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 
 @Component({
-    selector: 'quote-vehicle-model-versions',
-    templateUrl: './vehicle-model-versions.component.html',
-    styleUrl: './vehicle-model-versions.component.scss',
-    imports: [
-        CommonModule,
-        HeaderTitleComponent,
-        QuoteFooterComponent,
-        TextCardComponent,
-        NxCopytextModule,
-        NxFormfieldModule,
-        NxIconModule,
-        NxInputModule,
-        ReactiveFormsModule,
-        QuoteLiteralDirective,
-        QuoteTrackDirective,
-        QuoteLiteralPipe
-    ],
-    providers: [VehicleService]
+  selector: 'quote-vehicle-model-versions',
+  templateUrl: './vehicle-model-versions.component.html',
+  styleUrl: './vehicle-model-versions.component.scss',
+  imports: [
+    CommonModule,
+    HeaderTitleComponent,
+    QuoteFooterComponent,
+    TextCardComponent,
+    NxCopytextModule,
+    NxFormfieldModule,
+    NxInputModule,
+    ReactiveFormsModule,
+    QuoteLiteralDirective,
+    QuoteTrackDirective,
+    QuoteLiteralPipe
+  ],
+  providers: [VehicleService]
 })
 export class VehicleModelVersionsComponent extends QuoteComponent<QuoteModel> implements OnInit {
   @ViewChild('searchInput', { static: true })
@@ -70,6 +68,11 @@ export class VehicleModelVersionsComponent extends QuoteComponent<QuoteModel> im
     this.routingService.next();
   }
 
+  public clearInput(): void {
+    this.form.patchValue({ searchInput: '' });
+    this.filteredVersions();
+  }
+
   private updateValidData = (): boolean => {
     return !!this._contextData.vehicle.modelVersion;
   };
@@ -80,13 +83,6 @@ export class VehicleModelVersionsComponent extends QuoteComponent<QuoteModel> im
     });
   }
 
-  private filteredVersions = (): Promise<void> =>
-    this.vehicleService.vehicleModelVersions(this._contextData.vehicle.model!).then(versions => {
-      this.modelVersions = this.form.value.searchInput
-        ? versions.filter(data => data.data?.toLocaleLowerCase().includes(this.form.value.searchInput?.toLocaleLowerCase()))
-        : versions;
-    });
-
   private searchBoxConfig(): Subscription {
     return fromEvent(this.searchInput.nativeElement, 'keyup')
       .pipe(
@@ -96,4 +92,11 @@ export class VehicleModelVersionsComponent extends QuoteComponent<QuoteModel> im
       )
       .subscribe(() => this.filteredVersions());
   }
+
+  private filteredVersions = (): Promise<void> =>
+    this.vehicleService.vehicleModelVersions(this._contextData.vehicle.model!).then(versions => {
+      this.modelVersions = this.form.value.searchInput
+        ? versions.filter(data => data.data?.toLocaleLowerCase().includes(this.form.value.searchInput?.toLocaleLowerCase()))
+        : versions;
+    });
 }

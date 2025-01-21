@@ -4,12 +4,13 @@ import { TranslateService } from '@ngx-translate/core';
 import { of } from 'rxjs';
 import { NX_WORKFLOW_TOKEN } from 'src/app/core/components/models';
 import { NX_LANGUAGE_CONFIG } from 'src/app/core/models';
+import { ServiceActivatorService } from 'src/app/core/service-activators';
 import { NX_RECAPTCHA_TOKEN, RoutingService } from 'src/app/core/services';
-import { CubicCapacityModel, FuelModel, QuoteModel, VehicleClassesModel } from 'src/app/library/models';
+import { QuoteModel } from 'src/app/library/models';
+import { CubicCapacityModel, FuelModel, VehicleClassesModel } from 'src/app/library/models/vehicle';
 import { VehicleService } from 'src/app/library/services';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 import { VehicleCharacteristicsComponent } from './vehicle-characteristics.component';
-import { ServiceActivatorService } from 'src/app/core/service-activators';
 
 describe('VehicleCharacteristicsComponent', () => {
   let component: VehicleCharacteristicsComponent;

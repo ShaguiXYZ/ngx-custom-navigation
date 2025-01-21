@@ -2,7 +2,6 @@ import { CommonModule } from '@angular/common';
 import { Component, ElementRef, inject, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
-import { NxIconModule } from '@aposin/ng-aquila/icon';
 import { NxInputModule } from '@aposin/ng-aquila/input';
 import { IndexedData } from '@shagui/ng-shagui/core';
 import { debounceTime, distinctUntilChanged, fromEvent, Subscription } from 'rxjs';
@@ -29,7 +28,6 @@ import { InsuranceComponentService } from './services';
     QuoteFooterComponent,
     TextCardComponent,
     NxFormfieldModule,
-    NxIconModule,
     NxInputModule,
     ReactiveFormsModule,
     QuoteLiteralDirective,
@@ -78,6 +76,11 @@ export class InsuranceCompaniesComponent extends QuoteComponent<QuoteModel> impl
     };
 
     this.routingService.next();
+  }
+
+  public clearInput(): void {
+    this.form.patchValue({ searchInput: '' });
+    this.searchInsurances();
   }
 
   private createForm(): void {

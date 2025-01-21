@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NxCopytextModule } from '@aposin/ng-aquila/copytext';
-import { NxIconModule } from '@aposin/ng-aquila/icon';
 import { NxTooltipModule } from '@aposin/ng-aquila/tooltip';
 import { ContextDataService } from '@shagui/ng-shagui/core';
 import { of } from 'rxjs';
@@ -21,7 +20,7 @@ describe('QuoteStepperComponent', () => {
 
     await TestBed.configureTestingModule({
       declarations: [],
-      imports: [QuoteStepperComponent, CommonModule, NxCopytextModule, NxIconModule, NxTooltipModule],
+      imports: [QuoteStepperComponent, CommonModule, NxCopytextModule, NxTooltipModule],
       providers: [
         { provide: ContextDataService, useValue: contextDataServiceSpy },
         { provide: QuoteStepperService, useValue: quoteStepperServiceSpy }

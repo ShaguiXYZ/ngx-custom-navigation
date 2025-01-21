@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { NxCopytextModule } from '@aposin/ng-aquila/copytext';
-import { NxIconModule } from '@aposin/ng-aquila/icon';
 import { NxTooltipModule } from '@aposin/ng-aquila/tooltip';
 import { ContextDataService } from '@shagui/ng-shagui/core';
 import { Subscription } from 'rxjs';
@@ -11,11 +10,11 @@ import { QuoteLiteralPipe } from '../../pipes';
 import { QuoteStepperService } from './services';
 
 @Component({
-    selector: 'quote-stepper',
-    templateUrl: './quote-stepper.component.html',
-    styleUrls: ['./quote-stepper.component.scss'],
-    providers: [QuoteStepperService],
-    imports: [CommonModule, NxCopytextModule, NxIconModule, NxTooltipModule, QuoteLiteralPipe]
+  selector: 'quote-stepper',
+  templateUrl: './quote-stepper.component.html',
+  styleUrls: ['./quote-stepper.component.scss'],
+  providers: [QuoteStepperService],
+  imports: [CommonModule, NxCopytextModule, NxTooltipModule, QuoteLiteralPipe]
 })
 export class QuoteStepperComponent implements OnInit, OnDestroy {
   public stepperData?: { stepper: Stepper; stepKey: string };

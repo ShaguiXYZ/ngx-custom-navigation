@@ -6,29 +6,30 @@ import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
 import { QuoteComponent } from 'src/app/core/components';
 import { RoutingService } from 'src/app/core/services';
 import { QuoteTrackDirective } from 'src/app/core/tracking';
-import { CubicCapacityModel, FuelModel, QuoteModel, VehicleClassesModel } from 'src/app/library/models';
+import { QuoteModel } from 'src/app/library/models';
+import { CubicCapacityModel, FuelModel, VehicleClassesModel } from 'src/app/library/models/vehicle';
 import { VehicleService } from 'src/app/library/services';
 import { HeaderTitleComponent, QuoteFooterComponent, SelectableOptionComponent } from 'src/app/shared/components';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 
 @Component({
-    selector: 'quote-vehicle-characteristics',
-    templateUrl: './vehicle-characteristics.component.html',
-    styleUrl: './vehicle-characteristics.component.scss',
-    imports: [
-        CommonModule,
-        HeaderTitleComponent,
-        QuoteFooterComponent,
-        SelectableOptionComponent,
-        NxAccordionModule,
-        NxCopytextModule,
-        NxFormfieldModule,
-        QuoteLiteralPipe,
-        QuoteLiteralDirective,
-        QuoteTrackDirective
-    ],
-    providers: [VehicleService]
+  selector: 'quote-vehicle-characteristics',
+  templateUrl: './vehicle-characteristics.component.html',
+  styleUrl: './vehicle-characteristics.component.scss',
+  imports: [
+    CommonModule,
+    HeaderTitleComponent,
+    QuoteFooterComponent,
+    SelectableOptionComponent,
+    NxAccordionModule,
+    NxCopytextModule,
+    NxFormfieldModule,
+    QuoteLiteralPipe,
+    QuoteLiteralDirective,
+    QuoteTrackDirective
+  ],
+  providers: [VehicleService]
 })
 export class VehicleCharacteristicsComponent extends QuoteComponent<QuoteModel> implements OnInit {
   public cubicCapacityNotKnown: CubicCapacityModel = { index: '-1', data: 'nsnc' };

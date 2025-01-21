@@ -4,7 +4,6 @@ import { NxButtonModule } from '@aposin/ng-aquila/button';
 import { NxCardModule } from '@aposin/ng-aquila/card';
 import { NxCopytextModule } from '@aposin/ng-aquila/copytext';
 import { NxHeadlineModule } from '@aposin/ng-aquila/headline';
-import { NxIconModule } from '@aposin/ng-aquila/icon';
 import { TranslateService } from '@ngx-translate/core';
 import { ContextDataService } from '@shagui/ng-shagui/core';
 import { of } from 'rxjs';
@@ -44,7 +43,6 @@ describe('ApologyComponent', () => {
         NxCardModule,
         NxCopytextModule,
         NxHeadlineModule,
-        NxIconModule,
         HeaderTitleComponent,
         QuoteFooterComponent,
         QuoteLiteralDirective

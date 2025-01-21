@@ -1,3 +1,4 @@
+<!-- eslint-disable @angular-eslint/template/click-events-have-key-events -->
 <article class="component-container">
   <quote-header-title>
     <span nxQuoteLiteral="header"></span>
@@ -8,7 +9,7 @@
       <nx-formfield [label]="'search' | quoteLiteral" appearance="outline">
         <input #searchInput type="text" formControlName="searchInput" nxInput />
         <span nxFormfieldSuffix>
-          <nx-icon name="search" size="s"></nx-icon>
+          <em class="fa-solid fa-xmark" tabindex="0" (click)="clearInput()"></em>
         </span>
       </nx-formfield>
     </form>

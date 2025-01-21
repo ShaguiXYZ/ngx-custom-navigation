@@ -1,12 +1,12 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
-import { NxIconModule } from '@aposin/ng-aquila/icon';
 import { NxInputModule } from '@aposin/ng-aquila/input';
 import { TranslateService } from '@ngx-translate/core';
 import { ContextDataService } from '@shagui/ng-shagui/core';
 import { of } from 'rxjs';
 import { NX_LANGUAGE_CONFIG } from 'src/app/core/models';
+import { ServiceActivatorService } from 'src/app/core/service-activators';
 import { RoutingService } from 'src/app/core/services';
 import { ContextDataServiceStub } from 'src/app/core/stub';
 import { QuoteModel } from 'src/app/library/models';
@@ -14,7 +14,6 @@ import { VehicleService } from 'src/app/library/services';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 import { BrandComponentService } from './services';
 import { VehicleBrandComponent } from './vehicle-brand.component';
-import { ServiceActivatorService } from 'src/app/core/service-activators';
 
 describe('VehicleBrandComponent', () => {
   let component: VehicleBrandComponent;
@@ -38,7 +37,7 @@ describe('VehicleBrandComponent', () => {
 
     await TestBed.configureTestingModule({
       declarations: [],
-      imports: [VehicleBrandComponent, ReactiveFormsModule, NxIconModule, NxFormfieldModule, NxInputModule],
+      imports: [VehicleBrandComponent, ReactiveFormsModule, NxFormfieldModule, NxInputModule],
       providers: [
         { provide: BrandComponentService, useValue: brandServiceSpy },
         { provide: ContextDataService, useClass: ContextDataServiceStub },

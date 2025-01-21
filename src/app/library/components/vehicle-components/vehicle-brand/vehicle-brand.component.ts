@@ -2,7 +2,6 @@ import { CommonModule } from '@angular/common';
 import { Component, ElementRef, inject, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
-import { NxIconModule } from '@aposin/ng-aquila/icon';
 import { NxInputModule } from '@aposin/ng-aquila/input';
 import { debounceTime, distinctUntilChanged, fromEvent, map, Subscription } from 'rxjs';
 import { QuoteComponent } from 'src/app/core/components';
@@ -24,25 +23,24 @@ import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 import { BrandComponentService } from './services';
 
 @Component({
-    selector: 'quote-vehicle-brand',
-    templateUrl: './vehicle-brand.component.html',
-    styleUrl: './vehicle-brand.component.scss',
-    imports: [
-        CommonModule,
-        HeaderTitleComponent,
-        QuoteFooterComponent,
-        IconCardComponent,
-        TextCardComponent,
-        QuoteZoneComponent,
-        NxIconModule,
-        NxFormfieldModule,
-        NxInputModule,
-        ReactiveFormsModule,
-        QuoteLiteralDirective,
-        QuoteLiteralPipe,
-        QuoteTrackDirective
-    ],
-    providers: [BrandComponentService, VehicleService]
+  selector: 'quote-vehicle-brand',
+  templateUrl: './vehicle-brand.component.html',
+  styleUrl: './vehicle-brand.component.scss',
+  imports: [
+    CommonModule,
+    HeaderTitleComponent,
+    QuoteFooterComponent,
+    IconCardComponent,
+    TextCardComponent,
+    QuoteZoneComponent,
+    NxFormfieldModule,
+    NxInputModule,
+    ReactiveFormsModule,
+    QuoteLiteralDirective,
+    QuoteLiteralPipe,
+    QuoteTrackDirective
+  ],
+  providers: [BrandComponentService, VehicleService]
 })
 export class VehicleBrandComponent extends QuoteComponent<QuoteModel> implements OnInit {
   @ViewChild('searchInput', { static: true })
@@ -76,14 +74,23 @@ export class VehicleBrandComponent extends QuoteComponent<QuoteModel> implements
   public override canDeactivate = (): boolean => this.updateValidData();
 
   public selectBrand(event: string): void {
-    this.selectedBrand = event;
+    const selectionChanged = this.selectedBrand !== event;
 
-    this._contextData.vehicle = {
-      ...this._contextData.vehicle,
-      brand: this.selectedBrand!
-    };
+    if (selectionChanged) {
+      this.selectedBrand = event;
+
+      this._contextData.vehicle = {
+        ...this._contextData.vehicle,
+        brand: this.selectedBrand!
+      };
+    }
 
     this.routingService.next();
+  }
+
+  public clearInput(): void {
+    this.form.patchValue({ searchInput: '' });
+    this.searchBrands();
   }
 
   private createForm(): void {

@@ -3,7 +3,6 @@ import { Component, inject, Input, OnDestroy, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { NavigationEnd, Router } from '@angular/router';
 import { NxCopytextModule } from '@aposin/ng-aquila/copytext';
-import { NxIconModule } from '@aposin/ng-aquila/icon';
 import { $, ContextDataService } from '@shagui/ng-shagui/core';
 import { filter, Subscription } from 'rxjs';
 import { QUOTE_APP_CONTEXT_DATA } from 'src/app/core/constants';
@@ -16,20 +15,19 @@ import { LanguageComponent } from '../language';
 import { SwitchThemeComponent } from '../switch-theme';
 
 @Component({
-    selector: 'quote-header',
-    templateUrl: './quote-header.component.html',
-    styleUrl: './quote-header.component.scss',
-    imports: [
-        LanguageComponent,
-        SwitchThemeComponent,
-        CommonModule,
-        NxCopytextModule,
-        NxIconModule,
-        QuoteLinkDirective,
-        QuoteLiteralDirective,
-        QuoteTrackDirective,
-        QuoteLiteralPipe
-    ]
+  selector: 'quote-header',
+  templateUrl: './quote-header.component.html',
+  styleUrl: './quote-header.component.scss',
+  imports: [
+    LanguageComponent,
+    SwitchThemeComponent,
+    CommonModule,
+    NxCopytextModule,
+    QuoteLinkDirective,
+    QuoteLiteralDirective,
+    QuoteTrackDirective,
+    QuoteLiteralPipe
+  ]
 })
 export class QuoteHeaderComponent implements OnInit, OnDestroy {
   @Input()

@@ -3,7 +3,6 @@ import { Component, ElementRef, inject, OnInit, ViewChild } from '@angular/core'
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { NxCopytextModule } from '@aposin/ng-aquila/copytext';
 import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
-import { NxIconModule } from '@aposin/ng-aquila/icon';
 import { NxInputModule } from '@aposin/ng-aquila/input';
 import { debounceTime, distinctUntilChanged, fromEvent, map, Subscription } from 'rxjs';
 import { QuoteComponent } from 'src/app/core/components';
@@ -17,24 +16,23 @@ import { QuoteLiteralDirective } from 'src/app/shared/directives';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 
 @Component({
-    selector: 'quote-vehicle-models',
-    templateUrl: './vehicle-models.component.html',
-    styleUrl: './vehicle-models.component.scss',
-    imports: [
-        CommonModule,
-        HeaderTitleComponent,
-        QuoteFooterComponent,
-        TextCardComponent,
-        NxCopytextModule,
-        NxFormfieldModule,
-        NxIconModule,
-        NxInputModule,
-        ReactiveFormsModule,
-        QuoteLiteralDirective,
-        QuoteTrackDirective,
-        QuoteLiteralPipe
-    ],
-    providers: [VehicleService]
+  selector: 'quote-vehicle-models',
+  templateUrl: './vehicle-models.component.html',
+  styleUrl: './vehicle-models.component.scss',
+  imports: [
+    CommonModule,
+    HeaderTitleComponent,
+    QuoteFooterComponent,
+    TextCardComponent,
+    NxCopytextModule,
+    NxFormfieldModule,
+    NxInputModule,
+    ReactiveFormsModule,
+    QuoteLiteralDirective,
+    QuoteTrackDirective,
+    QuoteLiteralPipe
+  ],
+  providers: [VehicleService]
 })
 export class VehicleModelsComponent extends QuoteComponent<QuoteModel> implements OnInit {
   @ViewChild('searchInput', { static: true })
@@ -61,14 +59,23 @@ export class VehicleModelsComponent extends QuoteComponent<QuoteModel> implement
   public override canDeactivate = (): boolean => this.updateValidData();
 
   public selectModel(model: string) {
-    this.selectedModel = model;
+    const selectionChanged = this.selectedModel !== model;
 
-    this._contextData.vehicle = {
-      ...this._contextData.vehicle,
-      model: this.selectedModel
-    };
+    if (selectionChanged) {
+      this.selectedModel = model;
+
+      this._contextData.vehicle = {
+        ...this._contextData.vehicle,
+        model: this.selectedModel
+      };
+    }
 
     this.routingService.next();
+  }
+
+  public clearInput(): void {
+    this.form.patchValue({ searchInput: '' });
+    this.filteredModels();
   }
 
   private updateValidData = (): boolean => {
@@ -90,8 +97,11 @@ export class VehicleModelsComponent extends QuoteComponent<QuoteModel> implement
         debounceTime(DEBOUNCE_TIME),
         distinctUntilChanged()
       )
-      .subscribe(
-        async () => (this.models = await this.vehicleService.getModels(this._contextData.vehicle.brand!, this.form.value.searchInput))
-      );
+      .subscribe(async () => this.filteredModels());
   }
+
+  private filteredModels = (): Promise<void> =>
+    this.vehicleService.getModels(this._contextData.vehicle.brand!, this.form.value.searchInput).then(models => {
+      this.models = models;
+    });
 }

@@ -801,6 +801,17 @@ export const WORKFLOW: ConfigurationDTO<QuoteModel, WorkflowManifestId> = {
         },
         serviceActivators: [
           {
+            entryPoint: 'on-init',
+            activator: '$patch-quote',
+            params: { insuranceCompany: { company: {} } },
+            conditions: [
+              {
+                expression: 'client.isPolicyOwner',
+                value: false
+              }
+            ]
+          },
+          {
             entryPoint: '$on-pricing',
             activator: '$store-budget'
           }
@@ -816,10 +827,9 @@ export const WORKFLOW: ConfigurationDTO<QuoteModel, WorkflowManifestId> = {
       ],
       configuration: {
         literals: {
-          header: '¡Muchas gracias {{ name }}!',
-          subheader: 'Uno de nuestros agentes te llamará a la hora que has solicitado para darte toda la información que necesites.',
-          body: '',
-          'footer-next': 'FINALIZAR'
+          header: { value: 'Pages.Confirmation.Header', type: 'translate' },
+          subheader: { value: 'Pages.Confirmation.Subheader', type: 'translate' },
+          'footer-next': { value: 'Pages.Confirmation.FooterNext', type: 'translate' }
         },
         data: {
           contextData: {
@@ -874,10 +884,13 @@ export const WORKFLOW: ConfigurationDTO<QuoteModel, WorkflowManifestId> = {
         literals: {
           header: 'Información de contacto',
           subheader: 'Nos gustaría poder ayudarte, <br/>¡contactanos!',
-          'footer-next': 'FINALIZAR'
+          'footer-next': 'FINALIZAR',
+          line1: 'Horario comercial',
+          line2: 'Lunes a Jueves de 9h a 19h',
+          line3: 'Viernes de 9h a 18h'
         },
         data: {
-          contactUsTexts: ['Horario comercial', 'Lunes a Jueves de 9h a 19h', 'Viernes de 9h a 18h'],
+          bodyLines: ['line1', 'line2', 'line3'],
           headerConfig: {
             showBack: true,
             showContactUs: false
@@ -990,14 +1003,13 @@ export const WORKFLOW: ConfigurationDTO<QuoteModel, WorkflowManifestId> = {
       configuration: {
         literals: {
           header: { value: 'Pages.IsClientContactUs.Header', type: 'translate' },
-          subheader: { value: 'Pages.IsClientContactUs.Subheader', type: 'translate' }
+          subheader: { value: 'Pages.IsClientContactUs.Subheader', type: 'translate' },
+          'literal-1': "<h1 class='info-header nx-font-weight-bold'>Horario comercial</h1>",
+          'literal-2': 'Lunes a Jueves de 9h a 19h',
+          'literal-3': 'Viernes de 9h a 18h'
         },
         data: {
-          contactUsTexts: [
-            "<h1 class='info-header nx-font-weight-bold'>Horario comercial</h1>",
-            'Lunes a Jueves de 9h a 19h',
-            'Viernes de 9h a 18h'
-          ],
+          bodyLines: ['literal-1', 'literal-2', 'literal-3'],
           footerConfig: {
             showNext: false
           },
@@ -1030,7 +1042,7 @@ export const WORKFLOW: ConfigurationDTO<QuoteModel, WorkflowManifestId> = {
           line3: 'Viernes de 9h a 18h'
         },
         data: {
-          contactUsTexts: ['line1', 'line2', 'line3'],
+          bodyLines: ['line1', 'line2', 'line3'],
           headerConfig: {
             showBack: true,
             showContactUs: false

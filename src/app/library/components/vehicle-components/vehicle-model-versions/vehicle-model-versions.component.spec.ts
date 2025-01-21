@@ -2,7 +2,6 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NxCopytextModule } from '@aposin/ng-aquila/copytext';
 import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
-import { NxIconModule } from '@aposin/ng-aquila/icon';
 import { NxInputModule } from '@aposin/ng-aquila/input';
 import { TranslateService } from '@ngx-translate/core';
 import { ContextDataService } from '@shagui/ng-shagui/core';
@@ -49,7 +48,6 @@ describe('VehicleModelVersionsComponent', () => {
         ReactiveFormsModule,
         NxCopytextModule,
         NxFormfieldModule,
-        NxIconModule,
         NxInputModule,
         HeaderTitleComponent,
         IconCardComponent,

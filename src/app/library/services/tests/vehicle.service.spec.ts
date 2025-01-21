@@ -2,17 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { TestBed } from '@angular/core/testing';
 import { of } from 'rxjs';
 import { FuelTypes } from 'src/app/core/models';
-import {
-  CubicCapacityDTO,
-  CubicCapacityModel,
-  FuelDTO,
-  FuelModel,
-  ModelVersionModel,
-  QuoteVehicleModel,
-  VehicleClassesDTO,
-  VehicleClassesModel,
-  VehicleDTO
-} from '../../models';
+import { ModelVersionModel, QuoteVehicleModel, VehicleDTO } from '../../models';
+import { CubicCapacityDTO, CubicCapacityModel, FuelDTO, FuelModel, VehicleClassesDTO, VehicleClassesModel } from '../../models/vehicle';
 import { VehicleService } from '../vehicle.service';
 
 describe('VehicleService', () => {

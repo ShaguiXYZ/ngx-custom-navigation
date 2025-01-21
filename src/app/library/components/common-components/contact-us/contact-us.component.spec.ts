@@ -3,7 +3,6 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { NxCopytextModule } from '@aposin/ng-aquila/copytext';
 import { NxHeadlineModule } from '@aposin/ng-aquila/headline';
-import { NxIconModule } from '@aposin/ng-aquila/icon';
 import { TranslateService } from '@ngx-translate/core';
 import { ContextDataService } from '@shagui/ng-shagui/core';
 import { of } from 'rxjs';
@@ -37,15 +36,7 @@ describe('ContactUsComponent', () => {
 
     await TestBed.configureTestingModule({
       declarations: [],
-      imports: [
-        ContactUsComponent,
-        NxHeadlineModule,
-        NxCopytextModule,
-        NxIconModule,
-        HeaderTitleComponent,
-        QuoteFooterComponent,
-        QuoteLiteralDirective
-      ],
+      imports: [ContactUsComponent, NxHeadlineModule, NxCopytextModule, HeaderTitleComponent, QuoteFooterComponent, QuoteLiteralDirective],
       providers: [
         { provide: ContextDataService, useClass: ContextDataServiceStub },
         { provide: TranslateService, useValue: translateServiceSpy },

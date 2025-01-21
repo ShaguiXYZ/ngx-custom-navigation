@@ -19,7 +19,7 @@
       (click)="(_active || _complete) && onStepClick(step)"
     >
       <div class="stepper__item__progress">
-        <nx-icon class="stepper__state" [ngClass]="{ complete: _complete }" name="check" size="auto"></nx-icon>
+        <em class="stepper__state fa-solid fa-check" [ngClass]="{ complete: _complete }"></em>
       </div>
     </div>
     @if(!$last) {

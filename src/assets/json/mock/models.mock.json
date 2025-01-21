@@ -1,0 +1,154 @@
+{
+  "collection": {
+    "url": "/api/models?make=Audi\u0026year=2020",
+    "count": 28,
+    "pages": 1,
+    "total": 28,
+    "next": "",
+    "prev": "",
+    "first": "/api/models?make=Audi\u0026year=2020",
+    "last": ""
+  },
+  "data": [
+    {
+      "id": 103,
+      "make_id": 2,
+      "name": "A3"
+    },
+    {
+      "id": 104,
+      "make_id": 2,
+      "name": "A4"
+    },
+    {
+      "id": 105,
+      "make_id": 2,
+      "name": "A4 allroad"
+    },
+    {
+      "id": 3,
+      "make_id": 2,
+      "name": "A5"
+    },
+    {
+      "id": 106,
+      "make_id": 2,
+      "name": "A6"
+    },
+    {
+      "id": 107,
+      "make_id": 2,
+      "name": "A6 allroad"
+    },
+    {
+      "id": 108,
+      "make_id": 2,
+      "name": "A7"
+    },
+    {
+      "id": 109,
+      "make_id": 2,
+      "name": "A8"
+    },
+    {
+      "id": 111,
+      "make_id": 2,
+      "name": "e-tron Sportback"
+    },
+    {
+      "id": 6,
+      "make_id": 2,
+      "name": "Q3"
+    },
+    {
+      "id": 7,
+      "make_id": 2,
+      "name": "Q5"
+    },
+    {
+      "id": 116,
+      "make_id": 2,
+      "name": "Q7"
+    },
+    {
+      "id": 8,
+      "make_id": 2,
+      "name": "Q8"
+    },
+    {
+      "id": 117,
+      "make_id": 2,
+      "name": "R8"
+    },
+    {
+      "id": 118,
+      "make_id": 2,
+      "name": "RS 3"
+    },
+    {
+      "id": 123,
+      "make_id": 2,
+      "name": "RS Q8"
+    },
+    {
+      "id": 124,
+      "make_id": 2,
+      "name": "S3"
+    },
+    {
+      "id": 125,
+      "make_id": 2,
+      "name": "S4"
+    },
+    {
+      "id": 126,
+      "make_id": 2,
+      "name": "S5"
+    },
+    {
+      "id": 127,
+      "make_id": 2,
+      "name": "S6"
+    },
+    {
+      "id": 128,
+      "make_id": 2,
+      "name": "S7"
+    },
+    {
+      "id": 129,
+      "make_id": 2,
+      "name": "S8"
+    },
+    {
+      "id": 130,
+      "make_id": 2,
+      "name": "SQ5"
+    },
+    {
+      "id": 132,
+      "make_id": 2,
+      "name": "SQ7"
+    },
+    {
+      "id": 133,
+      "make_id": 2,
+      "name": "SQ8"
+    },
+    {
+      "id": 134,
+      "make_id": 2,
+      "name": "TT"
+    },
+    {
+      "id": 135,
+      "make_id": 2,
+      "name": "TT RS"
+    },
+    {
+      "id": 136,
+      "make_id": 2,
+      "name": "TTS"
+    }
+  ]
+}
