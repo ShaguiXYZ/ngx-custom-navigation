@@ -15,5 +15,5 @@ import { QuoteLiteralPipe } from 'src/app/shared/pipes';
     encapsulation: ViewEncapsulation.None
 })
 export class ContactUsComponent extends QuoteComponent<QuoteModel> {
-  public contactUsTexts: string[] = [];
+  public bodyLines: string[] = [];
 }

@@ -56,11 +56,13 @@
   }
 
   .progress-bar {
-    width: 100%;
-    max-width: 600px;
-    height: 10px;
     background-color: var(--background-color);
     border-radius: 0 0 5px 5px;
+    display: flex;
+    height: 10px;
+    justify-content: center;
+    max-width: 600px;
+    width: 100%;
 
     .progress {
       background-color: var(--success);

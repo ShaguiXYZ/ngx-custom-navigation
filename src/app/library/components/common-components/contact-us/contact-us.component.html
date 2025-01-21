@@ -9,7 +9,7 @@
     <div class="info-row info-phone nx-margin-y-s">
       <a href="tel: {{ 'phone' | quoteLiteral }}" nxQuoteLiteral="phone"></a>
     </div>
-    @for(text of contactUsTexts; track $index) {
+    @for(text of bodyLines; track $index) {
     <div nxCopytext="medium" class="info-row" [nxQuoteLiteral]="text"></div>
     }
   </section>
