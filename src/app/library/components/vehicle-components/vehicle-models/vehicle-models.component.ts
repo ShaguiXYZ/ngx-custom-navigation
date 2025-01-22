@@ -46,14 +46,20 @@ export class VehicleModelsComponent extends QuoteComponent<QuoteModel> implement
   private readonly vehicleService = inject(VehicleService);
   private readonly fb = inject(FormBuilder);
 
-  ngOnInit(): void {
-    this.selectedModel = this._contextData.vehicle.model;
-
-    this.vehicleService.getModels(this._contextData.vehicle.brand!, this._contextData.vehicle.model).then(models => {
-      this.models = models;
-    });
-
+  async ngOnInit(): Promise<void> {
     this.createForm();
+
+    if (!this._contextData.vehicle.brand) {
+      console.warn('Brand not selected');
+      this.initData();
+      return;
+    }
+
+    this.selectedModel = this._contextData.vehicle.model;
+    this.models = await this.vehicleService.getModels(this._contextData.vehicle.brand, this._contextData.vehicle.model);
+    if (this.selectedModel && !this.models.includes(this.selectedModel)) {
+      this.initData();
+    }
   }
 
   public override canDeactivate = (): boolean => this.updateValidData();
@@ -77,6 +83,14 @@ export class VehicleModelsComponent extends QuoteComponent<QuoteModel> implement
     this.form.patchValue({ searchInput: '' });
     this.filteredModels();
   }
+
+  private initData = (): void => {
+    this._contextData.vehicle.model = undefined;
+    this.selectedModel = undefined;
+    this.form.patchValue({ searchInput: '' });
+
+    this.filteredModels();
+  };
 
   private updateValidData = (): boolean => {
     return !!this._contextData.vehicle.model;

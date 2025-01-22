@@ -35,7 +35,7 @@ export class ClientPhoneNumberComponent extends QuoteComponent<QuoteModel> {
   private readonly quoteFormValidarors = inject(QuoteFormValidarors);
   private readonly fb = inject(FormBuilder);
 
-  protected override ngQuoteInit = this.createForm.bind(this);
+  protected override ngOnQuoteInit = this.createForm.bind(this);
 
   public override canDeactivate = (): boolean => this.form.valid;
 

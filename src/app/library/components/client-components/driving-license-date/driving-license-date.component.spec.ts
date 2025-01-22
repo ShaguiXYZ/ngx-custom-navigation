@@ -76,7 +76,7 @@ describe('DrivingLicenseDateComponent', () => {
       driven: { licenseDate: '01-01-2022' }
     } as unknown as QuoteModel;
 
-    component['ngQuoteInit']();
+    component['ngOnQuoteInit']();
 
     fixture.detectChanges();
   });

@@ -48,7 +48,7 @@ export class LicensePlateComponent extends QuoteComponent<QuoteModel> implements
   private readonly routingService = inject(RoutingService);
   private readonly fb = inject(FormBuilder);
 
-  protected override ngQuoteInit = this.createForm.bind(this);
+  protected override ngOnQuoteInit = this.createForm.bind(this);
 
   ngOnInit(): void {
     this.masks = PatternsByCountry[this.countryCode]?.mask ?? '';

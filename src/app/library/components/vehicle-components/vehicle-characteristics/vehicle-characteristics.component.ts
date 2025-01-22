@@ -51,15 +51,22 @@ export class VehicleCharacteristicsComponent extends QuoteComponent<QuoteModel> 
   private readonly vehicleService = inject(VehicleService);
 
   async ngOnInit(): Promise<void> {
-    this.selectedFuel = this._contextData.vehicle.fuel;
-    this.selectedCubicCapacity = this._contextData.vehicle.cubicCapacity;
-    this.selectedPower = this._contextData.vehicle.powerRange;
-
     [this.fuels, this.cubicCapacities, this.powers] = await Promise.all([
       this.vehicleService.getFuelTypes(this._contextData.vehicle),
       this.vehicleService.cubicCapacities(this._contextData.vehicle),
       this.vehicleService.getVehicleClasses(this._contextData.vehicle)
     ]);
+
+    this.selectedFuel =
+      this._contextData.vehicle.fuel && this.fuels.includes(this._contextData.vehicle.fuel) ? this._contextData.vehicle.fuel : undefined;
+    this.selectedCubicCapacity =
+      this._contextData.vehicle.cubicCapacity && this.cubicCapacities.includes(this._contextData.vehicle.cubicCapacity)
+        ? this._contextData.vehicle.cubicCapacity
+        : undefined;
+    this.selectedPower =
+      this._contextData.vehicle.powerRange && this.powers.includes(this._contextData.vehicle.powerRange)
+        ? this._contextData.vehicle.powerRange
+        : undefined;
   }
 
   public override canDeactivate = (): boolean => {

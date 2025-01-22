@@ -34,7 +34,7 @@ export class ClientNameComponent extends QuoteComponent<QuoteModel> {
   private readonly titleCasePipe = inject(TitleCasePipe);
   private readonly fb = inject(FormBuilder);
 
-  protected override ngQuoteInit = this.createForm.bind(this);
+  protected override ngOnQuoteInit = this.createForm.bind(this);
 
   public override canDeactivate = (): boolean => {
     this._contextData.personalData = {

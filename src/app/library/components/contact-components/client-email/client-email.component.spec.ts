@@ -79,7 +79,7 @@ describe('ClientEMailComponent', () => {
       }
     } as QuoteModel;
 
-    component['ngQuoteInit']();
+    component['ngOnQuoteInit']();
 
     fixture.detectChanges();
   });

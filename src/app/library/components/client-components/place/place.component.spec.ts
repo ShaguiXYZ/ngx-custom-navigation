@@ -84,7 +84,7 @@ describe('PlaceComponent', () => {
       place: { postalCode: '12345', province: 'TestProvince', location: 'TestLocation' }
     } as QuoteModel;
 
-    component['ngQuoteInit']();
+    component['ngOnQuoteInit']();
 
     fixture.detectChanges();
   });

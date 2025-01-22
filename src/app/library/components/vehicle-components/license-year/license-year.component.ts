@@ -41,7 +41,7 @@ export class LicenseYearComponent extends QuoteComponent<QuoteModel> implements 
   private readonly quoteFormValidarors = inject(QuoteFormValidarors);
   private readonly fb = inject(FormBuilder);
 
-  protected override ngQuoteInit = this.createForm.bind(this);
+  protected override ngOnQuoteInit = this.createForm.bind(this);
 
   ngOnInit(): void {
     this.minYear = new NxDate().getFullYear() - this.maxYearsOld;

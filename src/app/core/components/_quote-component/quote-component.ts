@@ -16,7 +16,7 @@ export abstract class QuoteComponent<T extends QuoteControlModel> implements OnD
   protected _contextData: T;
   protected subscription$: Subscription[] = [];
 
-  protected ngQuoteInit?: () => void;
+  protected ngOnQuoteInit?: () => void;
 
   protected readonly contextDataService = inject(ContextDataService);
 
@@ -75,6 +75,6 @@ export abstract class QuoteComponent<T extends QuoteControlModel> implements OnD
       }
     }
 
-    this.ngQuoteInit?.();
+    this.ngOnQuoteInit?.();
   };
 }
