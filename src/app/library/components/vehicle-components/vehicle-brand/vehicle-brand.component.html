@@ -9,9 +9,15 @@
       <quote-zone name="search">
         <nx-formfield [label]="'search' | quoteLiteral" appearance="outline">
           <input #searchInput type="text" formControlName="searchInput" nxInput (keyup.escape)="clearInput()" />
-          <span nxFormfieldSuffix>
-            <em class="fa-solid fa-xmark" tabindex="0" (click)="clearInput()"></em>
+          @if(searchInput.value) {
+          <span class="clear-input" tabindex="0" (click)="clearInput()" nxFormfieldSuffix>
+            <em class="fa-solid fa-xmark"></em>
           </span>
+          } @else {
+          <span nxFormfieldSuffix>
+            <em class="fa-solid fa-magnifying-glass"></em>
+          </span>
+          }
         </nx-formfield>
       </quote-zone>
     </form>

@@ -4,7 +4,7 @@ interface BrandData {
 }
 
 export interface BrandDTO {
-  info: {
+  collection: {
     url: string;
     count: number;
     pages: number;

@@ -16,25 +16,25 @@ import { QuoteLiteralDirective } from 'src/app/shared/directives';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 
 @Component({
-    selector: 'quote-your-car-is',
-    templateUrl: './your-car-is.component.html',
-    styleUrl: './your-car-is.component.scss',
-    imports: [
-        CommonModule,
-        HeaderTitleComponent,
-        QuoteFooterComponent,
-        TextCardComponent,
-        NxButtonModule,
-        NxCopytextModule,
-        NxFormfieldModule,
-        NxInputModule,
-        NxMaskModule,
-        ReactiveFormsModule,
-        QuoteLiteralPipe,
-        QuoteLiteralDirective,
-        QuoteTrackDirective
-    ],
-    providers: [VehicleService]
+  selector: 'quote-your-car-is',
+  templateUrl: './your-car-is.component.html',
+  styleUrl: './your-car-is.component.scss',
+  imports: [
+    CommonModule,
+    HeaderTitleComponent,
+    QuoteFooterComponent,
+    TextCardComponent,
+    NxButtonModule,
+    NxCopytextModule,
+    NxFormfieldModule,
+    NxInputModule,
+    NxMaskModule,
+    ReactiveFormsModule,
+    QuoteLiteralPipe,
+    QuoteLiteralDirective,
+    QuoteTrackDirective
+  ],
+  providers: [VehicleService]
 })
 export class YourCarIsComponent extends QuoteComponent<QuoteModel> implements OnInit {
   public vehicleOptions: QuoteVehicleModel[] = [];
@@ -45,7 +45,12 @@ export class YourCarIsComponent extends QuoteComponent<QuoteModel> implements On
 
   async ngOnInit(): Promise<void> {
     this.selectedVehicle = !this._contextData.vehicle.notFound ? this._contextData.vehicle : {};
-    this.vehicleOptions = await this.vehicleService.vehicles();
+
+    if (this._contextData.vehicle.plateNumber) {
+      this.vehicleOptions = await this.vehicleService.findByPlate(this._contextData.vehicle.plateNumber);
+    } else {
+      this.vehicleOptions = await this.vehicleService.vehicles();
+    }
   }
 
   public override canDeactivate = (): boolean => this.isValidData();

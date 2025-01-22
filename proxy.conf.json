@@ -1,5 +1,6 @@
-{
-  "/api/*": {
+[
+  {
+    "context": ["/api"],
     "target": "https://carapi.app",
     "secure": false,
     "changeOrigin": true,
@@ -8,4 +9,4 @@
       "^/api": "/api"
     }
   }
-}
+]

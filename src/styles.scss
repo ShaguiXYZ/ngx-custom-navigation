@@ -52,6 +52,24 @@ main {
         text-transform: capitalize;
       }
 
+      .clear-input {
+        background: var(--ui-03);
+        border-radius: 4px;
+        color: var(--ui-06);
+        cursor: pointer;
+        padding: 5px 8px;
+        transition: background-color 0.3s ease, color 0.3s ease;
+
+        &.nx-formfield__suffix {
+          margin-right: 0;
+        }
+
+        &:hover {
+          color: var(--ui-05);
+          background-color: var(--footer-option-background-color);
+        }
+      }
+
       // .selectable-row {
       //   // @howto: render the card-container when element is viewed
       //   content-visibility: auto;
