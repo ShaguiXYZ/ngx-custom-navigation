@@ -25,7 +25,7 @@ export class VehicleService {
   private readonly _MODEL_VERSIONS_CACHE_ID_ = `_${UniqueIds.next()}_`;
 
   // private readonly VEHICLE_API = environment.baseUrl;
-  private readonly VEHICLE_API = 'http://localhost:3000/api';
+  private readonly VEHICLE_API = '/api';
 
   private http = inject(HttpService);
 
