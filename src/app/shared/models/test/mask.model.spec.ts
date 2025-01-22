@@ -8,9 +8,14 @@ describe('QuoteMask', () => {
       invalid: ['abc', '123abc']
     },
     {
+      type: 'character',
+      valid: ['abc def', 'ABC', ' ', ''],
+      invalid: ['abc@123', 'abc.123', 'a1b']
+    },
+    {
       type: 'alphanumeric',
       valid: ['abc123', 'ABC', '123', ''],
-      invalid: ['abc@123', 'abc 123']
+      invalid: ['abc@123', 'abc-123']
     },
     {
       type: 'mail',
