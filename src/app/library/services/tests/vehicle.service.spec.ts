@@ -122,12 +122,13 @@ describe('VehicleService', () => {
 
   it('should find vehicle by plate', async () => {
     const plate = 'ABC123';
-    const mockVehicle: QuoteVehicleModel = { brand: 'Toyota', model: 'Corolla' };
+    const mockVehicleDTO: VehicleDTO = { make: 'Toyota', model: 'Corolla' };
+    const mockVehicle: QuoteVehicleModel = { brand: 'Toyota', model: 'Corolla', creationDate: undefined };
 
-    httpClientSpy.get.and.returnValue(of(mockVehicle));
+    httpClientSpy.get.and.returnValue(of([mockVehicleDTO]));
 
     service.findByPlate(plate).then(vehicle => {
-      expect(vehicle).toEqual(mockVehicle);
+      expect(vehicle).toEqual([mockVehicle]);
     });
   });
 });

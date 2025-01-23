@@ -63,8 +63,6 @@ export class BlackListActivator {
           hasDebt: BlackListActivator.ramdomBoolean(_params.percentHasDebt)
         };
 
-    console.log(`blackList ${type}`, { response, _params });
-
     return firstValueFrom(of({ type, value: response }));
   }
 

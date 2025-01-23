@@ -1,10 +1,10 @@
 import { inject, Injectable } from '@angular/core';
 import { ContextDataService, HttpService } from '@shagui/ng-shagui/core';
+import { NX_WORKFLOW_TOKEN } from '../components/models';
 import { QUOTE_APP_CONTEXT_DATA, QUOTE_CONTEXT_DATA } from '../constants';
 import { ConditionEvaluation } from '../lib';
 import { AppContextData, QuoteControlModel } from '../models';
 import { ActivatorFn, Activators, EntryPoint, ServiceActivatorType } from './quote-activator.model';
-import { NX_WORKFLOW_TOKEN } from '../components/models';
 
 @Injectable({ providedIn: 'root' })
 export class ServiceActivatorService {
@@ -50,9 +50,9 @@ export class ServiceActivatorService {
         if (
           ConditionEvaluation.checkConditions(this.contextDataService.get<QuoteControlModel>(QUOTE_CONTEXT_DATA), entryPoint.conditions)
         ) {
-          console.log('Activating', entryPoint.activator);
-
-          await this.runActivator(entryPoint.activator, entryPoint.params);
+          console.groupCollapsed('Activating', entryPoint.activator);
+          console.log('Service value', await this.runActivator(entryPoint.activator, entryPoint.params));
+          console.groupEnd();
         }
       })
     );
@@ -62,6 +62,10 @@ export class ServiceActivatorService {
     this.activators[name] = activator;
   };
 
-  private runActivator = (name: ServiceActivatorType, params?: unknown): Promise<unknown> =>
-    this.activators[name]?.(params).then(value => value && this.activateEntryPoint(name));
+  private runActivator = async (name: ServiceActivatorType, params?: unknown): Promise<unknown> => {
+    const value = await this.activators[name]?.(params);
+    value && this.activateEntryPoint(name);
+
+    return value;
+  };
 }

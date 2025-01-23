@@ -75,14 +75,14 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(withInterceptors([httpErrorInterceptor, mockInterceptor, recaptchaInterceptor])),
     provideRouter(routes),
     provideZoneChangeDetection({ eventCoalescing: true }),
-    { provide: ErrorHandler, useClass: GlobalErrorHandler },
-    { provide: NxDatepickerIntl, useClass: DatePikerIntl },
     { provide: NX_WORKFLOW_TOKEN, useExisting: VEHICLE_WORKFLOW_TOKEN },
     {
       provide: NX_CONTEX_CONFIG,
       useValue: { appName: APP_NAME.toUpperCase(), urls, cache: { schedulerPeriod: SCHEDULER_PERIOD } }
     },
     { provide: NX_LANGUAGE_CONFIG, useValue: LanguageConfig },
-    { provide: NX_RECAPTCHA_TOKEN, useValue: { siteKey: environment.recaptcha.siteKey } }
+    { provide: NX_RECAPTCHA_TOKEN, useValue: { siteKey: environment.recaptcha.siteKey } },
+    { provide: NxDatepickerIntl, useClass: DatePikerIntl },
+    { provide: ErrorHandler, useClass: GlobalErrorHandler }
   ]
 };

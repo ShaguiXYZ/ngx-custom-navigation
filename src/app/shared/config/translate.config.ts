@@ -1,5 +1,4 @@
 import { HttpClient } from '@angular/common/http';
-import { LOCALE_ID } from '@angular/core';
 import { MissingTranslationHandler, MissingTranslationHandlerParams, TranslateLoader, TranslateModuleConfig } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
@@ -23,7 +22,6 @@ export const TRANSLATE_MODULE_CONFIG: TranslateModuleConfig = {
 };
 
 export const LanguageConfig = {
-  current: LOCALE_ID,
   languages: {
     'en-GB': { value: 'English', format: 'MM/DD/YYYY', formats: ['MM/DD/YYYY', 'MM/DD/YY', 'MMDDYYYY', 'MMDDYY'] },
     'es-ES': { value: 'Español (España)', format: 'DD/MM/YYYY', formats: ['DD/MM/YYYY', 'DD/MM/YY', 'DDMMYYYY', 'DDMMYY'] },
