@@ -10,11 +10,11 @@
         <nx-formfield [label]="'search' | quoteLiteral" appearance="outline">
           <input #searchInput type="text" formControlName="searchInput" nxInput (keyup.escape)="clearInput()" />
           @if(searchInput.value) {
-          <span class="clear-input" tabindex="0" (click)="clearInput()" nxFormfieldSuffix>
-            <em class="fa-solid fa-xmark"></em>
+          <span class="clear-input" tabindex="0" nxFormfieldSuffix (click)="clearInput()">
+            <em class="fa-solid fa-eraser"></em>
           </span>
           } @else {
-          <span nxFormfieldSuffix>
+          <span class="search-input" nxFormfieldSuffix>
             <em class="fa-solid fa-magnifying-glass"></em>
           </span>
           }
@@ -22,7 +22,7 @@
       </quote-zone>
     </form>
 
-    @if(!form.value.searchInput) {
+    @if(!form.value.searchInput && iconBrands.length) {
     <div class="icon-cards">
       @for(brand of iconBrands; track brand) {
       <quote-icon-card
@@ -39,7 +39,7 @@
       }
     </div>
     } @else {
-    <div class="serached-data">
+    <div class="serached-data" [ngClass]="{ 'not-found': notFound }">
       @for (item of searchedBrands; track item) {
       <div class="selectable-row">
         <quote-text-card

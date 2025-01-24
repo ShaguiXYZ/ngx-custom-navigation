@@ -10,29 +10,32 @@
         <input #searchInput type="text" formControlName="searchInput" nxInput />
         @if(searchInput.value) {
         <span class="clear-input" tabindex="0" (click)="clearInput()" nxFormfieldSuffix>
-          <em class="fa-solid fa-xmark"></em>
+          <em class="fa-solid fa-eraser"></em>
         </span>
         } @else {
-        <span nxFormfieldSuffix>
+        <span class="search-input" nxFormfieldSuffix>
           <em class="fa-solid fa-magnifying-glass"></em>
         </span>
         }
       </nx-formfield>
     </form>
-    @for(modelVersion of modelVersions; track modelVersion.index) {
-    <div class="selectable-row">
-      <quote-text-card
-        [selected]="modelVersion.index === selectedModelVersion?.index"
-        [data]="modelVersion.data"
-        [nxTrack]="{
+
+    <div class="serached-data" [ngClass]="{ 'not-found': notFound }">
+      @for(modelVersion of modelVersions; track modelVersion.index) {
+      <div class="selectable-row">
+        <quote-text-card
+          [selected]="modelVersion.index === selectedModelVersion?.index"
+          [data]="modelVersion.data"
+          [nxTrack]="{
           label: modelVersion.data,
           modelVersion: modelVersion.index.toString(),
         }"
-        [nxTrackEvents]="['click']"
-        (uiSelect)="selectVersion(modelVersion)"
-      />
+          [nxTrackEvents]="['click']"
+          (uiSelect)="selectVersion(modelVersion)"
+        />
+      </div>
+      }
     </div>
-    }
   </section>
   <quote-footer [config]="{ showNext: false }" />
 </article>

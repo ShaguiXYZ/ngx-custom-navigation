@@ -41,6 +41,7 @@ export class VehicleModelVersionsComponent extends QuoteComponent<QuoteModel> im
   public form!: FormGroup;
   public modelVersions: ModelVersionModel[] = [];
   public selectedModelVersion?: ModelVersionModel;
+  public notFound = false;
 
   private readonly routingService = inject(RoutingService);
   private readonly vehicleService = inject(VehicleService);
@@ -98,5 +99,6 @@ export class VehicleModelVersionsComponent extends QuoteComponent<QuoteModel> im
       this.modelVersions = this.form.value.searchInput
         ? versions.filter(data => data.data?.toLocaleLowerCase().includes(this.form.value.searchInput?.toLocaleLowerCase()))
         : versions;
+      this.notFound = this.modelVersions.length === 0;
     });
 }

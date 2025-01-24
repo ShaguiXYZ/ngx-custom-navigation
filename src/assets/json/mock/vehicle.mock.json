@@ -1,7 +1,7 @@
 [
   {
     "vehicleCode": "AUDIQ3Diesel1202015",
-    "make": "AUDI",
+    "make": "Audi",
     "model": "Q3",
     "fuel": { "data": "Diesel", "index": "D" },
     "power": 120,
@@ -9,7 +9,7 @@
   },
   {
     "vehicleCode": "AUDIQ3Diesel1302015",
-    "make": "AUDI",
+    "make": "Audi",
     "model": "Q3",
     "fuel": { "data": "Diesel", "index": "D" },
     "power": 130,
@@ -17,7 +17,7 @@
   },
   {
     "vehicleCode": "AUDIQ3Diesel1402015",
-    "make": "AUDI",
+    "make": "Audi",
     "model": "Q3",
     "fuel": { "data": "Diesel", "index": "D" },
     "power": 140,
@@ -25,7 +25,7 @@
   },
   {
     "vehicleCode": "AUDIQ3Diesel1502015",
-    "make": "AUDI",
+    "make": "Audi",
     "model": "Q3",
     "fuel": { "data": "Diesel", "index": "D" },
     "power": 150,

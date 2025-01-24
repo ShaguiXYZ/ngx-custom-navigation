@@ -39,6 +39,7 @@ import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 export class YourCarIsComponent extends QuoteComponent<QuoteModel> implements OnInit {
   public vehicleOptions: QuoteVehicleModel[] = [];
   public selectedVehicle?: QuoteVehicleModel;
+  public notFound = false;
 
   private readonly routingService = inject(RoutingService);
   private readonly vehicleService = inject(VehicleService);
@@ -51,6 +52,8 @@ export class YourCarIsComponent extends QuoteComponent<QuoteModel> implements On
     } else {
       this.vehicleOptions = await this.vehicleService.vehicles();
     }
+
+    this.notFound = this.vehicleOptions.length === 0;
   }
 
   public override canDeactivate = (): boolean => this.isValidData();

@@ -8,11 +8,11 @@ import { ActivatorServices, ServiceActivatorFn } from './quote-activator.model';
 
 export class BudgetActivator {
   public static storeBudget: ServiceActivatorFn =
-    (services: ActivatorServices): (() => Promise<boolean>) =>
+    ({ contextDataService }: ActivatorServices): (() => Promise<boolean>) =>
     async (): Promise<boolean> => {
-      const quote = services.contextDataService.get<QuoteControlModel>(QUOTE_CONTEXT_DATA);
+      const quote = contextDataService.get<QuoteControlModel>(QUOTE_CONTEXT_DATA);
       const budget: Budget = {
-        context: services.contextDataService.get<AppContextData>(QUOTE_APP_CONTEXT_DATA),
+        context: contextDataService.get<AppContextData>(QUOTE_APP_CONTEXT_DATA),
         quote
       };
       const storedDataKey: StoredDataKey = {
@@ -30,9 +30,9 @@ export class BudgetActivator {
     };
 
   public static retrieveBudget: ServiceActivatorFn =
-    (services: ActivatorServices): (() => Promise<boolean>) =>
+    ({ contextDataService }: ActivatorServices): (() => Promise<boolean>) =>
     async (params?: { budget?: string }): Promise<boolean> => {
-      const { signature } = services.contextDataService.get<QuoteControlModel>(QUOTE_CONTEXT_DATA);
+      const { signature } = contextDataService.get<QuoteControlModel>(QUOTE_CONTEXT_DATA);
       const budget = params?.budget ?? signature?.budget;
 
       if (!budget) {
@@ -48,8 +48,8 @@ export class BudgetActivator {
 
       const decrypted = BudgetUtils.decrypt<Budget>(storedDataKey.passKey, cipher);
 
-      services.contextDataService.set<AppContextData>(QUOTE_APP_CONTEXT_DATA, decrypted.context);
-      services.contextDataService.set<QuoteControlModel>(QUOTE_CONTEXT_DATA, {
+      contextDataService.set<AppContextData>(QUOTE_APP_CONTEXT_DATA, decrypted.context);
+      contextDataService.set<QuoteControlModel>(QUOTE_CONTEXT_DATA, {
         ...decrypted.quote
       });
 

@@ -3,7 +3,7 @@
     <span nxQuoteLiteral="header"></span>
     <p nxCopytext="normal" nxQuoteLiteral="subheader"></p>
   </quote-header-title>
-  <section class="form-container">
+  <section class="form-container" [ngClass]="{ 'not-found': !vehicleTypes.length }">
     @for(type of vehicleTypes; track type.index) {
     <div class="selectable-row">
       @let label = type.data | quoteLiteral:{value:type.index, first: $first ? {value: 'first', type:'literal'}: '', last: $last ? {value:

@@ -12,13 +12,12 @@
     "value": "20000",
     "base7": 7,
     "type": "Sedan",
-    "fuel": "Petrol",
+    "fuel": { "index": "G", "data": "Gasoline" },
     "releaseDate": "2019-12-01T00:00:00Z",
     "powerRange": "100-150",
     "cubicCapacity": "1500",
     "vehicleModelVersion": "2020",
-    "yearOfManufacture": 2019,
-    "vehicleType": "Passenger"
+    "yearOfManufacture": 2019
   },
   {
     "plateNumber": "5678FGH",
@@ -33,13 +32,12 @@
     "value": "25000",
     "base7": 14,
     "type": "Hatchback",
-    "fuel": "Diesel",
+    "fuel": { "index": "D", "data": "Diesel" },
     "releaseDate": "2018-11-15T00:00:00Z",
     "powerRange": "150-200",
     "cubicCapacity": "2000",
     "vehicleModelVersion": "2019",
-    "yearOfManufacture": 2018,
-    "vehicleType": "Passenger"
+    "yearOfManufacture": 2018
   },
   {
     "plateNumber": "9101IJK",
@@ -54,13 +52,12 @@
     "value": "22000",
     "base7": 21,
     "type": "Sedan",
-    "fuel": "Petrol",
+    "fuel": { "index": "G", "data": "Gasoline" },
     "releaseDate": "2020-10-20T00:00:00Z",
     "powerRange": "100-150",
     "cubicCapacity": "1600",
     "vehicleModelVersion": "2021",
-    "yearOfManufacture": 2020,
-    "vehicleType": "Passenger"
+    "yearOfManufacture": 2020
   },
   {
     "plateNumber": "1213LMN",
@@ -75,13 +72,12 @@
     "value": "21000",
     "base7": 28,
     "type": "Sedan",
-    "fuel": "Diesel",
+    "fuel": { "index": "D", "data": "Diesel" },
     "releaseDate": "2017-09-30T00:00:00Z",
     "powerRange": "100-150",
     "cubicCapacity": "1800",
     "vehicleModelVersion": "2018",
-    "yearOfManufacture": 2017,
-    "vehicleType": "Passenger"
+    "yearOfManufacture": 2017
   },
   {
     "plateNumber": "1415OPQ",
@@ -96,13 +92,12 @@
     "value": "23000",
     "base7": 35,
     "type": "Sedan",
-    "fuel": "Petrol",
+    "fuel": { "index": "G", "data": "Gasoline" },
     "releaseDate": "2016-08-10T00:00:00Z",
     "powerRange": "100-150",
     "cubicCapacity": "2500",
     "vehicleModelVersion": "2017",
-    "yearOfManufacture": 2016,
-    "vehicleType": "Passenger"
+    "yearOfManufacture": 2016
   },
   {
     "plateNumber": "1617RST",
@@ -117,13 +112,12 @@
     "value": "24000",
     "base7": 42,
     "type": "Hatchback",
-    "fuel": "Diesel",
+    "fuel": { "index": "D", "data": "Diesel" },
     "releaseDate": "2015-05-25T00:00:00Z",
     "powerRange": "150-200",
     "cubicCapacity": "2200",
     "vehicleModelVersion": "2016",
-    "yearOfManufacture": 2015,
-    "vehicleType": "Passenger"
+    "yearOfManufacture": 2015
   },
   {
     "plateNumber": "1819UVW",
@@ -138,13 +132,12 @@
     "value": "19000",
     "base7": 49,
     "type": "Sedan",
-    "fuel": "Petrol",
+    "fuel": { "index": "G", "data": "Gasoline" },
     "releaseDate": "2014-07-15T00:00:00Z",
     "powerRange": "100-150",
     "cubicCapacity": "1800",
     "vehicleModelVersion": "2015",
-    "yearOfManufacture": 2014,
-    "vehicleType": "Passenger"
+    "yearOfManufacture": 2014
   },
   {
     "plateNumber": "2021XYZ",
@@ -159,13 +152,12 @@
     "value": "26000",
     "base7": 56,
     "type": "Sedan",
-    "fuel": "Diesel",
+    "fuel": { "index": "D", "data": "Diesel" },
     "releaseDate": "2013-03-20T00:00:00Z",
     "powerRange": "150-200",
     "cubicCapacity": "2400",
     "vehicleModelVersion": "2014",
-    "yearOfManufacture": 2013,
-    "vehicleType": "Passenger"
+    "yearOfManufacture": 2013
   },
   {
     "plateNumber": "2223ABC",
@@ -180,13 +172,12 @@
     "value": "27000",
     "base7": 63,
     "type": "Sedan",
-    "fuel": "Petrol",
+    "fuel": { "index": "G", "data": "Gasoline" },
     "releaseDate": "2012-06-05T00:00:00Z",
     "powerRange": "100-150",
     "cubicCapacity": "1400",
     "vehicleModelVersion": "2013",
-    "yearOfManufacture": 2012,
-    "vehicleType": "Passenger"
+    "yearOfManufacture": 2012
   },
   {
     "plateNumber": "2425DEF",
@@ -201,13 +192,12 @@
     "value": "28000",
     "base7": 70,
     "type": "Hatchback",
-    "fuel": "Diesel",
+    "fuel": { "index": "D", "data": "Diesel" },
     "releaseDate": "2011-04-10T00:00:00Z",
     "powerRange": "150-200",
     "cubicCapacity": "2000",
     "vehicleModelVersion": "2012",
-    "yearOfManufacture": 2011,
-    "vehicleType": "Passenger"
+    "yearOfManufacture": 2011
   },
   {
     "plateNumber": "2627GHI",
@@ -222,13 +212,12 @@
     "value": "30000",
     "base7": 77,
     "type": "Sedan",
-    "fuel": "Petrol",
+    "fuel": { "index": "G", "data": "Gasoline" },
     "releaseDate": "2010-02-15T00:00:00Z",
     "powerRange": "200-250",
     "cubicCapacity": "3000",
     "vehicleModelVersion": "2011",
-    "yearOfManufacture": 2010,
-    "vehicleType": "Passenger"
+    "yearOfManufacture": 2010
   },
   {
     "plateNumber": "2829JKL",
@@ -243,13 +232,12 @@
     "value": "32000",
     "base7": 84,
     "type": "Sedan",
-    "fuel": "Diesel",
+    "fuel": { "index": "D", "data": "Diesel" },
     "releaseDate": "2009-01-25T00:00:00Z",
     "powerRange": "150-200",
     "cubicCapacity": "2500",
     "vehicleModelVersion": "2010",
-    "yearOfManufacture": 2009,
-    "vehicleType": "Passenger"
+    "yearOfManufacture": 2009
   },
   {
     "plateNumber": "3031MNO",
@@ -264,13 +252,12 @@
     "value": "34000",
     "base7": 91,
     "type": "Sedan",
-    "fuel": "Petrol",
+    "fuel": { "index": "G", "data": "Gasoline" },
     "releaseDate": "2008-12-01T00:00:00Z",
     "powerRange": "200-250",
     "cubicCapacity": "2000",
     "vehicleModelVersion": "2009",
-    "yearOfManufacture": 2008,
-    "vehicleType": "Passenger"
+    "yearOfManufacture": 2008
   },
   {
     "plateNumber": "3233PQR",
@@ -285,12 +272,39 @@
     "value": "36000",
     "base7": 98,
     "type": "Sedan",
-    "fuel": "Diesel",
+    "fuel": { "index": "D", "data": "Diesel" },
     "releaseDate": "2007-11-15T00:00:00Z",
     "powerRange": "200-250",
     "cubicCapacity": "2500",
     "vehicleModelVersion": "2008",
-    "yearOfManufacture": 2007,
-    "vehicleType": "Passenger"
+    "yearOfManufacture": 2007
+  },
+  {
+    "plateNumber": "1111HHH",
+    "firstRegistrationDate": "2010-05-01",
+    "vehicleCode": "V300",
+    "make": "Audi",
+    "model": "A4",
+    "power": 90,
+    "fuel": { "index": "D", "data": "Diesel" },
+    "vehicleModelVersion": "47462",
+    "base7": 80380010,
+    "price": 17240,
+    "cilind": 1598,
+    "yearOfManufacture": 2010
+  },
+  {
+    "plateNumber": "1111HHH",
+    "fechaLanzamiento": "2010-05-01",
+    "vehicleCode": "V301",
+    "make": "Audi",
+    "model": "A4 allroad",
+    "power": 90,
+    "fuel": { "index": "D", "data": "Diesel" },
+    "vehicleModelVersion": "47461",
+    "base7": 80380009,
+    "price": 19990,
+    "cilind": 1598,
+    "yearOfManufacture": 2010
   }
 ]

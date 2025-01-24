@@ -3,7 +3,7 @@
     <span nxQuoteLiteral="header"></span>
     <p nxCopytext="normal" nxQuoteLiteral="subheader"></p>
   </quote-header-title>
-  <div class="form-container">
+  <div class="form-container" [ngClass]="{ 'not-found': notFound }">
     @for(vehicle of vehicleOptions; track vehicle; let index = $index) {
     <div class="selectable-row reveal">
       @defer(on viewport) { @let brand_model = vehicle.brand + ' ' + vehicle.model; @let vehicle_info = vehicle.fuel?.data + ' - ' +
@@ -35,7 +35,7 @@
     <div class="extra__footer__options">
       <button
         class="nx-margin-y-2xs"
-        nxButton="tertiary small"
+        nxButton="{{ notFound ? 'primary' : 'tertiary' }} 'small'"
         type="button"
         [nxTrack]="{
           label: literal | quoteLiteral

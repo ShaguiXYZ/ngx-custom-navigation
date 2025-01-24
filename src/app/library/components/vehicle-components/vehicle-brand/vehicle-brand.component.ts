@@ -47,9 +47,10 @@ export class VehicleBrandComponent extends QuoteComponent<QuoteModel> implements
   private searchInput!: ElementRef;
 
   public form!: FormGroup;
-  public iconBrands!: IIconData[];
+  public iconBrands: IIconData[] = [];
   public searchedBrands: string[] = [];
   public selectedBrand?: string;
+  public notFound = false;
 
   private readonly routingService = inject(RoutingService);
   private readonly brandComponentService = inject(BrandComponentService);
@@ -112,7 +113,14 @@ export class VehicleBrandComponent extends QuoteComponent<QuoteModel> implements
   }
 
   private async searchBrands(): Promise<void> {
-    this.searchedBrands = this.form.value.searchInput ? await this.vehicleService.getBrands(this.form.value.searchInput) : [];
+    if (this.form.value.searchInput || this.iconBrands.length === 0) {
+      this.searchedBrands = await this.vehicleService.getBrands(this.form.value.searchInput);
+      this.notFound = this.searchedBrands.length === 0;
+      return;
+    }
+
+    this.searchedBrands = [];
+    this.notFound = this.iconBrands.length === 0;
   }
 
   /**

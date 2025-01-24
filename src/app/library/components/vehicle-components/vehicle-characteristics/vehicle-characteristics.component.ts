@@ -39,6 +39,7 @@ export class VehicleCharacteristicsComponent extends QuoteComponent<QuoteModel> 
     fuel: false,
     power: false
   };
+  public fuelNotFound = false;
 
   public cubicCapacities: CubicCapacityModel[] = [];
   public fuels: FuelModel[] = [];
@@ -58,15 +59,20 @@ export class VehicleCharacteristicsComponent extends QuoteComponent<QuoteModel> 
     ]);
 
     this.selectedFuel =
-      this._contextData.vehicle.fuel && this.fuels.includes(this._contextData.vehicle.fuel) ? this._contextData.vehicle.fuel : undefined;
+      this._contextData.vehicle.fuel && this.fuels.map(fuel => fuel.index).includes(this._contextData.vehicle.fuel.index)
+        ? this._contextData.vehicle.fuel
+        : undefined;
     this.selectedCubicCapacity =
-      this._contextData.vehicle.cubicCapacity && this.cubicCapacities.includes(this._contextData.vehicle.cubicCapacity)
+      this._contextData.vehicle.cubicCapacity &&
+      this.cubicCapacities.map(cubicCapacity => cubicCapacity.index).includes(this._contextData.vehicle.cubicCapacity.index)
         ? this._contextData.vehicle.cubicCapacity
         : undefined;
     this.selectedPower =
-      this._contextData.vehicle.powerRange && this.powers.includes(this._contextData.vehicle.powerRange)
+      this._contextData.vehicle.powerRange && this.powers.map(power => power.index).includes(this._contextData.vehicle.powerRange.index)
         ? this._contextData.vehicle.powerRange
         : undefined;
+
+    this.fuelNotFound = this.fuels.length === 0;
   }
 
   public override canDeactivate = (): boolean => {

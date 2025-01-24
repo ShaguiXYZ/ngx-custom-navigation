@@ -26,13 +26,12 @@ export class InsuranceCompaniesService {
           catchError(error => {
             throw new HttpError(error.status, error.statusText, error.url, error.method);
           }),
-          map(res => res as InsuranceCompanyDTO[]),
+          map(res => (res as InsuranceCompanyDTO[]).filter(data => !data.disabled)),
           map(res => res.map(data => InsuranceCompany.create(data))),
           map(res => (insurance ? res.filter(data => data.data.toLowerCase().includes(insurance.toLowerCase())) : res)),
           map(res => res.sort((a, b) => a.data.localeCompare(b.data)))
         )
     );
   }
-
   private cacheInsuranceCompanies = (): string => `${this._COMPANIES_CACHE_ID_}_`;
 }

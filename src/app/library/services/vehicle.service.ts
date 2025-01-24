@@ -50,7 +50,7 @@ export class VehicleService {
             throw new HttpError(error.status, error.statusText, error.url, error.method);
           }),
           map(res => res as VehicleDTO[]),
-          // map(res => res.find(data => data.plateNumber === plate.toLocaleUpperCase().replace(/[^A-Z0-9]/g, ''))),
+          map(res => res.filter(data => data.plateNumber === plate.toLocaleUpperCase().replace(/[^A-Z0-9]/g, ''))),
           map(res => res.map(VehicleDTO.toModel))
         )
     );

@@ -6,6 +6,8 @@ import { QuoteComponent } from '../_quote-component';
 
 type Manifest<T> = Record<string, { component: Type<T> }>;
 
+export type WorkflowSettings = QuoteWorkflowSettings<QuoteComponent<QuoteControlModel>, QuoteControlModel>;
+
 export interface LibraryManifest<T> {
   components: Manifest<T>;
   serviceActivators: Activator;
@@ -19,6 +21,4 @@ export interface QuoteWorkflowSettings<T extends QuoteComponent<Q>, Q extends Qu
   hash: (quote: Q) => string;
 }
 
-export const NX_WORKFLOW_TOKEN = new InjectionToken<QuoteWorkflowSettings<QuoteComponent<QuoteControlModel>, QuoteControlModel>>(
-  'NX_WORKFLOW_TOKEN'
-);
+export const NX_WORKFLOW_TOKEN = new InjectionToken<WorkflowSettings>('NX_WORKFLOW_TOKEN');

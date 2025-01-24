@@ -122,8 +122,8 @@ describe('VehicleService', () => {
 
   it('should find vehicle by plate', async () => {
     const plate = 'ABC123';
-    const mockVehicleDTO: VehicleDTO = { make: 'Toyota', model: 'Corolla' };
-    const mockVehicle: QuoteVehicleModel = { brand: 'Toyota', model: 'Corolla', creationDate: undefined };
+    const mockVehicleDTO: VehicleDTO = { make: 'Toyota', model: 'Corolla', plateNumber: plate };
+    const mockVehicle: QuoteVehicleModel = { brand: 'Toyota', model: 'Corolla', creationDate: undefined, plateNumber: plate };
 
     httpClientSpy.get.and.returnValue(of([mockVehicleDTO]));
 

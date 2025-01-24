@@ -5,6 +5,7 @@ export interface InsuranceCompanyDTO {
   label: string;
   TIREASN: string;
   value: string;
+  disabled?: boolean;
 }
 
 export type InsuranceCompany = IndexedData;

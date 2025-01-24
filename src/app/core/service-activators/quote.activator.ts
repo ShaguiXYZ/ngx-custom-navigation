@@ -5,12 +5,12 @@ import { ActivatorServices, ServiceActivatorFn } from './quote-activator.model';
 
 export class QuoteActivator {
   public static quotePatch: ServiceActivatorFn =
-    (services: ActivatorServices): ((params: unknown) => Promise<boolean>) =>
+    ({ contextDataService }: ActivatorServices) =>
     async (params: unknown): Promise<boolean> => {
-      const quote = services.contextDataService.get<QuoteControlModel>(QUOTE_CONTEXT_DATA);
+      const quote = contextDataService.get<QuoteControlModel>(QUOTE_CONTEXT_DATA);
 
-      services.contextDataService.set(QUOTE_CONTEXT_DATA, JsonUtils.patch(quote, params));
+      contextDataService.set(QUOTE_CONTEXT_DATA, JsonUtils.patch(quote, params));
 
-      return Promise.resolve(true);
+      return true;
     };
 }

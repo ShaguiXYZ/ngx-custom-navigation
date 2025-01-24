@@ -41,6 +41,7 @@ export class VehicleModelsComponent extends QuoteComponent<QuoteModel> implement
   public form!: FormGroup;
   public models: string[] = [];
   public selectedModel?: string;
+  public notFound = false;
 
   private readonly routingService = inject(RoutingService);
   private readonly vehicleService = inject(VehicleService);
@@ -57,6 +58,7 @@ export class VehicleModelsComponent extends QuoteComponent<QuoteModel> implement
 
     this.selectedModel = this._contextData.vehicle.model;
     this.models = await this.vehicleService.getModels(this._contextData.vehicle.brand, this._contextData.vehicle.model);
+
     if (this.selectedModel && !this.models.includes(this.selectedModel)) {
       this.initData();
     }
@@ -117,5 +119,6 @@ export class VehicleModelsComponent extends QuoteComponent<QuoteModel> implement
   private filteredModels = (): Promise<void> =>
     this.vehicleService.getModels(this._contextData.vehicle.brand!, this.form.value.searchInput).then(models => {
       this.models = models;
+      this.notFound = this.models.length === 0;
     });
 }

@@ -24,10 +24,6 @@ export const Activators: Activator = {
   '$store-budget': BudgetActivator.storeBudget
 };
 
-export interface ActivatorConfig {
-  resetRouting?: boolean;
-}
-
 export interface ActivatorServices {
   contextDataService: ContextDataService;
   httpService?: HttpService;

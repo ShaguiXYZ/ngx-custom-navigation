@@ -14,7 +14,7 @@
         @if(formValidations.fuel) {
         <nx-error appearance="text" nxFormfieldError><span nxQuoteLiteral="error-required"></span> </nx-error>
         }
-        <div class="vehicle__selections">
+        <div class="vehicle__selections" [ngClass]="{ 'not-found': fuelNotFound }">
           @for(fuel of fuels; track $index) { @let _selectedFuel = fuel.index === selectedFuel?.index;
           <div class="vehicle__selection nx-margin-2xs">
             @defer(on viewport) {

@@ -41,9 +41,10 @@ export class InsuranceCompaniesComponent extends QuoteComponent<QuoteModel> impl
   private searchInput!: ElementRef;
 
   public form!: FormGroup;
-  public iconInsurances!: IIconData[];
+  public iconInsurances: IIconData[] = [];
   public searchedInsurances: IndexedData[] = [];
   public selectedCompany?: IndexedData;
+  public notFound = false;
 
   private readonly routingService = inject(RoutingService);
   private readonly insuranceComponentService = inject(InsuranceComponentService);
@@ -98,9 +99,14 @@ export class InsuranceCompaniesComponent extends QuoteComponent<QuoteModel> impl
   }
 
   private async searchInsurances(): Promise<void> {
-    this.searchedInsurances = this.form.value.searchInput
-      ? await this.insuranceCompaniesService.companies(this.form.value.searchInput)
-      : [];
+    if (this.form.value.searchInput || this.iconInsurances.length === 0) {
+      this.searchedInsurances = await this.insuranceCompaniesService.companies(this.form.value.searchInput);
+      this.notFound = this.searchedInsurances.length === 0;
+      return;
+    }
+
+    this.searchedInsurances = [];
+    this.notFound = this.iconInsurances.length === 0;
   }
 
   private isValidData = (): boolean => {

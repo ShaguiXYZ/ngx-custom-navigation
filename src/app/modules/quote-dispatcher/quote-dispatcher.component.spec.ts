@@ -7,8 +7,9 @@ import { of } from 'rxjs';
 import { NX_WORKFLOW_TOKEN } from 'src/app/core/components/models';
 import { CommercialExceptionsModel, JourneyInfo, NX_LANGUAGE_CONFIG, QuoteSettingsModel } from 'src/app/core/models';
 import { BudgetActivator } from 'src/app/core/service-activators/budget.activator';
-import { JourneyService, NX_RECAPTCHA_TOKEN, RoutingService } from 'src/app/core/services';
+import { JourneyService, NX_RECAPTCHA_TOKEN, RoutingService, SettingsService } from 'src/app/core/services';
 import { QuoteDispatcherComponent } from './quote-dispatcher.component';
+import { QuoteTrackService } from 'src/app/core/tracking';
 
 describe('QuoteDispatcherComponent', () => {
   let component: QuoteDispatcherComponent;
@@ -21,6 +22,8 @@ describe('QuoteDispatcherComponent', () => {
   let mockJourneyService: jasmine.SpyObj<JourneyService>;
 
   beforeEach(async () => {
+    const settingsService = jasmine.createSpyObj('SettingsService', ['loadSettings']);
+    const trackServiceSpy = jasmine.createSpyObj('QuoteTrackService', ['trackView']);
     const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate', 'setDefaultLang', 'use', 'instant']);
     const mockWorkflowConfig = {
       errorPageId: 'error',
@@ -75,6 +78,8 @@ describe('QuoteDispatcherComponent', () => {
         { provide: JourneyService, useValue: mockJourneyService },
         { provide: TranslateService, useValue: translateServiceSpy },
         { provide: HttpService, useValue: mockHttpService },
+        { provide: QuoteTrackService, useValue: trackServiceSpy },
+        { provide: SettingsService, useValue: settingsService },
         { provide: NX_RECAPTCHA_TOKEN, useValue: { siteKey: 'mock-site-key' } },
         { provide: NX_WORKFLOW_TOKEN, useValue: mockWorkflowConfig },
         { provide: NX_LANGUAGE_CONFIG, useValue: mockLanguageConfig }
@@ -104,7 +109,8 @@ describe('QuoteDispatcherComponent', () => {
             pageId: 'home',
             route: 'home-route'
           }
-        }
+        },
+        version: { actual: 'v1.0.0', last: '1.0.0' }
       },
       navigation: {
         viewedPages: []
@@ -128,6 +134,28 @@ describe('QuoteDispatcherComponent', () => {
   });
 
   it('should call trackService if dispatcher param exists', async () => {
+    const mockContext = {
+      settings: {
+        commercialExceptions: { enableWorkFlow: true }
+      },
+      configuration: {
+        homePageId: 'home',
+        errorPageId: 'error',
+        pageMap: {
+          home: {
+            pageId: 'home',
+            route: 'home-route'
+          }
+        },
+        version: { actual: 'v1.0.0', last: '1.0.0' }
+      },
+      navigation: {
+        viewedPages: []
+      }
+    };
+
+    mockContextDataService.get.and.returnValue(mockContext);
+
     mockActivatedRoute.snapshot.params = { dispatcher: 'some-dispatcher' };
 
     await component.ngOnInit();
@@ -148,7 +176,8 @@ describe('QuoteDispatcherComponent', () => {
             pageId: 'home',
             route: 'home-route'
           }
-        }
+        },
+        version: { actual: 'v1.0.0', last: '1.0.0' }
       },
       navigation: {
         viewedPages: []
@@ -184,7 +213,8 @@ describe('QuoteDispatcherComponent', () => {
             pageId: 'home',
             route: 'home-route'
           }
-        }
+        },
+        version: { actual: 'v1.0.0', last: '1.0.0' }
       },
       navigation: {
         viewedPages: ['home']
