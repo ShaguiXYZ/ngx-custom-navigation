@@ -35,8 +35,8 @@ export class QuoteKeysComponent {
         event.preventDefault();
         break;
       case 'R':
-        ScreenRecorder.startRecording();
         event.preventDefault();
+        ScreenRecorder.startRecording();
         break;
       case 'P':
       case 'S': {

@@ -33,6 +33,8 @@ import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 })
 export class BirthdateComponent extends QuoteComponent<QuoteModel> {
   public readonly maxDate = dayjs();
+  public maxDate__Date!: Date;
+  public minDate__Date!: Date;
   public form!: FormGroup;
   public minValue = 18;
   public maxValue = 70;
@@ -42,7 +44,12 @@ export class BirthdateComponent extends QuoteComponent<QuoteModel> {
   private readonly quoteFormValidarors = inject(QuoteFormValidarors);
   private readonly fb = inject(FormBuilder);
 
-  protected override ngOnQuoteInit = this.createForm.bind(this);
+  protected override ngOnQuoteInit = (): void => {
+    this.maxDate__Date = this.maxDate.subtract(this.minValue, 'y').toDate();
+    this.minDate__Date = this.maxDate.subtract(this.maxValue, 'y').toDate();
+
+    this.createForm();
+  };
 
   public override canDeactivate = (): boolean => this.form.valid;
 

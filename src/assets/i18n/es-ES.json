@@ -217,6 +217,16 @@
       "Header": "¡Muchas gracias {{name}}!",
       "Subheader": "Uno de nuestros agentes te llamará a la hora que has solicitado para darte toda la información que necesites.",
       "FooterNext": "FINALIZAR"
+    },
+    "EsteEsTuSeguro": {
+      "Header": "Este es tu seguro",
+      "Subheader": "Estás a punto de contratar el seguro más completo del mercado.",
+      "CoveragesHeader": "Compara las coberturas de tu seguro",
+      "FooterNext": "LLAMAR AHORA",
+      "FromNow": "Desde hoy {{value}}",
+      "Popular": "El más contratado",
+      "ViewCoverages": "Ver coberturas",
+      "FeeHeader": "Valor de la franquicia"
     }
   },
   "Footer": {

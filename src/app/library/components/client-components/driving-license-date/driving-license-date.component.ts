@@ -34,6 +34,7 @@ import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 export class DrivingLicenseDateComponent extends QuoteComponent<QuoteModel> {
   public readonly maxDate = dayjs();
   public readonly minYears = 18;
+  public maxDate__Date!: Date;
   public minDrivingYears = 1;
   public form!: FormGroup;
 
@@ -42,7 +43,11 @@ export class DrivingLicenseDateComponent extends QuoteComponent<QuoteModel> {
   private readonly quoteFormValidarors = inject(QuoteFormValidarors);
   private readonly fb = inject(FormBuilder);
 
-  protected override ngOnQuoteInit = this.createForm.bind(this);
+  protected override ngOnQuoteInit = (): void => {
+    this.maxDate__Date = this.maxDate.subtract(this.minDrivingYears, 'y').toDate();
+
+    this.createForm();
+  };
 
   public override canDeactivate = (): boolean => this.form.valid;
 

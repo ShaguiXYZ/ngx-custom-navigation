@@ -35,6 +35,8 @@ export class DateOfIssueComponent extends QuoteComponent<QuoteModel> {
   public readonly maxDays = 90;
   public readonly minDate = dayjs();
   public readonly maxDate = dayjs().add(this.maxDays, 'days');
+  public minDate__Date!: Date;
+  public maxDate__Date!: Date;
   public form!: FormGroup;
 
   private expirationInfo: { value: number; unit: ManipulateType } = { value: 1, unit: 'y' };
@@ -43,7 +45,12 @@ export class DateOfIssueComponent extends QuoteComponent<QuoteModel> {
   private readonly quoteFormValidarors = inject(QuoteFormValidarors);
   private readonly fb = inject(FormBuilder);
 
-  protected override ngOnQuoteInit = this.createForm.bind(this);
+  protected override ngOnQuoteInit = (): void => {
+    this.minDate__Date = this.minDate.toDate();
+    this.maxDate__Date = this.maxDate.toDate();
+
+    this.createForm();
+  };
 
   public override canDeactivate = (): boolean => this.form.valid;
 

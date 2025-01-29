@@ -37,7 +37,7 @@ export const isNIE = (nie?: string): boolean => {
   }
 
   // Convert the initial letter to its corresponding number
-  const convertedNieNumber = nieLetterIndex + nieNumber;
+  const convertedNieNumber = nieLetterIndex.toString() + nieNumber;
   const letter = nie.charAt(8);
   const validLetters = 'TRWAGMYFPDXBNJZSQVHLCKE';
   const letterIndex = Number(convertedNieNumber) % 23;

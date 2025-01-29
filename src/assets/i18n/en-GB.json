@@ -217,6 +217,16 @@
       "Header": "Thank you very much {{name}}!",
       "Subheader": "One of our agents will call you at the requested time to provide you with all the information you need.",
       "FooterNext": "FINISH"
+    },
+    "EsteEsTuSeguro": {
+      "Header": "This is your insurance",
+      "Subheader": "You are about to purchase the most comprehensive insurance on the market.",
+      "CoveragesHeader": "Compare your insurance coverages",
+      "FooterNext": "CALL NOW",
+      "FromNow": "From today {{value}}",
+      "Popular": "The most contracted",
+      "ViewCoverages": "View coverages",
+      "FeeHeader": "Deductible amount"
     }
   },
   "Footer": {

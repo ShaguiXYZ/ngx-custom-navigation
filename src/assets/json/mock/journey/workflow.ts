@@ -559,7 +559,7 @@ export const WORKFLOW: ConfigurationDTO<QuoteModel, WorkflowManifestId> = {
           header: { value: 'Pages.TimeInsuranceHolder.Header', type: 'translate' },
           year: { value: 'Pages.TimeInsuranceHolder.Year', type: 'translate' },
           years: { value: 'Pages.TimeInsuranceHolder.Years', type: 'translate' },
-          last: { value: 'or-more', type: 'literal' }
+          last: { value: 'Label.OrMore', type: 'translate' }
         }
       }
     },
@@ -584,7 +584,7 @@ export const WORKFLOW: ConfigurationDTO<QuoteModel, WorkflowManifestId> = {
           accident: '{{value}} {{last}}',
           accidents: '{{value}} {{last}}',
           first: { value: 'Pages.NumberAccidents.First', type: 'translate' },
-          last: { value: 'or-more', type: 'literal' },
+          last: { value: 'Label.OrMore', type: 'translate' },
           header: {
             value: 'Pages.NumberAccidents.Header',
             type: 'translate',
@@ -1096,7 +1096,6 @@ export const WORKFLOW: ConfigurationDTO<QuoteModel, WorkflowManifestId> = {
     fuel: { value: 'Label.Fuel', type: 'translate' },
     'hint-date-format': { value: 'Label.DateFormat', type: 'translate' },
     no: { value: 'Label.No', type: 'translate' },
-    'or-more': { value: 'Label.OrMore', type: 'translate' },
     phone: '+49 55 5555 5555',
     power: { value: 'Label.Power', type: 'translate' },
     search: { value: 'Label.Search', type: 'translate' },

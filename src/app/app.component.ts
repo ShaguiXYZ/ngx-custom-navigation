@@ -18,21 +18,21 @@ import { QuoteLiteralDirective } from './shared/directives';
 import { QuoteLiteralPipe } from './shared/pipes';
 
 @Component({
-    selector: 'quote-root',
-    templateUrl: './app.component.html',
-    styleUrls: ['./app.component.scss'],
-    providers: [QuoteLiteralPipe],
-    imports: [
-        RouterModule,
-        NxGridModule,
-        CaptchaComponent,
-        NotificationComponent,
-        QuoteKeysComponent,
-        QuoteHeaderComponent,
-        QuoteLoadingComponent,
-        QuoteStepperComponent,
-        QuoteLiteralDirective
-    ]
+  selector: 'quote-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.scss'],
+  providers: [QuoteLiteralPipe],
+  imports: [
+    RouterModule,
+    NxGridModule,
+    CaptchaComponent,
+    NotificationComponent,
+    QuoteKeysComponent,
+    QuoteHeaderComponent,
+    QuoteLoadingComponent,
+    QuoteStepperComponent,
+    QuoteLiteralDirective
+  ]
 })
 export class AppComponent implements OnInit, OnDestroy {
   public verified?: boolean;
@@ -42,8 +42,9 @@ export class AppComponent implements OnInit, OnDestroy {
   private readonly contextDataService = inject(ContextDataService);
   private readonly literalService = inject(LiteralsService);
   private readonly notificationService = inject(NotificationService);
+  private readonly router = inject(Router);
 
-  constructor(private readonly router: Router) {
+  constructor() {
     const {
       settings: {
         commercialExceptions: { captchaVerified }
@@ -70,13 +71,13 @@ export class AppComponent implements OnInit, OnDestroy {
   // @howto Detect the Browser Back Button
   @HostListener('window:popstate', ['$event'])
   onPopState(event: PopStateEvent): void {
+    event.preventDefault();
+    event.stopPropagation();
+
     this.notificationService.warning(
       this.literalService.toString({ value: 'not-allowed', type: 'literal' }) || 'Operation not allowed ',
       this.literalService.toString({ value: 'use-back-button', type: 'literal' }) || 'Please use the back button in the application'
     );
-
-    event.preventDefault();
-    event.stopPropagation();
   }
 
   public onCaptchaVerified(verified: boolean): void {

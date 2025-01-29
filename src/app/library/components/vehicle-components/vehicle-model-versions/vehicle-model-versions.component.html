@@ -27,9 +27,9 @@
           [selected]="modelVersion.index === selectedModelVersion?.index"
           [data]="modelVersion.data"
           [nxTrack]="{
-          label: modelVersion.data,
-          modelVersion: modelVersion.index.toString(),
-        }"
+            label: modelVersion.data,
+            modelVersion: modelVersion.index.toString(),
+          }"
           [nxTrackEvents]="['click']"
           (uiSelect)="selectVersion(modelVersion)"
         />

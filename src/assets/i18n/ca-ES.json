@@ -217,6 +217,16 @@
       "Header": "Moltes gràcies {{name}}!",
       "Subheader": "Un dels nostres agents et trucarà a l'hora que has sol·licitat per donar-te tota la informació que necessitis.",
       "FooterNext": "FINALITZAR"
+    },
+    "EsteEsTuSeguro": {
+      "Header": "Aquest és el teu segur",
+      "Subheader": "Estàs a punt de contractar el segur més complet del mercat.",
+      "CoveragesHeader": "Compara les cobertures del teu segur",
+      "FooterNext": "TRUCAR ARA",
+      "FromNow": "Des d'avui {{value}}",
+      "Popular": "El més contractat",
+      "ViewCoverages": "Veure cobertures",
+      "FeeHeader": "Valor de la franquícia"
     }
   },
   "Footer": {

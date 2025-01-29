@@ -1,5 +1,5 @@
 (function () {
-  window._satellite = window._satellite || {};
+  globalThis._satellite = globalThis._satellite || {};
 
   _satellite.track = (event, data) => {
     try {

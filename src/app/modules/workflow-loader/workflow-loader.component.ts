@@ -55,6 +55,7 @@ export class WorkflowLoaderComponent implements OnInit, OnDestroy, AfterViewInit
       this.container.clear();
       const componentRef = this.container.createComponent<QuoteComponent<any>>(manifest.component);
       this._instance = componentRef.instance;
+      this._instance.name = manifestKey;
       window.history.pushState({}, '', lastPage.routeTree ?? lastPage.pageId);
     } catch {
       throw new JourneyError(`Failed to load component ${manifestKey}`);

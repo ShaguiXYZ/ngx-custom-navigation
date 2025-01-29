@@ -4,13 +4,15 @@ import { ContextDataService, deepCopy, JsonUtils } from '@shagui/ng-shagui/core'
 import { Subject, Subscription, takeUntil } from 'rxjs';
 import { DEFAULT_DISPLAY_DATE_FORMAT, QUOTE_APP_CONTEXT_DATA, QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
 import { AppContextData, QuoteControlModel } from 'src/app/core/models';
-import { LanguageService } from '../../services';
 import { ServiceActivatorService } from '../../service-activators';
+import { LanguageService } from '../../services';
 
 @Component({
   template: ''
 })
 export abstract class QuoteComponent<T extends QuoteControlModel> implements OnDestroy {
+  public name?: string;
+
   protected displayDateFormat = DEFAULT_DISPLAY_DATE_FORMAT;
   protected displayDateFormats: string[] = [DEFAULT_DISPLAY_DATE_FORMAT];
   protected _contextData: T;
@@ -27,7 +29,10 @@ export abstract class QuoteComponent<T extends QuoteControlModel> implements OnD
   constructor() {
     this.serviveActivatorService.activateEntryPoint('on-init');
 
-    this.subscription$.push(this.contextDataService.onDataChange<T>(QUOTE_CONTEXT_DATA).subscribe(data => (this._contextData = data)));
+    this.contextDataService
+      .onDataChange<T>(QUOTE_CONTEXT_DATA)
+      .pipe(takeUntil(this._destroyed))
+      .subscribe(data => (this._contextData = data));
     this._contextData = this.contextDataService.get<T>(QUOTE_CONTEXT_DATA);
     this.__localeConfig();
 

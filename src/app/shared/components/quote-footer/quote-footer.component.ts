@@ -14,10 +14,10 @@ import { QuoteZoneComponent } from '../quote-zone';
 import { QuoteFooterInfoComponent } from './components';
 
 @Component({
-    selector: 'quote-footer',
-    templateUrl: './quote-footer.component.html',
-    styleUrl: './quote-footer.component.scss',
-    imports: [QuoteFooterInfoComponent, QuoteZoneComponent, CommonModule, NxButtonModule, QuoteLiteralDirective, QuoteTrackDirective]
+  selector: 'quote-footer',
+  templateUrl: './quote-footer.component.html',
+  styleUrl: './quote-footer.component.scss',
+  imports: [QuoteFooterInfoComponent, QuoteZoneComponent, CommonModule, NxButtonModule, QuoteLiteralDirective, QuoteTrackDirective]
 })
 export class QuoteFooterComponent implements OnInit, OnDestroy {
   @Input()

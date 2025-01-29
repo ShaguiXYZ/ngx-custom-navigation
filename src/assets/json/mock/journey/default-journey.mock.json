@@ -789,11 +789,12 @@
       ],
       "configuration": {
         "literals": {
-          "coverages-modal-header": "Compara las coberturas de tu seguro",
-          "footer-next": "LLAMAR AHORA",
-          "from-now": "Desde hoy {{value}}",
-          "popular": "El más contratado",
-          "view-coverages": "Ver coberturas"
+          "coverages-header": { "value": "Pages.EsteEsTuSeguro.CoveragesHeader", "type": "translate" },
+          "footer-next": { "value": "Pages.EsteEsTuSeguro.FooterNext", "type": "translate" },
+          "from-now": { "value": "Pages.EsteEsTuSeguro.FromNow", "type": "translate" },
+          "popular": { "value": "Pages.EsteEsTuSeguro.Popular", "type": "translate" },
+          "view-coverages": { "value": "Pages.EsteEsTuSeguro.ViewCoverages", "type": "translate" },
+          "fee-header": { "value": "Pages.EsteEsTuSeguro.FeeHeader", "type": "translate" }
         },
         "serviceActivators": [
           {
@@ -1085,7 +1086,6 @@
     "quote-copied-to-clipboard": "Presupuesto copiado al portapapeles, guardalo en un lugar seguro para poder acceder al mismo en otro momento.",
     "cubic-capacity": { "value": "Label.CubicCapacity", "type": "translate" },
     "currency": "€",
-    "fee-header": "Valor de la franquicia",
     "footer-back": { "value": "Label.Back", "type": "translate" },
     "footer-next": { "value": "Label.Next", "type": "translate" },
     "fuel": { "value": "Label.Fuel", "type": "translate" },
