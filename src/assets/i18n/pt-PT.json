@@ -176,9 +176,10 @@
       "Subheader": "Usaremos esses dados apenas para lhe dar um orçamento totalmente personalizado",
       "Hint": "Número de DNI ou NIE",
       "FooterInfo": "Para oferecer o melhor seguro, é importante verificar sua identidade.",
+      "BadFormat": "O número de identificação não é válido",
       "ErrorRequired": "O número de identificação é obrigatório para continuar",
-      "ErrorNif": "O número de identificação não é válido",
-      "ErrorNie": "O número de identificação não é válido"
+      "ErrorNif": "O Nif não é válido",
+      "ErrorNie": "O Nie não é válido"
     },
     "IsClientClientName": {
       "Header": "Qual é o seu nome?",

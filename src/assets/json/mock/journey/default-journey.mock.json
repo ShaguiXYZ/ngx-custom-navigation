@@ -766,6 +766,7 @@
           "subheader": { "value": "Pages.ClientIdentificationNumber.Subheader", "type": "translate" },
           "identification-number": { "value": "Pages.ClientIdentificationNumber.Hint", "type": "translate" },
           "footer-info": { "value": "Pages.ClientIdentificationNumber.FooterInfo", "type": "translate" },
+          "bad-format": { "value": "Pages.ClientPhoneNumber.BadFormat", "type": "translate" },
           "error-required": { "value": "Pages.ClientPhoneNumber.ErrorRequired", "type": "translate" },
           "error-nif": { "value": "Pages.ClientIdentificationNumber.ErrorNif", "type": "translate" },
           "error-nie": { "value": "Pages.ClientIdentificationNumber.ErrorNie", "type": "translate" }

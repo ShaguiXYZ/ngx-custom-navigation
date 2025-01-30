@@ -14,6 +14,8 @@
         <nx-error appearance="text" nxFormfieldError><span nxQuoteLiteral="error-nif"></span> </nx-error>
         } @if(form.get('identificationNumber')?.errors?.['@isNie']) {
         <nx-error appearance="text" nxFormfieldError><span nxQuoteLiteral="error-nie"></span> </nx-error>
+        } @if(form.get('identificationNumber')?.errors?.['matches']) {
+        <nx-error appearance="text" nxFormfieldError><span nxQuoteLiteral="bad-format"></span> </nx-error>
         }
       </nx-formfield>
     </form>

@@ -176,9 +176,10 @@
       "Subheader": "We will only use this data to give you a fully personalized quote",
       "Hint": "DNI or NIE number",
       "FooterInfo": "To offer you the best insurance, it is important to verify your identity.",
+      "BadFormat": "The identification number is not valid",
       "ErrorRequired": "The identification number is required to continue",
-      "ErrorNif": "The identification number is not valid",
-      "ErrorNie": "The identification number is not valid"
+      "ErrorNif": "The Nif is not valid",
+      "ErrorNie": "The Nie is not valid"
     },
     "IsClientClientName": {
       "Header": "What is your name?",

@@ -177,8 +177,8 @@
       "Hint": "Número de DNI o NIE",
       "FooterInfo": "Per oferir-te la millor assegurança és important verificar la teva identitat.",
       "ErrorRequired": "El número d'identificació és obligatori per continuar",
-      "ErrorNif": "El número d'identificació no és vàlid",
-      "ErrorNie": "El número d'identificació no és vàlid"
+      "ErrorNif": "El NIF no és vàlid",
+      "ErrorNie": "El NIE no és vàlid"
     },
     "IsClientClientName": {
       "Header": "Com et dius?",

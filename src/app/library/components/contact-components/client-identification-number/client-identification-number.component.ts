@@ -9,7 +9,7 @@ import { QuoteModel } from 'src/app/library/models';
 import { HeaderTitleComponent, QuoteFooterComponent } from 'src/app/shared/components';
 import { QuoteAutoFocusDirective, QuoteLiteralDirective } from 'src/app/shared/directives';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
-import { isNIF } from './models';
+import { isNIE, isNIF } from './models';
 
 @Component({
   selector: 'quote-client-identification-number',
@@ -73,17 +73,26 @@ export class ClientIdentificationNumberComponent extends QuoteComponent<QuoteMod
     }
   }
 
-  public isValidDocument =
-    (): ValidatorFn =>
-    (control: AbstractControl): ValidationErrors | null => {
-      const nifValidator = this.quoteFormValidarors.activateEntryPoint(control, '@isNif', !isNIF(control.value));
+  public isValidDocument(): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const value = control.value?.trim();
 
-      if (nifValidator) {
-        return nifValidator;
+      if (!value) {
+        return null;
       }
 
-      const nieValidator = this.quoteFormValidarors.activateEntryPoint(control, '@isNie', !isNIF(control.value));
+      const nifRegex = /^[0-9]{8}[A-Za-z]$/;
+      const nieRegex = /^[XYZ][0-9]{7}[A-Za-z]$/;
 
-      return nieValidator;
+      if (nifRegex.test(value)) {
+        return this.quoteFormValidarors.activateEntryPoint(control, '@isNif', !isNIF(value));
+      }
+
+      if (nieRegex.test(value)) {
+        return this.quoteFormValidarors.activateEntryPoint(control, '@isNie', !isNIE(value));
+      }
+
+      return { matches: true };
     };
+  }
 }
