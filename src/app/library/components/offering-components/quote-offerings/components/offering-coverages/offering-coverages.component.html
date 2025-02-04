@@ -10,7 +10,7 @@
         <div class="coverages">
           <nx-accordion variant="light" [multi]="false">
             @for(coverage of price.coverageList; track coverage.code) {
-            <nx-expansion-panel [expanded]="false">
+            <nx-expansion-panel [expanded]="false" (opened)="onCoverageOpened(coverage)">
               <nx-expansion-panel-header>
                 <nx-expansion-panel-title nxHeadline="subsection-xsmall">
                   <div class="coverage">
@@ -19,7 +19,9 @@
                   </div>
                 </nx-expansion-panel-title>
               </nx-expansion-panel-header>
-              {{ coverage.description || coverage.text }}
+              @if(coverageSelectecd === coverage.code) {
+              <quote-translate-text [text]="coverage.description"></quote-translate-text>
+              }
             </nx-expansion-panel>
             }
           </nx-accordion>

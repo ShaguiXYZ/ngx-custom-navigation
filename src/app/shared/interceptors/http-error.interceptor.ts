@@ -1,57 +1,41 @@
 import { HttpErrorResponse, HttpEvent, HttpHandlerFn, HttpInterceptorFn, HttpRequest, HttpStatusCode } from '@angular/common/http';
-import { inject } from '@angular/core';
-import { ContextDataService } from '@shagui/ng-shagui/core';
-import { Observable, throwError } from 'rxjs';
+import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { QUOTE_APP_CONTEXT_DATA } from '../../core/constants';
-import { HttpError } from '../../core/errors';
-import { AppContextData } from '../../core/models';
-import { RoutingService } from '../../core/services';
+import { HttpError } from 'src/app/core/errors';
+
+type StatusCodes =
+  | HttpStatusCode.BadRequest
+  | HttpStatusCode.Unauthorized
+  | HttpStatusCode.Forbidden
+  | HttpStatusCode.NotFound
+  | HttpStatusCode.InternalServerError;
 
 export const httpErrorInterceptor: HttpInterceptorFn = (req: HttpRequest<unknown>, next: HttpHandlerFn): Observable<HttpEvent<unknown>> => {
-  const contextDataService = inject(ContextDataService);
-  const routingService = inject(RoutingService);
-
   return next(req).pipe(
-    catchError((error: HttpErrorResponse) => {
-      let errorMessage = 'An unknown error occurred!';
+    catchError((error: HttpErrorResponse): Observable<never> => {
+      let errorMessage = error.statusText ?? 'Unknown error';
 
       if (error.error instanceof ErrorEvent) {
         // Client-side error
-        console.log('Client-side error');
+        console.error(`Client-side error (${error.status})`);
       } else {
         // Server-side error
-        console.log('Server-side error');
+        const httpErrorMessage: Record<StatusCodes, string> = {
+          [HttpStatusCode.BadRequest]: 'Bad Request',
+          [HttpStatusCode.Forbidden]: 'Forbidden',
+          [HttpStatusCode.InternalServerError]: 'Internal Server Error',
+          [HttpStatusCode.NotFound]: 'Not Found',
+          [HttpStatusCode.Unauthorized]: 'Unauthorized'
+        };
 
-        switch (error.status) {
-          case HttpStatusCode.BadRequest:
-            errorMessage = 'Bad Request';
-            break;
-          case HttpStatusCode.Unauthorized:
-            errorMessage = 'Unauthorized';
-            break;
-          case HttpStatusCode.Forbidden:
-            errorMessage = 'Forbidden';
-            break;
-          case HttpStatusCode.NotFound:
-            errorMessage = 'Not Found';
-            break;
-          case HttpStatusCode.InternalServerError:
-            errorMessage = 'Internal Server Error';
-            break;
-          default:
-            errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
-        }
+        errorMessage = `${httpErrorMessage[error.status as StatusCodes] ?? errorMessage} (${error.status})`;
 
-        const {
-          configuration: { errorPageId }
-        } = contextDataService.get<AppContextData>(QUOTE_APP_CONTEXT_DATA);
-
-        routingService.goToPage(errorPageId).catch(console.error);
+        console.error(`Server-side error: ${errorMessage}`);
       }
 
-      const httpError = error as HttpErrorResponse;
-      return throwError(() => new HttpError(httpError.status, errorMessage, httpError.url ?? '', httpError.error?.method ?? ''));
+      return new Observable<never>(observer => {
+        observer.error(new HttpError(error.status, errorMessage, error.url, req.method, true));
+      });
     })
   );
 };

@@ -1,9 +1,8 @@
 import { HttpParams, HttpStatusCode } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { HttpService, TTL, UniqueIds } from '@shagui/ng-shagui/core';
-import { catchError, firstValueFrom, map } from 'rxjs';
+import { firstValueFrom, map } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { HttpError } from '../../core/errors';
 import { ModelVersionModel, QuoteVehicleModel, VehicleDTO } from '../models';
 import {
   BrandDTO,
@@ -46,9 +45,6 @@ export class VehicleService {
           showLoading: true
         })
         .pipe(
-          catchError(error => {
-            throw new HttpError(error.status, error.statusText, error.url, error.method);
-          }),
           map(res => res as VehicleDTO[]),
           map(res => res.filter(data => data.plateNumber === plate.toLocaleUpperCase().replace(/[^A-Z0-9]/g, ''))),
           map(res => res.map(VehicleDTO.toModel))
@@ -66,9 +62,6 @@ export class VehicleService {
           showLoading: true
         })
         .pipe(
-          catchError(error => {
-            throw new HttpError(error.status, error.statusText, error.url, error.method);
-          }),
           map(res => res as VehicleDTO[]),
           map(res => res.map(VehicleDTO.toModel))
         )
@@ -122,9 +115,6 @@ export class VehicleService {
           cache: { id: this.cacheModelByBranch(make, year), ttl: TTL.L }
         })
         .pipe(
-          catchError(error => {
-            throw new HttpError(error.status, error.statusText, error.url, error.method);
-          }),
           map(res => res as VehicleModelDTO),
           map(res => (!make ? [] : res.data)),
           map(res => (search ? res.filter(data => data.name.toLowerCase().includes(search.toLowerCase())) : res)),
@@ -152,9 +142,6 @@ export class VehicleService {
           cache: { id: this.cacheModelVersionByBranch(model), ttl: TTL.L }
         })
         .pipe(
-          catchError(error => {
-            throw new HttpError(error.status, error.statusText, error.url, error.method);
-          }),
           map(res => (!model ? [] : res)),
           map(res => (res as ModelVersionModel[]).filter(data => !!data.data)),
           map(res => res.sort((a, b) => a.data.localeCompare(b.data)))
@@ -176,9 +163,6 @@ export class VehicleService {
           showLoading: true
         })
         .pipe(
-          catchError(error => {
-            throw new HttpError(error.status, error.statusText, error.url, error.method);
-          }),
           map(res => res as FuelDTO[]),
           map(res => res.map(FuelDTO.toModel)),
           map(res => (!brand || !model ? [] : res))
@@ -200,9 +184,6 @@ export class VehicleService {
           showLoading: true
         })
         .pipe(
-          catchError(error => {
-            throw new HttpError(error.status, error.statusText, error.url, error.method);
-          }),
           map(res => res as CubicCapacityDTO[]),
           map(res => res.map(CubicCapacityDTO.toModel)),
           map(res => (!brand || !model ? [] : res))
@@ -224,9 +205,6 @@ export class VehicleService {
           showLoading: true
         })
         .pipe(
-          catchError(error => {
-            throw new HttpError(error.status, error.statusText, error.url, error.method);
-          }),
           map(res => res as VehicleClassesDTO[]),
           map(res => res.map(VehicleClassesDTO.toModel)),
           map(res => (!brand || !model ? [] : res))

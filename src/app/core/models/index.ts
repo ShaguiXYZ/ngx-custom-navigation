@@ -17,3 +17,4 @@ export * from './quote-version.model';
 export * from './signature.model';
 export * from './stepper-config.model';
 export * from './stepper.model';
+export * from './quote-translate.model';

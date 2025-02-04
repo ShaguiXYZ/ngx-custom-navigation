@@ -1,10 +1,9 @@
 import { HttpStatusCode } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { DataInfo, HttpService, TTL, UniqueIds } from '@shagui/ng-shagui/core';
-import { catchError, firstValueFrom, map } from 'rxjs';
+import { firstValueFrom, map } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { LocationDTO, LocationModel } from '../models';
-import { HttpError } from '../errors';
 
 @Injectable()
 export class LocationService {
@@ -23,9 +22,6 @@ export class LocationService {
           cache: { id: this.cacheProvinces(), ttl: TTL.XXL }
         })
         .pipe(
-          catchError(error => {
-            throw new HttpError(error.status, error.statusText, error.url, error.method);
-          }),
           map(res => res as DataInfo),
           map(res => res[provinceCode])
         )
@@ -54,12 +50,7 @@ export class LocationService {
             },
             showLoading: true
           })
-          .pipe(
-            catchError(error => {
-              throw new HttpError(error.status, error.statusText, error.url, error.method);
-            }),
-            map(res => res as LocationDTO[])
-          )
+          .pipe(map(res => res as LocationDTO[]))
       );
 
       const location = locations.find(data => data.province === provinceCode && data.code === locationCode);

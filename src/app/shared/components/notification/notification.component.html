@@ -1,25 +1,25 @@
 @for (notification of notifications; track notification.id) {
-  <div class="message-content">
-    <nx-message closable="{{ notification.closable }}" [context]="notification.type" (close)="close(notification.id)">
-      <header>
-        <strong class="title">
-          {{ notification.title }}
-        </strong>
-      </header>
-      <section>
-        <span class="description">{{ notification.description }}</span>
-        @if (notification.button) {
-          <button
-            type="button"
-            nxButton="{{ notification.button.type }} small-medium"
-            class="nx-margin-bottom-0"
-            (click)="notification.button.action()"
-          >
-            <em class="fa-solid fa-arrow-right nx-margin-right-2xs"></em>
-            {{ notification.button.text }}
-          </button>
-        }
-      </section>
-    </nx-message>
-  </div>
+<div class="message-content">
+  <nx-message closable="{{ notification.closable }}" [context]="notification.type" (close)="close(notification.id)">
+    <header>
+      <strong class="title">
+        {{ notification.title }}
+      </strong>
+    </header>
+    <section>
+      <span class="description">{{ notification.description }}</span>
+      @if (notification.button) {
+      <button
+        type="button"
+        nxButton="{{ notification.button.type }} small-medium"
+        class="nx-margin-bottom-0"
+        (click)="notification.button.action()"
+      >
+        <em class="fa-solid fa-arrow-right nx-margin-right-2xs"></em>
+        {{ notification.button.text }}
+      </button>
+      }
+    </section>
+  </nx-message>
+</div>
 }

@@ -11,4 +11,5 @@ export * from './quote-stepper';
 export * from './quote-zone';
 export * from './selectable-option';
 export * from './switch-theme';
-export * from './text-card';
+export * from './text-card/text-card.component';
+export * from './translate-text/translate-text.component';

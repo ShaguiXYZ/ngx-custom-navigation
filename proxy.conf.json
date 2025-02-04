@@ -8,5 +8,15 @@
     "pathRewrite": {
       "^/api": "/api"
     }
+  },
+  {
+    "context": ["/translate"],
+    "target": "https://libretranslate.com",
+    "secure": false,
+    "changeOrigin": true,
+    "logLevel": "debug",
+    "pathRewrite": {
+      "^/translate": "/translate"
+    }
   }
 ]

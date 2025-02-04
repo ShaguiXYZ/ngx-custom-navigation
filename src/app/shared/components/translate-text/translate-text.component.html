@@ -1,0 +1,5 @@
+@defer (when text) {
+<span>{{ text! | quoteTranslate | async }}</span>
+} @placeholder {
+<div class="loader"></div>
+}

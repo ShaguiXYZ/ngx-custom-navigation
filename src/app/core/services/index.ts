@@ -6,3 +6,4 @@ export * from './location.service';
 export * from './recaptcha.service';
 export * from './routing.service';
 export * from './setting.service';
+export * from './translation.service';

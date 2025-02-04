@@ -1,18 +1,42 @@
-import { TestBed } from '@angular/core/testing';
-import { GlobalErrorHandler } from '../global-error.handler';
-import { ConditionError } from '../condition.error';
-import { TrackError } from '../track.error';
-import { HttpError } from '../http.error';
 import { HttpStatusCode } from '@angular/common/http';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
+import { TestBed } from '@angular/core/testing';
+import { ContextDataService } from '@shagui/ng-shagui/core';
+import { AppContextData } from '../../models';
+import { RoutingService } from '../../services';
+import { ConditionError } from '../condition.error';
+import { GlobalErrorHandler } from '../global-error.handler';
+import { HttpError } from '../http.error';
+import { TrackError } from '../track.error';
 
 describe('GlobalErrorHandler', () => {
   let errorHandler: GlobalErrorHandler;
+  let httpMock: HttpTestingController;
+  let routingServiceSpy: jasmine.SpyObj<RoutingService>;
+  let contextDataServiceSpy: jasmine.SpyObj<ContextDataService>;
 
   beforeEach(() => {
+    routingServiceSpy = jasmine.createSpyObj('RoutingService', ['goToPage']);
+    contextDataServiceSpy = jasmine.createSpyObj('ContextDataService', ['get']);
+
+    contextDataServiceSpy.get.and.returnValue({ configuration: { errorPageId: 'errorPageId' } } as AppContextData);
+
     TestBed.configureTestingModule({
-      providers: [GlobalErrorHandler]
+      providers: [
+        GlobalErrorHandler,
+        provideHttpClientTesting(),
+        { provide: RoutingService, useValue: routingServiceSpy },
+        { provide: ContextDataService, useValue: contextDataServiceSpy }
+      ]
     });
     errorHandler = TestBed.inject(GlobalErrorHandler);
+    httpMock = TestBed.inject(HttpTestingController);
+
+    routingServiceSpy.goToPage.and.returnValue(Promise.resolve(true));
+  });
+
+  afterEach(() => {
+    httpMock.verify();
   });
 
   it('should be created', () => {
@@ -30,7 +54,7 @@ describe('GlobalErrorHandler', () => {
   });
 
   it('shold log the condition error to the console', () => {
-    const consoleGroupSpy = spyOn(console, 'group');
+    const consoleGroupSpy = spyOn(console, 'groupCollapsed');
     const consoleErrorSpy = spyOn(console, 'error');
     const conditionError = new ConditionError('Test condition error', { expression: 'age', operation: '>', value: 18 });
 
@@ -42,7 +66,7 @@ describe('GlobalErrorHandler', () => {
   });
 
   it('shold log the track error to the console', () => {
-    const consoleGroupSpy = spyOn(console, 'group');
+    const consoleGroupSpy = spyOn(console, 'groupCollapsed');
     const consoleErrorSpy = spyOn(console, 'error');
     const trackError = new TrackError('Test track error', 'Test event');
 
@@ -54,7 +78,7 @@ describe('GlobalErrorHandler', () => {
   });
 
   it('shold log the http error to the console', () => {
-    const consoleGroupSpy = spyOn(console, 'group');
+    const consoleGroupSpy = spyOn(console, 'groupCollapsed');
     const consoleErrorSpy = spyOn(console, 'error');
     const httpError = new HttpError(HttpStatusCode.NotFound, 'Not Found', 'http://test.com', 'GET');
 

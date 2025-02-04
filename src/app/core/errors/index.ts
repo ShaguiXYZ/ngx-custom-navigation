@@ -1,3 +1,4 @@
+export * from './_error.model';
 export * from './budget.error';
 export * from './condition.error';
 export * from './global-error.handler';

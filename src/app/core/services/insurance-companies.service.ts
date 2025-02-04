@@ -1,9 +1,8 @@
 import { HttpStatusCode } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { HttpService, IndexedData, TTL, UniqueIds } from '@shagui/ng-shagui/core';
-import { catchError, firstValueFrom, map } from 'rxjs';
+import { firstValueFrom, map } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { HttpError } from '../errors';
 import { InsuranceCompany, InsuranceCompanyDTO } from '../models';
 
 @Injectable()
@@ -23,9 +22,6 @@ export class InsuranceCompaniesService {
           cache: { id: this.cacheInsuranceCompanies(), ttl: TTL.XXL }
         })
         .pipe(
-          catchError(error => {
-            throw new HttpError(error.status, error.statusText, error.url, error.method);
-          }),
           map(res => (res as InsuranceCompanyDTO[]).filter(data => !data.disabled)),
           map(res => res.map(data => InsuranceCompany.create(data))),
           map(res => (insurance ? res.filter(data => data.data.toLowerCase().includes(insurance.toLowerCase())) : res)),
