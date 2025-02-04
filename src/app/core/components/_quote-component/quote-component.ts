@@ -80,6 +80,12 @@ export abstract class QuoteComponent<T extends QuoteControlModel> implements OnD
       }
     }
 
+    this.resetView();
     this.ngOnQuoteInit?.();
   };
+
+  private resetView(): void {
+    document.body.scrollTop = 0; // For Safari browsers
+    document.documentElement.scrollTo(0, 0); // For other browsers
+  }
 }

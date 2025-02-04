@@ -4,7 +4,7 @@ import { ActivatedRouteSnapshot, CanActivateFn, GuardResult, MaybeAsync, RouterS
 import { ContextDataService, deepCopy } from '@shagui/ng-shagui/core';
 import { NX_WORKFLOW_TOKEN } from 'src/app/core/components/models';
 import { QUOTE_APP_CONTEXT_DATA, QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
-import { AppContextData, QuoteControlModel, Track } from 'src/app/core/models';
+import { AppContextData, QuoteControlModel, Track, TrackPoints } from 'src/app/core/models';
 
 /**
  * Guard function to control navigation flow based on the application's context data.
@@ -40,18 +40,24 @@ export const journeyGuard: CanActivateFn = (route: ActivatedRouteSnapshot, state
    * @param {Object} param0.navigation.track - The current track information.
    * @returns {Track | undefined} - The updated track information or undefined if no updates are made.
    */
-  const trackControl = ({ configuration: { steppers }, navigation: { nextPage, lastPage, track } }: AppContextData): Track | undefined => {
+  const trackControl = ({
+    configuration: { steppers },
+    navigation: { nextPage, lastPage, track = TrackPoints.init<QuoteControlModel>(), viewedPages }
+  }: AppContextData): TrackPoints => {
     const nextStepperKey = nextPage?.stepper?.key;
     const lastStepperKey = lastPage?.stepper?.key;
-    let _track = deepCopy(track);
+    const _track = deepCopy(track);
 
     if (lastStepperKey && nextStepperKey !== lastStepperKey) {
       const lastStepper = steppers?.[lastStepperKey];
 
       if (lastStepper?.stateInfo?.inherited === false) {
-        const inData = _track?.[lastStepperKey]?.inData;
+        const inData = _track.stepper[lastStepperKey]?.inData;
 
-        _track = { ...(_track ?? {}), [lastStepperKey]: { data: deepCopy(contextDataService.get<QuoteControlModel>(QUOTE_CONTEXT_DATA)) } };
+        _track.stepper = {
+          ..._track.stepper,
+          [lastStepperKey]: { data: deepCopy(contextDataService.get<QuoteControlModel>(QUOTE_CONTEXT_DATA)) }
+        };
         inData && contextDataService.set(QUOTE_CONTEXT_DATA, inData);
       }
 
@@ -59,11 +65,28 @@ export const journeyGuard: CanActivateFn = (route: ActivatedRouteSnapshot, state
 
       if (nextStepper && nextStepper?.stateInfo?.inherited === false) {
         const quote = deepCopy(contextDataService.get<QuoteControlModel>(QUOTE_CONTEXT_DATA));
-        const tracked = _track?.[nextStepperKey]?.data ?? workFlowToken.initialize();
+        const tracked = _track.stepper[nextStepperKey]?.data ?? workFlowToken.initialize();
 
-        _track = { ...(_track ?? {}), [nextStepperKey]: { inData: quote, data: tracked } };
+        _track.stepper = { ..._track.stepper, [nextStepperKey]: { inData: quote, data: tracked } };
         contextDataService.set(QUOTE_CONTEXT_DATA, tracked);
       }
+    }
+
+    const _pageKey = nextPage?.pageId || undefined;
+
+    if (_pageKey && _track.page[_pageKey]) {
+      const pageIndex = viewedPages.indexOf(nextPage!.pageId);
+      const viewedPagesAfter = pageIndex >= 0 ? viewedPages.slice(pageIndex) : [nextPage!.pageId];
+
+      contextDataService.set(QUOTE_CONTEXT_DATA, _track.page[_pageKey].data);
+
+      viewedPagesAfter.forEach(pageId => {
+        // const key = trackKey('page', pageId);
+
+        if (_track.page[pageId]) {
+          delete _track.page[pageId];
+        }
+      });
     }
 
     return _track;

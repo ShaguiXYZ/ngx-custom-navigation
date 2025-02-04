@@ -20,6 +20,7 @@ export type EntryPoint =
 
 export const Activators: Activator = {
   '$patch-quote': QuoteActivator.quotePatch,
+  '$track-quote': QuoteActivator.quoteTrack,
   '$retrieve-budget': BudgetActivator.retrieveBudget,
   '$store-budget': BudgetActivator.storeBudget
 };

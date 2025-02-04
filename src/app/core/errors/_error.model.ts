@@ -4,7 +4,7 @@ export class _Error extends Error {
     this.critical = critical;
   }
 
-  public static throw = (error: Error): void => {
+  public static readonly throw = (error: Error): void => {
     Promise.resolve().then(() => {
       throw error;
     });

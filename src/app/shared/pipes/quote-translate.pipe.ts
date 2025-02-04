@@ -8,6 +8,10 @@ export class QuoteTranslatePipe implements PipeTransform {
   private readonly translationService = inject(TranslationService);
 
   async transform(value: string): Promise<string> {
+    if (!value) {
+      return value;
+    }
+
     return await this.translationService
       .translate(value)
       .then(response => response.translatedText)

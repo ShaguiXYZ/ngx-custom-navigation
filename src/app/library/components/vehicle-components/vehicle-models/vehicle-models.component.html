@@ -7,9 +7,9 @@
   <section class="form-container">
     <form [formGroup]="form">
       <nx-formfield [label]="'search' | quoteLiteral" appearance="outline">
-        <input #searchInput type="text" formControlName="searchInput" nxInput />
+        <input #searchInput type="text" formControlName="searchInput" tabindex="0" nxInput />
         @if(searchInput.value) {
-        <span class="clear-input" tabindex="0" (click)="clearInput()" nxFormfieldSuffix>
+        <span class="clear-input" tabindex="1" (click)="clearInput()" nxFormfieldSuffix>
           <em class="fa-solid fa-eraser"></em>
         </span>
         } @else {
@@ -21,7 +21,7 @@
     </form>
 
     <div class="serached-data" [ngClass]="{ 'not-found': notFound }">
-      @for(model of models; track $index) {
+      @for(model of models; track model) {
       <div class="selectable-row">
         <quote-text-card
           [selected]="model === selectedModel"

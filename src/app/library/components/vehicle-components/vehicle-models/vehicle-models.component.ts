@@ -51,13 +51,14 @@ export class VehicleModelsComponent extends QuoteComponent<QuoteModel> implement
     this.createForm();
 
     if (!this._contextData.vehicle.brand) {
-      console.warn('Brand not selected');
+      console.warn('Not brand selected');
       this.initData();
       return;
     }
 
     this.selectedModel = this._contextData.vehicle.model;
-    this.models = await this.vehicleService.getModels(this._contextData.vehicle.brand, this._contextData.vehicle.model);
+
+    await this.filteredModels();
 
     if (this.selectedModel && !this.models.includes(this.selectedModel)) {
       this.initData();

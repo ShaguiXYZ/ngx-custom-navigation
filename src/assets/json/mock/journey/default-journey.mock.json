@@ -388,6 +388,29 @@
         }
       ],
       "configuration": {
+        "serviceActivators": [
+          {
+            "entryPoint": "on-destroy",
+            "activator": "$track-quote",
+            "conditions": [
+              {
+                "expression": "vehicle.vehicleType",
+                "value": "unregistered"
+              }
+            ]
+          },
+          {
+            "entryPoint": "on-destroy",
+            "activator": "$patch-quote",
+            "params": { "vehicle": { "plateNumber": null }, "driven": { "hasDrivenLicense": false } },
+            "conditions": [
+              {
+                "expression": "vehicle.vehicleType",
+                "value": "unregistered"
+              }
+            ]
+          }
+        ],
         "literals": {
           "header": { "value": "Pages.VehicleType.Header", "type": "translate" },
           "vehicle-old": { "value": "Pages.VehicleType.VehicleOld", "type": "translate" },
@@ -766,8 +789,8 @@
           "subheader": { "value": "Pages.ClientIdentificationNumber.Subheader", "type": "translate" },
           "identification-number": { "value": "Pages.ClientIdentificationNumber.Hint", "type": "translate" },
           "footer-info": { "value": "Pages.ClientIdentificationNumber.FooterInfo", "type": "translate" },
-          "bad-format": { "value": "Pages.ClientPhoneNumber.BadFormat", "type": "translate" },
-          "error-required": { "value": "Pages.ClientPhoneNumber.ErrorRequired", "type": "translate" },
+          "bad-format": { "value": "Errors.BadFormat", "type": "translate" },
+          "error-required": { "value": "Pages.ClientIdentificationNumber.ErrorRequired", "type": "translate" },
           "error-nif": { "value": "Pages.ClientIdentificationNumber.ErrorNif", "type": "translate" },
           "error-nie": { "value": "Pages.ClientIdentificationNumber.ErrorNie", "type": "translate" }
         },

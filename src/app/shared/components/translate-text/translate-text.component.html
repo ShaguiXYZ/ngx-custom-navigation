@@ -1,5 +1,5 @@
 @defer (when text) {
-<span>{{ text! | quoteTranslate | async }}</span>
+<span class="translated__text" nxCopytext="normal">{{ text! | quoteTranslate | async }}</span>
 } @placeholder {
 <div class="loader"></div>
 }

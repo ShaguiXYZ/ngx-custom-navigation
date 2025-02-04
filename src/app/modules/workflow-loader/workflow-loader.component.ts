@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { CommonModule } from '@angular/common';
 import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild, ViewContainerRef, inject } from '@angular/core';
 import { ContextDataService, LoadingService } from '@shagui/ng-shagui/core';
@@ -6,7 +5,7 @@ import { QuoteComponent } from 'src/app/core/components';
 import { NX_WORKFLOW_TOKEN } from 'src/app/core/components/models';
 import { QUOTE_APP_CONTEXT_DATA } from 'src/app/core/constants';
 import { JourneyError } from 'src/app/core/errors';
-import { AppContextData } from 'src/app/core/models';
+import { AppContextData, QuoteControlModel } from 'src/app/core/models';
 
 @Component({
   template: `<ng-template #dynamicComponent> </ng-template>`,
@@ -17,7 +16,7 @@ export class WorkflowLoaderComponent implements OnInit, OnDestroy, AfterViewInit
   @ViewChild('dynamicComponent', { read: ViewContainerRef, static: true })
   private container!: ViewContainerRef;
 
-  public _instance?: QuoteComponent<any>;
+  public _instance?: QuoteComponent<QuoteControlModel>;
 
   private readonly workflowToken = inject(NX_WORKFLOW_TOKEN);
   private readonly contextDataService = inject(ContextDataService);
@@ -53,9 +52,10 @@ export class WorkflowLoaderComponent implements OnInit, OnDestroy, AfterViewInit
 
     try {
       this.container.clear();
-      const componentRef = this.container.createComponent<QuoteComponent<any>>(manifest.component);
+      const componentRef = this.container.createComponent<QuoteComponent<QuoteControlModel>>(manifest.component);
       this._instance = componentRef.instance;
       this._instance.name = manifestKey;
+
       window.history.pushState({}, '', lastPage.routeTree ?? lastPage.pageId);
     } catch {
       throw new JourneyError(`Failed to load component ${manifestKey}`);

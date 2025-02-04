@@ -392,6 +392,19 @@ export const WORKFLOW: ConfigurationDTO<QuoteModel, WorkflowManifestId> = {
         }
       ],
       configuration: {
+        serviceActivators: [
+          {
+            entryPoint: 'on-destroy',
+            activator: '$patch-quote',
+            params: { vehicle: { plateNumber: null } },
+            conditions: [
+              {
+                expression: 'vehicle.vehicleType',
+                value: 'unregistered'
+              }
+            ]
+          }
+        ],
         literals: {
           header: { value: 'Pages.VehicleType.Header', type: 'translate' },
           'vehicle-old': { value: 'Pages.VehicleType.VehicleOld', type: 'translate' },
@@ -559,7 +572,7 @@ export const WORKFLOW: ConfigurationDTO<QuoteModel, WorkflowManifestId> = {
           header: { value: 'Pages.TimeInsuranceHolder.Header', type: 'translate' },
           year: { value: 'Pages.TimeInsuranceHolder.Year', type: 'translate' },
           years: { value: 'Pages.TimeInsuranceHolder.Years', type: 'translate' },
-          last: { value: 'Label.OrMore', type: 'translate' }
+          last: { value: 'or-more', type: 'literal' }
         }
       }
     },
@@ -584,7 +597,7 @@ export const WORKFLOW: ConfigurationDTO<QuoteModel, WorkflowManifestId> = {
           accident: '{{value}} {{last}}',
           accidents: '{{value}} {{last}}',
           first: { value: 'Pages.NumberAccidents.First', type: 'translate' },
-          last: { value: 'Label.OrMore', type: 'translate' },
+          last: { value: 'or-more', type: 'literal' },
           header: {
             value: 'Pages.NumberAccidents.Header',
             type: 'translate',
@@ -770,6 +783,7 @@ export const WORKFLOW: ConfigurationDTO<QuoteModel, WorkflowManifestId> = {
           subheader: { value: 'Pages.ClientIdentificationNumber.Subheader', type: 'translate' },
           'identification-number': { value: 'Pages.ClientIdentificationNumber.Hint', type: 'translate' },
           'footer-info': { value: 'Pages.ClientIdentificationNumber.FooterInfo', type: 'translate' },
+          'bad-format': { value: 'Pages.ClientPhoneNumber.BadFormat', type: 'translate' },
           'error-required': { value: 'Pages.ClientPhoneNumber.ErrorRequired', type: 'translate' },
           'error-nif': { value: 'Pages.ClientIdentificationNumber.ErrorNif', type: 'translate' },
           'error-nie': { value: 'Pages.ClientIdentificationNumber.ErrorNie', type: 'translate' }
@@ -793,11 +807,12 @@ export const WORKFLOW: ConfigurationDTO<QuoteModel, WorkflowManifestId> = {
       ],
       configuration: {
         literals: {
-          'coverages-modal-header': 'Compara las coberturas de tu seguro',
-          'footer-next': 'LLAMAR AHORA',
-          'from-now': 'Desde hoy {{value}}',
-          popular: 'El más contratado',
-          'view-coverages': 'Ver coberturas'
+          'coverages-header': { value: 'Pages.EsteEsTuSeguro.CoveragesHeader', type: 'translate' },
+          'footer-next': { value: 'Pages.EsteEsTuSeguro.FooterNext', type: 'translate' },
+          'from-now': { value: 'Pages.EsteEsTuSeguro.FromNow', type: 'translate' },
+          popular: { value: 'Pages.EsteEsTuSeguro.Popular', type: 'translate' },
+          'view-coverages': { value: 'Pages.EsteEsTuSeguro.ViewCoverages', type: 'translate' },
+          'fee-header': { value: 'Pages.EsteEsTuSeguro.FeeHeader', type: 'translate' }
         },
         serviceActivators: [
           {
@@ -1090,12 +1105,12 @@ export const WORKFLOW: ConfigurationDTO<QuoteModel, WorkflowManifestId> = {
       'Presupuesto copiado al portapapeles, guardalo en un lugar seguro para poder acceder al mismo en otro momento.',
     'cubic-capacity': { value: 'Label.CubicCapacity', type: 'translate' },
     currency: '€',
-    'fee-header': 'Valor de la franquicia',
     'footer-back': { value: 'Label.Back', type: 'translate' },
     'footer-next': { value: 'Label.Next', type: 'translate' },
     fuel: { value: 'Label.Fuel', type: 'translate' },
     'hint-date-format': { value: 'Label.DateFormat', type: 'translate' },
     no: { value: 'Label.No', type: 'translate' },
+    'or-more': { value: 'Label.OrMore', type: 'translate' },
     phone: '+49 55 5555 5555',
     power: { value: 'Label.Power', type: 'translate' },
     search: { value: 'Label.Search', type: 'translate' },

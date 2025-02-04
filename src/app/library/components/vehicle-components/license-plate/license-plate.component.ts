@@ -58,7 +58,7 @@ export class LicensePlateComponent extends QuoteComponent<QuoteModel> implements
   public override canDeactivate = (): boolean => this._contextData.driven.hasDrivenLicense === false || this.form.valid;
 
   public continueWithOutLicensePlate = (): void => {
-    this._contextData.vehicle.plateNumber = '';
+    this._contextData.vehicle.plateNumber = undefined;
     this._contextData.driven.hasDrivenLicense = false;
 
     this.routingService.next();
