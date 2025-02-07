@@ -20,7 +20,17 @@ export class BrandComponentService {
           showLoading: true,
           cache: { id: this.cacheIconBrands(), ttl: TTL.XXL }
         })
-        .pipe(map(res => res as IconDictionary))
+        .pipe(
+          map(res => res as IconDictionary),
+          map(res => {
+            return Object.keys(res)
+              .filter(key => res[key].active)
+              .reduce((acc, key) => {
+                acc[key] = res[key];
+                return acc;
+              }, {} as IconDictionary);
+          })
+        )
     );
   }
 

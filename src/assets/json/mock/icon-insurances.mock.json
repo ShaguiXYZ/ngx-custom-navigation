@@ -1,10 +1,10 @@
 {
-  "C031": { "icon": "assets/images/wm/insurances/company/c031.png" },
-  "C058": { "icon": "assets/images/wm/insurances/company/c058.png" },
-  "C468": { "icon": "assets/images/wm/insurances/company/c468.png" },
-  "CAMV": { "icon": "assets/images/wm/insurances/company/camv.png" },
-  "C723": { "icon": "assets/images/wm/insurances/company/caxa.png" },
-  "CING": { "icon": "assets/images/wm/insurances/company/cing.png" },
-  "E189": { "icon": "assets/images/wm/insurances/company/e189.png" },
-  "M050": { "icon": "assets/images/wm/insurances/company/m050.png" }
+  "C031": { "icon": "assets/images/wm/insurances/company/c031.png", "active": true },
+  "C058": { "icon": "assets/images/wm/insurances/company/c058.png", "active": true },
+  "C468": { "icon": "assets/images/wm/insurances/company/c468.png", "active": true },
+  "CAMV": { "icon": "assets/images/wm/insurances/company/camv.png", "active": true },
+  "C723": { "icon": "assets/images/wm/insurances/company/caxa.png", "active": true },
+  "CING": { "icon": "assets/images/wm/insurances/company/cing.png", "active": true },
+  "E189": { "icon": "assets/images/wm/insurances/company/e189.png", "active": true },
+  "M050": { "icon": "assets/images/wm/insurances/company/m050.png", "active": true }
 }
