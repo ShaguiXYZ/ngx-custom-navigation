@@ -5,7 +5,10 @@ export interface CommercialExceptionsModel {
    *              and is no longer configurable by the client.
    **/
   enableWorkflow?: boolean;
-  enableTracking: boolean;
+  /**
+   * @deprecated: Retrievable from the server, but not configurable by the client.
+   **/
+  enableTracking?: boolean;
 }
 
 export interface QuoteSettingsModel {

@@ -8,7 +8,7 @@ import { of, Subscription } from 'rxjs';
 import { NX_WORKFLOW_TOKEN } from '../../components/models';
 import { QUOTE_APP_CONTEXT_DATA, QUOTE_CONTEXT_DATA } from '../../constants';
 import { AppContextData, NX_LANGUAGE_CONFIG } from '../../models';
-import { NX_RECAPTCHA_TOKEN } from '../../services';
+import { JourneyService, NX_RECAPTCHA_TOKEN } from '../../services';
 import { TrackInfo } from '../quote-track.model';
 import { QuoteTrackService } from '../quote-track.service';
 import { _window } from '../window-tracker.model';
@@ -20,6 +20,7 @@ describe('QuoteTrackService', () => {
   let subscription: jasmine.SpyObj<Subscription>;
 
   beforeEach(() => {
+    const journeyServiceSpy = jasmine.createSpyObj('JourneyService', ['trackEvent']);
     const breakpointObserverSpy = jasmine.createSpyObj('BreakpointObserver', ['observe']);
     const routerSpy = jasmine.createSpyObj('Router', [], { events: of(new NavigationEnd(1, '/test', '/test')) });
     const contextDataServiceSpy = jasmine.createSpyObj('ContextDataService', ['get']);
@@ -62,6 +63,7 @@ describe('QuoteTrackService', () => {
         { provide: Router, useValue: routerSpy },
         { provide: ContextDataService, useValue: contextDataServiceSpy },
         { provide: TranslateService, useValue: translateServiceSpy },
+        { provide: JourneyService, useValue: journeyServiceSpy },
         { provide: Subscription, useValue: subscriptionSpy },
         { provide: NX_RECAPTCHA_TOKEN, useValue: { siteKey: 'mock-site-key' } },
         { provide: NX_WORKFLOW_TOKEN, useValue: mockWorkflowConfig },

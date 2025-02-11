@@ -14,10 +14,19 @@ app.use(express.json());
 app.get('/journey/setting/values', async (req, res) => {
   try {
     const config = await settings();
-    const { enableWorkflow, ...commercialExceptions } = config.commercialExceptions;
-    const value = { ...config, commercialExceptions };
+    const { commercialExceptions, ...value } = config;
 
     res.json(value);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+app.get('/journey/setting/enable-tracking', async (req, res) => {
+  try {
+    const config = await settings();
+
+    res.json(config.commercialExceptions.enableTracking);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

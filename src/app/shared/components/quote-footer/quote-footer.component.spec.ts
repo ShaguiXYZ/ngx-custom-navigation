@@ -3,12 +3,13 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { TranslateService } from '@ngx-translate/core';
 import { ContextDataService } from '@shagui/ng-shagui/core';
 import { of } from 'rxjs';
+import { NX_WORKFLOW_TOKEN } from 'src/app/core/components/models';
 import { NX_LANGUAGE_CONFIG, QuoteFooterConfig } from 'src/app/core/models';
 import { NX_RECAPTCHA_TOKEN, RoutingService } from 'src/app/core/services';
 import { ContextDataServiceStub } from 'src/app/core/stub';
+import { QuoteTrackService } from 'src/app/core/tracking';
 import { QuoteLiteralPipe } from '../../pipes';
 import { QuoteFooterComponent } from './quote-footer.component';
-import { NX_WORKFLOW_TOKEN } from 'src/app/core/components/models';
 
 describe('QuoteFooterComponent', () => {
   let component: QuoteFooterComponent;
@@ -17,6 +18,7 @@ describe('QuoteFooterComponent', () => {
   let routingService: jasmine.SpyObj<RoutingService>;
 
   beforeEach(async () => {
+    const quoteTrackServiceSpy = jasmine.createSpyObj('QuoteTrackService', ['trackView']);
     const breakpointObserverSpy = jasmine.createSpyObj('BreakpointObserver', ['observe']);
     const routingServiceSpy = jasmine.createSpyObj('RoutingService', ['next', 'previous']);
     const quoteLiteralPipeSpy = jasmine.createSpyObj('QuoteLiteralPipe', ['transform']);
@@ -38,6 +40,7 @@ describe('QuoteFooterComponent', () => {
         { provide: ContextDataService, useClass: ContextDataServiceStub },
         { provide: TranslateService, useValue: translateServiceSpy },
         { provide: RoutingService, useValue: routingServiceSpy },
+        { provide: QuoteTrackService, useValue: quoteTrackServiceSpy },
         { provide: QuoteLiteralPipe, useValue: quoteLiteralPipeSpy },
         { provide: NX_RECAPTCHA_TOKEN, useValue: { siteKey: 'mock-site-key' } },
         { provide: NX_WORKFLOW_TOKEN, useValue: mockWorkflowConfig },

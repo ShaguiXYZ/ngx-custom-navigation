@@ -3,6 +3,11 @@ const path = require('path');
 
 const JSON_FILE_PATH = path.join(__dirname, 'data', 'journey');
 
+/**
+ * Retrieves the settings JSON data.
+ *
+ * @returns
+ */
 async function settings() {
   try {
     return await readJson('settings');

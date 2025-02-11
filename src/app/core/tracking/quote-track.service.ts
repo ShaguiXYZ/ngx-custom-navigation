@@ -5,11 +5,11 @@ import { Subscription } from 'rxjs';
 import { NX_WORKFLOW_TOKEN } from '../components/models';
 import { CAPTCHA_TOKEN_KEY, QUOTE_APP_CONTEXT_DATA, QUOTE_CONTEXT_DATA } from '../constants';
 import { TrackError } from '../errors';
+import { StorageLib } from '../lib';
 import { AppContextData, QuoteControlModel } from '../models';
-import { CaptchaService, LiteralsService } from '../services';
+import { CaptchaService, JourneyService, LiteralsService } from '../services';
 import { TrackEventType, TrackInfo, TrackInfoPageModel } from './quote-track.model';
 import { _window } from './window-tracker.model';
-import { StorageLib } from '../lib';
 
 @Injectable({ providedIn: 'root' })
 export class QuoteTrackService implements OnDestroy {
@@ -26,6 +26,7 @@ export class QuoteTrackService implements OnDestroy {
   private readonly breakpointObserver = inject(BreakpointObserver);
   private readonly contextDataService = inject(ContextDataService);
   private readonly literalService = inject(LiteralsService);
+  private readonly journeyService = inject(JourneyService);
 
   constructor() {
     this.subscription$.push(
@@ -131,6 +132,12 @@ export class QuoteTrackService implements OnDestroy {
   };
 
   private trackFn = async (eventType: TrackEventType | 'view', trackInfo?: TrackInfo): Promise<void> => {
+    const enableTracking = await this.journeyService.enableTracking();
+
+    if (!enableTracking) {
+      return;
+    }
+
     if (!_window._satellite) {
       throw new TrackError('Adobe Launch not found', eventType, trackInfo);
     }

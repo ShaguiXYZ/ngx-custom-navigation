@@ -6,6 +6,7 @@ import { NX_WORKFLOW_TOKEN } from 'src/app/core/components/models';
 import { NX_LANGUAGE_CONFIG } from 'src/app/core/models';
 import { ServiceActivatorService } from 'src/app/core/service-activators';
 import { NX_RECAPTCHA_TOKEN, RoutingService } from 'src/app/core/services';
+import { QuoteTrackService } from 'src/app/core/tracking';
 import { QuoteModel } from 'src/app/library/models';
 import { CubicCapacityModel, FuelModel, VehicleClassesModel } from 'src/app/library/models/vehicle';
 import { VehicleService } from 'src/app/library/services';
@@ -19,6 +20,7 @@ describe('VehicleCharacteristicsComponent', () => {
   let routingService: jasmine.SpyObj<RoutingService>;
 
   beforeEach(async () => {
+    const quoteTrackServiceSpy = jasmine.createSpyObj('QuoteTrackService', ['trackView']);
     const vehicleServiceSpy = jasmine.createSpyObj('VehicleService', ['getFuelTypes', 'cubicCapacities', 'getVehicleClasses']);
     const routingServiceSpy = jasmine.createSpyObj('RoutingService', ['next']);
     const quoteLiteralPipeSpy = jasmine.createSpyObj('QuoteLiteralPipe', ['transform']);
@@ -44,6 +46,7 @@ describe('VehicleCharacteristicsComponent', () => {
         { provide: QuoteLiteralPipe, useValue: quoteLiteralPipeSpy },
         { provide: RoutingService, useValue: routingServiceSpy },
         { provide: ServiceActivatorService, useValue: activateEntryPointSpy },
+        { provide: QuoteTrackService, useValue: quoteTrackServiceSpy },
         { provide: NX_RECAPTCHA_TOKEN, useValue: { siteKey: 'mock-site-key' } },
         { provide: NX_WORKFLOW_TOKEN, useValue: mockWorkflowConfig },
         { provide: NX_LANGUAGE_CONFIG, useValue: mockLanguageConfig }

@@ -19,6 +19,7 @@ import { HeaderTitleComponent, QuoteFooterComponent, SelectableOptionComponent }
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 import { YourCarIsComponent } from './your-car-is.component';
+import { QuoteTrackService } from 'src/app/core/tracking';
 
 describe('YourCarIsComponent', () => {
   let component: YourCarIsComponent;
@@ -27,6 +28,7 @@ describe('YourCarIsComponent', () => {
   let vehicleService: jasmine.SpyObj<VehicleService>;
 
   beforeEach(async () => {
+    const quoteTrackServiceSpy = jasmine.createSpyObj('QuoteTrackService', ['trackView']);
     const quoteLiteralPipeSpy = jasmine.createSpyObj('QuoteLiteralPipe', ['transform']);
     const routingServiceSpy = jasmine.createSpyObj('RoutingService', ['next']);
     const vehicleServiceSpy = jasmine.createSpyObj('VehicleService', ['vehicles']);
@@ -64,6 +66,7 @@ describe('YourCarIsComponent', () => {
         { provide: RoutingService, useValue: routingServiceSpy },
         { provide: VehicleService, useValue: vehicleServiceSpy },
         { provide: ServiceActivatorService, useValue: activateEntryPointSpy },
+        { provide: QuoteTrackService, useValue: quoteTrackServiceSpy },
         { provide: QuoteLiteralPipe, useValue: quoteLiteralPipeSpy },
         { provide: NX_RECAPTCHA_TOKEN, useValue: { siteKey: 'mock-site-key' } },
         { provide: NX_WORKFLOW_TOKEN, useValue: mockWorkflowConfig },

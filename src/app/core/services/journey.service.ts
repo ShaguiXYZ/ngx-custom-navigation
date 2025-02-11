@@ -1,9 +1,11 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { inject, Injectable } from '@angular/core';
-import { DataInfo, HttpService, UniqueIds } from '@shagui/ng-shagui/core';
+import { ContextDataService, DataInfo, HttpService, UniqueIds } from '@shagui/ng-shagui/core';
 import { firstValueFrom, map } from 'rxjs';
 import { NX_WORKFLOW_TOKEN } from '../components/models';
+import { QUOTE_APP_CONTEXT_DATA } from '../constants';
 import {
+  AppContextData,
   Configuration,
   ConfigurationDTO,
   dataHash,
@@ -26,16 +28,28 @@ const JOURNEY_API = '/journey';
 @Injectable({ providedIn: 'root' })
 export class JourneyService {
   private readonly workFlowToken = inject(NX_WORKFLOW_TOKEN);
+  private readonly contextDataService = inject(ContextDataService);
   private readonly httpService = inject(HttpService);
   private readonly literalService = inject(LiteralsService);
 
-  public quoteSettings = (): Promise<QuoteSettingsModel> =>
-    firstValueFrom(this.httpService.get<QuoteSettingsModel>(`${JOURNEY_API}/setting/values`).pipe(map(res => res as QuoteSettingsModel)));
+  public quoteSettings = async (): Promise<QuoteSettingsModel> => {
+    const value = await firstValueFrom(
+      this.httpService.get<QuoteSettingsModel>(`${JOURNEY_API}/setting/values`).pipe(map(res => res as QuoteSettingsModel))
+    );
+    const { settings: { commercialExceptions = {} } = { commercialExceptions: {} } } =
+      this.contextDataService.get<AppContextData>(QUOTE_APP_CONTEXT_DATA) ?? {};
+
+    return { ...value, commercialExceptions };
+  };
 
   public journeySettings = async (journeyId: string): Promise<JourneyInfo> => {
     return await firstValueFrom(
       this.httpService.get<JourneyInfo>(`${JOURNEY_API}/${journeyId}/settings`).pipe(map(res => res as JourneyInfo))
     );
+  };
+
+  public enableTracking = async (): Promise<boolean> => {
+    return await firstValueFrom(this.httpService.get<boolean>(`${JOURNEY_API}/setting/enable-tracking`).pipe(map(res => !!res)));
   };
 
   public fetchConfiguration = async (info: JourneyInfo): Promise<Configuration> => {
