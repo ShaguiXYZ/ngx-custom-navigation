@@ -42,7 +42,7 @@ describe('QuoteDispatcherComponent', () => {
     mockRoutingService = jasmine.createSpyObj('RoutingService', ['someMethod']);
     mockHttpService = jasmine.createSpyObj('HttpService', ['get']);
     mockJourneyService = jasmine.createSpyObj('JourneyService', [
-      'clientJourney',
+      'journeySettings',
       'fetchConfiguration',
       'hasBreakingChange',
       'quoteSettings'
@@ -99,7 +99,7 @@ describe('QuoteDispatcherComponent', () => {
   it('should call BudgetActivator if stored param exists', async () => {
     const mockContext = {
       settings: {
-        commercialExceptions: { enableWorkFlow: true }
+        commercialExceptions: {}
       },
       configuration: {
         homePageId: 'home',
@@ -117,14 +117,14 @@ describe('QuoteDispatcherComponent', () => {
       }
     };
 
-    const mockCommercialExceptions = { enableWorkFlow: true } as unknown as CommercialExceptionsModel;
+    const mockCommercialExceptions = {} as unknown as CommercialExceptionsModel;
 
     mockContextDataService.get.and.returnValue(mockContext);
     mockActivatedRoute.snapshot.params = { stored: 'some-budget' };
     mockJourneyService.quoteSettings.and.returnValue(
       Promise.resolve({ commercialExceptions: mockCommercialExceptions } as QuoteSettingsModel)
     );
-    mockJourneyService.clientJourney.and.returnValue(Promise.resolve({} as JourneyInfo));
+    mockJourneyService.journeySettings.and.returnValue(Promise.resolve({} as JourneyInfo));
 
     spyOn(BudgetActivator, 'retrieveBudget').and.returnValue(async () => true);
 
@@ -136,7 +136,7 @@ describe('QuoteDispatcherComponent', () => {
   it('should call trackService if dispatcher param exists', async () => {
     const mockContext = {
       settings: {
-        commercialExceptions: { enableWorkFlow: true }
+        commercialExceptions: {}
       },
       configuration: {
         homePageId: 'home',
@@ -166,7 +166,7 @@ describe('QuoteDispatcherComponent', () => {
   it('should call loader if dispatcher param exists', async () => {
     const mockContext = {
       settings: {
-        commercialExceptions: { enableWorkFlow: true }
+        commercialExceptions: {}
       },
       configuration: {
         homePageId: 'home',
@@ -184,14 +184,14 @@ describe('QuoteDispatcherComponent', () => {
       }
     };
 
-    const mockCommercialExceptions = { enableWorkFlow: true } as unknown as CommercialExceptionsModel;
+    const mockCommercialExceptions = {} as unknown as CommercialExceptionsModel;
 
     mockContextDataService.get.and.returnValue(mockContext);
     mockActivatedRoute.snapshot.params = { dispatcher: 'some-dispatcher' };
     mockJourneyService.quoteSettings.and.returnValue(
       Promise.resolve({ commercialExceptions: mockCommercialExceptions } as QuoteSettingsModel)
     );
-    mockJourneyService.clientJourney.and.returnValue(Promise.resolve({} as JourneyInfo));
+    mockJourneyService.journeySettings.and.returnValue(Promise.resolve({} as JourneyInfo));
 
     spyOn(component as any, 'loader').and.callThrough();
 
@@ -203,7 +203,7 @@ describe('QuoteDispatcherComponent', () => {
   it('should call resetContext if homePageId exists', async () => {
     const mockContext = {
       settings: {
-        commercialExceptions: { enableWorkFlow: true }
+        commercialExceptions: {}
       },
       configuration: {
         homePageId: 'home',
@@ -221,13 +221,13 @@ describe('QuoteDispatcherComponent', () => {
       }
     };
 
-    const mockCommercialExceptions = { enableWorkFlow: true } as unknown as CommercialExceptionsModel;
+    const mockCommercialExceptions = {} as unknown as CommercialExceptionsModel;
 
     mockContextDataService.get.and.returnValue(mockContext);
     mockJourneyService.quoteSettings.and.returnValue(
       Promise.resolve({ commercialExceptions: mockCommercialExceptions } as QuoteSettingsModel)
     );
-    mockJourneyService.clientJourney.and.returnValue(Promise.resolve({} as JourneyInfo));
+    mockJourneyService.journeySettings.and.returnValue(Promise.resolve({} as JourneyInfo));
 
     spyOn(component as any, 'resetContext').and.callThrough();
 

@@ -5,8 +5,7 @@ const JSON_FILE_PATH = path.join(__dirname, 'data', 'journey');
 
 async function settings() {
   try {
-    const jsonData = await readJson('settings');
-    return jsonData;
+    return await readJson('settings');
   } catch (error) {
     throw new Error(`Error in settings function: ${error.message}`);
   }

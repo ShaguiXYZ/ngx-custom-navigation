@@ -21,8 +21,6 @@ import {
 } from '../models';
 import { LiteralsService } from './literals.service';
 
-export const QUOTE_JOURNEY_DISALED = 'not-journey';
-
 const JOURNEY_API = '/journey';
 
 @Injectable({ providedIn: 'root' })
@@ -34,7 +32,7 @@ export class JourneyService {
   public quoteSettings = (): Promise<QuoteSettingsModel> =>
     firstValueFrom(this.httpService.get<QuoteSettingsModel>(`${JOURNEY_API}/setting/values`).pipe(map(res => res as QuoteSettingsModel)));
 
-  public clientJourney = async (journeyId: string): Promise<JourneyInfo> => {
+  public journeySettings = async (journeyId: string): Promise<JourneyInfo> => {
     return await firstValueFrom(
       this.httpService.get<JourneyInfo>(`${JOURNEY_API}/${journeyId}/settings`).pipe(map(res => res as JourneyInfo))
     );

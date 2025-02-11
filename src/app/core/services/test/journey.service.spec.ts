@@ -60,11 +60,11 @@ describe('JourneyService', () => {
     const journeyId = 'test';
     const journeyName = 'test';
     const info: JourneyInfo = { id: journeyId, name: journeyName };
-    const settitngs: QuoteSettingsModel = { office: 1, commercialExceptions: { enableWorkFlow: true } } as QuoteSettingsModel;
+    const settitngs: QuoteSettingsModel = { office: 1, commercialExceptions: {} } as QuoteSettingsModel;
 
     httpService.get.and.returnValue(of(info));
 
-    service.clientJourney(`${settitngs}`).then(result => {
+    service.journeySettings(`${settitngs}`).then(result => {
       expect(result.name).toBe(journeyName);
     });
   });

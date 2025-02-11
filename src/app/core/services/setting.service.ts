@@ -12,7 +12,7 @@ import {
   QuoteSettingsModel,
   VersionInfo
 } from '../models';
-import { JourneyService, QUOTE_JOURNEY_DISALED } from './journey.service';
+import { JourneyService } from './journey.service';
 
 @Injectable({ providedIn: 'root' })
 export class SettingsService {
@@ -22,8 +22,8 @@ export class SettingsService {
 
   public async loadSettings(): Promise<void> {
     const settings = await this.journeyService.quoteSettings();
-    const journeyId = settings.commercialExceptions.enableWorkFlow ? `${settings.office}` : QUOTE_JOURNEY_DISALED;
-    const info = await this.journeyService.clientJourney(journeyId);
+    const journeyId = `${settings.office}`;
+    const info = await this.journeyService.journeySettings(journeyId);
     const context = this.contextDataService.get<AppContextData>(QUOTE_APP_CONTEXT_DATA);
     const breakingChange = this.breakingChange(context, info.versions ?? []);
 
@@ -34,8 +34,7 @@ export class SettingsService {
     } else {
       context.settings.commercialExceptions = {
         ...context.settings.commercialExceptions,
-        enableTracking: settings.commercialExceptions.enableTracking,
-        enableWorkFlow: settings.commercialExceptions.enableWorkFlow
+        enableTracking: settings.commercialExceptions.enableTracking
       };
       this.contextDataService.set(QUOTE_APP_CONTEXT_DATA, context, { persistent: true });
     }
