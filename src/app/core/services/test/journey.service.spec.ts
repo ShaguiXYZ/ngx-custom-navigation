@@ -3,7 +3,6 @@ import { HttpTestingController, provideHttpClientTesting } from '@angular/common
 import { TestBed } from '@angular/core/testing';
 import { ContextDataService, HttpService } from '@shagui/ng-shagui/core';
 import { of } from 'rxjs';
-import { environment } from 'src/environments/environment';
 import { NX_WORKFLOW_TOKEN } from '../../components/models';
 import { Configuration, ConfigurationDTO, JourneyInfo, QuoteSettingsModel, Version } from '../../models';
 import { JourneyService } from '../journey.service';
@@ -58,8 +57,9 @@ describe('JourneyService', () => {
   });
 
   it('shoult get client journey', async () => {
+    const journeyId = 'test';
     const journeyName = 'test';
-    const info: Record<string, JourneyInfo> = { '1': { name: journeyName } };
+    const info: JourneyInfo = { id: journeyId, name: journeyName };
     const settitngs: QuoteSettingsModel = { office: 1, commercialExceptions: { enableWorkFlow: true } } as QuoteSettingsModel;
 
     httpService.get.and.returnValue(of(info));
@@ -71,6 +71,7 @@ describe('JourneyService', () => {
 
   it('should fetch configuration', async () => {
     const dtoVersion: Version = 'v1.1.0';
+    const journeyId = 'test';
     const journeyName = 'test';
     const mockConfigurationDTO = {
       version: [{ value: dtoVersion }],
@@ -113,10 +114,10 @@ describe('JourneyService', () => {
 
     httpService.get.and.returnValue(of(mockConfigurationDTO));
 
-    const result = await service.fetchConfiguration(journeyName, [{ value: dtoVersion }]);
+    const result = await service.fetchConfiguration({ id: journeyId, name: journeyName, versions: [{ value: dtoVersion }] });
 
     expect(result).toEqual({ ...mockConfiguration, version: { actual: dtoVersion, last: dtoVersion } });
-    expect(httpService.get).toHaveBeenCalledWith(`${environment.baseUrl}/journey/test`);
+    expect(httpService.get).toHaveBeenCalledWith(`/journey/test`);
   });
 
   it('should set error page if not present in pageMap', () => {

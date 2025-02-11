@@ -16,15 +16,14 @@ import {
 } from '../models/vehicle';
 
 const DEFAULT_YEAR = new Date().getFullYear();
+// const VEHICLE_API = environment.baseUrl;
+const VEHICLE_API = '/api';
 
 @Injectable()
 export class VehicleService {
   private readonly _BRANCHES_CACHE_ID_ = `_${UniqueIds.next()}_`;
   private readonly _MODELS_CACHE_ID_ = `_${UniqueIds.next()}_`;
   private readonly _MODEL_VERSIONS_CACHE_ID_ = `_${UniqueIds.next()}_`;
-
-  // private readonly VEHICLE_API = environment.baseUrl;
-  private readonly VEHICLE_API = '/api';
 
   private http = inject(HttpService);
 
@@ -81,7 +80,7 @@ export class VehicleService {
 
     return firstValueFrom(
       this.http
-        .get<BrandDTO>(`${this.VEHICLE_API}/makes`, {
+        .get<BrandDTO>(`${VEHICLE_API}/makes`, {
           clientOptions: { params: httpParams },
           responseStatusMessage: {
             [HttpStatusCode.NotFound]: { text: 'Notifications.BrandsNotFound' }
@@ -106,7 +105,7 @@ export class VehicleService {
     const httpParams = new HttpParams().appendAll({ make, year });
     return firstValueFrom(
       this.http
-        .get<VehicleModelDTO>(`${this.VEHICLE_API}/models`, {
+        .get<VehicleModelDTO>(`${VEHICLE_API}/models`, {
           clientOptions: { params: httpParams },
           responseStatusMessage: {
             [HttpStatusCode.NotFound]: { text: 'Notifications.ModelsNotFound' }

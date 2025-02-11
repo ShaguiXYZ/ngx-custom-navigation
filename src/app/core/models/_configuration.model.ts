@@ -19,6 +19,7 @@ export type Literals = {
 } & DataInfo<LiteralModel>;
 
 export interface JourneyInfo {
+  id: string;
   name: string;
   versions?: VersionInfo[];
 }

@@ -1,9 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { HttpParams } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { DataInfo, HttpService, UniqueIds } from '@shagui/ng-shagui/core';
 import { firstValueFrom, map } from 'rxjs';
-import { environment } from 'src/environments/environment';
 import { NX_WORKFLOW_TOKEN } from '../components/models';
 import {
   Configuration,
@@ -25,6 +23,8 @@ import { LiteralsService } from './literals.service';
 
 export const QUOTE_JOURNEY_DISALED = 'not-journey';
 
+const JOURNEY_API = '/journey';
+
 @Injectable({ providedIn: 'root' })
 export class JourneyService {
   private readonly workFlowToken = inject(NX_WORKFLOW_TOKEN);
@@ -32,33 +32,20 @@ export class JourneyService {
   private readonly literalService = inject(LiteralsService);
 
   public quoteSettings = (): Promise<QuoteSettingsModel> =>
-    firstValueFrom(
-      this.httpService.get<QuoteSettingsModel>(`${environment.baseUrl}/journey/settings`).pipe(map(res => res as QuoteSettingsModel))
-    );
+    firstValueFrom(this.httpService.get<QuoteSettingsModel>(`${JOURNEY_API}/setting/values`).pipe(map(res => res as QuoteSettingsModel)));
 
   public clientJourney = async (journeyId: string): Promise<JourneyInfo> => {
-    const httpParams = new HttpParams().append('clientId', journeyId);
-
     return await firstValueFrom(
-      this.httpService
-        .get<Record<string, JourneyInfo>>(`${environment.baseUrl}/journey/journeys`, {
-          clientOptions: { params: httpParams }
-        })
-        .pipe(
-          map(res => res as Record<string, JourneyInfo>),
-          map(journeys => {
-            return journeys[journeyId];
-          })
-        )
+      this.httpService.get<JourneyInfo>(`${JOURNEY_API}/${journeyId}/settings`).pipe(map(res => res as JourneyInfo))
     );
   };
 
-  public fetchConfiguration = async (name: string, versions: VersionInfo[]): Promise<Configuration> => {
+  public fetchConfiguration = async (info: JourneyInfo): Promise<Configuration> => {
     const configurationDTO = await firstValueFrom(
-      this.httpService.get<ConfigurationDTO>(`${environment.baseUrl}/journey/${name}`).pipe(map(res => res as ConfigurationDTO))
+      this.httpService.get<ConfigurationDTO>(`${JOURNEY_API}/${info.id}`).pipe(map(res => res as ConfigurationDTO))
     );
 
-    return this.init(name, configurationDTO, VersionInfo.last(versions));
+    return this.init(info.name, configurationDTO, VersionInfo.last(info.versions));
   };
 
   private init = (name: string, configuration: ConfigurationDTO, version: VersionInfo): Configuration => {

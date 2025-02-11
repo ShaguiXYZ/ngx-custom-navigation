@@ -10,6 +10,16 @@
     }
   },
   {
+    "context": ["/journey"],
+    "target": "http://localhost:3000",
+    "secure": false,
+    "changeOrigin": true,
+    "logLevel": "debug",
+    "pathRewrite": {
+      "^/api": "/journey"
+    }
+  },
+  {
     "context": ["/translate"],
     "target": "https://libretranslate.com",
     "secure": false,

@@ -1,7 +1,0 @@
-{
-  "office": 10,
-  "commercialExceptions": {
-    "enableWorkFlow": true,
-    "enableTracking": true
-  }
-}

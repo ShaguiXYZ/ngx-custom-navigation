@@ -48,7 +48,7 @@ export class SettingsService {
     },
     breakingChange: Breakingchange
   ): Promise<void> => {
-    const remoteConfiguration = await this.journeyService.fetchConfiguration(info.name, info.versions ?? []);
+    const remoteConfiguration = await this.journeyService.fetchConfiguration(info);
     const actualContext = this.contextDataService.get<AppContextData>(QUOTE_APP_CONTEXT_DATA);
     const workflowChange = actualContext?.configuration?.hash !== remoteConfiguration.hash;
     const [quote, contextData] = workflowChange
