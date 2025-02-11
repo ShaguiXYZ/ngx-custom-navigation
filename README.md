@@ -308,9 +308,13 @@ Para iniciar la aplicación en modo de desarrollo, sigue estos pasos:
    ```bash
    npm install
    ```
-4. Inicia la aplicación en modo de desarrollo:
+4. Inicia el servidor de journeys en modo local:
    ```bash
-   npm start
+   node server/server.js
+   ```
+5. Inicia la aplicación en modo local:
+   ```bash
+   npm run start:local
    ```
    Esto ejecutará el comando `ng serve`, iniciando un servidor de desarrollo y abriendo la aplicación en tu navegador.
 
