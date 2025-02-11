@@ -1,53 +1,44 @@
 const express = require('express');
-const { createProxyMiddleware } = require('http-proxy-middleware');
-const axios = require('axios');
+const { config, journey, settings } = require('./json.lib');
 const app = express();
 
-app.use(
-  '/api',
-  createProxyMiddleware({
-    target: 'http://localhost:4200',
-    changeOrigin: true,
-    onProxyReq: (proxyReq, req, res) => {
-      proxyReq.setHeader('Origin', '*');
-    },
-    onProxyRes: (proxyRes, req, res) => {
-      proxyRes.headers['Access-Control-Allow-Origin'] = '*';
-      proxyRes.headers['Access-Control-Allow-Methods'] = 'GET, POST, PUT, DELETE, OPTIONS';
-      proxyRes.headers['Access-Control-Allow-Headers'] = 'Origin, X-Requested-With, Content-Type, Accept, Authorization';
-    }
-  })
-);
+app.use(express.json());
 
-app.get('/', (req, res) => {
-  res.send('Proxy server is running');
+app.get('/journey', (req, res) => {
+  res.send('Hello World!');
 });
 
-// call https://carapi.app/api/makes and it will proxy to https://localhost:4200/api/makes
-app.get('/makes', (req, res) => {
-  axios
-    .get('https://carapi.app/api/makes')
-    .then(response => {
-      res.json(response.data);
+app.get('/journey/setting/values', (req, res) => {
+  settings().then(value => {
+    res.json(value);
+  });
+});
+
+app.get('/journey/:key', (req, res) => {
+  const key = req.params.key;
+
+  journey(key)
+    .then(value => {
+      res.json(value);
     })
     .catch(error => {
-      res.status(500).send('Error fetching data');
+      res.status(404).json({ error: error.message });
     });
 });
 
-app.get('/models', (req, res) => {
-  const params = req.query;
+app.get('/journey/:key/settings', (req, res) => {
+  const key = req.params.key;
 
-  axios
-    .get('https://carapi.app/api/models', { params })
-    .then(response => {
-      res.json(response.data);
+  config(key)
+    .then(value => {
+      res.json(value);
     })
     .catch(error => {
-      res.status(500).send('Error fetching data');
+      res.status(404).json({ error: error.message });
     });
 });
 
+// Configurar el servidor para escuchar en el puerto 3000
 app.listen(3000, () => {
-  console.log('Proxy server is running on port 3000');
+  console.log('Servidor está corriendo en el puerto 3000');
 });

@@ -1,0 +1,9 @@
+{
+  "steppers": [],
+  "pageMap": [],
+  "literals": {
+    "error-body": { "value": "Label.ErrorBody", "type": "translate" },
+    "error-title": "Workflow NOT FOUND",
+    "footer-next": { "value": "Label.Next", "type": "translate" }
+  }
+}
