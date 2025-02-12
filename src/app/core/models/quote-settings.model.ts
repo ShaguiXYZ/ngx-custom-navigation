@@ -12,6 +12,6 @@ export interface CommercialExceptionsModel {
 }
 
 export interface QuoteSettingsModel {
-  office: number;
+  journey: string;
   commercialExceptions: CommercialExceptionsModel;
 }

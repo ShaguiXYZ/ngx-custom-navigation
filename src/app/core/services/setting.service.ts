@@ -22,7 +22,7 @@ export class SettingsService {
 
   public async loadSettings(): Promise<void> {
     const settings = await this.journeyService.quoteSettings();
-    const journeyId = `${settings.office}`;
+    const journeyId = settings.journey;
     const info = await this.journeyService.journeySettings(journeyId);
     const context = this.contextDataService.get<AppContextData>(QUOTE_APP_CONTEXT_DATA);
     const breakingChange = this.breakingChange(context, info.versions ?? []);

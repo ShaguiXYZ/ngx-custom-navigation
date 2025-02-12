@@ -37,6 +37,13 @@ async function config(key) {
   }
 }
 
+async function randomJourneyKey() {
+  const jsonData = await readJson('journeys');
+  const keys = Object.keys(jsonData).splice(1); // Skip the first key, which is the 'not-journey' key
+
+  return keys[Math.floor(Math.random() * keys.length)];
+}
+
 /**
  * Retrieves the journey data associated with the given key.
  *
@@ -47,6 +54,7 @@ async function journey(key) {
   try {
     const jsonData = await config(key);
     const journeyName = jsonData.name;
+
     return await readJson(journeyName);
   } catch (error) {
     throw new Error(`Error in journey function: ${error.message}`);
@@ -79,5 +87,6 @@ function readJson(json) {
 module.exports = {
   config,
   journey,
+  randomJourneyKey,
   settings
 };

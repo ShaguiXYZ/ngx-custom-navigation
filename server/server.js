@@ -1,8 +1,8 @@
 const express = require('express');
-const { config, journey, settings } = require('./json.lib');
-const app = express();
+const { config, journey, settings, randomJourneyKey } = require('./json.lib');
 
 const QUOTE_JOURNEY_DISALED = 'not-journey';
+const app = express();
 
 const journeyKey = async key => {
   const settingsValue = await settings();
@@ -15,6 +15,9 @@ app.get('/journey/setting/values', async (req, res) => {
   try {
     const config = await settings();
     const { commercialExceptions, ...value } = config;
+    const params = req.query;
+
+    value.journey = params.journey ?? (await randomJourneyKey());
 
     res.json(value);
   } catch (error) {

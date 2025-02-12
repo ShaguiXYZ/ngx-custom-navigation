@@ -1,7 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import { HttpParams } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { ContextDataService, DataInfo, HttpService, UniqueIds } from '@shagui/ng-shagui/core';
-import { firstValueFrom, map } from 'rxjs';
+import { firstValueFrom, map, tap } from 'rxjs';
 import { NX_WORKFLOW_TOKEN } from '../components/models';
 import { QUOTE_APP_CONTEXT_DATA } from '../constants';
 import {
@@ -22,7 +23,9 @@ import {
   VersionInfo
 } from '../models';
 import { LiteralsService } from './literals.service';
+import { StorageLib } from '../lib';
 
+const JOURNEY_SESSION_KEY = 'journey';
 const JOURNEY_API = '/journey';
 
 @Injectable({ providedIn: 'root' })
@@ -33,8 +36,18 @@ export class JourneyService {
   private readonly literalService = inject(LiteralsService);
 
   public quoteSettings = async (): Promise<QuoteSettingsModel> => {
+    const journey = StorageLib.get(JOURNEY_SESSION_KEY);
+    const params = journey ? new HttpParams().appendAll({ journey }) : undefined;
+
     const value = await firstValueFrom(
-      this.httpService.get<QuoteSettingsModel>(`${JOURNEY_API}/setting/values`).pipe(map(res => res as QuoteSettingsModel))
+      this.httpService
+        .get<QuoteSettingsModel>(`${JOURNEY_API}/setting/values`, {
+          clientOptions: { params }
+        })
+        .pipe(
+          map(res => res as QuoteSettingsModel),
+          tap(res => StorageLib.set(JOURNEY_SESSION_KEY, res.journey))
+        )
     );
     const { settings: { commercialExceptions = {} } = { commercialExceptions: {} } } =
       this.contextDataService.get<AppContextData>(QUOTE_APP_CONTEXT_DATA) ?? {};

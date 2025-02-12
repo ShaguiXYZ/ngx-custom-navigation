@@ -60,7 +60,7 @@ describe('JourneyService', () => {
     const journeyId = 'test';
     const journeyName = 'test';
     const info: JourneyInfo = { id: journeyId, name: journeyName };
-    const settitngs: QuoteSettingsModel = { office: 1, commercialExceptions: {} } as QuoteSettingsModel;
+    const settitngs: QuoteSettingsModel = { journey: 'id', commercialExceptions: {} } as QuoteSettingsModel;
 
     httpService.get.and.returnValue(of(info));
 
