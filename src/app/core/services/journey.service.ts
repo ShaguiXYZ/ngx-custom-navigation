@@ -70,11 +70,11 @@ export class JourneyService {
       this.httpService.get<ConfigurationDTO>(`${JOURNEY_API}/${info.id}`).pipe(map(res => res as ConfigurationDTO))
     );
 
-    return this.init(info.name, configurationDTO, VersionInfo.last(info.versions));
+    return this.init(info.id, configurationDTO, VersionInfo.last(info.versions));
   };
 
-  private init = (name: string, configuration: ConfigurationDTO, version: VersionInfo): Configuration => {
-    const quoteConfiguration: Configuration = this.initQuote(name, configuration, version);
+  private init = (id: string, configuration: ConfigurationDTO, version: VersionInfo): Configuration => {
+    const quoteConfiguration: Configuration = this.initQuote(id, configuration, version);
 
     if (!configuration.homePageId) {
       quoteConfiguration.homePageId = quoteConfiguration.errorPageId;

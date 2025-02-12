@@ -58,14 +58,13 @@ describe('JourneyService', () => {
 
   it('shoult get client journey', async () => {
     const journeyId = 'test';
-    const journeyName = 'test';
-    const info: JourneyInfo = { id: journeyId, name: journeyName };
+    const info: JourneyInfo = { id: journeyId };
     const settitngs: QuoteSettingsModel = { journey: 'id', commercialExceptions: {} } as QuoteSettingsModel;
 
     httpService.get.and.returnValue(of(info));
 
     service.journeySettings(`${settitngs}`).then(result => {
-      expect(result.name).toBe(journeyName);
+      expect(result.id).toBe(journeyId);
     });
   });
 
@@ -114,7 +113,7 @@ describe('JourneyService', () => {
 
     httpService.get.and.returnValue(of(mockConfigurationDTO));
 
-    const result = await service.fetchConfiguration({ id: journeyId, name: journeyName, versions: [{ value: dtoVersion }] });
+    const result = await service.fetchConfiguration({ id: journeyId, versions: [{ value: dtoVersion }] });
 
     expect(result).toEqual({ ...mockConfiguration, version: { actual: dtoVersion, last: dtoVersion } });
     expect(httpService.get).toHaveBeenCalledWith(`/journey/test`);

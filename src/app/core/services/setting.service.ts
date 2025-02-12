@@ -27,7 +27,7 @@ export class SettingsService {
     const context = this.contextDataService.get<AppContextData>(QUOTE_APP_CONTEXT_DATA);
     const breakingChange = this.breakingChange(context, info.versions ?? []);
 
-    if (context?.configuration.name !== info.name || breakingChange !== 'none') {
+    if (context?.configuration.name !== info.id || breakingChange !== 'none') {
       console.group('SettingsService');
       await this.loadJourney(info, settings, breakingChange);
       console.groupEnd();

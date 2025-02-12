@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 const { config, journey, settings, randomJourneyKey } = require('./json.lib');
 
 const QUOTE_JOURNEY_DISALED = 'not-journey';
@@ -9,6 +10,11 @@ const journeyKey = async key => {
   return settingsValue.commercialExceptions.enableWorkflow ? key : QUOTE_JOURNEY_DISALED;
 };
 
+// Configure CORS
+app.use(cors());
+
+// Middleware to parse URL-encoded and JSON requests
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 app.get('/journey/setting/values', async (req, res) => {
@@ -49,7 +55,7 @@ app.get('/journey/:key', async (req, res) => {
 app.get('/journey/:key/settings', async (req, res) => {
   try {
     const key = await journeyKey(req.params.key);
-    const value = await config(key);
+    const { name, ...value } = await config(key);
 
     res.json(value);
   } catch (error) {
@@ -57,7 +63,7 @@ app.get('/journey/:key/settings', async (req, res) => {
   }
 });
 
-// Configurar el servidor para escuchar en el puerto 3000
+// Configure the server to listen on port 3000
 app.listen(3000, () => {
   console.log('Servidor está corriendo en el puerto 3000');
 });

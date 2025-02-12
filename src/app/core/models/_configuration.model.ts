@@ -20,7 +20,6 @@ export type Literals = {
 
 export interface JourneyInfo {
   id: string;
-  name: string;
   versions?: VersionInfo[];
 }
 
