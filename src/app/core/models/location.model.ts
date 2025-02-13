@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-namespace */
 export interface LocationDTO {
-  province: string;
+  location: string;
   code: string;
   dc: number;
-  location: string;
+  province: string;
 }
 
 export interface LocationModel {
