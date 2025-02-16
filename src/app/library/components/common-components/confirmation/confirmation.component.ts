@@ -10,18 +10,18 @@ import { QuoteLiteralDirective } from 'src/app/shared/directives';
 import { environment } from 'src/environments/environment';
 
 @Component({
-    selector: 'quote-confirmation',
-    templateUrl: './confirmation.component.html',
-    styleUrl: './confirmation.component.scss',
-    imports: [QuoteFooterComponent, HeaderTitleComponent, NxButtonModule, NxCopytextModule, NxHeadlineModule, QuoteLiteralDirective]
+  selector: 'quote-confirmation',
+  templateUrl: './confirmation.component.html',
+  styleUrl: './confirmation.component.scss',
+  imports: [QuoteFooterComponent, HeaderTitleComponent, NxButtonModule, NxCopytextModule, NxHeadlineModule, QuoteLiteralDirective]
 })
 export class ConfirmationComponent extends QuoteComponent<QuoteModel> {
   public icon = 'fa-face-smile';
-  public href = environment.baseUrl;
+  public href = environment.mockUrl;
 
   public readonly router = inject(Router);
 
   finishFlow() {
-    window.location.assign(environment.baseUrl);
+    window.location.assign(environment.mockUrl);
   }
 }

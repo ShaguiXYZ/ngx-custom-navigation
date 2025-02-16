@@ -7,6 +7,7 @@ import { NX_WORKFLOW_TOKEN } from '../../components/models';
 import { Configuration, ConfigurationDTO, JourneyInfo, QuoteSettingsModel, Version } from '../../models';
 import { JourneyService } from '../journey.service';
 import { LiteralsService } from '../literals.service';
+import { environment } from 'src/environments/environment';
 
 describe('JourneyService', () => {
   let service: JourneyService;
@@ -116,7 +117,7 @@ describe('JourneyService', () => {
     const result = await service.fetchConfiguration({ id: journeyId, versions: [{ value: dtoVersion }] });
 
     expect(result).toEqual({ ...mockConfiguration, version: { actual: dtoVersion, last: dtoVersion } });
-    expect(httpService.get).toHaveBeenCalledWith(`/journey/test`);
+    expect(httpService.get).toHaveBeenCalledWith(`${environment.baseUrl}/journey/test`);
   });
 
   it('should set error page if not present in pageMap', () => {

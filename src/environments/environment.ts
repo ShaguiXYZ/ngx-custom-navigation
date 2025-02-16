@@ -6,7 +6,8 @@
 export const environment = {
   production: false,
   appName: 'ngx-custom-navigation',
-  baseUrl: 'http://localhost:3000', // url bff mock server
+  baseUrl: 'http://localhost:3000',
+  mockUrl: '', // url bff mock server
   domain: 'localhost:3000', // domain localhost
   recaptcha: {
     siteKey: ''

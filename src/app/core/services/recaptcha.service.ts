@@ -1,5 +1,7 @@
 import { Inject, Injectable, InjectionToken } from '@angular/core';
 
+const RECAPTCHA_API = '/recaptcha';
+
 export interface RecaptchaConfig {
   siteKey: string;
 }
@@ -34,7 +36,7 @@ export class CaptchaService {
     const head = document.getElementsByTagName('head')[0];
     const script = document.createElement('script');
     script.type = 'text/javascript';
-    script.src = `https://www.google.com/recaptcha/enterprise.js?render=${this.config.siteKey}`;
+    script.src = `${RECAPTCHA_API}/enterprise.js?render=${this.config.siteKey}`;
     head.appendChild(script);
   };
 }

@@ -24,6 +24,7 @@ import {
 } from '../models';
 import { LiteralsService } from './literals.service';
 import { StorageLib } from '../lib';
+import { environment } from 'src/environments/environment';
 
 const JOURNEY_SESSION_KEY = 'journey';
 const JOURNEY_API = '/journey';
@@ -41,7 +42,7 @@ export class JourneyService {
 
     const value = await firstValueFrom(
       this.httpService
-        .get<QuoteSettingsModel>(`${JOURNEY_API}/setting/values`, {
+        .get<QuoteSettingsModel>(`${environment.baseUrl}${JOURNEY_API}/setting/values`, {
           clientOptions: { params }
         })
         .pipe(
@@ -57,17 +58,19 @@ export class JourneyService {
 
   public journeySettings = async (journeyId: string): Promise<JourneyInfo> => {
     return await firstValueFrom(
-      this.httpService.get<JourneyInfo>(`${JOURNEY_API}/${journeyId}/settings`).pipe(map(res => res as JourneyInfo))
+      this.httpService.get<JourneyInfo>(`${environment.baseUrl}${JOURNEY_API}/${journeyId}/settings`).pipe(map(res => res as JourneyInfo))
     );
   };
 
   public enableTracking = async (): Promise<boolean> => {
-    return await firstValueFrom(this.httpService.get<boolean>(`${JOURNEY_API}/setting/enable-tracking`).pipe(map(res => !!res)));
+    return await firstValueFrom(
+      this.httpService.get<boolean>(`${environment.baseUrl}${JOURNEY_API}/setting/enable-tracking`).pipe(map(res => !!res))
+    );
   };
 
   public fetchConfiguration = async (info: JourneyInfo): Promise<Configuration> => {
     const configurationDTO = await firstValueFrom(
-      this.httpService.get<ConfigurationDTO>(`${JOURNEY_API}/${info.id}`).pipe(map(res => res as ConfigurationDTO))
+      this.httpService.get<ConfigurationDTO>(`${environment.baseUrl}${JOURNEY_API}/${info.id}`).pipe(map(res => res as ConfigurationDTO))
     );
 
     return this.init(info.id, configurationDTO, VersionInfo.last(info.versions));

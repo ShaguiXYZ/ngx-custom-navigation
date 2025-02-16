@@ -36,7 +36,7 @@ export class VehicleService {
 
     return firstValueFrom(
       this.http
-        .get<VehicleDTO[]>(`${environment.baseUrl}/plate`, {
+        .get<VehicleDTO[]>(`${environment.mockUrl}/plate`, {
           clientOptions: { params: httpParams },
           responseStatusMessage: {
             [HttpStatusCode.NotFound]: { text: 'Notifications.VehicleNotFound' }
@@ -54,7 +54,7 @@ export class VehicleService {
   public vehicles(): Promise<QuoteVehicleModel[]> {
     return firstValueFrom(
       this.http
-        .get<VehicleDTO[]>(`${environment.baseUrl}/vehicle`, {
+        .get<VehicleDTO[]>(`${environment.mockUrl}/vehicle`, {
           responseStatusMessage: {
             [HttpStatusCode.NotFound]: { text: 'Notifications.VehiclesNotFound' }
           },
@@ -132,7 +132,7 @@ export class VehicleService {
 
     return firstValueFrom(
       this.http
-        .get<ModelVersionModel[]>(`${environment.baseUrl}/version`, {
+        .get<ModelVersionModel[]>(`${environment.mockUrl}/version`, {
           clientOptions: { params: httpParams },
           responseStatusMessage: {
             [HttpStatusCode.NotFound]: { text: 'Notifications.ModelVersionsNotFound' }
@@ -154,7 +154,7 @@ export class VehicleService {
 
     return firstValueFrom(
       this.http
-        .get<FuelDTO[]>(`${environment.baseUrl}/fuel`, {
+        .get<FuelDTO[]>(`${environment.mockUrl}/fuel`, {
           clientOptions: { params: httpParams },
           responseStatusMessage: {
             [HttpStatusCode.NotFound]: { text: 'Notifications.FuelsNotFound' }
@@ -175,7 +175,7 @@ export class VehicleService {
 
     return firstValueFrom(
       this.http
-        .get<CubicCapacityDTO[]>(`${environment.baseUrl}/cubic-capacity`, {
+        .get<CubicCapacityDTO[]>(`${environment.mockUrl}/cubic-capacity`, {
           clientOptions: { params: httpParams },
           responseStatusMessage: {
             [HttpStatusCode.NotFound]: { text: 'Notifications.CubicCapacitiesNotFound' }
@@ -196,7 +196,7 @@ export class VehicleService {
 
     return firstValueFrom(
       this.http
-        .get<VehicleClassesDTO[]>(`${environment.baseUrl}/power`, {
+        .get<VehicleClassesDTO[]>(`${environment.mockUrl}/power`, {
           clientOptions: { params: httpParams },
           responseStatusMessage: {
             [HttpStatusCode.NotFound]: { text: 'Notifications.PowersNotFound' }

@@ -20,6 +20,16 @@
     }
   },
   {
+    "context": ["/_insurance"],
+    "target": "http://localhost:3000",
+    "secure": false,
+    "changeOrigin": true,
+    "logLevel": "debug",
+    "pathRewrite": {
+      "^/api": "/_insurance"
+    }
+  },
+  {
     "context": ["/location"],
     "target": "http://localhost:3000",
     "secure": false,
@@ -27,6 +37,16 @@
     "logLevel": "debug",
     "pathRewrite": {
       "^/api": "/location"
+    }
+  },
+  {
+    "context": ["/recaptcha"],
+    "target": "https://www.google.com",
+    "secure": true,
+    "changeOrigin": true,
+    "logLevel": "debug",
+    "pathRewrite": {
+      "^/api": "/recaptcha"
     }
   },
   {

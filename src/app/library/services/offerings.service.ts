@@ -23,7 +23,7 @@ export class OfferingsService {
 
       return firstValueFrom(
         this.httpService
-          .post<PricingDTO, OfferingDTO>(`${environment.baseUrl}/offerings`, PricingDTO.fromModel(quote, offeringStaticData), {
+          .post<PricingDTO, OfferingDTO>(`${environment.mockUrl}/offerings`, PricingDTO.fromModel(quote, offeringStaticData), {
             responseStatusMessage: {
               [HttpStatusCode.NotFound]: { text: 'Notifications.ModelsNotFound' }
             },

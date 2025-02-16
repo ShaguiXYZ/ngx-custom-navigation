@@ -28,7 +28,7 @@ describe('CaptchaService', () => {
 
   it('should append script to head on initialization', () => {
     const head = document.getElementsByTagName('head')[0];
-    const script = head.querySelector(`script[src="https://www.google.com/recaptcha/enterprise.js?render=${mockSiteKey}"]`);
+    const script = head.querySelector(`script[src="/recaptcha/enterprise.js?render=${mockSiteKey}"]`);
     expect(script).toBeTruthy();
   });
 

@@ -1,7 +1,8 @@
 export const environment = {
   production: true,
   appName: 'ngx-custom-navigation',
-  baseUrl: './assets/json/mock', // url bff dev, int, pre and production servers
+  baseUrl: '',
+  mockUrl: './assets/json/mock', // url bff mock server
   domain: '', // Empty for dev, int, pre and production environments
   recaptcha: {
     siteKey: ''

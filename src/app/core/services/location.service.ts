@@ -3,6 +3,7 @@ import { HttpService } from '@shagui/ng-shagui/core';
 import { catchError, firstValueFrom, map, of } from 'rxjs';
 import { LocationDTO, LocationModel } from '../models';
 import { HttpStatusCode } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 const LOCATION_API = '/location';
 
@@ -14,7 +15,7 @@ export class LocationService {
     try {
       const location = await firstValueFrom(
         this.httpService
-          .get<LocationDTO>(`${LOCATION_API}/address/${postalCode}`, {
+          .get<LocationDTO>(`${environment.baseUrl}${LOCATION_API}/address/${postalCode}`, {
             responseStatusMessage: { [HttpStatusCode.NotFound]: { text: 'Notifications.ModelsNotFound' } }
           })
           .pipe(

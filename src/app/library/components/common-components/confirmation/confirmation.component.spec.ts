@@ -78,7 +78,7 @@ describe('ConfirmationComponent', () => {
   });
 
   it('should set href to environment baseUrl', () => {
-    expect(component.href).toBe(environment.baseUrl);
+    expect(component.href).toBe(environment.mockUrl);
   });
 
   xit('should navigate to the correct URL on finishFlow', () => {
@@ -89,7 +89,7 @@ describe('ConfirmationComponent', () => {
 
     component.finishFlow();
 
-    expect(assignSpy).toHaveBeenCalledWith(environment.baseUrl);
+    expect(assignSpy).toHaveBeenCalledWith(environment.mockUrl);
 
     window.location.assign = originalAssign;
   });
