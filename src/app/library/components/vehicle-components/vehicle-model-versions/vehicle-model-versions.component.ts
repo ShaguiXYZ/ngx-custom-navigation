@@ -11,7 +11,7 @@ import { RoutingService } from 'src/app/core/services';
 import { QuoteTrackDirective } from 'src/app/core/tracking';
 import { ModelVersionModel, QuoteModel } from 'src/app/library/models';
 import { VehicleService } from 'src/app/library/services';
-import { HeaderTitleComponent, QuoteFooterComponent, TextCardComponent } from 'src/app/shared/components';
+import { HeaderTitleComponent, QuoteFooterComponent, QuoteZoneComponent, TextCardComponent } from 'src/app/shared/components';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 
@@ -23,6 +23,7 @@ import { QuoteLiteralPipe } from 'src/app/shared/pipes';
     CommonModule,
     HeaderTitleComponent,
     QuoteFooterComponent,
+    QuoteZoneComponent,
     TextCardComponent,
     NxCopytextModule,
     NxFormfieldModule,
@@ -78,7 +79,7 @@ export class VehicleModelVersionsComponent extends QuoteComponent<QuoteModel> im
 
   private createForm() {
     this.form = this.fb.group({
-      searchInput: new FormControl(this.selectedModelVersion?.data)
+      searchInput: new FormControl(this._contextData.vehicle.modelVersion?.data)
     });
 
     this.subscription$.push(this.searchBoxConfig());

@@ -8,7 +8,7 @@
     <form [formGroup]="form">
       <quote-zone name="search">
         <nx-formfield [label]="'search' | quoteLiteral" appearance="outline">
-          <input #searchInput type="text" formControlName="searchInput" nxInput (keyup.escape)="clearInput()" />
+          <input #searchInput type="text" formControlName="searchInput" nxInput />
           @if(searchInput.value) {
           <span class="clear-input" tabindex="0" nxFormfieldSuffix (click)="clearInput()">
             <em class="fa-solid fa-eraser"></em>

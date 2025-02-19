@@ -90,3 +90,10 @@
     border: 1px solid var(--interactive-primary);
   }
 }
+
+.card-placeholder {
+  align-items: center;
+  display: flex;
+  height: 56px;
+  justify-content: center;
+}

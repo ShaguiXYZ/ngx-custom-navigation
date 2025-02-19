@@ -6,18 +6,20 @@
   </quote-header-title>
   <section class="form-container">
     <form [formGroup]="form">
-      <nx-formfield [label]="'search' | quoteLiteral" appearance="outline">
-        <input #searchInput type="text" formControlName="searchInput" nxInput />
-        @if(searchInput.value) {
-        <span class="clear-input" tabindex="0" (click)="clearInput()" nxFormfieldSuffix>
-          <em class="fa-solid fa-eraser"></em>
-        </span>
-        } @else {
-        <span class="search-input" nxFormfieldSuffix>
-          <em class="fa-solid fa-magnifying-glass"></em>
-        </span>
-        }
-      </nx-formfield>
+      <quote-zone name="search">
+        <nx-formfield [label]="'search' | quoteLiteral" appearance="outline">
+          <input #searchInput type="text" formControlName="searchInput" nxInput />
+          @if(searchInput.value) {
+          <span class="clear-input" tabindex="0" (click)="clearInput()" nxFormfieldSuffix>
+            <em class="fa-solid fa-eraser"></em>
+          </span>
+          } @else {
+          <span class="search-input" nxFormfieldSuffix>
+            <em class="fa-solid fa-magnifying-glass"></em>
+          </span>
+          }
+        </nx-formfield>
+      </quote-zone>
     </form>
 
     <div class="serached-data" [ngClass]="{ 'not-found': notFound }">

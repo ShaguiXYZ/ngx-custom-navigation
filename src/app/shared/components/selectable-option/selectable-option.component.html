@@ -1,5 +1,6 @@
 <!-- eslint-disable @angular-eslint/template/interactive-supports-focus -->
 <!-- eslint-disable @angular-eslint/template/click-events-have-key-events -->
+@defer(on viewport) {
 <div class="option__container" [ngClass]="{ selected, disabled }" (click)="!disabled && uiSelect.emit()">
   @if(selected){
   <div class="option__checked" [ngClass]="{ 'full-height': fullHeight }">
@@ -8,3 +9,6 @@
   }
   <ng-content></ng-content>
 </div>
+} @placeholder {
+<div class="card-placeholder"></div>
+}
