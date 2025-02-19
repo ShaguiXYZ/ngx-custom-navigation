@@ -140,8 +140,7 @@ export class QuoteFormValidarors {
     validationKey: QuoteFormValidation,
     validationValue: boolean
   ): ValidationErrors | null => {
-    const validation = validationValue ? { [validationKey]: true } : null;
-    const controlName = Object.keys(control.parent?.controls || {}).find(
+    const controlName = Object.keys(control.parent?.controls ?? {}).find(
       key => (control.parent?.controls as Record<string, AbstractControl>)[key] === control
     );
 
@@ -169,6 +168,6 @@ export class QuoteFormValidarors {
       }
     }
 
-    return validation;
+    return validationValue ? { [validationKey]: true } : null;
   };
 }

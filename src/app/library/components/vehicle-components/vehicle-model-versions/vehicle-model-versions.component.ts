@@ -4,7 +4,7 @@ import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule } from '@angul
 import { NxCopytextModule } from '@aposin/ng-aquila/copytext';
 import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
 import { NxInputModule } from '@aposin/ng-aquila/input';
-import { debounceTime, distinctUntilChanged, fromEvent, map, Subscription } from 'rxjs';
+import { debounceTime, distinctUntilChanged, fromEvent, Subscription } from 'rxjs';
 import { QuoteComponent } from 'src/app/core/components';
 import { DEBOUNCE_TIME } from 'src/app/core/constants';
 import { RoutingService } from 'src/app/core/services';
@@ -48,12 +48,10 @@ export class VehicleModelVersionsComponent extends QuoteComponent<QuoteModel> im
   private readonly fb = inject(FormBuilder);
 
   async ngOnInit(): Promise<void> {
-    this.selectedModelVersion = this._contextData.vehicle.modelVersion;
     this.createForm();
+    this.selectedModelVersion = this._contextData.vehicle.modelVersion;
 
     await this.filteredVersions();
-
-    this.subscription$.push(this.searchBoxConfig());
   }
 
   public override canDeactivate = (): boolean => this.updateValidData();
@@ -82,15 +80,13 @@ export class VehicleModelVersionsComponent extends QuoteComponent<QuoteModel> im
     this.form = this.fb.group({
       searchInput: new FormControl(this.selectedModelVersion?.data)
     });
+
+    this.subscription$.push(this.searchBoxConfig());
   }
 
   private searchBoxConfig(): Subscription {
     return fromEvent(this.searchInput.nativeElement, 'keyup')
-      .pipe(
-        map(event => event),
-        debounceTime(DEBOUNCE_TIME),
-        distinctUntilChanged()
-      )
+      .pipe(debounceTime(DEBOUNCE_TIME), distinctUntilChanged())
       .subscribe(() => this.filteredVersions());
   }
 

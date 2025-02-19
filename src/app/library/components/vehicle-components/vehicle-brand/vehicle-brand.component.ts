@@ -3,7 +3,7 @@ import { Component, ElementRef, inject, OnInit, ViewChild } from '@angular/core'
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
 import { NxInputModule } from '@aposin/ng-aquila/input';
-import { debounceTime, distinctUntilChanged, fromEvent, map, Subscription } from 'rxjs';
+import { debounceTime, distinctUntilChanged, fromEvent, Subscription } from 'rxjs';
 import { QuoteComponent } from 'src/app/core/components';
 import { DEBOUNCE_TIME } from 'src/app/core/constants';
 import { IIconData } from 'src/app/core/models';
@@ -104,11 +104,7 @@ export class VehicleBrandComponent extends QuoteComponent<QuoteModel> implements
 
   private searchBoxConfig(): Subscription {
     return fromEvent(this.searchInput.nativeElement, 'keyup')
-      .pipe(
-        map(event => event),
-        debounceTime(DEBOUNCE_TIME),
-        distinctUntilChanged()
-      )
+      .pipe(debounceTime(DEBOUNCE_TIME), distinctUntilChanged())
       .subscribe(() => this.searchBrands());
   }
 

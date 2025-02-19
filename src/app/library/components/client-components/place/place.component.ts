@@ -72,7 +72,7 @@ export class PlaceComponent extends QuoteComponent<QuoteModel> {
 
   private postalCodeExistsValidator = (): AsyncValidatorFn => {
     return async (control: AbstractControl): Promise<ValidationErrors | null> => {
-      const location = await this.locationService.getAddress(control.value);
+      const location = control.value?.length === 5 ? await this.locationService.getAddress(control.value) : undefined;
 
       this._contextData.place = { ...location };
       this.location = location?.postalCode ? `${location?.location}, ${location?.province}` : '';
