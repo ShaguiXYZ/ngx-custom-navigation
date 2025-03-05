@@ -56,7 +56,7 @@ describe('ClientPhoneNumberComponent', () => {
 
     component['_contextData'] = {
       personalData: {
-        phoneNumber: '123456789'
+        phoneNumber: '+34123456789'
       }
     } as QuoteModel;
 
@@ -70,11 +70,11 @@ describe('ClientPhoneNumberComponent', () => {
   });
 
   it('should initialize form with phone number', () => {
-    expect(component.form.get('phoneNumber')?.value).toBe('123456789');
+    expect(component.form.get('phoneNumber')?.value).toBe('+34123456789');
   });
 
   it('should mark form as touched and update context data on valid form', () => {
-    component.form.get('phoneNumber')?.setValue('987654321');
+    component.form.get('phoneNumber')?.setValue('+34987654321');
     component['updateValidData']();
 
     expect(component.form.touched).toBeTrue();
@@ -88,7 +88,7 @@ describe('ClientPhoneNumberComponent', () => {
   });
 
   it('should return true from canDeactivate if form is valid', async () => {
-    component.form.get('phoneNumber')?.setValue('987654321');
+    component.form.get('phoneNumber')?.setValue('+34987654321');
     const canDeactivate = await component.canDeactivate();
     expect(canDeactivate).toBeTrue();
   });

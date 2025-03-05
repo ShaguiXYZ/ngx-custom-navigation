@@ -1,6 +1,7 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, DeferBlockBehavior, TestBed } from '@angular/core/testing';
 import { SelectableOptionComponent } from './selectable-option.component';
 import { By } from '@angular/platform-browser';
+import { ɵDeferBlockState } from '@angular/core';
 
 describe('SelectableOptionComponent', () => {
   let component: SelectableOptionComponent;
@@ -8,11 +9,17 @@ describe('SelectableOptionComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [SelectableOptionComponent]
+      imports: [SelectableOptionComponent],
+      deferBlockBehavior: DeferBlockBehavior.Manual
     }).compileComponents();
 
     fixture = TestBed.createComponent(SelectableOptionComponent);
     component = fixture.componentInstance;
+
+    // @howto Set the first defer block to complete to render the component
+    const firstDeferBlock = (await fixture.getDeferBlocks())[0];
+    await firstDeferBlock.render(ɵDeferBlockState.Complete);
+
     fixture.detectChanges();
   });
 
@@ -20,7 +27,7 @@ describe('SelectableOptionComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should emit uiSelect event when selected', () => {
+  it('should emit uiSelect event when selected', async () => {
     spyOn(component.uiSelect, 'emit');
 
     component.selected = true;
