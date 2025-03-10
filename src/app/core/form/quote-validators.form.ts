@@ -3,6 +3,7 @@ import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 import { ContextDataService, hasValue } from '@shagui/ng-shagui/core';
 import dayjs from 'dayjs';
 import isBetween from 'dayjs/plugin/isBetween';
+import parsePhoneNumberFromString from 'libphonenumber-js/max';
 import { QUOTE_APP_CONTEXT_DATA, QUOTE_CONTEXT_DATA } from '../constants';
 import { AppContextData, QuoteControlModel } from '../models';
 import { ServiceActivatorService } from '../service-activators';
@@ -124,6 +125,29 @@ export class QuoteFormValidarors {
       const mask = masks.find(mask => new RegExp(mask, flags).test(control.value));
 
       return this.activateEntryPoint(control, 'matches', !mask);
+    };
+  };
+
+  public validateMobileNumber = (): ValidatorFn => {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const value = control.value.trim().replace(/\s/g, '');
+
+      if (!value.length) {
+        return null;
+      }
+
+      if (isNaN(value)) {
+        return this.activateEntryPoint(control, 'mobilePhone', isNaN(value));
+      }
+
+      try {
+        const phoneNumber = parsePhoneNumberFromString(value);
+        const isValidPhoneNumber = phoneNumber?.isValid() && phoneNumber.getType() === 'MOBILE';
+
+        return this.activateEntryPoint(control, 'mobilePhone', !isValidPhoneNumber);
+      } catch {
+        return { mobilePhonePattern: true };
+      }
     };
   };
 

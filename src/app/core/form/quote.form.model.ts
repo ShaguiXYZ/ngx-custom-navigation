@@ -11,6 +11,7 @@ export type QuoteFormValidation =
   | 'minLenght'
   | 'minYearsBetweenDates'
   | 'minValues'
+  | 'mobilePhone'
   | 'notFound'
   | 'olderThanYears'
   | 'pastDate'

@@ -7,10 +7,12 @@
   <section class="form-container">
     <form [formGroup]="form">
       <nx-formfield [label]="'phone-number' | quoteLiteral">
-        <nx-phone-input formControlName="phoneNumber" [countryCode]="coutryCode" [inputFormatter]="whitespaceFormatter" nxAutoFocus />
+        <nx-phone-input formControlName="phoneNumber" [countryCode]="coutryCode" nxAutoFocus />
         @if(form.get('phoneNumber')?.errors?.['required']) {
         <nx-error appearance="text" nxFormfieldError><span nxQuoteLiteral="error-required"></span> </nx-error>
         } @if(form.get('phoneNumber')?.errors?.['matches']) {
+        <nx-error appearance="text" nxFormfieldError><span nxQuoteLiteral="bad-format"></span> </nx-error>
+        } @if(form.get('phoneNumber')?.errors?.['mobilePhone']) {
         <nx-error appearance="text" nxFormfieldError><span nxQuoteLiteral="bad-format"></span> </nx-error>
         }
       </nx-formfield>

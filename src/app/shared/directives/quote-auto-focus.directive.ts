@@ -1,4 +1,4 @@
-import { Directive, ElementRef, OnInit, Renderer2 } from '@angular/core';
+import { ChangeDetectorRef, Directive, ElementRef, OnInit, Renderer2 } from '@angular/core';
 
 /**
  * Directive to set focus on an input element when it is rendered.
@@ -7,7 +7,7 @@ import { Directive, ElementRef, OnInit, Renderer2 } from '@angular/core';
   selector: '[nxAutoFocus]'
 })
 export class QuoteAutoFocusDirective implements OnInit {
-  constructor(private readonly el: ElementRef<HTMLElement>, private readonly renderer: Renderer2) {}
+  constructor(private readonly cd: ChangeDetectorRef, private readonly el: ElementRef<HTMLElement>, private readonly renderer: Renderer2) {}
 
   public ngOnInit(): void {
     Promise.resolve().then(() => {
@@ -16,7 +16,8 @@ export class QuoteAutoFocusDirective implements OnInit {
 
       if (!someInputHasFocus && !value && (this.el.nativeElement.tabIndex >= 0 || this.el.nativeElement.hasAttribute('tabindex'))) {
         this.renderer.setAttribute(this.el.nativeElement, 'tabindex', '0');
-        this.el.nativeElement.focus();
+        this.renderer.selectRootElement(this.el.nativeElement).focus();
+        this.cd.detectChanges();
       }
     });
   }

@@ -4,6 +4,7 @@ import { NxCopytextModule } from '@aposin/ng-aquila/copytext';
 import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
 import { NxMaskModule } from '@aposin/ng-aquila/mask';
 import { NxPhoneInputComponent } from '@aposin/ng-aquila/phone-input';
+import { CountryCode } from 'libphonenumber-js';
 import { QuoteComponent } from 'src/app/core/components';
 import { QuoteFormValidarors } from 'src/app/core/form';
 import { QuoteModel } from 'src/app/library/models';
@@ -37,10 +38,8 @@ export class ClientPhoneNumberComponent extends QuoteComponent<QuoteModel> {
 
   protected override ngOnQuoteInit = this.createForm.bind(this);
 
-  public coutryCode = 'ES';
+  public coutryCode: CountryCode = 'ES';
   public override canDeactivate = (): boolean => this.form.valid;
-
-  public whitespaceFormatter = (value: string) => value.match(/.{1,2}/g)?.join(' ') || '';
 
   public updateValidData = (): void => {
     this.form.markAllAsTouched();
@@ -57,7 +56,7 @@ export class ClientPhoneNumberComponent extends QuoteComponent<QuoteModel> {
     this.form = this.fb.group({
       phoneNumber: new FormControl(this._contextData.personalData.phoneNumber ?? '', [
         this.quoteFormValidarors.required(),
-        this.quoteFormValidarors.matches([/^[+]\d{2}\s?\d{3}\s?\d{2}\s?\d{2}\s?\d{2}$/])
+        this.quoteFormValidarors.validateMobileNumber()
       ])
     });
   }
