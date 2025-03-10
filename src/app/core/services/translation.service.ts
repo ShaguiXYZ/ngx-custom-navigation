@@ -8,9 +8,7 @@ import { LanguageService } from './language.service';
 
 const TRANSLATION_API = '/translate';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({ providedIn: 'root' })
 export class TranslationService {
   // private apiUrl = 'https://libretranslate.com/translate';
 

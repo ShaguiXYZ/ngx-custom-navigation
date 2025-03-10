@@ -5,9 +5,7 @@ import { firstValueFrom, Observable, Subject } from 'rxjs';
 import { StorageLib } from '../lib';
 import { LanguageConfig, Languages, LocaleConfig, NX_LANGUAGE_CONFIG, STORAGE_LANGUAGE_KEY } from '../models';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({ providedIn: 'root' })
 export class LanguageService {
   private readonly config: LanguageConfig;
   private readonly languageChange$ = new Subject<string>();
