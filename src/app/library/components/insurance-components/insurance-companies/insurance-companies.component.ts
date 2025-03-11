@@ -10,7 +10,7 @@ import { IIconData } from 'src/app/core/models';
 import { InsuranceCompaniesService, RoutingService } from 'src/app/core/services';
 import { QuoteTrackDirective } from 'src/app/core/tracking';
 import { HeaderTitleComponent, IconCardComponent, QuoteFooterComponent, TextCardComponent } from 'src/app/shared/components';
-import { QuoteLiteralDirective } from 'src/app/shared/directives';
+import { QuoteAutoFocusDirective, QuoteLiteralDirective } from 'src/app/shared/directives';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 
 import { QuoteComponent } from 'src/app/core/components';
@@ -32,6 +32,7 @@ import { InsuranceComponentService } from './services';
     ReactiveFormsModule,
     QuoteLiteralDirective,
     QuoteTrackDirective,
+    QuoteAutoFocusDirective,
     QuoteLiteralPipe
   ],
   providers: [InsuranceComponentService, InsuranceCompaniesService]

@@ -12,7 +12,7 @@ import { QuoteTrackDirective } from 'src/app/core/tracking';
 import { ModelVersionModel, QuoteModel } from 'src/app/library/models';
 import { VehicleService } from 'src/app/library/services';
 import { HeaderTitleComponent, QuoteFooterComponent, QuoteZoneComponent, TextCardComponent } from 'src/app/shared/components';
-import { QuoteLiteralDirective } from 'src/app/shared/directives';
+import { QuoteAutoFocusDirective, QuoteLiteralDirective } from 'src/app/shared/directives';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 
 @Component({
@@ -31,6 +31,7 @@ import { QuoteLiteralPipe } from 'src/app/shared/pipes';
     ReactiveFormsModule,
     QuoteLiteralDirective,
     QuoteTrackDirective,
+    QuoteAutoFocusDirective,
     QuoteLiteralPipe
   ],
   providers: [VehicleService]

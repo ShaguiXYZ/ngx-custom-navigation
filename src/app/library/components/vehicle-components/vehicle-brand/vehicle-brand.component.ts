@@ -18,7 +18,7 @@ import {
   QuoteZoneComponent,
   TextCardComponent
 } from 'src/app/shared/components';
-import { QuoteLiteralDirective } from 'src/app/shared/directives';
+import { QuoteAutoFocusDirective, QuoteLiteralDirective } from 'src/app/shared/directives';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 import { BrandComponentService } from './services';
 
@@ -37,6 +37,7 @@ import { BrandComponentService } from './services';
     NxInputModule,
     ReactiveFormsModule,
     QuoteLiteralDirective,
+    QuoteAutoFocusDirective,
     QuoteLiteralPipe,
     QuoteTrackDirective
   ],

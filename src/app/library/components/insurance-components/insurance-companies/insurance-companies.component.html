@@ -7,7 +7,7 @@
   <section class="form-container">
     <form [formGroup]="form">
       <nx-formfield [label]="'search' | quoteLiteral" appearance="outline">
-        <input #searchInput type="text" formControlName="searchInput" nxInput />
+        <input #searchInput type="text" formControlName="searchInput" nxInput nxAutoFocus />
         @if(searchInput.value) {
         <span class="clear-input" tabindex="0" (click)="clearInput()" nxFormfieldSuffix>
           <em class="fa-solid fa-eraser"></em>
