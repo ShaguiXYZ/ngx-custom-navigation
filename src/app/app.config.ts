@@ -10,7 +10,7 @@ import {
   provideZoneChangeDetection
 } from '@angular/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
-import { provideRouter } from '@angular/router';
+import { provideRouter, withComponentInputBinding } from '@angular/router';
 import { NxDatepickerIntl } from '@aposin/ng-aquila/datefield';
 import { TranslateModule } from '@ngx-translate/core';
 import { NX_CONTEX_CONFIG } from '@shagui/ng-shagui/core';
@@ -73,7 +73,7 @@ export const appConfig: ApplicationConfig = {
     provideAppInitializer(appInitializer),
     provideAnimations(),
     provideHttpClient(withInterceptors([httpErrorInterceptor, mockInterceptor, recaptchaInterceptor])),
-    provideRouter(routes),
+    provideRouter(routes, withComponentInputBinding()),
     provideZoneChangeDetection({ eventCoalescing: true }),
     { provide: NX_WORKFLOW_TOKEN, useExisting: VEHICLE_WORKFLOW_TOKEN },
     {

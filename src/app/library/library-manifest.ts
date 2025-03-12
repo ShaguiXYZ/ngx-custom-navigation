@@ -44,7 +44,7 @@ import {
 } from './components/vehicle-components';
 import { VehicleCharacteristicsComponent } from './components/vehicle-components/vehicle-characteristics/vehicle-characteristics.component';
 import { QuoteModel } from './models';
-import { BlackListActivator } from './service-activators';
+import { BlackListActivator, QuoteActivator } from './service-activators';
 
 const LIBRARY_MANIFEST = {
   birthdate: { component: BirthdateComponent },
@@ -114,7 +114,8 @@ const SERVICE_ACTIVATORS_MANIFEST: Record<ServiceActivatorType, (services: Activ
   '$black-list-identification-number': BlackListActivator.checkIdentificationNumberBlackList,
   '$black-list-plate': BlackListActivator.checkPlateBlackList,
   '$black-list-phone': BlackListActivator.checkPhoneBlackList,
-  '$black-list-email': BlackListActivator.checkEmailBlackList
+  '$black-list-email': BlackListActivator.checkEmailBlackList,
+  '$reset-quote': QuoteActivator.quoteReset
 };
 
 export type WorkflowManifestId = keyof typeof LIBRARY_MANIFEST;

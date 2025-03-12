@@ -853,17 +853,6 @@
           "footer-next": { "value": "Pages.Confirmation.FooterNext", "type": "translate" }
         },
         "data": {
-          "contextData": {
-            "blackList": {},
-            "client": {},
-            "contactData": {},
-            "driven": {},
-            "insuranceCompany": {},
-            "personalData": {},
-            "place": {},
-            "vehicle": {},
-            "offering": {}
-          },
           "headerConfig": {
             "showBack": false,
             "showContactUs": false
@@ -871,7 +860,13 @@
           "stepperConfig": {
             "visible": false
           }
-        }
+        },
+        "serviceActivators": [
+          {
+            "entryPoint": "next-page",
+            "activator": "$reset-quote"
+          }
+        ]
       }
     },
     {
