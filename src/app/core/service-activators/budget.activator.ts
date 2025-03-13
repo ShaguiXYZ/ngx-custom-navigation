@@ -1,6 +1,6 @@
 import { IndexedData, UniqueIds } from '@shagui/ng-shagui/core';
 import dayjs from 'dayjs';
-import { QUOTE_APP_CONTEXT_DATA, QUOTE_CONTEXT_DATA } from '../constants';
+import { JOURNEY_SESSION_KEY, QUOTE_APP_CONTEXT_DATA, QUOTE_CONTEXT_DATA } from '../constants';
 import { BudgetError } from '../errors';
 import { BudgetUtils, StorageLib } from '../lib';
 import { AppContextData, Budget, QuoteControlModel, StoredDataKey } from '../models';
@@ -47,6 +47,8 @@ export class BudgetActivator {
       }
 
       const decrypted = BudgetUtils.decrypt<Budget>(storedDataKey.passKey, cipher);
+
+      decrypted?.context?.settings.journey && StorageLib.set(JOURNEY_SESSION_KEY, decrypted.context.settings.journey);
 
       contextDataService.set<AppContextData>(QUOTE_APP_CONTEXT_DATA, decrypted.context);
       contextDataService.set<QuoteControlModel>(QUOTE_CONTEXT_DATA, {

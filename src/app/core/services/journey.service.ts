@@ -3,8 +3,10 @@ import { HttpParams } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { ContextDataService, DataInfo, HttpService, UniqueIds } from '@shagui/ng-shagui/core';
 import { firstValueFrom, map, tap } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { NX_WORKFLOW_TOKEN } from '../components/models';
-import { QUOTE_APP_CONTEXT_DATA } from '../constants';
+import { JOURNEY_SESSION_KEY, QUOTE_APP_CONTEXT_DATA } from '../constants';
+import { StorageLib } from '../lib';
 import {
   AppContextData,
   Configuration,
@@ -23,10 +25,7 @@ import {
   VersionInfo
 } from '../models';
 import { LiteralsService } from './literals.service';
-import { StorageLib } from '../lib';
-import { environment } from 'src/environments/environment';
 
-const JOURNEY_SESSION_KEY = 'journey';
 const JOURNEY_API = '/journey';
 
 @Injectable({ providedIn: 'root' })
@@ -68,25 +67,26 @@ export class JourneyService {
     );
   };
 
-  public fetchConfiguration = async (info: JourneyInfo): Promise<Configuration> => {
+  public fetchConfiguration = async ({ id, versions }: JourneyInfo): Promise<Configuration> => {
     const configurationDTO = await firstValueFrom(
-      this.httpService.get<ConfigurationDTO>(`${environment.baseUrl}${JOURNEY_API}/${info.id}`).pipe(map(res => res as ConfigurationDTO))
+      this.httpService.get<ConfigurationDTO>(`${environment.baseUrl}${JOURNEY_API}/${id}`).pipe(map(res => res as ConfigurationDTO))
     );
 
-    return this.init(info.id, configurationDTO, VersionInfo.last(info.versions));
+    return this.init(id, configurationDTO, VersionInfo.last(versions));
   };
 
   private init = (id: string, configuration: ConfigurationDTO, version: VersionInfo): Configuration => {
     const quoteConfiguration: Configuration = this.initQuote(id, configuration, version);
+    const { homePageId, steppers, links, literals } = configuration;
 
-    if (!configuration.homePageId) {
+    if (!homePageId) {
       quoteConfiguration.homePageId = quoteConfiguration.errorPageId;
       quoteConfiguration.title = { value: 'error-title', type: 'literal' };
     }
 
-    this.initSteppers(quoteConfiguration, configuration.steppers);
-    this.initLinks(quoteConfiguration, configuration.links);
-    this.initLiterals(quoteConfiguration, configuration.literals);
+    this.initSteppers(quoteConfiguration, steppers);
+    this.initLinks(quoteConfiguration, links);
+    this.initLiterals(quoteConfiguration, literals);
 
     return quoteConfiguration;
   };
