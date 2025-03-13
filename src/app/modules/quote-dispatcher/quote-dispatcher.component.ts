@@ -1,5 +1,5 @@
-import { Component, inject, input, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, inject, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ContextDataService } from '@shagui/ng-shagui/core';
 import { QUOTE_APP_CONTEXT_DATA } from 'src/app/core/constants';
 import { JourneyError } from 'src/app/core/errors';
@@ -20,30 +20,28 @@ import { AppUrls } from 'src/app/shared/config';
 })
 export class QuoteDispatcherComponent implements OnInit {
   // @howto: dynamic binding of request parameters (see: withComponentInputBinding() in app config).
-  public stored = input.required<string>();
-  public dispatcher = input.required<string>();
+  // public stored = input.required<string>();
+  // public dispatcher = input.required<string>();
 
   private readonly contextDataService = inject(ContextDataService);
   private readonly settingsService = inject(SettingsService);
   private readonly trackService = inject(QuoteTrackService);
   private readonly _router = inject(Router);
+  private readonly _route = inject(ActivatedRoute);
 
   async ngOnInit(): Promise<void> {
-    /**
-     *  Old code
-     */
-    // const {
-    //   params: { stored, dispatcher }
-    // } = this._route.snapshot;
+    const {
+      params: { stored, dispatcher }
+    } = this._route.snapshot;
 
-    if (this.stored()) {
+    if (stored) {
       await (BudgetActivator.retrieveBudget({ contextDataService: this.contextDataService }) as ActivatorFn)({
-        budget: this.stored() as string
+        budget: stored
       });
     }
 
-    if (this.dispatcher()) {
-      this.trackService.trackView(this.dispatcher());
+    if (dispatcher) {
+      this.trackService.trackView(dispatcher);
     }
 
     this.loader();

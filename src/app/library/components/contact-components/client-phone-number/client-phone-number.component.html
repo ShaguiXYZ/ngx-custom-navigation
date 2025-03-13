@@ -7,7 +7,7 @@
   <section class="form-container">
     <form [formGroup]="form">
       <nx-formfield [label]="'phone-number' | quoteLiteral">
-        <nx-phone-input formControlName="phoneNumber" [countryCode]="coutryCode" nxAutoFocus />
+        <nx-phone-input formControlName="phoneNumber" [countryCode]="coutryCode" [countryNames]="countryNames" nxAutoFocus />
         @if(form.get('phoneNumber')?.errors?.['required']) {
         <nx-error appearance="text" nxFormfieldError><span nxQuoteLiteral="error-required"></span> </nx-error>
         } @if(form.get('phoneNumber')?.errors?.['matches']) {

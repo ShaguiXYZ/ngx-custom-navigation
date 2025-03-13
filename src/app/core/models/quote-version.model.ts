@@ -1,5 +1,11 @@
 /* eslint-disable @typescript-eslint/no-namespace */
 export type Version = `v${number}.${number}` | `v${number}.${number}.${number}`;
+/**
+ * Breaking change types
+ * - all: workflow and configurationa versions are breaking changes
+ * - workflow: only workflow versions are breaking changes
+ * - none: no breaking changes
+ */
 export type Breakingchange = 'all' | 'workflow' | 'none';
 export interface VersionInfo {
   value: Version;

@@ -3,19 +3,19 @@ import { Inject, Injectable, LOCALE_ID, Optional } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { firstValueFrom, Observable, Subject } from 'rxjs';
 import { StorageLib } from '../lib';
-import { LanguageConfig, Languages, LocaleConfig, NX_LANGUAGE_CONFIG, STORAGE_LANGUAGE_KEY } from '../models';
+import { LanguageConfig, Languages, LocaleConfig, LocateType, NX_LANGUAGE_CONFIG, STORAGE_LANGUAGE_KEY } from '../models';
 
 @Injectable({ providedIn: 'root' })
 export class LanguageService {
   private readonly config: LanguageConfig;
-  private readonly languageChange$ = new Subject<string>();
+  private readonly languageChange$ = new Subject<LocateType>();
 
   constructor(
     @Optional()
     @Inject(NX_LANGUAGE_CONFIG)
-    private readonly nxLanguageConfig: Partial<LanguageConfig> & { languages: Record<string, LocaleConfig> } = { languages: Languages },
+    private readonly nxLanguageConfig: Partial<LanguageConfig> & { languages: Record<LocateType, LocaleConfig> } = { languages: Languages },
     @Inject(DOCUMENT) private readonly document: Document,
-    @Inject(LOCALE_ID) private readonly locale: string,
+    @Inject(LOCALE_ID) private readonly locale: LocateType,
     private readonly translateService: TranslateService
   ) {
     this.config = this.configureService();
@@ -23,15 +23,15 @@ export class LanguageService {
     this.i18n(this.config.current!);
   }
 
-  public get current(): string {
+  public get current(): LocateType {
     return this.config.current;
   }
 
-  public get languages(): Record<string, LocaleConfig> {
+  public get languages(): Record<LocateType, LocaleConfig> {
     return this.config.languages;
   }
 
-  public async i18n(key: string): Promise<void> {
+  public async i18n(key: LocateType): Promise<void> {
     if (this.config.languages[key]) {
       await firstValueFrom(this.translateService.use(key));
 
@@ -48,12 +48,12 @@ export class LanguageService {
 
   public instant = this.translateService.instant.bind(this.translateService);
 
-  public asObservable = (): Observable<string> => this.languageChange$.asObservable();
+  public asObservable = (): Observable<LocateType> => this.languageChange$.asObservable();
 
   private configureService(): LanguageConfig {
     const sessionData = StorageLib.get(STORAGE_LANGUAGE_KEY, 'local');
     const storageConfig: LanguageConfig = sessionData ? JSON.parse(sessionData) : {};
-    const languageKeys = Object.keys(this.nxLanguageConfig.languages || {});
+    const languageKeys = Object.keys(this.nxLanguageConfig.languages || {}) as LocateType[];
 
     if (storageConfig.current && languageKeys.includes(storageConfig.current)) {
       return { ...this.nxLanguageConfig, current: storageConfig.current };

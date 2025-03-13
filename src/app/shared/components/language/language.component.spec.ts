@@ -10,8 +10,8 @@ describe('LanguageComponent', () => {
 
   beforeEach(async () => {
     languageServiceMock = {
-      languages: { en: { value: 'English' }, es: { value: 'Spanish' } },
-      current: 'en',
+      languages: { 'en-GB': { value: 'English' }, 'es-ES': { value: 'Spanish' } },
+      current: 'en-GB',
       i18n: jasmine.createSpy('i18n').and.returnValue(Promise.resolve())
     };
 
@@ -34,13 +34,13 @@ describe('LanguageComponent', () => {
 
   it('should initialize languages and currentLanguage on ngOnInit', async () => {
     await component.ngOnInit();
-    expect(component.languages).toEqual(['en', 'es']);
-    expect(component.currentLanguage).toBe('en');
+    expect(component.languages).toEqual(['en-GB', 'es-ES']);
+    expect(component.currentLanguage).toBe('en-GB');
   });
 
   it('should change language and emit uiChange event', async () => {
     spyOn(component.uiChange, 'emit');
-    const newLang = 'es';
+    const newLang = 'es-ES';
     await component.changeLanguage(newLang);
     expect(component.currentLanguage).toBe(newLang);
     expect(languageServiceMock.i18n).toHaveBeenCalledWith(newLang);
@@ -48,7 +48,7 @@ describe('LanguageComponent', () => {
   });
 
   it('should return the correct language name', () => {
-    const langName = component.getLanguageName('es');
+    const langName = component.getLanguageName('es-ES');
     expect(langName).toEqual({ value: 'Spanish' });
   });
 });

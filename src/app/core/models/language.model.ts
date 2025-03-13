@@ -1,7 +1,12 @@
+/* eslint-disable @typescript-eslint/no-namespace */
 import { InjectionToken } from '@angular/core';
 
+export type LanguageType = string;
+export type CountryType = string;
+export type LocateType = `${LanguageType}-${CountryType}`;
+
 export const STORAGE_LANGUAGE_KEY = 'LANGUAGE_CONFIG';
-export const Languages: Record<string, LocaleConfig> = {
+export const Languages: Record<LocateType, LocaleConfig> = {
   'ca-ES': { value: 'Català', format: 'DD/MM/YYYY', formats: ['DD/MM/YYYY', 'DD/MM/YY', 'DDMMYYYY', 'DDMMYY'] },
   'de-DE': { value: 'Deutsch', format: 'DD.MM.YYYY', formats: ['DD.MM.YYYY', 'DD.MM.YY', 'DDMMYYYY', 'DDMMYY'] },
   'en-GB': { value: 'English', format: 'MM/DD/YYYY', formats: ['MM/DD/YYYY', 'MM/DD/YY', 'MMDDYYYY', 'MMDDYY'] },
@@ -22,6 +27,11 @@ export interface LocaleConfig {
 }
 
 export interface LanguageConfig {
-  current: string;
-  languages: Record<string, LocaleConfig>;
+  current: LocateType;
+  languages: Record<LocateType, LocaleConfig>;
+}
+
+export namespace LanguageConfig {
+  export const language = (locale: LocateType): CountryType => locale.split('-')[0];
+  export const country = (locale: LocateType): CountryType => locale.split('-')[1];
 }

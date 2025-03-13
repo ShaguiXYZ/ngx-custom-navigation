@@ -1,22 +1,26 @@
-import { Component, DebugElement, RendererFactory2 } from '@angular/core';
+import { ChangeDetectorRef, Component, DebugElement, RendererFactory2 } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { QuoteAutoFocusDirective } from '../quote-auto-focus.directive';
 
 @Component({
-    template: `<input nxAutoFocus />`,
-    imports: [QuoteAutoFocusDirective]
+  template: `<input nxAutoFocus />`,
+  imports: [QuoteAutoFocusDirective]
 })
 class TestComponent {}
 
 describe('QuoteAutoFocusDirective', () => {
   let fixture: ComponentFixture<TestComponent>;
   let inputEl: DebugElement;
+  let mockChangeDetectorRef: jasmine.SpyObj<ChangeDetectorRef>;
 
   beforeEach(() => {
+    mockChangeDetectorRef = jasmine.createSpyObj('ChangeDetectorRef', ['detectChanges']);
+
     TestBed.configureTestingModule({
       declarations: [],
-      imports: [QuoteAutoFocusDirective, TestComponent]
+      imports: [QuoteAutoFocusDirective, TestComponent],
+      providers: [{ provide: ChangeDetectorRef, useValue: mockChangeDetectorRef }]
     });
 
     fixture = TestBed.createComponent(TestComponent);
@@ -26,7 +30,7 @@ describe('QuoteAutoFocusDirective', () => {
   it('should create an instance', () => {
     const rendererFactory = TestBed.inject(RendererFactory2);
     const renderer = rendererFactory.createRenderer(null, null);
-    const directive = new QuoteAutoFocusDirective(inputEl, renderer);
+    const directive = new QuoteAutoFocusDirective(mockChangeDetectorRef, inputEl, renderer);
     expect(directive).toBeTruthy();
   });
 

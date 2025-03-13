@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute, ActivatedRouteSnapshot, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
@@ -8,8 +7,8 @@ import { NX_WORKFLOW_TOKEN } from 'src/app/core/components/models';
 import { CommercialExceptionsModel, JourneyInfo, NX_LANGUAGE_CONFIG, QuoteSettingsModel } from 'src/app/core/models';
 import { BudgetActivator } from 'src/app/core/service-activators/budget.activator';
 import { JourneyService, NX_RECAPTCHA_TOKEN, RoutingService, SettingsService } from 'src/app/core/services';
-import { QuoteDispatcherComponent } from './quote-dispatcher.component';
 import { QuoteTrackService } from 'src/app/core/tracking';
+import { QuoteDispatcherComponent } from './quote-dispatcher.component';
 
 describe('QuoteDispatcherComponent', () => {
   let component: QuoteDispatcherComponent;
@@ -90,6 +89,7 @@ describe('QuoteDispatcherComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(QuoteDispatcherComponent);
     component = fixture.componentInstance;
+    fixture.detectChanges(); // Detectar cambios
   });
 
   it('should create', () => {
@@ -193,7 +193,7 @@ describe('QuoteDispatcherComponent', () => {
     );
     mockJourneyService.journeySettings.and.returnValue(Promise.resolve({} as JourneyInfo));
 
-    spyOn(component as any, 'loader').and.callThrough();
+    spyOn(component as never, 'loader').and.callThrough();
 
     await component.ngOnInit();
 
@@ -229,7 +229,7 @@ describe('QuoteDispatcherComponent', () => {
     );
     mockJourneyService.journeySettings.and.returnValue(Promise.resolve({} as JourneyInfo));
 
-    spyOn(component as any, 'resetContext').and.callThrough();
+    spyOn(component as never, 'resetContext').and.callThrough();
 
     await component.ngOnInit();
 

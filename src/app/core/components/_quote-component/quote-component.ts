@@ -21,9 +21,9 @@ export abstract class QuoteComponent<T extends QuoteControlModel> implements OnD
   protected ngOnQuoteInit?: () => void;
 
   protected readonly contextDataService = inject(ContextDataService);
+  protected readonly languageService = inject(LanguageService);
 
   private readonly _destroyed = new Subject<void>();
-  private readonly languageService = inject(LanguageService);
   private readonly serviveActivatorService = inject(ServiceActivatorService);
 
   constructor() {

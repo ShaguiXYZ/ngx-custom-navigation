@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { NxDatefieldModule } from '@aposin/ng-aquila/datefield';
+import { NxDatefieldModule, NxDatepickerIntl } from '@aposin/ng-aquila/datefield';
 import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
 import { NxInputModule } from '@aposin/ng-aquila/input';
 import { NxIsoDateModule } from '@aposin/ng-aquila/iso-date-adapter';
@@ -9,6 +9,7 @@ import { QuoteComponent } from 'src/app/core/components';
 import { DEFAULT_DATE_FORMAT } from 'src/app/core/constants';
 import { QuoteFormValidarors } from 'src/app/core/form';
 import { QuoteModel } from 'src/app/library/models';
+import { DatePikerIntl } from 'src/app/library/services/i18n';
 import { HeaderTitleComponent, QuoteFooterComponent } from 'src/app/shared/components';
 import { QuoteAutoFocusDirective, QuoteLiteralDirective } from 'src/app/shared/directives';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
@@ -29,7 +30,7 @@ import { QuoteLiteralPipe } from 'src/app/shared/pipes';
     QuoteLiteralDirective,
     QuoteLiteralPipe
   ],
-  providers: [QuoteFormValidarors]
+  providers: [QuoteFormValidarors, { provide: NxDatepickerIntl, useClass: DatePikerIntl }]
 })
 export class BirthdateComponent extends QuoteComponent<QuoteModel> {
   public readonly maxDate = dayjs();

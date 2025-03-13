@@ -74,7 +74,7 @@ describe('ClientPhoneNumberComponent', () => {
   });
 
   it('should mark form as touched and update context data on valid form', () => {
-    component.form.get('phoneNumber')?.setValue('+34987654321');
+    component.form.get('phoneNumber')?.setValue('+34687654321');
     component['updateValidData']();
 
     expect(component.form.touched).toBeTrue();
@@ -88,7 +88,7 @@ describe('ClientPhoneNumberComponent', () => {
   });
 
   it('should return true from canDeactivate if form is valid', async () => {
-    component.form.get('phoneNumber')?.setValue('+34987654321');
+    component.form.get('phoneNumber')?.setValue('+34687654321');
     const canDeactivate = await component.canDeactivate();
     expect(canDeactivate).toBeTrue();
   });
