@@ -170,6 +170,7 @@ export interface OfferingPriceModel {
 
 export interface QuoteOfferingModel {
   quotationId?: number;
+  priceIndex?: number;
   price?: OfferingPriceModel;
   prices?: OfferingPriceModel[];
   hash?: string;

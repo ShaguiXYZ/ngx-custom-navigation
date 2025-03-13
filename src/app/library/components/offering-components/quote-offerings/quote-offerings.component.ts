@@ -37,6 +37,7 @@ export class QuoteOfferingsComponent extends QuoteComponent<QuoteModel> implemen
   private componentDialogRef?: NxModalRef<QuoteOfferingCoveragesComponent>;
   private swipeCoord!: [number, number];
   private swipeTime!: number;
+  private timeout?: NodeJS.Timeout;
 
   private readonly unlistenFns: (() => void)[] = [];
   // private resizeObserver!: ResizeObserver;
@@ -47,17 +48,20 @@ export class QuoteOfferingsComponent extends QuoteComponent<QuoteModel> implemen
   private readonly dialogService = inject(NxDialogService);
 
   async ngOnInit(): Promise<void> {
-    this.offeringsService
-      .pricing(this._contextData)
-      .then(offering => (this.prices = offering.prices ?? []))
-      .catch(() => {
-        throw new QuoteError('Error fetching offering prices');
-      })
-      .finally(() => {
-        console.group('Offering prices fetched');
-        console.log('Offering prices fetched', this._contextData);
-        console.groupEnd();
-      });
+    try {
+      const { prices } = await this.offeringsService.pricing(this._contextData);
+
+      this.prices = prices ?? [];
+      this.timeout = setTimeout(
+        () => this.prices.length && this._contextData.offering.priceIndex && this.selectSteper(this._contextData.offering.priceIndex)
+      );
+    } catch {
+      throw new QuoteError('Error fetching offering prices');
+    }
+
+    console.group('Offering prices fetched');
+    console.log('Offering prices fetched', this._contextData);
+    console.groupEnd();
 
     this.unlistenFns.push(
       this.renderer.listen(this.track.nativeElement, 'touchstart', (event: TouchEvent) => this.swipeStart(event)),
@@ -78,13 +82,16 @@ export class QuoteOfferingsComponent extends QuoteComponent<QuoteModel> implemen
     super.ngOnDestroy();
 
     this.unlistenFns.forEach(unlisten => unlisten());
+    clearTimeout(this.timeout);
     // this.resizeObserver.disconnect();
   }
 
   public selectSteper(index: number): void {
+    this._contextData.offering.priceIndex = index;
     this._contextData.offering.price = { ...this._contextData.offering.price, ...this.prices[index] };
     this.selectedPriceIndex = index;
     this.renderer.setStyle(this.track.nativeElement, 'transition', 'transform 0.5s ease-out');
+
     this.selectCarrouselCard();
   }
 

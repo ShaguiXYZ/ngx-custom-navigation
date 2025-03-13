@@ -295,7 +295,7 @@
   },
   {
     "plateNumber": "1111HHH",
-    "fechaLanzamiento": "2010-05-01",
+    "firstRegistrationDate": "2010-05-01",
     "vehicleCode": "V301",
     "make": "Audi",
     "model": "A4 allroad",

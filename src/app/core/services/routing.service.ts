@@ -38,7 +38,7 @@ export class RoutingService implements OnDestroy {
     const nextPage = this.getNextRoute(toEveluate);
 
     if (!nextPage) {
-      return Promise.resolve(false);
+      return false;
     }
 
     return this._goToPage(nextPage);
@@ -53,7 +53,7 @@ export class RoutingService implements OnDestroy {
       return this._goToPage(this.appContextData.configuration.pageMap[pageId]);
     }
 
-    return Promise.resolve(false);
+    return false;
   };
 
   public goToPage = (pageId: string): Promise<boolean> => this._goToPage(this.getPage(pageId)!);

@@ -33,7 +33,7 @@ export class OfferingsService {
             map(res => res as OfferingDTO),
             map(OfferingDTO.toModel),
             tap(async offering => {
-              quote.offering = { ...quote.offering, quotationId: offering.quotationId, prices: offering.prices };
+              quote.offering = { ...quote.offering, quotationId: offering.quotationId, prices: offering.prices, priceIndex: 0 };
               quote.signature = { ...quote.signature, hash: QuoteModel.hash(quote) };
               quote.offering.hash = quote.signature.hash;
 
@@ -46,7 +46,7 @@ export class OfferingsService {
     } else {
       console.log('Quote not changed');
 
-      return Promise.resolve(quote.offering);
+      return quote.offering;
     }
   }
 }
