@@ -124,8 +124,8 @@ export class QuoteTrackService implements OnDestroy {
     return Object.entries(this.workFlowToken.manifest.tracks).reduce<TrackInfo>((acc, [key, data]) => {
       if (!data.tracked) return acc;
 
-      const value = JsonUtils.get(quote, data.value);
-      if (hasValue(value)) acc[key as keyof typeof this.workFlowToken.manifest.tracks] = `${value}`;
+      const value = JsonUtils.get(quote, data.path);
+      if (hasValue(value)) acc[key] = `${value}`;
 
       return acc;
     }, {});

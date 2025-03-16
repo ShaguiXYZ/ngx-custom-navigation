@@ -1,10 +1,11 @@
 export interface TrackedData {
-  value: string;
+  path: string;
   tracked: boolean;
 }
 
-export type TrackEventType = 'click' | 'keydown' | 'keyup' | 'focus' | 'blur' | 'change' | 'input' | 'submit';
-export type TrackKey<T = Record<string, TrackedData>> =
+export type TrackEventType = 'click' | 'keydown' | 'keyup' | 'focus' | 'blur' | 'change' | 'input' | 'submit' | 'success';
+export type TrackManifest = Record<string, TrackedData>;
+export type TrackKey<T = TrackManifest> =
   | 'action'
   | 'category'
   | 'event'
@@ -18,7 +19,7 @@ export type TrackKey<T = Record<string, TrackedData>> =
   | 'typology'
   | 'URL'
   | keyof T;
-export type TrackInfo = Partial<Record<TrackKey, string | number | boolean | null | undefined>>;
+export type TrackInfo<T = TrackManifest> = Partial<Record<TrackKey<T>, string | number | boolean | null | undefined>>;
 
 export interface TrackInfoPageModel {
   page: string;

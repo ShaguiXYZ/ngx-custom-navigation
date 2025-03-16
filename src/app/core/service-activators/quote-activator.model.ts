@@ -2,6 +2,7 @@ import { ContextDataService, HttpService } from '@shagui/ng-shagui/core';
 import { QuoteFormValidation } from '../form';
 import { BudgetActivator } from './budget.activator';
 import { QuoteActivator } from './quote.activator';
+import { QuoteTrackService } from '../tracking';
 
 export type ActivatorFn = (params?: unknown) => Promise<unknown>;
 export type ServiceActivatorFn = (services: ActivatorServices) => ActivatorFn;
@@ -28,4 +29,5 @@ export const Activators: Activator = {
 export interface ActivatorServices {
   contextDataService: ContextDataService;
   httpService?: HttpService;
+  trackService?: QuoteTrackService;
 }

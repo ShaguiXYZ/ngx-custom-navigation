@@ -2,7 +2,7 @@ import { InjectionToken } from '@angular/core';
 import { QuoteComponent } from '../core/components';
 import { QuoteWorkflowSettings } from '../core/components/models';
 import { ActivatorFn, ActivatorServices, ServiceActivatorType } from '../core/service-activators';
-import { TrackedData } from '../core/tracking';
+import { TrackManifest } from '../core/tracking';
 import {
   BirthdateComponent,
   DateOfIssueComponent,
@@ -79,35 +79,35 @@ const LIBRARY_MANIFEST = {
   'your-car-is': { component: YourCarIsComponent }
 };
 
-const TRACKING_MANIFEST: Record<string, TrackedData> = {
-  accidents: { value: 'client.accidents', tracked: false },
-  dateOfIssue: { value: 'client.dateOfIssue', tracked: false },
-  expiration: { value: 'client.expiration', tracked: false },
-  client: { value: 'client.isClient', tracked: true },
-  insurance: { value: 'client.isPolicyOwner', tracked: true },
-  isCurrentlyInsured: { value: 'client.isCurrentlyInsured', tracked: false },
-  contactHour: { value: 'contactData.contactHour', tracked: false },
-  location: { value: 'driven.licenseCountry', tracked: true },
-  drivenLicenseDate: { value: 'driven.licenseDate', tracked: false },
-  company: { value: 'insuranceCompany.company.index', tracked: true },
-  yearsAsOwner: { value: 'insuranceCompany.yearsAsOwner', tracked: false },
-  birthdate: { value: 'personalData.birthdate', tracked: false },
-  email: { value: 'personalData.email', tracked: false },
-  identificationNumber: { value: 'personalData.identificationNumber', tracked: false },
-  name: { value: 'personalData.name', tracked: false },
-  surname: { value: 'personalData.surname', tracked: false },
-  phoneNumber: { value: 'personalData.phoneNumber', tracked: false },
-  postalCode: { value: 'place.postalCode', tracked: false },
-  brand: { value: 'vehicle.brand', tracked: true },
-  displayment: { value: 'vehicle.cubicCapacity.index', tracked: true },
-  fuel: { value: 'vehicle.fuel.index', tracked: true },
-  model: { value: 'vehicle.model', tracked: true },
-  modelVersion: { value: 'vehicle.modelVersion.index', tracked: false },
-  plateNumber: { value: 'vehicle.plateNumber', tracked: false },
-  power: { value: 'vehicle.powerRange.index', tracked: false },
-  new: { value: 'vehicle.vehicleType', tracked: true },
-  yearOfManufacture: { value: 'vehicle.yearOfManufacture', tracked: false },
-  vehicleParkingType: { value: 'vehicle.vehicleParkingType', tracked: false }
+const TRACKING_MANIFEST: TrackManifest = {
+  accidents: { path: 'client.accidents', tracked: false },
+  dateOfIssue: { path: 'client.dateOfIssue', tracked: false },
+  expiration: { path: 'client.expiration', tracked: false },
+  client: { path: 'client.isClient', tracked: true },
+  insurance: { path: 'client.isPolicyOwner', tracked: true },
+  isCurrentlyInsured: { path: 'client.isCurrentlyInsured', tracked: false },
+  contactHour: { path: 'contactData.contactHour', tracked: false },
+  location: { path: 'driven.licenseCountry', tracked: true },
+  drivenLicenseDate: { path: 'driven.licenseDate', tracked: false },
+  company: { path: 'insuranceCompany.company.index', tracked: true },
+  yearsAsOwner: { path: 'insuranceCompany.yearsAsOwner', tracked: false },
+  birthdate: { path: 'personalData.birthdate', tracked: false },
+  email: { path: 'personalData.email', tracked: false },
+  identificationNumber: { path: 'personalData.identificationNumber', tracked: false },
+  name: { path: 'personalData.name', tracked: false },
+  surname: { path: 'personalData.surname', tracked: false },
+  phoneNumber: { path: 'personalData.phoneNumber', tracked: false },
+  postalCode: { path: 'place.postalCode', tracked: false },
+  brand: { path: 'vehicle.brand', tracked: true },
+  displayment: { path: 'vehicle.cubicCapacity.index', tracked: true },
+  fuel: { path: 'vehicle.fuel.index', tracked: true },
+  model: { path: 'vehicle.model', tracked: true },
+  modelVersion: { path: 'vehicle.modelVersion.index', tracked: false },
+  plateNumber: { path: 'vehicle.plateNumber', tracked: false },
+  power: { path: 'vehicle.powerRange.index', tracked: false },
+  new: { path: 'vehicle.vehicleType', tracked: true },
+  yearOfManufacture: { path: 'vehicle.yearOfManufacture', tracked: false },
+  vehicleParkingType: { path: 'vehicle.vehicleParkingType', tracked: false }
 };
 
 const SERVICE_ACTIVATORS_MANIFEST: Record<ServiceActivatorType, (services: ActivatorServices) => ActivatorFn> = {
