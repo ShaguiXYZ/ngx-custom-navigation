@@ -57,7 +57,19 @@ export class JourneyService {
 
   public journeySettings = async (journeyId: string): Promise<JourneyInfo> => {
     return await firstValueFrom(
-      this.httpService.get<JourneyInfo>(`${environment.baseUrl}${JOURNEY_API}/${journeyId}/settings`).pipe(map(res => res as JourneyInfo))
+      this.httpService
+        .get<JourneyInfo>(`${environment.baseUrl}${JOURNEY_API}/${journeyId}/settings`, {
+          responseStatusMessage: {
+            404: {
+              fn: () => {
+                console.warn('Journey not found');
+                StorageLib.remove(JOURNEY_SESSION_KEY);
+                window.location.reload();
+              }
+            }
+          }
+        })
+        .pipe(map(res => res as JourneyInfo))
     );
   };
 

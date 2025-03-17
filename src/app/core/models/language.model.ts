@@ -32,6 +32,6 @@ export interface LanguageConfig {
 }
 
 export namespace LanguageConfig {
-  export const language = (locale: LocateType): CountryType => locale.split('-')[0];
+  export const language = (locale: LocateType): LanguageType => locale.split('-')[0];
   export const country = (locale: LocateType): CountryType => locale.split('-')[1];
 }

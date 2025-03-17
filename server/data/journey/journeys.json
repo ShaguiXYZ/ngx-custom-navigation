@@ -14,10 +14,10 @@
       { "value": "v2.0.1", "date": 1736499580571, "breakingchange": "workflow" }
     ]
   },
-  "default-copy": {
-    "id": "default-copy",
+  "default-phone-config": {
+    "id": "default-phone-config",
     "name": "journey-0",
-    "versions": [{ "value": "v1.1" }]
+    "versions": [{ "value": "v1.1" }, { "value": "v1.2.0", "date": 1742229929266, "breakingchange": "all" }]
   },
   "not-is-client": {
     "id": "not-is-client",

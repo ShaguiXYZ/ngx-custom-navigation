@@ -703,6 +703,9 @@
         }
       ],
       "configuration": {
+        "data": {
+          "coutryCodes": ["ES"]
+        },
         "literals": {
           "header": { "value": "Pages.ClientPhoneNumber.Header", "type": "translate" },
           "subheader": { "value": "Pages.ClientPhoneNumber.Subheader", "type": "translate" },
