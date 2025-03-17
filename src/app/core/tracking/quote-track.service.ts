@@ -46,7 +46,7 @@ export class QuoteTrackService implements OnDestroy {
     // @howto implemants requestIdleCallback for track event
     requestIdleCallback(async () => {
       {
-        const fullUrl = `${window.location.protocol}//${window.location.host}/${inPage}`;
+        const fullUrl = this.fullUrl(inPage);
 
         const infoPage: TrackInfoPageModel = {
           page: inPage,
@@ -70,7 +70,7 @@ export class QuoteTrackService implements OnDestroy {
       configuration: { name: journey, steppers },
       navigation: { lastPage, viewedPages }
     } = appContextData;
-    const fullUrl = lastPage && `${window.location.protocol}//${window.location.host}/${lastPage.pageId}`;
+    const fullUrl = lastPage && this.fullUrl(lastPage.pageId);
     const title = this.literalService.toString({ value: 'header', type: 'literal' });
 
     return requestIdleCallback(async () => {
@@ -154,4 +154,6 @@ export class QuoteTrackService implements OnDestroy {
         throw new TrackError(error.message, eventType, trackInfo);
       });
   };
+
+  private fullUrl = (inPage: string): string => `${window.location.protocol}//${window.location.host}/${inPage}`;
 }

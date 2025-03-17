@@ -110,7 +110,8 @@ const TRACKING_MANIFEST: TrackManifest = {
   vehicleParkingType: { path: 'vehicle.vehicleParkingType', tracked: false }
 };
 
-const SERVICE_ACTIVATORS_MANIFEST: Record<ServiceActivatorType, (services: ActivatorServices) => ActivatorFn> = {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const SERVICE_ACTIVATORS_MANIFEST: Record<ServiceActivatorType, (services: ActivatorServices) => ActivatorFn<any>> = {
   '$black-list-identification-number': BlackListActivator.checkIdentificationNumberBlackList,
   '$black-list-plate': BlackListActivator.checkPlateBlackList,
   '$black-list-phone': BlackListActivator.checkPhoneBlackList,

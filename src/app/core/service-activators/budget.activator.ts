@@ -4,12 +4,12 @@ import { JOURNEY_SESSION_KEY, QUOTE_APP_CONTEXT_DATA, QUOTE_CONTEXT_DATA } from 
 import { BudgetError } from '../errors';
 import { BudgetUtils, StorageLib } from '../lib';
 import { AppContextData, Budget, QuoteControlModel, StoredDataKey } from '../models';
-import { ActivatorServices, ServiceActivatorFn } from './quote-activator.model';
+import { ActivatorFn, ActivatorServices, ServiceActivatorFn } from './quote-activator.model';
 
 export class BudgetActivator {
   public static storeBudget: ServiceActivatorFn =
-    ({ contextDataService }: ActivatorServices): (() => Promise<boolean>) =>
-    async (): Promise<boolean> => {
+    ({ contextDataService }: ActivatorServices): ActivatorFn<unknown, boolean> =>
+    (): boolean => {
       const quote = contextDataService.get<QuoteControlModel>(QUOTE_CONTEXT_DATA);
       const budget: Budget = {
         context: contextDataService.get<AppContextData>(QUOTE_APP_CONTEXT_DATA),
@@ -25,13 +25,12 @@ export class BudgetActivator {
 
       quote.signature = { ...quote.signature, budget: btoa(JSON.stringify(storedDataKey)) };
 
-      await Promise.resolve();
       return true;
     };
 
-  public static retrieveBudget: ServiceActivatorFn =
-    ({ contextDataService }: ActivatorServices): (() => Promise<boolean>) =>
-    async (params?: { budget?: string }): Promise<boolean> => {
+  public static retrieveBudget: ServiceActivatorFn<{ budget?: string }, boolean> =
+    ({ contextDataService }: ActivatorServices): ActivatorFn<{ budget?: string }, boolean> =>
+    (params?: { budget?: string }): boolean => {
       const { signature } = contextDataService.get<QuoteControlModel>(QUOTE_CONTEXT_DATA);
       const budget = params?.budget ?? signature?.budget;
 
@@ -55,7 +54,7 @@ export class BudgetActivator {
         ...decrypted.quote
       });
 
-      return Promise.resolve(true);
+      return true;
     };
 
   private static retrieveAll = (): IndexedData<string>[] => {

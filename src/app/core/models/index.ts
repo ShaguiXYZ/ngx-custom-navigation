@@ -18,3 +18,5 @@ export * from './signature.model';
 export * from './stepper-config.model';
 export * from './stepper.model';
 export * from './quote-translate.model';
+
+export type MaybePromise<T> = T | Promise<T>;

@@ -1,12 +1,12 @@
 import { deepCopy, JsonUtils } from '@shagui/ng-shagui/core';
 import { QUOTE_APP_CONTEXT_DATA, QUOTE_CONTEXT_DATA } from '../constants';
 import { AppContextData, QuoteControlModel, TrackPoints } from '../models';
-import { ActivatorServices, ServiceActivatorFn } from './quote-activator.model';
+import { ActivatorFn, ActivatorServices, ServiceActivatorFn } from './quote-activator.model';
 
 export class QuoteActivator {
   public static quotePatch: ServiceActivatorFn =
-    ({ contextDataService }: ActivatorServices) =>
-    async (params: unknown): Promise<boolean> => {
+    ({ contextDataService }: ActivatorServices): ActivatorFn<unknown, boolean> =>
+    (params: unknown): boolean => {
       const quote = contextDataService.get<QuoteControlModel>(QUOTE_CONTEXT_DATA);
 
       contextDataService.set(QUOTE_CONTEXT_DATA, JsonUtils.patch(quote, params));
@@ -15,8 +15,8 @@ export class QuoteActivator {
     };
 
   public static quoteTrack: ServiceActivatorFn =
-    ({ contextDataService }: ActivatorServices) =>
-    async (): Promise<boolean> => {
+    ({ contextDataService }: ActivatorServices): ActivatorFn<unknown, boolean> =>
+    (): boolean => {
       const contextData = contextDataService.get<AppContextData>(QUOTE_APP_CONTEXT_DATA);
       const { lastPage, track = TrackPoints.init() } = contextData.navigation;
 
