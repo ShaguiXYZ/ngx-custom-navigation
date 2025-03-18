@@ -7,7 +7,7 @@ import { AppContextData, Budget, QuoteControlModel, StoredDataKey } from '../mod
 import { ActivatorFn, ActivatorServices, ServiceActivatorFn } from './quote-activator.model';
 
 export class BudgetActivator {
-  public static storeBudget: ServiceActivatorFn =
+  public static storeBudget: ServiceActivatorFn<unknown, boolean> =
     ({ contextDataService }: ActivatorServices): ActivatorFn<unknown, boolean> =>
     (): boolean => {
       const quote = contextDataService.get<QuoteControlModel>(QUOTE_CONTEXT_DATA);

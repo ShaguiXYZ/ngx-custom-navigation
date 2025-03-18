@@ -4,7 +4,7 @@ import { QuoteModel } from '../models';
 import { AppContextData, TrackPoints } from 'src/app/core/models';
 
 export class QuoteActivator {
-  public static quoteReset: ServiceActivatorFn =
+  public static quoteReset: ServiceActivatorFn<unknown, boolean> =
     ({ contextDataService }: ActivatorServices): ActivatorFn<unknown, boolean> =>
     (): boolean => {
       const quote = QuoteModel.init();

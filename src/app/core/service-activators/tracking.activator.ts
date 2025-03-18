@@ -7,7 +7,7 @@ interface TrackActivatorModel {
 }
 
 export class TrackingActivator {
-  public static trackEvent: ServiceActivatorFn<TrackActivatorModel> = ({
+  public static trackEvent: ServiceActivatorFn<TrackActivatorModel, boolean> = ({
     trackService
   }: ActivatorServices): ActivatorFn<TrackActivatorModel, boolean> => {
     return (params?: TrackActivatorModel): boolean => {
