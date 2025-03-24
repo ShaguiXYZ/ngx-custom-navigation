@@ -55,7 +55,21 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.subscription$.push(this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe(this.resetHeaderAnimation));
+    this.subscription$.push(
+      this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe(() => {
+        const {
+          navigation: { lastPage }
+        } = this.contextDataService.get<AppContextData>(QUOTE_APP_CONTEXT_DATA);
+
+        if (lastPage) {
+          const url = lastPage.routeTree ?? lastPage.pageId;
+
+          window.history.pushState({}, '', `${url}?step=${lastPage.pageId}`);
+        }
+
+        this.resetHeaderAnimation();
+      })
+    );
   }
 
   ngOnDestroy(): void {

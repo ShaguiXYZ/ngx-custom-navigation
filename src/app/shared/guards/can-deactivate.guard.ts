@@ -26,7 +26,7 @@ export const canDeactivateGuard: CanDeactivateFn<{ _instance: QuoteComponent<Quo
 
   const canDeactivate = (): boolean => {
     const instance = component._instance;
-    const canDeactivate = (instance.canDeactivate?.bind(component._instance)(currentRoute, state, next) ?? true) as boolean;
+    const canDeactivate = (instance.canDeactivate?.bind(instance)(currentRoute, state, next) ?? true) as boolean;
 
     instance['_contextData'].signature = {
       ...(instance['_contextData'].signature ?? {}),

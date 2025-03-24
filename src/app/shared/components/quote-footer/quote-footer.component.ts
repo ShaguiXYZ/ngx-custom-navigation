@@ -90,8 +90,9 @@ export class QuoteFooterComponent implements OnInit, OnDestroy {
   };
 
   private footerButtonProperties = (): void => {
-    const { navigation } = this.contextDataService.get<AppContextData>(QUOTE_APP_CONTEXT_DATA);
-    const lastPage = navigation?.lastPage;
+    const {
+      navigation: { lastPage }
+    } = this.contextDataService.get<AppContextData>(QUOTE_APP_CONTEXT_DATA);
     const config = (lastPage?.configuration?.data?.['footerConfig'] as Partial<QuoteFooterConfig>) ?? {};
 
     this.config = { ...this.config, ...config };

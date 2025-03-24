@@ -37,9 +37,7 @@ export class RoutingService implements OnDestroy {
     const toEveluate = this.contextDataService.get<QuoteControlModel>(QUOTE_CONTEXT_DATA);
     const nextPage = this.getNextRoute(toEveluate);
 
-    if (!nextPage) {
-      return false;
-    }
+    if (!nextPage) return false;
 
     return this._goToPage(nextPage);
   };
@@ -78,7 +76,9 @@ export class RoutingService implements OnDestroy {
     const page = this.getPage(pageId);
     const nextPageId = this.testNavigation(data, page!);
 
-    return this.appContextData.configuration.pageMap[nextPageId!];
+    if (!nextPageId) return;
+
+    return this.appContextData.configuration.pageMap[nextPageId];
   }
 
   private testNavigation(data: QuoteControlModel, page: Page): string | undefined {
@@ -90,7 +90,7 @@ export class RoutingService implements OnDestroy {
   }
 
   /**
-   * Devuelve el nextPageId que cumpla las condiciones, o en última instancia el nextPageId por defecto (último)
+   * Returns the nextPageId that meets the conditions, or ultimately the default nextPageId (last one)
    */
   private nextPageIdFromNextOptionList(data: QuoteControlModel, nextOptionList: NextOption[]): string | undefined {
     const nextOption = nextOptionList.find(nextOption => ConditionEvaluation.checkConditions(data, nextOption.conditions));

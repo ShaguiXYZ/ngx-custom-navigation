@@ -105,7 +105,7 @@ export class JourneyService {
 
   private initQuote = (name: string, dto: ConfigurationDTO, version: VersionInfo): Configuration => {
     const errorPageId = dto.errorPageId ?? UniqueIds.random();
-    const hash = this.configuration_Hash(name, dto);
+    const hash = this.workflowHash(name, dto);
 
     const configuration: Configuration = {
       name,
@@ -127,7 +127,7 @@ export class JourneyService {
     return configuration;
   };
 
-  private configuration_Hash = (name: string, dto: ConfigurationDTO): string => {
+  private workflowHash = (name: string, dto: ConfigurationDTO): string => {
     const { errorPageId, ...significantData } = dto;
 
     return dataHash({ ...significantData, name });

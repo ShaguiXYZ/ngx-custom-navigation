@@ -137,7 +137,7 @@ export class QuoteFormValidarors {
       }
 
       if (isNaN(value)) {
-        return this.activateEntryPoint(control, 'mobilePhone', isNaN(value));
+        return this.activateEntryPoint(control, 'mobilePhone', true);
       }
 
       try {

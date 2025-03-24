@@ -19,7 +19,7 @@ import { GlobalErrorHandler } from './core/errors';
 import { NX_LANGUAGE_CONFIG } from './core/models';
 import { NX_RECAPTCHA_TOKEN, SettingsService } from './core/services';
 import { VEHICLE_WORKFLOW_TOKEN } from './library/library-manifest';
-import { nxLanguageConfig as nxLanguageConfig, TRANSLATE_MODULE_CONFIG, urls } from './shared/config';
+import { nxLanguageConfig, TRANSLATE_MODULE_CONFIG, urls } from './shared/config';
 import { httpErrorInterceptor, mockInterceptor, recaptchaInterceptor } from './shared/interceptors';
 
 const appInitializer = (): Promise<void> => {
