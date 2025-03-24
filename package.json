@@ -13,14 +13,14 @@
   },
   "private": true,
   "dependencies": {
-    "@angular/animations": "19.2.2",
-    "@angular/common": "19.2.2",
-    "@angular/compiler": "19.2.2",
-    "@angular/core": "19.2.2",
-    "@angular/forms": "19.2.2",
-    "@angular/platform-browser": "19.2.2",
-    "@angular/platform-browser-dynamic": "19.2.2",
-    "@angular/router": "19.2.2",
+    "@angular/animations": "19.2.3",
+    "@angular/common": "19.2.3",
+    "@angular/compiler": "19.2.3",
+    "@angular/core": "19.2.3",
+    "@angular/forms": "19.2.3",
+    "@angular/platform-browser": "19.2.3",
+    "@angular/platform-browser-dynamic": "19.2.3",
+    "@angular/router": "19.2.3",
     "@aposin/ng-aquila": "19.2.0",
     "@fortawesome/fontawesome-free": "6.7.2",
     "@ngx-translate/core": "16.0.4",
@@ -34,13 +34,13 @@
     "zone.js": "~0.15.0"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "19.2.3",
-    "@angular/cli": "19.2.3",
-    "@angular/compiler-cli": "19.2.2",
+    "@angular-devkit/build-angular": "19.2.4",
+    "@angular/cli": "19.2.4",
+    "@angular/compiler-cli": "19.2.3",
     "@types/crypto-js": "^4.2.2",
     "@types/jasmine": "~5.1.7",
-    "angular-eslint": "19.2.1",
-    "eslint": "^9.22.0",
+    "angular-eslint": "19.3.0",
+    "eslint": "^9.23.0",
     "jasmine-core": "~5.6.0",
     "jasmine-spec-reporter": "~7.0.0",
     "karma": "~6.4.4",
@@ -51,6 +51,6 @@
     "karma-mocha-reporter": "~2.2.5",
     "karma-spec-reporter": "^0.0.36",
     "typescript": "~5.8.2",
-    "typescript-eslint": "8.26.1"
+    "typescript-eslint": "8.28.0"
   }
 }
