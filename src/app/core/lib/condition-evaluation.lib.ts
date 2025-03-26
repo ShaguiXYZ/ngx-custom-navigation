@@ -31,7 +31,11 @@ export class ConditionEvaluation {
     (union &&
       {
         ['AND']: previous && current,
-        ['OR']: previous || current
+        ['OR']: previous || current,
+        ['XOR']: previous !== current,
+        ['NOR']: !(previous || current),
+        ['NAND']: !(previous && current),
+        ['XNOR']: previous === current
       }[union]) ??
     current;
 }

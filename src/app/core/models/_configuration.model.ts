@@ -9,7 +9,18 @@ import { Version, VersionInfo } from './quote-version.model';
 import { StepperConfig } from './stepper-config.model';
 import { Stepper, StepperDTO } from './stepper.model';
 
-export type CompareOperations = 'AND' | 'OR';
+/**
+ * Represents the possible logical comparison operations.
+ *
+ * The available operations are:
+ * - 'AND': Logical AND operation.
+ * - 'OR': Logical OR operation.
+ * - 'XOR': Logical exclusive OR operation.
+ * - 'NOR': Logical NOR (NOT OR) operation.
+ * - 'NAND': Logical NAND (NOT AND) operation.
+ * - 'XNOR': Logical equivalence (NOT XOR) operation.
+ */
+export type CompareOperations = 'AND' | 'OR' | 'XOR' | 'NOR' | 'NAND' | 'XNOR';
 export type Links = DataInfo;
 export type Literals = {
   header?: LiteralModel;

@@ -4,7 +4,7 @@ import { NX_WORKFLOW_TOKEN } from '../components/models';
 import { QUOTE_APP_CONTEXT_DATA, QUOTE_CONTEXT_DATA } from '../constants';
 import { ConditionEvaluation } from '../lib';
 import { AppContextData, QuoteControlModel } from '../models';
-import { ActivatorFn, Activators, EntryPoint, ServiceActivatorType } from './quote-activator.model';
+import { Activator, ActivatorFn, Activators, EntryPoint, ServiceActivatorType } from './quote-activator.model';
 
 @Injectable({ providedIn: 'root' })
 export class ServiceActivatorService {
@@ -15,23 +15,19 @@ export class ServiceActivatorService {
   private readonly httpService = inject(HttpService);
 
   constructor() {
-    Object.entries(Activators).forEach(
-      ([name, serviceActivatorFn]) =>
-        serviceActivatorFn &&
-        this.registerActivator(
-          name as ServiceActivatorType,
-          serviceActivatorFn({ contextDataService: this.contextDataService, httpService: this.httpService })
-        )
-    );
+    const registerActivators = (activator: Activator): void => {
+      Object.entries(activator).forEach(([name, serviceActivatorFn]) => {
+        if (serviceActivatorFn) {
+          this.registerActivator(
+            name as ServiceActivatorType,
+            serviceActivatorFn({ contextDataService: this.contextDataService, httpService: this.httpService })
+          );
+        }
+      });
+    };
 
-    Object.entries(this.workFlowToken.manifest.serviceActivators ?? {}).forEach(
-      ([name, serviceActivatorFn]) =>
-        serviceActivatorFn &&
-        this.registerActivator(
-          name as ServiceActivatorType,
-          serviceActivatorFn({ contextDataService: this.contextDataService, httpService: this.httpService })
-        )
-    );
+    registerActivators(Activators);
+    registerActivators(this.workFlowToken.manifest.serviceActivators ?? {});
   }
 
   public activateEntryPoint = async (name: EntryPoint): Promise<void> => {
