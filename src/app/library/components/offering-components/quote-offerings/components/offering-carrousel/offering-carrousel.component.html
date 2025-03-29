@@ -1,0 +1,39 @@
+<!-- eslint-disable @angular-eslint/template/interactive-supports-focus -->
+<!-- eslint-disable @angular-eslint/template/click-events-have-key-events -->
+<section class="carrousel__container">
+  <div #carrouselInner class="inner__carrousel">
+    <div #carrouselTrack class="track nx-margin-s">
+      @for(price of prices; track price.modalityId) {
+      <div class="carousel__card" [ngClass]="{ selected: selectedPriceIndex === $index }" (click)="selectSteper($index)">
+        <quote-offering-price-card
+          [price]="price"
+          [selected]="selectedPriceIndex === $index"
+          (uiShowCoverages)="showCoverages($index)"
+          (uiCallNow)="callNow($event)"
+          (uiContactUs)="contactUs($event)"
+        />
+      </div>
+      }
+    </div>
+
+    @if(prices.length > 1) {
+    <div class="carousel__operation carousel__left" (click)="previous()">
+      <em class="fa-solid fa-arrow-left"></em>
+    </div>
+    <div class="carousel__operation carousel__right" (click)="next()">
+      <em class="fa-solid fa-arrow-right"></em>
+    </div>
+    }
+  </div>
+
+  <div class="carousel__stepers nx-margin-top-s">
+    @for(price of prices; track price.modalityId) {
+    <div
+      class="carousel__steper"
+      [ngClass]="{ 'selected-price': selectedPriceIndex === $index }"
+      (click)="selectSteper($index)"
+      tabindex="0"
+    ></div>
+    }
+  </div>
+</section>

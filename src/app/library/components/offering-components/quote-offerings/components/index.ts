@@ -1,2 +1,1 @@
-export * from './offering-coverages';
-export * from './offering-price-card';
+export * from './offering-carrousel';

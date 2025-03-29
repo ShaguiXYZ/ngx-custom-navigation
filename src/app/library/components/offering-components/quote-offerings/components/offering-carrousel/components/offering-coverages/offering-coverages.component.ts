@@ -1,13 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { Component, Inject, inject, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { NxAccordionModule } from '@aposin/ng-aquila/accordion';
 import { NxCopytextModule } from '@aposin/ng-aquila/copytext';
 import { NxHeadlineModule } from '@aposin/ng-aquila/headline';
 import { NX_MODAL_DATA } from '@aposin/ng-aquila/modal';
 import { NxTabsModule } from '@aposin/ng-aquila/tabs';
-import { ContextDataService } from '@shagui/ng-shagui/core';
-import { QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
-import { Coverage, OfferingPriceModel, QuoteModel } from 'src/app/library/models';
+import { Coverage, OfferingPriceModel } from 'src/app/library/models';
 import { HeaderTitleComponent, TranslateTextComponent } from 'src/app/shared/components';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
 
@@ -27,25 +25,20 @@ import { QuoteLiteralDirective } from 'src/app/shared/directives';
   ]
 })
 export class QuoteOfferingCoveragesComponent implements OnInit {
-  public selectedPriceIndex!: number;
-  public prices: OfferingPriceModel[] = [];
   public coverageSelectecd?: number;
-
-  private readonly contextDataService = inject(ContextDataService);
+  public selectedPriceIndex = 0;
+  public prices: OfferingPriceModel[] = [];
 
   constructor(
     @Inject(NX_MODAL_DATA)
     public data: {
+      prices: OfferingPriceModel[];
       selectedPriceIndex: number;
     }
   ) {}
 
   ngOnInit(): void {
-    const {
-      offering: { prices }
-    } = this.contextDataService.get<QuoteModel>(QUOTE_CONTEXT_DATA);
-    this.prices = prices ?? [];
-
+    this.prices = this.data.prices ?? [];
     this.selectedPriceIndex = this.data.selectedPriceIndex ?? 0;
   }
 

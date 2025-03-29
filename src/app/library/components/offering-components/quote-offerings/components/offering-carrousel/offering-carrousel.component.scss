@@ -1,0 +1,84 @@
+@import 'core-globals';
+@import './styles/carousel.scss';
+
+.carrousel__container {
+  .inner__carrousel {
+    display: block;
+    overflow: hidden;
+    position: relative;
+
+    .carousel__operation {
+      align-items: center;
+      background: radial-gradient(circle, rgba(0, 122, 179, 1) 0%, rgba(0, 122, 179, 0.5) 100%);
+      background-color: var(--ui-03);
+      color: var(--ui-02);
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      height: 60px;
+      opacity: 0.1;
+      position: absolute;
+      top: 50%;
+      transition: background-color 1s ease-in-out, opacity 1s ease-in-out;
+      transform: translateY(-50%);
+      width: 60px;
+      z-index: $z-index-bottom;
+
+      &.carousel__left {
+        border-radius: 100px 75px 75px 100px;
+        left: 0;
+      }
+
+      &.carousel__right {
+        border-radius: 75px 100px 100px 75px;
+        right: 0;
+      }
+
+      &:hover {
+        background: radial-gradient(circle, rgba(0, 122, 179, 1) 0%, rgba(0, 122, 179, 0.5) 100%);
+        background-color: var(--ui-04);
+        opacity: 0.5;
+      }
+
+      em {
+        font-size: xx-large;
+      }
+    }
+
+    .track {
+      display: flex;
+      transition: transform 0.2s ease-in-out;
+      width: fit-content;
+    }
+  }
+
+  .carousel__stepers {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+
+    .carousel__steper {
+      height: 8px;
+      border: 1px solid var(--interactive-primary);
+      border-radius: 100%;
+      cursor: pointer;
+      width: 8px;
+      transition: background-color 0.3s ease-in-out, width 0.3s ease-in-out;
+
+      &.selected-price {
+        background-color: var(--interactive-primary);
+        border-radius: 22px;
+        height: 8px;
+        gap: 0px;
+        opacity: 0px;
+        width: 28px;
+        transition: background-color 0.3s ease-in-out, width 0.3s ease-in-out;
+      }
+    }
+
+    .carousel__steper + .carousel__steper {
+      margin-left: 8px;
+    }
+  }
+}

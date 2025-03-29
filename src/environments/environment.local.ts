@@ -6,7 +6,7 @@ export const environment = {
   mockUrl: './assets/json/mock', // url bff mock server
   domain: 'localhost:3000', // domain localhost
   recaptcha: {
-    siteKey: ''
+    siteKey: '6Lcp7Z0qAAAAABkWa0biX46hjpkeBZCpmaTn-HCh'
   },
   scripts: []
 };

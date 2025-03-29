@@ -1,47 +1,16 @@
-<!-- eslint-disable @angular-eslint/template/interactive-supports-focus -->
-<!-- eslint-disable @angular-eslint/template/click-events-have-key-events -->
 <article class="component-container">
   <quote-header-title>
     <span nxQuoteLiteral="header"></span>
     <p nxCopytext="normal" nxQuoteLiteral="subheader"></p>
   </quote-header-title>
   <section class="form-container">
-    <div #carrouselInner class="inner__carrousel">
-      <div #carrouselTrack class="track nx-margin-s">
-        @for(price of prices; track price.modalityId) {
-        <div class="carousel__card" [ngClass]="{ selected: selectedPriceIndex === $index }" (click)="selectSteper($index)">
-          <quote-offering-price-card
-            [price]="price"
-            [selected]="selectedPriceIndex === $index"
-            (uiShowCoverages)="showCoverages($index)"
-            (uiCallNow)="callNow($event)"
-            (uiContactUs)="contactUs($event)"
-          />
-        </div>
-        }
-      </div>
-
-      @if(prices.length > 1) {
-      <div class="carousel__operation carousel__left" (click)="previous()">
-        <em class="fa-solid fa-arrow-left"></em>
-      </div>
-      <div class="carousel__operation carousel__right" (click)="next()">
-        <em class="fa-solid fa-arrow-right"></em>
-      </div>
-      }
-    </div>
-
-    <div class="carousel__stepers nx-margin-top-s">
-      @for(price of prices; track price.modalityId) {
-      <div
-        class="carousel__steper"
-        [ngClass]="{ 'selected-price': selectedPriceIndex === $index }"
-        (click)="selectSteper($index)"
-        (keydown)="selectSteper($index)"
-        tabindex="0"
-      ></div>
-      }
-    </div>
+    <quote-offering-carrousel
+      [prices]="prices"
+      [selectedPriceIndex]="selectedPriceIndex"
+      (uiSelected)="selectPrice($event)"
+      (uiCallNow)="callNow($event)"
+      (uiContactUs)="contactUs($event)"
+    />
   </section>
   <quote-footer [config]="{ showNext: false }" />
 </article>

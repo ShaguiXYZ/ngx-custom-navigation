@@ -90,7 +90,7 @@ describe('JourneyService', () => {
       literals: {}
     } as unknown as ConfigurationDTO;
 
-    const hash = service['configuration_Hash'](journeyName, mockConfigurationDTO);
+    const hash = service['workflowHash'](journeyName, mockConfigurationDTO);
 
     const mockConfiguration = {
       name: journeyName,

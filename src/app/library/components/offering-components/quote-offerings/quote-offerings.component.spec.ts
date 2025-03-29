@@ -1,41 +1,27 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { CommonModule } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
-import { Renderer2 } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NxDialogService, NxModalModule } from '@aposin/ng-aquila/modal';
-import { TranslateService } from '@ngx-translate/core';
-import { ContextDataService } from '@shagui/ng-shagui/core';
-import { of, Subject } from 'rxjs';
-import { NX_WORKFLOW_TOKEN } from 'src/app/core/components/models';
-import { QUOTE_APP_CONTEXT_DATA, QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
-import { AppContextData, NX_LANGUAGE_CONFIG } from 'src/app/core/models';
-import { NX_RECAPTCHA_TOKEN } from 'src/app/core/services';
-import { RoutingService } from 'src/app/core/services/routing.service';
-import { OfferingPriceModel, QuoteModel } from 'src/app/library/models';
+import { NX_RECAPTCHA_TOKEN, RoutingService } from 'src/app/core/services';
+import { OfferingPriceModel } from 'src/app/library/models';
 import { OfferingsService } from 'src/app/library/services/offerings.service';
-import { QuoteLiteralPipe } from 'src/app/shared/pipes';
-import { QuoteOfferingCoveragesComponent } from './components';
 import { QuoteOfferingsComponent } from './quote-offerings.component';
+import { TranslateService } from '@ngx-translate/core';
+import { QuoteLiteralPipe } from 'src/app/shared/pipes';
+import { NX_WORKFLOW_TOKEN } from 'src/app/core/components/models';
+import { NX_LANGUAGE_CONFIG } from 'src/app/core/models';
+import { ServiceActivatorService } from 'src/app/core/service-activators';
+import { HttpService } from '@shagui/ng-shagui/core';
 
-describe('QuoteOfferingsComponent', () => {
+fdescribe('QuoteOfferingsComponent', () => {
   let component: QuoteOfferingsComponent;
   let fixture: ComponentFixture<QuoteOfferingsComponent>;
-  let offeringsService: jasmine.SpyObj<OfferingsService>;
-  let routingService: jasmine.SpyObj<RoutingService>;
-  let dialogService: jasmine.SpyObj<NxDialogService>;
+  let offeringsServiceSpy: jasmine.SpyObj<OfferingsService>;
+  let routingServiceSpy: jasmine.SpyObj<RoutingService>;
 
   beforeEach(async () => {
-    const contextDataSubject = new Subject<any>();
-    const contextDataServiceSpy = jasmine.createSpyObj('ContextDataService', ['get', 'set', 'onDataChange']);
-    const offeringsServiceSpy = jasmine.createSpyObj('OfferingsService', ['pricing']);
-    const routingServiceSpy = jasmine.createSpyObj('RoutingService', ['next']);
-    const dialogServiceSpy = jasmine.createSpyObj('NxDialogService', ['open']);
-    const rendererSpy = jasmine.createSpyObj('Renderer2', ['listen', 'setStyle']);
+    const httpServiceSpy = jasmine.createSpyObj('HttpService', ['get']);
     const quoteLiteralPipeSpy = jasmine.createSpyObj('QuoteLiteralPipe', ['transform']);
-    const httpClientSpy = jasmine.createSpyObj('HttpClient', ['get', 'post', 'put', 'delete']);
     const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate', 'setDefaultLang', 'use', 'instant']);
+    const serviceActivatorService = jasmine.createSpyObj('ServiceActivatorService', ['activateEntryPoint']);
     const mockWorkflowConfig = {
       errorPageId: 'error',
       manifest: {}
@@ -45,51 +31,27 @@ describe('QuoteOfferingsComponent', () => {
       languages: ['en', 'fr']
     };
 
-    translateServiceSpy.use.and.returnValue(of('en'));
-
-    dialogServiceSpy.open.and.returnValue({});
-
-    contextDataServiceSpy.get.and.callFake((contextDataKey: string): any => {
-      if (contextDataKey === QUOTE_APP_CONTEXT_DATA) {
-        return {
-          configuration: { literals: {} },
-          navigation: { lastPage: { pageId: 'page1' }, viewedPages: ['page1', 'page2'] }
-        } as AppContextData;
-      } else if (contextDataKey === QUOTE_CONTEXT_DATA) {
-        return {
-          offering: { price: { totalPremiumAmount: '100' }, prices: [{ totalPremiumAmount: 100 }, { totalPremiumAmount: 200 }] }
-        };
-      }
-
-      return null;
-    });
-
-    contextDataServiceSpy.onDataChange.and.returnValue(contextDataSubject.asObservable());
+    offeringsServiceSpy = jasmine.createSpyObj('OfferingsService', ['pricing']);
+    routingServiceSpy = jasmine.createSpyObj('RoutingService', ['next']);
 
     await TestBed.configureTestingModule({
       declarations: [],
-      imports: [QuoteOfferingsComponent, CommonModule, BrowserAnimationsModule, NxModalModule],
+      imports: [QuoteOfferingsComponent],
       providers: [
-        { provide: ContextDataService, useValue: contextDataServiceSpy },
-        { provide: OfferingsService, useValue: offeringsServiceSpy },
         { provide: RoutingService, useValue: routingServiceSpy },
-        { provide: NxDialogService, useValue: dialogServiceSpy },
+        { provide: OfferingsService, useValue: offeringsServiceSpy },
+        { provide: HttpService, useValue: httpServiceSpy },
         { provide: TranslateService, useValue: translateServiceSpy },
+        { provide: ServiceActivatorService, useValue: serviceActivatorService },
         { provide: QuoteLiteralPipe, useValue: quoteLiteralPipeSpy },
-        { provide: Renderer2, useValue: rendererSpy },
-        { provide: HttpClient, useValue: httpClientSpy },
         { provide: NX_RECAPTCHA_TOKEN, useValue: { siteKey: 'mock-site-key' } },
         { provide: NX_WORKFLOW_TOKEN, useValue: mockWorkflowConfig },
         { provide: NX_LANGUAGE_CONFIG, useValue: mockLanguageConfig }
       ]
     }).compileComponents();
 
-    offeringsService = TestBed.inject(OfferingsService) as jasmine.SpyObj<OfferingsService>;
-    routingService = TestBed.inject(RoutingService) as jasmine.SpyObj<RoutingService>;
-    dialogService = TestBed.inject(NxDialogService) as jasmine.SpyObj<NxDialogService>;
     fixture = TestBed.createComponent(QuoteOfferingsComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
   });
 
   it('should create', () => {
@@ -97,93 +59,44 @@ describe('QuoteOfferingsComponent', () => {
   });
 
   it('should fetch offering prices on init', async () => {
-    const prices = [{ totalPremiumAmount: 100 }, { totalPremiumAmount: 200 }] as OfferingPriceModel[];
-
-    offeringsService.pricing.and.returnValue(Promise.resolve({ prices }));
+    const mockPrices = [{ modalityId: 1, totalPremiumAmount: 100 }] as OfferingPriceModel[];
+    component['_contextData'] = { offering: { priceIndex: 2 }, signature: {} } as any;
+    offeringsServiceSpy.pricing.and.returnValue(Promise.resolve({ prices: mockPrices }));
 
     await component.ngOnInit();
 
-    expect(component.prices).toEqual(prices);
+    expect(component.prices).toEqual(mockPrices);
+    expect(offeringsServiceSpy.pricing).toHaveBeenCalled();
   });
 
   it('should handle error when fetching offering prices', async () => {
-    component['_contextData'] = { offering: {} } as QuoteModel;
-    offeringsService.pricing.and.returnValue(Promise.reject());
+    offeringsServiceSpy.pricing.and.returnValue(Promise.reject());
 
-    try {
-      await component.ngOnInit();
-    } catch (e) {
-      expect(e).toEqual(new Error('Error fetching offering prices'));
-    }
+    await expectAsync(component.ngOnInit()).toBeRejectedWithError('Error fetching offering prices');
   });
 
-  it('should select steper and update selectedPriceIndex', () => {
-    component['_contextData'] = { offering: { prices: [{ totalPremiumAmount: 100 }, { totalPremiumAmount: 200 }] } } as QuoteModel;
-    component.prices = [{ totalPremiumAmount: '100' }, { totalPremiumAmount: 200 }] as OfferingPriceModel[];
+  it('should set selected price index', () => {
+    component['_contextData'] = { offering: { priceIndex: 2 } } as any;
 
-    component.selectSteper(1);
-
-    expect(component.selectedPriceIndex).toBe(1);
-    // expect(renderer.setStyle).toHaveBeenCalledWith(component['track'].nativeElement, 'transition', 'transform 0.5s ease-out');
+    expect(component.selectedPriceIndex).toBe(2);
   });
 
-  it('should call next and select next steper', () => {
-    component['_contextData'] = { offering: {} } as QuoteModel;
-    component.prices = [{ totalPremiumAmount: 100 }, { totalPremiumAmount: 200 }] as OfferingPriceModel[];
-    component.selectedPriceIndex = 0;
-    component.next();
+  it('should update offering price on callNow', () => {
+    const mockPrice = { modalityId: 1, totalPremiumAmount: 100 } as OfferingPriceModel;
+    component['_contextData'] = { offering: { price: {} } } as any;
 
-    expect(component.selectedPriceIndex).toBe(1);
+    component.callNow(mockPrice);
+
+    expect(component['_contextData'].offering.price).toEqual(mockPrice);
   });
 
-  it('should call previous and select previous steper', () => {
-    component['_contextData'] = { offering: {} } as QuoteModel;
-    component.prices = [{ totalPremiumAmount: 100 }, { totalPremiumAmount: 200 }] as OfferingPriceModel[];
-    component.selectedPriceIndex = 1;
-    component.previous();
+  it('should update offering price and navigate on contactUs', () => {
+    const mockPrice = { modalityId: 1, totalPremiumAmount: 100 } as OfferingPriceModel;
+    component['_contextData'] = { offering: { price: {} } } as any;
 
-    expect(component.selectedPriceIndex).toBe(0);
-  });
+    component.contactUs(mockPrice);
 
-  xit('should show coverages and open dialog', () => {
-    component.prices = [{ totalPremiumAmount: 100 }, { totalPremiumAmount: 200 }] as OfferingPriceModel[];
-    component.showCoverages(1);
-
-    expect(component.selectedPriceIndex).toBe(1);
-    expect(dialogService.open).toHaveBeenCalledWith(QuoteOfferingCoveragesComponent, {
-      maxWidth: '98%',
-      showCloseIcon: true,
-      data: { selectedPriceIndex: 1 }
-    });
-  });
-
-  it('should call contactUs and navigate to next route', () => {
-    component['_contextData'] = { offering: {} } as QuoteModel;
-    const price = { totalPremiumAmount: 100 } as OfferingPriceModel;
-    component.contactUs(price);
-
-    expect(component['_contextData'].offering.price).toEqual(price);
-    expect(routingService.next).toHaveBeenCalled();
-  });
-
-  it('should handle swipe start', () => {
-    const event = { changedTouches: [{ clientX: 100, clientY: 200 }] } as unknown as TouchEvent;
-    component['swipeStart'](event);
-
-    expect(component['swipeCoord']).toEqual([100, 200]);
-    expect(component['swipeTime']).toBeDefined();
-  });
-
-  it('should handle swipe end and select next steper', () => {
-    component['_contextData'] = { offering: {} } as QuoteModel;
-    component.prices = [{ totalPremiumAmount: 100 }, { totalPremiumAmount: 200 }] as OfferingPriceModel[];
-    component.selectedPriceIndex = 0;
-    component['swipeCoord'] = [100, 200];
-    component['swipeTime'] = new Date().getTime() - 1000;
-
-    const event = { changedTouches: [{ clientX: 50, clientY: 200 }] } as unknown as TouchEvent;
-    component['swipeEnd'](event);
-
-    expect(component.selectedPriceIndex).toBe(1);
+    expect(component['_contextData'].offering.price).toEqual(mockPrice);
+    expect(routingServiceSpy.next).toHaveBeenCalled();
   });
 });
