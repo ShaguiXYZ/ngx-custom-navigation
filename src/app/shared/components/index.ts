@@ -4,6 +4,7 @@ export * from './icon-card';
 export * from './language';
 export * from './loading';
 export * from './notification';
+export * from './offering-carrousel';
 export * from './quote-footer';
 export * from './quote-header';
 export * from './quote-keys';

@@ -5,9 +5,10 @@ import { NxCopytextModule } from '@aposin/ng-aquila/copytext';
 import { NxHeadlineModule } from '@aposin/ng-aquila/headline';
 import { NX_MODAL_DATA } from '@aposin/ng-aquila/modal';
 import { NxTabsModule } from '@aposin/ng-aquila/tabs';
-import { Coverage, OfferingPriceModel } from 'src/app/library/models';
-import { HeaderTitleComponent, TranslateTextComponent } from 'src/app/shared/components';
+import { Coverage, OfferingPriceModel } from 'src/app/core/models';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
+import { HeaderTitleComponent } from '../../../header-title';
+import { TranslateTextComponent } from '../../../translate-text/translate-text.component';
 
 @Component({
   selector: 'quote-offering-coverages',

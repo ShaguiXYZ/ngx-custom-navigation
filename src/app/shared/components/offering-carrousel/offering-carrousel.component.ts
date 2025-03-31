@@ -1,10 +1,10 @@
 import { ComponentType } from '@angular/cdk/portal';
 import { CommonModule } from '@angular/common';
 import { Component, ElementRef, EventEmitter, inject, Input, OnDestroy, OnInit, Output, Renderer2, ViewChild } from '@angular/core';
-import { NxDialogService, NxModalModule, NxModalRef } from '@aposin/ng-aquila/modal';
-import { QuoteError } from 'src/app/core/errors';
-import { OfferingPriceModel } from 'src/app/library/models';
 import { QuoteOfferingCoveragesComponent, QuoteOfferingPriceCardComponent } from './components';
+import { NxDialogService, NxModalModule, NxModalRef } from '@aposin/ng-aquila/modal';
+import { OfferingPriceModel } from 'src/app/core/models';
+import { QuoteError } from 'src/app/core/errors';
 
 @Component({
   selector: 'quote-offering-carrousel',

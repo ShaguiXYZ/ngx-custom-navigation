@@ -1,13 +1,11 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-namespace */
-import { dataHash } from 'src/app/core/models';
-import { QuoteControlModel } from '../../core/models/quote-control.model';
+import { dataHash, QuoteControlModel, QuoteOfferingModel } from 'src/app/core/models';
 import { QuoteBlackList } from './quote-black-list.model';
 import { QuoteClientModel } from './quote-client.model';
 import { QuoteContactDataModel } from './quote-contact-data.model';
 import { QuoteDrivenModel } from './quote-driven.model';
 import { QuoteInsuranceCompanyModel } from './quote-insurance-company.model';
-import { QuoteOfferingModel } from './quote-offering.model';
 import { QuotePersonalDataModel } from './quote-personal-data.model';
 import { QuotePlaceModel } from './quote-place.model';
 import { QuoteVehicleModel } from './quote-vehicle.model';

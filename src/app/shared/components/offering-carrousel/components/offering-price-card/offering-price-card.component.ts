@@ -8,36 +8,36 @@ import { NxHeadlineModule } from '@aposin/ng-aquila/headline';
 import { NxLinkModule } from '@aposin/ng-aquila/link';
 import { NxRadioModule } from '@aposin/ng-aquila/radio-button';
 import { Subscription } from 'rxjs';
-import { QuoteFooterConfig } from 'src/app/core/models';
+import { OfferingPriceModel, QuoteFooterConfig } from 'src/app/core/models';
 import { QuoteTrackDirective } from 'src/app/core/tracking';
-import { OfferingPriceModel } from 'src/app/library/models';
-import { HeaderTitleComponent, QuoteFooterComponent } from 'src/app/shared/components';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
 import { QuoteLiteralPipe, QuoteNumberPipe } from 'src/app/shared/pipes';
+import { HeaderTitleComponent } from '../../../header-title';
+import { QuoteFooterComponent } from '../../../quote-footer';
 
 @Component({
-    selector: 'quote-offering-price-card',
-    templateUrl: './offering-price-card.component.html',
-    styleUrl: './offering-price-card.component.scss',
-    imports: [
-        CommonModule,
-        HeaderTitleComponent,
-        ReactiveFormsModule,
-        NxButtonModule,
-        NxCopytextModule,
-        NxHeadlineModule,
-        NxLinkModule,
-        NxRadioModule,
-        QuoteFooterComponent,
-        QuoteLiteralDirective,
-        QuoteLiteralPipe,
-        QuoteNumberPipe,
-        QuoteTrackDirective
-    ]
+  selector: 'quote-offering-price-card',
+  templateUrl: './offering-price-card.component.html',
+  styleUrl: './offering-price-card.component.scss',
+  imports: [
+    CommonModule,
+    HeaderTitleComponent,
+    ReactiveFormsModule,
+    NxButtonModule,
+    NxCopytextModule,
+    NxHeadlineModule,
+    NxLinkModule,
+    NxRadioModule,
+    QuoteFooterComponent,
+    QuoteLiteralDirective,
+    QuoteLiteralPipe,
+    QuoteNumberPipe,
+    QuoteTrackDirective
+  ]
 })
 export class QuoteOfferingPriceCardComponent implements OnInit, OnDestroy {
   @Input()
-  public selected?: boolean;
+  public selected = false;
 
   @Output()
   public uiShowCoverages: EventEmitter<OfferingPriceModel> = new EventEmitter<OfferingPriceModel>();

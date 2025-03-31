@@ -12,11 +12,12 @@ export * from './location.model';
 export * from './page-form.model';
 export * from './quote-control.model';
 export * from './quote-footer-comfig.model';
+export * from './quote-offering.model';
 export * from './quote-settings.model';
+export * from './quote-translate.model';
 export * from './quote-version.model';
 export * from './signature.model';
 export * from './stepper-config.model';
 export * from './stepper.model';
-export * from './quote-translate.model';
 
 export type MaybePromise<T> = T | Promise<T>;

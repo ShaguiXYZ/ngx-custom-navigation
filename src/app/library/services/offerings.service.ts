@@ -2,9 +2,10 @@ import { HttpStatusCode } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { deepCopy, HttpService } from '@shagui/ng-shagui/core';
 import { firstValueFrom, map, tap } from 'rxjs';
+import { OfferingDTO, QuoteOfferingModel } from 'src/app/core/models';
 import { environment } from 'src/environments/environment';
 import { ServiceActivatorService } from '../../core/service-activators';
-import { OfferingDTO, PricingDTO, QuoteModel, QuoteOfferingModel } from '../models';
+import { PricingDTO, QuoteModel } from '../models';
 
 @Injectable()
 export class OfferingsService {
