@@ -226,18 +226,18 @@ Ejemplo:
 
 
 #### Zones
-Las página de `ngx-custom-navigation` pueden estar devididas en zonas, estas zonas pudene ser configuradas indevidualmente.
+Las página de `ngx-custom-navigation` pueden estar devididas en zonas, estas zonas pudene ser configuradas individualmente asignandoles un nombre.
 
 Ejemplo:
 ```json
 {
   "zones": { 
-    "0": { "skipLoad": true },
-    "3": { "skipLoad": true } 
+    "name1": { "skipLoad": true },
+    "name2": { "skipLoad": true } 
   }
 }
 ```
-- **key (0,1,2...)**: Posición de la zona en la página.
+- **name**: Nombre asignado a la zona.
 - **skipLoad**: indica si la zona ha de ser cargada o no.
 
 
