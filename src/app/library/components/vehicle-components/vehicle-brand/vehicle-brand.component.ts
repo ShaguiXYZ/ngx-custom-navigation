@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, ElementRef, inject, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
 import { NxInputModule } from '@aposin/ng-aquila/input';
 import { debounceTime, distinctUntilChanged, fromEvent, Subscription } from 'rxjs';
@@ -97,7 +97,7 @@ export class VehicleBrandComponent extends QuoteComponent<QuoteModel> implements
 
   private createForm(): void {
     this.form = this.fb.group({
-      searchInput: new FormControl(this._contextData.vehicle.brand)
+      searchInput: [this._contextData.vehicle.brand]
     });
 
     this.subscription$.push(this.searchBoxConfig());

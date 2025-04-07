@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { NxDatefieldModule, NxDatepickerIntl } from '@aposin/ng-aquila/datefield';
 import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
 import { NxInputModule } from '@aposin/ng-aquila/input';
@@ -72,12 +72,15 @@ export class DrivingLicenseDateComponent extends QuoteComponent<QuoteModel> {
     const birthdate = dayjs(this._contextData.personalData.birthdate).toDate();
 
     this.form = this.fb.group({
-      licenseDate: new FormControl(this.drivingLicenseDateFromContext?.toDate(), [
-        this.quoteFormValidarors.required(),
-        this.quoteFormValidarors.isFutureDate(),
-        this.quoteFormValidarors.minYearsBetweenDates(birthdate, this.minYears),
-        this.quoteFormValidarors.isOlderThanYears(this.minDrivingYears)
-      ])
+      licenseDate: [
+        this.drivingLicenseDateFromContext?.toDate(),
+        [
+          this.quoteFormValidarors.required(),
+          this.quoteFormValidarors.isFutureDate(),
+          this.quoteFormValidarors.minYearsBetweenDates(birthdate, this.minYears),
+          this.quoteFormValidarors.isOlderThanYears(this.minDrivingYears)
+        ]
+      ]
     });
   }
 }

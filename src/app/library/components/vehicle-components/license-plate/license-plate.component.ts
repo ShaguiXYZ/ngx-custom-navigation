@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { NxButtonModule } from '@aposin/ng-aquila/button';
 import { NxCopytextModule } from '@aposin/ng-aquila/copytext';
 import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
@@ -74,10 +74,10 @@ export class LicensePlateComponent extends QuoteComponent<QuoteModel> implements
 
   private createForm(): void {
     this.form = this.fb.group({
-      plateNumber: new FormControl(this._contextData.vehicle.plateNumber, [
-        this.quoteFormValidarors.required(),
-        this.quoteFormValidarors.matches(PatternsByCountry[this.countryCode]?.patterns)
-      ])
+      plateNumber: [
+        this._contextData.vehicle.plateNumber,
+        [this.quoteFormValidarors.required(), this.quoteFormValidarors.matches(PatternsByCountry[this.countryCode]?.patterns)]
+      ]
     });
 
     const plateNumberSubscription = this.form.get('plateNumber')?.valueChanges.subscribe(value => {

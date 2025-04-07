@@ -14,8 +14,6 @@ export interface VersionInfo {
 }
 
 export namespace VersionInfo {
-  const majorVersionBreakingchange = (versions: VersionInfo[] = []): VersionInfo | undefined =>
-    versions.find(info => info.breakingchange === 'all') ?? versions.find(info => info.breakingchange === 'workflow');
   export const compare = (a: VersionInfo, b: VersionInfo): number => {
     if (!b?.value) {
       return 1;
@@ -48,6 +46,9 @@ export namespace VersionInfo {
     });
   };
   export const breakingChange = (before: VersionInfo[] = [], after: VersionInfo[] = []): Breakingchange => {
+    const majorVersionBreakingchange = (versions: VersionInfo[] = []): VersionInfo | undefined =>
+      versions.find(info => info.breakingchange === 'all' || info.breakingchange === 'workflow');
+
     if (after.length === 0) {
       return 'none';
     }

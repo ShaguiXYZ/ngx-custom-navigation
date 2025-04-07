@@ -1,12 +1,11 @@
 import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout';
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, inject, Input, OnDestroy, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { NxButtonModule } from '@aposin/ng-aquila/button';
-import { NxCopytextModule } from '@aposin/ng-aquila/copytext';
-import { NxHeadlineModule } from '@aposin/ng-aquila/headline';
-import { NxLinkModule } from '@aposin/ng-aquila/link';
-import { NxRadioModule } from '@aposin/ng-aquila/radio-button';
+import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { NxButtonComponent } from '@aposin/ng-aquila/button';
+import { NxCopytextComponent } from '@aposin/ng-aquila/copytext';
+import { NxLinkComponent } from '@aposin/ng-aquila/link';
+import { NxRadioComponent, NxRadioGroupComponent } from '@aposin/ng-aquila/radio-button';
 import { Subscription } from 'rxjs';
 import { OfferingPriceModel, QuoteFooterConfig } from 'src/app/core/models';
 import { QuoteTrackDirective } from 'src/app/core/tracking';
@@ -21,13 +20,13 @@ import { QuoteFooterComponent } from '../../../quote-footer';
   styleUrl: './offering-price-card.component.scss',
   imports: [
     CommonModule,
-    HeaderTitleComponent,
     ReactiveFormsModule,
-    NxButtonModule,
-    NxCopytextModule,
-    NxHeadlineModule,
-    NxLinkModule,
-    NxRadioModule,
+    HeaderTitleComponent,
+    NxButtonComponent,
+    NxCopytextComponent,
+    NxLinkComponent,
+    NxRadioGroupComponent,
+    NxRadioComponent,
     QuoteFooterComponent,
     QuoteLiteralDirective,
     QuoteLiteralPipe,
@@ -65,6 +64,8 @@ export class QuoteOfferingPriceCardComponent implements OnInit, OnDestroy {
   private readonly fb = inject(FormBuilder);
 
   ngOnInit(): void {
+    this.createForm();
+
     this.subscription$.push(
       this.breakpointObserver
         .observe([Breakpoints.HandsetPortrait, Breakpoints.TabletPortrait, Breakpoints.WebPortrait])
@@ -75,8 +76,6 @@ export class QuoteOfferingPriceCardComponent implements OnInit, OnDestroy {
       showNext: false,
       ignoreQuoteConfig: true
     };
-
-    this.createForm();
   }
 
   ngOnDestroy(): void {
@@ -124,7 +123,7 @@ export class QuoteOfferingPriceCardComponent implements OnInit, OnDestroy {
 
   private createForm() {
     this.form = this.fb.group({
-      feeSelectedIndex: new FormControl(this.price.feeSelectedIndex)
+      feeSelectedIndex: [this.price.feeSelectedIndex, []]
     });
 
     this.subscription$.push(

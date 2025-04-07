@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, ElementRef, inject, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
 import { NxInputModule } from '@aposin/ng-aquila/input';
 import { IndexedData } from '@shagui/ng-shagui/core';
@@ -86,7 +86,7 @@ export class InsuranceCompaniesComponent extends QuoteComponent<QuoteModel> impl
 
   private createForm(): void {
     this.form = this.fb.group({
-      searchInput: new FormControl(this._contextData.insuranceCompany?.company?.data)
+      searchInput: [this._contextData.insuranceCompany?.company?.data]
     });
 
     this.subscription$.push(this.searchBoxConfig());

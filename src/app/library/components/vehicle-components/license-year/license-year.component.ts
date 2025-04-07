@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { NxButtonModule } from '@aposin/ng-aquila/button';
 import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
 import { NxInputModule } from '@aposin/ng-aquila/input';
@@ -59,11 +59,14 @@ export class LicenseYearComponent extends QuoteComponent<QuoteModel> implements 
 
   private createForm() {
     this.form = this.fb.group({
-      yearOfManufacture: new FormControl(this._contextData.vehicle.yearOfManufacture, [
-        this.quoteFormValidarors.required(),
-        this.quoteFormValidarors.minValues(this.minYear),
-        this.quoteFormValidarors.maxValues(dayjs().year())
-      ])
+      yearOfManufacture: [
+        this._contextData.vehicle.yearOfManufacture,
+        [
+          this.quoteFormValidarors.required(),
+          this.quoteFormValidarors.minValues(this.minYear),
+          this.quoteFormValidarors.maxValues(dayjs().year())
+        ]
+      ]
     });
   }
 }

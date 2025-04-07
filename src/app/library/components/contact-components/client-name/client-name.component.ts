@@ -1,6 +1,6 @@
 import { TitleCasePipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
 import { NxInputModule } from '@aposin/ng-aquila/input';
 import { QuoteComponent } from 'src/app/core/components';
@@ -59,8 +59,8 @@ export class ClientNameComponent extends QuoteComponent<QuoteModel> {
 
   private createForm() {
     this.form = this.fb.group({
-      name: new FormControl(this._contextData.personalData.name, [this.quoteFormValidarors.required()]),
-      surname: new FormControl(this._contextData.personalData.surname, [this.quoteFormValidarors.required(3)])
+      name: [this._contextData.personalData.name, [this.quoteFormValidarors.required()]],
+      surname: [this._contextData.personalData.surname, [this.quoteFormValidarors.required(3)]]
     });
 
     let subscription = this.form.get('name')?.valueChanges.subscribe(value => {

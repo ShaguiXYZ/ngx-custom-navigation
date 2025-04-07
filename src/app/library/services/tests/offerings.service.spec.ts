@@ -3,7 +3,8 @@ import { TestBed } from '@angular/core/testing';
 import { ContextDataService } from '@shagui/ng-shagui/core';
 import { of } from 'rxjs';
 import { NX_WORKFLOW_TOKEN } from 'src/app/core/components/models';
-import { OfferingDTO, QuoteModel } from '../../models';
+import { OfferingDTO } from 'src/app/core/models';
+import { QuoteModel } from '../../models';
 import { OfferingsService } from '../offerings.service';
 
 describe('OfferingsService', () => {

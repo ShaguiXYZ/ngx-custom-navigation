@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, ElementRef, inject, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { NxCopytextModule } from '@aposin/ng-aquila/copytext';
 import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
 import { NxInputModule } from '@aposin/ng-aquila/input';
@@ -103,7 +103,7 @@ export class VehicleModelsComponent extends QuoteComponent<QuoteModel> implement
 
   private createForm() {
     this.form = this.fb.group({
-      searchInput: new FormControl(this._contextData.vehicle.model)
+      searchInput: [this._contextData.vehicle.model]
     });
 
     this.subscription$.push(this.searchBoxConfig());

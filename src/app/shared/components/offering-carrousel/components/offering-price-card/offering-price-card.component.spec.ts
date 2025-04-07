@@ -4,10 +4,9 @@ import { TranslateService } from '@ngx-translate/core';
 import { ContextDataService } from '@shagui/ng-shagui/core';
 import { of } from 'rxjs';
 import { NX_WORKFLOW_TOKEN } from 'src/app/core/components/models';
-import { NX_LANGUAGE_CONFIG } from 'src/app/core/models';
+import { NX_LANGUAGE_CONFIG, OfferingPriceModel } from 'src/app/core/models';
 import { NX_RECAPTCHA_TOKEN } from 'src/app/core/services';
 import { ContextDataServiceStub } from 'src/app/core/stub';
-import { OfferingPriceModel } from 'src/app/library/models';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 import { QuoteOfferingPriceCardComponent } from './offering-price-card.component';
 

@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { AbstractControl, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, ValidationErrors, ValidatorFn } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, ReactiveFormsModule, ValidationErrors, ValidatorFn } from '@angular/forms';
 import { NxCopytextModule } from '@aposin/ng-aquila/copytext';
 import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
 import { NxInputModule } from '@aposin/ng-aquila/input';
@@ -58,10 +58,10 @@ export class ClientIdentificationNumberComponent extends QuoteComponent<QuoteMod
 
   private createForm() {
     this.form = this.fb.group({
-      identificationNumber: new FormControl(this._contextData.personalData.identificationNumber, [
-        this.quoteFormValidarors.required(),
-        this.isValidDocument()
-      ])
+      identificationNumber: [
+        this._contextData.personalData.identificationNumber,
+        [this.quoteFormValidarors.required(), this.isValidDocument()]
+      ]
     });
 
     const identificationNumberSubscription = this.form.get('identificationNumber')?.valueChanges.subscribe(value => {

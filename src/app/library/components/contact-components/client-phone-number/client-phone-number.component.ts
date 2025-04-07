@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { NxCopytextModule } from '@aposin/ng-aquila/copytext';
 import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
 import { NxMaskModule } from '@aposin/ng-aquila/mask';
@@ -69,10 +69,10 @@ export class ClientPhoneNumberComponent extends QuoteComponent<QuoteModel> {
 
   private createForm() {
     this.form = this.fb.group({
-      phoneNumber: new FormControl(this._contextData.personalData.phoneNumber ?? '', [
-        this.quoteFormValidarors.required(),
-        this.quoteFormValidarors.validateMobileNumber()
-      ])
+      phoneNumber: [
+        this._contextData.personalData.phoneNumber ?? '',
+        [this.quoteFormValidarors.required(), this.quoteFormValidarors.validateMobileNumber()]
+      ]
     });
   }
 

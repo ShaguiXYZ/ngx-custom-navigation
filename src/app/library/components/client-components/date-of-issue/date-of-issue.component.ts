@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { NxDatefieldModule, NxDatepickerIntl } from '@aposin/ng-aquila/datefield';
 import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
 import { NxInputModule } from '@aposin/ng-aquila/input';
@@ -77,10 +77,10 @@ export class DateOfIssueComponent extends QuoteComponent<QuoteModel> {
     }
 
     this.form = this.fb.group({
-      dateOfIssue: new FormControl(this.dateOfIssueFromContext?.toDate(), [
-        this.quoteFormValidarors.required(),
-        this.quoteFormValidarors.betweenDates(this.minDate.toDate(), this.maxDate.toDate())
-      ])
+      dateOfIssue: [
+        this.dateOfIssueFromContext?.toDate(),
+        [this.quoteFormValidarors.required(), this.quoteFormValidarors.betweenDates(this.minDate.toDate(), this.maxDate.toDate())]
+      ]
     });
   }
 }

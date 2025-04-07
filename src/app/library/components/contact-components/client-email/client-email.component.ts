@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { NxCopytextModule } from '@aposin/ng-aquila/copytext';
 import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
 import { NxInputModule } from '@aposin/ng-aquila/input';
@@ -62,12 +62,15 @@ export class ClientEMailComponent extends QuoteComponent<QuoteModel> {
     const emailRegex = /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i;
 
     this.form = this.fb.group({
-      email: new FormControl(this._contextData.personalData.email, [
-        this.quoteFormValidarors.required(),
-        this.quoteFormValidarors.matches([emailRegex]) // @howto use regex to validate email ignoring case
-      ]),
-      accepInfo: new FormControl(this._contextData.client.accepInfo ?? false, [this.quoteFormValidarors.informed()]),
-      acceptPrivacyPolicy: new FormControl(this._contextData.client.acceptPrivacyPolicy ?? false, [this.quoteFormValidarors.requiredTrue()])
+      email: [
+        this._contextData.personalData.email,
+        [
+          this.quoteFormValidarors.required(),
+          this.quoteFormValidarors.matches([emailRegex]) // @howto use regex to validate email ignoring case
+        ]
+      ],
+      accepInfo: [this._contextData.client.accepInfo ?? false, [this.quoteFormValidarors.informed()]],
+      acceptPrivacyPolicy: [this._contextData.client.acceptPrivacyPolicy ?? false, [this.quoteFormValidarors.requiredTrue()]]
     });
   }
 }

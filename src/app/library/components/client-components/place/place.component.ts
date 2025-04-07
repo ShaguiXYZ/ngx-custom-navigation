@@ -1,13 +1,5 @@
 import { Component, inject } from '@angular/core';
-import {
-  AbstractControl,
-  AsyncValidatorFn,
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  ReactiveFormsModule,
-  ValidationErrors
-} from '@angular/forms';
+import { AbstractControl, AsyncValidatorFn, FormBuilder, FormGroup, ReactiveFormsModule, ValidationErrors } from '@angular/forms';
 import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
 import { NxInputModule } from '@aposin/ng-aquila/input';
 import { NxMaskModule } from '@aposin/ng-aquila/mask';
@@ -62,11 +54,7 @@ export class PlaceComponent extends QuoteComponent<QuoteModel> {
 
   private createForm(): void {
     this.form = this.fb.group({
-      postalCode: new FormControl(
-        this._contextData.place.postalCode,
-        [this.quoteFormValidarors.required()],
-        [this.postalCodeExistsValidator()]
-      )
+      postalCode: [this._contextData.place.postalCode, [this.quoteFormValidarors.required()], [this.postalCodeExistsValidator()]]
     });
   }
 
