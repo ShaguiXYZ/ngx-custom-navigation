@@ -60,12 +60,12 @@ export class QuoteOfferingsComponent extends QuoteComponent<QuoteModel> implemen
     this._contextData.offering.priceIndex = index;
   }
 
-  public callNow(price: OfferingPriceModel): void {
-    this._contextData.offering.price = { ...this._contextData.offering.price, ...price };
+  public callNow(index: number): void {
+    this._contextData.offering.price = { ...this._contextData.offering.price, ...this.prices[index] };
   }
 
-  public contactUs(price: OfferingPriceModel): void {
-    this._contextData.offering.price = { ...this._contextData.offering.price, ...price };
+  public contactUs(index: number): void {
+    this._contextData.offering.price = { ...this._contextData.offering.price, ...this.prices[index] };
     this.routingService.next();
   }
 }

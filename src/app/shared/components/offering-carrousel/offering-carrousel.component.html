@@ -9,8 +9,8 @@
           [price]="price"
           [selected]="selectedPriceIndex === $index"
           (uiShowCoverages)="showCoverages($index)"
-          (uiCallNow)="callNow($event)"
-          (uiContactUs)="contactUs($event)"
+          (uiCallNow)="callNow($index)"
+          (uiContactUs)="contactUs($index)"
         />
       </div>
       }

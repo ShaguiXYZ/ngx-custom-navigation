@@ -1,10 +1,10 @@
 import { ComponentType } from '@angular/cdk/portal';
 import { CommonModule } from '@angular/common';
 import { Component, ElementRef, EventEmitter, inject, Input, OnDestroy, OnInit, Output, Renderer2, ViewChild } from '@angular/core';
-import { QuoteOfferingCoveragesComponent, QuoteOfferingPriceCardComponent } from './components';
 import { NxDialogService, NxModalModule, NxModalRef } from '@aposin/ng-aquila/modal';
-import { OfferingPriceModel } from 'src/app/core/models';
 import { QuoteError } from 'src/app/core/errors';
+import { OfferingPriceModel } from 'src/app/core/models';
+import { QuoteOfferingCoveragesComponent, QuoteOfferingPriceCardComponent } from './components';
 
 @Component({
   selector: 'quote-offering-carrousel',
@@ -28,10 +28,10 @@ export class OfferingCarrouselComponent implements OnInit, OnDestroy {
   public uiSelected: EventEmitter<number> = new EventEmitter<number>();
 
   @Output()
-  public uiCallNow: EventEmitter<OfferingPriceModel> = new EventEmitter<OfferingPriceModel>();
+  public uiCallNow: EventEmitter<number> = new EventEmitter<number>();
 
   @Output()
-  public uiContactUs: EventEmitter<OfferingPriceModel> = new EventEmitter<OfferingPriceModel>();
+  public uiContactUs: EventEmitter<number> = new EventEmitter<number>();
 
   private componentDialogRef?: NxModalRef<QuoteOfferingCoveragesComponent>;
   private swipeCoord!: [number, number];
@@ -63,6 +63,14 @@ export class OfferingCarrouselComponent implements OnInit, OnDestroy {
     clearTimeout(this.timeout);
   }
 
+  public next(): void {
+    this.selectSteper((this.selectedPriceIndex + 1) % this.prices.length);
+  }
+
+  public previous(): void {
+    this.selectSteper((this.selectedPriceIndex - 1 + this.prices.length) % this.prices.length);
+  }
+
   public showCoverages(index: number) {
     this.selectedPriceIndex = index;
     this.componentDialogRef?.close();
@@ -78,20 +86,12 @@ export class OfferingCarrouselComponent implements OnInit, OnDestroy {
     this.uiSelected.emit(index);
   }
 
-  public next(): void {
-    this.selectSteper((this.selectedPriceIndex + 1) % this.prices.length);
+  public callNow(index: number): void {
+    this.uiCallNow.emit(index);
   }
 
-  public previous(): void {
-    this.selectSteper((this.selectedPriceIndex - 1 + this.prices.length) % this.prices.length);
-  }
-
-  public callNow(price: OfferingPriceModel): void {
-    this.uiCallNow.emit(price);
-  }
-
-  public contactUs(price: OfferingPriceModel): void {
-    this.uiContactUs.emit(price);
+  public contactUs(index: number): void {
+    this.uiContactUs.emit(index);
   }
 
   private swipeStart(event: TouchEvent): void {
