@@ -71,14 +71,14 @@ export abstract class QuoteComponent<T extends QuoteControlModel> implements OnD
     } = this.contextDataService.get<AppContextData>(QUOTE_APP_CONTEXT_DATA);
     const pageData = lastPage?.configuration?.data ?? {};
 
-    for (const [key, value] of Object.entries(pageData)) {
+    Object.entries(pageData).forEach(([key, value]) => {
       if (key === 'contextData' && typeof component['_contextData'] === 'object' && typeof value === 'object') {
         component['_contextData'] = JsonUtils.patch(component['_contextData'], value as Record<string, unknown>);
         this.contextDataService.set(QUOTE_CONTEXT_DATA, component['_contextData']);
       } else if (key in component) {
         component[key as keyof C] = deepCopy(value) as C[keyof C];
       }
-    }
+    });
 
     this.resetView();
     this.ngOnQuoteInit?.();

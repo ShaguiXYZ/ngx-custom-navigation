@@ -82,18 +82,24 @@ describe('QuoteOfferingsComponent', () => {
 
   it('should update offering price on callNow', () => {
     const mockPrice = { modalityId: 1, totalPremiumAmount: 100 } as OfferingPriceModel;
-    component['_contextData'] = { offering: { price: {} } } as any;
+    const mockPrices = [mockPrice] as OfferingPriceModel[];
 
-    component.callNow(mockPrice);
+    component.prices = mockPrices;
+    component['_contextData'] = { offering: { prices: mockPrices, price: {} } } as any;
+
+    component.callNow(0);
 
     expect(component['_contextData'].offering.price).toEqual(mockPrice);
   });
 
   it('should update offering price and navigate on contactUs', () => {
     const mockPrice = { modalityId: 1, totalPremiumAmount: 100 } as OfferingPriceModel;
-    component['_contextData'] = { offering: { price: {} } } as any;
+    const mockPrices = [mockPrice] as OfferingPriceModel[];
 
-    component.contactUs(mockPrice);
+    component.prices = mockPrices;
+    component['_contextData'] = { offering: { prices: mockPrices, price: {} } } as any;
+
+    component.contactUs(0);
 
     expect(component['_contextData'].offering.price).toEqual(mockPrice);
     expect(routingServiceSpy.next).toHaveBeenCalled();
