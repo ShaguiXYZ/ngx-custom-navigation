@@ -1,16 +1,15 @@
 import { HttpStatusCode } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { HttpService, IndexedData, TTL, UniqueIds } from '@shagui/ng-shagui/core';
+import { HttpService, IndexedData, TTL } from '@shagui/ng-shagui/core';
 import { firstValueFrom, map } from 'rxjs';
-import { InsuranceCompany, InsuranceCompanyDTO } from '../models';
 import { environment } from 'src/environments/environment';
+import { InsuranceCompany, InsuranceCompanyDTO } from '../models';
+import { _COMPANIES_CACHE_ID_ } from '../models/constants';
 
 const INSURANCE_API = '/_insurance';
 
 @Injectable()
 export class InsuranceCompaniesService {
-  private readonly _COMPANIES_CACHE_ID_ = `_${UniqueIds.next()}_`;
-
   private readonly httpService = inject(HttpService);
 
   public companies(insurance?: string): Promise<IndexedData[]> {
@@ -21,7 +20,7 @@ export class InsuranceCompaniesService {
             [HttpStatusCode.NotFound]: { text: 'Notifications.ModelsNotFound' }
           },
           showLoading: true,
-          cache: { id: this.cacheInsuranceCompanies(), ttl: TTL.XXL }
+          cache: { id: this.cacheInsuranceCompanies(), ttl: TTL.M }
         })
         .pipe(
           map(res => res as InsuranceCompanyDTO[]),
@@ -31,5 +30,6 @@ export class InsuranceCompaniesService {
         )
     );
   }
-  private cacheInsuranceCompanies = (): string => `${this._COMPANIES_CACHE_ID_}_`;
+
+  private cacheInsuranceCompanies = (): string => _COMPANIES_CACHE_ID_;
 }

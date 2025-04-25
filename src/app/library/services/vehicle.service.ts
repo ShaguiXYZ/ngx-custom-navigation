@@ -1,9 +1,10 @@
 import { HttpParams, HttpStatusCode } from '@angular/common/http';
-import { Injectable, inject } from '@angular/core';
-import { HttpService, TTL, UniqueIds } from '@shagui/ng-shagui/core';
+import { inject, Injectable } from '@angular/core';
+import { HttpService, TTL } from '@shagui/ng-shagui/core';
 import { firstValueFrom, map } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { ModelVersionModel, QuoteVehicleModel, VehicleDTO } from '../models';
+import { _BRANCHES_CACHE_ID_, _MODEL_VERSIONS_CACHE_ID_, _MODELS_CACHE_ID_ } from '../models/constants';
 import {
   BrandDTO,
   CubicCapacityDTO,
@@ -21,10 +22,6 @@ const VEHICLE_API = '/api';
 
 @Injectable()
 export class VehicleService {
-  private readonly _BRANCHES_CACHE_ID_ = `_${UniqueIds.next()}_`;
-  private readonly _MODELS_CACHE_ID_ = `_${UniqueIds.next()}_`;
-  private readonly _MODEL_VERSIONS_CACHE_ID_ = `_${UniqueIds.next()}_`;
-
   private http = inject(HttpService);
 
   public findByPlate(plate: string): Promise<QuoteVehicleModel[]> {
@@ -86,7 +83,7 @@ export class VehicleService {
             [HttpStatusCode.NotFound]: { text: 'Notifications.BrandsNotFound' }
           },
           showLoading: true,
-          cache: { id: this.cacheBrands(year), ttl: TTL.XXL }
+          cache: { id: this.cacheBrands(year), ttl: TTL.L }
         })
         .pipe(
           map(res => res as BrandDTO),
@@ -211,7 +208,7 @@ export class VehicleService {
     );
   }
 
-  private cacheBrands = (year: number): string => `${this._BRANCHES_CACHE_ID_}${year}_`;
-  private cacheModelByBranch = (branch: string, year: number): string => `_${this._MODELS_CACHE_ID_}${branch}_${year}_`;
-  private cacheModelVersionByBranch = (model: string): string => `_${this._MODEL_VERSIONS_CACHE_ID_}${model}_`;
+  private cacheBrands = (year: number): string => `${_BRANCHES_CACHE_ID_}${year}_`;
+  private cacheModelByBranch = (branch: string, year: number): string => `_${_MODELS_CACHE_ID_}${branch}_${year}_`;
+  private cacheModelVersionByBranch = (model: string): string => `_${_MODEL_VERSIONS_CACHE_ID_}${model}_`;
 }

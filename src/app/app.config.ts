@@ -39,7 +39,7 @@ export const appConfig: ApplicationConfig = {
     { provide: NX_WORKFLOW_TOKEN, useExisting: VEHICLE_WORKFLOW_TOKEN },
     {
       provide: NX_CONTEX_CONFIG,
-      useValue: { appName: APP_NAME.toUpperCase(), urls, cache: { schedulerPeriod: SCHEDULER_PERIOD } }
+      useValue: { appName: APP_NAME.toUpperCase(), urls, debug: !environment.production, cache: { schedulerPeriod: SCHEDULER_PERIOD } }
     },
     { provide: NX_LANGUAGE_CONFIG, useValue: nxLanguageConfig },
     { provide: NX_RECAPTCHA_TOKEN, useValue: { siteKey: environment.recaptcha.siteKey } },

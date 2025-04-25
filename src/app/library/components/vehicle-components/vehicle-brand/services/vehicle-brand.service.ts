@@ -1,13 +1,12 @@
 import { HttpStatusCode } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { HttpService, TTL, UniqueIds } from '@shagui/ng-shagui/core';
+import { HttpService, TTL } from '@shagui/ng-shagui/core';
 import { firstValueFrom, map } from 'rxjs';
 import { IconDictionary } from 'src/app/core/models';
+import { _ICON_BRANCHES_CACHE_ID_ } from 'src/app/library/models/constants';
 
 @Injectable()
 export class BrandComponentService {
-  private readonly _ICON_BRANCHES_CACHE_ID_ = `_${UniqueIds.next()}_`;
-
   private http = inject(HttpService);
 
   public iconBrands(): Promise<IconDictionary> {
@@ -18,7 +17,7 @@ export class BrandComponentService {
             [HttpStatusCode.NotFound]: { text: 'Notifications.IconBrandsNotFound' }
           },
           showLoading: true,
-          cache: { id: this.cacheIconBrands(), ttl: TTL.XXL }
+          cache: { id: this.cacheIconBrands(), ttl: TTL.L }
         })
         .pipe(
           map(res => res as IconDictionary),
@@ -34,5 +33,5 @@ export class BrandComponentService {
     );
   }
 
-  private cacheIconBrands = (): string => this._ICON_BRANCHES_CACHE_ID_;
+  private cacheIconBrands = (): string => _ICON_BRANCHES_CACHE_ID_;
 }
