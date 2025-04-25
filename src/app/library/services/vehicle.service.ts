@@ -64,11 +64,11 @@ export class VehicleService {
     );
   }
 
-  public getBrands(make?: string, year: number = DEFAULT_YEAR): Promise<string[]> {
+  public getBrands(search?: string, year: number = DEFAULT_YEAR): Promise<string[]> {
     const httpParams = new HttpParams();
 
-    if (make?.trim()) {
-      httpParams.set('make', make);
+    if (search?.trim()) {
+      httpParams.set('make', search);
     }
 
     if (year) {
@@ -88,7 +88,7 @@ export class VehicleService {
         .pipe(
           map(res => res as BrandDTO),
           map(res => res.data.map(data => data.name)),
-          map(res => (make ? res.filter(data => data.toUpperCase().includes(make.toUpperCase())) : res)),
+          map(res => (search ? res.filter(data => data.toUpperCase().includes(search.toUpperCase())) : res)),
           map(res => res.sort((a, b) => a.localeCompare(b)))
         )
     );
@@ -120,7 +120,7 @@ export class VehicleService {
     );
   }
 
-  public vehicleModelVersions(model: string): Promise<ModelVersionModel[]> {
+  public vehicleModelVersions(model: string, search?: string): Promise<ModelVersionModel[]> {
     if (!model?.trim()) {
       return Promise.resolve([]);
     }
@@ -140,6 +140,7 @@ export class VehicleService {
         .pipe(
           map(res => (!model ? [] : res)),
           map(res => (res as ModelVersionModel[]).filter(data => !!data.data)),
+          map(res => (search ? res.filter(data => data.data.toLowerCase().includes(search.toLowerCase())) : res)),
           map(res => res.sort((a, b) => a.data.localeCompare(b.data)))
         )
     );

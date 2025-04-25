@@ -17,7 +17,7 @@ export class BrandComponentService {
             [HttpStatusCode.NotFound]: { text: 'Notifications.IconBrandsNotFound' }
           },
           showLoading: true,
-          cache: { id: this.cacheIconBrands(), ttl: TTL.L }
+          cache: { id: this.cacheIconBrands(), ttl: TTL.XL }
         })
         .pipe(
           map(res => res as IconDictionary),

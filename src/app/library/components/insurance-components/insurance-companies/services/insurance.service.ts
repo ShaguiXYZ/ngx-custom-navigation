@@ -17,7 +17,7 @@ export class InsuranceComponentService {
             [HttpStatusCode.NotFound]: { text: 'Notifications.IconInsurancesNotFound' }
           },
           showLoading: true,
-          cache: { id: this.cacheIconInsurances(), ttl: TTL.L }
+          cache: { id: this.cacheIconInsurances(), ttl: TTL.XL }
         })
         .pipe(
           map(res => res as IconDictionary),

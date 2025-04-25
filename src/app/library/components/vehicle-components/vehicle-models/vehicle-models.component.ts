@@ -119,9 +119,22 @@ export class VehicleModelsComponent extends QuoteComponent<QuoteModel> implement
       .subscribe(async () => this.filteredModels());
   }
 
-  private filteredModels = (): Promise<void> =>
-    this.vehicleService.getModels(this._contextData.vehicle.brand!, this.form.value.searchInput).then(models => {
-      this.models = models;
-      this.notFound = this.models.length === 0;
-    });
+  private async filteredModels(): Promise<void> {
+    const { brand } = this._contextData.vehicle;
+    const { searchInput } = this.form.value;
+
+    if (!brand) {
+      this.models = [];
+      this.notFound = true;
+      return;
+    }
+
+    const models = await this.vehicleService.getModels(brand, searchInput);
+
+    this.models = models.includes(this.selectedModel ?? '')
+      ? [this.selectedModel!, ...models.filter(model => model !== this.selectedModel)]
+      : models;
+
+    this.notFound = this.models.length === 0;
+  }
 }

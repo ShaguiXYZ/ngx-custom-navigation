@@ -92,11 +92,19 @@ export class VehicleModelVersionsComponent extends QuoteComponent<QuoteModel> im
       .subscribe(() => this.filteredVersions());
   }
 
-  private filteredVersions = (): Promise<void> =>
-    this.vehicleService.vehicleModelVersions(this._contextData.vehicle.model!).then(versions => {
-      this.modelVersions = this.form.value.searchInput
-        ? versions.filter(data => data.data?.toLocaleLowerCase().includes(this.form.value.searchInput?.toLocaleLowerCase()))
-        : versions;
-      this.notFound = this.modelVersions.length === 0;
-    });
+  private async filteredVersions(): Promise<void> {
+    const { model } = this._contextData.vehicle;
+    const { searchInput } = this.form.value;
+
+    const modelVersions = await this.vehicleService.vehicleModelVersions(model!, searchInput);
+
+    const selectedIndex = this.selectedModelVersion?.index;
+    this.modelVersions = modelVersions.filter(version => version.index !== selectedIndex);
+
+    if (this.selectedModelVersion && modelVersions.some(version => version.index === selectedIndex)) {
+      this.modelVersions.unshift(this.selectedModelVersion);
+    }
+
+    this.notFound = this.modelVersions.length === 0;
+  }
 }

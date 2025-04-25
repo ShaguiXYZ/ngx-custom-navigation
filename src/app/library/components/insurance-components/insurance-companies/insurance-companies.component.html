@@ -20,7 +20,20 @@
       </nx-formfield>
     </form>
 
-    @if(!form.value.searchInput && iconInsurances.length) {
+    @if(!form.value.searchInput && iconInsurances.length) { @if(selectedCompany) {
+    <div class="nx-margin-y-xs">
+      <quote-text-card
+        [data]="selectedCompany.data"
+        [selected]="true"
+        [nxTrack]="{
+          label: selectedCompany.data,
+          company: selectedCompany.index
+        }"
+        [nxTrackEvents]="['click']"
+        (uiSelect)="selectCompany(selectedCompany)"
+      />
+    </div>
+    }
     <div class="icon-cards">
       @for(icon of iconInsurances; track icon.index) {
       <quote-icon-card

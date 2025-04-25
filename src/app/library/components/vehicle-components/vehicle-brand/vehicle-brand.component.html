@@ -22,7 +22,20 @@
       </quote-zone>
     </form>
 
-    @if(!form.value.searchInput && iconBrands.length) {
+    @if(!form.value.searchInput && iconBrands.length) { @if(selectedBrand) {
+    <div class="nx-margin-y-xs">
+      <quote-text-card
+        [selected]="true"
+        [data]="selectedBrand"
+        [nxTrack]="{
+          brand: selectedBrand,
+          label: selectedBrand
+        }"
+        [nxTrackEvents]="['click']"
+        (uiSelect)="selectBrand(selectedBrand)"
+      />
+    </div>
+    }
     <div class="icon-cards">
       @for(brand of iconBrands; track brand) {
       <quote-icon-card

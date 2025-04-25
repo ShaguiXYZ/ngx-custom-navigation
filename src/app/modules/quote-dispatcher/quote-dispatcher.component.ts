@@ -30,6 +30,7 @@ export class QuoteDispatcherComponent implements OnInit {
   private readonly _route = inject(ActivatedRoute);
 
   async ngOnInit(): Promise<void> {
+    // @howto: Retrieve request parameters from ActivatedRoute
     const {
       params: { stored, dispatcher }
     } = this._route.snapshot;
