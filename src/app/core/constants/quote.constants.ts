@@ -10,4 +10,4 @@ export const JOURNEY_SESSION_KEY = 'journey';
 export const CAPTCHA_TOKEN_KEY = 'captcha-token';
 
 // header keys
-export const G_RECAPTCHA_RESPONSE = 'g-recaptcha-response';
+export const X_RECAPTCHA_RESPONSE = 'x-recaptcha-token';

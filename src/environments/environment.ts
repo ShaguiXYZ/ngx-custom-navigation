@@ -5,6 +5,7 @@
 
 export const environment = {
   production: false,
+  loadingOnNav: true,
   appName: 'ngx-custom-navigation',
   baseUrl: 'http://localhost:3000',
   mockUrl: '', // url bff mock server

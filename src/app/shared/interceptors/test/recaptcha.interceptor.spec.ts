@@ -2,7 +2,7 @@ import { HttpClient, HttpErrorResponse, provideHttpClient, withInterceptors } fr
 import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { StorageLib } from 'src/app/core/lib';
-import { CAPTCHA_TOKEN_KEY, G_RECAPTCHA_RESPONSE } from '../../../core/constants';
+import { CAPTCHA_TOKEN_KEY, X_RECAPTCHA_RESPONSE } from '../../../core/constants';
 import { recaptchaInterceptor } from '../recaptcha.interceptor';
 
 describe('RecaptchaInterceptor', () => {
@@ -30,8 +30,8 @@ describe('RecaptchaInterceptor', () => {
     httpClient.get('/test').subscribe();
 
     const req = httpMock.expectOne('/test');
-    expect(req.request.headers.has(G_RECAPTCHA_RESPONSE)).toBeTruthy();
-    expect(req.request.headers.get(G_RECAPTCHA_RESPONSE)).toBe(token);
+    expect(req.request.headers.has(X_RECAPTCHA_RESPONSE)).toBeTruthy();
+    expect(req.request.headers.get(X_RECAPTCHA_RESPONSE)).toBe(token);
   });
 
   it('should not add reCAPTCHA token to headers if token does not exist', () => {
@@ -40,7 +40,7 @@ describe('RecaptchaInterceptor', () => {
     httpClient.get('/test').subscribe();
 
     const req = httpMock.expectOne('/test');
-    expect(req.request.headers.has(G_RECAPTCHA_RESPONSE)).toBeFalsy();
+    expect(req.request.headers.has(X_RECAPTCHA_RESPONSE)).toBeFalsy();
   });
 
   it('should remove reCAPTCHA token from session storage on 403 error', () => {

@@ -21,7 +21,6 @@ export class QuoteTrackService implements OnDestroy {
   private readonly subscription$: Subscription[] = [];
 
   private readonly workFlowToken = inject(NX_WORKFLOW_TOKEN);
-
   private readonly captchaService = inject(CaptchaService);
   private readonly breakpointObserver = inject(BreakpointObserver);
   private readonly contextDataService = inject(ContextDataService);

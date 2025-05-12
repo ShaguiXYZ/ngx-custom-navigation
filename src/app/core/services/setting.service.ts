@@ -21,9 +21,9 @@ export class SettingsService {
   private readonly journeyService = inject(JourneyService);
 
   public async loadSettings(): Promise<void> {
+    const context = this.contextDataService.get<AppContextData>(QUOTE_APP_CONTEXT_DATA);
     const settings = await this.journeyService.quoteSettings();
     const info = await this.journeyService.journeySettings(settings.journey);
-    const context = this.contextDataService.get<AppContextData>(QUOTE_APP_CONTEXT_DATA);
     const breakingChange = this.breakingChange(context, info.versions ?? []);
 
     if (context?.configuration.name !== info.id || breakingChange !== 'none') {
@@ -64,9 +64,6 @@ export class SettingsService {
 
     this.contextDataService.set(QUOTE_APP_CONTEXT_DATA, contextData, { persistent: true });
     this.contextDataService.set(QUOTE_CONTEXT_DATA, quote, { persistent: true, referenced: true });
-
-    console.log('Quote configuration', QUOTE_APP_CONTEXT_DATA, contextData);
-    console.log('Quote data', QUOTE_CONTEXT_DATA, quote);
   };
 
   private breakingChange(contextData: AppContextData, versions: VersionInfo[]): Breakingchange {

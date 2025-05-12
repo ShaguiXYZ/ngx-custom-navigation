@@ -3,7 +3,8 @@
     text-wrap: wrap;
 
     ::ng-deep p {
-      margin-top: 12px;
+      // @howto add a margin to the text paragraphs (lh = line height)
+      margin-block: 1lh;
     }
   }
 }

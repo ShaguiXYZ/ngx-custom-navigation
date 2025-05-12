@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild, ViewContainerRef, inject } from '@angular/core';
-import { ContextDataService, LoadingService } from '@shagui/ng-shagui/core';
+import { ContextDataService, LoadingService, NX_CONTEX_CONFIG } from '@shagui/ng-shagui/core';
 import { QuoteComponent } from 'src/app/core/components';
 import { NX_WORKFLOW_TOKEN } from 'src/app/core/components/models';
 import { QUOTE_APP_CONTEXT_DATA } from 'src/app/core/constants';
@@ -18,6 +18,7 @@ export class WorkflowLoaderComponent implements OnInit, OnDestroy, AfterViewInit
 
   public _instance?: QuoteComponent<QuoteControlModel>;
 
+  private readonly contextConfig = inject(NX_CONTEX_CONFIG);
   private readonly workflowToken = inject(NX_WORKFLOW_TOKEN);
   private readonly contextDataService = inject(ContextDataService);
   private readonly loadingService = inject(LoadingService);
@@ -27,11 +28,11 @@ export class WorkflowLoaderComponent implements OnInit, OnDestroy, AfterViewInit
   }
 
   ngOnDestroy(): void {
-    this.loadingService.showLoading = true;
+    this.toggleLoading(true);
   }
 
   ngAfterViewInit(): void {
-    this.loadingService.showLoading = false;
+    this.toggleLoading(false);
   }
 
   private loadComponent = (): void => {
@@ -59,4 +60,10 @@ export class WorkflowLoaderComponent implements OnInit, OnDestroy, AfterViewInit
       throw new JourneyError(`Failed to load component ${manifestKey}`);
     }
   };
+
+  private toggleLoading(state: boolean): void {
+    if (this.contextConfig.loadingOnNav) {
+      this.loadingService.showLoading = state;
+    }
+  }
 }
