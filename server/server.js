@@ -2,7 +2,8 @@ const express = require('express');
 const cors = require('cors');
 const { api: journey } = require('./api.journey');
 const { api: location } = require('./api.location');
-const { api: insurance } = require('./api-insurance');
+const { api: insurance } = require('./api.insurance');
+const { api: offering } = require('./api.offering');
 
 const app = express();
 
@@ -16,6 +17,7 @@ app.use(express.json());
 journey(app);
 location(app);
 insurance(app);
+offering(app);
 
 // Configure the server to listen on port 3000
 app.listen(3000, () => {

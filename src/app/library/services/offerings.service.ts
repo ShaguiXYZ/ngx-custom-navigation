@@ -3,9 +3,10 @@ import { inject, Injectable } from '@angular/core';
 import { deepCopy, HttpService } from '@shagui/ng-shagui/core';
 import { firstValueFrom, map, tap } from 'rxjs';
 import { OfferingDTO, QuoteOfferingModel } from 'src/app/core/models';
-import { environment } from 'src/environments/environment';
 import { ServiceActivatorService } from '../../core/service-activators';
 import { PricingDTO, QuoteModel } from '../models';
+
+const OFFERING_API = '/offering';
 
 @Injectable()
 export class OfferingsService {
@@ -18,13 +19,13 @@ export class OfferingsService {
     console.log('Pricing quote', deepCopy(quote));
 
     if (signature?.hash !== quote.offering.hash) {
-      const offeringStaticData = await firstValueFrom(
+      const offeringConfigData = await firstValueFrom(
         this.httpService.get(`assets/json/offering.config.json`).pipe(map(res => res as Partial<PricingDTO>))
       );
 
       return firstValueFrom(
         this.httpService
-          .post<PricingDTO, OfferingDTO>(`${environment.mockUrl}/offerings`, PricingDTO.fromModel(quote, offeringStaticData), {
+          .post<PricingDTO, OfferingDTO>(`${OFFERING_API}/get`, PricingDTO.fromModel(quote, offeringConfigData), {
             responseStatusMessage: {
               [HttpStatusCode.NotFound]: { text: 'Notifications.ModelsNotFound' }
             },

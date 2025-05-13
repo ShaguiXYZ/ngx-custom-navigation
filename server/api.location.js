@@ -15,7 +15,7 @@ async function locations() {
   try {
     return await readJson(JSON_FILE_PATH, 'locations');
   } catch (error) {
-    throw new Error(`Error in settings function: ${error.message}`);
+    throw new Error(`Error in locations function: ${error.message}`);
   }
 }
 

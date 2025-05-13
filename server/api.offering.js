@@ -3,11 +3,11 @@ const { readJson } = require('./json.lib');
 
 const JSON_FILE_PATH = path.join(__dirname, 'data', 'mock');
 
-async function companies() {
+async function offering() {
   try {
-    return await readJson(JSON_FILE_PATH, 'insurance-companies');
+    return await readJson(JSON_FILE_PATH, 'offering');
   } catch (error) {
-    throw new Error(`Error in settings function: ${error.message}`);
+    throw new Error(`Error in offering function: ${error.message}`);
   }
 }
 
@@ -16,11 +16,14 @@ function api(app) {
     res.status(status).json({ error: error.message });
   };
 
-  app.get('/_insurance/companies', async (req, res) => {
+  app.post('/offering/get', async (req, res) => {
     try {
-      const data = await companies();
+      console.log(req.body);
 
-      res.json(data.filter(data => !data.disabled));
+      // @howto Add a 5-second delay
+      await new Promise(resolve => setTimeout(resolve, 5000));
+
+      res.json(await offering());
     } catch (error) {
       handleError(res, error, 404);
     }

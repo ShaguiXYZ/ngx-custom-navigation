@@ -40,6 +40,16 @@
     }
   },
   {
+    "context": ["/offering"],
+    "target": "http://localhost:3000",
+    "secure": false,
+    "changeOrigin": true,
+    "logLevel": "debug",
+    "pathRewrite": {
+      "^/api": "/offering"
+    }
+  },
+  {
     "context": ["/recaptcha"],
     "target": "https://www.google.com",
     "secure": true,
