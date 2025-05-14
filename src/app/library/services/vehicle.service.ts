@@ -94,7 +94,7 @@ export class VehicleService {
     );
   }
 
-  public getModels(make: string, search?: string, year = 2020): Promise<string[]> {
+  public getModels(make: string, search?: string, year = DEFAULT_YEAR): Promise<string[]> {
     if (!make?.trim()) {
       return Promise.resolve([]);
     }

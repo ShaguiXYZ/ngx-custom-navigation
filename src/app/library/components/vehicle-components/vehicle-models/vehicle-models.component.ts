@@ -120,7 +120,7 @@ export class VehicleModelsComponent extends QuoteComponent<QuoteModel> implement
   }
 
   private async filteredModels(): Promise<void> {
-    const { brand } = this._contextData.vehicle;
+    const { brand, yearOfManufacture } = this._contextData.vehicle;
     const { searchInput } = this.form.value;
 
     if (!brand) {
@@ -129,7 +129,7 @@ export class VehicleModelsComponent extends QuoteComponent<QuoteModel> implement
       return;
     }
 
-    const models = await this.vehicleService.getModels(brand, searchInput);
+    const models = await this.vehicleService.getModels(brand, searchInput, yearOfManufacture);
 
     this.models = models.includes(this.selectedModel ?? '')
       ? [this.selectedModel!, ...models.filter(model => model !== this.selectedModel)]

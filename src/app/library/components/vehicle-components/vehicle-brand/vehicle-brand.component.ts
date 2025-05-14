@@ -59,10 +59,11 @@ export class VehicleBrandComponent extends QuoteComponent<QuoteModel> implements
   private readonly fb = inject(FormBuilder);
 
   async ngOnInit(): Promise<void> {
+    const { yearOfManufacture } = this._contextData.vehicle;
     this.createForm();
 
     const iconDictionary = await this.brandComponentService.iconBrands();
-    const brandList = await this.vehicleService.getBrands();
+    const brandList = await this.vehicleService.getBrands(undefined, yearOfManufacture);
 
     this.iconBrands = brandList
       .filter(brand => Object.keys(iconDictionary).includes(brand))
@@ -111,7 +112,9 @@ export class VehicleBrandComponent extends QuoteComponent<QuoteModel> implements
 
   private async searchBrands(): Promise<void> {
     if (this.form.value.searchInput || this.iconBrands.length === 0) {
-      this.searchedBrands = await this.vehicleService.getBrands(this.form.value.searchInput);
+      const { yearOfManufacture } = this._contextData.vehicle;
+
+      this.searchedBrands = await this.vehicleService.getBrands(this.form.value.searchInput, yearOfManufacture);
       this.notFound = this.searchedBrands.length === 0;
       return;
     }

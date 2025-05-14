@@ -114,7 +114,7 @@ describe('VehicleModelsComponent', () => {
     tick(DEBOUNCE_TIME);
     // await fixture.whenStable();
 
-    expect(vehicleService.getModels).toHaveBeenCalledWith('Toyota', 'Prius');
+    expect(vehicleService.getModels).toHaveBeenCalledWith('Toyota', 'Prius', undefined);
   }));
 
   it('should return true for canDeactivate if model is selected', () => {
