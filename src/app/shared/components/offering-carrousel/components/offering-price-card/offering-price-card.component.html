@@ -18,9 +18,9 @@
       <div class="fee-values">
         <form [formGroup]="form">
           <nx-radio-group class="offering-fee" formControlName="feeSelectedIndex">
-            @for(f of fee; track f) {
-            <nx-radio labelSize="small" [value]="$index">
-              <span nxCopytext="normal" class="nx-font-weight-bold">{{ f | quoteNumber }} {{ 'currency' | quoteLiteral }}</span>
+            @for(f of fee; track f.value) {
+            <nx-radio labelSize="small" [value]="$index" (click)="toggleFee($index)">
+              <span nxCopytext="normal" class="nx-font-weight-bold">{{ f.value | quoteNumber }} {{ 'currency' | quoteLiteral }}</span>
             </nx-radio>
             }
           </nx-radio-group>
@@ -31,7 +31,7 @@
     <div class="nx-margin-bottom-s">
       <p nxCopytext="large" class="price">
         <span class="price-value">
-          {{ priceInteger }}<span class="price-decimal">,{{ priceDecimal }} {{ 'currency' | quoteLiteral }}</span>
+          {{ priceSegments.$int() }}<span class="price-decimal">,{{ priceSegments.$dec() }} {{ 'currency' | quoteLiteral }}</span>
         </span>
         <span
           nxCopytext="medium"

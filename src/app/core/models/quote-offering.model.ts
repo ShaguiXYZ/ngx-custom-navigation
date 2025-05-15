@@ -1,4 +1,10 @@
 /* eslint-disable @typescript-eslint/no-namespace */
+export interface FeeDTO {
+  value: string;
+  description?: string;
+  totalPremiumAmount: string;
+}
+
 export interface ReceiptDataDTO {
   firstReceiptAmount: string;
   followingReceiptAmount: string;
@@ -22,7 +28,7 @@ export interface PriceGridDTO {
   paymentTypeDescription: string;
   contractable: string;
   totalPremiumAmount: string;
-  fee: string | string[];
+  fee: FeeDTO | FeeDTO[];
   newPremium: unknown;
   receiptData: ReceiptDataDTO;
   coverageList: CoverageDTO[];
@@ -99,6 +105,8 @@ export interface OfferingDTO {
 export namespace OfferingDTO {
   export const toModel = (dto: OfferingDTO): QuoteOfferingModel => {
     const prices: OfferingPriceModel[] = dto.operationData.priceGrid.map(priceGrid => {
+      const roundToNDecimals = (value: string, n: number): number => parseFloat(parseFloat(value).toFixed(n));
+
       const mapCoverage = (coverageDTO: CoverageDTO): Coverage => ({
         code: coverageDTO.code,
         text: coverageDTO.texto,
@@ -108,7 +116,21 @@ export namespace OfferingDTO {
         subcoverages: Array.isArray(coverageDTO.subcoverages) ? (coverageDTO.subcoverages as CoverageDTO[]).map(mapCoverage) : null
       });
 
-      const roundToNDecimals = (value: string, n: number): number => parseFloat(parseFloat(value).toFixed(n));
+      const fee = priceGrid.fee
+        ? Array.isArray(priceGrid.fee)
+          ? priceGrid.fee.map(f => ({
+              value: roundToNDecimals(f.value, 2),
+              description: f.description,
+              amount: roundToNDecimals(f.totalPremiumAmount, 2)
+            }))
+          : [
+              {
+                value: roundToNDecimals(priceGrid.fee.value, 2),
+                description: priceGrid.fee.description,
+                amount: roundToNDecimals(priceGrid.fee.totalPremiumAmount, 2)
+              }
+            ]
+        : [];
 
       return {
         modalityId: priceGrid.modalityId,
@@ -119,11 +141,7 @@ export namespace OfferingDTO {
         contractable: priceGrid.contractable,
         totalPremiumAmount: roundToNDecimals(priceGrid.totalPremiumAmount, 2),
         popular: priceGrid.premium ? priceGrid.premium === '1' : false,
-        fee: priceGrid.fee
-          ? typeof priceGrid.fee === 'string'
-            ? [roundToNDecimals(priceGrid.fee, 2)]
-            : priceGrid.fee.splice(0, 2).map(value => roundToNDecimals(value, 2))
-          : [],
+        fee: fee.slice(0, 2),
         receiptData: {
           firstReceiptAmount: roundToNDecimals(priceGrid.receiptData.firstReceiptAmount, 2),
           followingReceiptAmount: roundToNDecimals(priceGrid.receiptData.followingReceiptAmount, 2)
@@ -152,6 +170,12 @@ export interface Coverage {
   subcoverages: Coverage[] | null;
 }
 
+export interface FeeModel {
+  value: number;
+  description?: string;
+  amount: number;
+}
+
 export interface OfferingPriceModel {
   modalityId: number;
   modalityDescription: string;
@@ -161,7 +185,7 @@ export interface OfferingPriceModel {
   popular?: boolean;
   contractable: string;
   totalPremiumAmount: number;
-  fee: number[];
+  fee: FeeModel[];
   feeSelectedIndex?: number;
   receiptData: ReceiptData;
   coverageList: Coverage[];

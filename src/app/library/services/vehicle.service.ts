@@ -1,6 +1,6 @@
 import { HttpParams, HttpStatusCode } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { deepCopy, hasValue, HttpService, TTL } from '@shagui/ng-shagui/core';
+import { hasValue, HttpService, TTL } from '@shagui/ng-shagui/core';
 import { firstValueFrom, map } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { ModelVersionModel, QuoteVehicleModel, VehicleDTO } from '../models';
@@ -74,8 +74,6 @@ export class VehicleService {
     if (hasValue(year)) {
       httpParams = httpParams.append('year', year.toString());
     }
-
-    console.log(`Fetching brands for year: ${year} with search: ${search}`, deepCopy(httpParams));
 
     return firstValueFrom(
       this.http

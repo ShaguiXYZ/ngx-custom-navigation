@@ -60,8 +60,8 @@ describe('QuoteOfferingPriceCardComponent', () => {
     component.price = price;
 
     expect(component.price).toEqual(price);
-    expect(component.priceInteger).toBe('123');
-    expect(component.priceDecimal).toBe('45');
+    expect(component.priceSegments.$int()).toBe('123');
+    expect(component.priceSegments.$dec()).toBe('45');
   });
 
   it('should emit uiShowCoverages event when showCoverages is called', () => {

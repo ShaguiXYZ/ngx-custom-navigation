@@ -1,23 +1,36 @@
 import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout';
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, inject, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  inject,
+  Input,
+  OnDestroy,
+  OnInit,
+  Output,
+  signal,
+  WritableSignal
+} from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { NxButtonComponent } from '@aposin/ng-aquila/button';
 import { NxCopytextComponent } from '@aposin/ng-aquila/copytext';
 import { NxLinkComponent } from '@aposin/ng-aquila/link';
 import { NxRadioComponent, NxRadioGroupComponent } from '@aposin/ng-aquila/radio-button';
 import { Subscription } from 'rxjs';
-import { OfferingPriceModel, QuoteFooterConfig } from 'src/app/core/models';
+import { FeeModel, OfferingPriceModel, QuoteFooterConfig } from 'src/app/core/models';
 import { QuoteTrackDirective } from 'src/app/core/tracking';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
 import { QuoteLiteralPipe, QuoteNumberPipe } from 'src/app/shared/pipes';
 import { HeaderTitleComponent } from '../../../header-title';
 import { QuoteFooterComponent } from '../../../quote-footer';
+import { hasValue } from '@shagui/ng-shagui/core';
 
 @Component({
   selector: 'quote-offering-price-card',
   templateUrl: './offering-price-card.component.html',
   styleUrl: './offering-price-card.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     CommonModule,
     ReactiveFormsModule,
@@ -54,8 +67,11 @@ export class QuoteOfferingPriceCardComponent implements OnInit, OnDestroy {
 
   public form!: FormGroup;
   public footerConfig!: QuoteFooterConfig;
+  public priceSegments: { $int: WritableSignal<string>; $dec: WritableSignal<string> } = {
+    $int: signal('0'),
+    $dec: signal('00')
+  };
 
-  private priceSegments: string[] = [];
   private _price!: OfferingPriceModel;
 
   private readonly subscription$: Subscription[] = [];
@@ -86,27 +102,26 @@ export class QuoteOfferingPriceCardComponent implements OnInit, OnDestroy {
   public set price(value: OfferingPriceModel) {
     this._price = value;
     this.form?.patchValue({ feeSelectedIndex: this._price.feeSelectedIndex });
-    this.priceSegments = `${this._price.totalPremiumAmount}`.split(/[.,]/);
+    this.setPriceSegments();
   }
 
   public get price(): OfferingPriceModel {
     return this._price;
   }
 
-  public get priceInteger(): string {
-    return this.priceSegments.length ? this.priceSegments[0] : '0';
-  }
-
-  public get priceDecimal(): string {
-    return this.priceSegments.length > 1 ? this.priceSegments[1] : '00';
-  }
-
   public get now(): Date {
     return new Date();
   }
 
-  public get fee(): number[] {
+  public get fee(): FeeModel[] {
     return (this._price.fee = this._price.fee ?? []);
+  }
+
+  public toggleFee(index: number): void {
+    if (index === this.price.feeSelectedIndex) {
+      this.price.feeSelectedIndex = undefined;
+      this.form.patchValue({ feeSelectedIndex: undefined });
+    }
   }
 
   public showCoverages(): void {
@@ -129,9 +144,20 @@ export class QuoteOfferingPriceCardComponent implements OnInit, OnDestroy {
     this.subscription$.push(
       this.form.valueChanges.subscribe(value => {
         this.price.feeSelectedIndex = value.feeSelectedIndex;
+        this.setPriceSegments();
 
         this.uiSelectFee.emit(this.price);
       })
     );
+  }
+
+  private setPriceSegments() {
+    const price = hasValue(this.price.feeSelectedIndex)
+      ? `${this.price.fee[this.price.feeSelectedIndex].amount}`
+      : `${this.price.totalPremiumAmount}`;
+    const segments = price.split(/[.,]/);
+
+    this.priceSegments.$int.set(segments[0]);
+    this.priceSegments.$dec.set(segments.length > 1 ? segments[1] : '00');
   }
 }
