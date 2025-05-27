@@ -43,7 +43,6 @@ export const appConfig: ApplicationConfig = {
         appName: APP_NAME.toUpperCase(),
         urls,
         debug: !environment.production,
-        loadingOnNav: environment.loadingOnNav,
         cache: { schedulerPeriod: SCHEDULER_PERIOD }
       }
     },

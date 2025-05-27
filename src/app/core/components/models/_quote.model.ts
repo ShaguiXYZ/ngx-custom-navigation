@@ -17,6 +17,7 @@ export interface LibraryManifest<T> {
 export interface QuoteWorkflowSettings<T extends QuoteComponent<Q>, Q extends QuoteControlModel> {
   errorPageId: keyof Manifest<T>;
   manifest: LibraryManifest<T>;
+  loadingOnNav: boolean;
   initialize: () => Q;
   hash: (quote: Q) => string;
 }

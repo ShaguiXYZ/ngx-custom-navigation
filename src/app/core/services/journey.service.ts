@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { HttpParams } from '@angular/common/http';
+import { HttpParams, HttpStatusCode } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { ContextDataService, DataInfo, HttpService, UniqueIds } from '@shagui/ng-shagui/core';
 import { firstValueFrom, map, tap } from 'rxjs';
@@ -60,7 +60,7 @@ export class JourneyService {
       this.httpService
         .get<JourneyInfo>(`${environment.baseUrl}${JOURNEY_API}/${journeyId}/settings`, {
           responseStatusMessage: {
-            404: {
+            [HttpStatusCode.NotFound]: {
               fn: () => {
                 console.warn('Journey not found');
                 StorageLib.remove(JOURNEY_SESSION_KEY);

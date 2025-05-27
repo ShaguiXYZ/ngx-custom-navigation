@@ -1,4 +1,5 @@
 import { InjectionToken } from '@angular/core';
+import { environment } from 'src/environments/environment';
 import { QuoteComponent } from '../core/components';
 import { QuoteWorkflowSettings } from '../core/components/models';
 import { ActivatorFn, ActivatorServices, ServiceActivatorType } from '../core/service-activators';
@@ -130,6 +131,7 @@ export const VEHICLE_WORKFLOW_TOKEN = new InjectionToken<QuoteWorkflowSettings<Q
     factory: () => ({
       errorPageId: errorPageId,
       manifest: { components: LIBRARY_MANIFEST, serviceActivators: SERVICE_ACTIVATORS_MANIFEST, tracks: TRACKING_MANIFEST },
+      loadingOnNav: environment.loadingOnNav,
       initialize: QuoteModel.init,
       hash: QuoteModel.hash
     })

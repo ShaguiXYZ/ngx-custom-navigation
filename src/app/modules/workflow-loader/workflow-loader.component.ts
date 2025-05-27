@@ -62,7 +62,7 @@ export class WorkflowLoaderComponent implements OnInit, OnDestroy, AfterViewInit
   };
 
   private toggleLoading(state: boolean): void {
-    if (this.contextConfig.loadingOnNav) {
+    if (this.workflowToken.loadingOnNav) {
       this.loadingService.showLoading = state;
     }
   }
