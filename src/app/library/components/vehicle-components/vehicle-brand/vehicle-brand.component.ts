@@ -115,6 +115,9 @@ export class VehicleBrandComponent extends QuoteComponent<QuoteModel> implements
       const { yearOfManufacture } = this._contextData.vehicle;
 
       this.searchedBrands = await this.vehicleService.getBrands(this.form.value.searchInput, yearOfManufacture);
+      this.searchedBrands = this.searchedBrands.filter(brand => brand !== this.selectedBrand);
+      this.selectedBrand && this.searchedBrands.unshift(this.selectedBrand);
+
       this.notFound = this.searchedBrands.length === 0;
       return;
     }
