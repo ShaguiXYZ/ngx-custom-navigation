@@ -8,6 +8,9 @@ import { QUOTE_APP_CONTEXT_DATA } from '../../constants';
 import { AppContextData } from '../../models';
 import { ContextDataServiceStub } from '../../stub';
 import { RoutingService } from '../routing.service';
+import { NX_RECAPTCHA_TOKEN } from '../recaptcha.service';
+import { Subject } from 'rxjs';
+import { LiteralsService } from '../literals.service';
 
 describe('RoutingService', () => {
   let service: RoutingService;
@@ -16,20 +19,26 @@ describe('RoutingService', () => {
   let mockAppContextData: AppContextData;
 
   beforeEach(() => {
+    const literalsService = jasmine.createSpyObj('LiteralsService', ['transformLiteral', 'onLanguageChange']);
     const routerSpy = jasmine.createSpyObj('Router', ['navigate']);
     const httpClientSpy = jasmine.createSpyObj('HttpClient', ['get', 'post', 'put', 'delete']);
+    const languageSubject = new Subject<any>();
     const mockConfig = {
       errorPageId: 'error',
       manifest: {}
     };
+
+    literalsService.onLanguageChange.and.returnValue(languageSubject.asObservable());
 
     TestBed.configureTestingModule({
       providers: [
         RoutingService,
         { provide: Router, useValue: routerSpy },
         { provide: ContextDataService, useClass: ContextDataServiceStub },
+        { provide: LiteralsService, useValue: literalsService },
         { provide: HttpClient, useValue: httpClientSpy },
-        { provide: NX_WORKFLOW_TOKEN, useValue: mockConfig }
+        { provide: NX_WORKFLOW_TOKEN, useValue: mockConfig },
+        { provide: NX_RECAPTCHA_TOKEN, useValue: { siteKey: 'test-site-key' } }
       ]
     });
 

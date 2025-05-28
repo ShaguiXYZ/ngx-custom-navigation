@@ -1,11 +1,13 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { HttpClient } from '@angular/common/http';
 import { TestBed } from '@angular/core/testing';
 import { ContextDataService } from '@shagui/ng-shagui/core';
-import { of } from 'rxjs';
+import { of, Subject } from 'rxjs';
 import { NX_WORKFLOW_TOKEN } from 'src/app/core/components/models';
 import { OfferingDTO } from 'src/app/core/models';
 import { QuoteModel } from '../../models';
 import { OfferingsService } from '../offerings.service';
+import { LiteralsService, NX_RECAPTCHA_TOKEN } from 'src/app/core/services';
 
 describe('OfferingsService', () => {
   let service: OfferingsService;
@@ -13,6 +15,8 @@ describe('OfferingsService', () => {
   let httpClientSpy: jasmine.SpyObj<HttpClient>;
 
   beforeEach(() => {
+    const literalsService = jasmine.createSpyObj('LiteralsService', ['transformLiteral', 'onLanguageChange']);
+    const languageSubject = new Subject<any>();
     const mockConfig = {
       errorPageId: 'error',
       manifest: {}
@@ -21,6 +25,8 @@ describe('OfferingsService', () => {
     contextDataServiceSpy = jasmine.createSpyObj('ContextDataService', ['get']);
     httpClientSpy = jasmine.createSpyObj('HttpClient', ['get', 'post', 'put', 'delete']);
 
+    literalsService.onLanguageChange.and.returnValue(languageSubject.asObservable());
+
     contextDataServiceSpy.get.and.returnValue({ settings: { agent: '1234' } });
 
     TestBed.configureTestingModule({
@@ -28,8 +34,10 @@ describe('OfferingsService', () => {
       providers: [
         OfferingsService,
         { provide: ContextDataService, useValue: contextDataServiceSpy },
+        { provide: LiteralsService, useValue: literalsService },
         { provide: HttpClient, useValue: httpClientSpy },
-        { provide: NX_WORKFLOW_TOKEN, useValue: mockConfig }
+        { provide: NX_WORKFLOW_TOKEN, useValue: mockConfig },
+        { provide: NX_RECAPTCHA_TOKEN, useValue: { siteKey: 'test-site-key' } }
       ]
     });
 

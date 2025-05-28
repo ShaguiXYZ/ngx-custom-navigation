@@ -1,16 +1,23 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { HttpClient } from '@angular/common/http';
 import { TestBed } from '@angular/core/testing';
 import { FormControl } from '@angular/forms';
 import dayjs from 'dayjs';
+import { Subject } from 'rxjs';
 import { NX_WORKFLOW_TOKEN } from '../../components/models';
+import { LiteralsService, NX_RECAPTCHA_TOKEN } from '../../services';
 import { QuoteFormValidarors } from '../quote-validators.form';
 
 describe('QuoteFormValidarors', () => {
+  const literalsService = jasmine.createSpyObj('LiteralsService', ['transformLiteral', 'onLanguageChange']);
+  const languageSubject = new Subject<any>();
+  let validators: QuoteFormValidarors;
   const mockConfig = {
     errorPageId: 'error',
     manifest: {}
   };
-  let validators: QuoteFormValidarors;
+
+  literalsService.onLanguageChange.and.returnValue(languageSubject.asObservable());
 
   beforeEach(() => {
     const httpClientSpy = jasmine.createSpyObj('HttpClient', ['get', 'post', 'put', 'delete']);
@@ -18,8 +25,10 @@ describe('QuoteFormValidarors', () => {
     TestBed.configureTestingModule({
       providers: [
         QuoteFormValidarors,
+        { provide: LiteralsService, useValue: literalsService },
         { provide: HttpClient, useValue: httpClientSpy },
-        { provide: NX_WORKFLOW_TOKEN, useValue: mockConfig }
+        { provide: NX_WORKFLOW_TOKEN, useValue: mockConfig },
+        { provide: NX_RECAPTCHA_TOKEN, useValue: { siteKey: 'test-site-key' } }
       ]
     });
     validators = TestBed.inject(QuoteFormValidarors);

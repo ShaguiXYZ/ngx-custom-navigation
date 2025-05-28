@@ -5,6 +5,7 @@ import { ContextDataService } from '@shagui/ng-shagui/core';
 import { Subject } from 'rxjs';
 import { NX_WORKFLOW_TOKEN } from 'src/app/core/components/models';
 import { AppContextData, Stepper } from 'src/app/core/models';
+import { LiteralsService, NX_RECAPTCHA_TOKEN } from 'src/app/core/services';
 import { QuoteStepperService } from './quote-stepper.service';
 
 describe('QuoteStepperService', () => {
@@ -13,11 +14,15 @@ describe('QuoteStepperService', () => {
   let contextDataServiceSpy: jasmine.SpyObj<ContextDataService>;
 
   beforeEach(() => {
+    const literalsService = jasmine.createSpyObj('LiteralsService', ['transformLiteral', 'onLanguageChange']);
     const httpClientSpy = jasmine.createSpyObj('HttpClient', ['get', 'post', 'put', 'delete']);
+    const languageSubject = new Subject<any>();
     const mockConfig = {
       errorPageId: 'error',
       manifest: {}
     };
+
+    literalsService.onLanguageChange.and.returnValue(languageSubject.asObservable());
 
     contextDataServiceSpy = jasmine.createSpyObj('ContextDataService', ['get', 'set', 'onDataChange']);
     contextDataSubject = new Subject<AppContextData>();
@@ -28,8 +33,10 @@ describe('QuoteStepperService', () => {
       providers: [
         QuoteStepperService,
         { provide: ContextDataService, useValue: contextDataServiceSpy },
+        { provide: LiteralsService, useValue: literalsService },
         { provide: HttpClient, useValue: httpClientSpy },
-        { provide: NX_WORKFLOW_TOKEN, useValue: mockConfig }
+        { provide: NX_WORKFLOW_TOKEN, useValue: mockConfig },
+        { provide: NX_RECAPTCHA_TOKEN, useValue: { siteKey: 'test-site-key' } }
       ]
     });
   });
