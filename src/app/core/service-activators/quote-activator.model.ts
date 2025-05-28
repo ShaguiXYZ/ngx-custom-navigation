@@ -5,6 +5,9 @@ import { QuoteTrackService } from '../tracking';
 import { BudgetActivator } from './budget.activator';
 import { QuoteActivator } from './quote.activator';
 
+export type ServiceActivatorType = `$${string}`;
+export type ValidationActivatorType = `#${string}-${QuoteFormValidation}`;
+export type OnErrorActivatorType = `on-${string}-error`;
 export type EntryPoint =
   | 'next-page'
   | 'previous-page'
@@ -19,11 +22,8 @@ export type ServiceActivatorFn<TParams = unknown, TResult = unknown> = ({
 }: ActivatorServices) => ActivatorFn<TParams, TResult>;
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type Activator = Partial<Record<EntryPoint, ServiceActivatorFn<any, any>>>;
-export type ServiceActivatorType = `$${string}`;
-export type ValidationActivatorType = `#${string}-${QuoteFormValidation}`;
-export type OnErrorActivatorType = `on-${string}-error`;
 
-export const Activators: Activator = {
+export const QUOTE_ACTIVATORS: Activator = {
   '$patch-quote': QuoteActivator.quotePatch,
   '$track-quote': QuoteActivator.quoteTrack,
   '$retrieve-budget': BudgetActivator.retrieveBudget,

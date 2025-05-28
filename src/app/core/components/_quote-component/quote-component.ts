@@ -1,4 +1,4 @@
-import { Component, inject, OnDestroy } from '@angular/core';
+import { Component, inject, OnDestroy, signal, WritableSignal } from '@angular/core';
 import { ActivatedRouteSnapshot, GuardResult, MaybeAsync, RouterStateSnapshot } from '@angular/router';
 import { ContextDataService, deepCopy, JsonUtils } from '@shagui/ng-shagui/core';
 import { Subject, Subscription, takeUntil } from 'rxjs';
@@ -13,8 +13,8 @@ import { LanguageService } from '../../services';
 export abstract class QuoteComponent<T extends QuoteControlModel> implements OnDestroy {
   public name?: string;
 
-  protected displayDateFormat = DEFAULT_DISPLAY_DATE_FORMAT;
-  protected displayDateFormats: string[] = [DEFAULT_DISPLAY_DATE_FORMAT];
+  protected $displayDateFormat: WritableSignal<string> = signal('');
+  protected $displayDateFormats: WritableSignal<string[]> = signal([]);
   protected _contextData: T;
   protected subscription$: Subscription[] = [];
 
@@ -57,12 +57,12 @@ export abstract class QuoteComponent<T extends QuoteControlModel> implements OnD
       .asObservable()
       .pipe(takeUntil(this._destroyed))
       .subscribe(value => {
-        this.displayDateFormat = this.languageService.languages[value].format ?? DEFAULT_DISPLAY_DATE_FORMAT;
-        this.displayDateFormats = this.languageService.languages[value].formats ?? [DEFAULT_DISPLAY_DATE_FORMAT];
+        this.$displayDateFormat.set(this.languageService.languages[value].format ?? DEFAULT_DISPLAY_DATE_FORMAT);
+        this.$displayDateFormats.set(this.languageService.languages[value].formats ?? [DEFAULT_DISPLAY_DATE_FORMAT]);
       });
 
-    this.displayDateFormat = this.languageService.languages[this.languageService.current]?.format ?? DEFAULT_DISPLAY_DATE_FORMAT;
-    this.displayDateFormats = this.languageService.languages[this.languageService.current]?.formats ?? [DEFAULT_DISPLAY_DATE_FORMAT];
+    this.$displayDateFormat.set(this.languageService.languages[this.languageService.current]?.format ?? DEFAULT_DISPLAY_DATE_FORMAT);
+    this.$displayDateFormats.set(this.languageService.languages[this.languageService.current]?.formats ?? [DEFAULT_DISPLAY_DATE_FORMAT]);
   };
 
   private __updateComponentData = <C extends QuoteComponent<T>>(component: C): void => {

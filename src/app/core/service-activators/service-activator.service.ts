@@ -4,29 +4,34 @@ import { NX_WORKFLOW_TOKEN } from '../components/models';
 import { QUOTE_APP_CONTEXT_DATA, QUOTE_CONTEXT_DATA } from '../constants';
 import { ConditionEvaluation } from '../lib';
 import { AppContextData, QuoteControlModel } from '../models';
-import { Activator, ActivatorFn, Activators, EntryPoint, ServiceActivatorType } from './quote-activator.model';
+import { QuoteTrackService } from '../tracking';
+import { Activator, ActivatorFn, EntryPoint, QUOTE_ACTIVATORS } from './quote-activator.model';
 
 @Injectable({ providedIn: 'root' })
 export class ServiceActivatorService {
-  private activators: Record<string, ActivatorFn> = {};
+  private readonly activators: Partial<Record<EntryPoint, ActivatorFn>> = {};
 
   private readonly workFlowToken = inject(NX_WORKFLOW_TOKEN);
   private readonly contextDataService = inject(ContextDataService);
   private readonly httpService = inject(HttpService);
+  private readonly trackService = inject(QuoteTrackService);
 
   constructor() {
     const registerActivators = (activator: Activator): void => {
       Object.entries(activator).forEach(([name, serviceActivatorFn]) => {
-        if (serviceActivatorFn) {
+        serviceActivatorFn &&
           this.registerActivator(
-            name as ServiceActivatorType,
-            serviceActivatorFn({ contextDataService: this.contextDataService, httpService: this.httpService })
+            name as EntryPoint,
+            serviceActivatorFn({
+              contextDataService: this.contextDataService,
+              httpService: this.httpService,
+              trackService: this.trackService
+            })
           );
-        }
       });
     };
 
-    registerActivators(Activators);
+    registerActivators(QUOTE_ACTIVATORS);
     registerActivators(this.workFlowToken.manifest.serviceActivators ?? {});
   }
 
@@ -39,7 +44,7 @@ export class ServiceActivatorService {
       return;
     }
 
-    const entryPoints = lastPage.configuration?.serviceActivators?.filter(entryPoint => entryPoint.entryPoint === name);
+    const entryPoints = lastPage.configuration?.serviceActivators?.filter(sa => sa.entryPoint === name);
 
     await Promise.all(
       (entryPoints ?? []).map(async entryPoint => {
@@ -54,11 +59,11 @@ export class ServiceActivatorService {
     );
   };
 
-  private registerActivator = (name: ServiceActivatorType, activator: ActivatorFn): void => {
+  private registerActivator = (name: EntryPoint, activator: ActivatorFn): void => {
     this.activators[name] = activator;
   };
 
-  private runActivator = async (name: ServiceActivatorType, params?: unknown): Promise<unknown> => {
+  private runActivator = async (name: EntryPoint, params?: unknown): Promise<unknown> => {
     const value = await this.activators[name]?.(params);
     value && this.activateEntryPoint(name);
 

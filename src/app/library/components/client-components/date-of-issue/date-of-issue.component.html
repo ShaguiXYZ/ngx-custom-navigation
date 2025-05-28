@@ -15,10 +15,10 @@
           [min]="minDate__Date"
           [max]="maxDate__Date"
           [datepicker]="myDatepicker"
-          [parseFormat]="displayDateFormats"
-          [displayFormat]="displayDateFormat"
+          [parseFormat]="$displayDateFormats()"
+          [displayFormat]="$displayDateFormat()"
         />
-        <span nxFormfieldHint nxQuoteLiteral="hint-date-format" [nxQuoteLitealParams]="{ format: displayDateFormat }"></span>
+        <span nxFormfieldHint>{{ 'hint-date-format' | quoteLiteral : { format: $displayDateFormat() } }} </span>
         <nx-datepicker-toggle [for]="myDatepicker" nxFormfieldSuffix></nx-datepicker-toggle>
         <nx-datepicker #myDatepicker></nx-datepicker>
         @if(form.get('dateOfIssue')?.errors?.['required']) {
@@ -27,7 +27,7 @@
         <nx-error appearance="text" nxFormfieldError
           ><span
             nxQuoteLiteral="error-not-between-dates"
-            [nxQuoteLitealParams]="{ min: minDate.format(displayDateFormat), max: maxDate.format(displayDateFormat) }"
+            [nxQuoteLitealParams]="{ min: minDate.format($displayDateFormat()), max: maxDate.format($displayDateFormat()) }"
           ></span>
         </nx-error>
         }
