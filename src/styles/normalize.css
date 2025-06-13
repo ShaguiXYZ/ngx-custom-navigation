@@ -1,7 +1,11 @@
 * {
   box-sizing: border-box;
-  position: relative;
+  /*
+    @howto The 'interpolate-size' property is a CSS feature that controls how size-related properties (like width, height, etc.)
+               are interpolated during transitions or animations.
+   */
   interpolate-size: allow-keywords;
+  position: relative;
 }
 
 *::before,

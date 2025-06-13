@@ -89,9 +89,6 @@ export class LiteralsService implements OnDestroy {
     }
   };
 
-  private normalizeParams = (params?: LiteralParam): DataInfo => {
-    return params
-      ? Object.fromEntries(Object.entries(params).map(([key, value]) => [key, this.toString(value)]) as [string, string][])
-      : {};
-  };
+  private normalizeParams = (params?: LiteralParam): DataInfo =>
+    params ? Object.fromEntries(Object.entries(params).map(([key, value]) => [key, this.toString(value)]) as [string, string][]) : {};
 }

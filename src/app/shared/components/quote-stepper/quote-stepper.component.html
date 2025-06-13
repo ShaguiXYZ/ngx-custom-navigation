@@ -10,8 +10,8 @@
   </header>
   @if(showSteps) {
   <section class="stepper__list">
-    @for(step of stepperData.stepper.steps; track step.key) { @let _active=step.key === stepperData.stepKey; @let _complete=stepperIndex >
-    $index; @let _disabled=stepperIndex < $index;
+    @for(step of stepperData.stepper.steps; track step.key) { @let _active = step.key === stepperData.stepKey; @let _complete = stepperIndex
+    > $index; @let _disabled = stepperIndex < $index;
     <div
       class="stepper__item"
       [ngClass]="{ active: _active, complete: _complete, disabled: _disabled }"
