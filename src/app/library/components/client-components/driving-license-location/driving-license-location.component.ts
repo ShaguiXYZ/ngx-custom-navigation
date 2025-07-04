@@ -33,10 +33,10 @@ import { DrivingLicenseIcons } from './models';
   ]
 })
 export class DrivingLicenseLocationComponent extends QuoteComponent<QuoteModel> implements OnInit {
-  private readonly $infoModal = viewChild.required<ComponentType<unknown>>('template');
-
   public drivenLicenseCountries = DrivingLicenseIcons;
   public selectedLocation?: IndexedData;
+
+  private readonly $infoModal = viewChild.required<ComponentType<unknown>>('template');
 
   private readonly routingService = inject(RoutingService);
   private readonly dialogService = inject(NxDialogService);

@@ -37,13 +37,13 @@ import { InsuranceComponentService } from './services';
   providers: [InsuranceComponentService, InsuranceCompaniesService]
 })
 export class InsuranceCompaniesComponent extends QuoteComponent<QuoteModel> implements OnInit {
-  private readonly $searchInput = viewChild.required<ElementRef>('searchInput');
-
   public form!: FormGroup;
   public iconInsurances: IIconData[] = [];
   public searchedInsurances: IndexedData[] = [];
   public selectedCompany?: IndexedData;
   public notFound = false;
+
+  private readonly $searchInput = viewChild.required<ElementRef>('searchInput');
 
   private readonly routingService = inject(RoutingService);
   private readonly insuranceComponentService = inject(InsuranceComponentService);
