@@ -1,18 +1,18 @@
+import { ComponentType } from '@angular/cdk/portal';
 import { CommonModule } from '@angular/common';
-import { Component, inject, OnDestroy, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit, viewChild } from '@angular/core';
 import { NxDialogService, NxModalModule, NxModalRef } from '@aposin/ng-aquila/modal';
 import { LoadingService } from '@shagui/ng-shagui/core';
 import { Subscription } from 'rxjs';
 
 @Component({
-    selector: 'quote-loading',
-    templateUrl: './loading.component.html',
-    styleUrls: ['./loading.component.scss'],
-    imports: [CommonModule, NxModalModule]
+  selector: 'quote-loading',
+  templateUrl: './loading.component.html',
+  styleUrls: ['./loading.component.scss'],
+  imports: [CommonModule, NxModalModule]
 })
 export class QuoteLoadingComponent implements OnInit, OnDestroy {
-  @ViewChild('loadingBody')
-  private templateLoadingRef!: TemplateRef<unknown>;
+  private readonly $templateLoadingRef = viewChild.required<ComponentType<unknown>>('loadingBody');
   private templateLoadingDialogRef!: NxModalRef<unknown>;
 
   private loadingObs!: Subscription;
@@ -35,7 +35,7 @@ export class QuoteLoadingComponent implements OnInit, OnDestroy {
   }
 
   private openLoadingModal(): void {
-    this.templateLoadingDialogRef = this.dialogService.open(this.templateLoadingRef, {
+    this.templateLoadingDialogRef = this.dialogService.open(this.$templateLoadingRef(), {
       width: '200px',
       disableClose: true
     });

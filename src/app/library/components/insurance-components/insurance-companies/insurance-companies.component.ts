@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, ElementRef, inject, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, inject, OnInit, viewChild } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
 import { NxInputModule } from '@aposin/ng-aquila/input';
@@ -37,8 +37,7 @@ import { InsuranceComponentService } from './services';
   providers: [InsuranceComponentService, InsuranceCompaniesService]
 })
 export class InsuranceCompaniesComponent extends QuoteComponent<QuoteModel> implements OnInit {
-  @ViewChild('searchInput', { static: true })
-  private searchInput!: ElementRef;
+  private readonly $searchInput = viewChild.required<ElementRef>('searchInput');
 
   public form!: FormGroup;
   public iconInsurances: IIconData[] = [];
@@ -93,7 +92,7 @@ export class InsuranceCompaniesComponent extends QuoteComponent<QuoteModel> impl
   }
 
   private searchBoxConfig(): Subscription {
-    return fromEvent(this.searchInput.nativeElement, 'keyup')
+    return fromEvent(this.$searchInput().nativeElement, 'keyup')
       .pipe(debounceTime(DEBOUNCE_TIME), distinctUntilChanged())
       .subscribe(() => this.searchInsurances());
   }

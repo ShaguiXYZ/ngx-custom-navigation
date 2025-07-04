@@ -1,6 +1,6 @@
 import { ComponentType } from '@angular/cdk/portal';
 import { CommonModule } from '@angular/common';
-import { Component, ElementRef, EventEmitter, inject, Input, OnDestroy, OnInit, Output, Renderer2, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, inject, Input, OnDestroy, OnInit, Output, Renderer2, viewChild } from '@angular/core';
 import { NxDialogService, NxModalModule, NxModalRef } from '@aposin/ng-aquila/modal';
 import { QuoteError } from 'src/app/core/errors';
 import { OfferingPriceModel } from 'src/app/core/models';
@@ -13,10 +13,8 @@ import { QuoteOfferingCoveragesComponent, QuoteOfferingPriceCardComponent } from
   imports: [CommonModule, QuoteOfferingPriceCardComponent, NxModalModule]
 })
 export class OfferingCarrouselComponent implements OnInit, OnDestroy {
-  @ViewChild('carrouselInner', { static: true })
-  private inner!: ElementRef;
-  @ViewChild('carrouselTrack', { static: true })
-  private track!: ElementRef;
+  private readonly $inner = viewChild.required<ElementRef>('carrouselInner');
+  private readonly $track = viewChild.required<ElementRef>('carrouselTrack');
 
   @Input()
   public selectedPriceIndex = 0;
@@ -53,8 +51,8 @@ export class OfferingCarrouselComponent implements OnInit, OnDestroy {
     }
 
     this.unlistenFns.push(
-      this.renderer.listen(this.track.nativeElement, 'touchstart', (event: TouchEvent) => this.swipeStart(event)),
-      this.renderer.listen(this.track.nativeElement, 'touchend', (event: TouchEvent) => this.swipeEnd(event))
+      this.renderer.listen(this.$track().nativeElement, 'touchstart', (event: TouchEvent) => this.swipeStart(event)),
+      this.renderer.listen(this.$track().nativeElement, 'touchend', (event: TouchEvent) => this.swipeEnd(event))
     );
   }
 
@@ -124,19 +122,19 @@ export class OfferingCarrouselComponent implements OnInit, OnDestroy {
    *  with a smooth transition
    **/
   private selectCarrouselCard(): void {
-    const innerWidth = this.inner.nativeElement.clientWidth;
-    const screenItems = Math.floor(innerWidth / this.track.nativeElement.childNodes[0].clientWidth);
+    const innerWidth = this.$inner().nativeElement.clientWidth;
+    const screenItems = Math.floor(innerWidth / this.$track().nativeElement.childNodes[0].clientWidth);
     const trackCards = this.prices.length - screenItems > this.selectedPriceIndex;
     const selectedCardLeftPosition = this.selectedCardLeftPosition(trackCards ? this.selectedPriceIndex : this.prices.length - screenItems);
 
     requestAnimationFrame(() => {
-      this.renderer.setStyle(this.track.nativeElement, 'transition', 'transform 0.5s ease-out');
-      this.renderer.setStyle(this.track.nativeElement, 'transform', `translateX(${-selectedCardLeftPosition}px)`);
+      this.renderer.setStyle(this.$track().nativeElement, 'transition', 'transform 0.5s ease-out');
+      this.renderer.setStyle(this.$track().nativeElement, 'transform', `translateX(${-selectedCardLeftPosition}px)`);
     });
   }
 
   private selectedCardLeftPosition = (index: number): number =>
-    Array.from(this.track.nativeElement.childNodes as NodeList)
+    Array.from(this.$track().nativeElement.childNodes as NodeList)
       .slice(0, index)
       .reduce<number>((acc, card) => acc + (card as HTMLElement).clientWidth, 0);
 }

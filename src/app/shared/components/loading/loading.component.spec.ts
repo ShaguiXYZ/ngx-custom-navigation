@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import { TemplateRef } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { NxDialogService } from '@aposin/ng-aquila/modal';
@@ -12,13 +10,11 @@ describe('QuoteLoadingComponent', () => {
   let fixture: ComponentFixture<QuoteLoadingComponent>;
   let dialogService: jasmine.SpyObj<NxDialogService>;
   let loadingService: jasmine.SpyObj<LoadingService>;
-  let templateRef: jasmine.SpyObj<TemplateRef<any>>;
+  // let templateRef: jasmine.SpyObj<TemplateRef<any>>;
 
   beforeEach(async () => {
     const loadingServiceSpy = jasmine.createSpyObj('LoadingService', ['asObservable']);
     const dialogServiceSpy = jasmine.createSpyObj('NxDialogService', ['open']);
-
-    templateRef = jasmine.createSpyObj('TemplateRef', ['']);
 
     await TestBed.configureTestingModule({
       declarations: [],
@@ -38,11 +34,8 @@ describe('QuoteLoadingComponent', () => {
     dialogService = TestBed.inject(NxDialogService) as jasmine.SpyObj<NxDialogService>;
     dialogService.open.and.returnValue(jasmine.createSpyObj('NxModalRef', ['close']));
 
-    templateRef = jasmine.createSpyObj('TemplateRef', ['']);
-
     fixture = TestBed.createComponent(QuoteLoadingComponent);
     component = fixture.componentInstance;
-    component['templateLoadingRef'] = templateRef;
     fixture.detectChanges();
   });
 

@@ -1,5 +1,6 @@
+import { ComponentType } from '@angular/cdk/portal';
 import { CommonModule } from '@angular/common';
-import { Component, inject, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Component, inject, OnInit, viewChild } from '@angular/core';
 import { NxButtonModule } from '@aposin/ng-aquila/button';
 import { NxCopytextModule } from '@aposin/ng-aquila/copytext';
 import { NxHeadlineModule } from '@aposin/ng-aquila/headline';
@@ -11,8 +12,8 @@ import { QuoteTrackDirective } from 'src/app/core/tracking';
 import { QuoteModel } from 'src/app/library/models';
 import { HeaderTitleComponent, IconCardComponent, QuoteFooterComponent } from 'src/app/shared/components';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
-import { DrivingLicenseIcons } from './models';
 import { QuoteLiteralPipe } from 'src/app/shared/pipes';
+import { DrivingLicenseIcons } from './models';
 
 @Component({
   selector: 'quote-driving-license-location',
@@ -32,8 +33,7 @@ import { QuoteLiteralPipe } from 'src/app/shared/pipes';
   ]
 })
 export class DrivingLicenseLocationComponent extends QuoteComponent<QuoteModel> implements OnInit {
-  @ViewChild('template')
-  private infoModal!: TemplateRef<unknown>;
+  private readonly $infoModal = viewChild.required<ComponentType<unknown>>('template');
 
   public drivenLicenseCountries = DrivingLicenseIcons;
   public selectedLocation?: IndexedData;
@@ -57,7 +57,7 @@ export class DrivingLicenseLocationComponent extends QuoteComponent<QuoteModel> 
   }
 
   public openFromTemplate(): void {
-    this.dialogService.open(this.infoModal, {
+    this.dialogService.open(this.$infoModal(), {
       maxWidth: '350px',
       showCloseIcon: false
     });

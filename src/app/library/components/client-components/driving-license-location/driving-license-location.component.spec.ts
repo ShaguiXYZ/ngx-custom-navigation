@@ -83,7 +83,7 @@ describe('DrivingLicenseLocationComponent', () => {
   it('should open modal from template', () => {
     component.openFromTemplate();
 
-    expect(dialogService.open).toHaveBeenCalledWith(component['infoModal'], {
+    expect(dialogService.open).toHaveBeenCalledWith(component['$infoModal'], {
       maxWidth: '350px',
       showCloseIcon: false
     });

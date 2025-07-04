@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, ElementRef, inject, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, inject, OnInit, viewChild } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { NxCopytextModule } from '@aposin/ng-aquila/copytext';
 import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
@@ -37,8 +37,7 @@ import { QuoteLiteralPipe } from 'src/app/shared/pipes';
   providers: [VehicleService]
 })
 export class VehicleModelVersionsComponent extends QuoteComponent<QuoteModel> implements OnInit {
-  @ViewChild('searchInput', { static: true })
-  private searchInput!: ElementRef;
+  private readonly $searchInput = viewChild.required<ElementRef>('searchInput');
 
   public form!: FormGroup;
   public modelVersions: ModelVersionModel[] = [];
@@ -87,7 +86,7 @@ export class VehicleModelVersionsComponent extends QuoteComponent<QuoteModel> im
   }
 
   private searchBoxConfig(): Subscription {
-    return fromEvent(this.searchInput.nativeElement, 'keyup')
+    return fromEvent(this.$searchInput().nativeElement, 'keyup')
       .pipe(debounceTime(DEBOUNCE_TIME), distinctUntilChanged())
       .subscribe(() => this.filteredVersions());
   }
