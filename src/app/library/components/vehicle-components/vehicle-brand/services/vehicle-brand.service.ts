@@ -24,10 +24,10 @@ export class BrandComponentService {
           map(res => {
             return Object.keys(res)
               .filter(key => res[key].active)
-              .reduce((acc, key) => {
+              .reduce<IconDictionary>((acc, key) => {
                 acc[key] = res[key];
                 return acc;
-              }, {} as IconDictionary);
+              }, {});
           })
         )
     );

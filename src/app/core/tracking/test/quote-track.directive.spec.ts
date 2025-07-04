@@ -6,8 +6,7 @@ import { TrackEventType } from '../quote-track.model';
 import { QuoteTrackService } from '../quote-track.service';
 
 @Component({
-    template: `<div [nxTrack]="trackInfo" [nxTrackEvents]="trackEvents"></div>`,
-    standalone: false
+  template: `<div [nxTrack]="trackInfo" [nxTrackEvents]="trackEvents"></div>`
 })
 class TestComponent {
   trackInfo = { id: 'test-id' };
@@ -22,8 +21,8 @@ describe('QuoteTrackDirective', () => {
     const trackServiceSpy = jasmine.createSpyObj('QuoteTrackService', ['trackEvent']);
 
     TestBed.configureTestingModule({
-      declarations: [TestComponent],
-      imports: [QuoteTrackDirective],
+      declarations: [],
+      imports: [TestComponent, QuoteTrackDirective],
       providers: [{ provide: QuoteTrackService, useValue: trackServiceSpy }]
     }).compileComponents();
 

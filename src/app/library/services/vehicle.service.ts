@@ -142,7 +142,7 @@ export class VehicleService {
           map(res => res as VehicleSubmodelDTO),
           map(res => (!make || !model ? [] : res.data)),
           map(res =>
-            res.reduce((acc, data) => {
+            res.reduce<ModelVersionModel[]>((acc, data) => {
               const submodel = data.submodel.trim();
               if (submodel) {
                 acc.push({
@@ -155,7 +155,7 @@ export class VehicleService {
                 });
               }
               return acc;
-            }, [] as ModelVersionModel[])
+            }, [])
           ),
           map(res => (search ? res.filter(submodel => submodel.data.toLowerCase().includes(search.toLowerCase())) : res))
         )

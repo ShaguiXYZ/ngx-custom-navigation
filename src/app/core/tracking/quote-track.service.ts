@@ -78,7 +78,7 @@ export class QuoteTrackService implements OnDestroy {
           ...this.loadManifest(),
           ...Object.entries(data)
             .filter(([, value]) => hasValue(value))
-            .reduce((acc, [key, value]) => {
+            .reduce<TrackInfo>((acc, [key, value]) => {
               if (
                 !(key in this.workFlowToken.manifest.tracks) ||
                 this.workFlowToken.manifest.tracks[key as keyof typeof this.workFlowToken.manifest.tracks].tracked
@@ -86,7 +86,7 @@ export class QuoteTrackService implements OnDestroy {
                 acc[key] = `${value}`;
               }
               return acc;
-            }, {} as TrackInfo),
+            }, {}),
           category: `tarificador ${journey}`,
           page: lastPage?.pageId,
           title: title,

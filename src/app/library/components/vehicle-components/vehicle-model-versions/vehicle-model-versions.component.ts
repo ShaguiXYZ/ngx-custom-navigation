@@ -38,12 +38,12 @@ import { QuoteLiteralPipe } from 'src/app/shared/pipes';
   providers: [VehicleService]
 })
 export class VehicleModelVersionsComponent extends QuoteComponent<QuoteModel> implements OnInit {
-  private readonly $searchInput = viewChild.required<ElementRef>('searchInput');
-
   public form!: FormGroup;
   public modelVersions: ModelVersionModel[] = [];
   public selectedModelVersion?: ModelVersionModel;
   public notFound = false;
+
+  private readonly $searchInput = viewChild.required<ElementRef>('searchInput');
 
   private readonly routingService = inject(RoutingService);
   private readonly vehicleService = inject(VehicleService);

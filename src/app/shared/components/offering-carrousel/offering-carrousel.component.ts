@@ -13,9 +13,6 @@ import { QuoteOfferingCoveragesComponent, QuoteOfferingPriceCardComponent } from
   imports: [CommonModule, QuoteOfferingPriceCardComponent, NxModalModule]
 })
 export class OfferingCarrouselComponent implements OnInit, OnDestroy {
-  private readonly $inner = viewChild.required<ElementRef>('carrouselInner');
-  private readonly $track = viewChild.required<ElementRef>('carrouselTrack');
-
   @Input()
   public selectedPriceIndex = 0;
 
@@ -37,6 +34,9 @@ export class OfferingCarrouselComponent implements OnInit, OnDestroy {
   private timeout?: NodeJS.Timeout;
 
   private readonly unlistenFns: (() => void)[] = [];
+
+  private readonly $inner = viewChild.required<ElementRef>('carrouselInner');
+  private readonly $track = viewChild.required<ElementRef>('carrouselTrack');
 
   private readonly renderer = inject(Renderer2);
   private readonly dialogService = inject(NxDialogService);

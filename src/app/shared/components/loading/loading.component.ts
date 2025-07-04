@@ -12,10 +12,11 @@ import { Subscription } from 'rxjs';
   imports: [CommonModule, NxModalModule]
 })
 export class QuoteLoadingComponent implements OnInit, OnDestroy {
-  private readonly $templateLoadingRef = viewChild.required<ComponentType<unknown>>('loadingBody');
-  private templateLoadingDialogRef!: NxModalRef<unknown>;
+  private templateLoadingDialogRef?: NxModalRef<unknown>;
 
   private loadingObs!: Subscription;
+
+  private readonly $templateLoadingRef = viewChild.required<ComponentType<unknown>>('loadingBody');
 
   private readonly loadingService = inject(LoadingService);
   private readonly dialogService = inject(NxDialogService);

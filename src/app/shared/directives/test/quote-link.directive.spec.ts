@@ -7,8 +7,7 @@ import { RoutingService } from 'src/app/core/services';
 import { QuoteLinkDirective } from '../quote-link.directive';
 
 @Component({
-    template: `<div nxQuoteLink="testLink"></div>`,
-    standalone: false
+  template: `<div nxQuoteLink="testLink"></div>`
 })
 class TestComponent {}
 
@@ -23,8 +22,8 @@ describe('QuoteLinkDirective', () => {
     const routingServiceSpy = jasmine.createSpyObj('RoutingService', ['goToPage']);
 
     TestBed.configureTestingModule({
-      declarations: [TestComponent],
-      imports: [QuoteLinkDirective],
+      declarations: [],
+      imports: [TestComponent, QuoteLinkDirective],
       providers: [
         { provide: ContextDataService, useValue: contextDataServiceSpy },
         { provide: RoutingService, useValue: routingServiceSpy }

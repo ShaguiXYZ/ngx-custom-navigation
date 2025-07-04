@@ -44,13 +44,13 @@ import { BrandComponentService } from './services';
   providers: [BrandComponentService, VehicleService]
 })
 export class VehicleBrandComponent extends QuoteComponent<QuoteModel> implements OnInit {
-  private readonly $searchInput = viewChild.required<ElementRef>('searchInput');
-
   public form!: FormGroup;
   public iconBrands: IIconData[] = [];
   public searchedBrands: string[] = [];
   public selectedBrand?: string;
   public notFound = false;
+
+  private readonly $searchInput = viewChild.required<ElementRef>('searchInput');
 
   private readonly routingService = inject(RoutingService);
   private readonly brandComponentService = inject(BrandComponentService);
