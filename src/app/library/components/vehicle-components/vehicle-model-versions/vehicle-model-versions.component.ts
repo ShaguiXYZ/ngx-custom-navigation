@@ -9,7 +9,8 @@ import { QuoteComponent } from 'src/app/core/components';
 import { DEBOUNCE_TIME } from 'src/app/core/constants';
 import { RoutingService } from 'src/app/core/services';
 import { QuoteTrackDirective } from 'src/app/core/tracking';
-import { ModelVersionModel, QuoteModel } from 'src/app/library/models';
+import { QuoteModel } from 'src/app/library/models';
+import { ModelVersionModel } from 'src/app/library/models/vehicle';
 import { VehicleService } from 'src/app/library/services';
 import { HeaderTitleComponent, QuoteFooterComponent, QuoteZoneComponent, TextCardComponent } from 'src/app/shared/components';
 import { QuoteAutoFocusDirective, QuoteLiteralDirective } from 'src/app/shared/directives';
@@ -92,10 +93,10 @@ export class VehicleModelVersionsComponent extends QuoteComponent<QuoteModel> im
   }
 
   private async filteredVersions(): Promise<void> {
-    const { model } = this._contextData.vehicle;
+    const { brand, model, yearOfManufacture } = this._contextData.vehicle;
     const { searchInput } = this.form.value;
 
-    const modelVersions = await this.vehicleService.vehicleModelVersions(model!, searchInput);
+    const modelVersions = await this.vehicleService.getSubmodels(brand!, model!, searchInput, yearOfManufacture);
 
     const selectedIndex = this.selectedModelVersion?.index;
     this.modelVersions = modelVersions.filter(version => version.index !== selectedIndex);

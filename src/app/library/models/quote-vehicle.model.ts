@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-namespace */
 
-import { IndexedData } from '@shagui/ng-shagui/core';
-import { CubicCapacityModel, VehicleClassesModel } from './vehicle';
+import { CubicCapacityModel, ModelVersionModel, VehicleClassesModel } from './vehicle';
 import { FuelModel } from './vehicle/vehicle-fuel.model';
 
 export declare const enum VehicleTypes {
@@ -9,8 +8,6 @@ export declare const enum VehicleTypes {
   PRIVATE_CAR_MICRO = 'MT',
   RECREATIONAL_VEHICLE = 'AC'
 }
-
-export type ModelVersionModel = IndexedData<string, number>;
 
 export interface VehicleDTO {
   make: string;

@@ -3,17 +3,19 @@ import { inject, Injectable } from '@angular/core';
 import { hasValue, HttpService, TTL } from '@shagui/ng-shagui/core';
 import { firstValueFrom, map } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { ModelVersionModel, QuoteVehicleModel, VehicleDTO } from '../models';
-import { _BRANCHES_CACHE_ID_, _MODEL_VERSIONS_CACHE_ID_, _MODELS_CACHE_ID_ } from '../models/constants';
+import { QuoteVehicleModel, VehicleDTO } from '../models';
+import { _BRANCHES_CACHE_ID_, _MODEL_VERSIONS_CACHE_ID_, _MODELS_CACHE_ID_, _SUBMODELS_CACHE_ID_ } from '../models/constants';
 import {
   BrandDTO,
   CubicCapacityDTO,
   CubicCapacityModel,
   FuelDTO,
   FuelModel,
+  ModelVersionModel,
   VehicleClassesDTO,
   VehicleClassesModel,
-  VehicleModelDTO
+  VehicleModelDTO,
+  VehicleSubmodelDTO
 } from '../models/vehicle';
 
 const DEFAULT_YEAR = new Date().getFullYear();
@@ -77,7 +79,7 @@ export class VehicleService {
 
     return firstValueFrom(
       this.http
-        .get<BrandDTO>(`${VEHICLE_API}/makes`, {
+        .get<BrandDTO>(`${VEHICLE_API}/makes/v2`, {
           clientOptions: { params: httpParams },
           responseStatusMessage: {
             [HttpStatusCode.NotFound]: { text: 'Notifications.BrandsNotFound' }
@@ -102,13 +104,13 @@ export class VehicleService {
     const httpParams = new HttpParams().appendAll({ make, year });
     return firstValueFrom(
       this.http
-        .get<VehicleModelDTO>(`${VEHICLE_API}/models`, {
+        .get<VehicleModelDTO>(`${VEHICLE_API}/models/v2`, {
           clientOptions: { params: httpParams },
           responseStatusMessage: {
             [HttpStatusCode.NotFound]: { text: 'Notifications.ModelsNotFound' }
           },
           showLoading: true,
-          cache: { id: this.cacheModelByBranch(make, year), ttl: TTL.L }
+          cache: { id: this.cacheModel(make, year), ttl: TTL.L }
         })
         .pipe(
           map(res => res as VehicleModelDTO),
@@ -116,6 +118,46 @@ export class VehicleService {
           map(res => (search ? res.filter(data => data.name.toLowerCase().includes(search.toLowerCase())) : res)),
           map(res => res.map(data => data.name)),
           map(res => res.sort((a, b) => a.localeCompare(b)))
+        )
+    );
+  }
+
+  public getSubmodels(make: string, model: string, search?: string, year = DEFAULT_YEAR): Promise<ModelVersionModel[]> {
+    if (!make?.trim() || !model?.trim()) {
+      return Promise.resolve([]);
+    }
+    const httpParams = new HttpParams().appendAll({ make, model, year });
+
+    return firstValueFrom(
+      this.http
+        .get<VehicleSubmodelDTO>(`${VEHICLE_API}/submodels/v2`, {
+          clientOptions: { params: httpParams },
+          responseStatusMessage: {
+            [HttpStatusCode.NotFound]: { text: 'Notifications.SubmodelsNotFound' }
+          },
+          showLoading: true,
+          cache: { id: this.cacheSubmodel(make, model, year), ttl: TTL.L }
+        })
+        .pipe(
+          map(res => res as VehicleSubmodelDTO),
+          map(res => (!make || !model ? [] : res.data)),
+          map(res =>
+            res.reduce((acc, data) => {
+              const submodel = data.submodel.trim();
+              if (submodel) {
+                acc.push({
+                  data: submodel
+                    .replace(/[^A-Z0-9]/g, ' ')
+                    .replace(/\s+/g, ' ')
+                    .trim()
+                    .toUpperCase(),
+                  index: data.id
+                });
+              }
+              return acc;
+            }, [] as ModelVersionModel[])
+          ),
+          map(res => (search ? res.filter(submodel => submodel.data.toLowerCase().includes(search.toLowerCase())) : res))
         )
     );
   }
@@ -210,6 +252,7 @@ export class VehicleService {
   }
 
   private cacheBrands = (year: number): string => `${_BRANCHES_CACHE_ID_}${year}_`;
-  private cacheModelByBranch = (branch: string, year: number): string => `_${_MODELS_CACHE_ID_}${branch}_${year}_`;
+  private cacheModel = (branch: string, year: number): string => `_${_MODELS_CACHE_ID_}${branch}_${year}_`;
+  private cacheSubmodel = (branch: string, model: string, year: number): string => `_${_SUBMODELS_CACHE_ID_}${branch}_${model}_${year}_`;
   private cacheModelVersionByBranch = (model: string): string => `_${_MODEL_VERSIONS_CACHE_ID_}${model}_`;
 }

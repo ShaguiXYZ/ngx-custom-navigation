@@ -96,8 +96,8 @@
       .stepper__item__line__dotted {
         border: none;
         border-top: 5px dotted var(--ui-05);
-        width: 50%;
         transition: width var(--line-transition-time) ease-in-out;
+        width: 50%;
       }
 
       &.solid__line {
