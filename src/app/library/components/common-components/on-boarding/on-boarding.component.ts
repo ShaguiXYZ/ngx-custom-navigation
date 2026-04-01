@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { NxButtonModule } from '@aposin/ng-aquila/button';
-import { NxCardModule } from '@aposin/ng-aquila/card';
-import { NxCopytextModule } from '@aposin/ng-aquila/copytext';
-import { NxHeadlineModule } from '@aposin/ng-aquila/headline';
+import { NxButtonModule } from '@allianz/ng-aquila/button';
+import { NxCardModule } from '@allianz/ng-aquila/card';
+import { NxCopytextModule } from '@allianz/ng-aquila/copytext';
+import { NxHeadlineModule } from '@allianz/ng-aquila/headline';
 import { QuoteComponent } from 'src/app/core/components';
 import { QuoteModel } from 'src/app/library/models';
 import { HeaderTitleComponent, QuoteFooterComponent, QuoteZoneComponent } from 'src/app/shared/components';

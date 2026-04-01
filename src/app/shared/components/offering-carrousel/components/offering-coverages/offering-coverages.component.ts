@@ -1,10 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { Component, Inject, OnInit } from '@angular/core';
-import { NxAccordionDirective, NxExpansionPanelComponent, NxExpansionPanelHeaderComponent } from '@aposin/ng-aquila/accordion';
-import { NxCopytextComponent } from '@aposin/ng-aquila/copytext';
-import { NxHeadlineComponent } from '@aposin/ng-aquila/headline';
-import { NX_MODAL_DATA } from '@aposin/ng-aquila/modal';
-import { NxTabComponent, NxTabGroupComponent } from '@aposin/ng-aquila/tabs';
+import { NxAccordionDirective, NxExpansionPanelComponent, NxExpansionPanelHeaderComponent } from '@allianz/ng-aquila/accordion';
+import { NxCopytextComponent } from '@allianz/ng-aquila/copytext';
+import { NxHeadlineComponent } from '@allianz/ng-aquila/headline';
+import { NX_MODAL_DATA } from '@allianz/ng-aquila/modal';
+import { NxTabComponent, NxTabGroupComponent } from '@allianz/ng-aquila/tabs';
 import { Coverage, OfferingPriceModel } from 'src/app/core/models';
 import { QuoteLiteralDirective } from 'src/app/shared/directives';
 import { HeaderTitleComponent } from '../../../header-title';

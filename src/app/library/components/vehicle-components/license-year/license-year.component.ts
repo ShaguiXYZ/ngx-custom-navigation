@@ -1,10 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { NxButtonModule } from '@aposin/ng-aquila/button';
-import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
-import { NxInputModule } from '@aposin/ng-aquila/input';
-import { NxMaskModule } from '@aposin/ng-aquila/mask';
+import { NxButtonModule } from '@allianz/ng-aquila/button';
+import { NxFormfieldModule } from '@allianz/ng-aquila/formfield';
+import { NxInputModule } from '@allianz/ng-aquila/input';
+import { NxMaskModule } from '@allianz/ng-aquila/mask';
 import { NxDate } from '@shagui/ng-shagui/core';
 import dayjs from 'dayjs';
 import { QuoteComponent } from 'src/app/core/components';

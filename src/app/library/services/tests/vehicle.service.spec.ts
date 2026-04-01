@@ -1,29 +1,31 @@
-import { HttpClient } from '@angular/common/http';
 import { TestBed } from '@angular/core/testing';
 import { of } from 'rxjs';
 import { FuelTypes } from 'src/app/core/models';
+import { HttpService } from '@shagui/ng-shagui/core';
 import { QuoteVehicleModel, VehicleDTO } from '../../models';
 import {
+  BrandDTO,
   CubicCapacityDTO,
   CubicCapacityModel,
   FuelDTO,
   FuelModel,
   ModelVersionModel,
   VehicleClassesDTO,
-  VehicleClassesModel
+  VehicleClassesModel,
+  VehicleModelDTO
 } from '../../models/vehicle';
 import { VehicleService } from '../vehicle.service';
 
 describe('VehicleService', () => {
   let service: VehicleService;
-  let httpClientSpy: jasmine.SpyObj<HttpClient>;
+  let httpServiceSpy: jasmine.SpyObj<HttpService>;
 
   beforeEach(() => {
-    httpClientSpy = jasmine.createSpyObj('HttpClient', ['get', 'post', 'put', 'delete']);
+    httpServiceSpy = jasmine.createSpyObj('HttpService', ['get', 'post', 'put', 'delete']);
 
     TestBed.configureTestingModule({
       imports: [],
-      providers: [VehicleService, { provide: HttpClient, useValue: httpClientSpy }]
+      providers: [VehicleService, { provide: HttpService, useValue: httpServiceSpy }]
     });
 
     service = TestBed.inject(VehicleService);
@@ -34,26 +36,58 @@ describe('VehicleService', () => {
   });
 
   it('should fetch vehicle brands', async () => {
-    const mockBrands = ['Toyota', 'Honda', 'Ford'];
+    const mockBrands: BrandDTO = {
+      collection: {
+        url: '',
+        count: 3,
+        pages: 1,
+        total: 3,
+        next: '',
+        prev: '',
+        first: '',
+        last: ''
+      },
+      data: [
+        { id: 1, name: 'Toyota' },
+        { id: 2, name: 'Honda' },
+        { id: 3, name: 'Ford' }
+      ]
+    };
     const brand = 'to';
 
-    httpClientSpy.get.and.returnValue(of(mockBrands));
+    httpServiceSpy.get.and.returnValue(of(mockBrands));
 
-    service.getBrands(brand).then(brands => {
-      expect(brands).toEqual(['Toyota']);
-    });
+    const brands = await service.getBrands(brand);
+
+    expect(brands).toEqual(['Toyota']);
   });
 
   it('should fetch vehicle models', async () => {
-    const mockModels = ['Corolla', 'Civic', 'Mustang'];
+    const mockModels: VehicleModelDTO = {
+      collection: {
+        url: '',
+        count: 3,
+        pages: 1,
+        total: 3,
+        next: '',
+        prev: '',
+        first: '',
+        last: ''
+      },
+      data: [
+        { id: 1, make_id: 1, name: 'Corolla' },
+        { id: 2, make_id: 1, name: 'Civic' },
+        { id: 3, make_id: 1, name: 'Mustang' }
+      ]
+    };
     const brand = 'Toyota';
     const search = 'co';
 
-    httpClientSpy.get.and.returnValue(of(mockModels));
+    httpServiceSpy.get.and.returnValue(of(mockModels));
 
-    service.getModels(brand, search).then(models => {
-      expect(models).toEqual(['Corolla']);
-    });
+    const models = await service.getModels(brand, search);
+
+    expect(models).toEqual(['Corolla']);
   });
 
   it('should fetch vehicle model versions', async () => {
@@ -63,11 +97,11 @@ describe('VehicleService', () => {
     ];
     const model = 'Corolla';
 
-    httpClientSpy.get.and.returnValue(of(mockModelVersions));
+    httpServiceSpy.get.and.returnValue(of(mockModelVersions));
 
-    service.vehicleModelVersions(model).then(versions => {
-      expect(versions).toEqual(mockModelVersions);
-    });
+    const versions = await service.vehicleModelVersions(model);
+
+    expect(versions).toEqual(mockModelVersions);
   });
 
   it('should fetch model fuels', async () => {
@@ -77,26 +111,24 @@ describe('VehicleService', () => {
     ];
     const vehicle: QuoteVehicleModel = { brand: 'Toyota', model: 'Corolla' };
 
-    httpClientSpy.get.and.returnValue(of(mockFuels));
+    httpServiceSpy.get.and.returnValue(of(mockFuels));
 
-    service.getFuelTypes(vehicle).then(fuels => {
-      const expectedFuels: FuelModel[] = mockFuels.map(fuel => FuelDTO.toModel(fuel));
+    const fuels = await service.getFuelTypes(vehicle);
+    const expectedFuels: FuelModel[] = mockFuels.map(fuel => FuelDTO.toModel(fuel));
 
-      expect(fuels).toEqual(expectedFuels);
-    });
+    expect(fuels).toEqual(expectedFuels);
   });
 
   it('should fetch vehicle powers', async () => {
     const mockPowers: VehicleClassesDTO[] = ['range-1.100-200', 'range-2.200-300'];
     const vehicle: QuoteVehicleModel = { brand: 'Toyota', model: 'Corolla' };
 
-    httpClientSpy.get.and.returnValue(of(mockPowers));
+    httpServiceSpy.get.and.returnValue(of(mockPowers));
 
-    service.getVehicleClasses(vehicle).then(powers => {
-      const expectedPowers: VehicleClassesModel[] = mockPowers.map(power => VehicleClassesDTO.toModel(power));
+    const powers = await service.getVehicleClasses(vehicle);
+    const expectedPowers: VehicleClassesModel[] = mockPowers.map(power => VehicleClassesDTO.toModel(power));
 
-      expect(powers).toEqual(expectedPowers);
-    });
+    expect(powers).toEqual(expectedPowers);
   });
 
   it('should fetch cubic capacities', async () => {
@@ -106,13 +138,12 @@ describe('VehicleService', () => {
     ];
     const vehicle: QuoteVehicleModel = { brand: 'Toyota', model: 'Corolla' };
 
-    httpClientSpy.get.and.returnValue(of(mockCapacities));
+    httpServiceSpy.get.and.returnValue(of(mockCapacities));
 
-    service.cubicCapacities(vehicle).then(capacities => {
-      const expectedCapacities: CubicCapacityModel[] = mockCapacities.map(capacity => CubicCapacityDTO.toModel(capacity));
+    const capacities = await service.cubicCapacities(vehicle);
+    const expectedCapacities: CubicCapacityModel[] = mockCapacities.map(capacity => CubicCapacityDTO.toModel(capacity));
 
-      expect(capacities).toEqual(expectedCapacities);
-    });
+    expect(capacities).toEqual(expectedCapacities);
   });
 
   it('should fetch vehicles', async () => {
@@ -121,11 +152,11 @@ describe('VehicleService', () => {
       { make: 'Honda', model: 'Civic' }
     ];
 
-    httpClientSpy.get.and.returnValue(of(mockVehicles));
+    httpServiceSpy.get.and.returnValue(of(mockVehicles));
 
-    service.vehicles().then(vehicles => {
-      expect(vehicles).toEqual(mockVehicles.map(vehicle => VehicleDTO.toModel(vehicle)));
-    });
+    const vehicles = await service.vehicles();
+
+    expect(vehicles).toEqual(mockVehicles.map(vehicle => VehicleDTO.toModel(vehicle)));
   });
 
   it('should find vehicle by plate', async () => {
@@ -133,10 +164,10 @@ describe('VehicleService', () => {
     const mockVehicleDTO: VehicleDTO = { make: 'Toyota', model: 'Corolla', plateNumber: plate };
     const mockVehicle: QuoteVehicleModel = { brand: 'Toyota', model: 'Corolla', creationDate: undefined, plateNumber: plate };
 
-    httpClientSpy.get.and.returnValue(of([mockVehicleDTO]));
+    httpServiceSpy.get.and.returnValue(of([mockVehicleDTO]));
 
-    service.findByPlate(plate).then(vehicle => {
-      expect(vehicle).toEqual([mockVehicle]);
-    });
+    const vehicles = await service.findByPlate(plate);
+
+    expect(vehicles).toEqual([mockVehicle]);
   });
 });

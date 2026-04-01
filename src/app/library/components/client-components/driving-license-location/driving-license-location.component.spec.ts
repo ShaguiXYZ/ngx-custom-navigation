@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { NxDialogService } from '@aposin/ng-aquila/modal';
+import { NxDialogService } from '@allianz/ng-aquila/modal';
 import { TranslateService } from '@ngx-translate/core';
 import { ContextDataService } from '@shagui/ng-shagui/core';
 import { NX_WORKFLOW_TOKEN } from 'src/app/core/components/models';

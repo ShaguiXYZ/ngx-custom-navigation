@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideAnimations } from '@angular/platform-browser/animations';
-import { NxDialogService } from '@aposin/ng-aquila/modal';
+import { NxDialogService } from '@allianz/ng-aquila/modal';
 import { LoadingService } from '@shagui/ng-shagui/core';
 import { of } from 'rxjs';
 import { QuoteLoadingComponent } from './loading.component';

@@ -1,43 +1,35 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { HttpClient } from '@angular/common/http';
 import { TestBed } from '@angular/core/testing';
-import { ContextDataService } from '@shagui/ng-shagui/core';
 import { of, Subject } from 'rxjs';
+import { HttpService } from '@shagui/ng-shagui/core';
 import { NX_WORKFLOW_TOKEN } from 'src/app/core/components/models';
 import { OfferingDTO } from 'src/app/core/models';
 import { QuoteModel } from '../../models';
 import { OfferingsService } from '../offerings.service';
-import { LiteralsService, NX_RECAPTCHA_TOKEN } from 'src/app/core/services';
+import { ServiceActivatorService } from 'src/app/core/service-activators';
 
 describe('OfferingsService', () => {
   let service: OfferingsService;
-  let contextDataServiceSpy: jasmine.SpyObj<ContextDataService>;
-  let httpClientSpy: jasmine.SpyObj<HttpClient>;
+  let httpServiceSpy: jasmine.SpyObj<HttpService>;
+  let serviceActivatorSpy: jasmine.SpyObj<ServiceActivatorService>;
 
   beforeEach(() => {
-    const literalsService = jasmine.createSpyObj('LiteralsService', ['transformLiteral', 'onLanguageChange']);
-    const languageSubject = new Subject<any>();
     const mockConfig = {
       errorPageId: 'error',
       manifest: {}
     };
 
-    contextDataServiceSpy = jasmine.createSpyObj('ContextDataService', ['get']);
-    httpClientSpy = jasmine.createSpyObj('HttpClient', ['get', 'post', 'put', 'delete']);
-
-    literalsService.onLanguageChange.and.returnValue(languageSubject.asObservable());
-
-    contextDataServiceSpy.get.and.returnValue({ settings: { agent: '1234' } });
+    httpServiceSpy = jasmine.createSpyObj('HttpService', ['get', 'post', 'put', 'delete']);
+    serviceActivatorSpy = jasmine.createSpyObj('ServiceActivatorService', ['activateEntryPoint']);
+    serviceActivatorSpy.activateEntryPoint.and.resolveTo(undefined);
 
     TestBed.configureTestingModule({
       imports: [],
       providers: [
         OfferingsService,
-        { provide: ContextDataService, useValue: contextDataServiceSpy },
-        { provide: LiteralsService, useValue: literalsService },
-        { provide: HttpClient, useValue: httpClientSpy },
-        { provide: NX_WORKFLOW_TOKEN, useValue: mockConfig },
-        { provide: NX_RECAPTCHA_TOKEN, useValue: { siteKey: 'test-site-key' } }
+        { provide: HttpService, useValue: httpServiceSpy },
+        { provide: ServiceActivatorService, useValue: serviceActivatorSpy },
+        { provide: NX_WORKFLOW_TOKEN, useValue: mockConfig }
       ]
     });
 
@@ -72,47 +64,42 @@ describe('OfferingsService', () => {
       }
     } as unknown as OfferingDTO;
 
-    httpClientSpy.get.and.returnValue(of(mockOfferings));
-    httpClientSpy.post.and.returnValue(of(mockOfferings));
+    httpServiceSpy.get.and.returnValue(of(mockOfferings));
+    httpServiceSpy.post.and.returnValue(of(mockOfferings));
 
-    await service
-      .pricing({
-        client: {},
-        contactData: {},
-        driven: {},
-        insuranceCompany: {},
-        offering: {},
-        personalData: {},
-        place: {},
-        vehicle: {},
-        signature: { hash: 'hash' }
-      } as QuoteModel)
-      .then(offerings => {
-        expect(offerings.prices?.length).toBe(2);
-        expect(offerings.prices?.[0].modalityId).toBe(1);
-        expect(offerings.prices?.[0].modalityDescription).toBe('Offering 1');
-      });
+    const offerings = await service.pricing({
+      client: {},
+      contactData: {},
+      driven: {},
+      insuranceCompany: {},
+      offering: {},
+      personalData: {},
+      place: {},
+      vehicle: {},
+      signature: { hash: 'hash' }
+    } as unknown as QuoteModel);
 
-    expect(httpClientSpy.get.calls.count()).withContext('one call').toBe(1);
-    expect(httpClientSpy.post.calls.count()).withContext('one call').toBe(1);
+    expect(offerings.prices?.length).toBe(2);
+    expect(offerings.prices?.[0].modalityId).toBe(1);
+    expect(offerings.prices?.[0].modalityDescription).toBe('Offering 1');
+
+    expect(httpServiceSpy.get.calls.count()).withContext('one call').toBe(1);
+    expect(httpServiceSpy.post.calls.count()).withContext('one call').toBe(1);
   });
 
   it('should return cached offerings when quote does not change', async () => {
-    service
-      .pricing({
-        signature: { hash: 'hash' },
-        offering: {
-          hash: 'hash',
-          prices: [
-            { modalityId: 1, modalityDescription: 'Offering 1', totalPremiumAmount: '100' },
-            { modalityId: 2, modalityDescription: 'Offering 2', totalPremiumAmount: '200' }
-          ]
-        }
-      } as unknown as QuoteModel)
-      .then(offerings => {
-        expect(offerings.prices?.length).toBe(2);
-      });
+    const offerings = await service.pricing({
+      signature: { hash: 'hash' },
+      offering: {
+        hash: 'hash',
+        prices: [
+          { modalityId: 1, modalityDescription: 'Offering 1', totalPremiumAmount: '100' },
+          { modalityId: 2, modalityDescription: 'Offering 2', totalPremiumAmount: '200' }
+        ]
+      }
+    } as unknown as QuoteModel);
 
-    expect(httpClientSpy.get.calls.count()).withContext('no calls').toBe(0);
+    expect(offerings.prices?.length).toBe(2);
+    expect(httpServiceSpy.get.calls.count()).withContext('no calls').toBe(0);
   });
 });

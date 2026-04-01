@@ -1,5 +1,5 @@
 import { Component, inject, Input, OnDestroy, OnInit } from '@angular/core';
-import { NxSwitcherModule } from '@aposin/ng-aquila/switcher';
+import { NxSwitcherModule } from '@allianz/ng-aquila/switcher';
 import { Subscription } from 'rxjs';
 import { STORAGE_THEME_KEY, Theme } from './models';
 import { ThemingService } from './services';

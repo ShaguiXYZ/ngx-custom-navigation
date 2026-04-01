@@ -1,11 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
-import { NxCopytextModule } from '@aposin/ng-aquila/copytext';
-import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
-import { NxInputModule } from '@aposin/ng-aquila/input';
-import { NxLinkModule } from '@aposin/ng-aquila/link';
-import { NxSwitcherModule } from '@aposin/ng-aquila/switcher';
+import { NxCopytextModule } from '@allianz/ng-aquila/copytext';
+import { NxFormfieldModule } from '@allianz/ng-aquila/formfield';
+import { NxInputModule } from '@allianz/ng-aquila/input';
+import { NxLinkModule } from '@allianz/ng-aquila/link';
+import { NxSwitcherModule } from '@allianz/ng-aquila/switcher';
 import { TranslateService } from '@ngx-translate/core';
 import { ContextDataService } from '@shagui/ng-shagui/core';
 import { of } from 'rxjs';

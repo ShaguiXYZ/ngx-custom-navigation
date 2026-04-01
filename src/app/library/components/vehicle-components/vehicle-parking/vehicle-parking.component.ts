@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
-import { NxCopytextModule } from '@aposin/ng-aquila/copytext';
+import { NxCopytextModule } from '@allianz/ng-aquila/copytext';
 import { IndexedData } from '@shagui/ng-shagui/core';
 import { Observable } from 'rxjs';
 import { QuoteComponent } from 'src/app/core/components';
