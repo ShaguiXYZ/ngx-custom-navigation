@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { NxCopytextModule } from '@aposin/ng-aquila/copytext';
+import { NxCopytextModule } from '@allianz/ng-aquila/copytext';
 import { TranslateService } from '@ngx-translate/core';
 import { ContextDataService, IndexedData } from '@shagui/ng-shagui/core';
 import { of } from 'rxjs';

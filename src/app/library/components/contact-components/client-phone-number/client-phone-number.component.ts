@@ -1,9 +1,9 @@
 import { Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { NxCopytextModule } from '@aposin/ng-aquila/copytext';
-import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
-import { NxMaskModule } from '@aposin/ng-aquila/mask';
-import { NxPhoneInputComponent } from '@aposin/ng-aquila/phone-input';
+import { NxCopytextModule } from '@allianz/ng-aquila/copytext';
+import { NxFormfieldModule } from '@allianz/ng-aquila/formfield';
+import { NxMaskModule } from '@allianz/ng-aquila/mask';
+import { NxPhoneInputComponent } from '@allianz/ng-aquila/phone-input';
 import countries, { LocalizedCountryNames } from 'i18n-iso-countries';
 import { CountryCode } from 'libphonenumber-js';
 import { QuoteComponent } from 'src/app/core/components';

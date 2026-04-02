@@ -1,9 +1,9 @@
 import { Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { NxDatefieldModule, NxDatepickerIntl } from '@aposin/ng-aquila/datefield';
-import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
-import { NxInputModule } from '@aposin/ng-aquila/input';
-import { NxIsoDateModule } from '@aposin/ng-aquila/iso-date-adapter';
+import { NxDatefieldModule, NxDatepickerIntl } from '@allianz/ng-aquila/datefield';
+import { NxFormfieldModule } from '@allianz/ng-aquila/formfield';
+import { NxInputModule } from '@allianz/ng-aquila/input';
+import { NxIsoDateModule } from '@allianz/ng-aquila/iso-date-adapter';
 import dayjs, { Dayjs } from 'dayjs';
 import { QuoteComponent } from 'src/app/core/components';
 import { DEFAULT_DATE_FORMAT } from 'src/app/core/constants';

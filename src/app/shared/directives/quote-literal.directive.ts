@@ -36,9 +36,8 @@ export class QuoteLiteralDirective implements AfterViewInit, OnDestroy {
   }
 
   private updateElement(): void {
-    const soureceLiteral = this.el.nativeElement.innerHTML;
     const value = this.literalsService.transformLiteral(this.nxQuoteLiteral, this.nxQuoteLitealParams) || this.nxQuoteDefaultLiteral;
-    const toSanitize = value || soureceLiteral;
+    const toSanitize = value || this.el.nativeElement.innerHTML;
 
     this.el.nativeElement.innerHTML = this.domSanitizer.sanitize(1, toSanitize) ?? '';
   }

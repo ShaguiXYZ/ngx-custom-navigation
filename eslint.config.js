@@ -29,6 +29,13 @@ module.exports = tseslint.config(
     }
   },
   {
+    files: ['**/*.spec.ts', '**/*.test.ts'],
+    env: {
+      jasmine: true
+    },
+    rules: {}
+  },
+  {
     files: ['**/*.html'],
     extends: [...angular.configs.templateRecommended, ...angular.configs.templateAccessibility],
     rules: {}

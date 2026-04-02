@@ -20,11 +20,13 @@ export namespace VersionInfo {
     }
 
     const parseVersion = (version: string) => {
-      const [major, minor, patch] = version
-        .slice(1)
+      let _version = /^v\d+\.\d+(\.\d+)?$/.test(version) ? version : 'v0.0.0';
+
+      const [major, minor, patch] = _version
+        .slice(1) // remove 'v' at the beginning (v1.2.3 => 1.2.3)
         .split('.')
         .map(v => parseInt(v, 10));
-      return { major, minor, patch: patch ?? 0 };
+      return { major, minor: minor ?? 0, patch: patch ?? 0 };
     };
 
     const aParsed = parseVersion(a.value);
@@ -40,11 +42,13 @@ export namespace VersionInfo {
 
     return bParsed.patch - aParsed.patch;
   };
+
   export const sort = (versions: VersionInfo[]): VersionInfo[] => {
     return versions.sort((a, b) => {
       return compare(a, b);
     });
   };
+
   export const breakingChange = (before: VersionInfo[] = [], after: VersionInfo[] = []): Breakingchange => {
     const majorVersionBreakingchange = (versions: VersionInfo[] = []): VersionInfo | undefined =>
       versions.find(info => info.breakingchange === 'all' || info.breakingchange === 'workflow');
@@ -66,6 +70,7 @@ export namespace VersionInfo {
 
     return majorVersionBreakingchange(filteredAfterSorted)?.breakingchange ?? 'none';
   };
+
   export const last = (versions: VersionInfo[] = []): VersionInfo => {
     return versions.length ? sort(versions)[0] : { value: 'v0.0.0' };
   };

@@ -1,4 +1,4 @@
-import { Inject, Injectable, InjectionToken } from '@angular/core';
+import { inject, Injectable, InjectionToken } from '@angular/core';
 
 const RECAPTCHA_API = '/recaptcha';
 
@@ -17,7 +17,9 @@ declare const grecaptcha: {
 
 @Injectable({ providedIn: 'root' })
 export class CaptchaService {
-  constructor(@Inject(NX_RECAPTCHA_TOKEN) private readonly config: RecaptchaConfig) {
+  private readonly config: RecaptchaConfig = inject(NX_RECAPTCHA_TOKEN);
+
+  constructor() {
     this.headScript();
   }
 

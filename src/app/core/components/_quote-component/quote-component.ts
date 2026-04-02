@@ -11,8 +11,6 @@ import { LanguageService } from '../../services';
   template: ''
 })
 export abstract class QuoteComponent<T extends QuoteControlModel> implements OnDestroy {
-  public name?: string;
-
   protected $displayDateFormat: WritableSignal<string> = signal('');
   protected $displayDateFormats: WritableSignal<string[]> = signal([]);
   protected _contextData: T;

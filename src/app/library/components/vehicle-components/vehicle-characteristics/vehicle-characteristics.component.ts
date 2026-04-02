@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
-import { NxAccordionModule } from '@aposin/ng-aquila/accordion';
-import { NxCopytextModule } from '@aposin/ng-aquila/copytext';
-import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
+import { NxAccordionModule } from '@allianz/ng-aquila/accordion';
+import { NxCopytextModule } from '@allianz/ng-aquila/copytext';
+import { NxFormfieldModule } from '@allianz/ng-aquila/formfield';
 import { QuoteComponent } from 'src/app/core/components';
 import { RoutingService } from 'src/app/core/services';
 import { QuoteTrackDirective } from 'src/app/core/tracking';

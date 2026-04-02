@@ -1,8 +1,8 @@
 import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { NxButtonModule } from '@aposin/ng-aquila/button';
-import { NxCopytextModule } from '@aposin/ng-aquila/copytext';
-import { NxHeadlineModule } from '@aposin/ng-aquila/headline';
+import { NxButtonModule } from '@allianz/ng-aquila/button';
+import { NxCopytextModule } from '@allianz/ng-aquila/copytext';
+import { NxHeadlineModule } from '@allianz/ng-aquila/headline';
 import { QuoteComponent } from 'src/app/core/components';
 import { QuoteModel } from 'src/app/library/models';
 import { HeaderTitleComponent, QuoteFooterComponent } from 'src/app/shared/components';

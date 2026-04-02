@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { NxSwitcherModule } from '@aposin/ng-aquila/switcher';
+import { NxSwitcherModule } from '@allianz/ng-aquila/switcher';
 import { of } from 'rxjs';
 import { Theme } from './models';
 import { ThemingService } from './services';

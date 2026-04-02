@@ -22,6 +22,7 @@
     "Email": "Email",
     "ErrorBody": "Sorry, we cannot process your request at this moment. Please try again later.",
     "Fuel": "Fuel",
+    "Loading": "Loading {{page}}...",
     "Model": "Model",
     "Next": "Next",
     "No": "No",

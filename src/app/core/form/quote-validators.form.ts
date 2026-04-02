@@ -156,20 +156,16 @@ export class QuoteFormValidarors {
    *
    * @param control - The form control to validate.
    * @param validationKey - The key representing the type of validation.
-   * @param validationValue - A boolean indicating whether the validation is active.
+   * @param isKO - A boolean indicating whether the validation is active.
    * @returns A validation error object if validation fails, otherwise null.
    */
-  public activateEntryPoint = (
-    control: AbstractControl,
-    validationKey: QuoteFormValidation,
-    validationValue: boolean
-  ): ValidationErrors | null => {
+  public activateEntryPoint = (control: AbstractControl, validationKey: QuoteFormValidation, isKO: boolean): ValidationErrors | null => {
     const controlName = Object.keys(control.parent?.controls ?? {}).find(
       key => (control.parent?.controls as Record<string, AbstractControl>)[key] === control
     );
 
     if (controlName) {
-      if (validationValue) {
+      if (isKO) {
         this.serviceActivatorService.activateEntryPoint(`#${controlName}-${validationKey}`);
       }
 
@@ -180,7 +176,7 @@ export class QuoteFormValidarors {
 
       if (lastPageId) {
         const quote = this.contextDataService.get<QuoteControlModel>(QUOTE_CONTEXT_DATA);
-        const controlValidation: FormValidations = { [controlName]: { [validationKey]: validationValue } };
+        const controlValidation: FormValidations = { [controlName]: { [validationKey]: isKO } };
         const pageValidations = { ...(quote.forms?.[lastPageId] ?? {}), ...controlValidation };
         const validationSettings = lastPage.configuration?.validationSettings?.[controlName]?.[validationKey];
 
@@ -192,6 +188,6 @@ export class QuoteFormValidarors {
       }
     }
 
-    return validationValue ? { [validationKey]: true } : null;
+    return isKO ? { [validationKey]: true } : null;
   };
 }

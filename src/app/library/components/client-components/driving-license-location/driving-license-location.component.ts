@@ -1,10 +1,10 @@
 import { ComponentType } from '@angular/cdk/portal';
 import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit, viewChild } from '@angular/core';
-import { NxButtonModule } from '@aposin/ng-aquila/button';
-import { NxCopytextModule } from '@aposin/ng-aquila/copytext';
-import { NxHeadlineModule } from '@aposin/ng-aquila/headline';
-import { NxDialogService } from '@aposin/ng-aquila/modal';
+import { NxButtonModule } from '@allianz/ng-aquila/button';
+import { NxCopytextModule } from '@allianz/ng-aquila/copytext';
+import { NxHeadlineModule } from '@allianz/ng-aquila/headline';
+import { NxDialogService } from '@allianz/ng-aquila/modal';
 import { IndexedData } from '@shagui/ng-shagui/core';
 import { QuoteComponent } from 'src/app/core/components';
 import { RoutingService } from 'src/app/core/services';

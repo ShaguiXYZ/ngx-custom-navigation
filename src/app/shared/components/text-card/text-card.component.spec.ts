@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { ComponentFixture, DeferBlockBehavior, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { NxAvatarModule } from '@aposin/ng-aquila/avatar';
-import { NxCopytextModule } from '@aposin/ng-aquila/copytext';
+import { NxAvatarModule } from '@allianz/ng-aquila/avatar';
+import { NxCopytextModule } from '@allianz/ng-aquila/copytext';
 import { SelectableOptionComponent } from '../selectable-option';
 import { TextCardComponent } from './text-card.component';
 import { ɵDeferBlockState } from '@angular/core';

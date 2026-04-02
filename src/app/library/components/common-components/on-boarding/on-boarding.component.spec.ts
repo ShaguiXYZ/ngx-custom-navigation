@@ -1,10 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { NxButtonModule } from '@aposin/ng-aquila/button';
-import { NxCardModule } from '@aposin/ng-aquila/card';
-import { NxCopytextModule } from '@aposin/ng-aquila/copytext';
-import { NxHeadlineModule } from '@aposin/ng-aquila/headline';
+import { NxButtonModule } from '@allianz/ng-aquila/button';
+import { NxCardModule } from '@allianz/ng-aquila/card';
+import { NxCopytextModule } from '@allianz/ng-aquila/copytext';
+import { NxHeadlineModule } from '@allianz/ng-aquila/headline';
 import { TranslateService } from '@ngx-translate/core';
 import { ContextDataService } from '@shagui/ng-shagui/core';
 import { NX_WORKFLOW_TOKEN } from 'src/app/core/components/models';

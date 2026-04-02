@@ -279,7 +279,7 @@ El archivo `package.json` contiene información esencial sobre el proyecto `ngx-
 - **private**: Indica que el proyecto es privado.
 - **dependencies**: Lista de dependencias necesarias para que la aplicación funcione:
   - `@angular/animations`, `@angular/common`, `@angular/compiler`, `@angular/core`, `@angular/forms`, `@angular/platform-browser`, `@angular/platform-browser-dynamic`, `@angular/router`: Paquetes esenciales de Angular.
-  - `@aposin/ng-aquila`: Biblioteca de componentes de UI.
+  - `@allianz/ng-aquila`: Biblioteca de componentes de UI.
   - `@fortawesome/fontawesome-free`: Iconos FontAwesome.
   - `@ngx-translate/core`, `@ngx-translate/http-loader`: Soporte de traducción.
   - `crypto-js`: Biblioteca de criptografía.

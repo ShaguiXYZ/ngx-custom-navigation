@@ -89,7 +89,7 @@ export class VehicleService {
         })
         .pipe(
           map(res => res as BrandDTO),
-          map(res => res.data.map(data => data.name)),
+          map(res => res?.data?.map(data => data.name) ?? []),
           map(res => (search ? res.filter(data => data.toUpperCase().includes(search.toUpperCase())) : res)),
           map(res => res.sort((a, b) => a.localeCompare(b)))
         )
@@ -114,7 +114,7 @@ export class VehicleService {
         })
         .pipe(
           map(res => res as VehicleModelDTO),
-          map(res => (!make ? [] : res.data)),
+          map(res => (!make ? [] : (res?.data ?? []))),
           map(res => (search ? res.filter(data => data.name.toLowerCase().includes(search.toLowerCase())) : res)),
           map(res => res.map(data => data.name)),
           map(res => res.sort((a, b) => a.localeCompare(b)))
@@ -140,7 +140,7 @@ export class VehicleService {
         })
         .pipe(
           map(res => res as VehicleSubmodelDTO),
-          map(res => (!make || !model ? [] : res.data)),
+          map(res => (!make || !model ? [] : (res?.data ?? []))),
           map(res =>
             res.reduce<ModelVersionModel[]>((acc, data) => {
               const submodel = data.submodel.trim();
@@ -180,7 +180,7 @@ export class VehicleService {
           cache: { id: this.cacheModelVersionByBranch(model), ttl: TTL.L }
         })
         .pipe(
-          map(res => (!model ? [] : res)),
+          map(res => (!model ? [] : ((res as ModelVersionModel[]) ?? []))),
           map(res => (res as ModelVersionModel[]).filter(data => !!data.data)),
           map(res => (search ? res.filter(data => data.data.toLowerCase().includes(search.toLowerCase())) : res)),
           map(res => res.sort((a, b) => a.data.localeCompare(b.data)))
@@ -202,7 +202,7 @@ export class VehicleService {
           showLoading: true
         })
         .pipe(
-          map(res => res as FuelDTO[]),
+          map(res => (res as FuelDTO[]) ?? []),
           map(res => res.map(FuelDTO.toModel)),
           map(res => (!brand || !model ? [] : res))
         )
@@ -223,7 +223,7 @@ export class VehicleService {
           showLoading: true
         })
         .pipe(
-          map(res => res as CubicCapacityDTO[]),
+          map(res => (res as CubicCapacityDTO[]) ?? []),
           map(res => res.map(CubicCapacityDTO.toModel)),
           map(res => (!brand || !model ? [] : res))
         )
@@ -244,7 +244,7 @@ export class VehicleService {
           showLoading: true
         })
         .pipe(
-          map(res => res as VehicleClassesDTO[]),
+          map(res => (res as VehicleClassesDTO[]) ?? []),
           map(res => res.map(VehicleClassesDTO.toModel)),
           map(res => (!brand || !model ? [] : res))
         )

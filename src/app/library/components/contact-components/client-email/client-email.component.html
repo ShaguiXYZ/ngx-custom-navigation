@@ -3,48 +3,49 @@
     <span nxQuoteLiteral="header"></span>
     <p nxCopytext="normal" nxQuoteLiteral="subheader"></p>
   </quote-header-title>
-  @defer(when !!form) {
-  <section class="form-container">
-    <form [formGroup]="form">
-      <nx-formfield [label]="'e-mail' | quoteLiteral">
-        <input type="email" formControlName="email" nxInput nxAutoFocus />
-        @if(form.get('email')?.errors?.['required']) {
-        <nx-error appearance="text" nxFormfieldError><span nxQuoteLiteral="error-required"></span> </nx-error>
-        } @if(form.get('email')?.errors?.['matches']) {
-        <nx-error appearance="text" nxFormfieldError><span nxQuoteLiteral="bad-format"></span> </nx-error>
-        }
-      </nx-formfield>
-      <quote-zone name="accep-info">
-        <div class="products-info nx-margin-top-s">
-          <div class="products-info-literal nx-margin-right-xs" nxCopytext="normal">
-            <span nxQuoteLiteral="accep-info"></span>
+  @defer (when !!form) {
+    <section class="form-container">
+      <form [formGroup]="form">
+        <nx-formfield [label]="'e-mail' | quoteLiteral">
+          <input type="email" formControlName="email" nxInput nxAutoFocus />
+          @if (form.get('email')?.errors?.['required']) {
+            <nx-error appearance="text" nxFormfieldError><span nxQuoteLiteral="error-required"></span> </nx-error>
+          }
+          @if (form.get('email')?.errors?.['matches']) {
+            <nx-error appearance="text" nxFormfieldError><span nxQuoteLiteral="bad-format"></span> </nx-error>
+          }
+        </nx-formfield>
+        <quote-zone name="accep-info">
+          <div class="products-info nx-margin-top-s">
+            <div class="products-info-literal nx-margin-right-xs" nxCopytext="normal">
+              <span nxQuoteLiteral="accep-info"></span>
+            </div>
+            <nx-switcher formControlName="accepInfo" />
           </div>
-          <nx-switcher formControlName="accepInfo" />
-        </div>
-      </quote-zone>
-      <quote-zone name="privacy-policy">
-        <div class="products-info nx-margin-top-s">
-          <div class="privatity products-info-literal nx-margin-right-xs" nxCopytext="normal">
-            <span nxQuoteLiteral="privacy-policy"></span>
+        </quote-zone>
+        <quote-zone name="privacy-policy">
+          <div class="products-info nx-margin-top-s">
+            <div class="privatity products-info-literal nx-margin-right-xs" nxCopytext="normal">
+              <span nxQuoteLiteral="privacy-policy"></span>
+            </div>
+            <nx-switcher formControlName="acceptPrivacyPolicy" />
           </div>
-          <nx-switcher formControlName="acceptPrivacyPolicy" />
-        </div>
-        @if(form.get('acceptPrivacyPolicy')?.touched && form.get('acceptPrivacyPolicy')?.errors?.['requiredTrue']) {
-        <nx-error class="align-right" appearance="text" nxFormfieldError><span nxQuoteLiteral="error-required"></span></nx-error>
-        }
-      </quote-zone>
-      <quote-zone name="legal-text">
-        <div class="legal-text nx-margin-top-s" nxCopytext="normal" nxQuoteLiteral="legal-text">
-          <span class="products-info-literal nx-margin-y-s"></span>
-        </div>
-      </quote-zone>
-    </form>
-  </section>
-  <quote-footer
-    [trackInfo]="{
-      email: form.get('email')?.value,
-    }"
-    (uiOnNext)="updateValidData()"
-  />
+          @if (form.get('acceptPrivacyPolicy')?.touched && form.get('acceptPrivacyPolicy')?.errors?.['requiredTrue']) {
+            <nx-error class="align-right" appearance="text" nxFormfieldError><span nxQuoteLiteral="error-required"></span></nx-error>
+          }
+        </quote-zone>
+        <quote-zone name="legal-text">
+          <div class="legal-text nx-margin-top-s" nxCopytext="normal" nxQuoteLiteral="legal-text">
+            <span class="products-info-literal nx-margin-y-s"></span>
+          </div>
+        </quote-zone>
+      </form>
+    </section>
+    <quote-footer
+      [trackInfo]="{
+        email: form.get('email')?.value
+      }"
+      (uiOnNext)="updateValidData()"
+    />
   }
 </article>

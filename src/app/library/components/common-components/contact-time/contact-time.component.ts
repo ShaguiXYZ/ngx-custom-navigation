@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { NxCopytextModule } from '@aposin/ng-aquila/copytext';
+import { NxCopytextModule } from '@allianz/ng-aquila/copytext';
 import { QuoteComponent } from 'src/app/core/components';
 import { QuoteTrackDirective } from 'src/app/core/tracking';
 import { Hour, QuoteModel } from 'src/app/library/models';

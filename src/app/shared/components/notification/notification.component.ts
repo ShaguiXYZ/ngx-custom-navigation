@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, OnDestroy, OnInit } from '@angular/core';
-import { NxButtonModule } from '@aposin/ng-aquila/button';
-import { NxMessageModule } from '@aposin/ng-aquila/message';
+import { NxButtonModule } from '@allianz/ng-aquila/button';
+import { NxMessageModule } from '@allianz/ng-aquila/message';
 import { NotificationModel, NotificationService } from '@shagui/ng-shagui/core';
 import { Subject, takeUntil } from 'rxjs';
 

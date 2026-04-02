@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { NxCopytextModule } from '@aposin/ng-aquila/copytext';
-import { NxTooltipModule } from '@aposin/ng-aquila/tooltip';
+import { NxCopytextModule } from '@allianz/ng-aquila/copytext';
+import { NxTooltipModule } from '@allianz/ng-aquila/tooltip';
 import { ContextDataService } from '@shagui/ng-shagui/core';
 import { of } from 'rxjs';
 import { Step, Stepper } from 'src/app/core/models';

@@ -18,11 +18,11 @@ export class ThemingService implements OnDestroy {
 
     this.theme = (storedTheme && JSON.parse(storedTheme)?.active) || (systemPrefersDark ? 'dark' : 'light');
     this.themeChange.next(this.theme);
-    this.darkThemeMq.addEventListener('change', this.darkThemeMqListener.bind(this));
+    this.darkThemeMq.addEventListener('change', this.darkThemeMqListener);
   }
 
   ngOnDestroy(): void {
-    this.darkThemeMq.removeEventListener('change', this.darkThemeMqListener.bind(this));
+    this.darkThemeMq.removeEventListener('change', this.darkThemeMqListener);
   }
 
   public get theme(): Theme {

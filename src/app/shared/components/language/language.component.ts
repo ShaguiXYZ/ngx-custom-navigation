@@ -1,5 +1,5 @@
 import { Component, EventEmitter, inject, OnInit, Output } from '@angular/core';
-import { NxCopytextModule } from '@aposin/ng-aquila/copytext';
+import { NxCopytextModule } from '@allianz/ng-aquila/copytext';
 import { LocaleConfig, LocateType } from 'src/app/core/models';
 import { LanguageService } from 'src/app/core/services';
 

@@ -9,17 +9,17 @@
     </header>
 
     @if (verified) {
-    <quote-stepper class="nx-margin-bottom-3m" />
+      <quote-stepper class="nx-margin-bottom-3m" />
 
-    <section class="outlet__container nx-margin-bottom-3m">
-      <div class="outlet__content">
-        <router-outlet />
-      </div>
-    </section>
+      <section class="outlet__container nx-margin-bottom-3m">
+        <div class="outlet__content">
+          <router-outlet />
+        </div>
+      </section>
     } @else {
-    <section class="outlet__container">
-      <quote-captcha (uiVerified)="onCaptchaVerified($event)" />
-    </section>
+      <section class="outlet__container">
+        <quote-captcha (uiVerified)="onCaptchaVerified($event)" />
+      </section>
     }
 
     <footer class="app__footer nx-margin-top-xs">

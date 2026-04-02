@@ -22,6 +22,7 @@
     "Email": "Email",
     "ErrorBody": "Desculpe, não podemos processar seu pedido no momento. Por favor, tente novamente mais tarde.",
     "Fuel": "Combustível",
+    "Loading": "Carregando {{page}}...",
     "Model": "Modelo",
     "Next": "Próximo",
     "No": "Não",

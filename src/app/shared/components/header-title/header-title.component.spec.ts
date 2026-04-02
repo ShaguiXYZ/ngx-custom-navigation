@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { NxHeadlineModule } from '@aposin/ng-aquila/headline';
+import { NxHeadlineModule } from '@allianz/ng-aquila/headline';
 import { HeaderTitleComponent } from './header-title.component';
 
 describe('HeaderTitleComponent', () => {

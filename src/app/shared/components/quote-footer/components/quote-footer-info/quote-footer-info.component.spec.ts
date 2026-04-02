@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { NxCopytextModule } from '@aposin/ng-aquila/copytext';
-import { NxMessageModule } from '@aposin/ng-aquila/message';
+import { NxCopytextModule } from '@allianz/ng-aquila/copytext';
+import { NxMessageModule } from '@allianz/ng-aquila/message';
 import { QuoteFooterInfoComponent } from './quote-footer-info.component';
 
 describe('QuoteFooterInfoComponent', () => {

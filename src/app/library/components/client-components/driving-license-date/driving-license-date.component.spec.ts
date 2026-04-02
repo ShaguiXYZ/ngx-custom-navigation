@@ -2,10 +2,10 @@
 import { HttpClient } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
-import { NxDatefieldModule } from '@aposin/ng-aquila/datefield';
-import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
-import { NxInputModule } from '@aposin/ng-aquila/input';
-import { NxIsoDateModule } from '@aposin/ng-aquila/iso-date-adapter';
+import { NxDatefieldModule } from '@allianz/ng-aquila/datefield';
+import { NxFormfieldModule } from '@allianz/ng-aquila/formfield';
+import { NxInputModule } from '@allianz/ng-aquila/input';
+import { NxIsoDateModule } from '@allianz/ng-aquila/iso-date-adapter';
 import { TranslateService } from '@ngx-translate/core';
 import { ContextDataService } from '@shagui/ng-shagui/core';
 import dayjs from 'dayjs';
