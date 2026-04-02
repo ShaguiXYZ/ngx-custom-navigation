@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
-import { NxCopytextModule } from '@aposin/ng-aquila/copytext';
+import { NxCopytextModule } from '@allianz/ng-aquila/copytext';
 import { IndexedData } from '@shagui/ng-shagui/core';
 import { Observable } from 'rxjs';
 import { QuoteComponent } from 'src/app/core/components';
@@ -13,19 +13,19 @@ import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 import { VehicleTypes } from './models';
 
 @Component({
-    selector: 'quote-vehicle-type',
-    templateUrl: './vehicle-type.component.html',
-    styleUrl: './vehicle-type.component.scss',
-    imports: [
-        CommonModule,
-        HeaderTitleComponent,
-        QuoteFooterComponent,
-        TextCardComponent,
-        NxCopytextModule,
-        QuoteLiteralDirective,
-        QuoteTrackDirective,
-        QuoteLiteralPipe
-    ]
+  selector: 'quote-vehicle-type',
+  templateUrl: './vehicle-type.component.html',
+  styleUrl: './vehicle-type.component.scss',
+  imports: [
+    CommonModule,
+    HeaderTitleComponent,
+    QuoteFooterComponent,
+    TextCardComponent,
+    NxCopytextModule,
+    QuoteLiteralDirective,
+    QuoteTrackDirective,
+    QuoteLiteralPipe
+  ]
 })
 export class VehicleTypeComponent extends QuoteComponent<QuoteModel> implements OnInit {
   public vehicleTypes = VehicleTypes;
@@ -50,7 +50,5 @@ export class VehicleTypeComponent extends QuoteComponent<QuoteModel> implements 
     this.routingService.next();
   }
 
-  private isValidData = (): boolean => {
-    return !!this._contextData.vehicle.vehicleType;
-  };
+  private isValidData = (): boolean => !!this._contextData.vehicle.vehicleType;
 }

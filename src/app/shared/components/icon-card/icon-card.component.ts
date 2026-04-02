@@ -1,16 +1,16 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { NxAvatarModule } from '@aposin/ng-aquila/avatar';
-import { NxCopytextModule } from '@aposin/ng-aquila/copytext';
+import { NxAvatarModule } from '@allianz/ng-aquila/avatar';
+import { NxCopytextModule } from '@allianz/ng-aquila/copytext';
 import { IIconData } from 'src/app/core/models';
 import { QuoteLiteralDirective } from '../../directives';
 import { SelectableOptionComponent } from '../selectable-option';
 
 @Component({
-    selector: 'quote-icon-card',
-    templateUrl: './icon-card.component.html',
-    styleUrl: './icon-card.component.scss',
-    imports: [CommonModule, SelectableOptionComponent, NxAvatarModule, NxCopytextModule, QuoteLiteralDirective]
+  selector: 'quote-icon-card',
+  templateUrl: './icon-card.component.html',
+  styleUrl: './icon-card.component.scss',
+  imports: [CommonModule, SelectableOptionComponent, NxAvatarModule, NxCopytextModule, QuoteLiteralDirective]
 })
 export class IconCardComponent {
   @Input()

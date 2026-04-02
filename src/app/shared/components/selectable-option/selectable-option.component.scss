@@ -7,7 +7,9 @@
   display: block;
   border: 1px solid var(--card-border-color);
   border-radius: 6px;
-  transition: background-color var(--animation-duration) ease-in-out, opacity var(--animation-duration) ease-in-out;
+  transition:
+    background-color var(--animation-duration) ease-in-out,
+    opacity var(--animation-duration) ease-in-out;
 
   .option__checked {
     align-items: center;
@@ -28,13 +30,17 @@
     &.full-height {
       border-radius: 0 6px 6px 0;
       height: 100%;
-      transition: opacity var(--animation-duration) ease-in-out, width var(--animation-duration) ease-in-out;
+      transition:
+        opacity var(--animation-duration) ease-in-out,
+        width var(--animation-duration) ease-in-out;
       width: 56px;
     }
 
     &:not(.full-height) {
       scale: 1;
-      transition: opacity var(--animation-duration) ease-in-out, height var(--animation-duration) ease-in-out,
+      transition:
+        opacity var(--animation-duration) ease-in-out,
+        height var(--animation-duration) ease-in-out,
         width var(--animation-duration) ease-in-out;
     }
 

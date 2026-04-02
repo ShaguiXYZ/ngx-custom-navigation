@@ -5,8 +5,9 @@ import { QuoteMaskType } from '../../models';
 import { QuoteMaskDirective } from '../quote-mask.directive';
 
 @Component({
-    template: `<input type="text" [nxQuoteMask]="mask" (nxValueMatch)="onValueMatch($event)" />`,
-    imports: [QuoteMaskDirective]
+    standalone: true,
+    imports: [QuoteMaskDirective],
+    template: `<input type="text" [nxQuoteMask]="mask" (nxValueMatch)="onValueMatch($event)" />`
 })
 class TestComponent {
   public mask: QuoteMaskType = 'numeric';
@@ -24,8 +25,7 @@ describe('QuoteMaskDirective', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [],
-      imports: [TestComponent, QuoteMaskDirective]
+      imports: [TestComponent]
     });
 
     fixture = TestBed.createComponent(TestComponent);

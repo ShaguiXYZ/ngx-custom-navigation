@@ -1,8 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideRouter } from '@angular/router';
-import { NxGridModule } from '@aposin/ng-aquila/grid';
-import { NxLinkModule } from '@aposin/ng-aquila/link';
+import { NxGridModule } from '@allianz/ng-aquila/grid';
+import { NxLinkModule } from '@allianz/ng-aquila/link';
 import { TranslateService } from '@ngx-translate/core';
 import { ContextDataService, HttpService, NotificationModel, NotificationService } from '@shagui/ng-shagui/core';
 import { of } from 'rxjs';
@@ -53,7 +53,6 @@ describe('AppComponent', () => {
         QuoteStepperComponent
       ],
       providers: [
-        provideAnimations(),
         provideRouter([]),
         { provide: ContextDataService, useClass: ContextDataServiceStub },
         { provide: NotificationService, useValue: notificationServiceSpy },

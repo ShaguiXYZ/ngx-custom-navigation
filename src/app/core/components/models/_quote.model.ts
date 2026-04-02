@@ -4,8 +4,7 @@ import { Activator } from '../../service-activators';
 import { TrackManifest } from '../../tracking';
 import { QuoteComponent } from '../_quote-component';
 
-type Manifest<T> = Record<string, { component: Type<T> }>;
-
+export type Manifest<T> = Record<string, { component: Type<T> }>;
 export type WorkflowSettings = QuoteWorkflowSettings<QuoteComponent<QuoteControlModel>, QuoteControlModel>;
 
 export interface LibraryManifest<T> {

@@ -13,10 +13,10 @@ import {
   WritableSignal
 } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { NxButtonComponent } from '@aposin/ng-aquila/button';
-import { NxCopytextComponent } from '@aposin/ng-aquila/copytext';
-import { NxLinkComponent } from '@aposin/ng-aquila/link';
-import { NxRadioComponent, NxRadioGroupComponent } from '@aposin/ng-aquila/radio-button';
+import { NxButtonComponent } from '@allianz/ng-aquila/button';
+import { NxCopytextComponent } from '@allianz/ng-aquila/copytext';
+import { NxLinkComponent } from '@allianz/ng-aquila/link';
+import { NxRadioComponent, NxRadioGroupComponent } from '@allianz/ng-aquila/radio-button';
 import { Subscription } from 'rxjs';
 import { FeeModel, OfferingPriceModel, QuoteFooterConfig } from 'src/app/core/models';
 import { QuoteTrackDirective } from 'src/app/core/tracking';

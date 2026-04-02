@@ -4,10 +4,10 @@ import { CAPTCHA_IMAGES } from './constants/captcha-images';
 import { TTL } from '@shagui/ng-shagui/core';
 
 @Component({
-    selector: 'quote-color-captcha',
-    templateUrl: './color-captcha.component.html',
-    styleUrls: ['./color-captcha.component.scss'],
-    imports: [CommonModule]
+  selector: 'quote-color-captcha',
+  templateUrl: './color-captcha.component.html',
+  styleUrls: ['./color-captcha.component.scss'],
+  imports: [CommonModule]
 })
 export class ColorCaptchaComponent implements OnInit, OnDestroy {
   public readonly images = CAPTCHA_IMAGES;
@@ -91,9 +91,7 @@ export class ColorCaptchaComponent implements OnInit, OnDestroy {
     while (this.coloredIndices.length < this.selectableItems) {
       const index = Math.floor(Math.random() * this.totalItems);
 
-      if (!this.coloredIndices.includes(index)) {
-        this.coloredIndices.push(index);
-      }
+      !this.coloredIndices.includes(index) && this.coloredIndices.push(index);
     }
   }
 }

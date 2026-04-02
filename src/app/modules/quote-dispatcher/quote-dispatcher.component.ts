@@ -9,19 +9,25 @@ import { BudgetActivator } from 'src/app/core/service-activators/budget.activato
 import { SettingsService } from 'src/app/core/services';
 import { QuoteTrackService } from 'src/app/core/tracking';
 import { AppUrls } from 'src/app/shared/config';
+import { QuoteLiteralPipe } from 'src/app/shared/pipes';
 
 /**
  * This component is used to load the routing module dynamically.
  *
  */
 @Component({
-  template: ``,
-  styleUrl: './quote-dispatcher.component.scss'
+  template: `
+    <div class="quote-dispatcher">{{ { value: 'Label.Loading', params: { page: nextPageId }, type: 'translate' } | quoteLiteral }}</div>
+  `,
+  styleUrl: './quote-dispatcher.component.scss',
+  imports: [QuoteLiteralPipe]
 })
 export class QuoteDispatcherComponent implements OnInit {
   // @howto: dynamic binding of request parameters (see: withComponentInputBinding() in app config).
   // public stored = input.required<string>();
   // public dispatcher = input.required<string>();
+
+  public nextPageId!: string;
 
   private readonly contextDataService = inject(ContextDataService);
   private readonly settingsService = inject(SettingsService);
@@ -55,7 +61,8 @@ export class QuoteDispatcherComponent implements OnInit {
     } = this.contextDataService.get<AppContextData>(QUOTE_APP_CONTEXT_DATA);
 
     if (homePageId) {
-      if (!nextPage?.pageId) this.resetContext();
+      nextPage?.pageId ?? this.resetContext();
+      this.nextPageId = nextPage?.pageId ?? homePageId;
 
       await this.settingsService.loadSettings();
 

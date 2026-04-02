@@ -1,6 +1,5 @@
 import { Component, HostListener, inject, OnDestroy, OnInit } from '@angular/core';
 import { NavigationEnd, Router, RouterModule } from '@angular/router';
-import { NxGridModule } from '@aposin/ng-aquila/grid';
 import { $, ContextDataService, NotificationService } from '@shagui/ng-shagui/core';
 import { filter, Subscription } from 'rxjs';
 import { QUOTE_APP_CONTEXT_DATA } from './core/constants';
@@ -16,6 +15,7 @@ import {
 } from './shared/components';
 import { QuoteLiteralDirective } from './shared/directives';
 import { QuoteLiteralPipe } from './shared/pipes';
+import { NxGridModule } from '@allianz/ng-aquila/grid';
 
 @Component({
   selector: 'quote-root',

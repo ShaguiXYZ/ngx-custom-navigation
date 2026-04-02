@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
-import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
-import { NxInputModule } from '@aposin/ng-aquila/input';
+import { NxFormfieldModule } from '@allianz/ng-aquila/formfield';
+import { NxInputModule } from '@allianz/ng-aquila/input';
 import { TranslateService } from '@ngx-translate/core';
 import { ContextDataService } from '@shagui/ng-shagui/core';
 import { of } from 'rxjs';

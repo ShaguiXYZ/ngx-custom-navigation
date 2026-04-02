@@ -5,9 +5,9 @@ import { QuoteTrackService } from '../tracking';
 import { BudgetActivator } from './budget.activator';
 import { QuoteActivator } from './quote.activator';
 
-export type ServiceActivatorType = `$${string}`;
-export type ValidationActivatorType = `#${string}-${QuoteFormValidation}`;
-export type OnErrorActivatorType = `on-${string}-error`;
+export type ServiceActivatorType = `$${string}`; // Example: $patch-quote, $track-quote, $retrieve-budget, $store-budget, etc.
+export type ValidationActivatorType = `#${string}-${QuoteFormValidation}`; // Example: #myControl-required, #myControl-email, etc.
+export type OnErrorActivatorType = `on-${string}-error`; // Example: on-retrieve-budget-error, on-patch-quote-error, etc.
 export type EntryPoint =
   | 'next-page'
   | 'previous-page'

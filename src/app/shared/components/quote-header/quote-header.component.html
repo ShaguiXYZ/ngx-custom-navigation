@@ -5,44 +5,45 @@
         <div class="logo-container enhance-header">
           <nx-switch-theme>
             <div class="logo">
-              <img src="favicon.ico" onerror="this.src='assets/images/wm/no-image.svg'" alt="Logo" />
+              <img src="favicon.ico" onerror="this.src = 'assets/images/wm/no-image.svg'" alt="Logo" />
             </div>
           </nx-switch-theme>
         </div>
 
         <div class="back">
           @if (config.showBack) {
-          <a
-            (click)="return()"
-            (keydown.enter)="return()"
-            tabindex="0"
-            [nxTrack]="{
-              label: 'header-back' | quoteLiteral
-            }"
-            [nxTrackEvents]="['click']"
-          >
-            <em class="fa-solid fa-xl fa-arrow-left"></em> <span nxCopytext="normal" nxQuoteLiteral="header-back"></span
-          ></a>
+            <a
+              (click)="return()"
+              (keydown.enter)="return()"
+              tabindex="0"
+              [nxTrack]="{
+                label: 'header-back' | quoteLiteral
+              }"
+              [nxTrackEvents]="['click']"
+            >
+              <em class="fa-solid fa-xl fa-arrow-left"></em> <span nxCopytext="normal" nxQuoteLiteral="header-back"></span
+            ></a>
           }
         </div>
       </div>
 
       <div class="contact__info">
-        @if(config.showContactUs) {
-        <a
-          class="contact-us"
-          tabindex="0"
-          nxCopytext="normal"
-          nxQuoteLink="contact-us"
-          nxQuoteLiteral="we-call-you"
-          [nxTrack]="{
-            label: 'we-call-you' | quoteLiteral
-          }"
-          [nxTrackEvents]="['click']"
-        >
-        </a>
-        } @if(config.showLanguages) {
-        <quote-language />
+        @if (config.showContactUs) {
+          <a
+            class="contact-us"
+            tabindex="0"
+            nxCopytext="normal"
+            nxQuoteLink="contact-us"
+            nxQuoteLiteral="we-call-you"
+            [nxTrack]="{
+              label: 'we-call-you' | quoteLiteral
+            }"
+            [nxTrackEvents]="['click']"
+          >
+          </a>
+        }
+        @if (config.showLanguages) {
+          <quote-language />
         }
       </div>
     </div>

@@ -5,33 +5,34 @@
     [ngClass]="{ 'mobile-options': mobileMode, 'nx-margin-bottom-xs': config.showBack || config.showNext }"
   >
     @if (config.showBack) {
-    <button
-      class="footer-option"
-      [ngClass]="{ 'mobile-option-back': mobileMode }"
-      nxButton="secondary medium"
-      nxQuoteLiteral="footer-back"
-      type="button"
-      (click)="goToPreviousStep()"
-    ></button>
-    } @if (config.showNext) {
-    <button
-      class="footer-option"
-      nxButton="primary medium"
-      nxQuoteLiteral="footer-next"
-      type="button"
-      [nxTrack]="trackInfo"
-      [nxTrackEvents]="['click']"
-      (click)="goToNextStep()"
-    ></button>
+      <button
+        class="footer-option"
+        [ngClass]="{ 'mobile-option-back': mobileMode }"
+        nxButton="secondary medium"
+        nxQuoteLiteral="footer-back"
+        type="button"
+        (click)="goToPreviousStep()"
+      ></button>
+    }
+    @if (config.showNext) {
+      <button
+        class="footer-option"
+        nxButton="primary medium"
+        nxQuoteLiteral="footer-next"
+        type="button"
+        [nxTrack]="trackInfo"
+        [nxTrackEvents]="['click']"
+        (click)="goToNextStep()"
+      ></button>
     }
   </div>
   <div class="footer-extras" [ngClass]="{ 'mobile-options': mobileMode }">
     <ng-content></ng-content>
 
-    @if(config.info) {
-    <div class="footer-info">
-      <quote-footer-info [icon]="config.info.icon"> <span [nxQuoteLiteral]="config.info.literal"></span> </quote-footer-info>
-    </div>
+    @if (config.info) {
+      <div class="footer-info">
+        <quote-footer-info [icon]="config.info.icon"> <span [nxQuoteLiteral]="config.info.literal"></span> </quote-footer-info>
+      </div>
     }
 
     <ng-content select="[after]"></ng-content>

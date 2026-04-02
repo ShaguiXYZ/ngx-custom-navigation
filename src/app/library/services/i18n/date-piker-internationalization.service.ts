@@ -1,5 +1,5 @@
 import { inject, Injectable, OnDestroy } from '@angular/core';
-import { NxDatepickerIntl } from '@aposin/ng-aquila/datefield';
+import { NxDatepickerIntl } from '@allianz/ng-aquila/datefield';
 import { Subscription } from 'rxjs';
 import { LiteralsService } from 'src/app/core/services';
 

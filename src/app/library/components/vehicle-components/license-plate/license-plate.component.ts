@@ -1,11 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { NxButtonModule } from '@aposin/ng-aquila/button';
-import { NxCopytextModule } from '@aposin/ng-aquila/copytext';
-import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
-import { NxInputModule } from '@aposin/ng-aquila/input';
-import { NxLicencePlateModule } from '@aposin/ng-aquila/licence-plate';
+import { NxButtonModule } from '@allianz/ng-aquila/button';
+import { NxCopytextModule } from '@allianz/ng-aquila/copytext';
+import { NxFormfieldModule } from '@allianz/ng-aquila/formfield';
+import { NxInputModule } from '@allianz/ng-aquila/input';
+import { NxLicencePlateModule } from '@allianz/ng-aquila/licence-plate';
 import { QuoteFormValidarors } from 'src/app/core/form';
 import { RoutingService } from 'src/app/core/services';
 import { QuoteTrackDirective } from 'src/app/core/tracking';

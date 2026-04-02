@@ -1,14 +1,55 @@
 /* You can add global styles to this file, and also import other style files */
 /**
   Themes
-*/
+  */
+@use 'sass:map';
+@use '@allianz/ng-aquila/styles/theming' as nx;
+
 @use '@angular/cdk/overlay-prebuilt.css';
 @use '@angular/cdk/a11y-prebuilt.css';
 
 @use 'core-globals';
 
-@use 'themes/dark';
-@use 'themes/light';
+/**
+  * @howto: register theme
+  * 1. create a theme file in themes folder, and export a map variable with $theme suffix, e.g. $light-theme
+  * 2. import the theme file here and register the theme to $nx-themes map with nx.nx-register-theme function
+  * 3. use the theme in html with data-theme attribute, e.g. <body data-theme="light">
+  */
+@import 'themes/light';
+@import 'themes/dark';
+
+$nx-themes: nx.$nx-themes;
+
+$nx-themes: nx.nx-register-theme($light-theme, light);
+$nx-themes: nx.nx-register-theme($dark-theme, dark, light);
+
+@function _nx-deep-find-value($theme, $key, $value) {
+  $parent-value: map.get($theme, $value);
+
+  @if $parent-value != null {
+    @return _nx-deep-find-value($theme, $value, $parent-value);
+  }
+
+  @return $value;
+}
+
+@mixin nx-build-theme($theme-name) {
+  $theme: map.get($nx-themes, $theme-name);
+
+  @each $name, $value in $theme {
+    $resolved: _nx-deep-find-value($theme, $name, $value);
+    #{"--" + $name}: #{$resolved};
+  }
+}
+
+[data-theme='light'] {
+  @include nx-build-theme(light);
+}
+
+[data-theme='dark'] {
+  @include nx-build-theme(dark);
+}
 
 body {
   background-image: none;
@@ -72,7 +113,9 @@ main {
 
         .clear-input {
           background: var(--badge-critical-background-color);
-          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+          box-shadow:
+            0 4px 6px rgba(0, 0, 0, 0.1),
+            0 1px 3px rgba(0, 0, 0, 0.08);
           border-radius: 4px;
           color: var(--ui-06);
           cursor: pointer;
@@ -136,7 +179,11 @@ main {
   aspect-ratio: 1;
   --principal: var(--ui-06);
   --c: no-repeat radial-gradient(farthest-side, var(--principal) 92%, #0000);
-  background: var(--c) 50% 0, var(--c) 50% 100%, var(--c) 100% 50%, var(--c) 0 50%;
+  background:
+    var(--c) 50% 0,
+    var(--c) 50% 100%,
+    var(--c) 100% 50%,
+    var(--c) 0 50%;
   background-size: 10px 10px;
   animation: l18 1s infinite;
   position: relative;

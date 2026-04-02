@@ -7,8 +7,9 @@ import { LiteralsService } from 'src/app/core/services';
 import { QuoteLiteralDirective } from '../quote-literal.directive';
 
 @Component({
-  template: `<div [nxQuoteLiteral]="literal" [nxQuoteLitealParams]="params" [nxQuoteDefaultLiteral]="defaultLiteral">safeHtml</div>`,
-  imports: [QuoteLiteralDirective]
+  standalone: true,
+  imports: [QuoteLiteralDirective],
+  template: `<div [nxQuoteLiteral]="literal" [nxQuoteLitealParams]="params" [nxQuoteDefaultLiteral]="defaultLiteral">safeHtml</div>`
 })
 class TestComponent {
   literal = 'testLiteral';
@@ -31,8 +32,7 @@ describe('QuoteLiteralDirective', () => {
     literalsService.onLanguageChange.and.returnValue(languageSubject.asObservable());
 
     TestBed.configureTestingModule({
-      declarations: [],
-      imports: [TestComponent, QuoteLiteralDirective],
+      imports: [TestComponent],
       providers: [
         { provide: LiteralsService, useValue: literalsService },
         { provide: DomSanitizer, useValue: domSanitizer }

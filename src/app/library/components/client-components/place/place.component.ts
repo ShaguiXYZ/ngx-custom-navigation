@@ -1,8 +1,8 @@
 import { Component, inject } from '@angular/core';
 import { AbstractControl, AsyncValidatorFn, FormBuilder, FormGroup, ReactiveFormsModule, ValidationErrors } from '@angular/forms';
-import { NxFormfieldModule } from '@aposin/ng-aquila/formfield';
-import { NxInputModule } from '@aposin/ng-aquila/input';
-import { NxMaskModule } from '@aposin/ng-aquila/mask';
+import { NxFormfieldModule } from '@allianz/ng-aquila/formfield';
+import { NxInputModule } from '@allianz/ng-aquila/input';
+import { NxMaskModule } from '@allianz/ng-aquila/mask';
 import { QuoteComponent } from 'src/app/core/components';
 import { QuoteFormValidarors } from 'src/app/core/form';
 import { LocationService } from 'src/app/core/services';

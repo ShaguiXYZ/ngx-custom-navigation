@@ -2,9 +2,9 @@
 <article class="price-container" [ngClass]="{ selected }">
   <quote-header-title>
     <div class="popular-header" [ngClass]="{ 'popular-price': price.popular }">
-      @if(price.popular) {
-      <em class="fa-regular fa-star fa-xs nx-margin-x-xs"></em>
-      <span nxQuoteLiteral="popular" nxCopytext="normal"></span>
+      @if (price.popular) {
+        <em class="fa-regular fa-star fa-xs nx-margin-x-xs"></em>
+        <span nxQuoteLiteral="popular" nxCopytext="normal"></span>
       }
     </div>
     <h3 class="price-title">
@@ -13,19 +13,19 @@
   </quote-header-title>
   <section class="form-container">
     <div class="offering-fee">
-      @if(fee.length) {
-      <div nxCopytext="large" class="fee-title nx-margin-bottom-2xs nx-font-weight-bold" nxQuoteLiteral="fee-header"></div>
-      <div class="fee-values">
-        <form [formGroup]="form">
-          <nx-radio-group class="offering-fee" formControlName="feeSelectedIndex">
-            @for(f of fee; track f.value) {
-            <nx-radio labelSize="small" [value]="$index" (click)="toggleFee($index)">
-              <span nxCopytext="normal" class="nx-font-weight-bold">{{ f.value | quoteNumber }} {{ 'currency' | quoteLiteral }}</span>
-            </nx-radio>
-            }
-          </nx-radio-group>
-        </form>
-      </div>
+      @if (fee.length) {
+        <div nxCopytext="large" class="fee-title nx-margin-bottom-2xs nx-font-weight-bold" nxQuoteLiteral="fee-header"></div>
+        <div class="fee-values">
+          <form [formGroup]="form">
+            <nx-radio-group class="offering-fee" formControlName="feeSelectedIndex">
+              @for (f of fee; track f.value) {
+                <nx-radio labelSize="small" [value]="$index" (click)="toggleFee($index)">
+                  <span nxCopytext="normal" class="nx-font-weight-bold">{{ f.value | quoteNumber }} {{ 'currency' | quoteLiteral }}</span>
+                </nx-radio>
+              }
+            </nx-radio-group>
+          </form>
+        </div>
       }
     </div>
     <div class="nx-margin-bottom-s">
@@ -37,15 +37,15 @@
           nxCopytext="medium"
           class="nx-margin-left-3xs"
           nxQuoteLiteral="from-now"
-          [nxQuoteLitealParams]="{ value: (now | date : 'dd/MM/YYYY') || '' }"
+          [nxQuoteLitealParams]="{ value: (now | date: 'dd/MM/yyyy') || '' }"
         ></span>
       </p>
     </div>
     <div class="coverages nx-margin-bottom-s">
-      @for(coverage of price.coverageList; track coverage.code) {
-      <p nxCopytext="normal" class="coverage nx-margin-bottom-xs">
-        <em class="coverage-icon fa-solid fa-check nx-margin-y-3xs nx-margin-x-xs"></em>{{ coverage.text }}
-      </p>
+      @for (coverage of price.coverageList; track coverage.code) {
+        <p nxCopytext="normal" class="coverage nx-margin-bottom-xs">
+          <em class="coverage-icon fa-solid fa-check nx-margin-y-3xs nx-margin-x-xs"></em>{{ coverage.text }}
+        </p>
       }
     </div>
     <div class="view-coverages">
@@ -66,20 +66,20 @@
         type="button"
         [nxTrack]="{
           label: 'footer-next' | quoteLiteral,
-          typology: price.modalityDescription,
+          typology: price.modalityDescription
         }"
         [nxTrackEvents]="['click']"
         (click)="callNow()"
       >
         @if (isMobile) {
-        <a
-          href="tel:{{ 'phone' | quoteLiteral }}"
-          nxCopytext="medium"
-          class="uppercase nx-font-weight-bold"
-          nxQuoteLiteral="footer-next"
-        ></a>
+          <a
+            href="tel:{{ 'phone' | quoteLiteral }}"
+            nxCopytext="medium"
+            class="uppercase nx-font-weight-bold"
+            nxQuoteLiteral="footer-next"
+          ></a>
         } @else {
-        <span nxCopytext="medium" class="uppercase nx-font-weight-bold" nxQuoteLiteral="phone"> </span>
+          <span nxCopytext="medium" class="uppercase nx-font-weight-bold" nxQuoteLiteral="phone"> </span>
         }
       </button>
       <button
@@ -87,9 +87,9 @@
         nxButton="secondary"
         type="button"
         [nxTrack]="{
-        label: 'we-call-you' | quoteLiteral,
-        typology: price.modalityDescription,
-      }"
+          label: 'we-call-you' | quoteLiteral,
+          typology: price.modalityDescription
+        }"
         [nxTrackEvents]="['click']"
         (click)="contactUs()"
       >

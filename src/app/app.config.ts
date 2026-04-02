@@ -7,7 +7,6 @@ import {
   provideAppInitializer,
   provideZoneChangeDetection
 } from '@angular/core';
-import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideRouter, withComponentInputBinding } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { NX_CONTEX_CONFIG } from '@shagui/ng-shagui/core';
@@ -32,7 +31,6 @@ export const appConfig: ApplicationConfig = {
   providers: [
     importProvidersFrom(TranslateModule.forRoot(TRANSLATE_MODULE_CONFIG)),
     provideAppInitializer(appInitializer),
-    provideAnimations(),
     provideHttpClient(withInterceptors([httpErrorInterceptor, mockInterceptor, recaptchaInterceptor])),
     provideRouter(routes, withComponentInputBinding()),
     provideZoneChangeDetection({ eventCoalescing: true }),

@@ -22,6 +22,7 @@
     "Email": "Correu electrònic",
     "ErrorBody": "Ho sentim, no podem processar la seva sol·licitud en aquest moment. Si us plau, torni-ho a intentar més tard.",
     "Fuel": "Combustible",
+    "Loading": "Carregant {{page}}...",
     "Model": "Model",
     "Next": "Següent",
     "No": "No",

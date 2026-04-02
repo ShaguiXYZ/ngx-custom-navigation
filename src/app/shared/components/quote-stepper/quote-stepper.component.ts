@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, OnDestroy, OnInit } from '@angular/core';
-import { NxCopytextModule } from '@aposin/ng-aquila/copytext';
-import { NxTooltipModule } from '@aposin/ng-aquila/tooltip';
+import { NxCopytextModule } from '@allianz/ng-aquila/copytext';
+import { NxTooltipModule } from '@allianz/ng-aquila/tooltip';
 import { ContextDataService } from '@shagui/ng-shagui/core';
 import { Subscription } from 'rxjs';
 import { QUOTE_APP_CONTEXT_DATA } from 'src/app/core/constants';

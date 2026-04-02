@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { NxHeadlineModule } from '@aposin/ng-aquila/headline';
+import { NxHeadlineModule } from '@allianz/ng-aquila/headline';
 import { QuoteZoneComponent } from '../quote-zone';
 
 @Component({

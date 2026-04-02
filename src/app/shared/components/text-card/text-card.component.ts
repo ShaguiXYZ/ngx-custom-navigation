@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { NxAvatarModule } from '@aposin/ng-aquila/avatar';
-import { NxCopytextModule } from '@aposin/ng-aquila/copytext';
+import { NxAvatarModule } from '@allianz/ng-aquila/avatar';
+import { NxCopytextModule } from '@allianz/ng-aquila/copytext';
 import { SelectableOptionComponent } from '../selectable-option';
 
 @Component({

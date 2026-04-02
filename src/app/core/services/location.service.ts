@@ -16,7 +16,7 @@ export class LocationService {
       const location = await firstValueFrom(
         this.httpService
           .get<LocationDTO>(`${environment.baseUrl}${LOCATION_API}/address/${postalCode}`, {
-            responseStatusMessage: { [HttpStatusCode.NotFound]: { text: 'Notifications.ModelsNotFound' } }
+            responseStatusMessage: { [HttpStatusCode.NotFound]: { text: 'Notifications.DataNotFound' } }
           })
           .pipe(
             catchError(() => of(undefined)),

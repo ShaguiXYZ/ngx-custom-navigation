@@ -1,7 +1,7 @@
 import { InjectionToken } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { QuoteComponent } from '../core/components';
-import { QuoteWorkflowSettings } from '../core/components/models';
+import { Manifest, QuoteWorkflowSettings } from '../core/components/models';
 import { ActivatorFn, ActivatorServices, ServiceActivatorType } from '../core/service-activators';
 import { TrackManifest } from '../core/tracking';
 import {
@@ -47,7 +47,7 @@ import { VehicleCharacteristicsComponent } from './components/vehicle-components
 import { QuoteModel } from './models';
 import { BlackListActivator, QuoteActivator } from './service-activators';
 
-const LIBRARY_MANIFEST = {
+const LIBRARY_MANIFEST: Manifest<QuoteComponent<QuoteModel>> = {
   birthdate: { component: BirthdateComponent },
   'date-of-issue': { component: DateOfIssueComponent },
   'driving-license-date': { component: DrivingLicenseDateComponent },

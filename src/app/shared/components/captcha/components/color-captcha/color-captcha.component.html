@@ -2,14 +2,14 @@
 <!-- eslint-disable @angular-eslint/template/click-events-have-key-events -->
 <div class="captcha-container">
   <div class="captcha-items">
-    @for(image of captchaImageIndexes; track $index) {
-    <div
-      class="captcha-character"
-      [ngClass]="{ colored: coloredIndices.includes($index), selected: selectedIndices.includes($index) }"
-      (click)="onCharacterClick($index)"
-    >
-      <em class="fa-solid {{ images[image] }}" [ngStyle]="getRandomStyle()"></em>
-    </div>
+    @for (image of captchaImageIndexes; track $index) {
+      <div
+        class="captcha-character"
+        [ngClass]="{ colored: coloredIndices.includes($index), selected: selectedIndices.includes($index) }"
+        (click)="onCharacterClick($index)"
+      >
+        <em class="fa-solid {{ images[image] }}" [ngStyle]="getRandomStyle()"></em>
+      </div>
     }
   </div>
   <div class="progress-bar">

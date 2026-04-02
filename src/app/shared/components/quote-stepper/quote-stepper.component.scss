@@ -42,8 +42,11 @@
         justify-content: center;
         height: 100%;
         position: absolute;
-        transition: background-color var(--stepper-transition-time) ease-in-out, border-color 1s ease-in-out,
-          opacity var(--stepper-transition-time) ease-in-out, scale var(--stepper-transition-time) ease-in-out;
+        transition:
+          background-color var(--stepper-transition-time) ease-in-out,
+          border-color 1s ease-in-out,
+          opacity var(--stepper-transition-time) ease-in-out,
+          scale var(--stepper-transition-time) ease-in-out;
         width: 100%;
       }
 
@@ -59,11 +62,11 @@
 
       &.complete {
         border-color: var(--interactive-primary);
-        color: var(--text-02);
+        color: var(--ui-02);
 
         .stepper__item__progress {
           opacity: 1;
-          scale: 1;
+          scale: 0.8;
         }
       }
 
@@ -95,7 +98,7 @@
 
       .stepper__item__line__dotted {
         border: none;
-        border-top: 5px dotted var(--ui-05);
+        border-top: 5px dotted var(--interactive-primary);
         transition: width var(--line-transition-time) ease-in-out;
         width: 50%;
       }

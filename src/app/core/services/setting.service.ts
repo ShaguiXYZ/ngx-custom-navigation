@@ -22,18 +22,22 @@ export class SettingsService {
 
   public async loadSettings(): Promise<void> {
     const context = this.contextDataService.get<AppContextData>(QUOTE_APP_CONTEXT_DATA);
-    const settings = await this.journeyService.quoteSettings();
-    const info = await this.journeyService.journeySettings(settings.journey);
-    const breakingChange = this.breakingChange(context, info.versions ?? []);
+    const quoteSettings = await this.journeyService.quoteSettings();
+    const journeySettings = await this.journeyService.journeySettings(quoteSettings.journey);
+    const breakingChange = this.breakingChange(context, journeySettings.versions ?? []);
 
-    if (context?.configuration.name !== info.id || breakingChange !== 'none') {
+    /**
+     * If there is no context or the journey has changed with a breaking change,
+     * we load the journey configuration and reset the context.
+     */
+    if (context?.configuration.name !== journeySettings.id || breakingChange !== 'none') {
       console.group('SettingsService');
-      await this.loadJourney(info, settings, breakingChange);
+      await this.loadJourney(journeySettings, quoteSettings, breakingChange);
       console.groupEnd();
     } else {
       context.settings.commercialExceptions = {
         ...context.settings.commercialExceptions,
-        enableTracking: settings.commercialExceptions.enableTracking
+        enableTracking: quoteSettings.commercialExceptions.enableTracking
       };
       this.contextDataService.set(QUOTE_APP_CONTEXT_DATA, context, { persistent: true });
     }

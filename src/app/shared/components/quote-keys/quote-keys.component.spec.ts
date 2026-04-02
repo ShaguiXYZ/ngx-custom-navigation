@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { CommonModule } from '@angular/common';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { NxDialogService, NxModalModule } from '@aposin/ng-aquila/modal';
+import { NxDialogService, NxModalModule } from '@allianz/ng-aquila/modal';
 import { ScreenRecorder } from '@shagui/ng-shagui/core';
 import { QuoteKeysComponent } from './quote-keys.component';
 

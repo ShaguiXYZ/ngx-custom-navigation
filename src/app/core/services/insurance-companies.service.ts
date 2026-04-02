@@ -17,7 +17,7 @@ export class InsuranceCompaniesService {
       this.httpService
         .get<InsuranceCompanyDTO[]>(`${environment.baseUrl}${INSURANCE_API}/companies`, {
           responseStatusMessage: {
-            [HttpStatusCode.NotFound]: { text: 'Notifications.ModelsNotFound' }
+            [HttpStatusCode.NotFound]: { text: 'Notifications.DataNotFound' }
           },
           showLoading: true,
           cache: { id: this.cacheInsuranceCompanies(), ttl: TTL.M }

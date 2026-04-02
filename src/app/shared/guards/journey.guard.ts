@@ -80,13 +80,7 @@ export const journeyGuard: CanActivateFn = (route: ActivatedRouteSnapshot, state
 
       contextDataService.set(QUOTE_CONTEXT_DATA, _track.page[_pageKey].data);
 
-      viewedPagesAfter.forEach(pageId => {
-        // const key = trackKey('page', pageId);
-
-        if (_track.page[pageId]) {
-          delete _track.page[pageId];
-        }
-      });
+      viewedPagesAfter.forEach(pageId => _track.page[pageId] && delete _track.page[pageId]);
     }
 
     return _track;

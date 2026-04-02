@@ -16,7 +16,7 @@ export class WorkflowLoaderComponent implements OnInit, OnDestroy, AfterViewInit
   @ViewChild('dynamicComponent', { read: ViewContainerRef, static: true })
   private container!: ViewContainerRef;
 
-  public _instance?: QuoteComponent<QuoteControlModel>;
+  protected _instance?: QuoteComponent<QuoteControlModel>;
 
   private readonly workflowToken = inject(NX_WORKFLOW_TOKEN);
   private readonly contextDataService = inject(ContextDataService);
@@ -54,7 +54,6 @@ export class WorkflowLoaderComponent implements OnInit, OnDestroy, AfterViewInit
       this.container.clear();
       const componentRef = this.container.createComponent<QuoteComponent<QuoteControlModel>>(manifest.component);
       this._instance = componentRef.instance;
-      this._instance.name = manifestKey;
     } catch {
       throw new JourneyError(`Failed to load component ${manifestKey}`);
     }
