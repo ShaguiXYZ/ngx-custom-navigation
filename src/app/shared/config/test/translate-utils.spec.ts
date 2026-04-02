@@ -1,7 +1,7 @@
 import { HttpClient, provideHttpClient } from '@angular/common/http';
 import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
-import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateModule } from '@ngx-translate/core';
 import { createTranslateLoader, CustomMissingTranslationHandler } from '../translate.config';
 
 describe('TranslateUtils', () => {
@@ -12,11 +12,7 @@ describe('TranslateUtils', () => {
     TestBed.configureTestingModule({
       imports: [
         TranslateModule.forRoot({
-          loader: {
-            provide: TranslateLoader,
-            useFactory: createTranslateLoader,
-            deps: [HttpClient]
-          },
+          loader: createTranslateLoader(),
           missingTranslationHandler: { provide: CustomMissingTranslationHandler }
         })
       ],
@@ -31,9 +27,10 @@ describe('TranslateUtils', () => {
     httpTestingController.verify();
   });
 
-  it('should create TranslateHttpLoader', () => {
-    const loader = createTranslateLoader(httpClient);
-    expect(loader).toBeTruthy();
+  it('should create TranslateHttpLoader providers', () => {
+    const loaderProviders = createTranslateLoader();
+    expect(Array.isArray(loaderProviders)).toBeTrue();
+    expect(loaderProviders.length).toBeGreaterThan(0);
   });
 
   it('should handle missing translations', () => {
