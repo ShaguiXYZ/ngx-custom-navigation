@@ -13,9 +13,9 @@
   },
   "private": true,
   "dependencies": {
-    "@allianz/ng-aquila": "21.5.0",
+    "@allianz/ng-aquila": "22.5.0",
     "@angular/animations": "22.2.2",
-    "@angular/cdk": "21.2.5",
+    "@angular/cdk": "22.2.2",
     "@angular/common": "22.2.2",
     "@angular/compiler": "22.2.2",
     "@angular/core": "22.2.2",
