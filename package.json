@@ -44,7 +44,7 @@
     "@angular/compiler-cli": "22.2.2",
     "@types/crypto-js": "^4.2.2",
     "@types/jasmine": "~6.0.0",
-    "angular-eslint": "21.3.1",
+    "angular-eslint": "22.6.0",
     "eslint": "^10.2.0",
     "istanbul-lib-instrument": "^6.0.3",
     "jasmine-core": "~6.1.0",
