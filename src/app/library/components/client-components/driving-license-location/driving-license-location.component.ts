@@ -1,6 +1,6 @@
 import { ComponentType } from '@angular/cdk/portal';
 import { CommonModule } from '@angular/common';
-import { Component, inject, OnInit, viewChild } from '@angular/core';
+import { Component, inject, OnInit, viewChild, ChangeDetectionStrategy } from '@angular/core';
 import { NxButtonModule } from '@allianz/ng-aquila/button';
 import { NxCopytextModule } from '@allianz/ng-aquila/copytext';
 import { NxHeadlineModule } from '@allianz/ng-aquila/headline';
@@ -19,6 +19,7 @@ import { DrivingLicenseIcons } from './models';
   selector: 'quote-driving-license-location',
   templateUrl: './driving-license-location.component.html',
   styleUrl: './driving-license-location.component.scss',
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [
     CommonModule,
     QuoteFooterComponent,

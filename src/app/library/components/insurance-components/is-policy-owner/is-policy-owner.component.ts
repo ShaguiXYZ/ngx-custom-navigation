@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
 import { NxButtonModule } from '@allianz/ng-aquila/button';
 import { hasValue } from '@shagui/ng-shagui/core';
 import { QuoteComponent } from 'src/app/core/components';
@@ -14,6 +14,7 @@ import { QuoteLiteralPipe } from 'src/app/shared/pipes';
     selector: 'quote-is-policy-owner',
     templateUrl: './is-policy-owner.component.html',
     styleUrl: './is-policy-owner.component.scss',
+    changeDetection: ChangeDetectionStrategy.Eager,
     imports: [
         CommonModule,
         HeaderTitleComponent,

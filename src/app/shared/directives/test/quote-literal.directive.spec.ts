@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Component, ElementRef } from '@angular/core';
+import { Component, ElementRef, ChangeDetectionStrategy } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Subject } from 'rxjs';
@@ -9,6 +9,7 @@ import { QuoteLiteralDirective } from '../quote-literal.directive';
 @Component({
   standalone: true,
   imports: [QuoteLiteralDirective],
+  changeDetection: ChangeDetectionStrategy.Eager,
   template: `<div [nxQuoteLiteral]="literal" [nxQuoteLitealParams]="params" [nxQuoteDefaultLiteral]="defaultLiteral">safeHtml</div>`
 })
 class TestComponent {

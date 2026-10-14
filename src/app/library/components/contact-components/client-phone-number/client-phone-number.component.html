@@ -20,7 +20,7 @@
   </section>
   <quote-footer
     [trackInfo]="{
-      phoneNumber: form.get('phoneNumber')?.value
+      phoneNumber: $safeNavigationMigration(form.get('phoneNumber')?.value)
     }"
     (uiOnNext)="updateValidData()"
   />

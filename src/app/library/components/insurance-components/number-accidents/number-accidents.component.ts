@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { NxCopytextModule } from '@allianz/ng-aquila/copytext';
 import { hasValue, IndexedData } from '@shagui/ng-shagui/core';
 import { QuoteComponent } from 'src/app/core/components';
@@ -14,6 +14,7 @@ import { NumberAccidents } from './models';
     selector: 'quote-number-accidents',
     templateUrl: './number-accidents.component.html',
     styleUrl: './number-accidents.component.scss',
+    changeDetection: ChangeDetectionStrategy.Eager,
     imports: [
         HeaderTitleComponent,
         QuoteFooterComponent,

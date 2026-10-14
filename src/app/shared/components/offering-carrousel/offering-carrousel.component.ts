@@ -1,6 +1,6 @@
 import { ComponentType } from '@angular/cdk/portal';
 import { CommonModule } from '@angular/common';
-import { Component, ElementRef, EventEmitter, inject, Input, OnDestroy, OnInit, Output, Renderer2, viewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, inject, Input, OnDestroy, OnInit, Output, Renderer2, viewChild, ChangeDetectionStrategy } from '@angular/core';
 import { NxDialogService, NxModalModule, NxModalRef } from '@allianz/ng-aquila/modal';
 import { QuoteError } from 'src/app/core/errors';
 import { OfferingPriceModel } from 'src/app/core/models';
@@ -10,6 +10,7 @@ import { QuoteOfferingCoveragesComponent, QuoteOfferingPriceCardComponent } from
   selector: 'quote-offering-carrousel',
   templateUrl: './offering-carrousel.component.html',
   styleUrls: ['./offering-carrousel.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [CommonModule, QuoteOfferingPriceCardComponent, NxModalModule]
 })
 export class OfferingCarrouselComponent implements OnInit, OnDestroy {

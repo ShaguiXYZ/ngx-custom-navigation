@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, ElementRef, inject, OnInit, viewChild } from '@angular/core';
+import { Component, ElementRef, inject, OnInit, viewChild, ChangeDetectionStrategy } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { NxCopytextModule } from '@allianz/ng-aquila/copytext';
 import { NxFormfieldModule } from '@allianz/ng-aquila/formfield';
@@ -35,6 +35,7 @@ import { QuoteLiteralPipe } from 'src/app/shared/pipes';
     QuoteAutoFocusDirective,
     QuoteLiteralPipe
   ],
+  changeDetection: ChangeDetectionStrategy.Eager,
   providers: [VehicleService]
 })
 export class VehicleModelVersionsComponent extends QuoteComponent<QuoteModel> implements OnInit {

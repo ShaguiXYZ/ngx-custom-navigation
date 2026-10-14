@@ -1,4 +1,4 @@
-import { HttpClient, HttpErrorResponse, provideHttpClient, withInterceptors } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, provideHttpClient, withInterceptors, withXhr } from '@angular/common/http';
 import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { httpErrorInterceptor } from '../http-error.interceptor';
@@ -10,7 +10,7 @@ describe('HttpErrorInterceptor', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [],
-      providers: [provideHttpClient(withInterceptors([httpErrorInterceptor])), provideHttpClientTesting()]
+      providers: [provideHttpClient(withXhr(), withInterceptors([httpErrorInterceptor])), provideHttpClientTesting()]
     });
 
     httpMock = TestBed.inject(HttpTestingController);

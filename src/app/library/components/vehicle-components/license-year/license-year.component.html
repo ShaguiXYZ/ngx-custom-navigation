@@ -22,7 +22,7 @@
   </section>
   <quote-footer
     [trackInfo]="{
-      yearOfManufacture: form.get('yearOfManufacture')?.value
+      yearOfManufacture: $safeNavigationMigration(form.get('yearOfManufacture')?.value)
     }"
     (uiOnNext)="updateValidData()"
   />

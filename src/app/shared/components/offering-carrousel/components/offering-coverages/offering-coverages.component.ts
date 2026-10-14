@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { NxAccordionDirective, NxExpansionPanelComponent, NxExpansionPanelHeaderComponent } from '@allianz/ng-aquila/accordion';
 import { NxCopytextComponent } from '@allianz/ng-aquila/copytext';
 import { NxHeadlineComponent } from '@allianz/ng-aquila/headline';
@@ -14,6 +14,7 @@ import { TranslateTextComponent } from '../../../translate-text/translate-text.c
   selector: 'quote-offering-coverages',
   templateUrl: './offering-coverages.component.html',
   styleUrls: ['./offering-coverages.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [
     CommonModule,
     HeaderTitleComponent,

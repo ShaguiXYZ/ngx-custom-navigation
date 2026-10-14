@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ContextDataService } from '@shagui/ng-shagui/core';
 import { QUOTE_APP_CONTEXT_DATA } from 'src/app/core/constants';
@@ -20,6 +20,7 @@ import { QuoteLiteralPipe } from 'src/app/shared/pipes';
     <div class="quote-dispatcher">{{ { value: 'Label.Loading', params: { page: nextPageId }, type: 'translate' } | quoteLiteral }}</div>
   `,
   styleUrl: './quote-dispatcher.component.scss',
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [QuoteLiteralPipe]
 })
 export class QuoteDispatcherComponent implements OnInit {

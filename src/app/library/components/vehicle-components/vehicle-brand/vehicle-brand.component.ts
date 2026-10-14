@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, ElementRef, inject, OnInit, viewChild } from '@angular/core';
+import { Component, ElementRef, inject, OnInit, viewChild, ChangeDetectionStrategy } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { NxFormfieldModule } from '@allianz/ng-aquila/formfield';
 import { NxInputModule } from '@allianz/ng-aquila/input';
@@ -41,6 +41,7 @@ import { BrandComponentService } from './services';
     QuoteLiteralPipe,
     QuoteTrackDirective
   ],
+  changeDetection: ChangeDetectionStrategy.Eager,
   providers: [BrandComponentService, VehicleService]
 })
 export class VehicleBrandComponent extends QuoteComponent<QuoteModel> implements OnInit {

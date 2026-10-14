@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { NxCopytextModule } from '@allianz/ng-aquila/copytext';
 import { IndexedData } from '@shagui/ng-shagui/core';
 import { Observable } from 'rxjs';
@@ -16,6 +16,7 @@ import { VehicleParkingTypes } from './models';
     selector: 'quote-vehicle-parking',
     templateUrl: './vehicle-parking.component.html',
     styleUrl: './vehicle-parking.component.scss',
+    changeDetection: ChangeDetectionStrategy.Eager,
     imports: [
         CommonModule,
         HeaderTitleComponent,

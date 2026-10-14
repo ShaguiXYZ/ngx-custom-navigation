@@ -1,4 +1,4 @@
-import { Component, EventEmitter, inject, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, inject, OnInit, Output, ChangeDetectionStrategy } from '@angular/core';
 import { NxCopytextModule } from '@allianz/ng-aquila/copytext';
 import { LocaleConfig, LocateType } from 'src/app/core/models';
 import { LanguageService } from 'src/app/core/services';
@@ -7,6 +7,7 @@ import { LanguageService } from 'src/app/core/services';
   selector: 'quote-language',
   templateUrl: './language.component.html',
   styleUrls: ['./language.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [NxCopytextModule]
 })
 export class LanguageComponent implements OnInit {

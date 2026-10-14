@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, inject, Input, OnDestroy, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { NavigationEnd, Router } from '@angular/router';
 import { NxCopytextModule } from '@allianz/ng-aquila/copytext';
@@ -18,6 +18,7 @@ import { SwitchThemeComponent } from '../switch-theme';
   selector: 'quote-header',
   templateUrl: './quote-header.component.html',
   styleUrl: './quote-header.component.scss',
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [
     LanguageComponent,
     SwitchThemeComponent,

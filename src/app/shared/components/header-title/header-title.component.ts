@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { NxHeadlineModule } from '@allianz/ng-aquila/headline';
 import { QuoteZoneComponent } from '../quote-zone';
 
@@ -7,6 +7,7 @@ import { QuoteZoneComponent } from '../quote-zone';
     selector: 'quote-header-title',
     imports: [QuoteZoneComponent, CommonModule, NxHeadlineModule],
     templateUrl: './header-title.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrl: './header-title.component.scss'
 })
 export class HeaderTitleComponent {}

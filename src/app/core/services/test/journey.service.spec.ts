@@ -1,4 +1,4 @@
-import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClient, withXhr } from '@angular/common/http';
 import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { ContextDataService, HttpService } from '@shagui/ng-shagui/core';
@@ -33,7 +33,7 @@ describe('JourneyService', () => {
     TestBed.configureTestingModule({
       imports: [],
       providers: [
-        provideHttpClient(),
+        provideHttpClient(withXhr()),
         provideHttpClientTesting(),
         JourneyService,
         { provide: ContextDataService, useValue: contextDataServiceSpy },

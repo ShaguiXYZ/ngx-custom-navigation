@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { NxCopytextModule } from '@allianz/ng-aquila/copytext';
 import { IndexedData } from '@shagui/ng-shagui/core';
 import { Observable } from 'rxjs';
@@ -16,6 +16,7 @@ import { VehicleTypes } from './models';
   selector: 'quote-vehicle-type',
   templateUrl: './vehicle-type.component.html',
   styleUrl: './vehicle-type.component.scss',
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [
     CommonModule,
     HeaderTitleComponent,

@@ -6,7 +6,7 @@
   <div class="form-container" [ngClass]="{ 'not-found': notFound }">
     @for(vehicle of vehicleOptions; track vehicle; let index = $index) {
     <div class="selectable-row reveal">
-      @defer(on viewport) { @let brand_model = vehicle.brand + ' ' + vehicle.model; @let vehicle_info = vehicle.fuel?.data + ' - ' +
+      @defer(on viewport) { @let brand_model = vehicle.brand + ' ' + vehicle.model; @let vehicle_info = $safeNavigationMigration(vehicle.fuel?.data) + ' - ' +
       vehicle.power + ' CV - ' + vehicle.yearOfManufacture;
       <quote-text-card
         [selected]="vehicle.vehicleCode === selectedVehicle?.vehicleCode"

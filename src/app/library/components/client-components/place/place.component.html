@@ -23,7 +23,7 @@
   </section>
   <quote-footer
     [trackInfo]="{
-      postalCode: form.get('postalCode')?.value
+      postalCode: $safeNavigationMigration(form.get('postalCode')?.value)
     }"
     (uiOnNext)="updateValidData()"
   >

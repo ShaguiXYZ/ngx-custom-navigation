@@ -21,7 +21,7 @@
   </section>
   <quote-footer
     [trackInfo]="{
-      plateNumber: form.get('plateNumber')?.value
+      plateNumber: $safeNavigationMigration(form.get('plateNumber')?.value)
     }"
     (uiOnNext)="updateValidData()"
   >

@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ReactiveFormsModule, ValidationErrors, ValidatorFn } from '@angular/forms';
 import { NxCopytextModule } from '@allianz/ng-aquila/copytext';
 import { NxFormfieldModule } from '@allianz/ng-aquila/formfield';
@@ -26,6 +26,7 @@ import { isNIE, isNIF } from './models';
     QuoteLiteralDirective,
     QuoteLiteralPipe
   ],
+  changeDetection: ChangeDetectionStrategy.Eager,
   providers: [QuoteFormValidarors]
 })
 export class ClientIdentificationNumberComponent extends QuoteComponent<QuoteModel> {

@@ -1,4 +1,4 @@
-import { HttpClient, provideHttpClient } from '@angular/common/http';
+import { HttpClient, provideHttpClient, withXhr } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { of } from 'rxjs';
@@ -14,7 +14,7 @@ describe('LocationService', () => {
 
     TestBed.configureTestingModule({
       imports: [],
-      providers: [provideHttpClient(), provideHttpClientTesting(), LocationService, { provide: HttpClient, useValue: httpClientSpy }]
+      providers: [provideHttpClient(withXhr()), provideHttpClientTesting(), LocationService, { provide: HttpClient, useValue: httpClientSpy }]
     });
     service = TestBed.inject(LocationService);
   });

@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NxButtonModule } from '@allianz/ng-aquila/button';
 import { NxCopytextModule } from '@allianz/ng-aquila/copytext';
@@ -34,6 +34,7 @@ import { QuoteLiteralPipe } from 'src/app/shared/pipes';
     QuoteLiteralDirective,
     QuoteTrackDirective
   ],
+  changeDetection: ChangeDetectionStrategy.Eager,
   providers: [VehicleService]
 })
 export class YourCarIsComponent extends QuoteComponent<QuoteModel> implements OnInit {

@@ -1,6 +1,6 @@
 import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout';
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, inject, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, inject, Input, OnDestroy, OnInit, Output, ChangeDetectionStrategy } from '@angular/core';
 import { NxButtonModule } from '@allianz/ng-aquila/button';
 import { ContextDataService } from '@shagui/ng-shagui/core';
 import { Subscription } from 'rxjs';
@@ -17,6 +17,7 @@ import { QuoteFooterInfoComponent } from './components';
   selector: 'quote-footer',
   templateUrl: './quote-footer.component.html',
   styleUrl: './quote-footer.component.scss',
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [QuoteFooterInfoComponent, QuoteZoneComponent, CommonModule, NxButtonModule, QuoteLiteralDirective, QuoteTrackDirective]
 })
 export class QuoteFooterComponent implements OnInit, OnDestroy {

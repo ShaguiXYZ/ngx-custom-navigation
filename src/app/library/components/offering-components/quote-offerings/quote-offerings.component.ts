@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, OnDestroy, OnInit } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { QuoteComponent } from 'src/app/core/components';
 import { QuoteError } from 'src/app/core/errors';
 import { OfferingPriceModel } from 'src/app/core/models';
@@ -14,6 +14,7 @@ import { QuoteLiteralDirective } from 'src/app/shared/directives';
   templateUrl: './quote-offerings.component.html',
   styleUrl: './quote-offerings.component.scss',
   imports: [CommonModule, HeaderTitleComponent, OfferingCarrouselComponent, QuoteFooterComponent, QuoteLiteralDirective],
+  changeDetection: ChangeDetectionStrategy.Eager,
   providers: [OfferingsService]
 })
 export class QuoteOfferingsComponent extends QuoteComponent<QuoteModel> implements OnInit, OnDestroy {

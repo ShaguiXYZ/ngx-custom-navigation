@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, OnDestroy, OnInit } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { NxCopytextModule } from '@allianz/ng-aquila/copytext';
 import { NxTooltipModule } from '@allianz/ng-aquila/tooltip';
 import { ContextDataService } from '@shagui/ng-shagui/core';
@@ -14,6 +14,7 @@ import { QuoteStepperService } from './services';
   templateUrl: './quote-stepper.component.html',
   styleUrls: ['./quote-stepper.component.scss'],
   providers: [QuoteStepperService],
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [CommonModule, NxCopytextModule, NxTooltipModule, QuoteLiteralPipe]
 })
 export class QuoteStepperComponent implements OnInit, OnDestroy {

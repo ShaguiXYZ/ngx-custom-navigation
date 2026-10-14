@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
 import { Router } from '@angular/router';
 import { NxButtonModule } from '@allianz/ng-aquila/button';
 import { NxCopytextModule } from '@allianz/ng-aquila/copytext';
@@ -13,6 +13,7 @@ import { environment } from 'src/environments/environment';
   selector: 'quote-confirmation',
   templateUrl: './confirmation.component.html',
   styleUrl: './confirmation.component.scss',
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [QuoteFooterComponent, HeaderTitleComponent, NxButtonModule, NxCopytextModule, NxHeadlineModule, QuoteLiteralDirective]
 })
 export class ConfirmationComponent extends QuoteComponent<QuoteModel> {

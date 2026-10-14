@@ -1,4 +1,4 @@
-import { Component, inject, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, inject, Input, OnDestroy, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { NxSwitcherModule } from '@allianz/ng-aquila/switcher';
 import { Subscription } from 'rxjs';
 import { STORAGE_THEME_KEY, Theme } from './models';
@@ -10,6 +10,7 @@ import { StorageLib } from 'src/app/core/lib';
     templateUrl: './switch-theme.component.html',
     styleUrls: ['./switch-theme.component.scss'],
     imports: [NxSwitcherModule],
+    changeDetection: ChangeDetectionStrategy.Eager,
     providers: [ThemingService]
 })
 export class SwitchThemeComponent implements OnInit, OnDestroy {

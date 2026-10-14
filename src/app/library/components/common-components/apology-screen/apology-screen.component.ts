@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { NxButtonModule } from '@allianz/ng-aquila/button';
 import { NxCardModule } from '@allianz/ng-aquila/card';
 import { NxCopytextModule } from '@allianz/ng-aquila/copytext';
@@ -12,6 +12,7 @@ import { QuoteLiteralDirective } from 'src/app/shared/directives';
   selector: 'quote-apology-screen',
   templateUrl: './apology-screen.component.html',
   styleUrl: './apology-screen.component.scss',
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [
     HeaderTitleComponent,
     QuoteFooterComponent,

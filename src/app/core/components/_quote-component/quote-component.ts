@@ -1,4 +1,4 @@
-import { Component, inject, OnDestroy, signal, WritableSignal } from '@angular/core';
+import { Component, inject, OnDestroy, signal, WritableSignal, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRouteSnapshot, GuardResult, MaybeAsync, RouterStateSnapshot } from '@angular/router';
 import { ContextDataService, deepCopy, JsonUtils } from '@shagui/ng-shagui/core';
 import { Subject, Subscription, takeUntil } from 'rxjs';
@@ -8,6 +8,7 @@ import { ServiceActivatorService } from '../../service-activators';
 import { LanguageService } from '../../services';
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.Eager,
   template: ''
 })
 export abstract class QuoteComponent<T extends QuoteControlModel> implements OnDestroy {

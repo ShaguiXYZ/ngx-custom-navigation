@@ -1,4 +1,4 @@
-import { Component, DebugElement } from '@angular/core';
+import { Component, DebugElement, ChangeDetectionStrategy } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { ContextDataService } from '@shagui/ng-shagui/core';
@@ -9,6 +9,7 @@ import { QuoteLinkDirective } from '../quote-link.directive';
 @Component({
   standalone: true,
   imports: [QuoteLinkDirective],
+  changeDetection: ChangeDetectionStrategy.Eager,
   template: `<div nxQuoteLink="testLink"></div>`
 })
 class TestComponent {}

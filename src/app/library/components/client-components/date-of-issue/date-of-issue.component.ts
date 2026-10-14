@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { NxDatefieldModule, NxDatepickerIntl } from '@allianz/ng-aquila/datefield';
 import { NxFormfieldModule } from '@allianz/ng-aquila/formfield';
@@ -30,6 +30,7 @@ import { QuoteLiteralPipe } from 'src/app/shared/pipes';
     QuoteLiteralDirective,
     QuoteLiteralPipe
   ],
+  changeDetection: ChangeDetectionStrategy.Eager,
   providers: [QuoteFormValidarors, { provide: NxDatepickerIntl, useClass: DatePikerIntl }]
 })
 export class DateOfIssueComponent extends QuoteComponent<QuoteModel> {

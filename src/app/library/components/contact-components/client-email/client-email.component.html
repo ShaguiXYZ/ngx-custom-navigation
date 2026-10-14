@@ -43,7 +43,7 @@
     </section>
     <quote-footer
       [trackInfo]="{
-        email: form.get('email')?.value
+        email: $safeNavigationMigration(form.get('email')?.value)
       }"
       (uiOnNext)="updateValidData()"
     />

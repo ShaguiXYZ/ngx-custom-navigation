@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, ChangeDetectionStrategy } from '@angular/core';
 import { NxAvatarModule } from '@allianz/ng-aquila/avatar';
 import { NxCopytextModule } from '@allianz/ng-aquila/copytext';
 import { IIconData } from 'src/app/core/models';
@@ -10,6 +10,7 @@ import { SelectableOptionComponent } from '../selectable-option';
   selector: 'quote-icon-card',
   templateUrl: './icon-card.component.html',
   styleUrl: './icon-card.component.scss',
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [CommonModule, SelectableOptionComponent, NxAvatarModule, NxCopytextModule, QuoteLiteralDirective]
 })
 export class IconCardComponent {

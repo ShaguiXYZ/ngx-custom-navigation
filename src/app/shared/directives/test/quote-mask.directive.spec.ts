@@ -1,4 +1,4 @@
-import { Component, ElementRef } from '@angular/core';
+import { Component, ElementRef, ChangeDetectionStrategy } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { QuoteMaskType } from '../../models';
@@ -7,6 +7,7 @@ import { QuoteMaskDirective } from '../quote-mask.directive';
 @Component({
     standalone: true,
     imports: [QuoteMaskDirective],
+    changeDetection: ChangeDetectionStrategy.Eager,
     template: `<input type="text" [nxQuoteMask]="mask" (nxValueMatch)="onValueMatch($event)" />`
 })
 class TestComponent {

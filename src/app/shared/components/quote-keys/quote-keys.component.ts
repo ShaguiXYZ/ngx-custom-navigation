@@ -1,8 +1,9 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, HostListener, ChangeDetectionStrategy } from '@angular/core';
 import { ScreenRecorder } from '@shagui/ng-shagui/core';
 
 @Component({
   selector: 'quote-keys',
+  changeDetection: ChangeDetectionStrategy.Eager,
   template: ``
 })
 export class QuoteKeysComponent {

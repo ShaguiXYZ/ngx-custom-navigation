@@ -1,4 +1,4 @@
-import { HttpStatusCode, provideHttpClient } from '@angular/common/http';
+import { HttpStatusCode, provideHttpClient, withXhr } from '@angular/common/http';
 import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { HttpService } from '@shagui/ng-shagui/core';
@@ -12,7 +12,7 @@ describe('InsuranceComponentService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [],
-      providers: [provideHttpClient(), provideHttpClientTesting(), InsuranceComponentService, HttpService]
+      providers: [provideHttpClient(withXhr()), provideHttpClientTesting(), InsuranceComponentService, HttpService]
     });
     service = TestBed.inject(InsuranceComponentService);
     httpMock = TestBed.inject(HttpTestingController);

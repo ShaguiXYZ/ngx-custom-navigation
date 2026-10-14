@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { NxCopytextModule } from '@allianz/ng-aquila/copytext';
 import { IndexedData } from '@shagui/ng-shagui/core';
 import { QuoteComponent } from 'src/app/core/components';
@@ -14,6 +14,7 @@ import { TimeInsuranceHolder } from './models';
     selector: 'quote-time-insurance-holder',
     templateUrl: './time-insurance-holder.component.html',
     styleUrl: './time-insurance-holder.component.scss',
+    changeDetection: ChangeDetectionStrategy.Eager,
     imports: [
         HeaderTitleComponent,
         TextCardComponent,

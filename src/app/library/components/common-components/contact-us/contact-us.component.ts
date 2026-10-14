@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, ViewEncapsulation, ChangeDetectionStrategy } from '@angular/core';
 import { NxCopytextModule } from '@allianz/ng-aquila/copytext';
 import { NxHeadlineModule } from '@allianz/ng-aquila/headline';
 import { QuoteComponent } from 'src/app/core/components';
@@ -12,6 +12,7 @@ import { QuoteLiteralPipe } from 'src/app/shared/pipes';
     templateUrl: './contact-us.component.html',
     styleUrl: './contact-us.component.scss',
     imports: [HeaderTitleComponent, QuoteFooterComponent, QuoteLiteralDirective, QuoteLiteralPipe, NxCopytextModule, NxHeadlineModule],
+    changeDetection: ChangeDetectionStrategy.Eager,
     encapsulation: ViewEncapsulation.None
 })
 export class ContactUsComponent extends QuoteComponent<QuoteModel> {

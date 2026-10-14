@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, ChangeDetectionStrategy } from '@angular/core';
 import { NxAvatarModule } from '@allianz/ng-aquila/avatar';
 import { NxCopytextModule } from '@allianz/ng-aquila/copytext';
 import { SelectableOptionComponent } from '../selectable-option';
@@ -8,6 +8,7 @@ import { SelectableOptionComponent } from '../selectable-option';
     selector: 'quote-text-card',
     templateUrl: './text-card.component.html',
     styleUrl: './text-card.component.scss',
+    changeDetection: ChangeDetectionStrategy.Eager,
     imports: [CommonModule, SelectableOptionComponent, NxAvatarModule, NxCopytextModule]
 })
 export class TextCardComponent {

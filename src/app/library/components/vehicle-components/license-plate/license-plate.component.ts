@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { NxButtonModule } from '@allianz/ng-aquila/button';
 import { NxCopytextModule } from '@allianz/ng-aquila/copytext';
@@ -37,6 +37,7 @@ import { CountryCodes, PatternsByCountry } from './models';
     QuoteLiteralPipe,
     QuoteTrackDirective
   ],
+  changeDetection: ChangeDetectionStrategy.Eager,
   providers: [QuoteFormValidarors]
 })
 export class LicensePlateComponent extends QuoteComponent<QuoteModel> implements OnInit {

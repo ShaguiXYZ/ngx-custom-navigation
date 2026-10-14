@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { NxCopytextModule } from '@allianz/ng-aquila/copytext';
 import { QuoteComponent } from 'src/app/core/components';
 import { QuoteTrackDirective } from 'src/app/core/tracking';
@@ -20,6 +20,7 @@ import { QuoteLiteralDirective } from 'src/app/shared/directives';
         QuoteTrackDirective
     ],
     templateUrl: './contact-time.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrl: './contact-time.component.scss'
 })
 export class ContactTimeComponent extends QuoteComponent<QuoteModel> implements OnInit {
