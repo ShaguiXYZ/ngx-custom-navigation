@@ -26,7 +26,7 @@
     "@fortawesome/fontawesome-free": "7.3.1",
     "@ngx-translate/core": "18.0.0",
     "@ngx-translate/http-loader": "18.0.0",
-    "@shagui/ng-shagui": "^21.0.2",
+    "@shagui/ng-shagui": "^22.0.0",
     "crypto-js": "^4.2.0",
     "dayjs": "^1.11.23",
     "decimal.js": "^10.6.0",
