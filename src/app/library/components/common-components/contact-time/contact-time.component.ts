@@ -1,5 +1,5 @@
 import { NxCopytextModule } from '@allianz/ng-aquila/copytext';
-import { CommonModule } from '@angular/common';
+
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { QuoteComponent } from '../../../../core/components';
 import { QuoteTrackDirective } from '../../../../core/tracking';
@@ -10,7 +10,6 @@ import { Hour, QuoteModel } from '../../../models';
 @Component({
   selector: 'quote-contact-time',
   imports: [
-    CommonModule,
     HeaderTitleComponent,
     QuoteFooterComponent,
     QuoteZoneComponent,
@@ -18,7 +17,7 @@ import { Hour, QuoteModel } from '../../../models';
     NxCopytextModule,
     QuoteLiteralDirective,
     QuoteTrackDirective
-  ],
+],
   templateUrl: './contact-time.component.html',
   changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './contact-time.component.scss'

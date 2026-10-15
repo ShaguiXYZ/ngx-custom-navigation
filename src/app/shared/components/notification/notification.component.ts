@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, inject, OnDestroy, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { NxButtonModule } from '@allianz/ng-aquila/button';
 import { NxMessageModule } from '@allianz/ng-aquila/message';
@@ -10,7 +10,7 @@ import { Subject, takeUntil } from 'rxjs';
   styleUrls: ['./notification.component.scss'],
   templateUrl: './notification.component.html',
   changeDetection: ChangeDetectionStrategy.Eager,
-  imports: [CommonModule, NxButtonModule, NxMessageModule]
+  imports: [NxButtonModule, NxMessageModule]
 })
 export class NotificationComponent implements OnInit, OnDestroy {
   public notifications: NotificationModel[] = [];

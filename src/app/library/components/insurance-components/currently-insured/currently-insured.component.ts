@@ -1,5 +1,5 @@
 import { NxButtonModule } from '@allianz/ng-aquila/button';
-import { CommonModule } from '@angular/common';
+
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { hasValue } from '@shagui/ng-shagui/core';
 import { QuoteComponent } from '../../../../core/components';
@@ -16,7 +16,6 @@ import { QuoteModel } from '../../../models';
   styleUrl: './currently-insured.component.scss',
   changeDetection: ChangeDetectionStrategy.Eager,
   imports: [
-    CommonModule,
     HeaderTitleComponent,
     QuoteFooterComponent,
     SelectableOptionComponent,
@@ -24,7 +23,7 @@ import { QuoteModel } from '../../../models';
     QuoteLiteralPipe,
     QuoteLiteralDirective,
     QuoteTrackDirective
-  ]
+]
 })
 export class CurrentlyInsuredComponent extends QuoteComponent<QuoteModel> {
   private readonly routingService = inject(RoutingService);

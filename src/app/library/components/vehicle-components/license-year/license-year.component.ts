@@ -2,7 +2,7 @@ import { NxButtonModule } from '@allianz/ng-aquila/button';
 import { NxFormfieldModule } from '@allianz/ng-aquila/formfield';
 import { NxInputModule } from '@allianz/ng-aquila/input';
 import { NxMaskModule } from '@allianz/ng-aquila/mask';
-import { CommonModule } from '@angular/common';
+
 import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { NxDate } from '@shagui/ng-shagui/core';
@@ -26,11 +26,10 @@ import { QuoteModel } from '../../../models';
     NxMaskModule,
     NxButtonModule,
     ReactiveFormsModule,
-    CommonModule,
     QuoteAutoFocusDirective,
     QuoteLiteralDirective,
     QuoteLiteralPipe
-  ],
+],
   changeDetection: ChangeDetectionStrategy.Eager,
   providers: [QuoteFormValidarors]
 })

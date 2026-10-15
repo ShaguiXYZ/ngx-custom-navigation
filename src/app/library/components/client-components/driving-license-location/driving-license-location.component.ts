@@ -3,7 +3,7 @@ import { NxCopytextModule } from '@allianz/ng-aquila/copytext';
 import { NxHeadlineModule } from '@allianz/ng-aquila/headline';
 import { NxDialogService } from '@allianz/ng-aquila/modal';
 import { ComponentType } from '@angular/cdk/portal';
-import { CommonModule } from '@angular/common';
+
 import { ChangeDetectionStrategy, Component, inject, OnInit, viewChild } from '@angular/core';
 import { IndexedData } from '@shagui/ng-shagui/core';
 import { QuoteComponent } from '../../../../core/components';
@@ -21,7 +21,6 @@ import { DrivingLicenseIcons } from './models';
   styleUrl: './driving-license-location.component.scss',
   changeDetection: ChangeDetectionStrategy.Eager,
   imports: [
-    CommonModule,
     QuoteFooterComponent,
     IconCardComponent,
     HeaderTitleComponent,
@@ -31,7 +30,7 @@ import { DrivingLicenseIcons } from './models';
     QuoteLiteralPipe,
     QuoteLiteralDirective,
     QuoteTrackDirective
-  ]
+]
 })
 export class DrivingLicenseLocationComponent extends QuoteComponent<QuoteModel> implements OnInit {
   public drivenLicenseCountries = DrivingLicenseIcons;

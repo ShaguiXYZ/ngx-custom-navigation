@@ -3,8 +3,8 @@ import { NxCopytextComponent } from '@allianz/ng-aquila/copytext';
 import { NxHeadlineComponent } from '@allianz/ng-aquila/headline';
 import { NX_MODAL_DATA } from '@allianz/ng-aquila/modal';
 import { NxTabComponent, NxTabGroupComponent } from '@allianz/ng-aquila/tabs';
-import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, Inject, OnInit } from '@angular/core';
+
+import { ChangeDetectionStrategy, Component, OnInit, inject } from '@angular/core';
 import { Coverage, OfferingPriceModel } from '../../../../../core/models';
 import { QuoteLiteralDirective } from '../../../../directives';
 import { HeaderTitleComponent } from '../../../header-title';
@@ -16,7 +16,6 @@ import { TranslateTextComponent } from '../../../translate-text/translate-text.c
   styleUrls: ['./offering-coverages.component.scss'],
   changeDetection: ChangeDetectionStrategy.Eager,
   imports: [
-    CommonModule,
     HeaderTitleComponent,
     TranslateTextComponent,
     NxCopytextComponent,
@@ -27,20 +26,17 @@ import { TranslateTextComponent } from '../../../translate-text/translate-text.c
     NxTabGroupComponent,
     NxAccordionDirective,
     QuoteLiteralDirective
-  ]
+]
 })
 export class QuoteOfferingCoveragesComponent implements OnInit {
+  data = inject<{
+    prices: OfferingPriceModel[];
+    selectedPriceIndex: number;
+}>(NX_MODAL_DATA);
+
   public coverageSelectecd?: number;
   public selectedPriceIndex = 0;
   public prices: OfferingPriceModel[] = [];
-
-  constructor(
-    @Inject(NX_MODAL_DATA)
-    public data: {
-      prices: OfferingPriceModel[];
-      selectedPriceIndex: number;
-    }
-  ) {}
 
   ngOnInit(): void {
     this.prices = this.data.prices ?? [];

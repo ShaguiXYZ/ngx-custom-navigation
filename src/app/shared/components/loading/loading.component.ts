@@ -1,5 +1,5 @@
 import { ComponentType } from '@angular/cdk/portal';
-import { CommonModule } from '@angular/common';
+
 import { Component, inject, OnDestroy, OnInit, viewChild, ChangeDetectionStrategy } from '@angular/core';
 import { NxDialogService, NxModalModule, NxModalRef } from '@allianz/ng-aquila/modal';
 import { LoadingService } from '@shagui/ng-shagui/core';
@@ -10,7 +10,7 @@ import { Subscription } from 'rxjs';
   templateUrl: './loading.component.html',
   styleUrls: ['./loading.component.scss'],
   changeDetection: ChangeDetectionStrategy.Eager,
-  imports: [CommonModule, NxModalModule]
+  imports: [NxModalModule]
 })
 export class QuoteLoadingComponent implements OnInit, OnDestroy {
   private templateLoadingDialogRef?: NxModalRef<unknown>;

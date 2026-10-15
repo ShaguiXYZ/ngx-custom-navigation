@@ -1,5 +1,5 @@
 import { DOCUMENT } from '@angular/common';
-import { Inject, Injectable, LOCALE_ID, Optional } from '@angular/core';
+import { Injectable, LOCALE_ID, inject } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { firstValueFrom, Observable, Subject } from 'rxjs';
 import { StorageLib } from '../lib';
@@ -7,17 +7,16 @@ import { LanguageConfig, Languages, LocaleConfig, LocateType, NX_LANGUAGE_CONFIG
 
 @Injectable({ providedIn: 'root' })
 export class LanguageService {
+  private readonly nxLanguageConfig: Partial<LanguageConfig> & { languages: Record<LocateType, LocaleConfig> } =
+    inject(NX_LANGUAGE_CONFIG, { optional: true }) ?? { languages: Languages };
+  private readonly document = inject<Document>(DOCUMENT);
+  private readonly locale = inject<LocateType>(LOCALE_ID);
+  private readonly translateService = inject(TranslateService);
+
   private readonly config: LanguageConfig;
   private readonly languageChange$ = new Subject<LocateType>();
 
-  constructor(
-    @Optional()
-    @Inject(NX_LANGUAGE_CONFIG)
-    private readonly nxLanguageConfig: Partial<LanguageConfig> & { languages: Record<LocateType, LocaleConfig> } = { languages: Languages },
-    @Inject(DOCUMENT) private readonly document: Document,
-    @Inject(LOCALE_ID) private readonly locale: LocateType,
-    private readonly translateService: TranslateService
-  ) {
+  constructor() {
     this.config = this.configureService();
     this.translateService.setFallbackLang(this.config.current);
     this.i18n(this.config.current!);

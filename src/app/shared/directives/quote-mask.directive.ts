@@ -1,10 +1,12 @@
-import { Directive, ElementRef, EventEmitter, HostListener, Input, Output } from '@angular/core';
+import { Directive, ElementRef, EventEmitter, HostListener, Input, Output, inject } from '@angular/core';
 import { QUOTE_MASK, QuoteMaskType } from '../models';
 
 @Directive({
   selector: '[nxQuoteMask]'
 })
 export class QuoteMaskDirective {
+  private el = inject(ElementRef);
+
   @Input()
   public value!: string;
 
@@ -15,7 +17,7 @@ export class QuoteMaskDirective {
 
   private readonly specialKeys: Set<string>;
 
-  constructor(private el: ElementRef) {
+  constructor() {
     this.specialKeys = new Set(['Backspace', 'Tab', 'End', 'Home', 'ArrowLeft', 'ArrowRight', 'Del', 'Delete']);
   }
 

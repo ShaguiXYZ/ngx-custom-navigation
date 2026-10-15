@@ -1,3 +1,5 @@
+import type { EnvironmentConfig } from './environment.model';
+
 export const environment = {
   production: false,
   loadingOnNav: false,
@@ -10,4 +12,4 @@ export const environment = {
     siteKey: '6Lcp7Z0qAAAAABkWa0biX46hjpkeBZCpmaTn-HCh'
   },
   scripts: []
-};
+} satisfies EnvironmentConfig;

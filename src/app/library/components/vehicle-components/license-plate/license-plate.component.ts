@@ -3,7 +3,7 @@ import { NxCopytextModule } from '@allianz/ng-aquila/copytext';
 import { NxFormfieldModule } from '@allianz/ng-aquila/formfield';
 import { NxInputModule } from '@allianz/ng-aquila/input';
 import { NxLicencePlateModule } from '@allianz/ng-aquila/licence-plate';
-import { CommonModule } from '@angular/common';
+
 import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { QuoteComponent } from '../../../../core/components';
@@ -21,7 +21,6 @@ import { CountryCodes, PatternsByCountry } from './models';
   templateUrl: './license-plate.component.html',
   styleUrl: './license-plate.component.scss',
   imports: [
-    CommonModule,
     HeaderTitleComponent,
     NxCopytextModule,
     NxFormfieldModule,
@@ -35,7 +34,7 @@ import { CountryCodes, PatternsByCountry } from './models';
     QuoteLiteralDirective,
     QuoteLiteralPipe,
     QuoteTrackDirective
-  ],
+],
   changeDetection: ChangeDetectionStrategy.Eager,
   providers: [QuoteFormValidarors]
 })

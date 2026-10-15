@@ -26,7 +26,9 @@
       "command": "C:\\Users\\Shagui\\AppData\\Roaming\\fnm\\node-versions\\v24.21.0\\installation\\node.exe",
       "args": [
         "C:\\Users\\Shagui\\AppData\\Roaming\\fnm\\node-versions\\v24.21.0\\installation\\node_modules\\npm\\bin\\npm-cli.js",
-        "test"
+        "test",
+        "--",
+        "--watch=false"
       ],
       "prependPath": [
         "C:\\Users\\Shagui\\AppData\\Roaming\\fnm\\node-versions\\v24.21.0\\installation"

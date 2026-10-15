@@ -1,4 +1,4 @@
-@import 'core-globals';
+@use 'core-globals' as *;
 
 .app__container {
   display: flex;

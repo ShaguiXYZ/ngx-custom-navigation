@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { ChangeDetectionStrategy, Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { QuoteComponent } from '../../../../core/components';
 import { QuoteError } from '../../../../core/errors';
@@ -13,7 +13,7 @@ import { OfferingsService } from '../../../services';
   selector: 'quote-quote-offerings',
   templateUrl: './quote-offerings.component.html',
   styleUrl: './quote-offerings.component.scss',
-  imports: [CommonModule, HeaderTitleComponent, OfferingCarrouselComponent, QuoteFooterComponent, QuoteLiteralDirective],
+  imports: [HeaderTitleComponent, OfferingCarrouselComponent, QuoteFooterComponent, QuoteLiteralDirective],
   changeDetection: ChangeDetectionStrategy.Eager,
   providers: [OfferingsService]
 })

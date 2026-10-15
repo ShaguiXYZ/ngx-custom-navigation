@@ -27,7 +27,7 @@ module.exports = tseslint.config(
         }
       ],
       '@typescript-eslint/no-unused-expressions': 'off',
-      '@angular-eslint/prefer-inject': 'off',
+      '@angular-eslint/prefer-inject': 'error',
       '@angular-eslint/prefer-on-push-component-change-detection': 'off'
     }
   },

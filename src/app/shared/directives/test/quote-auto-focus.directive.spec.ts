@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, DebugElement, RendererFactory2, ChangeDetectionStrategy } from '@angular/core';
+import { ChangeDetectorRef, Component, DebugElement, ChangeDetectionStrategy } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { QuoteAutoFocusDirective } from '../quote-auto-focus.directive';
@@ -29,9 +29,7 @@ describe('QuoteAutoFocusDirective', () => {
   });
 
   it('should create an instance', () => {
-    const rendererFactory = TestBed.inject(RendererFactory2);
-    const renderer = rendererFactory.createRenderer(null, null);
-    const directive = new QuoteAutoFocusDirective(mockChangeDetectorRef, inputEl, renderer);
+    const directive = inputEl.injector.get(QuoteAutoFocusDirective);
     expect(directive).toBeTruthy();
   });
 

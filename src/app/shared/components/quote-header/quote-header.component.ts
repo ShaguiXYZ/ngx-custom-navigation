@@ -1,5 +1,5 @@
 import { NxCopytextModule } from '@allianz/ng-aquila/copytext';
-import { CommonModule } from '@angular/common';
+
 import { ChangeDetectionStrategy, Component, inject, Input, OnDestroy, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { NavigationEnd, Router } from '@angular/router';
@@ -22,15 +22,18 @@ import { SwitchThemeComponent } from '../switch-theme';
   imports: [
     LanguageComponent,
     SwitchThemeComponent,
-    CommonModule,
     NxCopytextModule,
     QuoteLinkDirective,
     QuoteLiteralDirective,
     QuoteTrackDirective,
     QuoteLiteralPipe
-  ]
+]
 })
 export class QuoteHeaderComponent implements OnInit, OnDestroy {
+  private readonly title = inject(Title);
+  private readonly router = inject(Router);
+  private readonly quoteLiteral = inject(QuoteLiteralPipe);
+
   @Input()
   public verified?: boolean;
 
@@ -41,12 +44,6 @@ export class QuoteHeaderComponent implements OnInit, OnDestroy {
   private readonly contextDataService = inject(ContextDataService);
   private readonly literalsService = inject(LiteralsService);
   private readonly routingService = inject(RoutingService);
-
-  constructor(
-    private readonly title: Title,
-    private readonly router: Router,
-    private readonly quoteLiteral: QuoteLiteralPipe
-  ) {}
 
   ngOnInit(): void {
     this.subscription$.push(

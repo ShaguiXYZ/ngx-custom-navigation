@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { ChangeDetectionStrategy, Component, ElementRef } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { DomSanitizer } from '@angular/platform-browser';
+import { By, DomSanitizer } from '@angular/platform-browser';
 import { Subject } from 'rxjs';
 import { LiteralsService } from '../../../core/services';
 import { QuoteLiteralDirective } from '../quote-literal.directive';
@@ -46,7 +46,7 @@ describe('QuoteLiteralDirective', () => {
   });
 
   it('should create an instance', () => {
-    const directive = new QuoteLiteralDirective(literalsService, new ElementRef(element), domSanitizer);
+    const directive = fixture.debugElement.query(By.directive(QuoteLiteralDirective)).injector.get(QuoteLiteralDirective);
     expect(directive).toBeTruthy();
   });
 

@@ -1,5 +1,5 @@
 import { NxCopytextModule } from '@allianz/ng-aquila/copytext';
-import { CommonModule } from '@angular/common';
+
 import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
 import { IndexedData } from '@shagui/ng-shagui/core';
 import { Observable } from 'rxjs';
@@ -18,7 +18,6 @@ import { VehicleParkingTypes } from './models';
   styleUrl: './vehicle-parking.component.scss',
   changeDetection: ChangeDetectionStrategy.Eager,
   imports: [
-    CommonModule,
     HeaderTitleComponent,
     QuoteFooterComponent,
     TextCardComponent,
@@ -26,7 +25,7 @@ import { VehicleParkingTypes } from './models';
     QuoteLiteralDirective,
     QuoteTrackDirective,
     QuoteLiteralPipe
-  ]
+]
 })
 export class VehicleParkingComponent extends QuoteComponent<QuoteModel> implements OnInit {
   public vehicleParkingTypes = VehicleParkingTypes;

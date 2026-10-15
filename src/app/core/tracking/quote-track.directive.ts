@@ -6,6 +6,9 @@ import { QuoteTrackService } from './quote-track.service';
   selector: '[nxTrack]'
 })
 export class QuoteTrackDirective implements OnInit {
+  private el = inject(ElementRef);
+  private renderer = inject(Renderer2);
+
   @Input('nxTrack')
   public nxTrackInfo: TrackInfo = {};
 
@@ -14,8 +17,6 @@ export class QuoteTrackDirective implements OnInit {
 
   private readonly unlistenFns: (() => void)[] = [];
   private readonly trackService = inject(QuoteTrackService);
-
-  constructor(private el: ElementRef, private renderer: Renderer2) {}
 
   ngOnInit(): void {
     this.nxTrackEvents.forEach(event => {

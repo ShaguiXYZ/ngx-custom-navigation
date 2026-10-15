@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Directive, ElementRef, OnInit, Renderer2 } from '@angular/core';
+import { ChangeDetectorRef, Directive, ElementRef, OnInit, Renderer2, inject } from '@angular/core';
 
 /**
  * Directive to set focus on an input element when it is rendered.
@@ -7,7 +7,9 @@ import { ChangeDetectorRef, Directive, ElementRef, OnInit, Renderer2 } from '@an
   selector: '[nxAutoFocus]'
 })
 export class QuoteAutoFocusDirective implements OnInit {
-  constructor(private readonly cd: ChangeDetectorRef, private readonly el: ElementRef<HTMLElement>, private readonly renderer: Renderer2) {}
+  private readonly cd = inject(ChangeDetectorRef);
+  private readonly el = inject<ElementRef<HTMLElement>>(ElementRef);
+  private readonly renderer = inject(Renderer2);
 
   public ngOnInit(): void {
     Promise.resolve().then(() => {
