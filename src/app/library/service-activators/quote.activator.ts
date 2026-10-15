@@ -1,7 +1,7 @@
-import { QUOTE_APP_CONTEXT_DATA, QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
-import { ActivatorFn, ActivatorServices, ServiceActivatorFn } from 'src/app/core/service-activators';
+import { QUOTE_APP_CONTEXT_DATA, QUOTE_CONTEXT_DATA } from '../../core/constants';
+import { AppContextData, TrackPoints } from '../../core/models';
+import { ActivatorFn, ActivatorServices, ServiceActivatorFn } from '../../core/service-activators';
 import { QuoteModel } from '../models';
-import { AppContextData, TrackPoints } from 'src/app/core/models';
 
 export class QuoteActivator {
   public static quoteReset: ServiceActivatorFn<unknown, boolean> =

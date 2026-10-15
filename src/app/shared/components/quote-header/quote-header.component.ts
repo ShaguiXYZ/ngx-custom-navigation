@@ -1,14 +1,14 @@
+import { NxCopytextModule } from '@allianz/ng-aquila/copytext';
 import { CommonModule } from '@angular/common';
-import { Component, inject, Input, OnDestroy, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, Input, OnDestroy, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { NavigationEnd, Router } from '@angular/router';
-import { NxCopytextModule } from '@allianz/ng-aquila/copytext';
 import { $, ContextDataService } from '@shagui/ng-shagui/core';
 import { filter, Subscription } from 'rxjs';
-import { QUOTE_APP_CONTEXT_DATA } from 'src/app/core/constants';
-import { AppContextData, HeaderConfig, Page } from 'src/app/core/models';
-import { LiteralsService, RoutingService } from 'src/app/core/services';
-import { QuoteTrackDirective } from 'src/app/core/tracking';
+import { QUOTE_APP_CONTEXT_DATA } from '../../../core/constants';
+import { AppContextData, HeaderConfig, Page } from '../../../core/models';
+import { LiteralsService, RoutingService } from '../../../core/services';
+import { QuoteTrackDirective } from '../../../core/tracking';
 import { QuoteLinkDirective, QuoteLiteralDirective } from '../../directives';
 import { QuoteLiteralPipe } from '../../pipes';
 import { LanguageComponent } from '../language';
@@ -42,7 +42,11 @@ export class QuoteHeaderComponent implements OnInit, OnDestroy {
   private readonly literalsService = inject(LiteralsService);
   private readonly routingService = inject(RoutingService);
 
-  constructor(private readonly title: Title, private readonly router: Router, private readonly quoteLiteral: QuoteLiteralPipe) {}
+  constructor(
+    private readonly title: Title,
+    private readonly router: Router,
+    private readonly quoteLiteral: QuoteLiteralPipe
+  ) {}
 
   ngOnInit(): void {
     this.subscription$.push(

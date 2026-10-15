@@ -2,7 +2,7 @@ import { HttpStatusCode } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { deepCopy, HttpService } from '@shagui/ng-shagui/core';
 import { firstValueFrom, map, tap } from 'rxjs';
-import { OfferingDTO, QuoteOfferingModel } from 'src/app/core/models';
+import { OfferingDTO, QuoteOfferingModel } from '../../core/models';
 import { ServiceActivatorService } from '../../core/service-activators';
 import { PricingDTO, QuoteModel } from '../models';
 

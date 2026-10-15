@@ -3,7 +3,7 @@ import { HttpParams, HttpStatusCode } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { ContextDataService, DataInfo, HttpService, UniqueIds } from '@shagui/ng-shagui/core';
 import { firstValueFrom, map, tap } from 'rxjs';
-import { environment } from 'src/environments/environment';
+import { environment } from '../../../environments/environment';
 import { NX_WORKFLOW_TOKEN } from '../components/models';
 import { JOURNEY_SESSION_KEY, QUOTE_APP_CONTEXT_DATA } from '../constants';
 import { StorageLib } from '../lib';

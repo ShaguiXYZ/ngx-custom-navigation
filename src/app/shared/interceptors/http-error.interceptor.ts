@@ -1,7 +1,7 @@
 import { HttpErrorResponse, HttpEvent, HttpHandlerFn, HttpInterceptorFn, HttpRequest, HttpStatusCode } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { HttpError } from 'src/app/core/errors';
+import { HttpError } from '../../core/errors';
 
 type StatusCodes =
   | HttpStatusCode.BadRequest

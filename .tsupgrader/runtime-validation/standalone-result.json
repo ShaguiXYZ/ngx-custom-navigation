@@ -1,0 +1,105 @@
+{
+  "planHash": "cf76a88bee5fb1becbb10c9fca94f41185c927f3cf834fce939fcea6136d9631",
+  "phase": "standalone",
+  "recordedAtUtc": "2026-10-14T10:44:06.2053703Z",
+  "retryCount": 3,
+  "resetBaseline": false,
+  "complete": true,
+  "result": {
+    "setupSucceeded": true,
+    "setupDurationMs": 0,
+    "setupFailureOutput": null,
+    "assertions": [
+      {
+        "name": "production-build",
+        "kind": "process",
+        "verificationMethod": "exit-code",
+        "passed": false,
+        "timedOut": false,
+        "skipped": false,
+        "skippedReason": null,
+        "exitCode": 1,
+        "outputSample": "\r\n\u003E ngx-custom-navigation@2.0.0 build\r\n\u003E ng build\r\n\r\n\u0022ng\u0022 no se reconoce como un comando interno o externo,\r\nprograma o archivo por lotes ejecutable.\r\n",
+        "durationMs": 1560
+      },
+      {
+        "name": "tests-pass",
+        "kind": "process",
+        "verificationMethod": "test-results",
+        "passed": false,
+        "timedOut": false,
+        "skipped": false,
+        "skippedReason": null,
+        "exitCode": 1,
+        "outputSample": "\r\n\u003E ngx-custom-navigation@2.0.0 test\r\n\u003E ng test\r\n\r\n\u0022ng\u0022 no se reconoce como un comando interno o externo,\r\nprograma o archivo por lotes ejecutable.\r\n",
+        "durationMs": 3076,
+        "testResults": {
+          "testFramework": "jasmine",
+          "runnerDetectedFrom": "package_json",
+          "testsTotal": 0,
+          "testsPassed": 0,
+          "testsFailed": 0,
+          "testsSkipped": 0,
+          "parseFailed": true
+        }
+      },
+      {
+        "name": "dev-server-serves-home",
+        "kind": "http-probe",
+        "verificationMethod": "http-status",
+        "passed": false,
+        "timedOut": false,
+        "skipped": false,
+        "skippedReason": null,
+        "exitCode": 1,
+        "outputSample": "server exited before responding (exit=1)\n--- server output ---\n\r\n\u003E ngx-custom-navigation@2.0.0 start\r\n\u003E ng serve --host 127.0.0.1 --port 4200\r\n\r\n\u0022ng\u0022 no se reconoce como un comando interno o externo,\r\nprograma o archivo por lotes ejecutable.\r\n",
+        "durationMs": 2558
+      }
+    ],
+    "executions": [
+      {
+        "source": "production-build",
+        "resolvedExecutable": "C:\\Users\\Shagui\\AppData\\Roaming\\fnm\\node-versions\\v24.21.0\\installation\\node.exe",
+        "args": [
+          "C:\\Users\\Shagui\\AppData\\Roaming\\fnm\\node-versions\\v24.21.0\\installation\\node_modules\\npm\\bin\\npm-cli.js",
+          "run",
+          "build"
+        ],
+        "cwd": "C:\\Users\\Shagui\\workspace\\work\\ngx-custom-navigation",
+        "env": {},
+        "prependPath": [],
+        "platform": "win32"
+      },
+      {
+        "source": "tests-pass",
+        "resolvedExecutable": "C:\\Users\\Shagui\\AppData\\Roaming\\fnm\\node-versions\\v24.21.0\\installation\\node.exe",
+        "args": [
+          "C:\\Users\\Shagui\\AppData\\Roaming\\fnm\\node-versions\\v24.21.0\\installation\\node_modules\\npm\\bin\\npm-cli.js",
+          "test"
+        ],
+        "cwd": "C:\\Users\\Shagui\\workspace\\work\\ngx-custom-navigation",
+        "env": {},
+        "prependPath": [],
+        "platform": "win32"
+      },
+      {
+        "source": "dev-server-serves-home",
+        "resolvedExecutable": "C:\\Users\\Shagui\\AppData\\Roaming\\fnm\\node-versions\\v24.21.0\\installation\\node.exe",
+        "args": [
+          "C:\\Users\\Shagui\\AppData\\Roaming\\fnm\\node-versions\\v24.21.0\\installation\\node_modules\\npm\\bin\\npm-cli.js",
+          "run",
+          "start",
+          "--",
+          "--host",
+          "127.0.0.1",
+          "--port",
+          "4200"
+        ],
+        "cwd": "C:\\Users\\Shagui\\workspace\\work\\ngx-custom-navigation",
+        "env": {},
+        "prependPath": [],
+        "platform": "win32"
+      }
+    ]
+  }
+}

@@ -1,19 +1,19 @@
-import { CommonModule } from '@angular/common';
-import { Component, ElementRef, inject, OnInit, viewChild, ChangeDetectionStrategy } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { NxCopytextModule } from '@allianz/ng-aquila/copytext';
 import { NxFormfieldModule } from '@allianz/ng-aquila/formfield';
 import { NxInputModule } from '@allianz/ng-aquila/input';
+import { CommonModule } from '@angular/common';
+import { ChangeDetectionStrategy, Component, ElementRef, inject, OnInit, viewChild } from '@angular/core';
+import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { debounceTime, distinctUntilChanged, fromEvent, map, Subscription } from 'rxjs';
-import { QuoteComponent } from 'src/app/core/components';
-import { DEBOUNCE_TIME } from 'src/app/core/constants';
-import { RoutingService } from 'src/app/core/services';
-import { QuoteTrackDirective } from 'src/app/core/tracking';
-import { QuoteModel } from 'src/app/library/models';
-import { VehicleService } from 'src/app/library/services';
-import { HeaderTitleComponent, QuoteFooterComponent, QuoteZoneComponent, TextCardComponent } from 'src/app/shared/components';
-import { QuoteAutoFocusDirective, QuoteLiteralDirective } from 'src/app/shared/directives';
-import { QuoteLiteralPipe } from 'src/app/shared/pipes';
+import { QuoteComponent } from '../../../../core/components';
+import { DEBOUNCE_TIME } from '../../../../core/constants';
+import { RoutingService } from '../../../../core/services';
+import { QuoteTrackDirective } from '../../../../core/tracking';
+import { HeaderTitleComponent, QuoteFooterComponent, QuoteZoneComponent, TextCardComponent } from '../../../../shared/components';
+import { QuoteAutoFocusDirective, QuoteLiteralDirective } from '../../../../shared/directives';
+import { QuoteLiteralPipe } from '../../../../shared/pipes';
+import { QuoteModel } from '../../../models';
+import { VehicleService } from '../../../services';
 
 @Component({
   selector: 'quote-vehicle-models',

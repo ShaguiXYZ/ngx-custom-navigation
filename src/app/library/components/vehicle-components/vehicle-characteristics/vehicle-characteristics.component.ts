@@ -1,17 +1,17 @@
-import { CommonModule } from '@angular/common';
-import { Component, inject, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { NxAccordionModule } from '@allianz/ng-aquila/accordion';
 import { NxCopytextModule } from '@allianz/ng-aquila/copytext';
 import { NxFormfieldModule } from '@allianz/ng-aquila/formfield';
-import { QuoteComponent } from 'src/app/core/components';
-import { RoutingService } from 'src/app/core/services';
-import { QuoteTrackDirective } from 'src/app/core/tracking';
-import { QuoteModel } from 'src/app/library/models';
-import { CubicCapacityModel, FuelModel, VehicleClassesModel } from 'src/app/library/models/vehicle';
-import { VehicleService } from 'src/app/library/services';
-import { HeaderTitleComponent, QuoteFooterComponent, SelectableOptionComponent } from 'src/app/shared/components';
-import { QuoteLiteralDirective } from 'src/app/shared/directives';
-import { QuoteLiteralPipe } from 'src/app/shared/pipes';
+import { CommonModule } from '@angular/common';
+import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
+import { QuoteComponent } from '../../../../core/components';
+import { RoutingService } from '../../../../core/services';
+import { QuoteTrackDirective } from '../../../../core/tracking';
+import { HeaderTitleComponent, QuoteFooterComponent, SelectableOptionComponent } from '../../../../shared/components';
+import { QuoteLiteralDirective } from '../../../../shared/directives';
+import { QuoteLiteralPipe } from '../../../../shared/pipes';
+import { QuoteModel } from '../../../models';
+import { CubicCapacityModel, FuelModel, VehicleClassesModel } from '../../../models/vehicle';
+import { VehicleService } from '../../../services';
 
 @Component({
   selector: 'quote-vehicle-characteristics',

@@ -1,17 +1,17 @@
-import { Component, inject, Input, OnDestroy, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { NxSwitcherModule } from '@allianz/ng-aquila/switcher';
+import { ChangeDetectionStrategy, Component, inject, Input, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { StorageLib } from '../../../core/lib';
 import { STORAGE_THEME_KEY, Theme } from './models';
 import { ThemingService } from './services';
-import { StorageLib } from 'src/app/core/lib';
 
 @Component({
-    selector: 'nx-switch-theme',
-    templateUrl: './switch-theme.component.html',
-    styleUrls: ['./switch-theme.component.scss'],
-    imports: [NxSwitcherModule],
-    changeDetection: ChangeDetectionStrategy.Eager,
-    providers: [ThemingService]
+  selector: 'nx-switch-theme',
+  templateUrl: './switch-theme.component.html',
+  styleUrls: ['./switch-theme.component.scss'],
+  imports: [NxSwitcherModule],
+  changeDetection: ChangeDetectionStrategy.Eager,
+  providers: [ThemingService]
 })
 export class SwitchThemeComponent implements OnInit, OnDestroy {
   private readonly subscription$: Subscription[] = [];

@@ -19,7 +19,7 @@ export class LanguageService {
     private readonly translateService: TranslateService
   ) {
     this.config = this.configureService();
-    this.translateService.setDefaultLang(this.config.current);
+    this.translateService.setFallbackLang(this.config.current);
     this.i18n(this.config.current!);
   }
 

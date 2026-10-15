@@ -1,14 +1,14 @@
-import { TitleCasePipe } from '@angular/common';
-import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { NxFormfieldModule } from '@allianz/ng-aquila/formfield';
 import { NxInputModule } from '@allianz/ng-aquila/input';
-import { QuoteComponent } from 'src/app/core/components';
-import { QuoteFormValidarors } from 'src/app/core/form';
-import { QuoteModel } from 'src/app/library/models';
-import { HeaderTitleComponent, QuoteFooterComponent, QuoteZoneComponent } from 'src/app/shared/components';
-import { QuoteAutoFocusDirective, QuoteLiteralDirective } from 'src/app/shared/directives';
-import { QuoteLiteralPipe } from 'src/app/shared/pipes';
+import { TitleCasePipe } from '@angular/common';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { QuoteComponent } from '../../../../core/components';
+import { QuoteFormValidarors } from '../../../../core/form';
+import { HeaderTitleComponent, QuoteFooterComponent, QuoteZoneComponent } from '../../../../shared/components';
+import { QuoteAutoFocusDirective, QuoteLiteralDirective } from '../../../../shared/directives';
+import { QuoteLiteralPipe } from '../../../../shared/pipes';
+import { QuoteModel } from '../../../models';
 
 @Component({
   selector: 'quote-client-name',

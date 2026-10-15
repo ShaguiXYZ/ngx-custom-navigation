@@ -1,16 +1,9 @@
 import { provideHttpClient, withInterceptors, withXhr } from '@angular/common/http';
-import {
-  ApplicationConfig,
-  ErrorHandler,
-  importProvidersFrom,
-  inject,
-  provideAppInitializer,
-  provideZoneChangeDetection
-} from '@angular/core';
+import { ApplicationConfig, ErrorHandler, inject, provideAppInitializer, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter, withComponentInputBinding } from '@angular/router';
-import { TranslateModule } from '@ngx-translate/core';
+import { provideMissingTranslationHandler, provideTranslateService } from '@ngx-translate/core';
 import { NX_CONTEX_CONFIG } from '@shagui/ng-shagui/core';
-import { environment } from 'src/environments/environment';
+import { environment } from '../environments/environment';
 import { routes } from './app.routes';
 import { NX_WORKFLOW_TOKEN } from './core/components/models';
 import { APP_NAME, SCHEDULER_PERIOD } from './core/constants';
@@ -18,7 +11,7 @@ import { GlobalErrorHandler } from './core/errors';
 import { NX_LANGUAGE_CONFIG } from './core/models';
 import { NX_RECAPTCHA_TOKEN, SettingsService } from './core/services';
 import { VEHICLE_WORKFLOW_TOKEN } from './library/library-manifest';
-import { nxLanguageConfig, TRANSLATE_MODULE_CONFIG, urls } from './shared/config';
+import { CustomMissingTranslationHandler, createTranslateLoader, nxLanguageConfig, urls } from './shared/config';
 import { httpErrorInterceptor, mockInterceptor, recaptchaInterceptor } from './shared/interceptors';
 
 const appInitializer = (): Promise<void> => {
@@ -29,7 +22,10 @@ const appInitializer = (): Promise<void> => {
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    importProvidersFrom(TranslateModule.forRoot(TRANSLATE_MODULE_CONFIG)),
+    provideTranslateService({
+      loader: createTranslateLoader(),
+      missingTranslationHandler: provideMissingTranslationHandler(CustomMissingTranslationHandler)
+    }),
     provideAppInitializer(appInitializer),
     provideHttpClient(withXhr(), withInterceptors([httpErrorInterceptor, mockInterceptor, recaptchaInterceptor])),
     provideRouter(routes, withComponentInputBinding()),

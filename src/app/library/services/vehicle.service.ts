@@ -2,7 +2,7 @@ import { HttpParams, HttpStatusCode } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { hasValue, HttpService, TTL } from '@shagui/ng-shagui/core';
 import { firstValueFrom, map } from 'rxjs';
-import { environment } from 'src/environments/environment';
+import { environment } from '../../../environments/environment';
 import { QuoteVehicleModel, VehicleDTO } from '../models';
 import { _BRANCHES_CACHE_ID_, _MODEL_VERSIONS_CACHE_ID_, _MODELS_CACHE_ID_, _SUBMODELS_CACHE_ID_ } from '../models/constants';
 import {

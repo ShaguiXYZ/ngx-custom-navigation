@@ -1,11 +1,11 @@
-import { CommonModule } from '@angular/common';
-import { Component, inject, OnDestroy, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { NxCopytextModule } from '@allianz/ng-aquila/copytext';
 import { NxTooltipModule } from '@allianz/ng-aquila/tooltip';
+import { CommonModule } from '@angular/common';
+import { ChangeDetectionStrategy, Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { ContextDataService } from '@shagui/ng-shagui/core';
 import { Subscription } from 'rxjs';
-import { QUOTE_APP_CONTEXT_DATA } from 'src/app/core/constants';
-import { AppContextData, Step, Stepper, StepperConfig } from 'src/app/core/models';
+import { QUOTE_APP_CONTEXT_DATA } from '../../../core/constants';
+import { AppContextData, Step, Stepper, StepperConfig } from '../../../core/models';
 import { QuoteLiteralPipe } from '../../pipes';
 import { QuoteStepperService } from './services';
 

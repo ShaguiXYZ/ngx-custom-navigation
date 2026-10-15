@@ -1,15 +1,15 @@
-import { Component, inject, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ContextDataService } from '@shagui/ng-shagui/core';
-import { QUOTE_APP_CONTEXT_DATA } from 'src/app/core/constants';
-import { JourneyError } from 'src/app/core/errors';
-import { AppContextData } from 'src/app/core/models';
-import { ActivatorFn } from 'src/app/core/service-activators';
-import { BudgetActivator } from 'src/app/core/service-activators/budget.activator';
-import { SettingsService } from 'src/app/core/services';
-import { QuoteTrackService } from 'src/app/core/tracking';
-import { AppUrls } from 'src/app/shared/config';
-import { QuoteLiteralPipe } from 'src/app/shared/pipes';
+import { QUOTE_APP_CONTEXT_DATA } from '../../core/constants';
+import { JourneyError } from '../../core/errors';
+import { AppContextData } from '../../core/models';
+import { ActivatorFn } from '../../core/service-activators';
+import { BudgetActivator } from '../../core/service-activators/budget.activator';
+import { SettingsService } from '../../core/services';
+import { QuoteTrackService } from '../../core/tracking';
+import { AppUrls } from '../../shared/config';
+import { QuoteLiteralPipe } from '../../shared/pipes';
 
 /**
  * This component is used to load the routing module dynamically.

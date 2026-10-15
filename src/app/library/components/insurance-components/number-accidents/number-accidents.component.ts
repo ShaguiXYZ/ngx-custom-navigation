@@ -1,29 +1,29 @@
-import { Component, inject, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { NxCopytextModule } from '@allianz/ng-aquila/copytext';
+import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
 import { hasValue, IndexedData } from '@shagui/ng-shagui/core';
-import { QuoteComponent } from 'src/app/core/components';
-import { RoutingService } from 'src/app/core/services';
-import { QuoteTrackDirective } from 'src/app/core/tracking';
-import { QuoteModel } from 'src/app/library/models';
-import { HeaderTitleComponent, QuoteFooterComponent, TextCardComponent } from 'src/app/shared/components';
-import { QuoteLiteralDirective } from 'src/app/shared/directives';
-import { QuoteLiteralPipe } from 'src/app/shared/pipes';
+import { QuoteComponent } from '../../../../core/components';
+import { RoutingService } from '../../../../core/services';
+import { QuoteTrackDirective } from '../../../../core/tracking';
+import { HeaderTitleComponent, QuoteFooterComponent, TextCardComponent } from '../../../../shared/components';
+import { QuoteLiteralDirective } from '../../../../shared/directives';
+import { QuoteLiteralPipe } from '../../../../shared/pipes';
+import { QuoteModel } from '../../../models';
 import { NumberAccidents } from './models';
 
 @Component({
-    selector: 'quote-number-accidents',
-    templateUrl: './number-accidents.component.html',
-    styleUrl: './number-accidents.component.scss',
-    changeDetection: ChangeDetectionStrategy.Eager,
-    imports: [
-        HeaderTitleComponent,
-        QuoteFooterComponent,
-        TextCardComponent,
-        NxCopytextModule,
-        QuoteLiteralDirective,
-        QuoteTrackDirective,
-        QuoteLiteralPipe
-    ]
+  selector: 'quote-number-accidents',
+  templateUrl: './number-accidents.component.html',
+  styleUrl: './number-accidents.component.scss',
+  changeDetection: ChangeDetectionStrategy.Eager,
+  imports: [
+    HeaderTitleComponent,
+    QuoteFooterComponent,
+    TextCardComponent,
+    NxCopytextModule,
+    QuoteLiteralDirective,
+    QuoteTrackDirective,
+    QuoteLiteralPipe
+  ]
 })
 export class NumberAccidentsComponent extends QuoteComponent<QuoteModel> implements OnInit {
   public selectedAccidents?: IndexedData<string, number>;

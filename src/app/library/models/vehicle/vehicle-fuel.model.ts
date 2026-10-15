@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-namespace */
 import { IndexedData } from '@shagui/ng-shagui/core';
-import { FuelTypes } from 'src/app/core/models';
+import { FuelTypes } from '../../../core/models';
 
 export interface FuelDTO {
   value: FuelTypes;

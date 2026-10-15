@@ -2,7 +2,7 @@ import { Injectable, OnDestroy, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { ContextDataService } from '@shagui/ng-shagui/core';
 import { Subscription } from 'rxjs';
-import { AppUrls } from 'src/app/shared/config';
+import { AppUrls } from '../../shared/config';
 import { QUOTE_APP_CONTEXT_DATA, QUOTE_CONTEXT_DATA } from '../constants';
 import { ConditionEvaluation } from '../lib';
 import { AppContextData, NextOption, Page, QuoteControlModel, Step } from '../models';

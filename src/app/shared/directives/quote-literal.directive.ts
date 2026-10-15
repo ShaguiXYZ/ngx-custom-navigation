@@ -1,8 +1,8 @@
 import { AfterViewInit, Directive, ElementRef, Input, OnDestroy } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Subscription } from 'rxjs';
-import { LiteralParam } from 'src/app/core/models';
-import { LiteralsService } from 'src/app/core/services';
+import { LiteralParam } from '../../core/models';
+import { LiteralsService } from '../../core/services';
 
 @Directive({
   selector: '[nxQuoteLiteral]'

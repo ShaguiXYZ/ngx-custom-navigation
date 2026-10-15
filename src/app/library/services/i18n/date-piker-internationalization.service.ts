@@ -1,7 +1,7 @@
-import { inject, Injectable, OnDestroy } from '@angular/core';
 import { NxDatepickerIntl } from '@allianz/ng-aquila/datefield';
+import { inject, Injectable, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { LiteralsService } from 'src/app/core/services';
+import { LiteralsService } from '../../../core/services';
 
 @Injectable()
 export class DatePikerIntl extends NxDatepickerIntl implements OnDestroy {

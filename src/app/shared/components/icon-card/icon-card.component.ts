@@ -1,8 +1,8 @@
-import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, Output, ChangeDetectionStrategy } from '@angular/core';
 import { NxAvatarModule } from '@allianz/ng-aquila/avatar';
 import { NxCopytextModule } from '@allianz/ng-aquila/copytext';
-import { IIconData } from 'src/app/core/models';
+import { CommonModule } from '@angular/common';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import { IIconData } from '../../../core/models';
 import { QuoteLiteralDirective } from '../../directives';
 import { SelectableOptionComponent } from '../selectable-option';
 

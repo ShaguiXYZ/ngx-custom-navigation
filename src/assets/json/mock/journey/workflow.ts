@@ -1,6 +1,6 @@
-import { ConfigurationDTO } from 'src/app/core/models';
-import { WorkflowManifestId } from 'src/app/library/library-manifest';
-import { QuoteModel } from 'src/app/library/models';
+import { ConfigurationDTO } from '../../../../app/core/models';
+import { WorkflowManifestId } from '../../../../app/library/library-manifest';
+import { QuoteModel } from '../../../../app/library/models';
 
 export const WORKFLOW: ConfigurationDTO<QuoteModel, WorkflowManifestId> = {
   homePageId: 'calcula-tu-seguro',

@@ -1,18 +1,18 @@
-import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { NxCopytextModule } from '@allianz/ng-aquila/copytext';
 import { NxFormfieldModule } from '@allianz/ng-aquila/formfield';
 import { NxMaskModule } from '@allianz/ng-aquila/mask';
 import { NxPhoneInputComponent } from '@allianz/ng-aquila/phone-input';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import countries, { LocalizedCountryNames } from 'i18n-iso-countries';
 import { CountryCode } from 'libphonenumber-js';
-import { QuoteComponent } from 'src/app/core/components';
-import { QuoteFormValidarors } from 'src/app/core/form';
-import { LanguageConfig } from 'src/app/core/models';
-import { QuoteModel } from 'src/app/library/models';
-import { HeaderTitleComponent, QuoteFooterComponent } from 'src/app/shared/components';
-import { QuoteAutoFocusDirective, QuoteLiteralDirective } from 'src/app/shared/directives';
-import { QuoteLiteralPipe } from 'src/app/shared/pipes';
+import { QuoteComponent } from '../../../../core/components';
+import { QuoteFormValidarors } from '../../../../core/form';
+import { LanguageConfig } from '../../../../core/models';
+import { HeaderTitleComponent, QuoteFooterComponent } from '../../../../shared/components';
+import { QuoteAutoFocusDirective, QuoteLiteralDirective } from '../../../../shared/directives';
+import { QuoteLiteralPipe } from '../../../../shared/pipes';
+import { QuoteModel } from '../../../models';
 
 @Component({
   selector: 'quote-client-phone-number',

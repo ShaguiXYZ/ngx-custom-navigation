@@ -1,18 +1,18 @@
-import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { NxDatefieldModule, NxDatepickerIntl } from '@allianz/ng-aquila/datefield';
 import { NxFormfieldModule } from '@allianz/ng-aquila/formfield';
 import { NxInputModule } from '@allianz/ng-aquila/input';
 import { NxIsoDateModule } from '@allianz/ng-aquila/iso-date-adapter';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import dayjs, { Dayjs } from 'dayjs';
-import { QuoteComponent } from 'src/app/core/components';
-import { DEFAULT_DATE_FORMAT } from 'src/app/core/constants';
-import { QuoteFormValidarors } from 'src/app/core/form';
-import { QuoteModel } from 'src/app/library/models';
-import { DatePikerIntl } from 'src/app/library/services/i18n';
-import { HeaderTitleComponent, QuoteFooterComponent } from 'src/app/shared/components';
-import { QuoteAutoFocusDirective, QuoteLiteralDirective } from 'src/app/shared/directives';
-import { QuoteLiteralPipe } from 'src/app/shared/pipes';
+import { QuoteComponent } from '../../../../core/components';
+import { DEFAULT_DATE_FORMAT } from '../../../../core/constants';
+import { QuoteFormValidarors } from '../../../../core/form';
+import { HeaderTitleComponent, QuoteFooterComponent } from '../../../../shared/components';
+import { QuoteAutoFocusDirective, QuoteLiteralDirective } from '../../../../shared/directives';
+import { QuoteLiteralPipe } from '../../../../shared/pipes';
+import { QuoteModel } from '../../../models';
+import { DatePikerIntl } from '../../../services/i18n';
 
 @Component({
   selector: 'quote-birthdate',

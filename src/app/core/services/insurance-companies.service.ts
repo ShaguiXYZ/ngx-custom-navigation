@@ -2,7 +2,7 @@ import { HttpStatusCode } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { HttpService, IndexedData, TTL } from '@shagui/ng-shagui/core';
 import { firstValueFrom, map } from 'rxjs';
-import { environment } from 'src/environments/environment';
+import { environment } from '../../../environments/environment';
 import { InsuranceCompany, InsuranceCompanyDTO } from '../models';
 import { _COMPANIES_CACHE_ID_ } from '../models/constants';
 

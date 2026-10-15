@@ -1,19 +1,19 @@
-import { CommonModule } from '@angular/common';
-import { Component, inject, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
 import { NxButtonModule } from '@allianz/ng-aquila/button';
 import { NxCopytextModule } from '@allianz/ng-aquila/copytext';
 import { NxFormfieldModule } from '@allianz/ng-aquila/formfield';
 import { NxInputModule } from '@allianz/ng-aquila/input';
 import { NxMaskModule } from '@allianz/ng-aquila/mask';
-import { QuoteComponent } from 'src/app/core/components';
-import { RoutingService } from 'src/app/core/services';
-import { QuoteTrackDirective } from 'src/app/core/tracking';
-import { QuoteModel, QuoteVehicleModel } from 'src/app/library/models';
-import { VehicleService } from 'src/app/library/services';
-import { HeaderTitleComponent, QuoteFooterComponent, TextCardComponent } from 'src/app/shared/components';
-import { QuoteLiteralDirective } from 'src/app/shared/directives';
-import { QuoteLiteralPipe } from 'src/app/shared/pipes';
+import { CommonModule } from '@angular/common';
+import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
+import { QuoteComponent } from '../../../../core/components';
+import { RoutingService } from '../../../../core/services';
+import { QuoteTrackDirective } from '../../../../core/tracking';
+import { HeaderTitleComponent, QuoteFooterComponent, TextCardComponent } from '../../../../shared/components';
+import { QuoteLiteralDirective } from '../../../../shared/directives';
+import { QuoteLiteralPipe } from '../../../../shared/pipes';
+import { QuoteModel, QuoteVehicleModel } from '../../../models';
+import { VehicleService } from '../../../services';
 
 @Component({
   selector: 'quote-your-car-is',

@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpService } from '@shagui/ng-shagui/core';
 import { firstValueFrom, map } from 'rxjs';
-import { environment } from 'src/environments/environment';
+import { environment } from '../../../environments/environment';
 import { _Error, HttpError } from '../errors';
 import { QuoteTranslateRequest, QuoteTranslateResponse } from '../models';
 import { LanguageService } from './language.service';

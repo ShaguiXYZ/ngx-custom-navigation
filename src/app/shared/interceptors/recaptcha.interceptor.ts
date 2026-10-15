@@ -1,7 +1,7 @@
 import { HttpEvent, HttpHandlerFn, HttpInterceptorFn, HttpRequest } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { StorageLib } from 'src/app/core/lib';
 import { CAPTCHA_TOKEN_KEY, X_RECAPTCHA_RESPONSE } from '../../core/constants';
+import { StorageLib } from '../../core/lib';
 
 export const recaptchaInterceptor: HttpInterceptorFn = (req: HttpRequest<unknown>, next: HttpHandlerFn): Observable<HttpEvent<unknown>> => {
   const token = StorageLib.get(CAPTCHA_TOKEN_KEY);

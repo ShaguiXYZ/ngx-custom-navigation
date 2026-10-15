@@ -41,7 +41,7 @@
               "includePaths": ["src/styles"]
             },
             "scripts": ["src/assets/js/tracking.js"],
-            "allowedCommonJsDependencies": ["crypto-js", "iban", "dayjs"]
+            "allowedCommonJsDependencies": ["crypto-js", "iban", "dayjs", "i18n-iso-countries"]
           },
           "configurations": {
             "local": {
@@ -66,7 +66,7 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "2MB",
+                  "maximumWarning": "2.25MB",
                   "maximumError": "5MB"
                 },
                 {

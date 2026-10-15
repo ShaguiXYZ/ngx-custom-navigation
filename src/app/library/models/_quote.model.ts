@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-namespace */
-import { dataHash, QuoteControlModel, QuoteOfferingModel } from 'src/app/core/models';
+import { dataHash, QuoteControlModel, QuoteOfferingModel } from '../../core/models';
 import { QuoteBlackList } from './quote-black-list.model';
 import { QuoteClientModel } from './quote-client.model';
 import { QuoteContactDataModel } from './quote-contact-data.model';
