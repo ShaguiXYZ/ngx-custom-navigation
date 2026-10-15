@@ -1,6 +1,6 @@
 import { ApplicationRef, inject, Injectable, OnDestroy } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { StorageLib } from 'src/app/core/lib';
+import { StorageLib } from '../../../../core/lib';
 import { STORAGE_THEME_KEY, Theme } from '../models';
 
 // @howto service to handle theme changes

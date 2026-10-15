@@ -1,4 +1,4 @@
-import { Component, HostListener, inject, OnDestroy, OnInit } from '@angular/core';
+import { Component, HostListener, inject, OnDestroy, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { NavigationEnd, Router, RouterModule } from '@angular/router';
 import { $, ContextDataService, NotificationService } from '@shagui/ng-shagui/core';
 import { filter, Subscription } from 'rxjs';
@@ -22,6 +22,7 @@ import { NxGridModule } from '@allianz/ng-aquila/grid';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
   providers: [QuoteLiteralPipe],
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [
     RouterModule,
     NxGridModule,

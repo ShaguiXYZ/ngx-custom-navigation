@@ -1,3 +1,7 @@
+import { NxButtonComponent } from '@allianz/ng-aquila/button';
+import { NxCopytextComponent } from '@allianz/ng-aquila/copytext';
+import { NxLinkComponent } from '@allianz/ng-aquila/link';
+import { NxRadioComponent, NxRadioGroupComponent } from '@allianz/ng-aquila/radio-button';
 import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout';
 import { CommonModule } from '@angular/common';
 import {
@@ -13,18 +17,14 @@ import {
   WritableSignal
 } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { NxButtonComponent } from '@allianz/ng-aquila/button';
-import { NxCopytextComponent } from '@allianz/ng-aquila/copytext';
-import { NxLinkComponent } from '@allianz/ng-aquila/link';
-import { NxRadioComponent, NxRadioGroupComponent } from '@allianz/ng-aquila/radio-button';
+import { hasValue } from '@shagui/ng-shagui/core';
 import { Subscription } from 'rxjs';
-import { FeeModel, OfferingPriceModel, QuoteFooterConfig } from 'src/app/core/models';
-import { QuoteTrackDirective } from 'src/app/core/tracking';
-import { QuoteLiteralDirective } from 'src/app/shared/directives';
-import { QuoteLiteralPipe, QuoteNumberPipe } from 'src/app/shared/pipes';
+import { FeeModel, OfferingPriceModel, QuoteFooterConfig } from '../../../../../core/models';
+import { QuoteTrackDirective } from '../../../../../core/tracking';
+import { QuoteLiteralDirective } from '../../../../directives';
+import { QuoteLiteralPipe, QuoteNumberPipe } from '../../../../pipes';
 import { HeaderTitleComponent } from '../../../header-title';
 import { QuoteFooterComponent } from '../../../quote-footer';
-import { hasValue } from '@shagui/ng-shagui/core';
 
 @Component({
   selector: 'quote-offering-price-card',

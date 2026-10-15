@@ -1,15 +1,16 @@
-import { Component, EventEmitter, inject, Output } from '@angular/core';
-import { CaptchaService } from 'src/app/core/services';
+import { ChangeDetectionStrategy, Component, EventEmitter, inject, Output } from '@angular/core';
+import { CaptchaService } from '../../../core/services';
 import { QuoteLiteralDirective } from '../../directives';
 import { HeaderTitleComponent } from '../header-title';
 import { ColorCaptchaComponent } from './components/color-captcha';
 import { CAPTCHA_SUBMIT_KEY } from './constants';
 
 @Component({
-    selector: 'quote-captcha',
-    templateUrl: './captcha.component.html',
-    styleUrl: './captcha.component.scss',
-    imports: [ColorCaptchaComponent, HeaderTitleComponent, QuoteLiteralDirective]
+  selector: 'quote-captcha',
+  templateUrl: './captcha.component.html',
+  styleUrl: './captcha.component.scss',
+  changeDetection: ChangeDetectionStrategy.Eager,
+  imports: [ColorCaptchaComponent, HeaderTitleComponent, QuoteLiteralDirective]
 })
 export class CaptchaComponent {
   @Output()

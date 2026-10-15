@@ -24,8 +24,8 @@
   </section>
   <quote-footer
     [trackInfo]="{
-      name: form.get('name')?.value,
-      surname: form.get('surname')?.value
+      name: $safeNavigationMigration(form.get('name')?.value),
+      surname: $safeNavigationMigration(form.get('surname')?.value)
     }"
     (uiOnNext)="updateValidData()"
   />

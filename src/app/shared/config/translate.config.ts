@@ -1,4 +1,4 @@
-import { MissingTranslationHandler, MissingTranslationHandlerParams, TranslateModuleConfig } from '@ngx-translate/core';
+import { MissingTranslationHandler, MissingTranslationHandlerParams } from '@ngx-translate/core';
 import { provideTranslateHttpLoader } from '@ngx-translate/http-loader';
 
 import countries from 'i18n-iso-countries';
@@ -27,11 +27,6 @@ export class CustomMissingTranslationHandler implements MissingTranslationHandle
     return undefined;
   }
 }
-
-export const TRANSLATE_MODULE_CONFIG: TranslateModuleConfig = {
-  loader: createTranslateLoader(),
-  missingTranslationHandler: { provide: MissingTranslationHandler, useClass: CustomMissingTranslationHandler }
-};
 
 export const nxLanguageConfig = {
   languages: {

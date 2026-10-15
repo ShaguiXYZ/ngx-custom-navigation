@@ -1,10 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { TestBed } from '@angular/core/testing';
+import { skip } from 'rxjs';
+import { StorageLib } from '../../../../core/lib';
 import { STORAGE_THEME_KEY, Theme } from '../models';
 import { ThemingService } from './theming.service';
 
 describe('ThemingService', () => {
   beforeEach(() => {
+    StorageLib.remove(STORAGE_THEME_KEY, 'local');
     const httpClientSpy = jasmine.createSpyObj('HttpClient', ['get', 'post', 'put', 'delete']);
 
     TestBed.configureTestingModule({
@@ -13,7 +16,7 @@ describe('ThemingService', () => {
   });
 
   afterEach(() => {
-    localStorage.removeItem(STORAGE_THEME_KEY);
+    StorageLib.remove(STORAGE_THEME_KEY, 'local');
   });
 
   it('should be created', () => {
@@ -43,8 +46,9 @@ describe('ThemingService', () => {
 
   it('should emit themeChange when theme is changed', done => {
     const service = TestBed.inject(ThemingService);
+    service.theme = 'light';
 
-    service.themeChange.subscribe((theme: Theme) => {
+    service.themeChange.pipe(skip(1)).subscribe((theme: Theme) => {
       expect(theme).toBe('dark');
       done();
     });

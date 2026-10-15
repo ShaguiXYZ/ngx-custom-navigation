@@ -1,19 +1,19 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NxCopytextModule } from '@allianz/ng-aquila/copytext';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { TranslateService } from '@ngx-translate/core';
 import { ContextDataService } from '@shagui/ng-shagui/core';
 import { of, Subject } from 'rxjs';
-import { NX_WORKFLOW_TOKEN } from 'src/app/core/components/models';
-import { QUOTE_APP_CONTEXT_DATA, QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
-import { NX_LANGUAGE_CONFIG } from 'src/app/core/models';
-import { ServiceActivatorService } from 'src/app/core/service-activators';
-import { NX_RECAPTCHA_TOKEN, RoutingService } from 'src/app/core/services';
-import { QuoteTrackService } from 'src/app/core/tracking';
-import { QuoteModel } from 'src/app/library/models';
-import { HeaderTitleComponent, QuoteFooterComponent, SelectableOptionComponent } from 'src/app/shared/components';
-import { QuoteLiteralDirective } from 'src/app/shared/directives';
-import { QuoteLiteralPipe } from 'src/app/shared/pipes';
+import { NX_WORKFLOW_TOKEN } from '../../../../core/components/models';
+import { QUOTE_APP_CONTEXT_DATA, QUOTE_CONTEXT_DATA } from '../../../../core/constants';
+import { NX_LANGUAGE_CONFIG } from '../../../../core/models';
+import { ServiceActivatorService } from '../../../../core/service-activators';
+import { NX_RECAPTCHA_TOKEN, RoutingService } from '../../../../core/services';
+import { QuoteTrackService } from '../../../../core/tracking';
+import { HeaderTitleComponent, QuoteFooterComponent, SelectableOptionComponent } from '../../../../shared/components';
+import { QuoteLiteralDirective } from '../../../../shared/directives';
+import { QuoteLiteralPipe } from '../../../../shared/pipes';
+import { QuoteModel } from '../../../models';
 import { NumberAccidentsComponent } from './number-accidents.component';
 
 describe('NumberAccidentsComponent', () => {
@@ -26,7 +26,7 @@ describe('NumberAccidentsComponent', () => {
     const quoteLiteralPipeSpy = jasmine.createSpyObj('QuoteLiteralPipe', ['transform']);
     const routingServiceSpy = jasmine.createSpyObj('RoutingService', ['next']);
     const contextDataServiceSpy = jasmine.createSpyObj('ContextDataService', ['get', 'set', 'onDataChange']);
-    const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate', 'setDefaultLang', 'use', 'instant']);
+    const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate', 'setFallbackLang', 'use', 'instant']);
     const activateEntryPointSpy = jasmine.createSpyObj('ServiceActivatorService', ['activateEntryPoint']);
     const mockWorkflowConfig = {
       errorPageId: 'error',

@@ -1,21 +1,22 @@
-import { CommonModule } from '@angular/common';
-import { Component, inject, OnInit } from '@angular/core';
 import { NxCopytextModule } from '@allianz/ng-aquila/copytext';
+import { CommonModule } from '@angular/common';
+import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
 import { IndexedData } from '@shagui/ng-shagui/core';
 import { Observable } from 'rxjs';
-import { QuoteComponent } from 'src/app/core/components';
-import { RoutingService } from 'src/app/core/services';
-import { QuoteTrackDirective } from 'src/app/core/tracking';
-import { QuoteModel } from 'src/app/library/models';
-import { HeaderTitleComponent, QuoteFooterComponent, TextCardComponent } from 'src/app/shared/components';
-import { QuoteLiteralDirective } from 'src/app/shared/directives';
-import { QuoteLiteralPipe } from 'src/app/shared/pipes';
+import { QuoteComponent } from '../../../../core/components';
+import { RoutingService } from '../../../../core/services';
+import { QuoteTrackDirective } from '../../../../core/tracking';
+import { HeaderTitleComponent, QuoteFooterComponent, TextCardComponent } from '../../../../shared/components';
+import { QuoteLiteralDirective } from '../../../../shared/directives';
+import { QuoteLiteralPipe } from '../../../../shared/pipes';
+import { QuoteModel } from '../../../models';
 import { VehicleTypes } from './models';
 
 @Component({
   selector: 'quote-vehicle-type',
   templateUrl: './vehicle-type.component.html',
   styleUrl: './vehicle-type.component.scss',
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [
     CommonModule,
     HeaderTitleComponent,

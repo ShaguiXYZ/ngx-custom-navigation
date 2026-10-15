@@ -22,9 +22,9 @@
               [selected]="_selectedFuel"
               [nxTrack]="{
                 label: fuel.data,
-                displayment: selectedCubicCapacity?.index,
+                displayment: $safeNavigationMigration(selectedCubicCapacity?.index),
                 fuel: fuel.index,
-                power: selectedPower?.index
+                power: $safeNavigationMigration(selectedPower?.index)
               }"
               [nxTrackEvents]="['click']"
               (uiSelect)="selectFuel(fuel)"
@@ -60,8 +60,8 @@
               [nxTrack]="{
                 label: cubicCapacity.data,
                 displayment: cubicCapacity.index,
-                fuel: selectedFuel?.index,
-                power: selectedPower?.index
+                fuel: $safeNavigationMigration(selectedFuel?.index),
+                power: $safeNavigationMigration(selectedPower?.index)
               }"
               [nxTrackEvents]="['click']"
               (uiSelect)="selectCubicCapacity(cubicCapacity)"
@@ -86,7 +86,7 @@
                 label: _cubicCapacityNotKnownLabel,
                 displayment: cubicCapacityNotKnown.index,
                 fuel: cubicCapacityNotKnown.index,
-                power: selectedPower?.index
+                power: $safeNavigationMigration(selectedPower?.index)
               }"
               [nxTrackEvents]="['click']"
               (uiSelect)="selectCubicCapacity(cubicCapacityNotKnown)"
@@ -118,8 +118,8 @@
               [selected]="_selectedPower"
               [nxTrack]="{
                 label: power.data,
-                displayment: selectedCubicCapacity?.index,
-                fuel: selectedFuel?.index,
+                displayment: $safeNavigationMigration(selectedCubicCapacity?.index),
+                fuel: $safeNavigationMigration(selectedFuel?.index),
                 power: power.index
               }"
               [nxTrackEvents]="['click']"
@@ -140,8 +140,8 @@
               [selected]="_powerNotKnown"
               [nxTrack]="{
                 label: _powerNotKnownLabel,
-                displayment: selectedCubicCapacity?.index,
-                fuel: selectedFuel?.index,
+                displayment: $safeNavigationMigration(selectedCubicCapacity?.index),
+                fuel: $safeNavigationMigration(selectedFuel?.index),
                 power: powerNotKnown.index
               }"
               [nxTrackEvents]="['click']"
@@ -160,8 +160,8 @@
   </section>
   <quote-footer
     [trackInfo]="{
-      displayment: selectedCubicCapacity?.index,
-      fuel: selectedFuel?.index,
+      displayment: $safeNavigationMigration(selectedCubicCapacity?.index),
+      fuel: $safeNavigationMigration(selectedFuel?.index),
       power: powerNotKnown.index
     }"
     (uiOnNext)="populateData()"

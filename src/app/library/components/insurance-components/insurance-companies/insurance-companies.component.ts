@@ -1,19 +1,19 @@
-import { CommonModule } from '@angular/common';
-import { Component, ElementRef, inject, OnInit, viewChild } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { NxFormfieldModule } from '@allianz/ng-aquila/formfield';
 import { NxInputModule } from '@allianz/ng-aquila/input';
+import { CommonModule } from '@angular/common';
+import { ChangeDetectionStrategy, Component, ElementRef, inject, OnInit, viewChild } from '@angular/core';
+import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { IndexedData } from '@shagui/ng-shagui/core';
 import { debounceTime, distinctUntilChanged, fromEvent, Subscription } from 'rxjs';
-import { QuoteComponent } from 'src/app/core/components';
-import { DEBOUNCE_TIME } from 'src/app/core/constants';
-import { IIconData } from 'src/app/core/models';
-import { InsuranceCompaniesService, RoutingService } from 'src/app/core/services';
-import { QuoteTrackDirective } from 'src/app/core/tracking';
-import { QuoteModel } from 'src/app/library/models';
-import { HeaderTitleComponent, IconCardComponent, QuoteFooterComponent, TextCardComponent } from 'src/app/shared/components';
-import { QuoteAutoFocusDirective, QuoteLiteralDirective } from 'src/app/shared/directives';
-import { QuoteLiteralPipe } from 'src/app/shared/pipes';
+import { QuoteComponent } from '../../../../core/components';
+import { DEBOUNCE_TIME } from '../../../../core/constants';
+import { IIconData } from '../../../../core/models';
+import { InsuranceCompaniesService, RoutingService } from '../../../../core/services';
+import { QuoteTrackDirective } from '../../../../core/tracking';
+import { HeaderTitleComponent, IconCardComponent, QuoteFooterComponent, TextCardComponent } from '../../../../shared/components';
+import { QuoteAutoFocusDirective, QuoteLiteralDirective } from '../../../../shared/directives';
+import { QuoteLiteralPipe } from '../../../../shared/pipes';
+import { QuoteModel } from '../../../models';
 import { InsuranceComponentService } from './services';
 
 @Component({
@@ -34,6 +34,7 @@ import { InsuranceComponentService } from './services';
     QuoteAutoFocusDirective,
     QuoteLiteralPipe
   ],
+  changeDetection: ChangeDetectionStrategy.Eager,
   providers: [InsuranceComponentService, InsuranceCompaniesService]
 })
 export class InsuranceCompaniesComponent extends QuoteComponent<QuoteModel> implements OnInit {
@@ -58,7 +59,7 @@ export class InsuranceCompaniesComponent extends QuoteComponent<QuoteModel> impl
 
     this.iconInsurances = insuranceList
       .filter(insurance => Object.keys(iconDictionary).includes(insurance.index))
-      .map(insurance => ({ ...iconDictionary[insurance.index], index: insurance.index, data: insurance.data } as IIconData));
+      .map(insurance => ({ ...iconDictionary[insurance.index], index: insurance.index, data: insurance.data }) as IIconData);
 
     this.selectedCompany = this._contextData.insuranceCompany?.company;
 

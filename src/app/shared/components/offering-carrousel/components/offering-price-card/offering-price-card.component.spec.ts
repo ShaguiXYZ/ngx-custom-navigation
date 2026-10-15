@@ -3,11 +3,11 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { TranslateService } from '@ngx-translate/core';
 import { ContextDataService } from '@shagui/ng-shagui/core';
 import { of } from 'rxjs';
-import { NX_WORKFLOW_TOKEN } from 'src/app/core/components/models';
-import { NX_LANGUAGE_CONFIG, OfferingPriceModel } from 'src/app/core/models';
-import { NX_RECAPTCHA_TOKEN } from 'src/app/core/services';
-import { ContextDataServiceStub } from 'src/app/core/stub';
-import { QuoteLiteralPipe } from 'src/app/shared/pipes';
+import { NX_WORKFLOW_TOKEN } from '../../../../../core/components/models';
+import { NX_LANGUAGE_CONFIG, OfferingPriceModel } from '../../../../../core/models';
+import { NX_RECAPTCHA_TOKEN } from '../../../../../core/services';
+import { ContextDataServiceStub } from '../../../../../core/stub';
+import { QuoteLiteralPipe } from '../../../../pipes';
 import { QuoteOfferingPriceCardComponent } from './offering-price-card.component';
 
 describe('QuoteOfferingPriceCardComponent', () => {
@@ -17,7 +17,7 @@ describe('QuoteOfferingPriceCardComponent', () => {
   beforeEach(async () => {
     const quoteLiteralPipeSpy = jasmine.createSpyObj('QuoteLiteralPipe', ['transform']);
     const httpClientSpy = jasmine.createSpyObj('HttpClient', ['get', 'post', 'put', 'delete']);
-    const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate', 'setDefaultLang', 'use', 'instant']);
+    const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate', 'setFallbackLang', 'use', 'instant']);
     const mockWorkflowConfig = {
       errorPageId: 'error',
       manifest: {}

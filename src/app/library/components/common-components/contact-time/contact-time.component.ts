@@ -1,26 +1,26 @@
-import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
 import { NxCopytextModule } from '@allianz/ng-aquila/copytext';
-import { QuoteComponent } from 'src/app/core/components';
-import { QuoteTrackDirective } from 'src/app/core/tracking';
-import { Hour, QuoteModel } from 'src/app/library/models';
-import { HeaderTitleComponent, QuoteFooterComponent, QuoteZoneComponent, TextCardComponent } from 'src/app/shared/components';
-import { QuoteLiteralDirective } from 'src/app/shared/directives';
+
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { QuoteComponent } from '../../../../core/components';
+import { QuoteTrackDirective } from '../../../../core/tracking';
+import { HeaderTitleComponent, QuoteFooterComponent, QuoteZoneComponent, TextCardComponent } from '../../../../shared/components';
+import { QuoteLiteralDirective } from '../../../../shared/directives';
+import { Hour, QuoteModel } from '../../../models';
 
 @Component({
-    selector: 'quote-contact-time',
-    imports: [
-        CommonModule,
-        HeaderTitleComponent,
-        QuoteFooterComponent,
-        QuoteZoneComponent,
-        TextCardComponent,
-        NxCopytextModule,
-        QuoteLiteralDirective,
-        QuoteTrackDirective
-    ],
-    templateUrl: './contact-time.component.html',
-    styleUrl: './contact-time.component.scss'
+  selector: 'quote-contact-time',
+  imports: [
+    HeaderTitleComponent,
+    QuoteFooterComponent,
+    QuoteZoneComponent,
+    TextCardComponent,
+    NxCopytextModule,
+    QuoteLiteralDirective,
+    QuoteTrackDirective
+],
+  templateUrl: './contact-time.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
+  styleUrl: './contact-time.component.scss'
 })
 export class ContactTimeComponent extends QuoteComponent<QuoteModel> implements OnInit {
   public hours: { am: Hour[]; pm: Hour[] } = {

@@ -1,10 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
     selector: 'quote-selectable-option',
     imports: [CommonModule],
     templateUrl: './selectable-option.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrl: './selectable-option.component.scss'
 })
 export class SelectableOptionComponent {

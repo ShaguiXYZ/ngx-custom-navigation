@@ -1,14 +1,14 @@
+import { NxAvatarModule } from '@allianz/ng-aquila/avatar';
+import { NxCopytextModule } from '@allianz/ng-aquila/copytext';
 import { CommonModule } from '@angular/common';
 import { ɵDeferBlockState } from '@angular/core';
 import { ComponentFixture, DeferBlockBehavior, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { NxAvatarModule } from '@allianz/ng-aquila/avatar';
-import { NxCopytextModule } from '@allianz/ng-aquila/copytext';
 import { TranslateService } from '@ngx-translate/core';
 import { ContextDataService } from '@shagui/ng-shagui/core';
 import { of } from 'rxjs';
-import { IIconData, NX_LANGUAGE_CONFIG } from 'src/app/core/models';
-import { ContextDataServiceStub } from 'src/app/core/stub';
+import { IIconData, NX_LANGUAGE_CONFIG } from '../../../core/models';
+import { ContextDataServiceStub } from '../../../core/stub';
 import { QuoteLiteralDirective } from '../../directives';
 import { SelectableOptionComponent } from '../selectable-option';
 import { IconCardComponent } from './icon-card.component';
@@ -19,7 +19,7 @@ describe('IconCardComponent', () => {
   let fixture: ComponentFixture<IconCardComponent>;
 
   beforeEach(async () => {
-    const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate', 'setDefaultLang', 'use', 'instant']);
+    const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate', 'setFallbackLang', 'use', 'instant']);
     const mockLanguageConfig = {
       current: 'en',
       languages: ['en', 'fr']

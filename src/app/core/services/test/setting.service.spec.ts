@@ -14,7 +14,7 @@ describe('SettingsService', () => {
   let journeyServiceSpy: jasmine.SpyObj<JourneyService>;
 
   beforeEach(() => {
-    const translateSpy = jasmine.createSpyObj('TranslateService', ['setDefaultLang']);
+    const translateSpy = jasmine.createSpyObj('TranslateService', ['setFallbackLang']);
     const contextSpy = jasmine.createSpyObj('ContextDataService', ['set', 'get']);
     const journeySpy = jasmine.createSpyObj('JourneyService', [
       'journeySettings',

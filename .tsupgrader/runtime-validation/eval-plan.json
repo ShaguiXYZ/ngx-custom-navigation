@@ -1,0 +1,63 @@
+{
+  "generatedAt": "2026-10-14T10:25:00Z",
+  "generatedOnPlatform": "win32",
+  "projectType": "webapp",
+  "setup": [],
+  "assertions": [
+    {
+      "name": "production-build",
+      "kind": "process",
+      "command": "C:\\Users\\Shagui\\AppData\\Roaming\\fnm\\node-versions\\v24.21.0\\installation\\node.exe",
+      "args": [
+        "C:\\Users\\Shagui\\AppData\\Roaming\\fnm\\node-versions\\v24.21.0\\installation\\node_modules\\npm\\bin\\npm-cli.js",
+        "run",
+        "build"
+      ],
+      "prependPath": [
+        "C:\\Users\\Shagui\\AppData\\Roaming\\fnm\\node-versions\\v24.21.0\\installation"
+      ],
+      "verificationMethod": "exit-code",
+      "expected": "0",
+      "timeoutSeconds": 300
+    },
+    {
+      "name": "tests-pass",
+      "kind": "process",
+      "command": "C:\\Users\\Shagui\\AppData\\Roaming\\fnm\\node-versions\\v24.21.0\\installation\\node.exe",
+      "args": [
+        "C:\\Users\\Shagui\\AppData\\Roaming\\fnm\\node-versions\\v24.21.0\\installation\\node_modules\\npm\\bin\\npm-cli.js",
+        "test",
+        "--",
+        "--watch=false"
+      ],
+      "prependPath": [
+        "C:\\Users\\Shagui\\AppData\\Roaming\\fnm\\node-versions\\v24.21.0\\installation"
+      ],
+      "verificationMethod": "test-results",
+      "expected": "0",
+      "timeoutSeconds": 300
+    },
+    {
+      "name": "dev-server-serves-home",
+      "kind": "http-probe",
+      "startCommand": "C:\\Users\\Shagui\\AppData\\Roaming\\fnm\\node-versions\\v24.21.0\\installation\\node.exe",
+      "startArgs": [
+        "C:\\Users\\Shagui\\AppData\\Roaming\\fnm\\node-versions\\v24.21.0\\installation\\node_modules\\npm\\bin\\npm-cli.js",
+        "run",
+        "start",
+        "--",
+        "--host",
+        "127.0.0.1",
+        "--port",
+        "4200"
+      ],
+      "prependPath": [
+        "C:\\Users\\Shagui\\AppData\\Roaming\\fnm\\node-versions\\v24.21.0\\installation"
+      ],
+      "url": "http://127.0.0.1:4200/",
+      "verificationMethod": "http-status",
+      "expected": "200",
+      "timeoutSeconds": 180
+    }
+  ]
+}

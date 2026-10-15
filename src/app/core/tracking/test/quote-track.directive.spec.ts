@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { QuoteTrackDirective } from '../quote-track.directive';
@@ -8,6 +8,7 @@ import { QuoteTrackService } from '../quote-track.service';
 @Component({
   standalone: true,
   imports: [QuoteTrackDirective],
+  changeDetection: ChangeDetectionStrategy.Eager,
   template: `<div [nxTrack]="trackInfo" [nxTrackEvents]="trackEvents"></div>`
 })
 class TestComponent {

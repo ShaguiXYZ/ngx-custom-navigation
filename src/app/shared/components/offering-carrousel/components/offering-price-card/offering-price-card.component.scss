@@ -1,4 +1,4 @@
-@import '../../styles/carousel.scss';
+@use '../../styles/carousel' as *;
 
 @property --angle {
   syntax: '<angle>';

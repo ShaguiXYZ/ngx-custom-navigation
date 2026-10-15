@@ -1,19 +1,20 @@
-import { CommonModule } from '@angular/common';
-import { Component, inject, OnDestroy, OnInit } from '@angular/core';
-import { QuoteComponent } from 'src/app/core/components';
-import { QuoteError } from 'src/app/core/errors';
-import { OfferingPriceModel } from 'src/app/core/models';
-import { RoutingService } from 'src/app/core/services';
-import { QuoteModel } from 'src/app/library/models';
-import { OfferingsService } from 'src/app/library/services/offerings.service';
-import { HeaderTitleComponent, OfferingCarrouselComponent, QuoteFooterComponent } from 'src/app/shared/components';
-import { QuoteLiteralDirective } from 'src/app/shared/directives';
+
+import { ChangeDetectionStrategy, Component, inject, OnDestroy, OnInit } from '@angular/core';
+import { QuoteComponent } from '../../../../core/components';
+import { QuoteError } from '../../../../core/errors';
+import { OfferingPriceModel } from '../../../../core/models';
+import { RoutingService } from '../../../../core/services';
+import { HeaderTitleComponent, OfferingCarrouselComponent, QuoteFooterComponent } from '../../../../shared/components';
+import { QuoteLiteralDirective } from '../../../../shared/directives';
+import { QuoteModel } from '../../../models';
+import { OfferingsService } from '../../../services';
 
 @Component({
   selector: 'quote-quote-offerings',
   templateUrl: './quote-offerings.component.html',
   styleUrl: './quote-offerings.component.scss',
-  imports: [CommonModule, HeaderTitleComponent, OfferingCarrouselComponent, QuoteFooterComponent, QuoteLiteralDirective],
+  imports: [HeaderTitleComponent, OfferingCarrouselComponent, QuoteFooterComponent, QuoteLiteralDirective],
+  changeDetection: ChangeDetectionStrategy.Eager,
   providers: [OfferingsService]
 })
 export class QuoteOfferingsComponent extends QuoteComponent<QuoteModel> implements OnInit, OnDestroy {

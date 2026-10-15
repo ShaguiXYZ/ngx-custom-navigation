@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnDestroy, OnInit, Output, ChangeDetectionStrategy } from '@angular/core';
 import { CAPTCHA_IMAGES } from './constants/captcha-images';
 import { TTL } from '@shagui/ng-shagui/core';
 
@@ -7,6 +7,7 @@ import { TTL } from '@shagui/ng-shagui/core';
   selector: 'quote-color-captcha',
   templateUrl: './color-captcha.component.html',
   styleUrls: ['./color-captcha.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [CommonModule]
 })
 export class ColorCaptchaComponent implements OnInit, OnDestroy {

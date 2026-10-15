@@ -2,8 +2,8 @@ import { HttpStatusCode } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { HttpService, TTL } from '@shagui/ng-shagui/core';
 import { firstValueFrom, map } from 'rxjs';
-import { IconDictionary } from 'src/app/core/models';
-import { _ICON_INSURANCES_CACHE_ID_ } from 'src/app/library/models/constants';
+import { IconDictionary } from '../../../../../core/models';
+import { _ICON_INSURANCES_CACHE_ID_ } from '../../../../models/constants';
 
 @Injectable()
 export class InsuranceComponentService {

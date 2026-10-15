@@ -1,10 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { TranslateService } from '@ngx-translate/core';
 import { of } from 'rxjs';
-import { NX_LANGUAGE_CONFIG } from 'src/app/core/models';
-import { CaptchaService } from 'src/app/core/services';
-import { HeaderTitleComponent } from 'src/app/shared/components';
-import { QuoteLiteralDirective } from 'src/app/shared/directives';
+import { NX_LANGUAGE_CONFIG } from '../../../core/models';
+import { CaptchaService } from '../../../core/services';
+import { QuoteLiteralDirective } from '../../directives';
+import { HeaderTitleComponent } from '../header-title';
 import { CaptchaComponent } from './captcha.component';
 import { ColorCaptchaComponent } from './components';
 import { CAPTCHA_SUBMIT_KEY } from './constants';
@@ -15,7 +15,7 @@ describe('CaptchaComponent', () => {
   let captchaServiceSpy: jasmine.SpyObj<CaptchaService>;
 
   beforeEach(async () => {
-    const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate', 'setDefaultLang', 'use', 'instant']);
+    const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate', 'setFallbackLang', 'use', 'instant']);
     const mockLanguageConfig = {
       current: 'en',
       languages: ['en', 'fr']

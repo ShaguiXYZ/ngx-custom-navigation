@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 import { NxCopytextModule } from '@allianz/ng-aquila/copytext';
 import { QuoteTranslatePipe } from '../../pipes';
 
@@ -7,6 +7,7 @@ import { QuoteTranslatePipe } from '../../pipes';
   selector: 'quote-translate-text',
   templateUrl: './translate-text.component.html',
   styleUrl: './translate-text.component.scss',
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [CommonModule, QuoteTranslatePipe, NxCopytextModule]
 })
 export class TranslateTextComponent {

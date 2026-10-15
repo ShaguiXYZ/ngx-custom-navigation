@@ -3,12 +3,12 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { TranslateService } from '@ngx-translate/core';
 import { ContextDataService } from '@shagui/ng-shagui/core';
 import { Subject } from 'rxjs';
-import { NX_WORKFLOW_TOKEN } from 'src/app/core/components/models';
-import { QUOTE_APP_CONTEXT_DATA } from 'src/app/core/constants';
-import { AppContextData, NX_LANGUAGE_CONFIG } from 'src/app/core/models';
-import { LanguageService, NX_RECAPTCHA_TOKEN, RoutingService } from 'src/app/core/services';
-import { ContextDataServiceStub } from 'src/app/core/stub';
-import { QuoteTrackService } from 'src/app/core/tracking';
+import { NX_WORKFLOW_TOKEN } from '../../../core/components/models';
+import { QUOTE_APP_CONTEXT_DATA } from '../../../core/constants';
+import { AppContextData, NX_LANGUAGE_CONFIG } from '../../../core/models';
+import { LanguageService, NX_RECAPTCHA_TOKEN, RoutingService } from '../../../core/services';
+import { ContextDataServiceStub } from '../../../core/stub';
+import { QuoteTrackService } from '../../../core/tracking';
 import { QuoteLiteralPipe } from '../../pipes';
 import { QuoteHeaderComponent } from './quote-header.component';
 

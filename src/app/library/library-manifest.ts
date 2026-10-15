@@ -1,5 +1,5 @@
 import { InjectionToken } from '@angular/core';
-import { environment } from 'src/environments/environment';
+import { environment } from '../../environments/environment';
 import { QuoteComponent } from '../core/components';
 import { Manifest, QuoteWorkflowSettings } from '../core/components/models';
 import { ActivatorFn, ActivatorServices, ServiceActivatorType } from '../core/service-activators';

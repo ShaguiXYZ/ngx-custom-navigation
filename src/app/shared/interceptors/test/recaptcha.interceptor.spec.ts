@@ -1,8 +1,8 @@
-import { HttpClient, HttpErrorResponse, provideHttpClient, withInterceptors } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, provideHttpClient, withInterceptors, withXhr } from '@angular/common/http';
 import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
-import { StorageLib } from 'src/app/core/lib';
 import { CAPTCHA_TOKEN_KEY, X_RECAPTCHA_RESPONSE } from '../../../core/constants';
+import { StorageLib } from '../../../core/lib';
 import { recaptchaInterceptor } from '../recaptcha.interceptor';
 
 describe('RecaptchaInterceptor', () => {
@@ -12,7 +12,7 @@ describe('RecaptchaInterceptor', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [],
-      providers: [provideHttpClient(withInterceptors([recaptchaInterceptor])), provideHttpClientTesting()]
+      providers: [provideHttpClient(withXhr(), withInterceptors([recaptchaInterceptor])), provideHttpClientTesting()]
     });
 
     httpMock = TestBed.inject(HttpTestingController);

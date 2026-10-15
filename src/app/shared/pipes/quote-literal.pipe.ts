@@ -1,6 +1,6 @@
 import { inject, Pipe, PipeTransform } from '@angular/core';
-import { LiteralModel, LiteralParam } from 'src/app/core/models';
-import { LiteralsService } from 'src/app/core/services';
+import { LiteralModel, LiteralParam } from '../../core/models';
+import { LiteralsService } from '../../core/services';
 
 @Pipe({
   name: 'quoteLiteral',

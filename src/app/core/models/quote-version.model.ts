@@ -20,7 +20,7 @@ export namespace VersionInfo {
     }
 
     const parseVersion = (version: string) => {
-      let _version = /^v\d+\.\d+(\.\d+)?$/.test(version) ? version : 'v0.0.0';
+      const _version = /^v\d+\.\d+(\.\d+)?$/.test(version) ? version : 'v0.0.0';
 
       const [major, minor, patch] = _version
         .slice(1) // remove 'v' at the beginning (v1.2.3 => 1.2.3)

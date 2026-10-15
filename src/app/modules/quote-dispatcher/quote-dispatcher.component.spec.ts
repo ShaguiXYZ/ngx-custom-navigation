@@ -3,11 +3,11 @@ import { ActivatedRoute, ActivatedRouteSnapshot, Router } from '@angular/router'
 import { TranslateService } from '@ngx-translate/core';
 import { ContextDataService, HttpService } from '@shagui/ng-shagui/core';
 import { of } from 'rxjs';
-import { NX_WORKFLOW_TOKEN } from 'src/app/core/components/models';
-import { CommercialExceptionsModel, JourneyInfo, NX_LANGUAGE_CONFIG, QuoteSettingsModel } from 'src/app/core/models';
-import { BudgetActivator } from 'src/app/core/service-activators/budget.activator';
-import { JourneyService, NX_RECAPTCHA_TOKEN, RoutingService, SettingsService } from 'src/app/core/services';
-import { QuoteTrackService } from 'src/app/core/tracking';
+import { NX_WORKFLOW_TOKEN } from '../../core/components/models';
+import { CommercialExceptionsModel, JourneyInfo, NX_LANGUAGE_CONFIG, QuoteSettingsModel } from '../../core/models';
+import { BudgetActivator } from '../../core/service-activators/budget.activator';
+import { JourneyService, NX_RECAPTCHA_TOKEN, RoutingService, SettingsService } from '../../core/services';
+import { QuoteTrackService } from '../../core/tracking';
 import { QuoteDispatcherComponent } from './quote-dispatcher.component';
 
 describe('QuoteDispatcherComponent', () => {
@@ -23,7 +23,7 @@ describe('QuoteDispatcherComponent', () => {
   beforeEach(async () => {
     const settingsService = jasmine.createSpyObj('SettingsService', ['loadSettings']);
     const trackServiceSpy = jasmine.createSpyObj('QuoteTrackService', ['trackView']);
-    const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate', 'setDefaultLang', 'use', 'instant']);
+    const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate', 'setFallbackLang', 'use', 'instant']);
     const mockWorkflowConfig = {
       errorPageId: 'error',
       manifest: {}

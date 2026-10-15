@@ -1,14 +1,14 @@
-import { CommonModule } from '@angular/common';
-import { Component, inject, Input, OnDestroy, OnInit } from '@angular/core';
+import { NxCopytextModule } from '@allianz/ng-aquila/copytext';
+
+import { ChangeDetectionStrategy, Component, inject, Input, OnDestroy, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { NavigationEnd, Router } from '@angular/router';
-import { NxCopytextModule } from '@allianz/ng-aquila/copytext';
 import { $, ContextDataService } from '@shagui/ng-shagui/core';
 import { filter, Subscription } from 'rxjs';
-import { QUOTE_APP_CONTEXT_DATA } from 'src/app/core/constants';
-import { AppContextData, HeaderConfig, Page } from 'src/app/core/models';
-import { LiteralsService, RoutingService } from 'src/app/core/services';
-import { QuoteTrackDirective } from 'src/app/core/tracking';
+import { QUOTE_APP_CONTEXT_DATA } from '../../../core/constants';
+import { AppContextData, HeaderConfig, Page } from '../../../core/models';
+import { LiteralsService, RoutingService } from '../../../core/services';
+import { QuoteTrackDirective } from '../../../core/tracking';
 import { QuoteLinkDirective, QuoteLiteralDirective } from '../../directives';
 import { QuoteLiteralPipe } from '../../pipes';
 import { LanguageComponent } from '../language';
@@ -18,18 +18,22 @@ import { SwitchThemeComponent } from '../switch-theme';
   selector: 'quote-header',
   templateUrl: './quote-header.component.html',
   styleUrl: './quote-header.component.scss',
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [
     LanguageComponent,
     SwitchThemeComponent,
-    CommonModule,
     NxCopytextModule,
     QuoteLinkDirective,
     QuoteLiteralDirective,
     QuoteTrackDirective,
     QuoteLiteralPipe
-  ]
+]
 })
 export class QuoteHeaderComponent implements OnInit, OnDestroy {
+  private readonly title = inject(Title);
+  private readonly router = inject(Router);
+  private readonly quoteLiteral = inject(QuoteLiteralPipe);
+
   @Input()
   public verified?: boolean;
 
@@ -40,8 +44,6 @@ export class QuoteHeaderComponent implements OnInit, OnDestroy {
   private readonly contextDataService = inject(ContextDataService);
   private readonly literalsService = inject(LiteralsService);
   private readonly routingService = inject(RoutingService);
-
-  constructor(private readonly title: Title, private readonly router: Router, private readonly quoteLiteral: QuoteLiteralPipe) {}
 
   ngOnInit(): void {
     this.subscription$.push(

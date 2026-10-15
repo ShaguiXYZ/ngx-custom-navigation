@@ -36,7 +36,7 @@
   </section>
   <quote-footer
     [trackInfo]="{
-      dateOfIssue: form.get('dateOfIssue')?.value
+      dateOfIssue: $safeNavigationMigration(form.get('dateOfIssue')?.value)
     }"
     (uiOnNext)="updateValidData()"
   />

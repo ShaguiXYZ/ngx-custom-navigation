@@ -1,13 +1,13 @@
-import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClient, withXhr } from '@angular/common/http';
 import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { ContextDataService, HttpService } from '@shagui/ng-shagui/core';
 import { of } from 'rxjs';
+import { environment } from '../../../../environments/environment';
 import { NX_WORKFLOW_TOKEN } from '../../components/models';
 import { Configuration, ConfigurationDTO, JourneyInfo, QuoteSettingsModel, Version } from '../../models';
 import { JourneyService } from '../journey.service';
 import { LiteralsService } from '../literals.service';
-import { environment } from 'src/environments/environment';
 
 describe('JourneyService', () => {
   let service: JourneyService;
@@ -33,7 +33,7 @@ describe('JourneyService', () => {
     TestBed.configureTestingModule({
       imports: [],
       providers: [
-        provideHttpClient(),
+        provideHttpClient(withXhr()),
         provideHttpClientTesting(),
         JourneyService,
         { provide: ContextDataService, useValue: contextDataServiceSpy },

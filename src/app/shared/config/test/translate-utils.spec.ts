@@ -1,25 +1,24 @@
-import { HttpClient, provideHttpClient } from '@angular/common/http';
+import { provideHttpClient, withXhr } from '@angular/common/http';
 import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
-import { TranslateModule } from '@ngx-translate/core';
+import { provideMissingTranslationHandler, provideTranslateService } from '@ngx-translate/core';
 import { createTranslateLoader, CustomMissingTranslationHandler } from '../translate.config';
 
 describe('TranslateUtils', () => {
-  let httpClient: HttpClient;
   let httpTestingController: HttpTestingController;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [
-        TranslateModule.forRoot({
+      providers: [
+        provideTranslateService({
           loader: createTranslateLoader(),
-          missingTranslationHandler: { provide: CustomMissingTranslationHandler }
-        })
-      ],
-      providers: [provideHttpClient(), provideHttpClientTesting()]
+          missingTranslationHandler: provideMissingTranslationHandler(CustomMissingTranslationHandler)
+        }),
+        provideHttpClient(withXhr()),
+        provideHttpClientTesting()
+      ]
     });
 
-    httpClient = TestBed.inject(HttpClient);
     httpTestingController = TestBed.inject(HttpTestingController);
   });
 

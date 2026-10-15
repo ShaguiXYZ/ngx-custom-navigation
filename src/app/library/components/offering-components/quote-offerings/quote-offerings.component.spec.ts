@@ -2,12 +2,12 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { TranslateService } from '@ngx-translate/core';
 import { HttpService } from '@shagui/ng-shagui/core';
-import { NX_WORKFLOW_TOKEN } from 'src/app/core/components/models';
-import { NX_LANGUAGE_CONFIG, OfferingPriceModel } from 'src/app/core/models';
-import { ServiceActivatorService } from 'src/app/core/service-activators';
-import { NX_RECAPTCHA_TOKEN, RoutingService } from 'src/app/core/services';
-import { OfferingsService } from 'src/app/library/services/offerings.service';
-import { QuoteLiteralPipe } from 'src/app/shared/pipes';
+import { NX_WORKFLOW_TOKEN } from '../../../../core/components/models';
+import { NX_LANGUAGE_CONFIG, OfferingPriceModel } from '../../../../core/models';
+import { ServiceActivatorService } from '../../../../core/service-activators';
+import { NX_RECAPTCHA_TOKEN, RoutingService } from '../../../../core/services';
+import { QuoteLiteralPipe } from '../../../../shared/pipes';
+import { OfferingsService } from '../../../services';
 import { QuoteOfferingsComponent } from './quote-offerings.component';
 
 describe('QuoteOfferingsComponent', () => {
@@ -19,7 +19,7 @@ describe('QuoteOfferingsComponent', () => {
   beforeEach(async () => {
     const httpServiceSpy = jasmine.createSpyObj('HttpService', ['get']);
     const quoteLiteralPipeSpy = jasmine.createSpyObj('QuoteLiteralPipe', ['transform']);
-    const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate', 'setDefaultLang', 'use', 'instant']);
+    const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate', 'setFallbackLang', 'use', 'instant']);
     const serviceActivatorService = jasmine.createSpyObj('ServiceActivatorService', ['activateEntryPoint']);
     const mockWorkflowConfig = {
       errorPageId: 'error',

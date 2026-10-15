@@ -2,9 +2,9 @@
 import { inject } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivateFn, GuardResult, MaybeAsync, RouterStateSnapshot } from '@angular/router';
 import { ContextDataService, deepCopy } from '@shagui/ng-shagui/core';
-import { NX_WORKFLOW_TOKEN } from 'src/app/core/components/models';
-import { QUOTE_APP_CONTEXT_DATA, QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
-import { AppContextData, QuoteControlModel, Track, TrackPoints } from 'src/app/core/models';
+import { NX_WORKFLOW_TOKEN } from '../../core/components/models';
+import { QUOTE_APP_CONTEXT_DATA, QUOTE_CONTEXT_DATA } from '../../core/constants';
+import { AppContextData, QuoteControlModel, TrackPoints } from '../../core/models';
 
 /**
  * Guard function to control navigation flow based on the application's context data.

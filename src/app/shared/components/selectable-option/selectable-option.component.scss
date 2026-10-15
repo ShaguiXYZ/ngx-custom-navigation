@@ -1,4 +1,4 @@
-@import 'core-globals';
+@use 'core-globals' as *;
 
 .option__container {
   --animation-duration: 0.3s;

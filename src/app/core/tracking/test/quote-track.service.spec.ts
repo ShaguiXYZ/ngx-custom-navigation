@@ -25,7 +25,7 @@ describe('QuoteTrackService', () => {
     const routerSpy = jasmine.createSpyObj('Router', [], { events: of(new NavigationEnd(1, '/test', '/test')) });
     const contextDataServiceSpy = jasmine.createSpyObj('ContextDataService', ['get']);
     const subscriptionSpy = jasmine.createSpyObj('Subscription', ['unsubscribe']);
-    const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate', 'setDefaultLang', 'use', 'instant']);
+    const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate', 'setFallbackLang', 'use', 'instant']);
     const mockWorkflowConfig = {
       errorPageId: 'error',
       manifest: { tracks: {} }

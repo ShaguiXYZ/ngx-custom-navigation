@@ -13,7 +13,7 @@
         [data]="label"
         [nxTrack]="{
               label,
-              yearsAsOwner: years?.index?.toString() || null
+              yearsAsOwner: years?.index.toString() || null
             }"
         [nxTrackEvents]="['click']"
         (uiSelect)="selectData(years)"

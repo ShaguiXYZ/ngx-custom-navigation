@@ -1,13 +1,17 @@
-import { AfterViewInit, Directive, ElementRef, Input, OnDestroy } from '@angular/core';
+import { AfterViewInit, Directive, ElementRef, Input, OnDestroy, inject } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Subscription } from 'rxjs';
-import { LiteralParam } from 'src/app/core/models';
-import { LiteralsService } from 'src/app/core/services';
+import { LiteralParam } from '../../core/models';
+import { LiteralsService } from '../../core/services';
 
 @Directive({
   selector: '[nxQuoteLiteral]'
 })
 export class QuoteLiteralDirective implements AfterViewInit, OnDestroy {
+  private readonly literalsService = inject(LiteralsService);
+  private readonly el = inject<ElementRef<HTMLElement>>(ElementRef);
+  private readonly domSanitizer = inject(DomSanitizer);
+
   @Input()
   public nxQuoteLiteral!: string;
 
@@ -19,11 +23,7 @@ export class QuoteLiteralDirective implements AfterViewInit, OnDestroy {
 
   private readonly subscrition$: Subscription;
 
-  constructor(
-    private readonly literalsService: LiteralsService,
-    private readonly el: ElementRef<HTMLElement>,
-    private readonly domSanitizer: DomSanitizer
-  ) {
+  constructor() {
     this.subscrition$ = this.literalsService.onLanguageChange().subscribe(() => this.updateElement());
   }
 

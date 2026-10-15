@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { TranslationService } from 'src/app/core/services';
+import { TranslationService } from '../../../core/services';
 import { QuoteTranslatePipe } from '../../pipes';
 import { TranslateTextComponent } from './translate-text.component';
 

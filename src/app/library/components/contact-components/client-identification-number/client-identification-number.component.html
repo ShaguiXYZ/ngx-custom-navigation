@@ -22,7 +22,7 @@
   </section>
   <quote-footer
     [trackInfo]="{
-      identificationNumber: form.get('identificationNumber')?.value
+      identificationNumber: $safeNavigationMigration(form.get('identificationNumber')?.value)
     }"
     (uiOnNext)="updateValidData()"
   >

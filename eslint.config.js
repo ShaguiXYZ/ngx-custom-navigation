@@ -1,5 +1,6 @@
 // @ts-check
 const eslint = require('@eslint/js');
+const globals = require('globals');
 const tseslint = require('typescript-eslint');
 const angular = require('angular-eslint');
 
@@ -25,13 +26,15 @@ module.exports = tseslint.config(
           style: 'kebab-case'
         }
       ],
-      '@typescript-eslint/no-unused-expressions': 'off'
+      '@typescript-eslint/no-unused-expressions': 'off',
+      '@angular-eslint/prefer-inject': 'error',
+      '@angular-eslint/prefer-on-push-component-change-detection': 'off'
     }
   },
   {
     files: ['**/*.spec.ts', '**/*.test.ts'],
-    env: {
-      jasmine: true
+    languageOptions: {
+      globals: globals.jasmine
     },
     rules: {}
   },

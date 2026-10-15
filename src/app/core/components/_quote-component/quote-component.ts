@@ -1,13 +1,14 @@
-import { Component, inject, OnDestroy, signal, WritableSignal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, OnDestroy, signal, WritableSignal } from '@angular/core';
 import { ActivatedRouteSnapshot, GuardResult, MaybeAsync, RouterStateSnapshot } from '@angular/router';
 import { ContextDataService, deepCopy, JsonUtils } from '@shagui/ng-shagui/core';
 import { Subject, Subscription, takeUntil } from 'rxjs';
-import { DEFAULT_DISPLAY_DATE_FORMAT, QUOTE_APP_CONTEXT_DATA, QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
-import { AppContextData, QuoteControlModel } from 'src/app/core/models';
+import { DEFAULT_DISPLAY_DATE_FORMAT, QUOTE_APP_CONTEXT_DATA, QUOTE_CONTEXT_DATA } from '../../constants';
+import { AppContextData, QuoteControlModel } from '../../models';
 import { ServiceActivatorService } from '../../service-activators';
 import { LanguageService } from '../../services';
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.Eager,
   template: ''
 })
 export abstract class QuoteComponent<T extends QuoteControlModel> implements OnDestroy {

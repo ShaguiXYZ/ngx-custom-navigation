@@ -1,3 +1,5 @@
+import type { EnvironmentConfig } from './environment.model';
+
 export const environment = {
   production: true,
   loadingOnNav: false,
@@ -7,5 +9,6 @@ export const environment = {
   domain: '', // Empty for dev, int, pre and production environments
   recaptcha: {
     siteKey: ''
-  }
-};
+  },
+  scripts: []
+} satisfies EnvironmentConfig;

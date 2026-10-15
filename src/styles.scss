@@ -16,8 +16,8 @@
   * 2. import the theme file here and register the theme to $nx-themes map with nx.nx-register-theme function
   * 3. use the theme in html with data-theme attribute, e.g. <body data-theme="light">
   */
-@import 'themes/light';
-@import 'themes/dark';
+@use 'themes/light' as *;
+@use 'themes/dark' as *;
 
 $nx-themes: nx.$nx-themes;
 

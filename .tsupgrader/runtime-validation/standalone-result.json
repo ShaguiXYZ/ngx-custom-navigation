@@ -1,0 +1,113 @@
+{
+  "planHash": "7f775ead573807ad999ec1d1406845eef1534c4227505363f99f14e768e7c33e",
+  "phase": "standalone",
+  "recordedAtUtc": "2026-10-15T12:33:53.9898751Z",
+  "retryCount": 3,
+  "resetBaseline": false,
+  "complete": true,
+  "result": {
+    "setupSucceeded": true,
+    "setupDurationMs": 0,
+    "setupFailureOutput": null,
+    "assertions": [
+      {
+        "name": "production-build",
+        "kind": "process",
+        "verificationMethod": "exit-code",
+        "passed": true,
+        "timedOut": false,
+        "skipped": false,
+        "skippedReason": null,
+        "exitCode": 0,
+        "outputSample": "\r\n\u003E ngx-custom-navigation@2.0.0 build\r\n\u003E ng build\r\n\r\n\u003E Building...\r\n\u221A Building...\r\nInitial chunk files   | Names                         |  Raw size | Estimated transfer size\r\nmain-M5U2XM56.js      | main                          |   1.35 MB |               227.10 kB\r\nstyles-5VL4Z5LW.css   | styles                        | 404.94 kB |                40.91 kB\r\nchunk-Cl4nn1Ya.js     | -                             | 364.21 kB |               100.10 kB\r\npolyfills-LVNOU2XZ.js | polyfills                     |  35.88 kB |                11.64 kB\r\nscripts-6YXTK45T.js   | scripts                       | 284 bytes |               284 bytes\r\n\r\n                      | Initial total                 |   2.15 MB |               380.05 kB\r\n\r\nLazy chunk files      | Names                         |  Raw size | Estimated transfer size\r\nchunk-4APrz2U1.js     | allianz-ng-aquila-phone-input | 126.52 kB |                24.33 kB\r\nchunk-CDm10qUb.js     | quote-dispatcher-component    |   1.82 kB |               860 bytes\r\nchunk-C-DghRWV.js     | workflow-loader-component     |   1.59 kB |               729 bytes\r\nchunk-BcFutntD.js     | index                         | 135 bytes |               135 bytes\r\nchunk-DE54gcxC.js     | index                         | 120 bytes |               120 bytes\r\n\r\nApplication bundle generation complete. [32.687 seconds] - 2026-10-15T12:32:36.701Z\r\n\r\n\u001B[33m\u25B2 \u001B[43;33m[\u001B[43;30mWARNING\u001B[43;33m]\u001B[0m \u001B[1mDeprecation\u001B[0m \u001B[1m\u001B[35m[plugin angular-sass]\u001B[0m\r\n\r\n    src/app/app.component.scss:1:8:\r\n\u001B[37m      1 \u2502 @import \u001B[32m\u001B[37m\u0027core-globals\u0027;\r\n        \u2575         \u001B[32m^\u001B[0m\r\n\r\n\r\n  Sass @import rules are deprecated and will be removed in Dart Sass 3.0.0.\r\n  \r\n  More info and automated migrator: \u001B[4mhttps://sass-lang.com/d/import\u001B[0m\r\n\r\n\r\n\u001B[33m\u25B2 \u001B[43;33m[\u001B[43;30mWARNING\u001B[43;33m]\u001B[0m \u001B[1mDeprecation\u001B[0m \u001B[1m\u001B[35m[plugin angular-sass]\u001B[0m\r\n\r\n    src/app/shared/components/language/language.component.scss:1:8:\r\n\u001B[37m      1 \u2502 @import \u001B[32m\u001B[37m\u0027core-globals\u0027;\r\n        \u2575         \u001B[32m^\u001B[0m\r\n\r\n\r\n  Sass @import rules are deprecated and will be removed in Dart Sass 3.0.0.\r\n  \r\n  More info and automated migrator: \u001B[4mhttps://sass-lang.com/d/import\u001B[0m\r\n\r\n\r\n\u001B[33m\u25B2 \u001B[43;33m[\u001B[43;30mWARNING\u001B[43;33m]\u001B[0m \u001B[1mDeprecation\u001B[0m \u001B[1m\u001B[35m[plugin angular-sass]\u001B[0m\r\n\r\n    src/app/shared/components/notification/notification.component.scss:1:8:\r\n\u001B[37m      1 \u2502 @import \u001B[32m\u001B[37m\u0027core-globals\u0027;\r\n        \u2575         \u001B[32m^\u001B[0m\r\n\r\n\r\n  Sass @import rules are deprecated and will be removed in Dart Sass 3.0.0.\r\n  \r\n  More info and automated migrator: \u001B[4mhttps://sass-lang.com/d/import\u001B[0m\r\n\r\n\r\n\u001B[33m\u25B2 \u001B[43;33m[\u001B[43;30mWARNING\u001B[43;33m]\u001B[0m \u001B[1mDeprecation\u001B[0m \u001B[1m\u001B[35m[plugin angular-sass]\u001B[0m\r\n\r\n    src/app/shared/components/offering-carrousel/components/offering-price-card/offering-price-card.component.scss:1:8:\r\n\u001B[37m      1 \u2502 @import \u001B[32m\u001B[37m\u0027../../styles/carousel.scss\u0027;\r\n        \u2575         \u001B[32m^\u001B[0m\r\n\r\n\r\n  Sass @import rules are deprecated and will be removed in Dart Sass 3.0.0.\r\n  \r\n  More info and automated migrator: \u001B[4mhttps://sass-lang.com/d/import\u001B[0m\r\n\r\n\r\n\u001B[33m\u25B2 \u001B[43;33m[\u001B[43;30mWARNING\u001B[43;33m]\u001B[0m \u001B[1mDeprecation\u001B[0m \u001B[1m\u001B[35m[plugin angular-sass]\u001B[0m\r\n\r\n    src/app/shared/components/offering-carrousel/offering-carrousel.component.scss:1:8:\r\n\u001B[37m      1 \u2502 @import \u001B[32m\u001B[37m\u0027core-globals\u0027;\r\n        \u2575         \u001B[32m^\u001B[0m\r\n\r\n\r\n  Sass @import rules are deprecated and will be removed in Dart Sass 3.0.0.\r\n  \r\n  More info and automated migrator: \u001B[4mhttps://sass-lang.com/d/import\u001B[0m\r\n\r\n\r\n\u001B[33m\u25B2 \u001B[43;33m[\u001B[43;30mWARNING\u001B[43;33m]\u001B[0m \u001B[1mDeprecation\u001B[0m \u001B[1m\u001B[35m[plugin angular-sass]\u001B[0m\r\n\r\n    src/app/shared/components/offering-carrousel/offering-carrousel.component.scss:2:8:\r\n\u001B[37m      2 \u2502 @import \u001B[32m\u001B[37m\u0027./styles/carousel.scss\u0027;\r\n        \u2575         \u001B[32m^\u001B[0m\r\n\r\n\r\n  Sass @import rules are deprecated and will be removed in Dart Sass 3.0.0.\r\n  \r\n  More info and automated migrator: \u001B[4mhttps://sass-lang.com/d/import\u001B[0m\r\n\r\n\r\n\u001B[33m\u25B2 \u001B[43;33m[\u001B[43;30mWARNING\u001B[43;33m]\u001B[0m \u001B[1mDeprecation\u001B[0m \u001B[1m\u001B[35m[plugin angular-sass]\u001B[0m\r\n\r\n    src/app/sh\n\u2026[truncated]",
+        "durationMs": 38157
+      },
+      {
+        "name": "tests-pass",
+        "kind": "process",
+        "verificationMethod": "test-results",
+        "passed": true,
+        "timedOut": false,
+        "skipped": false,
+        "skippedReason": null,
+        "exitCode": 0,
+        "outputSample": "\r\n\u003E ngx-custom-navigation@2.0.0 test\r\n\u003E ng test --watch=false\r\n\r\n\u003E Building...\r\n\u221A Building...\r\nInitial chunk files                                                                                                           | Names                                                                                                                      |  Raw size\r\nchunk-U7C67ID7.js                                                                                                             | -                                                                                                                          |   1.16 MB | \r\nchunk-LUZIB2QI.js                                                                                                             | -                                                                                                                          |   1.11 MB | \r\npolyfills.js                                                                                                                  | polyfills                                                                                                                  |   1.09 MB | \r\nchunk-WTQE3KO3.js                                                                                                             | -                                                                                                                          | 336.60 kB | \r\nstyles.css                                                                                                                    | styles                                                                                                                     | 326.80 kB | \r\nspec-app-library-components-contact-components-client-phone-number-client-phone-number.component.spec.js                      | spec-app-library-components-contact-components-client-phone-number-client-phone-number.component.spec                      | 316.73 kB | \r\nchunk-JBHW3D7P.js                                                                                                             | -                                                                                                                          | 273.10 kB | \r\nspec-app-app.component.spec.js                                                                                                | spec-app-app.component.spec                                                                                                | 264.80 kB | \r\nchunk-PKA2JLDZ.js                                                                                                             | -                                                                                                                          | 244.19 kB | \r\nchunk-2WAYCCU7.js                                                                                                             | -                                                                                                                          | 229.72 kB | \r\nchunk-Y5MZCM3M.js                                                                                                             | -                                                                                                                          | 226.51 kB | \r\nchunk-FVOEFP7E.js                                                                                                             | -                                                                                                                          | 218.11 kB | \r\nchunk-IWJ7WJ5H.js                                                                                                             | -                                                                                                                          | 208.67 kB | \r\nchunk-FXRK4GDY.js                                                                                                             | -                                                                                                                          | 186.37 kB | \r\n\u2026[truncated]",
+        "durationMs": 50298,
+        "testResults": {
+          "testFramework": "jasmine",
+          "runnerDetectedFrom": "package_json",
+          "testsTotal": 0,
+          "testsPassed": 0,
+          "testsFailed": 0,
+          "testsSkipped": 0,
+          "parseFailed": true
+        }
+      },
+      {
+        "name": "dev-server-serves-home",
+        "kind": "http-probe",
+        "verificationMethod": "http-status",
+        "passed": true,
+        "timedOut": false,
+        "skipped": false,
+        "skippedReason": null,
+        "exitCode": null,
+        "outputSample": "HTTP 200\n\u003C!DOCTYPE html\u003E\r\n\u003Chtml lang=\u0022en\u0022 class=\u0022notranslate\u0022 translate=\u0022no\u0022\u003E\r\n  \u003Chead\u003E\n    \u003Cscript type=\u0022module\u0022 src=\u0022/@vite/client\u0022\u003E\u003C/script\u003E\n\r\n    \u003Ctitle\u003E\u003C/title\u003E\r\n    \u003Cbase href=\u0022/\u0022/\u003E\r\n    \u003Cmeta charset=\u0022utf-8\u0022/\u003E\r\n    \u003Cmeta name=\u0022viewport\u0022 content=\u0022width=device-width, initial-scale=1\u0022/\u003E\r\n    \u003Clink rel=\u0022icon\u0022 type=\u0022image/x-icon\u0022 href=\u0022favicon.ico\u0022/\u003E\r\n  \u003Clink rel=\u0022stylesheet\u0022 href=\u0022styles.css\u0022\u003E\u003C/head\u003E\r\n  \u003Cbody data-theme=\u0022light\u0022\u003E\r\n    \u003Cquote-root\u003E\u003C/quote-root\u003E\r\n  \u003Cscript src=\u0022polyfills.js\u0022 type=\u0022module\u0022\u003E\u003C/script\u003E\u003Cscript src=\u0022scripts.js\u0022 defer\u003E\u003C/script\u003E\u003Cscript src=\u0022main.js\u0022 type=\u0022module\u0022\u003E\u003C/script\u003E\u003C/body\u003E\r\n\u003C/html\u003E\r\n\n--- server output ---\n\r\n\u003E ngx-custom-navigation@2.0.0 start\r\n\u003E ng serve --host 127.0.0.1 --port 4200\r\n\r\n\u003E Building...\r\n\u221A Building...\r\nInitial chunk files | Names                      |  Raw size\r\nmain.js             | main                       | 658.04 kB | \r\nstyles.css          | styles                     | 460.98 kB | \r\nchunk-6ZKQYKHF.js   | -                          |  63.20 kB | \r\nchunk-JLJOAWFD.js   | -                          |   3.24 kB | \r\nscripts.js          | scripts                    | 484 bytes | \r\npolyfills.js        | polyfills                  | 144 bytes | \r\n\r\n                    | Initial total              |   1.19 MB\r\n\r\nLazy chunk files    | Names                      |  Raw size\r\nchunk-7IGDFNLA.js   | quote-dispatcher-component |   5.36 kB | \r\nchunk-IU6KJFP5.js   | workflow-loader-component  |   5.02 kB | \r\n\r\nApplication bundle generation complete. [18.097 seconds] - 2026-10-15T12:33:52.449Z\r\n\r\n\u001B[33m\u25B2 \u001B[43;33m[\u001B[43;30mWARNING\u001B[43;33m]\u001B[0m \u001B[1mDeprecation\u001B[0m \u001B[1m\u001B[35m[plugin angular-sass]\u001B[0m\r\n\r\n    src/app/app.component.scss:1:8:\r\n\u001B[37m      1 \u2502 @import \u001B[32m\u001B[37m\u0027core-globals\u0027;\r\n        \u2575         \u001B[32m^\u001B[0m\r\n\r\n\r\n  Sass @import rules are deprecated and will be removed in Dart Sass 3.0.0.\r\n  \r\n  More info and automated migrator: \u001B[4mhttps://sass-lang.com/d/import\u001B[0m\r\n\r\n\r\n\u001B[33m\u25B2 \u001B[43;33m[\u001B[43;30mWARNING\u001B[43;33m]\u001B[0m \u001B[1mDeprecation\u001B[0m \u001B[1m\u001B[35m[plugin angular-sass]\u001B[0m\r\n\r\n    src/app/shared/components/language/language.component.scss:1:8:\r\n\u001B[37m      1 \u2502 @import \u001B[32m\u001B[37m\u0027core-globals\u0027;\r\n        \u2575         \u001B[32m^\u001B[0m\r\n\r\n\r\n  Sass @import rules are deprecated and will be removed in Dart Sass 3.0.0.\r\n  \r\n  More info and automated migrator: \u001B[4mhttps://sass-lang.com/d/import\u001B[0m\r\n\r\n\r\n\u001B[33m\u25B2 \u001B[43;33m[\u001B[43;30mWARNING\u001B[43;33m]\u001B[0m \u001B[1mDeprecation\u001B[0m \u001B[1m\u001B[35m[plugin angular-sass]\u001B[0m\r\n\r\n    src/app/shared/components/notification/notification.component.scss:1:8:\r\n\u001B[37m      1 \u2502 @import \u001B[32m\u001B[37m\u0027core-globals\u0027;\r\n        \u2575         \u001B[32m^\u001B[0m\r\n\r\n\r\n  Sass @import rules are deprecated and will be removed in Dart Sass 3.0.0.\r\n  \r\n  More info and automated migrator: \u001B[4mhttps://sass-lang.com/d/import\u001B[0m\r\n\r\n\r\n\u001B[33m\u25B2 \u001B[43;33m[\u001B[43;30mWARNING\u001B[43;33m]\u001B[0m \u001B[1mDeprecation\u001B[0m \u001B[1m\u001B[35m[plugin angular-sass]\u001B[0m\r\n\r\n    src/app/shared/components/offering-carrousel/components/offering-price-card/offering-price-card.component.scss:1:8:\r\n\u001B[37m      1 \u2502 @import \u001B[32m\u001B[37m\u0027../../styles/carousel.scss\u0027;\r\n        \u2575         \u001B[32m^\u001B[0m\r\n\r\n\r\n  Sass @import rules are deprecated and will be removed in Dart Sass 3.0.0.\r\n  \r\n  More info and automated migrator: \u001B[4mhttps://sass-lang.com/d/import\u001B[0m\r\n\r\n\r\n\u001B[33m\u25B2 \u001B[43;33m[\u001B[43;30mWARNING\u001B[43;33m]\u001B[0m \u001B[1mDeprecation\u001B[0m \u001B[1m\u001B[35m[plugin angular-sass]\u001B[0m\r\n\r\n    src/app/shared/components/offering-carrousel/offering-carrousel.component.scss:1:8:\r\n\u001B[37m      1 \u2502 @import \u001B[32m\u001B[37m\u0027core-globals\u0027;\r\n        \u2575         \u001B[32m^\u001B[0m\r\n\r\n\r\n  Sass @import rules are deprecated and will be removed in Dart Sass 3.0.0.\r\n  \r\n  More info and automated migrator: \u001B[4mhttps://sass-lang.com/d/import\u001B[0m\r\n\r\n\r\n\u001B[33m\u25B2 \u001B[43;33m[\u001B[43;30mWARNING\u001B[43;33m]\u001B[0m \u001B[1mDeprecation\u001B[0m \u001B[1m\u001B[35m[plugin angular-sass]\u001B[0m\r\n\r\n    src/app/shared/components/offering-carrousel/offering-carrousel.component.scss:2:8:\r\n\u001B[37m      2 \u2502 @import \u001B[32m\u001B[37m\u0027./styles/carousel.scss\u0027;\r\n        \u2575         \u001B[32m^\u001B[0m\r\n\r\n\r\n  Sass @import rules are deprecated and will be removed in Dart Sass 3.0.0.\r\n  \r\n  More info and automated\n\u2026[truncated]",
+        "durationMs": 25864
+      }
+    ],
+    "executions": [
+      {
+        "source": "production-build",
+        "resolvedExecutable": "C:\\Users\\Shagui\\AppData\\Roaming\\fnm\\node-versions\\v24.21.0\\installation\\node.exe",
+        "args": [
+          "C:\\Users\\Shagui\\AppData\\Roaming\\fnm\\node-versions\\v24.21.0\\installation\\node_modules\\npm\\bin\\npm-cli.js",
+          "run",
+          "build"
+        ],
+        "cwd": "C:\\Users\\Shagui\\workspace\\work\\ngx-custom-navigation",
+        "env": {},
+        "prependPath": [
+          "C:\\Users\\Shagui\\AppData\\Roaming\\fnm\\node-versions\\v24.21.0\\installation"
+        ],
+        "platform": "win32"
+      },
+      {
+        "source": "tests-pass",
+        "resolvedExecutable": "C:\\Users\\Shagui\\AppData\\Roaming\\fnm\\node-versions\\v24.21.0\\installation\\node.exe",
+        "args": [
+          "C:\\Users\\Shagui\\AppData\\Roaming\\fnm\\node-versions\\v24.21.0\\installation\\node_modules\\npm\\bin\\npm-cli.js",
+          "test",
+          "--",
+          "--watch=false"
+        ],
+        "cwd": "C:\\Users\\Shagui\\workspace\\work\\ngx-custom-navigation",
+        "env": {},
+        "prependPath": [
+          "C:\\Users\\Shagui\\AppData\\Roaming\\fnm\\node-versions\\v24.21.0\\installation"
+        ],
+        "platform": "win32"
+      },
+      {
+        "source": "dev-server-serves-home",
+        "resolvedExecutable": "C:\\Users\\Shagui\\AppData\\Roaming\\fnm\\node-versions\\v24.21.0\\installation\\node.exe",
+        "args": [
+          "C:\\Users\\Shagui\\AppData\\Roaming\\fnm\\node-versions\\v24.21.0\\installation\\node_modules\\npm\\bin\\npm-cli.js",
+          "run",
+          "start",
+          "--",
+          "--host",
+          "127.0.0.1",
+          "--port",
+          "4200"
+        ],
+        "cwd": "C:\\Users\\Shagui\\workspace\\work\\ngx-custom-navigation",
+        "env": {},
+        "prependPath": [
+          "C:\\Users\\Shagui\\AppData\\Roaming\\fnm\\node-versions\\v24.21.0\\installation"
+        ],
+        "platform": "win32"
+      }
+    ]
+  }
+}

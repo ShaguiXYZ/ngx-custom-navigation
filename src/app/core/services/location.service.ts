@@ -1,9 +1,9 @@
+import { HttpStatusCode } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { HttpService } from '@shagui/ng-shagui/core';
 import { catchError, firstValueFrom, map, of } from 'rxjs';
+import { environment } from '../../../environments/environment';
 import { LocationDTO, LocationModel } from '../models';
-import { HttpStatusCode } from '@angular/common/http';
-import { environment } from 'src/environments/environment';
 
 const LOCATION_API = '/location';
 

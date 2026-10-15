@@ -1,16 +1,17 @@
-import { CommonModule } from '@angular/common';
-import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild, ViewContainerRef, inject } from '@angular/core';
+
+import { AfterViewInit, ChangeDetectionStrategy, Component, OnDestroy, OnInit, ViewChild, ViewContainerRef, inject } from '@angular/core';
 import { ContextDataService, LoadingService } from '@shagui/ng-shagui/core';
-import { QuoteComponent } from 'src/app/core/components';
-import { NX_WORKFLOW_TOKEN } from 'src/app/core/components/models';
-import { QUOTE_APP_CONTEXT_DATA } from 'src/app/core/constants';
-import { JourneyError } from 'src/app/core/errors';
-import { AppContextData, QuoteControlModel } from 'src/app/core/models';
+import { QuoteComponent } from '../../core/components';
+import { NX_WORKFLOW_TOKEN } from '../../core/components/models';
+import { QUOTE_APP_CONTEXT_DATA } from '../../core/constants';
+import { JourneyError } from '../../core/errors';
+import { AppContextData, QuoteControlModel } from '../../core/models';
 
 @Component({
   template: `<ng-template #dynamicComponent> </ng-template>`,
   styleUrls: ['./workflow-loader.component.scss'],
-  imports: [CommonModule]
+  changeDetection: ChangeDetectionStrategy.Eager,
+  imports: []
 })
 export class WorkflowLoaderComponent implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild('dynamicComponent', { read: ViewContainerRef, static: true })
