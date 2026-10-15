@@ -13,7 +13,7 @@
         [data]="label"
         [nxTrack]="{
           label,
-          accidents: accident?.index?.toString() || null
+          accidents: accident?.index.toString() || null
         }"
         [nxTrackEvents]="['click']"
         (uiSelect)="selectData(accident)"

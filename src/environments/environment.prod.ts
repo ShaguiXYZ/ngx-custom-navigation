@@ -7,5 +7,6 @@ export const environment = {
   domain: '', // Empty for dev, int, pre and production environments
   recaptcha: {
     siteKey: ''
-  }
+  },
+  scripts: []
 };
