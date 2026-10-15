@@ -1,7 +1,7 @@
-import { QuoteLiteralPipe } from '../quote-literal.pipe';
-import { LiteralsService } from 'src/app/core/services';
-import { LiteralModel, LiteralParam } from 'src/app/core/models';
 import { TestBed } from '@angular/core/testing';
+import { LiteralModel, LiteralParam } from '../../../core/models';
+import { LiteralsService } from '../../../core/services';
+import { QuoteLiteralPipe } from '../quote-literal.pipe';
 
 describe('QuoteLiteralPipe', () => {
   let pipe: QuoteLiteralPipe;

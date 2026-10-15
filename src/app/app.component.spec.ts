@@ -27,7 +27,7 @@ describe('AppComponent', () => {
 
   beforeEach(async () => {
     const notificationServiceSpy = jasmine.createSpyObj('NotificationService', ['warning', 'onNotification', 'onCloseNotification']);
-    const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate', 'setDefaultLang', 'use', 'instant']);
+    const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate', 'setFallbackLang', 'use', 'instant']);
     const httpClientSpy = jasmine.createSpyObj('HttpClient', ['get', 'post', 'put', 'delete']);
     const mockWorkflowConfig = {
       errorPageId: 'error',

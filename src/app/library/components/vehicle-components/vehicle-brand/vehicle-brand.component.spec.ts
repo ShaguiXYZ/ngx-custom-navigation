@@ -1,17 +1,17 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ReactiveFormsModule } from '@angular/forms';
 import { NxFormfieldModule } from '@allianz/ng-aquila/formfield';
 import { NxInputModule } from '@allianz/ng-aquila/input';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ReactiveFormsModule } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { ContextDataService } from '@shagui/ng-shagui/core';
 import { of } from 'rxjs';
-import { NX_LANGUAGE_CONFIG } from 'src/app/core/models';
-import { ServiceActivatorService } from 'src/app/core/service-activators';
-import { RoutingService } from 'src/app/core/services';
-import { ContextDataServiceStub } from 'src/app/core/stub';
-import { QuoteModel } from 'src/app/library/models';
-import { VehicleService } from 'src/app/library/services';
-import { QuoteLiteralPipe } from 'src/app/shared/pipes';
+import { NX_LANGUAGE_CONFIG } from '../../../../core/models';
+import { ServiceActivatorService } from '../../../../core/service-activators';
+import { RoutingService } from '../../../../core/services';
+import { ContextDataServiceStub } from '../../../../core/stub';
+import { QuoteLiteralPipe } from '../../../../shared/pipes';
+import { QuoteModel } from '../../../models';
+import { VehicleService } from '../../../services';
 import { BrandComponentService } from './services';
 import { VehicleBrandComponent } from './vehicle-brand.component';
 
@@ -26,7 +26,7 @@ describe('VehicleBrandComponent', () => {
     const vehicleServiceSpy = jasmine.createSpyObj('VehicleService', ['getBrands']);
     const routingServiceSpy = jasmine.createSpyObj('RoutingService', ['next']);
     const brandServiceSpy = jasmine.createSpyObj('BrandService', ['iconBrands']);
-    const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate', 'setDefaultLang', 'use', 'instant']);
+    const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate', 'setFallbackLang', 'use', 'instant']);
     const activateEntryPointSpy = jasmine.createSpyObj('ServiceActivatorService', ['activateEntryPoint']);
     const mockLanguageConfig = {
       current: 'en',

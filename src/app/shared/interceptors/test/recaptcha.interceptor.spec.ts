@@ -1,8 +1,8 @@
 import { HttpClient, HttpErrorResponse, provideHttpClient, withInterceptors, withXhr } from '@angular/common/http';
 import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
-import { StorageLib } from 'src/app/core/lib';
 import { CAPTCHA_TOKEN_KEY, X_RECAPTCHA_RESPONSE } from '../../../core/constants';
+import { StorageLib } from '../../../core/lib';
 import { recaptchaInterceptor } from '../recaptcha.interceptor';
 
 describe('RecaptchaInterceptor', () => {

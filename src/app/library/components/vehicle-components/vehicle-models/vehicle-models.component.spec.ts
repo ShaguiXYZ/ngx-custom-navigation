@@ -4,14 +4,14 @@ import { By } from '@angular/platform-browser';
 import { TranslateService } from '@ngx-translate/core';
 import { ContextDataService } from '@shagui/ng-shagui/core';
 import { of } from 'rxjs';
-import { DEBOUNCE_TIME } from 'src/app/core/constants';
-import { NX_LANGUAGE_CONFIG } from 'src/app/core/models';
-import { ServiceActivatorService } from 'src/app/core/service-activators';
-import { RoutingService } from 'src/app/core/services';
-import { ContextDataServiceStub } from 'src/app/core/stub';
-import { QuoteModel } from 'src/app/library/models';
-import { VehicleService } from 'src/app/library/services';
-import { QuoteLiteralPipe } from 'src/app/shared/pipes';
+import { DEBOUNCE_TIME } from '../../../../core/constants';
+import { NX_LANGUAGE_CONFIG } from '../../../../core/models';
+import { ServiceActivatorService } from '../../../../core/service-activators';
+import { RoutingService } from '../../../../core/services';
+import { ContextDataServiceStub } from '../../../../core/stub';
+import { QuoteLiteralPipe } from '../../../../shared/pipes';
+import { QuoteModel } from '../../../models';
+import { VehicleService } from '../../../services';
 import { VehicleModelsComponent } from './vehicle-models.component';
 
 describe('VehicleModelsComponent', () => {
@@ -24,7 +24,7 @@ describe('VehicleModelsComponent', () => {
     const quoteLiteralPipeSpy = jasmine.createSpyObj('QuoteLiteralPipe', ['transform']);
     const routingServiceSpy = jasmine.createSpyObj('RoutingService', ['next']);
     const vehicleServiceSpy = jasmine.createSpyObj('VehicleService', ['getModels']);
-    const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate', 'setDefaultLang', 'use', 'instant']);
+    const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate', 'setFallbackLang', 'use', 'instant']);
     const activateEntryPointSpy = jasmine.createSpyObj('ServiceActivatorService', ['activateEntryPoint']);
     const mockLanguageConfig = {
       current: 'en',

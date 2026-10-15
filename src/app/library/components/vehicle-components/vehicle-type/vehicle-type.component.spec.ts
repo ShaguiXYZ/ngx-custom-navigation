@@ -3,14 +3,14 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { TranslateService } from '@ngx-translate/core';
 import { ContextDataService, IndexedData } from '@shagui/ng-shagui/core';
 import { of } from 'rxjs';
-import { NX_WORKFLOW_TOKEN } from 'src/app/core/components/models';
-import { NX_LANGUAGE_CONFIG } from 'src/app/core/models';
-import { ServiceActivatorService } from 'src/app/core/service-activators';
-import { NX_RECAPTCHA_TOKEN, RoutingService } from 'src/app/core/services';
-import { ContextDataServiceStub } from 'src/app/core/stub';
-import { QuoteTrackService } from 'src/app/core/tracking';
-import { QuoteModel } from 'src/app/library/models';
-import { QuoteLiteralPipe } from 'src/app/shared/pipes';
+import { NX_WORKFLOW_TOKEN } from '../../../../core/components/models';
+import { NX_LANGUAGE_CONFIG } from '../../../../core/models';
+import { ServiceActivatorService } from '../../../../core/service-activators';
+import { NX_RECAPTCHA_TOKEN, RoutingService } from '../../../../core/services';
+import { ContextDataServiceStub } from '../../../../core/stub';
+import { QuoteTrackService } from '../../../../core/tracking';
+import { QuoteLiteralPipe } from '../../../../shared/pipes';
+import { QuoteModel } from '../../../models';
 import { VehicleTypes } from './models';
 import { VehicleTypeComponent } from './vehicle-type.component';
 
@@ -23,7 +23,7 @@ describe('VehicleTypeComponent', () => {
     const quoteTrackServiceSpy = jasmine.createSpyObj('QuoteTrackService', ['trackView']);
     const quoteLiteralPipeSpy = jasmine.createSpyObj('QuoteLiteralPipe', ['transform']);
     const routingServiceSpy = jasmine.createSpyObj('RoutingService', ['next']);
-    const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate', 'setDefaultLang', 'use', 'instant']);
+    const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate', 'setFallbackLang', 'use', 'instant']);
     const activateEntryPointSpy = jasmine.createSpyObj('ServiceActivatorService', ['activateEntryPoint']);
     const mockWorkflowConfig = {
       errorPageId: 'error',

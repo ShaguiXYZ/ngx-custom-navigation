@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { LanguageService } from 'src/app/core/services';
+import { LanguageService } from '../../../core/services';
 import { LanguageComponent } from './language.component';
 
 describe('LanguageComponent', () => {

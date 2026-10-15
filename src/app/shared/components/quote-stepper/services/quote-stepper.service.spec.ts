@@ -3,9 +3,9 @@ import { HttpClient } from '@angular/common/http';
 import { TestBed } from '@angular/core/testing';
 import { ContextDataService } from '@shagui/ng-shagui/core';
 import { Subject } from 'rxjs';
-import { NX_WORKFLOW_TOKEN } from 'src/app/core/components/models';
-import { AppContextData, Stepper } from 'src/app/core/models';
-import { LiteralsService, NX_RECAPTCHA_TOKEN } from 'src/app/core/services';
+import { NX_WORKFLOW_TOKEN } from '../../../../core/components/models';
+import { AppContextData, Stepper } from '../../../../core/models';
+import { LiteralsService, NX_RECAPTCHA_TOKEN } from '../../../../core/services';
 import { QuoteStepperService } from './quote-stepper.service';
 
 describe('QuoteStepperService', () => {

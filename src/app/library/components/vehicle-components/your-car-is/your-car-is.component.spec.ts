@@ -1,25 +1,25 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ReactiveFormsModule } from '@angular/forms';
 import { NxButtonModule } from '@allianz/ng-aquila/button';
 import { NxCopytextModule } from '@allianz/ng-aquila/copytext';
 import { NxFormfieldModule } from '@allianz/ng-aquila/formfield';
 import { NxInputModule } from '@allianz/ng-aquila/input';
 import { NxMaskModule } from '@allianz/ng-aquila/mask';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ReactiveFormsModule } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { ContextDataService } from '@shagui/ng-shagui/core';
 import { firstValueFrom, of } from 'rxjs';
-import { NX_WORKFLOW_TOKEN } from 'src/app/core/components/models';
-import { NX_LANGUAGE_CONFIG } from 'src/app/core/models';
-import { ServiceActivatorService } from 'src/app/core/service-activators';
-import { NX_RECAPTCHA_TOKEN, RoutingService } from 'src/app/core/services';
-import { ContextDataServiceStub } from 'src/app/core/stub';
-import { QuoteModel, QuoteVehicleModel } from 'src/app/library/models';
-import { VehicleService } from 'src/app/library/services';
-import { HeaderTitleComponent, QuoteFooterComponent, SelectableOptionComponent } from 'src/app/shared/components';
-import { QuoteLiteralDirective } from 'src/app/shared/directives';
-import { QuoteLiteralPipe } from 'src/app/shared/pipes';
+import { NX_WORKFLOW_TOKEN } from '../../../../core/components/models';
+import { NX_LANGUAGE_CONFIG } from '../../../../core/models';
+import { ServiceActivatorService } from '../../../../core/service-activators';
+import { NX_RECAPTCHA_TOKEN, RoutingService } from '../../../../core/services';
+import { ContextDataServiceStub } from '../../../../core/stub';
+import { QuoteTrackService } from '../../../../core/tracking';
+import { HeaderTitleComponent, QuoteFooterComponent, SelectableOptionComponent } from '../../../../shared/components';
+import { QuoteLiteralDirective } from '../../../../shared/directives';
+import { QuoteLiteralPipe } from '../../../../shared/pipes';
+import { QuoteModel, QuoteVehicleModel } from '../../../models';
+import { VehicleService } from '../../../services';
 import { YourCarIsComponent } from './your-car-is.component';
-import { QuoteTrackService } from 'src/app/core/tracking';
 
 describe('YourCarIsComponent', () => {
   let component: YourCarIsComponent;
@@ -32,7 +32,7 @@ describe('YourCarIsComponent', () => {
     const quoteLiteralPipeSpy = jasmine.createSpyObj('QuoteLiteralPipe', ['transform']);
     const routingServiceSpy = jasmine.createSpyObj('RoutingService', ['next']);
     const vehicleServiceSpy = jasmine.createSpyObj('VehicleService', ['vehicles']);
-    const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate', 'setDefaultLang', 'use', 'instant']);
+    const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate', 'setFallbackLang', 'use', 'instant']);
     const activateEntryPointSpy = jasmine.createSpyObj('ServiceActivatorService', ['activateEntryPoint']);
     const mockWorkflowConfig = {
       errorPageId: 'error',

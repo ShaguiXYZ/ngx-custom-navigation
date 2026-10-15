@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
-import { of } from 'rxjs';
-import { FuelTypes } from 'src/app/core/models';
 import { HttpService } from '@shagui/ng-shagui/core';
+import { of } from 'rxjs';
+import { FuelTypes } from '../../../core/models';
 import { QuoteVehicleModel, VehicleDTO } from '../../models';
 import {
   BrandDTO,

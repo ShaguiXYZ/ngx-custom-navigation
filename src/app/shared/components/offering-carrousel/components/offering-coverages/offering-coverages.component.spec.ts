@@ -1,12 +1,12 @@
+import { NX_MODAL_DATA } from '@allianz/ng-aquila/modal';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { NX_MODAL_DATA } from '@allianz/ng-aquila/modal';
 import { TranslateService } from '@ngx-translate/core';
 import { ContextDataService } from '@shagui/ng-shagui/core';
 import { of } from 'rxjs';
-import { QUOTE_APP_CONTEXT_DATA, QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
-import { NX_LANGUAGE_CONFIG, OfferingPriceModel } from 'src/app/core/models';
-import { QuoteModel } from 'src/app/library/models';
+import { QUOTE_APP_CONTEXT_DATA, QUOTE_CONTEXT_DATA } from '../../../../../core/constants';
+import { NX_LANGUAGE_CONFIG, OfferingPriceModel } from '../../../../../core/models';
+import { QuoteModel } from '../../../../../library/models';
 import { QuoteOfferingCoveragesComponent } from './offering-coverages.component';
 
 describe('QuoteOfferingCoveragesComponent', () => {
@@ -15,7 +15,7 @@ describe('QuoteOfferingCoveragesComponent', () => {
 
   beforeEach(async () => {
     const contextDataServiceSpy = jasmine.createSpyObj('ContextDataService', ['get']);
-    const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate', 'setDefaultLang', 'use', 'instant']);
+    const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate', 'setFallbackLang', 'use', 'instant']);
     const mockLanguageConfig = {
       current: 'en',
       languages: ['en', 'fr']

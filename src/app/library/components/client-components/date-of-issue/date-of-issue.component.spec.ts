@@ -1,24 +1,24 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { HttpClient } from '@angular/common/http';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ReactiveFormsModule } from '@angular/forms';
 import { NxDatefieldModule } from '@allianz/ng-aquila/datefield';
 import { NxFormfieldModule } from '@allianz/ng-aquila/formfield';
 import { NxInputModule } from '@allianz/ng-aquila/input';
 import { NxIsoDateModule } from '@allianz/ng-aquila/iso-date-adapter';
+import { HttpClient } from '@angular/common/http';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ReactiveFormsModule } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { ContextDataService } from '@shagui/ng-shagui/core';
 import dayjs from 'dayjs';
 import { of } from 'rxjs';
-import { NX_WORKFLOW_TOKEN } from 'src/app/core/components/models';
-import { DEFAULT_DATE_FORMAT } from 'src/app/core/constants';
-import { NX_LANGUAGE_CONFIG } from 'src/app/core/models';
-import { NX_RECAPTCHA_TOKEN } from 'src/app/core/services';
-import { ContextDataServiceStub } from 'src/app/core/stub';
-import { QuoteModel } from 'src/app/library/models';
-import { HeaderTitleComponent, QuoteFooterComponent } from 'src/app/shared/components';
-import { QuoteLiteralDirective } from 'src/app/shared/directives';
-import { QuoteLiteralPipe } from 'src/app/shared/pipes';
+import { NX_WORKFLOW_TOKEN } from '../../../../core/components/models';
+import { DEFAULT_DATE_FORMAT } from '../../../../core/constants';
+import { NX_LANGUAGE_CONFIG } from '../../../../core/models';
+import { NX_RECAPTCHA_TOKEN } from '../../../../core/services';
+import { ContextDataServiceStub } from '../../../../core/stub';
+import { HeaderTitleComponent, QuoteFooterComponent } from '../../../../shared/components';
+import { QuoteLiteralDirective } from '../../../../shared/directives';
+import { QuoteLiteralPipe } from '../../../../shared/pipes';
+import { QuoteModel } from '../../../models';
 import { DateOfIssueComponent } from './date-of-issue.component';
 
 describe('DateOfIssueComponent', () => {
@@ -28,7 +28,7 @@ describe('DateOfIssueComponent', () => {
   beforeEach(async () => {
     const quoteLiteralPipeSpy = jasmine.createSpyObj('QuoteLiteralPipe', ['transform']);
     const httpClientSpy = jasmine.createSpyObj('HttpClient', ['get', 'post', 'put', 'delete']);
-    const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate', 'setDefaultLang', 'use', 'instant']);
+    const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate', 'setFallbackLang', 'use', 'instant']);
     const mockWorkflowConfig = {
       errorPageId: 'error',
       manifest: {}

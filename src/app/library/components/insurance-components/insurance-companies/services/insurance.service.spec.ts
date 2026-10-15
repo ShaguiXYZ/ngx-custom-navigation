@@ -2,7 +2,7 @@ import { HttpStatusCode, provideHttpClient, withXhr } from '@angular/common/http
 import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { HttpService } from '@shagui/ng-shagui/core';
-import { IconDictionary } from 'src/app/core/models';
+import { IconDictionary } from '../../../../../core/models';
 import { InsuranceComponentService } from './insurance.service';
 
 describe('InsuranceComponentService', () => {

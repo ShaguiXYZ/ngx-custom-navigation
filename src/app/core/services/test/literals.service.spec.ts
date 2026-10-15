@@ -10,7 +10,7 @@ describe('LiteralsService', () => {
   let translateService: jasmine.SpyObj<TranslateService>;
 
   beforeEach(() => {
-    const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate', 'setDefaultLang', 'use', 'instant']);
+    const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate', 'setFallbackLang', 'use', 'instant']);
     const mockLanguageConfig = {
       current: 'en',
       languages: ['en', 'fr']

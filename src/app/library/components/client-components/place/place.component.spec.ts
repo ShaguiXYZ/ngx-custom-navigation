@@ -5,13 +5,13 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { ContextDataService } from '@shagui/ng-shagui/core';
 import { of, Subject } from 'rxjs';
-import { NX_WORKFLOW_TOKEN } from 'src/app/core/components/models';
-import { QUOTE_APP_CONTEXT_DATA, QUOTE_CONTEXT_DATA } from 'src/app/core/constants';
-import { QuoteFormValidarors } from 'src/app/core/form';
-import { AppContextData, NX_LANGUAGE_CONFIG } from 'src/app/core/models';
-import { LocationService, NX_RECAPTCHA_TOKEN } from 'src/app/core/services';
-import { QuoteModel } from 'src/app/library/models';
-import { QuoteLiteralPipe } from 'src/app/shared/pipes';
+import { NX_WORKFLOW_TOKEN } from '../../../../core/components/models';
+import { QUOTE_APP_CONTEXT_DATA, QUOTE_CONTEXT_DATA } from '../../../../core/constants';
+import { QuoteFormValidarors } from '../../../../core/form';
+import { AppContextData, NX_LANGUAGE_CONFIG } from '../../../../core/models';
+import { LocationService, NX_RECAPTCHA_TOKEN } from '../../../../core/services';
+import { QuoteLiteralPipe } from '../../../../shared/pipes';
+import { QuoteModel } from '../../../models';
 import { PlaceComponent } from './place.component';
 
 describe('PlaceComponent', () => {
@@ -25,7 +25,7 @@ describe('PlaceComponent', () => {
     const locationServiceSpy = jasmine.createSpyObj('LocationService', ['getAddress']);
     const quoteLiteralPipeSpy = jasmine.createSpyObj('QuoteLiteralPipe', ['transform']);
     const httpClientSpy = jasmine.createSpyObj('HttpClient', ['get', 'post', 'put', 'delete']);
-    const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate', 'setDefaultLang', 'use', 'instant']);
+    const translateServiceSpy = jasmine.createSpyObj('TranslateService', ['translate', 'setFallbackLang', 'use', 'instant']);
     const mockWorkflowConfig = {
       errorPageId: 'error',
       manifest: {}

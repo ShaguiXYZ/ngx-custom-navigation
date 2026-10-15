@@ -1,12 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { TestBed } from '@angular/core/testing';
-import { of, Subject } from 'rxjs';
 import { HttpService } from '@shagui/ng-shagui/core';
-import { NX_WORKFLOW_TOKEN } from 'src/app/core/components/models';
-import { OfferingDTO } from 'src/app/core/models';
+import { of } from 'rxjs';
+import { NX_WORKFLOW_TOKEN } from '../../../core/components/models';
+import { OfferingDTO } from '../../../core/models';
+import { ServiceActivatorService } from '../../../core/service-activators';
 import { QuoteModel } from '../../models';
 import { OfferingsService } from '../offerings.service';
-import { ServiceActivatorService } from 'src/app/core/service-activators';
 
 describe('OfferingsService', () => {
   let service: OfferingsService;
