@@ -1,7 +1,7 @@
 import { COMPONENTS } from './component-catalog.js';
 import { state } from './state.js';
 import { byId } from './dom.js';
-import { validatePageConfiguration } from './configuration-editor.js';
+import { validateFlowConfiguration, validatePageConfiguration } from './configuration-editor.js';
 
 const updateStateFromMetadata = () => {
   state.key = byId('journey-key').value.trim();
@@ -15,24 +15,9 @@ const updateStateFromMetadata = () => {
 };
 
 const readFlowExtras = errors => {
-  if (!state.flowExtrasRaw.trim()) return {};
-
-  try {
-    const extras = JSON.parse(state.flowExtrasRaw);
-    if (!extras || Array.isArray(extras) || typeof extras !== 'object') {
-      errors.push('La configuración avanzada debe ser un objeto JSON.');
-      return {};
-    }
-    const unsupported = Object.keys(extras).filter(key => !['errorPageId', 'links', 'literals'].includes(key));
-    if (unsupported.length) {
-      errors.push(`La configuración avanzada no puede redefinir: ${unsupported.join(', ')}.`);
-      return {};
-    }
-    return extras;
-  } catch (error) {
-    errors.push(`JSON inválido en la configuración avanzada: ${error.message}`);
-    return {};
-  }
+  const result = validateFlowConfiguration(state.flowExtrasRaw, state.pages.map(page => page.pageId.trim()));
+  result.errors.forEach(error => errors.push(`Configuración avanzada no válida: ${error}`));
+  return result.configuration;
 };
 
 export const setMetadataInputs = () => {

@@ -255,5 +255,6 @@ export const renderSteps = () => {
 
 export const refresh = () => {
   renderPages();
+  updateConfigurationEditor(byId('flow-extras'));
   renderPreview();
 };

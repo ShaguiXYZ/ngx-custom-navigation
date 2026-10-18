@@ -621,6 +621,7 @@ summary span {
 }
 
 .page-configuration,
+#flow-extras,
 .json-preview {
   font-family: "Cascadia Code", Consolas, "Courier New", monospace;
   font-size: 0.73rem;
@@ -639,7 +640,8 @@ summary span {
 }
 
 .json-highlight,
-.page-configuration {
+.page-configuration,
+#flow-extras {
   position: absolute;
   inset: 0;
   width: 100%;
@@ -673,7 +675,8 @@ summary span {
   font: inherit;
 }
 
-.page-configuration {
+.page-configuration,
+#flow-extras {
   z-index: 1;
   resize: none;
   overflow: auto;
@@ -683,7 +686,8 @@ summary span {
   -webkit-text-fill-color: transparent;
 }
 
-.page-configuration::selection {
+.page-configuration::selection,
+#flow-extras::selection {
   background: rgb(111 135 255 / 38%);
   -webkit-text-fill-color: transparent;
 }

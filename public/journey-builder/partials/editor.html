@@ -85,8 +85,24 @@
       <p class="panel-copy">Propiedades adicionales del journey en formato JSON.</p>
     </div>
   </div>
-  <label for="flow-extras">Propiedades admitidas: errorPageId, links y literals</label>
-  <textarea id="flow-extras" rows="5" spellcheck="false" placeholder='{"errorPageId":"error"}'></textarea>
+  <label class="field-wide config-label">
+    <span>Propiedades admitidas: errorPageId, links y literals</span>
+    <div class="json-editor">
+      <pre class="json-highlight" aria-hidden="true"><code></code></pre>
+      <textarea
+        id="flow-extras"
+        rows="12"
+        spellcheck="false"
+        autocapitalize="off"
+        autocomplete="off"
+        placeholder='{"errorPageId":"error"}'
+        aria-label="Configuración avanzada del journey en JSON"
+        aria-describedby="flow-extras-status"
+      ></textarea>
+    </div>
+    <span class="configuration-status" id="flow-extras-status" aria-live="polite"></span>
+    <ul class="configuration-diagnostics" aria-live="polite"></ul>
+  </label>
 </section>
 
 <section class="panel import-panel">

@@ -14,7 +14,7 @@ editor.addEventListener('change', handleEditorInput);
 editor.addEventListener('click', handleEditorClick);
 editor.addEventListener('keydown', handleConfigurationEditorKeydown);
 editor.addEventListener('scroll', event => {
-  if (event.target.matches('.page-configuration')) syncConfigurationEditorScroll(event.target);
+  if (event.target.matches('.page-configuration, #flow-extras')) syncConfigurationEditorScroll(event.target);
 }, true);
 preview.addEventListener('click', handleEditorClick);
 flowIndex.addEventListener('click', handleEditorClick);

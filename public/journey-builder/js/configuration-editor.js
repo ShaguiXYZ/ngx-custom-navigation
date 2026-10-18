@@ -1,8 +1,25 @@
+import { state } from './state.js';
+
 const literalTypes = new Set(['value', 'literal', 'data', 'translate']);
 const unions = new Set(['AND', 'OR', 'XOR', 'NOR', 'NAND', 'XNOR']);
 const pageConfigurationKeys = new Set(['literals', 'data', 'validationSettings', 'serviceActivators', 'zones']);
+const flowConfigurationKeys = new Set(['errorPageId', 'links', 'literals']);
 
 const isObject = value => value !== null && typeof value === 'object' && !Array.isArray(value);
+
+const jsonParseError = (source, error) => {
+  const message = error.message ?? 'JSON no válido.';
+  const position = message.match(/position\s+(\d+)/i);
+  const lineColumn = message.match(/line\s+(\d+)\s+column\s+(\d+)/i);
+  let line = lineColumn ? Number(lineColumn[1]) : null;
+  let column = lineColumn ? Number(lineColumn[2]) : null;
+  if (position) {
+    const beforeError = source.slice(0, Number(position[1]));
+    line = (beforeError.match(/\n/g) ?? []).length + 1;
+    column = Number(position[1]) - beforeError.lastIndexOf('\n');
+  }
+  return { errors: [message], warnings: [], line, column };
+};
 
 const escapeHtml = value =>
   value.replace(/[&<>"']/g, character => {
@@ -144,17 +161,7 @@ export const validatePageConfiguration = source => {
   try {
     configuration = JSON.parse(source);
   } catch (error) {
-    const message = error.message ?? 'JSON no válido.';
-    const position = message.match(/position\s+(\d+)/i);
-    const lineColumn = message.match(/line\s+(\d+)\s+column\s+(\d+)/i);
-    let line = lineColumn ? Number(lineColumn[1]) : null;
-    let column = lineColumn ? Number(lineColumn[2]) : null;
-    if (position) {
-      const beforeError = source.slice(0, Number(position[1]));
-      line = (beforeError.match(/\n/g) ?? []).length + 1;
-      column = Number(position[1]) - beforeError.lastIndexOf('\n');
-    }
-    return { errors: [message], warnings: [], line, column };
+    return jsonParseError(source, error);
   }
 
   const errors = [];
@@ -226,13 +233,62 @@ export const validatePageConfiguration = source => {
   return { errors, warnings, line: null, column: null };
 };
 
+export const validateFlowConfiguration = (source, pageIds) => {
+  if (!source.trim()) return { errors: [], warnings: [], line: null, column: null, configuration: {} };
+
+  let configuration;
+  try {
+    configuration = JSON.parse(source);
+  } catch (error) {
+    return { ...jsonParseError(source, error), configuration: {} };
+  }
+
+  const errors = [];
+  const warnings = [];
+  if (!isObject(configuration)) {
+    return {
+      errors: ['La configuración avanzada debe ser un objeto JSON, no un array ni un valor primitivo.'],
+      warnings,
+      line: null,
+      column: null,
+      configuration: {}
+    };
+  }
+
+  Object.keys(configuration).forEach(key => {
+    if (!flowConfigurationKeys.has(key)) errors.push(`Propiedad no admitida en la configuración avanzada: ${key}.`);
+  });
+  if (configuration.errorPageId !== undefined) {
+    if (typeof configuration.errorPageId !== 'string' || !configuration.errorPageId.trim()) {
+      errors.push('errorPageId debe ser texto no vacío.');
+    } else if (pageIds && !pageIds.includes(configuration.errorPageId)) {
+      errors.push(`errorPageId debe identificar una página existente: ${configuration.errorPageId}.`);
+    }
+  }
+  if (configuration.links !== undefined) {
+    if (!isObject(configuration.links)) {
+      errors.push('links debe ser un objeto.');
+    } else {
+      Object.entries(configuration.links).forEach(([key, value]) => {
+        if (typeof value !== 'string') errors.push(`links.${key} debe ser texto.`);
+      });
+    }
+  }
+  if (configuration.literals !== undefined) validateLiterals(configuration.literals, errors);
+
+  return { errors, warnings, line: null, column: null, configuration };
+};
+
 export const updateConfigurationEditor = textarea => {
   const editor = textarea.closest('.json-editor');
   editor.querySelector('.json-highlight code').innerHTML = highlightJson(textarea.value);
   syncConfigurationEditorScroll(textarea);
   const status = editor.parentElement.querySelector('.configuration-status');
   const diagnostics = editor.parentElement.querySelector('.configuration-diagnostics');
-  const result = validatePageConfiguration(textarea.value);
+  const result =
+    textarea.id === 'flow-extras'
+      ? validateFlowConfiguration(textarea.value, state.pages.map(page => page.pageId.trim()))
+      : validatePageConfiguration(textarea.value);
 
   editor.classList.toggle('has-json-error', result.errors.length > 0);
   status.className = `configuration-status${result.errors.length ? ' is-invalid' : result.warnings.length ? ' has-warning' : ''}`;
@@ -267,7 +323,7 @@ export const syncConfigurationEditorScroll = textarea => {
 };
 
 export const handleConfigurationEditorKeydown = event => {
-  if (!event.target.matches('.page-configuration') || event.key !== 'Tab') return;
+  if (!event.target.matches('.page-configuration, #flow-extras') || event.key !== 'Tab') return;
   event.preventDefault();
   const textarea = event.target;
   const start = textarea.selectionStart;

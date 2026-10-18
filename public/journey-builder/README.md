@@ -62,14 +62,15 @@ El índice lateral se vuelve a generar al importar, añadir o eliminar páginas 
 
 ### Editor de configuración JSON
 
-La configuración de cada página se edita en un área de texto con resaltado de claves, cadenas, números, booleanos, `null` y puntuación. La edición y selección siguen siendo las nativas del navegador; al pulsar Tab se insertan dos espacios, y Mayús+Tab quita la sangría de la línea.
+La configuración de cada página y la configuración avanzada del journey se editan en áreas de texto con resaltado de claves, cadenas, números, booleanos, `null` y puntuación. La edición y selección siguen siendo las nativas del navegador; al pulsar Tab se insertan dos espacios, y Mayús+Tab quita la sangría de la línea.
 
-La validación se actualiza mientras se escribe:
+La validación de ambas configuraciones se actualiza mientras se escribe:
 
 - Comprueba que el JSON parsea y que la raíz es un objeto.
 - Comprueba las formas conocidas de `literals`, `data` (`contextData`, `headerConfig`, `footerConfig` y `stepperConfig`), `validationSettings`, `serviceActivators` y `zones`.
 - Muestra los errores y avisos junto al editor y en el panel general. Los errores estructurales bloquean las descargas; las propiedades superiores no reconocidas se marcan como avisos para no descartar extensiones deliberadamente.
 - Una configuración vacía es opcional y conserva el aviso general de que la página no define configuración.
+- La configuración avanzada solo admite `errorPageId`, `links` y `literals`; comprueba que `errorPageId` corresponda a una página existente y que `links` y `literals` tengan la estructura esperada.
 
 La validación refleja los modelos del repositorio, en especial `PageConfiguration` y sus modelos asociados en `src/app/core/models/` y `ServiceActivator` en `src/app/core/service-activators/service-activator.model.ts`; no sustituye la validación de negocio de cada componente.
 

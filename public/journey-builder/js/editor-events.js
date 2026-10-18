@@ -1,16 +1,9 @@
 import { COMPONENTS } from './component-catalog.js';
-import { state } from './state.js';
-import { byId } from './dom.js';
 import { updateConfigurationEditor } from './configuration-editor.js';
-import {
-  renderHomePageOptions,
-  renderPageIndex,
-  renderPreview,
-  renderSteps,
-  refresh,
-  updatePageToggleAllButton
-} from './renderer.js';
+import { byId } from './dom.js';
 import { downloadCatalogEntry, downloadJourney } from './file-operations.js';
+import { refresh, renderHomePageOptions, renderPageIndex, renderPreview, renderSteps, updatePageToggleAllButton } from './renderer.js';
+import { state } from './state.js';
 
 const stepsList = byId('steps-list');
 
@@ -41,22 +34,22 @@ const updatePageField = (target, field) => {
     renderHomePageOptions();
     renderSteps();
   }
-  if (field === 'pageId') renderPageIndex();
+  if (field === 'pageId') {
+    renderPageIndex();
+    updateConfigurationEditor(byId('flow-extras'));
+  }
 };
 
 export const handleEditorInput = event => {
   const target = event.target;
-  if (
-    target.matches(
-      '#journey-key, #journey-id, #journey-name, #journey-version, #journey-title, #journey-breakingchange'
-    )
-  ) {
+  if (target.matches('#journey-key, #journey-id, #journey-name, #journey-version, #journey-title, #journey-breakingchange')) {
     if (target.id === 'journey-name') target.value = target.value.replace(/\.json$/i, '');
     renderPreview();
     return;
   }
   if (target.matches('#flow-extras')) {
     state.flowExtrasRaw = target.value;
+    updateConfigurationEditor(target);
     renderPreview();
     return;
   }
