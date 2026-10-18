@@ -1,0 +1,20 @@
+<section class="panel preview-panel">
+  <div class="panel-heading preview-heading">
+    <div>
+      <h2>Validación</h2>
+      <p class="panel-copy">Comprueba el flujo antes de descargarlo.</p>
+    </div>
+    <span class="status-badge" id="validation-badge" aria-live="polite"></span>
+  </div>
+  <div class="validation-messages" id="validation-messages" aria-live="polite"></div>
+  <label class="preview-label" for="json-preview">Journey JSON</label>
+  <textarea class="json-preview" id="json-preview" readonly spellcheck="false"></textarea>
+  <div class="download-actions">
+    <button class="button button-primary button-full" id="download-journey" type="button">Descargar journey</button>
+    <button class="button button-secondary button-full" id="download-catalog" type="button">Descargar entrada de catálogo</button>
+  </div>
+  <details class="catalog-preview">
+    <summary>Vista previa del catálogo</summary>
+    <textarea id="catalog-preview" rows="8" readonly spellcheck="false"></textarea>
+  </details>
+</section>

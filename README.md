@@ -317,6 +317,7 @@ Para iniciar la aplicación en modo de desarrollo, sigue estos pasos:
    npm run start:local
    ```
    Esto ejecutará el comando `ng serve`, iniciando un servidor de desarrollo y abriendo la aplicación en tu navegador.
+6. Abre `http://localhost:4200/journey-builder/` para diseñar un journey. Usa **Importar journey** para cargar un flujo con `homePageId` y `pageMap`; **Seleccionar journeys.json** carga el catálogo, no el flujo. El índice lateral facilita navegar páginas; la configuración JSON de cada página ofrece resaltado de sintaxis y validación estructural, y el panel de validación muestra errores antes de descargar. Los archivos se generan localmente en el navegador: copia el journey descargado a `server/data/journey/` y combina la entrada descargada con `journeys.json` sin reemplazar el catálogo. Para los pasos detallados y la resolución de problemas, consulta [la guía de uso y mantenimiento de Journey Builder](./public/journey-builder/README.md).
 
 ### Licencia
 

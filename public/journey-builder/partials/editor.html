@@ -1,0 +1,101 @@
+<section class="panel">
+  <div class="panel-heading">
+    <div>
+      <h2>Identidad del journey</h2>
+      <p class="panel-copy">Metadatos del flujo y del registro de catálogo.</p>
+    </div>
+    <button class="button button-secondary" id="import-journey-button" type="button">Importar journey</button>
+  </div>
+  <div class="form-grid">
+    <label>
+      Clave del catálogo
+      <input id="journey-key" autocomplete="off" />
+    </label>
+    <label>
+      ID
+      <input id="journey-id" autocomplete="off" />
+    </label>
+    <label class="field-wide">
+      Nombre de archivo
+      <div class="input-with-suffix">
+        <input id="journey-name" autocomplete="off" />
+        <span>.json</span>
+      </div>
+    </label>
+    <label>
+      Versión
+      <input id="journey-version" autocomplete="off" placeholder="v1.0.0" />
+    </label>
+    <label>
+      Cambio incompatible
+      <select id="journey-breakingchange">
+        <option value="">No especificado</option>
+        <option value="none">Ninguno</option>
+        <option value="workflow">Workflow</option>
+        <option value="all">Todos</option>
+      </select>
+    </label>
+    <label class="field-wide">
+      Título
+      <div class="form-grid title-fields">
+        <input id="journey-title" autocomplete="off" />
+        <select id="journey-title-type" aria-label="Tipo de título">
+          <option value="literal">Literal</option>
+          <option value="translate">Traducción</option>
+        </select>
+      </div>
+    </label>
+    <label class="field-wide">
+      Página inicial
+      <select id="home-page"></select>
+    </label>
+  </div>
+</section>
+
+<section class="panel">
+  <div class="panel-heading">
+    <div>
+      <h2>Páginas</h2>
+      <p class="panel-copy">Cada página usa un componente registrado y puede definir rutas condicionales.</p>
+    </div>
+    <div class="page-actions">
+      <button class="button button-secondary button-small" id="toggle-all-pages" type="button" aria-expanded="true">Contraer todas</button>
+      <button class="button button-primary" id="add-page" type="button">＋ Página</button>
+    </div>
+  </div>
+  <div class="pages-list" id="pages-list"></div>
+</section>
+
+<section class="panel">
+  <div class="panel-heading">
+    <div>
+      <h2>Stepper</h2>
+      <p class="panel-copy">Agrupa páginas en pasos ordenados. Usa el mismo ID para pasos del mismo stepper.</p>
+    </div>
+    <button class="button button-secondary" id="add-step" type="button">＋ Paso</button>
+  </div>
+  <p class="empty-hint" id="empty-steps">No hay pasos configurados.</p>
+  <div class="steps-list" id="steps-list"></div>
+</section>
+
+<section class="panel">
+  <div class="panel-heading">
+    <div>
+      <h2>Configuración avanzada</h2>
+      <p class="panel-copy">Propiedades adicionales del journey en formato JSON.</p>
+    </div>
+  </div>
+  <label for="flow-extras">Propiedades admitidas: errorPageId, links y literals</label>
+  <textarea id="flow-extras" rows="5" spellcheck="false" placeholder='{"errorPageId":"error"}'></textarea>
+</section>
+
+<section class="panel import-panel">
+  <h2>Catálogo de journeys</h2>
+  <p class="panel-copy">Carga el catálogo existente para conservar versiones y detectar conflictos.</p>
+  <label class="button button-secondary button-full import-label" for="import-catalog-file">Seleccionar journeys.json</label>
+  <input id="import-catalog-file" type="file" accept=".json,application/json" hidden />
+  <p class="catalog-status" id="catalog-status" aria-live="polite">Catálogo no cargado; se generará una entrada nueva.</p>
+</section>
+
+<input id="import-journey-file" type="file" accept=".json,application/json" hidden />
+<p class="privacy-note">Los JSON permanecen en tu navegador; importar y descargar no modifica los archivos del repositorio.</p>
