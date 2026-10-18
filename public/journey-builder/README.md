@@ -18,12 +18,15 @@ Open <http://localhost:4200/journey-builder/>. Use the HTTP URL: opening `index.
 1. **Load the existing catalog (optional, recommended before importing a journey).** In the *Journey catalog* panel, select `server/data/journey/journeys.json`. This preserves the matching entry's data and version history and detects IDs or file names already in use. Loading the catalog alone does not change the journey being edited.
 2. **Import the journey you want to edit.** Click **Import journey** in the identity panel and select a journey JSON file. It must contain a string `homePageId` and an array `pageMap`; if present, `steppers` must be an array. The editor populates the form from the selected file.
 3. **Edit the configuration.** Complete the metadata, choose the home page, select a registered component for each page, configure its JSON and routes. Conditions are optional. In *Stepper*, group pages into steps; in *Advanced configuration*, define `errorPageId`, `links`, or `literals`.
-4. **Navigate long flows.** The side index lists pages in order; select one to scroll to it. If collapsed, it expands automatically. The index updates when pages are added or removed and when their IDs or components change. On small screens it appears above the editor. You can also collapse or expand cards individually or all at once.
-5. **Review and download.** The *Validation* panel shows errors and warnings and lets you inspect both JSON files. Errors block downloads. Download the journey and catalog entry separately.
+4. **Explore the screen flow.** In the *Pages* heading, select the magnifying-glass button to open the visual diagram over the editor. It displays pages, routes, and links from the home page, and highlights unreachable pages. Select a page node to close the diagram and jump to that page's configuration. The diagram updates as the journey changes and can be scrolled in both directions.
+5. **Navigate long flows.** The side index lists pages in order; select one to scroll to it. If collapsed, it expands automatically. The index updates when pages are added or removed and when their IDs or components change. On small screens it appears above the editor. You can also collapse or expand cards individually or all at once.
+6. **Review and download.** The *Validation* panel shows errors and warnings and lets you inspect both JSON files. Errors block downloads. Download the journey and catalog entry separately.
 
 **Import journey** loads a definition with `homePageId` and `pageMap`; **Select journeys.json** only loads the catalog and does not replace the open journey. To preserve versions, load the catalog before importing the corresponding journey. When a journey is imported, its home page is expanded and the other pages are collapsed.
 
 JSON files are processed in the browser: the editor does not write to the repository or change `settings.json`. After downloading, copy the journey JSON to `server/data/journey/<name>.json` and merge the downloaded catalog entry into `server/data/journey/journeys.json` without removing existing entries. Do not add a catalog entry or enable a journey in `settings.json` unless that is the change you intend to make.
+
+The editor shows an in-app confirmation popup before deleting pages, routes, conditions, or steps; changing the home page, route destinations, or route order; or importing a journey/catalog that replaces data currently in the editor. Cancelling leaves the current data unchanged.
 
 ### If a journey does not load
 
@@ -45,11 +48,15 @@ The ES modules in `js/` separate responsibilities:
 | `dom.js` | Accesses elements by ID and clones HTML templates. |
 | `flow-model.js` | Reads form metadata, validates the model, and builds journey and catalog JSON. |
 | `configuration-editor.js` | Highlights JSON syntax, validates the `PageConfiguration` structure, and handles editor indentation. |
+| `confirmation.js` | Shows accessible in-app confirmation dialogs for destructive or flow-changing actions. |
 | `renderer.js` | Renders pages, steppers, errors, warnings, and previews. |
+| `flow-diagram.js` | Builds the interactive screen-flow diagram from journey pages, routes, and links. |
 | `editor-events.js` | Synchronizes controls with state and handles editor actions. |
 | `file-operations.js` | Imports files and downloads the journey and catalog entry. |
 | `partials/intro.html` | Introductory header. |
 | `partials/flow-index.html` | Side navigation index for pages. |
+| `partials/flow-diagram.html` | Interactive visual screen-flow diagram. |
+| `partials/confirmation.html` | In-app confirmation popup. |
 | `partials/editor.html` | Forms, pages, steppers, and imports. |
 | `partials/preview.html` | Validation, previews, and downloads. |
 | `partials/templates.html` | HTML templates for pages, routes, conditions, and steps. |

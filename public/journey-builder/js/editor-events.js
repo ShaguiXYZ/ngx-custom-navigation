@@ -2,6 +2,7 @@ import { COMPONENTS } from './component-catalog.js';
 import { updateConfigurationEditor } from './configuration-editor.js';
 import { byId } from './dom.js';
 import { downloadCatalogEntry, downloadJourney } from './file-operations.js';
+import { confirmAction } from './confirmation.js';
 import { refresh, renderHomePageOptions, renderPageIndex, renderPreview, renderSteps, updatePageToggleAllButton } from './renderer.js';
 import { state } from './state.js';
 
@@ -40,7 +41,7 @@ const updatePageField = (target, field) => {
   }
 };
 
-export const handleEditorInput = event => {
+export const handleEditorInput = async event => {
   const target = event.target;
   if (target.matches('#journey-key, #journey-id, #journey-name, #journey-version, #journey-title, #journey-breakingchange')) {
     if (target.id === 'journey-name') target.value = target.value.replace(/\.json$/i, '');
@@ -59,6 +60,18 @@ export const handleEditorInput = event => {
     return;
   }
   if (target.matches('#home-page')) {
+    if (event.type === 'input') return;
+    if (
+      target.value !== state.homePageId &&
+      !(await confirmAction({
+        titleText: 'Change home page?',
+        messageText: `Change the home page from "${state.homePageId}" to "${target.value}"? This changes where the journey starts.`,
+        confirmText: 'Change home page'
+      }))
+    ) {
+      target.value = state.homePageId;
+      return;
+    }
     state.homePageId = target.value;
     renderPageIndex();
     renderPreview();
@@ -75,7 +88,21 @@ export const handleEditorInput = event => {
   const routeIndex = Number(target.dataset.routeIndex);
   const route = state.pages[pageIndex]?.routes[routeIndex];
   if (route) {
-    if (target.matches('.route-target')) route.nextPageId = target.value;
+    if (target.matches('.route-target')) {
+      if (event.type === 'input') return;
+      if (
+        target.value !== route.nextPageId &&
+        !(await confirmAction({
+          titleText: 'Change route destination?',
+          messageText: `Change the destination of this route from "${route.nextPageId || '(none)'}" to "${target.value || '(none)'}"? This changes the journey flow.`,
+          confirmText: 'Change destination'
+        }))
+      ) {
+        target.value = route.nextPageId;
+        return;
+      }
+      route.nextPageId = target.value;
+    }
     const condition = route.conditions[Number(target.dataset.conditionIndex)];
     if (condition) {
       if (target.matches('.condition-union-input')) condition.union = target.value;
@@ -99,15 +126,16 @@ export const handleEditorInput = event => {
   renderPreview();
 };
 
-export const handleEditorClick = event => {
+export const handleEditorClick = async event => {
   const button = event.target.closest('button');
   if (!button) return;
 
-  if (button.matches('.flow-index-link')) {
+  if (button.matches('.flow-index-link, .flow-diagram-node')) {
     const pageIndex = Number(button.dataset.pageIndex);
     const page = state.pages[pageIndex];
     const card = document.getElementById(`page-card-${pageIndex}`);
     if (!page || !card) return;
+    if (button.matches('.flow-diagram-node')) button.closest('dialog')?.close();
     if (page.collapsed) {
       page.collapsed = false;
       card.classList.remove('is-collapsed');
@@ -154,6 +182,19 @@ export const handleEditorClick = event => {
   }
   if (button.matches('.remove-page')) {
     const index = Number(button.dataset.pageIndex);
+    const page = state.pages[index];
+    const homePageWarning = page?.pageId === state.homePageId ? ' You will need to choose a new home page.' : '';
+    if (
+      !page ||
+      !(await confirmAction({
+        titleText: `Delete "${page?.pageId ?? 'page'}"?`,
+        messageText: `This deletes its configuration and routes. Routes leading to it and its step assignments will also be removed.${homePageWarning} This cannot be undone.`,
+        confirmText: 'Delete page',
+        destructive: true
+      }))
+    ) {
+      return;
+    }
     const [removed] = state.pages.splice(index, 1);
     state.pages.forEach(page => {
       page.routes = page.routes.filter(route => route.nextPageId !== removed.pageId);
@@ -174,7 +215,20 @@ export const handleEditorClick = event => {
     return;
   }
   if (button.matches('.remove-route')) {
-    state.pages[Number(button.dataset.pageIndex)]?.routes.splice(Number(button.dataset.routeIndex), 1);
+    const page = state.pages[Number(button.dataset.pageIndex)];
+    const route = page?.routes[Number(button.dataset.routeIndex)];
+    if (
+      !route ||
+      !(await confirmAction({
+        titleText: 'Delete route?',
+        messageText: `Delete this route${route.nextPageId ? ` from "${page.pageId}" to "${route.nextPageId}"` : ` from "${page.pageId}"`} and its conditions? This changes the journey flow.`,
+        confirmText: 'Delete route',
+        destructive: true
+      }))
+    ) {
+      return;
+    }
+    page.routes.splice(Number(button.dataset.routeIndex), 1);
     refresh();
     return;
   }
@@ -190,10 +244,20 @@ export const handleEditorClick = event => {
     return;
   }
   if (button.matches('.remove-condition')) {
-    state.pages[Number(button.dataset.pageIndex)]?.routes[Number(button.dataset.routeIndex)]?.conditions.splice(
-      Number(button.dataset.conditionIndex),
-      1
-    );
+    const conditions =
+      state.pages[Number(button.dataset.pageIndex)]?.routes[Number(button.dataset.routeIndex)]?.conditions;
+    if (
+      !conditions?.[Number(button.dataset.conditionIndex)] ||
+      !(await confirmAction({
+        titleText: 'Delete route condition?',
+        messageText: 'This may change which destination is selected.',
+        confirmText: 'Delete condition',
+        destructive: true
+      }))
+    ) {
+      return;
+    }
+    conditions.splice(Number(button.dataset.conditionIndex), 1);
     refresh();
     return;
   }
@@ -202,6 +266,15 @@ export const handleEditorClick = event => {
     const index = Number(button.dataset.routeIndex);
     const destination = index + (button.matches('.move-route-up') ? -1 : 1);
     if (page && destination >= 0 && destination < page.routes.length) {
+      if (
+        !(await confirmAction({
+          titleText: 'Reorder routes?',
+          messageText: 'Route order can affect which branch of the journey is taken.',
+          confirmText: 'Reorder routes'
+        }))
+      ) {
+        return;
+      }
       [page.routes[index], page.routes[destination]] = [page.routes[destination], page.routes[index]];
     }
     refresh();
@@ -214,7 +287,20 @@ export const handleEditorClick = event => {
     return;
   }
   if (button.matches('.remove-step')) {
-    state.steps.splice(Number(button.dataset.stepIndex), 1);
+    const index = Number(button.dataset.stepIndex);
+    const step = state.steps[index];
+    if (
+      !step ||
+      !(await confirmAction({
+        titleText: `Delete "${step?.label || step?.id || 'step'}"?`,
+        messageText: 'Its step configuration will be removed.',
+        confirmText: 'Delete step',
+        destructive: true
+      }))
+    ) {
+      return;
+    }
+    state.steps.splice(index, 1);
     renderSteps();
     renderPreview();
     return;

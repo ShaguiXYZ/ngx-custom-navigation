@@ -1,5 +1,6 @@
 import { state } from './state.js';
 import { byId } from './dom.js';
+import { confirmAction } from './confirmation.js';
 import { buildOutput, setMetadataInputs } from './flow-model.js';
 import { refresh, renderPreview, setValidationMessage } from './renderer.js';
 
@@ -125,6 +126,17 @@ export const importJourney = async file => {
         };
       });
     });
+    if (
+      !(await confirmAction({
+        titleText: 'Replace the current journey?',
+        messageText: `Import "${file.name}"? This replaces the current journey's pages, routes, conditions, steps, and metadata.`,
+        confirmText: 'Replace journey',
+        destructive: true
+      }))
+    ) {
+      byId('import-journey-file').value = '';
+      return;
+    }
     state.pages = pages;
     state.steps = steps;
     state.homePageId = homePageId;
@@ -170,13 +182,24 @@ export const importCatalog = async file => {
     ) {
       throw new Error('Each catalog entry needs an id, a name, and a valid versions array.');
     }
+    if (
+      state.catalog &&
+      !(await confirmAction({
+        titleText: 'Replace the current catalog?',
+        messageText: 'This replaces the catalog currently loaded in the editor.',
+        confirmText: 'Replace catalog',
+        destructive: true
+      }))
+    ) {
+      byId('import-catalog-file').value = '';
+      return;
+    }
     state.catalog = catalog;
     const count = Object.keys(catalog).length;
     status.textContent = `Catalog loaded: ${count} ${count === 1 ? 'entry' : 'entries'}.`;
     status.className = 'catalog-status is-loaded';
     renderPreview();
   } catch (error) {
-    state.catalog = undefined;
     status.textContent = error.message;
     status.className = 'catalog-status';
     renderPreview();

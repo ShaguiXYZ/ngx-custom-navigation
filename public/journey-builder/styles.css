@@ -67,6 +67,69 @@ code {
   font-size: 0.9em;
 }
 
+.confirmation-dialog {
+  width: min(440px, calc(100vw - 2rem));
+  max-width: none;
+  padding: 0;
+  overflow: visible;
+  border: 1px solid rgb(228 231 239 / 80%);
+  border-radius: 18px;
+  background: var(--surface);
+  color: var(--ink);
+  box-shadow: 0 24px 80px rgb(16 24 40 / 24%);
+}
+
+.confirmation-dialog::backdrop {
+  background: rgb(25 31 49 / 48%);
+  backdrop-filter: blur(4px);
+}
+
+.confirmation-card {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 1rem;
+  padding: 1.5rem;
+}
+
+.confirmation-icon {
+  width: 2.5rem;
+  height: 2.5rem;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--accent-soft);
+  color: var(--accent-dark);
+  font-size: 1.2rem;
+  font-weight: 800;
+}
+
+.confirmation-dialog.is-destructive .confirmation-icon {
+  background: var(--danger-soft);
+  color: var(--danger);
+}
+
+.confirmation-content h2 {
+  margin: 0.15rem 0 0.45rem;
+  font-size: 1.05rem;
+  letter-spacing: -0.02em;
+}
+
+.confirmation-content p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.86rem;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+.confirmation-actions {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.65rem;
+  margin-top: 0.4rem;
+}
+
 .topbar {
   min-height: 66px;
   display: flex;
@@ -297,6 +360,239 @@ h3 {
   font-size: 0.64rem;
 }
 
+.flow-diagram-count {
+  flex: 0 0 auto;
+  padding: 0.35rem 0.6rem;
+  border-radius: 999px;
+  background: var(--accent-soft);
+  color: var(--accent-dark);
+  font-size: 0.7rem;
+  font-weight: 750;
+}
+
+.flow-diagram-dialog {
+  width: min(1100px, calc(100vw - 2rem));
+  max-width: none;
+  max-height: calc(100dvh - 2rem);
+  padding: 0;
+  overflow: auto;
+  border: 0;
+  background: transparent;
+  color: var(--ink);
+}
+
+.flow-diagram-dialog::backdrop {
+  background: rgb(25 31 49 / 62%);
+  backdrop-filter: blur(3px);
+}
+
+.flow-diagram-panel {
+  max-height: calc(100dvh - 2rem);
+  display: flex;
+  flex-direction: column;
+}
+
+.flow-diagram-actions {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.flow-diagram-open {
+  width: 34px;
+  min-width: 34px;
+  display: grid;
+  place-items: center;
+  padding: 0.4rem;
+}
+
+.flow-diagram-open svg {
+  width: 17px;
+  height: 17px;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-width: 2;
+}
+
+.flow-diagram-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem 1.2rem;
+  margin: 0.85rem 0;
+  color: var(--muted);
+  font-size: 0.71rem;
+}
+
+.flow-diagram-legend span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.flow-diagram-legend i {
+  width: 0.7rem;
+  height: 0.7rem;
+  border: 1px solid #d4d9e5;
+  border-radius: 4px;
+  background: white;
+}
+
+.flow-diagram-legend .flow-legend-home {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+
+.flow-diagram-legend .flow-legend-unreachable {
+  border-color: #d5a24b;
+  background: #fff7e8;
+}
+
+.flow-diagram-scroll {
+  max-height: min(660px, calc(100dvh - 15rem));
+  min-height: 140px;
+  overflow: auto;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background-color: #fafbfe;
+  background-image: radial-gradient(#d9deeb 0.8px, transparent 0.8px);
+  background-size: 18px 18px;
+  scrollbar-color: #c9c9df transparent;
+  scrollbar-width: thin;
+}
+
+.flow-diagram-dialog .flow-diagram-scroll {
+  flex: 1 1 auto;
+}
+
+.flow-diagram-canvas {
+  position: relative;
+  min-width: 100%;
+  min-height: 170px;
+  padding: 1px;
+}
+
+.flow-diagram-edges {
+  position: absolute;
+  inset: 0;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.flow-edge {
+  fill: none;
+  stroke: #858da2;
+  stroke-width: 1.8;
+}
+
+.flow-edge-link {
+  stroke: var(--accent);
+  stroke-dasharray: 5 4;
+}
+
+.flow-edge-routed {
+  stroke-dasharray: 4 3;
+}
+
+.flow-edge-label {
+  fill: #596176;
+  font-family: inherit;
+  font-size: 11px;
+  paint-order: stroke;
+  stroke: #fafbfe;
+  stroke-linejoin: round;
+  stroke-width: 5px;
+}
+
+.flow-edge-label-routed {
+  fill: var(--accent-dark);
+  font-size: 10px;
+}
+
+.flow-diagram-node {
+  position: absolute;
+  width: 216px;
+  min-height: 104px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.28rem;
+  padding: 0.7rem 0.8rem;
+  border: 1px solid #dce1eb;
+  border-radius: 10px;
+  background: white;
+  box-shadow: 0 4px 12px rgb(31 42 68 / 7%);
+  color: var(--ink);
+  cursor: pointer;
+  text-align: left;
+  transition:
+    border-color 140ms ease,
+    box-shadow 140ms ease,
+    transform 140ms ease;
+}
+
+.flow-diagram-node:hover {
+  z-index: 1;
+  transform: translateY(-2px);
+  border-color: #a9a5ed;
+  box-shadow: 0 8px 18px rgb(31 42 68 / 12%);
+}
+
+.flow-diagram-node.is-home {
+  border-color: #8e89e8;
+  background: #fbfaff;
+}
+
+.flow-diagram-node.is-unreachable {
+  border-color: #e2bd7e;
+  background: #fffaf1;
+}
+
+.flow-diagram-node-heading,
+.flow-diagram-details {
+  color: var(--muted);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.035em;
+  text-transform: uppercase;
+}
+
+.flow-diagram-page-id {
+  max-width: 100%;
+  overflow: hidden;
+  color: var(--ink);
+  font-family: "Cascadia Code", Consolas, monospace;
+  font-size: 0.82rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.flow-diagram-component {
+  max-width: 100%;
+  overflow: hidden;
+  color: #687187;
+  font-size: 0.72rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.flow-diagram-details {
+  margin-top: auto;
+  font-size: 0.61rem;
+  font-weight: 550;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.flow-diagram-empty {
+  margin: 0;
+  padding: 1.5rem;
+  color: var(--muted);
+  font-size: 0.8rem;
+  text-align: center;
+}
+
 .editor-column,
 .preview-column {
   display: grid;
@@ -448,6 +744,17 @@ textarea:hover {
 .button-secondary:hover:not(:disabled) {
   border-color: #c6c4f1;
   background: #fafaff;
+}
+
+.button.button-primary.button-danger {
+  border-color: var(--danger);
+  background: var(--danger);
+  color: white;
+}
+
+.button.button-primary.button-danger:hover:not(:disabled) {
+  border-color: #98293d;
+  background: #98293d;
 }
 
 .button-small {
@@ -1058,6 +1365,19 @@ summary span {
 
   .panel {
     padding: 1rem;
+  }
+
+  .flow-diagram-dialog {
+    width: calc(100vw - 1rem);
+    max-height: calc(100dvh - 1rem);
+  }
+
+  .flow-diagram-panel {
+    max-height: calc(100dvh - 1rem);
+  }
+
+  .flow-diagram-actions {
+    gap: 0.4rem;
   }
 
   .panel-heading {

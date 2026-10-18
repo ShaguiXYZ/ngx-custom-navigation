@@ -3,6 +3,7 @@ import { state } from './state.js';
 import { buildOutput } from './flow-model.js';
 import { byId, cloneTemplate } from './dom.js';
 import { updateConfigurationEditor } from './configuration-editor.js';
+import { renderFlowDiagram } from './flow-diagram.js';
 
 const pagesList = byId('pages-list');
 const stepsList = byId('steps-list');
@@ -45,6 +46,7 @@ export const renderPreview = () => {
   badge.className = `status-badge ${errors.length ? 'status-invalid' : 'status-valid'}`;
   byId('json-preview').value = JSON.stringify(flow, null, 2);
   byId('catalog-preview').value = JSON.stringify({ [state.key]: catalogEntry }, null, 2);
+  renderFlowDiagram(flow);
   byId('download-journey').disabled = errors.length > 0;
   byId('download-catalog').disabled = errors.length > 0;
   return { errors, warnings, flow, catalogEntry };
@@ -94,7 +96,7 @@ export const renderPageIndex = () => {
     number.textContent = String(pageIndex + 1);
     details.className = 'flow-index-details';
     pageId.className = 'flow-index-page-id';
-    pageId.textContent = page.pageId || '(sin ID)';
+    pageId.textContent = page.pageId || '(no ID)';
     component.className = 'flow-index-component';
     component.textContent = componentLabel;
     details.append(pageId, component);
