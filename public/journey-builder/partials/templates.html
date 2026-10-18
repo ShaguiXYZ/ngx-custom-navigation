@@ -120,6 +120,35 @@
   </div>
 </template>
 
+<template id="stepper-template">
+  <section class="stepper-group">
+    <header class="stepper-group-heading">
+      <button class="stepper-toggle" type="button" aria-expanded="true">
+        <span class="stepper-toggle-icon" aria-hidden="true">⌄</span>
+        <span class="stepper-summary"></span>
+      </button>
+      <button class="button button-secondary button-small add-step" type="button">＋ Step</button>
+    </header>
+    <div class="stepper-content">
+      <div class="stepper-group-fields">
+        <label>
+          Stepper ID
+          <input class="stepper-id" autocomplete="off" />
+        </label>
+        <label>
+          Context inheritance
+          <select class="step-inherited">
+            <option value="">Default</option>
+            <option value="true">Inherit</option>
+            <option value="false">Isolate this stepper</option>
+          </select>
+        </label>
+      </div>
+      <div class="stepper-steps-list"></div>
+    </div>
+  </section>
+</template>
+
 <template id="step-template">
   <article class="step-card">
     <div class="step-card-heading">
@@ -127,10 +156,6 @@
       <button class="icon-button remove-step" type="button" aria-label="Remove step">Remove</button>
     </div>
     <div class="form-grid step-fields">
-      <label>
-        Stepper ID
-        <input class="stepper-id" autocomplete="off" value="main" />
-      </label>
       <label>
         Label
         <input class="step-label" autocomplete="off" placeholder="Steps.PersonalData" />
@@ -140,14 +165,6 @@
         <select class="step-label-type">
           <option value="translate">Translation</option>
           <option value="literal">Literal</option>
-        </select>
-      </label>
-      <label>
-        Context inheritance
-        <select class="step-inherited">
-          <option value="">Default</option>
-          <option value="true">Inherit</option>
-          <option value="false">Isolate this stepper</option>
         </select>
       </label>
     </div>

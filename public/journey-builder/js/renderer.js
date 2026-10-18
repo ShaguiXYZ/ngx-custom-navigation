@@ -73,6 +73,16 @@ export const updatePageToggleAllButton = () => {
   button.setAttribute('aria-expanded', String(hasPages && !allCollapsed));
 };
 
+export const updateStepperToggleAllButton = () => {
+  const button = byId('toggle-all-steppers');
+  const ids = [...new Set(state.steps.map(step => step.id))];
+  const hasSteppers = ids.length > 0;
+  const allCollapsed = hasSteppers && ids.every(id => state.collapsedSteppers[id]);
+  button.disabled = !hasSteppers;
+  button.textContent = allCollapsed ? 'Expand all' : 'Collapse all';
+  button.setAttribute('aria-expanded', String(hasSteppers && !allCollapsed));
+};
+
 export const renderPageIndex = () => {
   flowIndexList.replaceChildren();
   byId('flow-index-count').textContent = String(state.pages.length);
@@ -218,41 +228,72 @@ export const renderPages = () => {
 
 export const renderSteps = () => {
   stepsList.replaceChildren();
+  const groups = new Map();
   state.steps.forEach((step, stepIndex) => {
-    const card = cloneTemplate('step-template');
-    card.querySelector('.step-number').textContent = `Step ${stepIndex + 1}`;
-    card.querySelector('.remove-step').dataset.stepIndex = stepIndex;
-    const stepperId = card.querySelector('.stepper-id');
-    stepperId.value = step.id;
-    stepperId.dataset.stepIndex = stepIndex;
-    const label = card.querySelector('.step-label');
-    label.value = step.label;
-    label.dataset.stepIndex = stepIndex;
-    const labelType = card.querySelector('.step-label-type');
-    labelType.value = step.labelType;
-    labelType.dataset.stepIndex = stepIndex;
-    const inherited = card.querySelector('.step-inherited');
-    inherited.value = step.inherited;
-    inherited.dataset.stepIndex = stepIndex;
-    const pages = card.querySelector('.step-pages');
-    if (!state.pages.length) {
-      pages.textContent = 'Add pages to assign them to this step.';
-    } else {
-      state.pages.forEach(page => {
-        const option = document.createElement('label');
-        option.className = 'step-page-option';
-        const checkbox = document.createElement('input');
-        checkbox.type = 'checkbox';
-        checkbox.value = page.pageId;
-        checkbox.checked = step.pages.includes(page.pageId);
-        checkbox.dataset.stepIndex = stepIndex;
-        option.append(checkbox, document.createTextNode(page.pageId || '(no ID)'));
-        pages.append(option);
-      });
-    }
-    stepsList.append(card);
+    if (!groups.has(step.id)) groups.set(step.id, []);
+    groups.get(step.id).push({ step, stepIndex });
+  });
+  Object.keys(state.collapsedSteppers).forEach(id => {
+    if (!groups.has(id)) delete state.collapsedSteppers[id];
+  });
+
+  groups.forEach((group, id) => {
+    const stepper = cloneTemplate('stepper-template');
+    const stepIndices = group.map(({ stepIndex }) => stepIndex).join(',');
+    const collapsed = Boolean(state.collapsedSteppers[id]);
+    const content = stepper.querySelector('.stepper-content');
+    const toggle = stepper.querySelector('.stepper-toggle');
+    const stepList = stepper.querySelector('.stepper-steps-list');
+    const stepperName = id || '(no ID)';
+    stepper.classList.toggle('is-collapsed', collapsed);
+    content.hidden = collapsed;
+    content.id = `stepper-content-${encodeURIComponent(id || 'empty')}`;
+    toggle.dataset.stepperId = id;
+    toggle.setAttribute('aria-expanded', String(!collapsed));
+    toggle.setAttribute('aria-controls', content.id);
+    toggle.setAttribute('aria-label', `${collapsed ? 'Expand' : 'Collapse'} stepper ${stepperName}`);
+    stepper.querySelector('.stepper-summary').textContent = `${stepperName} · ${group.length} ${group.length === 1 ? 'step' : 'steps'}`;
+    const stepperId = stepper.querySelector('.stepper-id');
+    stepperId.value = id;
+    stepperId.dataset.stepIndices = stepIndices;
+    const inherited = stepper.querySelector('.step-inherited');
+    inherited.value = group[0].step.inherited;
+    inherited.dataset.stepIndices = stepIndices;
+    stepper.querySelector('.add-step').dataset.stepperId = id;
+
+    group.forEach(({ step, stepIndex }, groupStepIndex) => {
+      const card = cloneTemplate('step-template');
+      card.querySelector('.step-number').textContent = `Step ${groupStepIndex + 1}`;
+      card.querySelector('.remove-step').dataset.stepIndex = stepIndex;
+      const label = card.querySelector('.step-label');
+      label.value = step.label;
+      label.dataset.stepIndex = stepIndex;
+      const labelType = card.querySelector('.step-label-type');
+      labelType.value = step.labelType;
+      labelType.dataset.stepIndex = stepIndex;
+      const pages = card.querySelector('.step-pages');
+      if (!state.pages.length) {
+        pages.textContent = 'Add pages to assign them to this step.';
+      } else {
+        state.pages.forEach(page => {
+          const option = document.createElement('label');
+          option.className = 'step-page-option';
+          const checkbox = document.createElement('input');
+          checkbox.type = 'checkbox';
+          checkbox.value = page.pageId;
+          checkbox.checked = step.pages.includes(page.pageId);
+          checkbox.dataset.stepIndex = stepIndex;
+          option.append(checkbox, document.createTextNode(page.pageId || '(no ID)'));
+          pages.append(option);
+        });
+      }
+      stepList.append(card);
+    });
+
+    stepsList.append(stepper);
   });
   byId('empty-steps').hidden = state.steps.length > 0;
+  updateStepperToggleAllButton();
 };
 
 export const refresh = () => {

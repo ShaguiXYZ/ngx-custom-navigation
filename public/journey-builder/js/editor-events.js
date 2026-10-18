@@ -3,7 +3,15 @@ import { updateConfigurationEditor } from './configuration-editor.js';
 import { byId } from './dom.js';
 import { downloadCatalogEntry, downloadJourney } from './file-operations.js';
 import { confirmAction } from './confirmation.js';
-import { refresh, renderHomePageOptions, renderPageIndex, renderPreview, renderSteps, updatePageToggleAllButton } from './renderer.js';
+import {
+  refresh,
+  renderHomePageOptions,
+  renderPageIndex,
+  renderPreview,
+  renderSteps,
+  updatePageToggleAllButton,
+  updateStepperToggleAllButton
+} from './renderer.js';
 import { state } from './state.js';
 
 const stepsList = byId('steps-list');
@@ -115,12 +123,33 @@ export const handleEditorInput = async event => {
   const stepIndex = Number(target.dataset.stepIndex);
   const step = state.steps[stepIndex];
   if (step) {
-    if (target.matches('.stepper-id')) step.id = target.value;
     if (target.matches('.step-label')) step.label = target.value;
     if (target.matches('.step-label-type')) step.labelType = target.value;
-    if (target.matches('.step-inherited')) step.inherited = target.value;
     if (target.matches('.step-pages input')) {
       step.pages = [...stepsList.querySelectorAll(`.step-pages input[data-step-index="${stepIndex}"]:checked`)].map(input => input.value);
+    }
+  }
+  if (target.matches('.stepper-id, .step-inherited')) {
+    const stepIndices = target.dataset.stepIndices.split(',').map(Number);
+    const previousId = state.steps[stepIndices[0]]?.id;
+    stepIndices.forEach(index => {
+      const groupedStep = state.steps[index];
+      if (!groupedStep) return;
+      if (target.matches('.stepper-id')) groupedStep.id = target.value;
+      else groupedStep.inherited = target.value;
+    });
+    if (event.type === 'change' && target.matches('.stepper-id')) {
+      if (
+        previousId !== target.value &&
+        state.collapsedSteppers[previousId] !== undefined &&
+        state.collapsedSteppers[target.value] === undefined
+      ) {
+        state.collapsedSteppers[target.value] = state.collapsedSteppers[previousId];
+      }
+      if (previousId !== target.value && !state.steps.some(item => item.id === previousId)) {
+        delete state.collapsedSteppers[previousId];
+      }
+      renderSteps();
     }
   }
   renderPreview();
@@ -168,6 +197,21 @@ export const handleEditorClick = async event => {
       page.collapsed = collapse;
     });
     refresh();
+    return;
+  }
+  if (button.id === 'toggle-all-steppers') {
+    const ids = [...new Set(state.steps.map(step => step.id))];
+    const collapse = ids.some(id => !state.collapsedSteppers[id]);
+    ids.forEach(id => {
+      state.collapsedSteppers[id] = collapse;
+    });
+    renderSteps();
+    return;
+  }
+  if (button.matches('.stepper-toggle')) {
+    const id = button.dataset.stepperId;
+    state.collapsedSteppers[id] = !state.collapsedSteppers[id];
+    renderSteps();
     return;
   }
   if (button.id === 'add-page') {
@@ -280,8 +324,30 @@ export const handleEditorClick = async event => {
     refresh();
     return;
   }
-  if (button.id === 'add-step') {
-    state.steps.push({ id: 'main', inherited: '', extras: {}, label: '', labelType: 'translate', pages: [] });
+  if (button.id === 'add-stepper') {
+    const usedIds = new Set(state.steps.map(step => step.id));
+    let id = 'stepper';
+    let suffix = 2;
+    while (usedIds.has(id)) id = `stepper-${suffix++}`;
+    state.steps.push({ id, inherited: '', extras: {}, label: '', labelType: 'translate', pages: [] });
+    renderSteps();
+    renderPreview();
+    return;
+  }
+  if (button.matches('.add-step')) {
+    const id = button.dataset.stepperId;
+    const group = state.steps.filter(step => step.id === id);
+    const lastIndex = state.steps.reduce((last, step, index) => step.id === id ? index : last, -1);
+    if (!group.length) return;
+    state.collapsedSteppers[id] = false;
+    state.steps.splice(lastIndex + 1, 0, {
+      id,
+      inherited: group[0]?.inherited ?? '',
+      extras: {},
+      label: '',
+      labelType: 'translate',
+      pages: []
+    });
     renderSteps();
     renderPreview();
     return;

@@ -34,6 +34,7 @@ export const state = {
     }
   ],
   steps: [],
+  collapsedSteppers: {},
   flowExtrasRaw: '',
   stepperExtras: {},
   stepperStateInfo: {},

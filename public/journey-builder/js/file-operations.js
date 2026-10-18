@@ -139,6 +139,7 @@ export const importJourney = async file => {
     }
     state.pages = pages;
     state.steps = steps;
+    state.collapsedSteppers = {};
     state.homePageId = homePageId;
     state.title = typeof title === 'object' && title !== null ? title.value ?? '' : String(title ?? '');
     state.titleType = title?.type === 'translate' ? 'translate' : 'literal';

@@ -75,12 +75,15 @@
 <section class="panel">
   <div class="panel-heading">
     <div>
-      <h2>Stepper</h2>
-      <p class="panel-copy">Group pages into ordered steps. Use the same ID for steps in the same stepper.</p>
+      <h2>Steppers</h2>
+      <p class="panel-copy">Group ordered steps by Stepper ID and assign pages to each step.</p>
     </div>
-    <button class="button button-secondary" id="add-step" type="button">＋ Step</button>
+    <div class="page-actions">
+      <button class="button button-secondary button-small" id="toggle-all-steppers" type="button" aria-expanded="true" disabled>Collapse all</button>
+      <button class="button button-secondary" id="add-stepper" type="button">＋ Stepper</button>
+    </div>
   </div>
-  <p class="empty-hint" id="empty-steps">No steps configured.</p>
+  <p class="empty-hint" id="empty-steps">No steppers configured.</p>
   <div class="steps-list" id="steps-list"></div>
 </section>
 

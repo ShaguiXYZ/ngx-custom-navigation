@@ -17,12 +17,14 @@ Open <http://localhost:4200/journey-builder/>. Use the HTTP URL: opening `index.
 
 1. **Load the existing catalog (optional, recommended before importing a journey).** In the *Journey catalog* panel, select `server/data/journey/journeys.json`. This preserves the matching entry's data and version history and detects IDs or file names already in use. Loading the catalog alone does not change the journey being edited.
 2. **Import the journey you want to edit.** Click **Import journey** in the identity panel and select a journey JSON file. It must contain a string `homePageId` and an array `pageMap`; if present, `steppers` must be an array. The editor populates the form from the selected file.
-3. **Edit the configuration.** Complete the metadata, choose the home page, select a registered component for each page, configure its JSON and routes. Conditions are optional. In *Stepper*, group pages into steps; in *Advanced configuration*, define `errorPageId`, `links`, or `literals`.
+3. **Edit the configuration.** Complete the metadata, choose the home page, select a registered component for each page, configure its JSON and routes. Conditions are optional. In *Steppers*, each `Stepper ID` has its own collapsible group of ordered steps, with shared context inheritance; add steps inside a group or create another stepper. Use the group toggle or **Collapse all** to fold steppers. In *Advanced configuration*, define `errorPageId`, `links`, or `literals`.
 4. **Explore the screen flow.** In the *Pages* heading, select the magnifying-glass button to open the visual diagram over the editor. It displays pages, routes, and links from the home page, and highlights unreachable pages. Select a page node to close the diagram and jump to that page's configuration. The diagram updates as the journey changes and can be scrolled in both directions.
 5. **Navigate long flows.** The side index lists pages in order; select one to scroll to it. If collapsed, it expands automatically. The index updates when pages are added or removed and when their IDs or components change. On small screens it appears above the editor. You can also collapse or expand cards individually or all at once.
 6. **Review and download.** The *Validation* panel shows errors and warnings and lets you inspect both JSON files. Errors block downloads. Download the journey and catalog entry separately.
 
 **Import journey** loads a definition with `homePageId` and `pageMap`; **Select journeys.json** only loads the catalog and does not replace the open journey. To preserve versions, load the catalog before importing the corresponding journey. When a journey is imported, its home page is expanded and the other pages are collapsed.
+
+The *Steppers* editor groups steps by `Stepper ID`. Changing a group's ID updates all its steps; if the ID matches another group, the groups are combined. Step order and the exported journey structure are preserved.
 
 JSON files are processed in the browser: the editor does not write to the repository or change `settings.json`. After downloading, copy the journey JSON to `server/data/journey/<name>.json` and merge the downloaded catalog entry into `server/data/journey/journeys.json` without removing existing entries. Do not add a catalog entry or enable a journey in `settings.json` unless that is the change you intend to make.
 
@@ -59,7 +61,7 @@ The ES modules in `js/` separate responsibilities:
 | `partials/confirmation.html` | In-app confirmation popup. |
 | `partials/editor.html` | Forms, pages, steppers, and imports. |
 | `partials/preview.html` | Validation, previews, and downloads. |
-| `partials/templates.html` | HTML templates for pages, routes, conditions, and steps. |
+| `partials/templates.html` | HTML templates for pages, routes, conditions, steppers, and steps. |
 | `../styles.css` | Responsive editor styles. |
 | `../index.html` | Application shell and fragment insertion points. |
 

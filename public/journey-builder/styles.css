@@ -774,6 +774,82 @@ textarea:hover {
   gap: 0.9rem;
 }
 
+.stepper-group {
+  min-width: 0;
+  padding: 1rem;
+  border: 1px solid #dfe1ee;
+  border-radius: 12px;
+  background: #f8f8fd;
+}
+
+.stepper-group-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.8rem;
+  margin-bottom: 0.75rem;
+}
+
+.stepper-group.is-collapsed .stepper-group-heading {
+  margin-bottom: 0;
+}
+
+.stepper-toggle {
+  min-width: 0;
+  display: flex;
+  flex: 1 1 auto;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.25rem 0;
+  border: 0;
+  background: transparent;
+  color: var(--ink);
+  cursor: pointer;
+  text-align: left;
+}
+
+.stepper-toggle-icon {
+  width: 1.5rem;
+  height: 1.5rem;
+  display: grid;
+  flex: 0 0 auto;
+  place-items: center;
+  border-radius: 6px;
+  background: var(--accent-soft);
+  color: var(--accent-dark);
+  font-size: 1rem;
+  transition: transform 140ms ease;
+}
+
+.stepper-toggle[aria-expanded="false"] .stepper-toggle-icon {
+  transform: rotate(-90deg);
+}
+
+.stepper-summary {
+  overflow: hidden;
+  font-size: 0.83rem;
+  font-weight: 750;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.stepper-group-fields {
+  flex: 1 1 auto;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.8rem;
+}
+
+.stepper-steps-list {
+  display: grid;
+  gap: 0.7rem;
+  margin-top: 0.8rem;
+}
+
+.stepper-steps-list .step-card {
+  background: white;
+}
+
 .page-card,
 .step-card {
   min-width: 0;
@@ -1385,8 +1461,14 @@ summary span {
   }
 
   .form-grid,
-  .step-fields {
+  .step-fields,
+  .stepper-group-fields {
     grid-template-columns: minmax(0, 1fr);
+  }
+
+  .stepper-group-heading {
+    align-items: stretch;
+    flex-direction: column;
   }
 
   .field-wide {
