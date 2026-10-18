@@ -3,7 +3,7 @@ const loadFragment = async target => {
   const response = await fetch(new URL(path, document.baseURI));
 
   if (!response.ok) {
-    throw new Error(`No se pudo cargar "${path}" (${response.status} ${response.statusText}).`);
+    throw new Error(`Failed to load "${path}" (${response.status} ${response.statusText}).`);
   }
 
   target.innerHTML = await response.text();
@@ -20,6 +20,6 @@ start().catch(error => {
   const status = document.querySelector('[data-app-status]');
 
   status.hidden = false;
-  status.textContent = `No se pudo iniciar Journey Builder. ${error.message} Comprueba que la aplicación se sirve por HTTP y vuelve a cargar la página.`;
-  console.error('No se pudo iniciar Journey Builder.', error);
+  status.textContent = `Journey Builder could not start. ${error.message} Make sure the app is served over HTTP, then reload the page.`;
+  console.error('Journey Builder could not start.', error);
 });

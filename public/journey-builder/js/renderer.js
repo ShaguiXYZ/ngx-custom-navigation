@@ -34,14 +34,14 @@ export const renderPreview = () => {
 
   errors.forEach(message => setValidationMessage(messages, message, 'error'));
   warnings.forEach(message => setValidationMessage(messages, message, 'warning'));
-  if (!errors.length && !warnings.length) setValidationMessage(messages, 'Referencias y estructura correctas.', 'success');
+  if (!errors.length && !warnings.length) setValidationMessage(messages, 'References and structure are valid.', 'success');
 
   const badge = byId('validation-badge');
   badge.textContent = errors.length
-    ? `${errors.length} error${errors.length === 1 ? '' : 'es'}`
+    ? `${errors.length} error${errors.length === 1 ? '' : 's'}`
     : warnings.length
-      ? 'Válido con avisos'
-      : 'Válido';
+      ? 'Valid with warnings'
+      : 'Valid';
   badge.className = `status-badge ${errors.length ? 'status-invalid' : 'status-valid'}`;
   byId('json-preview').value = JSON.stringify(flow, null, 2);
   byId('catalog-preview').value = JSON.stringify({ [state.key]: catalogEntry }, null, 2);
@@ -53,7 +53,7 @@ export const renderPreview = () => {
 export const renderHomePageOptions = () => {
   const select = byId('home-page');
   const current = state.homePageId;
-  select.replaceChildren(...state.pages.map(page => new Option(page.pageId || '(sin ID)', page.pageId)));
+  select.replaceChildren(...state.pages.map(page => new Option(page.pageId || '(no ID)', page.pageId)));
   if (state.pages.some(page => page.pageId === current)) {
     select.value = current;
   } else {
@@ -67,7 +67,7 @@ export const updatePageToggleAllButton = () => {
   const hasPages = state.pages.length > 0;
   const allCollapsed = hasPages && state.pages.every(page => page.collapsed);
   button.disabled = !hasPages;
-  button.textContent = allCollapsed ? 'Expandir todas' : 'Contraer todas';
+  button.textContent = allCollapsed ? 'Expand all' : 'Collapse all';
   button.setAttribute('aria-expanded', String(hasPages && !allCollapsed));
 };
 
@@ -88,7 +88,7 @@ export const renderPageIndex = () => {
     button.dataset.pageIndex = pageIndex;
     button.setAttribute(
       'aria-label',
-      `Ir a página ${pageIndex + 1}: ${page.pageId || 'sin ID'}, ${componentLabel}${page.pageId === state.homePageId ? ', página inicial' : ''}`
+      `Go to page ${pageIndex + 1}: ${page.pageId || 'no ID'}, ${componentLabel}${page.pageId === state.homePageId ? ', home page' : ''}`
     );
     number.className = 'flow-index-number';
     number.textContent = String(pageIndex + 1);
@@ -130,20 +130,20 @@ export const renderPages = () => {
     const card = cloneTemplate('page-template');
     card.id = `page-card-${pageIndex}`;
     card.dataset.pageIndex = pageIndex;
-    const pageName = page.pageId || `página ${pageIndex + 1}`;
+    const pageName = page.pageId || `page ${pageIndex + 1}`;
     const toggle = card.querySelector('.page-toggle');
     const content = card.querySelector('.page-content');
     card.classList.toggle('is-collapsed', Boolean(page.collapsed));
     toggle.dataset.pageIndex = pageIndex;
     toggle.setAttribute('aria-expanded', String(!page.collapsed));
-    toggle.setAttribute('aria-label', `${page.collapsed ? 'Expandir' : 'Contraer'} ${pageName}`);
+    toggle.setAttribute('aria-label', `${page.collapsed ? 'Expand' : 'Collapse'} ${pageName}`);
     content.id = `page-content-${pageIndex}`;
     content.hidden = Boolean(page.collapsed);
     toggle.setAttribute('aria-controls', content.id);
-    card.querySelector('.page-number').textContent = `Página ${pageIndex + 1}`;
+    card.querySelector('.page-number').textContent = `Page ${pageIndex + 1}`;
     card.querySelector('.page-id').value = page.pageId;
     card.querySelector('.page-id').dataset.pageIndex = pageIndex;
-    card.querySelector('.page-summary-id').textContent = page.pageId || '(sin ID)';
+    card.querySelector('.page-summary-id').textContent = page.pageId || '(no ID)';
 
     const componentSelect = card.querySelector('.page-component');
     componentSelect.dataset.pageIndex = pageIndex;
@@ -164,12 +164,12 @@ export const renderPages = () => {
     const routes = card.querySelector('.routes-list');
     page.routes.forEach((route, routeIndex) => {
       const routeCard = cloneTemplate('route-template');
-      routeCard.querySelector('.route-title').textContent = `Ruta ${routeIndex + 1}`;
+      routeCard.querySelector('.route-title').textContent = `Route ${routeIndex + 1}`;
       const target = routeCard.querySelector('.route-target');
       target.dataset.pageIndex = pageIndex;
       target.dataset.routeIndex = routeIndex;
-      target.add(new Option('Seleccionar destino…', ''), 0);
-      state.pages.forEach(item => target.add(new Option(item.pageId || '(sin ID)', item.pageId)));
+      target.add(new Option('Select destination…', ''), 0);
+      state.pages.forEach(item => target.add(new Option(item.pageId || '(no ID)', item.pageId)));
       target.value = route.nextPageId;
       routeCard.querySelector('.add-condition').dataset.pageIndex = pageIndex;
       routeCard.querySelector('.add-condition').dataset.routeIndex = routeIndex;
@@ -218,7 +218,7 @@ export const renderSteps = () => {
   stepsList.replaceChildren();
   state.steps.forEach((step, stepIndex) => {
     const card = cloneTemplate('step-template');
-    card.querySelector('.step-number').textContent = `Paso ${stepIndex + 1}`;
+    card.querySelector('.step-number').textContent = `Step ${stepIndex + 1}`;
     card.querySelector('.remove-step').dataset.stepIndex = stepIndex;
     const stepperId = card.querySelector('.stepper-id');
     stepperId.value = step.id;
@@ -234,7 +234,7 @@ export const renderSteps = () => {
     inherited.dataset.stepIndex = stepIndex;
     const pages = card.querySelector('.step-pages');
     if (!state.pages.length) {
-      pages.textContent = 'Añade páginas para asignarlas a este paso.';
+      pages.textContent = 'Add pages to assign them to this step.';
     } else {
       state.pages.forEach(page => {
         const option = document.createElement('label');
@@ -244,7 +244,7 @@ export const renderSteps = () => {
         checkbox.value = page.pageId;
         checkbox.checked = step.pages.includes(page.pageId);
         checkbox.dataset.stepIndex = stepIndex;
-        option.append(checkbox, document.createTextNode(page.pageId || '(sin ID)'));
+        option.append(checkbox, document.createTextNode(page.pageId || '(no ID)'));
         pages.append(option);
       });
     }

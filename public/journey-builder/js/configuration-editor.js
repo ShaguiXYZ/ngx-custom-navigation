@@ -8,7 +8,7 @@ const flowConfigurationKeys = new Set(['errorPageId', 'links', 'literals']);
 const isObject = value => value !== null && typeof value === 'object' && !Array.isArray(value);
 
 const jsonParseError = (source, error) => {
-  const message = error.message ?? 'JSON no válido.';
+  const message = error.message ?? 'Invalid JSON.';
   const position = message.match(/position\s+(\d+)/i);
   const lineColumn = message.match(/line\s+(\d+)\s+column\s+(\d+)/i);
   let line = lineColumn ? Number(lineColumn[1]) : null;
@@ -54,50 +54,50 @@ const highlightJson = source => {
 
 const validateConditions = (conditions, path, errors) => {
   if (!Array.isArray(conditions)) {
-    errors.push(`${path} debe ser una lista.`);
+    errors.push(`${path} must be an array.`);
     return;
   }
   conditions.forEach((condition, index) => {
     const conditionPath = `${path}[${index}]`;
     if (!isObject(condition)) {
-      errors.push(`${conditionPath} debe ser un objeto.`);
+      errors.push(`${conditionPath} must be an object.`);
       return;
     }
     if (typeof condition.expression !== 'string' || !condition.expression.trim()) {
-      errors.push(`${conditionPath}.expression debe ser texto no vacío.`);
+      errors.push(`${conditionPath}.expression must be a non-empty string.`);
     }
     if (!Object.prototype.hasOwnProperty.call(condition, 'value')) {
-      errors.push(`${conditionPath}.value es obligatorio.`);
+      errors.push(`${conditionPath}.value is required.`);
     }
     if (condition.operation !== undefined && typeof condition.operation !== 'string') {
-      errors.push(`${conditionPath}.operation debe ser texto.`);
+      errors.push(`${conditionPath}.operation must be a string.`);
     }
     if (condition.union !== undefined && !unions.has(condition.union)) {
-      errors.push(`${conditionPath}.union debe ser una unión lógica admitida.`);
+      errors.push(`${conditionPath}.union must be a supported logical operator.`);
     }
   });
 };
 
 const validateLiterals = (literals, errors) => {
   if (!isObject(literals)) {
-    errors.push('literals debe ser un objeto.');
+    errors.push('literals must be an object.');
     return;
   }
   Object.entries(literals).forEach(([key, literal]) => {
     const path = `literals.${key}`;
     if (typeof literal === 'string' || typeof literal === 'number') return;
     if (!isObject(literal)) {
-      errors.push(`${path} debe ser texto, número o un objeto literal.`);
+      errors.push(`${path} must be a string, number, or literal object.`);
       return;
     }
     if (typeof literal.value !== 'string' && typeof literal.value !== 'number') {
-      errors.push(`${path}.value debe ser texto o número.`);
+      errors.push(`${path}.value must be a string or number.`);
     }
     if (literal.type !== undefined && !literalTypes.has(literal.type)) {
-      errors.push(`${path}.type no es un tipo de literal admitido.`);
+      errors.push(`${path}.type is not a supported literal type.`);
     }
     if (literal.params !== undefined && !isObject(literal.params)) {
-      errors.push(`${path}.params debe ser un objeto.`);
+      errors.push(`${path}.params must be an object.`);
     }
     if (literal.conditions !== undefined) validateConditions(literal.conditions, `${path}.conditions`, errors);
   });
@@ -106,26 +106,26 @@ const validateLiterals = (literals, errors) => {
 const validateBooleanProperties = (value, properties, path, errors) => {
   properties.forEach(property => {
     if (value[property] !== undefined && typeof value[property] !== 'boolean') {
-      errors.push(`${path}.${property} debe ser booleano.`);
+      errors.push(`${path}.${property} must be a boolean.`);
     }
   });
 };
 
 const validatePageData = (data, errors) => {
   if (!isObject(data)) {
-    errors.push('data debe ser un objeto.');
+    errors.push('data must be an object.');
     return;
   }
   if (data.contextData !== undefined && !isObject(data.contextData)) {
-    errors.push('data.contextData debe ser un objeto.');
+    errors.push('data.contextData must be an object.');
   }
   if (data.headerConfig !== undefined) {
-    if (!isObject(data.headerConfig)) errors.push('data.headerConfig debe ser un objeto.');
+    if (!isObject(data.headerConfig)) errors.push('data.headerConfig must be an object.');
     else validateBooleanProperties(data.headerConfig, ['showBack', 'showContactUs', 'showLanguages'], 'data.headerConfig', errors);
   }
   if (data.footerConfig !== undefined) {
     if (!isObject(data.footerConfig)) {
-      errors.push('data.footerConfig debe ser un objeto.');
+      errors.push('data.footerConfig must be an object.');
     } else {
       validateBooleanProperties(
         data.footerConfig,
@@ -134,16 +134,16 @@ const validatePageData = (data, errors) => {
         errors
       );
       if (data.footerConfig.info !== undefined) {
-        if (!isObject(data.footerConfig.info)) errors.push('data.footerConfig.info debe ser un objeto.');
+        if (!isObject(data.footerConfig.info)) errors.push('data.footerConfig.info must be an object.');
         else if (typeof data.footerConfig.info.literal !== 'string') {
-          errors.push('data.footerConfig.info.literal debe ser texto.');
+          errors.push('data.footerConfig.info.literal must be a string.');
         }
       }
     }
   }
   if (data.stepperConfig !== undefined) {
     if (!isObject(data.stepperConfig)) {
-      errors.push('data.stepperConfig debe ser un objeto.');
+      errors.push('data.stepperConfig must be an object.');
     } else {
       validateBooleanProperties(data.stepperConfig, ['visible', 'showLabel', 'showSteps'], 'data.stepperConfig', errors);
     }
@@ -168,7 +168,7 @@ export const validatePageConfiguration = source => {
   const warnings = [];
   if (!isObject(configuration)) {
     return {
-      errors: ['La configuración debe ser un objeto JSON, no un array ni un valor primitivo.'],
+      errors: ['Configuration must be a JSON object, not an array or primitive value.'],
       warnings,
       line: null,
       column: null
@@ -176,55 +176,55 @@ export const validatePageConfiguration = source => {
   }
 
   Object.keys(configuration).forEach(key => {
-    if (!pageConfigurationKeys.has(key)) warnings.push(`Propiedad no reconocida en la configuración de página: ${key}.`);
+    if (!pageConfigurationKeys.has(key)) warnings.push(`Unrecognized property in page configuration: ${key}.`);
   });
   if (configuration.literals !== undefined) validateLiterals(configuration.literals, errors);
   if (configuration.data !== undefined) validatePageData(configuration.data, errors);
   if (configuration.validationSettings !== undefined && !isObject(configuration.validationSettings)) {
-    errors.push('validationSettings debe ser un objeto.');
+    errors.push('validationSettings must be an object.');
   }
   if (configuration.validationSettings !== undefined && isObject(configuration.validationSettings)) {
     Object.entries(configuration.validationSettings).forEach(([control, rules]) => {
-      if (!isObject(rules)) errors.push(`validationSettings.${control} debe ser un objeto.`);
+      if (!isObject(rules)) errors.push(`validationSettings.${control} must be an object.`);
       else {
         Object.entries(rules).forEach(([rule, settings]) => {
-          if (!isObject(settings)) errors.push(`validationSettings.${control}.${rule} debe ser un objeto.`);
+          if (!isObject(settings)) errors.push(`validationSettings.${control}.${rule} must be an object.`);
           else if (settings.disabled !== undefined && typeof settings.disabled !== 'boolean') {
-            errors.push(`validationSettings.${control}.${rule}.disabled debe ser booleano.`);
+            errors.push(`validationSettings.${control}.${rule}.disabled must be a boolean.`);
           }
         });
       }
     });
   }
   if (configuration.serviceActivators !== undefined && !Array.isArray(configuration.serviceActivators)) {
-    errors.push('serviceActivators debe ser una lista.');
+    errors.push('serviceActivators must be an array.');
   }
   if (Array.isArray(configuration.serviceActivators)) {
     configuration.serviceActivators.forEach((activator, index) => {
       const path = `serviceActivators[${index}]`;
       if (!isObject(activator)) {
-        errors.push(`${path} debe ser un objeto.`);
+        errors.push(`${path} must be an object.`);
         return;
       }
       if (typeof activator.entryPoint !== 'string' || !activator.entryPoint) {
-        errors.push(`${path}.entryPoint debe ser texto no vacío.`);
+        errors.push(`${path}.entryPoint must be a non-empty string.`);
       }
       if (typeof activator.activator !== 'string' || !activator.activator) {
-        errors.push(`${path}.activator debe ser texto no vacío.`);
+        errors.push(`${path}.activator must be a non-empty string.`);
       }
       validateConditionsProperty(activator, path, errors);
     });
   }
-  if (configuration.zones !== undefined && !isObject(configuration.zones)) errors.push('zones debe ser un objeto.');
+  if (configuration.zones !== undefined && !isObject(configuration.zones)) errors.push('zones must be an object.');
   if (isObject(configuration.zones)) {
     Object.entries(configuration.zones).forEach(([name, zone]) => {
       const path = `zones.${name}`;
       if (!isObject(zone)) {
-        errors.push(`${path} debe ser un objeto.`);
+        errors.push(`${path} must be an object.`);
         return;
       }
       if (zone.skipLoad !== undefined && typeof zone.skipLoad !== 'boolean') {
-        errors.push(`${path}.skipLoad debe ser booleano.`);
+        errors.push(`${path}.skipLoad must be a boolean.`);
       }
       validateConditionsProperty(zone, path, errors);
     });
@@ -247,7 +247,7 @@ export const validateFlowConfiguration = (source, pageIds) => {
   const warnings = [];
   if (!isObject(configuration)) {
     return {
-      errors: ['La configuración avanzada debe ser un objeto JSON, no un array ni un valor primitivo.'],
+      errors: ['Advanced configuration must be a JSON object, not an array or primitive value.'],
       warnings,
       line: null,
       column: null,
@@ -256,21 +256,21 @@ export const validateFlowConfiguration = (source, pageIds) => {
   }
 
   Object.keys(configuration).forEach(key => {
-    if (!flowConfigurationKeys.has(key)) errors.push(`Propiedad no admitida en la configuración avanzada: ${key}.`);
+    if (!flowConfigurationKeys.has(key)) errors.push(`Unsupported property in advanced configuration: ${key}.`);
   });
   if (configuration.errorPageId !== undefined) {
     if (typeof configuration.errorPageId !== 'string' || !configuration.errorPageId.trim()) {
-      errors.push('errorPageId debe ser texto no vacío.');
+      errors.push('errorPageId must be a non-empty string.');
     } else if (pageIds && !pageIds.includes(configuration.errorPageId)) {
-      errors.push(`errorPageId debe identificar una página existente: ${configuration.errorPageId}.`);
+      errors.push(`errorPageId must refer to an existing page: ${configuration.errorPageId}.`);
     }
   }
   if (configuration.links !== undefined) {
     if (!isObject(configuration.links)) {
-      errors.push('links debe ser un objeto.');
+      errors.push('links must be an object.');
     } else {
       Object.entries(configuration.links).forEach(([key, value]) => {
-        if (typeof value !== 'string') errors.push(`links.${key} debe ser texto.`);
+        if (typeof value !== 'string') errors.push(`links.${key} must be a string.`);
       });
     }
   }
@@ -293,15 +293,15 @@ export const updateConfigurationEditor = textarea => {
   editor.classList.toggle('has-json-error', result.errors.length > 0);
   status.className = `configuration-status${result.errors.length ? ' is-invalid' : result.warnings.length ? ' has-warning' : ''}`;
   if (!textarea.value.trim()) {
-    status.textContent = 'Configuración opcional: introduce un objeto JSON para definirla.';
+    status.textContent = 'Optional configuration: enter a JSON object to define it.';
   } else if (result.errors.length) {
     status.textContent = result.line
-      ? `JSON no válido · línea ${result.line}${result.column ? `, columna ${result.column}` : ''}`
-      : 'Configuración JSON no válida';
+      ? `Invalid JSON · line ${result.line}${result.column ? `, column ${result.column}` : ''}`
+      : 'Invalid JSON configuration';
   } else if (result.warnings.length) {
-    status.textContent = `Estructura válida con ${result.warnings.length} aviso${result.warnings.length === 1 ? '' : 's'}.`;
+    status.textContent = `Valid structure with ${result.warnings.length} warning${result.warnings.length === 1 ? '' : 's'}.`;
   } else {
-    status.textContent = 'JSON y estructura de configuración válidos.';
+    status.textContent = 'JSON and configuration structure are valid.';
   }
 
   diagnostics.replaceChildren();

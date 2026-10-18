@@ -1,102 +1,102 @@
 # Journey Builder
 
-Editor independiente para crear, importar, validar y descargar configuraciones JSON de journeys. Se sirve como contenido estático de `public/` y no forma parte del flujo de cotización.
+Standalone editor for creating, importing, validating, and downloading journey JSON configurations. It is served as static content from `public/` and is independent of the quote flow.
 
-## Uso local
+## Run locally
 
-Desde la raíz del repositorio, inicia el servidor de journeys y Angular en terminales separadas:
+From the repository root, start the journey server and Angular in separate terminals:
 
 ```bash
 node server/server.js
 npm run start:local
 ```
 
-Abre <http://localhost:4200/journey-builder/>. Usa la URL servida por HTTP: abrir `index.html` directamente como `file://` impide cargar los fragmentos y módulos ES.
+Open <http://localhost:4200/journey-builder/>. Use the HTTP URL: opening `index.html` directly with `file://` prevents fragments and ES modules from loading.
 
-## Crear o editar un journey
+## Create or edit a journey
 
-1. **Carga el catálogo existente (opcional, recomendado antes del journey).** En el panel *Catálogo de journeys*, selecciona `server/data/journey/journeys.json`. Esto permite conservar los datos e historial de versiones de la entrada coincidente y detectar IDs o nombres ya usados. Cargar el catálogo por sí solo no cambia el flujo que se está editando.
-2. **Importa el flujo que quieras editar.** Pulsa **Importar journey** en el panel de identidad y selecciona un archivo JSON de journey. Debe tener `homePageId` de tipo texto y `pageMap` de tipo array; `steppers`, si existe, debe ser un array. El editor actualiza el formulario desde el archivo seleccionado.
-3. **Edita la configuración.** Completa los metadatos, elige la página inicial, configura en cada página un componente registrado, su configuración JSON y las rutas. Las condiciones son opcionales. En *Stepper* puedes agrupar páginas en pasos y en *Configuración avanzada* definir `errorPageId`, `links` o `literals`.
-4. **Navega por flujos largos.** El índice lateral enumera las páginas en orden; selecciona una para desplazarte a ella. Si estaba plegada, se expande. El índice se actualiza al añadir o eliminar páginas y al cambiar el ID o componente. En pantallas pequeñas se muestra encima del editor. También puedes plegar o expandir tarjetas de forma individual o en conjunto.
-5. **Revisa y descarga.** La vista *Validación* muestra errores y avisos y permite inspeccionar ambos JSON. Los errores bloquean la descarga. Descarga el journey y la entrada de catálogo por separado.
+1. **Load the existing catalog (optional, recommended before importing a journey).** In the *Journey catalog* panel, select `server/data/journey/journeys.json`. This preserves the matching entry's data and version history and detects IDs or file names already in use. Loading the catalog alone does not change the journey being edited.
+2. **Import the journey you want to edit.** Click **Import journey** in the identity panel and select a journey JSON file. It must contain a string `homePageId` and an array `pageMap`; if present, `steppers` must be an array. The editor populates the form from the selected file.
+3. **Edit the configuration.** Complete the metadata, choose the home page, select a registered component for each page, configure its JSON and routes. Conditions are optional. In *Stepper*, group pages into steps; in *Advanced configuration*, define `errorPageId`, `links`, or `literals`.
+4. **Navigate long flows.** The side index lists pages in order; select one to scroll to it. If collapsed, it expands automatically. The index updates when pages are added or removed and when their IDs or components change. On small screens it appears above the editor. You can also collapse or expand cards individually or all at once.
+5. **Review and download.** The *Validation* panel shows errors and warnings and lets you inspect both JSON files. Errors block downloads. Download the journey and catalog entry separately.
 
-El botón **Importar journey** carga una definición con `homePageId` y `pageMap`; **Seleccionar journeys.json** carga únicamente el catálogo y no sustituye el flujo abierto. Para conservar versiones, carga el catálogo antes de importar el journey correspondiente. Al importar un flujo, la página inicial se muestra expandida y las demás plegadas.
+**Import journey** loads a definition with `homePageId` and `pageMap`; **Select journeys.json** only loads the catalog and does not replace the open journey. To preserve versions, load the catalog before importing the corresponding journey. When a journey is imported, its home page is expanded and the other pages are collapsed.
 
-Los JSON se procesan en el navegador: el editor no escribe en el repositorio ni cambia `settings.json`. Después de descargar, copia el JSON del journey a `server/data/journey/<name>.json` y combina la entrada descargada con `server/data/journey/journeys.json`, sin eliminar las entradas existentes. No añadas una entrada al catálogo ni habilites un journey en `settings.json` salvo que ese sea el cambio que necesitas.
+JSON files are processed in the browser: the editor does not write to the repository or change `settings.json`. After downloading, copy the journey JSON to `server/data/journey/<name>.json` and merge the downloaded catalog entry into `server/data/journey/journeys.json` without removing existing entries. Do not add a catalog entry or enable a journey in `settings.json` unless that is the change you intend to make.
 
-### Si no se carga un flujo
+### If a journey does not load
 
-- Comprueba que seleccionaste **Importar journey**, no **Seleccionar journeys.json**.
-- Confirma que el archivo contiene JSON válido con `homePageId` y `pageMap` en la raíz. Los errores de formato se muestran en el panel *Validación*.
-- Asegúrate de abrir la herramienta desde `http://localhost:4200/journey-builder/` y de mantener activo el servidor de desarrollo. No uses `file://`.
-- Si el editor muestra el flujo anterior, vuelve a abrir el selector **Importar journey** y selecciona el archivo deseado. Cancelar el selector no sustituye el flujo.
+- Make sure you selected **Import journey**, not **Select journeys.json**.
+- Confirm that the file contains valid JSON with `homePageId` and `pageMap` at the root. Format errors appear in the *Validation* panel.
+- Open the tool at `http://localhost:4200/journey-builder/` and keep the development server running. Do not use `file://`.
+- If the editor still shows the previous journey, open **Import journey** again and select the desired file. Cancelling the file picker does not replace the current journey.
 
-## Organización del código
+## Code organization
 
-Los módulos ES de `js/` separan las responsabilidades:
+The ES modules in `js/` separate responsibilities:
 
-| Módulo | Responsabilidad |
+| Module | Responsibility |
 | --- | --- |
-| `bootstrap.js` | Carga los fragmentos HTML por HTTP y, cuando están listos, importa la aplicación. |
-| `app.js` | Punto de entrada: conecta eventos y arranca la vista. |
-| `component-catalog.js` | Claves de componentes disponibles. Deben coincidir con `src/app/library/library-manifest.ts`. |
-| `state.js` | Estado inicial y datos editables del journey. |
-| `dom.js` | Acceso a elementos por ID y clonación de plantillas HTML. |
-| `flow-model.js` | Lee metadatos del formulario, valida el modelo y construye el JSON del journey y del catálogo. |
-| `configuration-editor.js` | Resalta la sintaxis JSON, valida la estructura de `PageConfiguration` y gestiona la sangría del editor. |
-| `renderer.js` | Renderiza páginas, steppers, errores, avisos y vistas previas. |
-| `editor-events.js` | Sincroniza los controles con el estado y gestiona las acciones del editor. |
-| `file-operations.js` | Importa archivos y descarga el journey y el registro del catálogo. |
-| `partials/intro.html` | Encabezado introductorio. |
-| `partials/flow-index.html` | Índice lateral de navegación por página. |
-| `partials/editor.html` | Formularios, páginas, steppers e importación. |
-| `partials/preview.html` | Validación, vistas previas y descargas. |
-| `partials/templates.html` | Plantillas HTML para páginas, rutas, condiciones y pasos. |
-| `../styles.css` | Estilos del editor, adaptativos a pantallas pequeñas. |
-| `../index.html` | Shell de la aplicación y puntos de inserción de los fragmentos. |
+| `bootstrap.js` | Loads HTML fragments over HTTP and imports the application when they are ready. |
+| `app.js` | Entry point: connects events and starts the view. |
+| `component-catalog.js` | Available component keys. They must match `src/app/library/library-manifest.ts`. |
+| `state.js` | Initial state and editable journey data. |
+| `dom.js` | Accesses elements by ID and clones HTML templates. |
+| `flow-model.js` | Reads form metadata, validates the model, and builds journey and catalog JSON. |
+| `configuration-editor.js` | Highlights JSON syntax, validates the `PageConfiguration` structure, and handles editor indentation. |
+| `renderer.js` | Renders pages, steppers, errors, warnings, and previews. |
+| `editor-events.js` | Synchronizes controls with state and handles editor actions. |
+| `file-operations.js` | Imports files and downloads the journey and catalog entry. |
+| `partials/intro.html` | Introductory header. |
+| `partials/flow-index.html` | Side navigation index for pages. |
+| `partials/editor.html` | Forms, pages, steppers, and imports. |
+| `partials/preview.html` | Validation, previews, and downloads. |
+| `partials/templates.html` | HTML templates for pages, routes, conditions, and steps. |
+| `../styles.css` | Responsive editor styles. |
+| `../index.html` | Application shell and fragment insertion points. |
 
-Los controles de plegado guardan `collapsed` en el estado de cada página, por lo que permanecen estables cuando el editor vuelve a renderizar el flujo. Al importar un journey se muestra expandida la página inicial y se pliegan las demás; cada tarjeta puede expandirse individualmente o mediante los controles globales. Los botones usan `aria-expanded` y `aria-controls` para que la interacción también sea accesible con teclado y tecnologías de asistencia.
+Collapse controls store `collapsed` in each page's state, so they remain stable when the editor re-renders the journey. When a journey is imported, the home page is expanded and the others are collapsed; each card can be expanded individually or with the global controls. Buttons use `aria-expanded` and `aria-controls` to support keyboard and assistive technology.
 
-El índice lateral se vuelve a generar al importar, añadir o eliminar páginas y al editar sus IDs o componentes. Permite saltar directamente a una página y la expande si estaba plegada; el resaltado sigue la página visible durante el desplazamiento.
+The side index is regenerated when pages are imported, added, or removed and when their IDs or components change. It can jump directly to a page and expand it if collapsed; the highlighted index entry follows the visible page while scrolling.
 
-### Editor de configuración JSON
+### JSON configuration editor
 
-La configuración de cada página y la configuración avanzada del journey se editan en áreas de texto con resaltado de claves, cadenas, números, booleanos, `null` y puntuación. La edición y selección siguen siendo las nativas del navegador; al pulsar Tab se insertan dos espacios, y Mayús+Tab quita la sangría de la línea.
+Page and advanced journey configuration are edited in text areas with syntax highlighting for keys, strings, numbers, booleans, `null`, and punctuation. Editing and selection use the browser's native text area behavior; press Tab to insert two spaces, or Shift+Tab to remove indentation from the line.
 
-La validación de ambas configuraciones se actualiza mientras se escribe:
+Validation updates as you type:
 
-- Comprueba que el JSON parsea y que la raíz es un objeto.
-- Comprueba las formas conocidas de `literals`, `data` (`contextData`, `headerConfig`, `footerConfig` y `stepperConfig`), `validationSettings`, `serviceActivators` y `zones`.
-- Muestra los errores y avisos junto al editor y en el panel general. Los errores estructurales bloquean las descargas; las propiedades superiores no reconocidas se marcan como avisos para no descartar extensiones deliberadamente.
-- Una configuración vacía es opcional y conserva el aviso general de que la página no define configuración.
-- La configuración avanzada solo admite `errorPageId`, `links` y `literals`; comprueba que `errorPageId` corresponda a una página existente y que `links` y `literals` tengan la estructura esperada.
+- Checks that the JSON parses and that the root is an object.
+- Checks known structures in `literals`, `data` (`contextData`, `headerConfig`, `footerConfig`, and `stepperConfig`), `validationSettings`, `serviceActivators`, and `zones`.
+- Shows errors and warnings beside the editor and in the overall validation panel. Structural errors block downloads; unrecognized top-level page configuration properties are shown as warnings so intentional extensions are not discarded.
+- Empty page configuration is optional and retains the general warning that the page has no configuration.
+- Advanced configuration only supports `errorPageId`, `links`, and `literals`; it checks that `errorPageId` refers to an existing page and that `links` and `literals` have the expected structure.
 
-La validación refleja los modelos del repositorio, en especial `PageConfiguration` y sus modelos asociados en `src/app/core/models/` y `ServiceActivator` en `src/app/core/service-activators/service-activator.model.ts`; no sustituye la validación de negocio de cada componente.
+Validation reflects the repository models, especially `PageConfiguration` and its associated models in `src/app/core/models/` and `ServiceActivator` in `src/app/core/service-activators/service-activator.model.ts`; it does not replace component-specific business validation.
 
-### Añadir un componente
+### Add a component
 
-1. Comprueba que el componente esté registrado en `src/app/library/library-manifest.ts`.
-2. Añade su clave y una etiqueta legible a `js/component-catalog.js`.
-3. Ajusta la configuración inicial de una página solo si la aplicación lo necesita; el catálogo no reemplaza los modelos ni la configuración del componente.
-4. Verifica la lista y la vista previa en el navegador.
+1. Check that the component is registered in `src/app/library/library-manifest.ts`.
+2. Add its key and a readable label to `js/component-catalog.js`.
+3. Adjust the initial page configuration only if the application requires it; the catalog does not replace component models or configuration.
+4. Verify the list and preview in the browser.
 
-### Cambiar el formato generado
+### Change the generated format
 
-Mantén el flujo de datos separado:
+Keep the data flow separated:
 
-1. Cambia lectura, validación y serialización en `js/flow-model.js`.
-2. Cambia el formulario en `partials/editor.html` y las plantillas dinámicas en `partials/templates.html`.
-3. Cambia cómo se refleja el estado en `js/renderer.js` y `js/editor-events.js`.
-4. Conserva el viaje de ida y vuelta de importación/exportación en `js/file-operations.js`.
+1. Change reading, validation, and serialization in `js/flow-model.js`.
+2. Change the form in `partials/editor.html` and dynamic templates in `partials/templates.html`.
+3. Change how state is reflected in `js/renderer.js` and `js/editor-events.js`.
+4. Preserve the import/export round trip in `js/file-operations.js`.
 
-Al añadir nuevos fragmentos, referencia su ruta relativa a `public/journey-builder/` mediante `data-include` en `index.html`. `bootstrap.js` los carga antes de iniciar `app.js`; sirve siempre el editor por HTTP para que `fetch` y los módulos ES funcionen.
+When adding fragments, reference their paths relative to `public/journey-builder/` using `data-include` in `index.html`. `bootstrap.js` loads them before starting `app.js`; always serve the editor over HTTP so `fetch` and ES modules work.
 
-Las condiciones de una página se evalúan en orden; varias condiciones dentro de una ruta admiten las uniones del modelo (`AND`, `OR`, `XOR`, `NOR`, `NAND`, `XNOR`). El catálogo importado conserva la información e historial existentes para la misma clave y versión.
+Page conditions are evaluated in order; multiple conditions in a route support the model's unions (`AND`, `OR`, `XOR`, `NOR`, `NAND`, `XNOR`). The imported catalog retains existing information and history for the same key and version.
 
-## Comprobaciones
+## Checks
 
-- El estado del editor muestra errores bloqueantes y avisos de navegación/configuración.
-- La vista previa permite inspeccionar los JSON antes de descargarlos.
-- En este repositorio, las comprobaciones manuales de referencia son los modelos en `src/app/core/models/_configuration.model.ts`, las versiones en `src/app/core/models/quote-version.model.ts` y el manifiesto de componentes.
-- Para el aspecto adaptable, comprueba al menos una pantalla estrecha y otra de escritorio.
+- The editor status shows blocking errors and navigation/configuration warnings.
+- The preview lets you inspect the JSON files before downloading them.
+- In this repository, the manual reference checks are the models in `src/app/core/models/_configuration.model.ts`, versions in `src/app/core/models/quote-version.model.ts`, and the component manifest.
+- For responsive layout, check at least one narrow and one desktop viewport.

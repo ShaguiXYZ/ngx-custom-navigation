@@ -1,15 +1,15 @@
 export const state = {
-  key: 'nuevo-journey',
-  id: 'nuevo-journey',
-  name: 'nuevo-journey',
+  key: 'new-journey',
+  id: 'new-journey',
+  name: 'new-journey',
   version: 'v1.0.0',
   breakingchange: '',
-  title: 'nuevo-journey-title',
+  title: 'new-journey-title',
   titleType: 'literal',
-  homePageId: 'inicio',
+  homePageId: 'home',
   pages: [
     {
-      pageId: 'inicio',
+      pageId: 'home',
       component: 'on-boarding',
       extras: {},
       configurationRaw: JSON.stringify(

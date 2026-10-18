@@ -14,7 +14,7 @@ const updatePageField = (target, field) => {
   page[field] = target.value;
   const pageCard = target.closest('.page-card');
   if (field === 'pageId') {
-    pageCard.querySelector('.page-summary-id').textContent = target.value || '(sin ID)';
+    pageCard.querySelector('.page-summary-id').textContent = target.value || '(no ID)';
   }
   if (field === 'component') {
     pageCard.querySelector('.page-summary-component').textContent =
@@ -114,7 +114,7 @@ export const handleEditorClick = event => {
       card.querySelector('.page-content').hidden = false;
       const toggle = card.querySelector('.page-toggle');
       toggle.setAttribute('aria-expanded', 'true');
-      toggle.setAttribute('aria-label', `Contraer ${page.pageId || `página ${pageIndex + 1}`}`);
+      toggle.setAttribute('aria-label', `Collapse ${page.pageId || `page ${pageIndex + 1}`}`);
       updatePageToggleAllButton();
     }
     card.querySelector('.page-toggle').focus({ preventScroll: true });
@@ -129,7 +129,7 @@ export const handleEditorClick = event => {
     const content = button.closest('.page-card').querySelector('.page-content');
     content.hidden = page.collapsed;
     button.setAttribute('aria-expanded', String(!page.collapsed));
-    button.setAttribute('aria-label', `${page.collapsed ? 'Expandir' : 'Contraer'} ${page.pageId || 'página'}`);
+    button.setAttribute('aria-label', `${page.collapsed ? 'Expand' : 'Collapse'} ${page.pageId || 'page'}`);
     button.closest('.page-card').classList.toggle('is-collapsed', page.collapsed);
     updatePageToggleAllButton();
     return;

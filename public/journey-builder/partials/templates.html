@@ -9,20 +9,20 @@
         </span>
         <span class="page-toggle-icon" aria-hidden="true">⌄</span>
       </button>
-      <button class="icon-button remove-page" type="button" aria-label="Eliminar página">Eliminar</button>
+      <button class="icon-button remove-page" type="button" aria-label="Remove page">Remove</button>
     </header>
     <div class="page-content">
       <div class="form-grid">
         <label>
-          ID de página
+          Page ID
           <input class="page-id" autocomplete="off" />
         </label>
         <label>
-          Componente
+          Component
           <select class="page-component"></select>
         </label>
         <label class="field-wide config-label">
-          <span>Configuración de página (JSON)</span>
+          <span>Page configuration (JSON)</span>
           <div class="json-editor">
             <pre class="json-highlight" aria-hidden="true"><code></code></pre>
             <textarea
@@ -32,7 +32,7 @@
               autocapitalize="off"
               autocomplete="off"
               placeholder='{"data":{}}'
-              aria-label="Configuración de página JSON"
+              aria-label="Page configuration JSON"
             ></textarea>
           </div>
           <span class="configuration-status" aria-live="polite"></span>
@@ -42,10 +42,10 @@
       <section class="routes-section">
         <div class="routes-heading">
           <div>
-            <h3>Rutas</h3>
-            <span class="field-hint">Define los destinos y, si hace falta, sus condiciones.</span>
+            <h3>Routes</h3>
+            <span class="field-hint">Define destinations and, if needed, their conditions.</span>
           </div>
-          <button class="button button-secondary button-small add-route" type="button">＋ Ruta</button>
+          <button class="button button-secondary button-small add-route" type="button">＋ Route</button>
         </div>
         <div class="routes-list"></div>
       </section>
@@ -58,28 +58,28 @@
     <div class="route-topline">
       <span class="route-title"></span>
       <div class="route-actions">
-        <button class="icon-button move-route-up" type="button" aria-label="Mover ruta hacia arriba">↑</button>
-        <button class="icon-button move-route-down" type="button" aria-label="Mover ruta hacia abajo">↓</button>
-        <button class="icon-button remove-route" type="button" aria-label="Eliminar ruta">×</button>
+        <button class="icon-button move-route-up" type="button" aria-label="Move route up">↑</button>
+        <button class="icon-button move-route-down" type="button" aria-label="Move route down">↓</button>
+        <button class="icon-button remove-route" type="button" aria-label="Remove route">×</button>
       </div>
     </div>
     <label>
-      Ir a
+      Go to
       <select class="route-target"></select>
     </label>
     <div class="conditions-list"></div>
-    <button class="button button-small button-secondary add-condition" type="button">＋ Condición</button>
+    <button class="button button-small button-secondary add-condition" type="button">＋ Condition</button>
   </div>
 </template>
 
 <template id="condition-template">
   <div class="condition-fields">
     <label class="condition-union">
-      Unión
+      Union
       <select class="condition-union-input">
-        <option value="">Primera</option>
-        <option value="AND">Y (AND)</option>
-        <option value="OR">O (OR)</option>
+        <option value="">First</option>
+        <option value="AND">And (AND)</option>
+        <option value="OR">Or (OR)</option>
         <option value="XOR">XOR</option>
         <option value="NOR">NOR</option>
         <option value="NAND">NAND</option>
@@ -87,11 +87,11 @@
       </select>
     </label>
     <label class="condition-expression">
-      Expresión del contexto
+      Context expression
       <input class="condition-expression-input" placeholder="client.isClient" autocomplete="off" />
     </label>
     <label class="condition-operation">
-      Operador
+      Operator
       <select class="condition-operation-input">
         <option value="">=</option>
         <option value="===">===</option>
@@ -103,20 +103,20 @@
       </select>
     </label>
     <label class="condition-value">
-      Valor de comparación
+      Comparison value
       <input class="condition-value-input" autocomplete="off" placeholder="true" />
     </label>
     <label class="condition-type">
-      Tipo
+      Type
       <select class="condition-type-input">
-        <option value="string">Texto</option>
-        <option value="boolean">Booleano</option>
-        <option value="number">Número</option>
-        <option value="null">Nulo</option>
+        <option value="string">String</option>
+        <option value="boolean">Boolean</option>
+        <option value="number">Number</option>
+        <option value="null">Null</option>
         <option value="json">JSON</option>
       </select>
     </label>
-    <button class="icon-button remove-condition" type="button" aria-label="Eliminar condición">×</button>
+    <button class="icon-button remove-condition" type="button" aria-label="Remove condition">×</button>
   </div>
 </template>
 
@@ -124,35 +124,35 @@
   <article class="step-card">
     <div class="step-card-heading">
       <h3 class="step-number"></h3>
-      <button class="icon-button remove-step" type="button" aria-label="Eliminar paso">Eliminar</button>
+      <button class="icon-button remove-step" type="button" aria-label="Remove step">Remove</button>
     </div>
     <div class="form-grid step-fields">
       <label>
-        ID del stepper
+        Stepper ID
         <input class="stepper-id" autocomplete="off" value="main" />
       </label>
       <label>
-        Etiqueta
+        Label
         <input class="step-label" autocomplete="off" placeholder="Steps.PersonalData" />
       </label>
       <label>
-        Tipo de etiqueta
+        Label type
         <select class="step-label-type">
-          <option value="translate">Traducción</option>
+          <option value="translate">Translation</option>
           <option value="literal">Literal</option>
         </select>
       </label>
       <label>
-        Herencia del contexto
+        Context inheritance
         <select class="step-inherited">
-          <option value="">Predeterminada</option>
-          <option value="true">Heredar</option>
-          <option value="false">Aislar este stepper</option>
+          <option value="">Default</option>
+          <option value="true">Inherit</option>
+          <option value="false">Isolate this stepper</option>
         </select>
       </label>
     </div>
     <fieldset class="step-page-options">
-      <legend>Páginas de este paso</legend>
+      <legend>Pages in this step</legend>
       <div class="step-pages"></div>
     </fieldset>
   </article>

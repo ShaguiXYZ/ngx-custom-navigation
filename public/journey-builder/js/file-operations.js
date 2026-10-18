@@ -31,13 +31,13 @@ const readJsonFile = async (file, label) => {
   try {
     return JSON.parse(await file.text());
   } catch (error) {
-    throw new Error(`${label} no contiene JSON válido: ${error.message}`);
+    throw new Error(`${label} does not contain valid JSON: ${error.message}`);
   }
 };
 
 export const importJourney = async file => {
   try {
-    const flow = await readJsonFile(file, 'El archivo');
+    const flow = await readJsonFile(file, 'The file');
     if (
       !flow ||
       !Array.isArray(flow.pageMap) ||
@@ -45,12 +45,12 @@ export const importJourney = async file => {
       typeof flow.homePageId !== 'string' ||
       (flow.steppers !== undefined && !Array.isArray(flow.steppers))
     ) {
-      throw new Error('El archivo debe ser un journey con homePageId y pageMap.');
+      throw new Error('The file must be a journey with homePageId and pageMap.');
     }
 
     const pages = flow.pageMap.map(page => {
       if (page.nextOptionList !== undefined && !Array.isArray(page.nextOptionList)) {
-        throw new Error(`La lista de destinos de "${page.pageId}" no es válida.`);
+        throw new Error(`The destination list for "${page.pageId}" is invalid.`);
       }
       const { pageId, component, configuration, nextOptionList, ...extras } = page;
       return {
@@ -61,7 +61,7 @@ export const importJourney = async file => {
         configurationRaw: configuration ? JSON.stringify(configuration, null, 2) : '',
         routes: (nextOptionList ?? []).map(option => {
           if (!option || typeof option !== 'object' || !Array.isArray(option.conditions ?? [])) {
-            throw new Error(`Una ruta de "${pageId}" no tiene un formato válido.`);
+            throw new Error(`A route on "${pageId}" has an invalid format.`);
           }
           const { nextPageId, conditions, ...routeExtras } = option;
           return {
@@ -93,7 +93,7 @@ export const importJourney = async file => {
         stepper => !stepper || typeof stepper !== 'object' || (stepper.steps !== undefined && !Array.isArray(stepper.steps))
       )
     ) {
-      throw new Error('La lista de steppers no tiene un formato válido.');
+      throw new Error('The stepper list has an invalid format.');
     }
 
     const { homePageId, title, pageMap, steppers, ...flowExtras } = flow;
@@ -112,7 +112,7 @@ export const importJourney = async file => {
             : String(stateInfo.inherited);
       return (steps ?? []).map(step => {
         if (!step || typeof step !== 'object' || !Array.isArray(step.pages ?? [])) {
-          throw new Error(`Un paso del stepper "${stepperId}" no tiene un formato válido.`);
+          throw new Error(`A step in stepper "${stepperId}" has an invalid format.`);
         }
         const { label, pages, ...stepExtras } = step;
         return {
@@ -154,9 +154,9 @@ export const importJourney = async file => {
 export const importCatalog = async file => {
   const status = byId('catalog-status');
   try {
-    const catalog = await readJsonFile(file, 'El catálogo');
+    const catalog = await readJsonFile(file, 'The catalog');
     if (!catalog || typeof catalog !== 'object' || Array.isArray(catalog)) {
-      throw new Error('El catálogo debe ser un objeto JSON.');
+      throw new Error('The catalog must be a JSON object.');
     }
     if (
       Object.values(catalog).some(
@@ -168,11 +168,11 @@ export const importCatalog = async file => {
           entry.versions.some(version => !version || typeof version.value !== 'string')
       )
     ) {
-      throw new Error('Cada entrada del catálogo necesita id, name y una lista versions válida.');
+      throw new Error('Each catalog entry needs an id, a name, and a valid versions array.');
     }
     state.catalog = catalog;
     const count = Object.keys(catalog).length;
-    status.textContent = `Catálogo cargado: ${count} ${count === 1 ? 'entrada' : 'entradas'}.`;
+    status.textContent = `Catalog loaded: ${count} ${count === 1 ? 'entry' : 'entries'}.`;
     status.className = 'catalog-status is-loaded';
     renderPreview();
   } catch (error) {
@@ -188,6 +188,6 @@ const showImportError = message => {
   const messages = byId('validation-messages');
   messages.replaceChildren();
   setValidationMessage(messages, message, 'error');
-  byId('validation-badge').textContent = 'Error de importación';
+  byId('validation-badge').textContent = 'Import error';
   byId('validation-badge').className = 'status-badge status-invalid';
 };

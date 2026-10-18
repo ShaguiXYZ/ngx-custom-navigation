@@ -16,7 +16,7 @@ const updateStateFromMetadata = () => {
 
 const readFlowExtras = errors => {
   const result = validateFlowConfiguration(state.flowExtrasRaw, state.pages.map(page => page.pageId.trim()));
-  result.errors.forEach(error => errors.push(`Configuración avanzada no válida: ${error}`));
+  result.errors.forEach(error => errors.push(`Invalid advanced configuration: ${error}`));
   return result.configuration;
 };
 
@@ -38,12 +38,12 @@ const readConfiguration = (page, index, errors) => {
   try {
     const configuration = JSON.parse(page.configurationRaw);
     if (!configuration || Array.isArray(configuration) || typeof configuration !== 'object') {
-      errors.push(`La configuración de la página ${index + 1} debe ser un objeto JSON.`);
+      errors.push(`Page ${index + 1} configuration must be a JSON object.`);
       return undefined;
     }
     return configuration;
   } catch (error) {
-    errors.push(`JSON inválido en la configuración de la página ${index + 1}: ${error.message}`);
+    errors.push(`Invalid JSON in page ${index + 1} configuration: ${error.message}`);
     return undefined;
   }
 };
@@ -51,11 +51,11 @@ const readConfiguration = (page, index, errors) => {
 const parseConditionValue = condition => {
   switch (condition.valueType) {
     case 'boolean':
-      if (condition.value !== 'true' && condition.value !== 'false') throw new Error('El valor booleano debe ser true o false.');
+      if (condition.value !== 'true' && condition.value !== 'false') throw new Error('Boolean values must be true or false.');
       return condition.value === 'true';
     case 'number': {
       const value = Number(condition.value);
-      if (!condition.value.trim() || !Number.isFinite(value)) throw new Error('El valor de la condición debe ser un número válido.');
+      if (!condition.value.trim() || !Number.isFinite(value)) throw new Error('Condition value must be a valid number.');
       return value;
     }
     case 'null':
@@ -76,74 +76,74 @@ export const buildOutput = () => {
   const pageIdSet = new Set(pageIds);
 
   if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(state.key)) {
-    errors.push('La clave debe usar minúsculas, números y guiones (sin guiones al principio ni al final).');
+    errors.push('The key must use lowercase letters, numbers, and hyphens (no leading or trailing hyphens).');
   }
   const registeredCurrentEntry = state.catalog?.[state.key];
   if (
     ['default', 'not-journey'].includes(state.key) &&
     (!registeredCurrentEntry || registeredCurrentEntry.id !== state.id || registeredCurrentEntry.name !== state.name)
   ) {
-    errors.push(`La clave "${state.key}" está reservada para el journey existente.`);
+    errors.push(`The key "${state.key}" is reserved for the existing journey.`);
   }
-  if (!state.id) errors.push('El ID del journey es obligatorio.');
+  if (!state.id) errors.push('Journey ID is required.');
   if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(state.name)) {
-    errors.push('El nombre de archivo debe usar minúsculas, números y guiones.');
+    errors.push('The file name must use lowercase letters, numbers, and hyphens.');
   }
-  if (!/^v\d+\.\d+(?:\.\d+)?$/.test(state.version)) errors.push('La versión debe tener el formato v1.2 o v1.2.3.');
-  if (!state.title) errors.push('El título del journey es obligatorio.');
-  if (state.pages.length === 0) errors.push('Añade al menos una página al journey.');
-  if (!state.homePageId || !pageIdSet.has(state.homePageId)) errors.push('La página inicial debe existir en el flujo.');
-  if (new Set(pageIds).size !== pageIds.length) errors.push('Cada ID de página debe ser único.');
-  if (pageIds.some(pageId => !pageId)) errors.push('Todas las páginas necesitan un ID.');
+  if (!/^v\d+\.\d+(?:\.\d+)?$/.test(state.version)) errors.push('Version must use the format v1.2 or v1.2.3.');
+  if (!state.title) errors.push('Journey title is required.');
+  if (state.pages.length === 0) errors.push('Add at least one page to the journey.');
+  if (!state.homePageId || !pageIdSet.has(state.homePageId)) errors.push('The home page must exist in the journey.');
+  if (new Set(pageIds).size !== pageIds.length) errors.push('Every page ID must be unique.');
+  if (pageIds.some(pageId => !pageId)) errors.push('Every page needs an ID.');
 
   if (registeredCurrentEntry) {
     const previous = registeredCurrentEntry;
     if (previous.id !== state.id || previous.name !== state.name) {
-      errors.push(`La clave "${state.key}" ya está registrada con otro ID o nombre de archivo.`);
+      errors.push(`The key "${state.key}" is already registered with a different ID or file name.`);
     }
   }
 
   state.pages.forEach((page, pageIndex) => {
     if (!COMPONENTS.some(component => component.id === page.component)) {
-      errors.push(`La página ${pageIndex + 1} no usa un componente registrado.`);
+      errors.push(`Page ${pageIndex + 1} does not use a registered component.`);
     }
     if (!page.configurationRaw.trim()) {
-      warnings.push(`La página "${page.pageId}" no tiene configuration; revisa los literales y datos que requiera su componente.`);
+      warnings.push(`Page "${page.pageId}" has no configuration; check the literals and data required by its component.`);
     }
     const configurationResult = validatePageConfiguration(page.configurationRaw);
     configurationResult.errors.forEach(error => {
-      errors.push(`Configuración de "${page.pageId}" no válida: ${error}`);
+      errors.push(`Invalid configuration for "${page.pageId}": ${error}`);
     });
     configurationResult.warnings.forEach(warning => {
-      warnings.push(`Configuración de "${page.pageId}": ${warning}`);
+      warnings.push(`Configuration for "${page.pageId}": ${warning}`);
     });
 
     page.routes.forEach((route, routeIndex) => {
       if (!route.nextPageId) {
-        errors.push(`La ruta ${routeIndex + 1} de "${page.pageId || `página ${pageIndex + 1}`}" necesita un destino.`);
+        errors.push(`Route ${routeIndex + 1} of "${page.pageId || `page ${pageIndex + 1}`}" needs a destination.`);
       } else if (!pageIdSet.has(route.nextPageId)) {
-        errors.push(`El destino "${route.nextPageId}" no existe en el journey.`);
+        errors.push(`Destination "${route.nextPageId}" does not exist in the journey.`);
       }
 
       route.conditions.forEach((condition, conditionIndex) => {
         const hasExpression = Boolean(condition.expression?.trim());
         const hasConditionValue = condition.valueType === 'null' || condition.value !== '';
         if (condition.operation && !['===', '!==', '>', '>=', '<', '<='].includes(condition.operation)) {
-          errors.push(`Operador no válido en la condición ${conditionIndex + 1} de la ruta ${routeIndex + 1}.`);
+          errors.push(`Invalid operator in condition ${conditionIndex + 1} of route ${routeIndex + 1}.`);
         }
         if (condition.union && !['AND', 'OR', 'XOR', 'NOR', 'NAND', 'XNOR'].includes(condition.union)) {
-          errors.push(`Unión no válida en la condición ${conditionIndex + 1} de la ruta ${routeIndex + 1}.`);
+          errors.push(`Invalid union in condition ${conditionIndex + 1} of route ${routeIndex + 1}.`);
         }
         if (hasExpression !== hasConditionValue) {
           errors.push(
-            `Completa expresión y valor de la condición ${conditionIndex + 1} de la ruta ${routeIndex + 1} de "${page.pageId}".`
+            `Complete both the expression and value for condition ${conditionIndex + 1} of route ${routeIndex + 1} on "${page.pageId}".`
           );
         }
         if (hasExpression && hasConditionValue) {
           try {
             parsedConditionValues.set(condition, parseConditionValue(condition));
           } catch (error) {
-            errors.push(`${error.message} Ruta de "${page.pageId}".`);
+            errors.push(`${error.message} Route on "${page.pageId}".`);
           }
         }
       });
@@ -152,18 +152,18 @@ export const buildOutput = () => {
 
   const stepperInherited = new Map();
   state.steps.forEach((step, index) => {
-    if (!step.id.trim()) errors.push(`El paso ${index + 1} necesita un ID de stepper.`);
-    if (!step.label.trim()) errors.push(`El paso ${index + 1} necesita una etiqueta.`);
-    if (!step.pages.length) errors.push(`El paso ${index + 1} debe incluir al menos una página.`);
+    if (!step.id.trim()) errors.push(`Step ${index + 1} needs a stepper ID.`);
+    if (!step.label.trim()) errors.push(`Step ${index + 1} needs a label.`);
+    if (!step.pages.length) errors.push(`Step ${index + 1} must include at least one page.`);
     const inherited = step.inherited;
     if (stepperInherited.has(step.id) && stepperInherited.get(step.id) !== inherited) {
-      errors.push(`Todos los pasos del stepper "${step.id}" deben usar la misma herencia del contexto.`);
+      errors.push(`All steps in stepper "${step.id}" must use the same context inheritance setting.`);
     }
     stepperInherited.set(step.id, inherited);
     if (step.pages.some(pageId => !pageIdSet.has(pageId))) {
-      errors.push(`El paso ${index + 1} incluye una página que no existe.`);
+      errors.push(`Step ${index + 1} includes a page that does not exist.`);
     }
-    if (new Set(step.pages).size !== step.pages.length) errors.push(`El paso ${index + 1} tiene páginas repetidas.`);
+    if (new Set(step.pages).size !== step.pages.length) errors.push(`Step ${index + 1} contains duplicate pages.`);
   });
 
   const flowExtras = readFlowExtras(errors);
@@ -181,7 +181,7 @@ export const buildOutput = () => {
     };
     visit(state.homePageId);
     const unreachable = pageIds.filter(pageId => pageId && !visited.has(pageId));
-    if (unreachable.length) warnings.push(`Páginas no alcanzables desde el inicio: ${unreachable.join(', ')}.`);
+    if (unreachable.length) warnings.push(`Pages unreachable from the home page: ${unreachable.join(', ')}.`);
   }
 
   if (state.catalog) {
@@ -190,7 +190,7 @@ export const buildOutput = () => {
         (key !== state.key && item.id === state.id) ||
         (key !== state.key && item.name === state.name)
     );
-    if (conflicts.length) errors.push('El ID o el nombre de archivo ya se utiliza en otra entrada del catálogo.');
+    if (conflicts.length) errors.push('The ID or file name is already used by another catalog entry.');
   }
 
   const pageMap = state.pages.map((page, pageIndex) => {

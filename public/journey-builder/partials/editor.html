@@ -1,14 +1,14 @@
 <section class="panel">
   <div class="panel-heading">
     <div>
-      <h2>Identidad del journey</h2>
-      <p class="panel-copy">Metadatos del flujo y del registro de catálogo.</p>
+      <h2>Journey identity</h2>
+      <p class="panel-copy">Journey metadata and catalog entry.</p>
     </div>
-    <button class="button button-secondary" id="import-journey-button" type="button">Importar journey</button>
+    <button class="button button-secondary" id="import-journey-button" type="button">Import journey</button>
   </div>
   <div class="form-grid">
     <label>
-      Clave del catálogo
+      Catalog key
       <input id="journey-key" autocomplete="off" />
     </label>
     <label>
@@ -16,37 +16,37 @@
       <input id="journey-id" autocomplete="off" />
     </label>
     <label class="field-wide">
-      Nombre de archivo
+      File name
       <div class="input-with-suffix">
         <input id="journey-name" autocomplete="off" />
         <span>.json</span>
       </div>
     </label>
     <label>
-      Versión
+      Version
       <input id="journey-version" autocomplete="off" placeholder="v1.0.0" />
     </label>
     <label>
-      Cambio incompatible
+      Breaking change
       <select id="journey-breakingchange">
-        <option value="">No especificado</option>
-        <option value="none">Ninguno</option>
+        <option value="">Not specified</option>
+        <option value="none">None</option>
         <option value="workflow">Workflow</option>
-        <option value="all">Todos</option>
+        <option value="all">All</option>
       </select>
     </label>
     <label class="field-wide">
-      Título
+      Title
       <div class="form-grid title-fields">
         <input id="journey-title" autocomplete="off" />
-        <select id="journey-title-type" aria-label="Tipo de título">
+        <select id="journey-title-type" aria-label="Title type">
           <option value="literal">Literal</option>
-          <option value="translate">Traducción</option>
+          <option value="translate">Translation</option>
         </select>
       </div>
     </label>
     <label class="field-wide">
-      Página inicial
+      Home page
       <select id="home-page"></select>
     </label>
   </div>
@@ -55,12 +55,12 @@
 <section class="panel">
   <div class="panel-heading">
     <div>
-      <h2>Páginas</h2>
-      <p class="panel-copy">Cada página usa un componente registrado y puede definir rutas condicionales.</p>
+      <h2>Pages</h2>
+      <p class="panel-copy">Each page uses a registered component and can define conditional routes.</p>
     </div>
     <div class="page-actions">
-      <button class="button button-secondary button-small" id="toggle-all-pages" type="button" aria-expanded="true">Contraer todas</button>
-      <button class="button button-primary" id="add-page" type="button">＋ Página</button>
+      <button class="button button-secondary button-small" id="toggle-all-pages" type="button" aria-expanded="true">Collapse all</button>
+      <button class="button button-primary" id="add-page" type="button">＋ Page</button>
     </div>
   </div>
   <div class="pages-list" id="pages-list"></div>
@@ -70,23 +70,23 @@
   <div class="panel-heading">
     <div>
       <h2>Stepper</h2>
-      <p class="panel-copy">Agrupa páginas en pasos ordenados. Usa el mismo ID para pasos del mismo stepper.</p>
+      <p class="panel-copy">Group pages into ordered steps. Use the same ID for steps in the same stepper.</p>
     </div>
-    <button class="button button-secondary" id="add-step" type="button">＋ Paso</button>
+    <button class="button button-secondary" id="add-step" type="button">＋ Step</button>
   </div>
-  <p class="empty-hint" id="empty-steps">No hay pasos configurados.</p>
+  <p class="empty-hint" id="empty-steps">No steps configured.</p>
   <div class="steps-list" id="steps-list"></div>
 </section>
 
 <section class="panel">
   <div class="panel-heading">
     <div>
-      <h2>Configuración avanzada</h2>
-      <p class="panel-copy">Propiedades adicionales del journey en formato JSON.</p>
+      <h2>Advanced configuration</h2>
+      <p class="panel-copy">Additional journey properties in JSON format.</p>
     </div>
   </div>
   <label class="field-wide config-label">
-    <span>Propiedades admitidas: errorPageId, links y literals</span>
+    <span>Supported properties: errorPageId, links, and literals</span>
     <div class="json-editor">
       <pre class="json-highlight" aria-hidden="true"><code></code></pre>
       <textarea
@@ -96,7 +96,7 @@
         autocapitalize="off"
         autocomplete="off"
         placeholder='{"errorPageId":"error"}'
-        aria-label="Configuración avanzada del journey en JSON"
+        aria-label="Advanced journey configuration in JSON"
         aria-describedby="flow-extras-status"
       ></textarea>
     </div>
@@ -106,12 +106,12 @@
 </section>
 
 <section class="panel import-panel">
-  <h2>Catálogo de journeys</h2>
-  <p class="panel-copy">Carga el catálogo existente para conservar versiones y detectar conflictos.</p>
-  <label class="button button-secondary button-full import-label" for="import-catalog-file">Seleccionar journeys.json</label>
+  <h2>Journey catalog</h2>
+  <p class="panel-copy">Load the existing catalog to preserve versions and detect conflicts.</p>
+  <label class="button button-secondary button-full import-label" for="import-catalog-file">Select journeys.json</label>
   <input id="import-catalog-file" type="file" accept=".json,application/json" hidden />
-  <p class="catalog-status" id="catalog-status" aria-live="polite">Catálogo no cargado; se generará una entrada nueva.</p>
+  <p class="catalog-status" id="catalog-status" aria-live="polite">Catalog not loaded; a new entry will be generated.</p>
 </section>
 
 <input id="import-journey-file" type="file" accept=".json,application/json" hidden />
-<p class="privacy-note">Los JSON permanecen en tu navegador; importar y descargar no modifica los archivos del repositorio.</p>
+<p class="privacy-note">JSON files stay in your browser; importing and downloading does not modify repository files.</p>
