@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-namespace */
-
 export interface QuotePersonalDataModel {
   birthdate?: Date;
   email?: string;
@@ -7,8 +5,4 @@ export interface QuotePersonalDataModel {
   identificationNumber?: string;
   surname?: string;
   phoneNumber?: string;
-}
-
-export namespace QuotePersonalDataModel {
-  export const init = (): QuotePersonalDataModel => ({});
 }

@@ -65,7 +65,3 @@ export interface QuoteVehicleModel {
   modelVersion?: ModelVersionModel;
   notFound?: boolean;
 }
-
-export namespace QuoteVehicleModel {
-  export const init = (): QuoteVehicleModel => ({});
-}

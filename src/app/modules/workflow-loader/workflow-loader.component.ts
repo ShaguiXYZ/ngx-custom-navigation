@@ -1,4 +1,3 @@
-
 import { AfterViewInit, ChangeDetectionStrategy, Component, OnDestroy, OnInit, ViewChild, ViewContainerRef, inject } from '@angular/core';
 import { ContextDataService, LoadingService } from '@shagui/ng-shagui/core';
 import { QuoteComponent } from '../../core/components';

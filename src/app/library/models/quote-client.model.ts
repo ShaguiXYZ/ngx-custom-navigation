@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-namespace */
-
 export interface QuoteClientModel {
   isClient?: boolean;
   isPolicyOwner?: boolean;
@@ -9,8 +7,4 @@ export interface QuoteClientModel {
   dateOfIssue?: Date;
   expiration?: Date;
   isCurrentlyInsured?: boolean;
-}
-
-export namespace QuoteClientModel {
-  export const init = (): QuoteClientModel => ({});
 }

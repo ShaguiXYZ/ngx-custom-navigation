@@ -178,9 +178,10 @@ export class QuoteFormValidarors {
         const quote = this.contextDataService.get<QuoteControlModel>(QUOTE_CONTEXT_DATA);
         const controlValidation: FormValidations = { [controlName]: { [validationKey]: isKO } };
         const pageValidations = { ...(quote.forms?.[lastPageId] ?? {}), ...controlValidation };
-        const validationSettings = lastPage.configuration?.validationSettings?.[controlName]?.[validationKey];
 
         quote.forms = { ...quote.forms, [lastPageId]: pageValidations };
+
+        const validationSettings = lastPage.configuration?.validationSettings?.[controlName]?.[validationKey];
 
         if (validationSettings?.disabled) {
           return null;

@@ -199,7 +199,3 @@ export interface QuoteOfferingModel {
   prices?: OfferingPriceModel[];
   hash?: string;
 }
-
-export namespace QuoteOfferingModel {
-  export const init = (): QuoteOfferingModel => ({} as QuoteOfferingModel);
-}

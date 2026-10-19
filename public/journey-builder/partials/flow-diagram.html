@@ -1,0 +1,24 @@
+<dialog class="flow-diagram-dialog" id="flow-diagram-dialog" aria-labelledby="flow-diagram-title">
+  <section class="panel flow-diagram-panel">
+    <div class="panel-heading">
+      <div>
+        <h2 id="flow-diagram-title">Screen flow</h2>
+        <p class="panel-copy">Explore how pages connect. Select a page to open it in the editor.</p>
+      </div>
+      <div class="flow-diagram-actions">
+        <span class="flow-diagram-count" id="flow-diagram-count" aria-live="polite"></span>
+        <button class="button button-secondary button-small" type="button" data-close-flow-diagram autofocus aria-label="Close screen flow">
+          Close
+        </button>
+      </div>
+    </div>
+    <div class="flow-diagram-legend" aria-label="Diagram legend">
+      <span><i class="flow-legend-home" aria-hidden="true"></i>Home page</span>
+      <span><i class="flow-legend-page" aria-hidden="true"></i>Page</span>
+      <span><i class="flow-legend-unreachable" aria-hidden="true"></i>Unreachable</span>
+    </div>
+    <div class="flow-diagram-scroll" id="flow-diagram" role="region" aria-label="Journey screen flow" tabindex="0">
+      <div class="flow-diagram-canvas" id="flow-diagram-canvas"></div>
+    </div>
+  </section>
+</dialog>

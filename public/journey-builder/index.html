@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Create, validate, and import journey JSON configurations." />
+    <title>Journey Builder</title>
+    <link rel="stylesheet" href="./styles.css" />
+    <script type="module" src="./js/bootstrap.js"></script>
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="./">
+        <span class="brand-mark" aria-hidden="true">J</span>
+        <span>Journey Builder</span>
+      </a>
+      <span class="topbar-note">Standalone journey editor</span>
+    </header>
+
+    <main class="shell">
+      <div data-include="partials/intro.html"></div>
+      <div data-include="partials/flow-diagram.html"></div>
+      <div data-include="partials/confirmation.html"></div>
+      <div class="workspace">
+        <aside class="flow-index-column" data-include="partials/flow-index.html"></aside>
+        <div class="editor-column" data-include="partials/editor.html"></div>
+        <aside class="preview-column" data-include="partials/preview.html"></aside>
+      </div>
+      <footer class="footer">
+        <span>Journey Builder</span>
+        <span>Files are processed locally in your browser.</span>
+      </footer>
+      <div data-include="partials/templates.html"></div>
+      <div class="app-load-error" data-app-status role="alert" hidden></div>
+    </main>
+  </body>
+</html>

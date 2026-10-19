@@ -3,30 +3,31 @@
     <span nxQuoteLiteral="header"></span>
     <p nxCopytext="normal" nxQuoteLiteral="subheader"></p>
   </quote-header-title>
-  @defer(when !!form) {
-  <section class="form-container">
-    <form [formGroup]="form">
-      <nx-formfield [label]="'postal-code' | quoteLiteral">
-        <input type="text" formControlName="postalCode" nxInput maxlength="5" nxQuoteMask="numeric" nxAutoFocus />
-        <span nxFormfieldHint> {{ location }} </span>
-        @if(form.get('postalCode')?.hasError('required')) {
-        <nx-error appearance="text" nxFormfieldError>
-          <span nxQuoteLiteral="error-required"></span>
-        </nx-error>
-        } @if(form.get('postalCode')?.hasError('notFound')) {
-        <nx-error appearance="text" nxFormfieldError>
-          <span nxQuoteLiteral="error-not-found"></span>
-        </nx-error>
-        }
-      </nx-formfield>
-    </form>
-  </section>
-  <quote-footer
-    [trackInfo]="{
-      postalCode: $safeNavigationMigration(form.get('postalCode')?.value)
-    }"
-    (uiOnNext)="updateValidData()"
-  >
-  </quote-footer>
+  @defer (when !!form) {
+    <section class="form-container">
+      <form [formGroup]="form">
+        <nx-formfield [label]="'postal-code' | quoteLiteral">
+          <input type="text" formControlName="postalCode" nxInput maxlength="5" nxQuoteMask="numeric" nxAutoFocus />
+          <span nxFormfieldHint> {{ location }} </span>
+          @if (form.get('postalCode')?.hasError('required')) {
+            <nx-error appearance="text" nxFormfieldError>
+              <span nxQuoteLiteral="error-required"></span>
+            </nx-error>
+          }
+          @if (form.get('postalCode')?.hasError('notFound')) {
+            <nx-error appearance="text" nxFormfieldError>
+              <span nxQuoteLiteral="error-not-found"></span>
+            </nx-error>
+          }
+        </nx-formfield>
+      </form>
+    </section>
+    <quote-footer
+      [trackInfo]="{
+        postalCode: $safeNavigationMigration(form.get('postalCode')?.value)
+      }"
+      (uiOnNext)="updateValidData()"
+    >
+    </quote-footer>
   }
 </article>
