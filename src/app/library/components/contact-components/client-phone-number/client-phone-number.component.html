@@ -3,26 +3,28 @@
     <span nxQuoteLiteral="header"></span>
     <p nxCopytext="normal" nxQuoteLiteral="subheader"></p>
   </quote-header-title>
-  @defer(when !!form) {
-  <section class="form-container">
-    <form [formGroup]="form">
-      <nx-formfield [label]="'phone-number' | quoteLiteral">
-        <nx-phone-input formControlName="phoneNumber" [countryCode]="coutryCode" [countryNames]="countryNames" nxAutoFocus />
-        @if(form.get('phoneNumber')?.errors?.['required']) {
-        <nx-error appearance="text" nxFormfieldError><span nxQuoteLiteral="error-required"></span> </nx-error>
-        } @if(form.get('phoneNumber')?.errors?.['matches']) {
-        <nx-error appearance="text" nxFormfieldError><span nxQuoteLiteral="bad-format"></span> </nx-error>
-        } @if(form.get('phoneNumber')?.errors?.['mobilePhone']) {
-        <nx-error appearance="text" nxFormfieldError><span nxQuoteLiteral="bad-format"></span> </nx-error>
-        }
-      </nx-formfield>
-    </form>
-  </section>
-  <quote-footer
-    [trackInfo]="{
-      phoneNumber: $safeNavigationMigration(form.get('phoneNumber')?.value)
-    }"
-    (uiOnNext)="updateValidData()"
-  />
+  @defer (when !!form) {
+    <section class="form-container">
+      <form [formGroup]="form">
+        <nx-formfield [label]="'phone-number' | quoteLiteral">
+          <nx-phone-input formControlName="phoneNumber" [countryCode]="coutryCode" [countryNames]="countryNames" nxAutoFocus />
+          @if (form.get('phoneNumber')?.errors?.['required']) {
+            <nx-error appearance="text" nxFormfieldError><span nxQuoteLiteral="error-required"></span> </nx-error>
+          }
+          @if (form.get('phoneNumber')?.errors?.['matches']) {
+            <nx-error appearance="text" nxFormfieldError><span nxQuoteLiteral="bad-format"></span> </nx-error>
+          }
+          @if (form.get('phoneNumber')?.errors?.['mobilePhone']) {
+            <nx-error appearance="text" nxFormfieldError><span nxQuoteLiteral="bad-format"></span> </nx-error>
+          }
+        </nx-formfield>
+      </form>
+    </section>
+    <quote-footer
+      [trackInfo]="{
+        phoneNumber: $safeNavigationMigration(form.get('phoneNumber')?.value)
+      }"
+      (uiOnNext)="updateValidData()"
+    />
   }
 </article>

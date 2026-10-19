@@ -4,21 +4,27 @@
     <p nxCopytext="normal" nxQuoteLiteral="subheader"></p>
   </quote-header-title>
   <section class="form-container">
-    @for(accident of accidents; track accident.index) {
-    <div class="selectable-row">
-      @let label = accident.data | quoteLiteral:{value: accident.index.toString(), first: $first ? {value: 'first', type:'literal'}: '',
-      last: $last ? {value: 'last', type:'literal'} : ''};
-      <quote-text-card
-        [selected]="accident.index === selectedAccidents?.index"
-        [data]="label"
-        [nxTrack]="{
-          label,
-          accidents: accident?.index.toString() || null
-        }"
-        [nxTrackEvents]="['click']"
-        (uiSelect)="selectData(accident)"
-      />
-    </div>
+    @for (accident of accidents; track accident.index) {
+      <div class="selectable-row">
+        @let label =
+          accident.data
+            | quoteLiteral
+              : {
+                  value: accident.index.toString(),
+                  first: $first ? { value: 'first', type: 'literal' } : '',
+                  last: $last ? { value: 'last', type: 'literal' } : ''
+                };
+        <quote-text-card
+          [selected]="accident.index === selectedAccidents?.index"
+          [data]="label"
+          [nxTrack]="{
+            label,
+            accidents: accident?.index.toString() || null
+          }"
+          [nxTrackEvents]="['click']"
+          (uiSelect)="selectData(accident)"
+        />
+      </div>
     }
   </section>
   <quote-footer [config]="{ showNext: false }" />
